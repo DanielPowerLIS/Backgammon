@@ -94,7 +94,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Pages\LogIn.xaml">
+    <Page Include="Views\Pages\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,8 +112,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Views\Pages\LogIn.xaml.cs">
-      <DependentUpon>LogIn.xaml</DependentUpon>
+    <Compile Include="Views\Pages\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\Preinitiation.xaml.cs">
       <DependentUpon>Preinitiation.xaml</DependentUpon>

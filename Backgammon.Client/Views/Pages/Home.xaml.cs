@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Backgammon.Client.Views.Pages
 {
     /// <summary>
-    /// Lógica de interacción para LogIn.xaml
+    /// Lógica de interacción para Home.xaml
     /// </summary>
-    public partial class LogIn : Page
+    public partial class Home : Page
     {
-        public LogIn()
+        public Home()
         {
             InitializeComponent();
         }
