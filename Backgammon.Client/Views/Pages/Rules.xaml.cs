@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using Backgammon.Client.Views.Pages;
-
-namespace Backgammon.Client
+namespace Backgammon.Client.Views.Pages
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Lógica de interacción para Rules.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Rules : Page
     {
-        public MainWindow()
+        public Rules()
         {
             InitializeComponent();
-            MainFrame.Navigate(new LogIn());
         }
-
-        
     }
 }

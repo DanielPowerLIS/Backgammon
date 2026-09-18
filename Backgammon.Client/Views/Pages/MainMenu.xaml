@@ -1,0 +1,23 @@
+﻿<Page x:Class="Backgammon.Client.Views.Pages.MainMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Backgammon.Client.Views.Pages"
+      xmlns:properties="clr-namespace:Backgammon.Client.Properties"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MainMenu"
+      Background="White">
+
+    <Grid>
+        <Label Content="BACKGAMMON" HorizontalAlignment="Center" Margin="0,32,0,0" VerticalAlignment="Top" FontSize="45"/>
+        <Button Content="{x:Static properties:Resources.Play}" HorizontalAlignment="Center" Margin="0,157,0,0" VerticalAlignment="Top" Width="176" Height="26"/>
+        <Button Content="{x:Static properties:Resources.Leaderboard}" HorizontalAlignment="Center" Margin="0,189,0,0" VerticalAlignment="Top" Width="176" Height="26"/>
+        <Button Content="{x:Static properties:Resources.Profile}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="176" Height="25" Margin="0,222,0,0"/>
+        <Button Content="{x:Static properties:Resources.Friends}" HorizontalAlignment="Center" Margin="0,252,0,0" VerticalAlignment="Top" Width="176" Height="26"/>
+        <Button Content="{x:Static properties:Resources.Settings}" HorizontalAlignment="Center" Margin="0,284,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.922,3.018" Width="176" Height="26"/>
+        <Button Content="{x:Static properties:Resources.SignOut}" HorizontalAlignment="Left" Margin="40,388,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.922,3.018" Width="75" Height="20"/>
+
+    </Grid>
+</Page>

@@ -118,74 +118,74 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Guest" xml:space="preserve">
-    <value>Invitado</value>
+    <value>Guest</value>
   </data>
   <data name="Play" xml:space="preserve">
-    <value>Jugar</value>
+    <value>Play</value>
   </data>
   <data name="SignIn" xml:space="preserve">
-    <value>Iniciar Sesión</value>
+    <value>Sign In</value>
   </data>
   <data name="Leaderboard" xml:space="preserve">
-    <value>Clasificaciones</value>
+    <value>Leaderboard</value>
   </data>
   <data name="Profile" xml:space="preserve">
-    <value>Perfil</value>
+    <value>Profile</value>
   </data>
   <data name="Friends" xml:space="preserve">
-    <value>Amigos</value>
+    <value>Friends</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Configuración</value>
+    <value>Settings</value>
   </data>
   <data name="SignOut" xml:space="preserve">
-    <value>Cerrar Sesión</value>
+    <value>Sign Out</value>
   </data>
   <data name="CreateLobby" xml:space="preserve">
-    <value>Crear Sala</value>
+    <value>Create Lobby</value>
   </data>
   <data name="Join" xml:space="preserve">
-    <value>Unirse</value>
+    <value>Join</value>
   </data>
   <data name="Back" xml:space="preserve">
-    <value>Volver</value>
+    <value>Back</value>
   </data>
   <data name="Wins" xml:space="preserve">
-    <value>Victorias</value>
+    <value>Wins</value>
   </data>
   <data name="Points" xml:space="preserve">
-    <value>Puntos</value>
+    <value>Points</value>
   </data>
   <data name="Account" xml:space="preserve">
-    <value>Cuenta</value>
+    <value>Acount</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Idioma</value>
+    <value>Language</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
-    <value>Cambiar Contraseña</value>
+    <value>Change Password</value>
   </data>
   <data name="Spanish" xml:space="preserve">
-    <value>Español</value>
+    <value>Spanish</value>
   </data>
   <data name="English" xml:space="preserve">
-    <value>Inglés</value>
+    <value>English</value>
   </data>
   <data name="Rules" xml:space="preserve">
     <value>Reglas</value>
   </data>
   <data name="GameRules" xml:space="preserve">
-    <value>1. En el Backgammon participan dos jugadores (A y B). Cada uno de ellos dispone de 15 fichas. Cada rival maneja fichas de diferente color. En cada caso, las fichas circulan como lo indican las flechas, contando cada pico como uno. 
-2. Para iniciar el juego, cada participante tira un sólo dado, ganando el derecho de iniciar el jugador que obtenga la puntuación más alta. En caso de empate se repiten los tiros.
-3. Gana el juego el primero que logre sacar sus propias fichas del tablero. Antes de poder empezar a sacar fichas, es necesario que todas se encuentren en el último pico del tablero. Si se observa bien el campo, notará que cuenta con cuatro cuadrantes.
-4. Una vez que se determina quién inicia el juego, éste tira dos dados y desplazará su ficha en el sentido de las flechas que se muestran en la ilustración. Tantos picos como puntos haya sacado en los dados. El movimiento lo podrá hacer también con dos fichas, una con los puntos de un dado y la otra con los puntos del dado restante.
-5. Cuando al tirar salgan dados con los mismos puntos, el movimiento de fichas se duplica. Es decir, si se obtienen dos 6, se podrá hacer lo siguiente: 
-a) Mover una ficha 24 picos 
-b) Mover dos fichas 12 picos cada una   
-c) Mover cuatro fichas 6 casillas cada una.
-6. El jugador que gana la partida recibe 100 puntos. Cada vez que cualquier jugador captura una ficha rival durante el juego, se añaden 10 puntos a un "pozo" compartido. Al finalizar la partida, el ganador se lleva sus 100 puntos base más todos los puntos acumulados en el pozo. 
-7. El jugador que gana la partida recibe 100 puntos. Cada vez que cualquier jugador captura una ficha rival durante el juego, se añaden 10 puntos a un "pozo" compartido. Al finalizar la partida, el ganador se lleva sus 100 puntos base más todos los puntos acumulados en el pozo. El perdedor no recibe ningún punto.
-8. Si una partida cuenta con un jugador invitado, en caso de ganar el invitado, la puntuación obtenida no se verá reflejada en alguna parte, en caso de ganar el jugador registrado la puntuación se refleja de manera normal.
-9. Para cada partida, cada jugador tendrá 2 minutos de manera global para poder realizar movimientos de fichas en toda la partida.  Antes de empezar su tiempo global de cada jugador, hay 7 segundos en cada turno para que el jugador pueda mover sus fichas sin usar tiempo global.</value>
+    <value>1. Backgammon is played by two players (A and B). Each player has 15 checkers, and each player uses checkers of a different color. The checkers move in the direction indicated by the arrows, with each point on the board counting as one space. 
+2. To start the game, each player rolls one die. The player who rolls the higher number earns the right to go first. In case of a tie, both players roll again.
+3. The winner is the first player to bear off all of their checkers from the board. Before a player can begin bearing off checkers, all of their checkers must be located in their home board. The board is divided into four quadrants.
+4. Once the starting player has been determined, that player rolls two dice and moves their checkers in the direction indicated by the arrows. The number of points moved corresponds to the numbers rolled on the dice. The player may also move two different checkers, using the value of one die for one checker and the value of the other die for another checker.
+5. When both dice show the same number, the number of moves is doubled. For example, if two sixes are rolled, the player may:
+a) Move one checker a total of 24 points,
+b) Move two checkers 12 points each, or
+c) Move four checkers 6 points each.
+6. If a point is occupied by two or more opposing checkers, a player cannot move one of their checkers onto that point. However, if there is only one opposing checker on the point, the player may move there and capture it. The captured checker is placed on the central bar and must re-enter the board before continuing its path. A player who has a checker on the bar cannot move any of their other checkers until the captured checker has successfully re-entered the board. To re-enter, the player must roll a number that allows the checker to enter an available point or a point occupied by only one opposing checker.
+7. The player who wins the match receives 100 points. Each time a player captures an opponent's checker during the game, 10 points are added to a shared pot. At the end of the match, the winner receives the 100 base points plus all points accumulated in the pot. The losing player receives no points.
+8. If a match includes a guest player, any points earned by the guest will not be recorded if the guest wins. If the registered player wins, the points earned are recorded normally.
+9. In each match, every player has a total of 2 minutes of global time to make checker movements throughout the entire game. At the beginning of each turn, the player has 7 seconds to make their move without using any of their global time.</value>
   </data>
 </root>

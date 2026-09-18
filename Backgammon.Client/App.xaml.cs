@@ -2,16 +2,27 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace Backgammon.Client
 {
-    /// <summary>
-    /// Lógica de interacción para App.xaml
-    /// </summary>
-    public partial class App : Application
-    {
+	/// <summary>
+	/// Lógica de interacción para App.xaml
+	/// </summary>
+	public partial class App : Application
+	{
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            CultureInfo culture = new CultureInfo("en");
+
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+
+            base.OnStartup(e);
+        }
     }
 }
