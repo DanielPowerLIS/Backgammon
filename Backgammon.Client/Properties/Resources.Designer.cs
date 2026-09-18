@@ -70,6 +70,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Agregar Enlace.
+        /// </summary>
+        public static string AddLink {
+            get {
+                return ResourceManager.GetString("AddLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Volver.
         /// </summary>
         public static string Back {
@@ -93,6 +102,24 @@ namespace Backgammon.Client.Properties {
         public static string CreateLobby {
             get {
                 return ResourceManager.GetString("CreateLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha de registro.
+        /// </summary>
+        public static string DateJoined {
+            get {
+                return ResourceManager.GetString("DateJoined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Descripción.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
             }
         }
         
@@ -221,6 +248,15 @@ namespace Backgammon.Client.Properties {
         public static string SignOut {
             get {
                 return ResourceManager.GetString("SignOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Redes Sociales.
+        /// </summary>
+        public static string SocialMedia {
+            get {
+                return ResourceManager.GetString("SocialMedia", resourceCulture);
             }
         }
         

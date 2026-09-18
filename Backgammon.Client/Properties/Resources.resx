@@ -188,4 +188,16 @@ c) Mover cuatro fichas 6 casillas cada una.
 8. Si una partida cuenta con un jugador invitado, en caso de ganar el invitado, la puntuación obtenida no se verá reflejada en alguna parte, en caso de ganar el jugador registrado la puntuación se refleja de manera normal.
 9. Para cada partida, cada jugador tendrá 2 minutos de manera global para poder realizar movimientos de fichas en toda la partida.  Antes de empezar su tiempo global de cada jugador, hay 7 segundos en cada turno para que el jugador pueda mover sus fichas sin usar tiempo global.</value>
   </data>
+  <data name="DateJoined" xml:space="preserve">
+    <value>Fecha de registro</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="SocialMedia" xml:space="preserve">
+    <value>Redes Sociales</value>
+  </data>
+  <data name="AddLink" xml:space="preserve">
+    <value>Agregar Enlace</value>
+  </data>
 </root>
