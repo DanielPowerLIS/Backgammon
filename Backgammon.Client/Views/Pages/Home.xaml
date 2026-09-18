@@ -6,36 +6,124 @@
       xmlns:local="clr-namespace:Backgammon.Client.Views.Pages"
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Home"
-      Background="White">
+      d:DesignHeight="450" d:DesignWidth="900"
+      Title="Home">
 
-    <Grid>
-        <Button
-            Content="{x:Static properties:Resources.SignIn}"
-            HorizontalAlignment="Left"
-            Margin="110,185,0,0"
-            VerticalAlignment="Top"
-            Width="194"
-            Height="55" FontSize="20"/>
+    <Page.Resources>
+        <RadialGradientBrush
+        x:Key="PageBackgroundBrush"
+        Center="0.5,0.35"
+        GradientOrigin="0.5,0.35"
+        RadiusX="0.85"
+        RadiusY="0.85">
 
-        <Button
-            Content="{x:Static properties:Resources.Guest}"
-            HorizontalAlignment="Left"
-            Margin="110,245,0,0"
-            VerticalAlignment="Top"
-            Width="194"
-            Height="55" RenderTransformOrigin="0.5,0.5" FontSize="20">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.047"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
-        <Label Content="Backgammmon" HorizontalAlignment="Left" Margin="121,44,0,0" VerticalAlignment="Top" Height="81" Width="365" FontSize="50"/>
+            <GradientStop
+            Color="#171C2B"
+            Offset="0" />
 
+            <GradientStop
+            Color="#0C1220"
+            Offset="0.55" />
+
+            <GradientStop
+            Color="#050914"
+            Offset="1" />
+        </RadialGradientBrush>
+        
+        <SolidColorBrush
+            x:Key="ControlBackgroundBrush"
+            Color="#080D1A" />
+
+        <SolidColorBrush
+            x:Key="CyanAccentBrush"
+            Color="#00C9F2" />
+
+        <SolidColorBrush
+            x:Key="PinkAccentBrush"
+            Color="#E795EC" />  
+
+        <Style
+            x:Key="HomeButtonStyle"
+            TargetType="Button">
+
+            <Setter
+                Property="Background"
+                Value="{StaticResource ControlBackgroundBrush}" />
+
+            <Setter
+                Property="BorderBrush"
+                Value="{StaticResource CyanAccentBrush}" />
+
+            <Setter
+                Property="BorderThickness"
+                Value="2" />
+
+            <Setter
+                Property="Foreground"
+                Value="{StaticResource PinkAccentBrush}" />
+
+            <Setter
+                Property="FontFamily"
+                Value="Segoe UI" />
+
+             <Setter
+                Property="FontSize"
+                Value="25" />
+
+            <Setter
+                Property="Cursor"
+                Value="Hand" />
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource PageBackgroundBrush}">
+        <Viewbox
+            Stretch="Uniform"
+            StretchDirection="Both">
+
+            <Grid
+                Width="900"
+                Height="450">
+
+                <TextBlock
+                    Text="BACKGAMMON"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0,45,0,0"
+                    Foreground="#E795EC"
+                    FontFamily="Segoe UI Light"
+                    FontSize="70"
+                    FontWeight="Light"
+                    TextAlignment="Center">
+
+                    <TextBlock.Effect>
+                        <DropShadowEffect
+                        Color="#E795EC"
+                        BlurRadius="3"
+                        ShadowDepth="0"
+                        Opacity="0.8" />
+                    </TextBlock.Effect>
+                </TextBlock>
+
+                <Button
+                    Content="{x:Static properties:Resources.SignIn}"
+                    Style="{StaticResource HomeButtonStyle}"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="0,230,0,0"
+                    Width="365"
+                    Height="72"/>
+
+                <Button
+                    Content="{x:Static properties:Resources.Guest}"
+                    Style="{StaticResource HomeButtonStyle}"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Margin="0,315,0,0"
+                    Width="285"
+                    Height="52"/>
+
+            </Grid>
+        </Viewbox>
     </Grid>
 </Page>

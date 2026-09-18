@@ -17,7 +17,7 @@ namespace Backgammon.Client
 	{
         protected override void OnStartup(StartupEventArgs e)
         {
-            CultureInfo culture = new CultureInfo("en");
+            CultureInfo culture = new CultureInfo("es");
 
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
