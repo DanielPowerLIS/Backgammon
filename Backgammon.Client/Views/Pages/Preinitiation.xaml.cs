@@ -13,16 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Backgammon.Client
+namespace Backgammon.Client.Views.Pages
 {
     /// <summary>
-    /// Lógica de interacción para Language.xaml
+    /// Lógica de interacción para Preinitiation.xaml
     /// </summary>
-    public partial class Language : Page
+    public partial class Preinitiation : Page
     {
-        public Language()
+        public Preinitiation()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
