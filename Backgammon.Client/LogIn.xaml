@@ -1,15 +1,41 @@
-﻿<Window x:Class="Backgammon.Client.LogIn"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Backgammon.Client"
-        xmlns:properties="clr-namespace:Backgammon.Client.Properties"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+﻿<Page x:Class="Backgammon.Client.LogIn"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Backgammon.Client"
+      xmlns:properties="clr-namespace:Backgammon.Client.Properties"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="LogIn"
+      Background="White">
+
     <Grid>
-        <Button Content="{x:Static properties:Resources.Guest}" HorizontalAlignment="Left" Margin="110,287,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <Button Content="{x:Static properties:Resources.SignIn}" HorizontalAlignment="Left" Margin="110,241,0,0" VerticalAlignment="Top" Click="Button_Click" Height="32" Width="99"/>
+        <Button
+            Content="{x:Static properties:Resources.SignIn}"
+            HorizontalAlignment="Left"
+            Margin="110,185,0,0"
+            VerticalAlignment="Top"
+            Width="194"
+            Height="55" FontSize="20"/>
+
+        <Button
+            Content="{x:Static properties:Resources.Guest}"
+            HorizontalAlignment="Left"
+            Margin="110,245,0,0"
+            VerticalAlignment="Top"
+            Width="194"
+            Height="55" RenderTransformOrigin="0.5,0.5" FontSize="20">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.047"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Label Content="Backgammmon" HorizontalAlignment="Left" Margin="121,44,0,0" VerticalAlignment="Top" Height="81" Width="365" FontSize="50"/>
 
     </Grid>
-</Window>
+</Page>

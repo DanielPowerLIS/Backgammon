@@ -17,15 +17,10 @@ namespace Backgammon.Client
 	{
         protected override void OnStartup(StartupEventArgs e)
         {
-            CultureInfo culture = new CultureInfo("es");
+            CultureInfo culture = new CultureInfo("en");
 
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
-
-            MessageBox.Show(
-                Backgammon.Client.Properties.Resources.Guest + "\n" +
-                Thread.CurrentThread.CurrentUICulture.Name
-            );
 
             base.OnStartup(e);
         }

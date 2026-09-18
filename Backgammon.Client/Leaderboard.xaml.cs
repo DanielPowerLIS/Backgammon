@@ -16,13 +16,18 @@ using System.Windows.Shapes;
 namespace Backgammon.Client
 {
     /// <summary>
-    /// Lógica de interacción para LogIn.xaml
+    /// Lógica de interacción para Leaderboard.xaml
     /// </summary>
-    public partial class LogIn : Page
+    public partial class Leaderboard : Page
     {
-        public LogIn()
+        public Leaderboard()
         {
             InitializeComponent();
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

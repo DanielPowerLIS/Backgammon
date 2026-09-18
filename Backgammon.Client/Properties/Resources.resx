@@ -120,7 +120,55 @@
   <data name="Guest" xml:space="preserve">
     <value>Invitado</value>
   </data>
+  <data name="Play" xml:space="preserve">
+    <value>Jugar</value>
+  </data>
   <data name="SignIn" xml:space="preserve">
-    <value>Iniciar sesión</value>
+    <value>Iniciar Sesión</value>
+  </data>
+  <data name="Leaderboard" xml:space="preserve">
+    <value>Clasificaciones</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="Friends" xml:space="preserve">
+    <value>Amigos</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Cerrar Sesión</value>
+  </data>
+  <data name="CreateLobby" xml:space="preserve">
+    <value>Crear Sala</value>
+  </data>
+  <data name="Join" xml:space="preserve">
+    <value>Unirse</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Volver</value>
+  </data>
+  <data name="Wins" xml:space="preserve">
+    <value>Victorias</value>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>Puntos</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Cuenta</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Cambiar Contraseña</value>
+  </data>
+  <data name="Spanish" xml:space="preserve">
+    <value>Español</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Inglés</value>
   </data>
 </root>

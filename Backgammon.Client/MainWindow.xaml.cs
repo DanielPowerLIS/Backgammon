@@ -16,13 +16,16 @@ using System.Windows.Shapes;
 namespace Backgammon.Client
 {
     /// <summary>
-    /// Lógica de interacción para LogIn.xaml
+    /// Lógica de interacción para MainWindow.xaml
     /// </summary>
-    public partial class LogIn : Page
+    public partial class MainWindow : Window
     {
-        public LogIn()
+        public MainWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(new LogIn());
         }
+
+        
     }
 }
