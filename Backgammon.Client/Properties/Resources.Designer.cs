@@ -115,6 +115,17 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a 1. En el Backgammon participan dos jugadores (A y B). Cada uno de ellos dispone de 15 fichas. Cada rival maneja fichas de diferente color. En cada caso, las fichas circulan como lo indican las flechas, contando cada pico como uno. 
+        ///2. Para iniciar el juego, cada participante tira un sólo dado, ganando el derecho de iniciar el jugador que obtenga la puntuación más alta. En caso de empate se repiten los tiros.
+        ///3. Gana el juego el primero que logre sacar sus propias fichas del tablero. Antes de poder empezar [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string GameRules {
+            get {
+                return ResourceManager.GetString("GameRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Invitado.
         /// </summary>
         public static string Guest {
@@ -174,6 +185,15 @@ namespace Backgammon.Client.Properties {
         public static string Profile {
             get {
                 return ResourceManager.GetString("Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reglas.
+        /// </summary>
+        public static string Rules {
+            get {
+                return ResourceManager.GetString("Rules", resourceCulture);
             }
         }
         
