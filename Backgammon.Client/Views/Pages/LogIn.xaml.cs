@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Backgammon.Client
+namespace Backgammon.Client.Views.Pages
 {
     /// <summary>
-    /// Lógica de interacción para Preinitiation.xaml
+    /// Lógica de interacción para LogIn.xaml
     /// </summary>
-    public partial class Preinitiation : Page
+    public partial class LogIn : Page
     {
-        public Preinitiation()
+        public LogIn()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Backgammon.Client
+namespace Backgammon.Client.Views.Pages
 {
     /// <summary>
-    /// Lógica de interacción para LogIn.xaml
+    /// Lógica de interacción para MainMenu.xaml
     /// </summary>
-    public partial class LogIn : Page
+    public partial class MainMenu : Page
     {
-        public LogIn()
+        public MainMenu()
         {
             InitializeComponent();
         }
