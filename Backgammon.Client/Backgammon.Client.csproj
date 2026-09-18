@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DBA002D2-CC44-4367-86F1-F72933E85F03}</ProjectGuid>
+    <ProjectGuid>{C95F5E06-037A-827B-3C31-DF1C89CA01A8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Backgammon.Client</RootNamespace>
     <AssemblyName>Backgammon.Client</AssemblyName>
