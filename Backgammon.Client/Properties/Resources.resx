@@ -171,4 +171,21 @@
   <data name="English" xml:space="preserve">
     <value>Inglés</value>
   </data>
+  <data name="Rules" xml:space="preserve">
+    <value>Reglas</value>
+  </data>
+  <data name="GameRules" xml:space="preserve">
+    <value>1. En el Backgammon participan dos jugadores (A y B). Cada uno de ellos dispone de 15 fichas. Cada rival maneja fichas de diferente color. En cada caso, las fichas circulan como lo indican las flechas, contando cada pico como uno. 
+2. Para iniciar el juego, cada participante tira un sólo dado, ganando el derecho de iniciar el jugador que obtenga la puntuación más alta. En caso de empate se repiten los tiros.
+3. Gana el juego el primero que logre sacar sus propias fichas del tablero. Antes de poder empezar a sacar fichas, es necesario que todas se encuentren en el último pico del tablero. Si se observa bien el campo, notará que cuenta con cuatro cuadrantes.
+4. Una vez que se determina quién inicia el juego, éste tira dos dados y desplazará su ficha en el sentido de las flechas que se muestran en la ilustración. Tantos picos como puntos haya sacado en los dados. El movimiento lo podrá hacer también con dos fichas, una con los puntos de un dado y la otra con los puntos del dado restante.
+5. Cuando al tirar salgan dados con los mismos puntos, el movimiento de fichas se duplica. Es decir, si se obtienen dos 6, se podrá hacer lo siguiente: 
+a) Mover una ficha 24 picos 
+b) Mover dos fichas 12 picos cada una   
+c) Mover cuatro fichas 6 casillas cada una.
+6. El jugador que gana la partida recibe 100 puntos. Cada vez que cualquier jugador captura una ficha rival durante el juego, se añaden 10 puntos a un "pozo" compartido. Al finalizar la partida, el ganador se lleva sus 100 puntos base más todos los puntos acumulados en el pozo. 
+7. El jugador que gana la partida recibe 100 puntos. Cada vez que cualquier jugador captura una ficha rival durante el juego, se añaden 10 puntos a un "pozo" compartido. Al finalizar la partida, el ganador se lleva sus 100 puntos base más todos los puntos acumulados en el pozo. El perdedor no recibe ningún punto.
+8. Si una partida cuenta con un jugador invitado, en caso de ganar el invitado, la puntuación obtenida no se verá reflejada en alguna parte, en caso de ganar el jugador registrado la puntuación se refleja de manera normal.
+9. Para cada partida, cada jugador tendrá 2 minutos de manera global para poder realizar movimientos de fichas en toda la partida.  Antes de empezar su tiempo global de cada jugador, hay 7 segundos en cada turno para que el jugador pueda mover sus fichas sin usar tiempo global.</value>
+  </data>
 </root>

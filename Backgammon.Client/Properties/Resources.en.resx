@@ -171,4 +171,21 @@
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="Rules" xml:space="preserve">
+    <value>Reglas</value>
+  </data>
+  <data name="GameRules" xml:space="preserve">
+    <value>1. Backgammon is played by two players (A and B). Each player has 15 checkers, and each player uses checkers of a different color. The checkers move in the direction indicated by the arrows, with each point on the board counting as one space. 
+2. To start the game, each player rolls one die. The player who rolls the higher number earns the right to go first. In case of a tie, both players roll again.
+3. The winner is the first player to bear off all of their checkers from the board. Before a player can begin bearing off checkers, all of their checkers must be located in their home board. The board is divided into four quadrants.
+4. Once the starting player has been determined, that player rolls two dice and moves their checkers in the direction indicated by the arrows. The number of points moved corresponds to the numbers rolled on the dice. The player may also move two different checkers, using the value of one die for one checker and the value of the other die for another checker.
+5. When both dice show the same number, the number of moves is doubled. For example, if two sixes are rolled, the player may:
+a) Move one checker a total of 24 points,
+b) Move two checkers 12 points each, or
+c) Move four checkers 6 points each.
+6. If a point is occupied by two or more opposing checkers, a player cannot move one of their checkers onto that point. However, if there is only one opposing checker on the point, the player may move there and capture it. The captured checker is placed on the central bar and must re-enter the board before continuing its path. A player who has a checker on the bar cannot move any of their other checkers until the captured checker has successfully re-entered the board. To re-enter, the player must roll a number that allows the checker to enter an available point or a point occupied by only one opposing checker.
+7. The player who wins the match receives 100 points. Each time a player captures an opponent's checker during the game, 10 points are added to a shared pot. At the end of the match, the winner receives the 100 base points plus all points accumulated in the pot. The losing player receives no points.
+8. If a match includes a guest player, any points earned by the guest will not be recorded if the guest wins. If the registered player wins, the points earned are recorded normally.
+9. In each match, every player has a total of 2 minutes of global time to make checker movements throughout the entire game. At the beginning of each turn, the player has 7 seconds to make their move without using any of their global time.</value>
+  </data>
 </root>
