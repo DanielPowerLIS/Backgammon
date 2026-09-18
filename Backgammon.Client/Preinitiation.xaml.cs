@@ -16,13 +16,18 @@ using System.Windows.Shapes;
 namespace Backgammon.Client
 {
     /// <summary>
-    /// Lógica de interacción para LogIn.xaml
+    /// Lógica de interacción para Preinitiation.xaml
     /// </summary>
-    public partial class LogIn : Page
+    public partial class Preinitiation : Page
     {
-        public LogIn()
+        public Preinitiation()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
