@@ -172,7 +172,7 @@
     <value>English</value>
   </data>
   <data name="Rules" xml:space="preserve">
-    <value>Reglas</value>
+    <value>Rules</value>
   </data>
   <data name="GameRules" xml:space="preserve">
     <value>1. Backgammon is played by two players (A and B). Each player has 15 checkers, and each player uses checkers of a different color. The checkers move in the direction indicated by the arrows, with each point on the board counting as one space. 

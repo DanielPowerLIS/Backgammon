@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Backgammon.Client
 {
     /// <summary>
-    /// Lógica de interacción para Settings.xaml
+    /// Lógica de interacción para Profile.xaml
     /// </summary>
-    public partial class Settings : Page
+    public partial class Profile : Page
     {
-        public Settings()
+        public Profile()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
