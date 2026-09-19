@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Backgammon.Client.Views.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using Backgammon.Client.Views.Pages;
+using Backgammon.Client.Dialog;
 
 namespace Backgammon.Client
 {
@@ -25,9 +25,21 @@ namespace Backgammon.Client
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new AccountRegistration());
+            MainFrame.Navigate(new Home());
+            Loaded += MainWindow_Loaded;
         }
 
-        
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            AlertDialog alert = new AlertDialog(
+                "Error",
+                Properties.Resources.SendMessageError,
+                Properties.Resources.Close
+            );
+
+            alert.Owner = this;
+            alert.ShowDialog();
+        }
+
     }
 }

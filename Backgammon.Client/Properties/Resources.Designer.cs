@@ -106,6 +106,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cerrar.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crear cuenta.
         /// </summary>
         public static string CreateAccount {
@@ -293,6 +302,15 @@ namespace Backgammon.Client.Properties {
         public static string Rules {
             get {
                 return ResourceManager.GetString("Rules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Su mensaje no ha podido ser enviado. Porfavor verifique su conexión e intente de nuevo.
+        /// </summary>
+        public static string SendMessageError {
+            get {
+                return ResourceManager.GetString("SendMessageError", resourceCulture);
             }
         }
         
