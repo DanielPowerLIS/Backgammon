@@ -233,4 +233,13 @@ c) Move four checkers 6 points each.
   <data name="AlreadyHaveAccount" xml:space="preserve">
     <value>Already have an account?</value>
   </data>
+  <data name="StartGame" xml:space="preserve">
+    <value>Start Game</value>
+  </data>
+  <data name="LeaveRoom" xml:space="preserve">
+    <value>Leave Room</value>
+  </data>
+  <data name="OpenChat" xml:space="preserve">
+    <value>Open Chat</value>
+  </data>
 </root>

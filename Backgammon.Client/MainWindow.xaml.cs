@@ -26,7 +26,7 @@ namespace Backgammon.Client
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new AccountRegistration());
+            MainFrame.Navigate(new Room());
             Loaded += MainWindow_Loaded;
         }
 

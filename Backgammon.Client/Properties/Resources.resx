@@ -233,4 +233,13 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="AlreadyHaveAccount" xml:space="preserve">
     <value>¿Ya tienes una cuenta?</value>
   </data>
+  <data name="StartGame" xml:space="preserve">
+    <value>Iniciar Juego</value>
+  </data>
+  <data name="LeaveRoom" xml:space="preserve">
+    <value>Salir Del Juego</value>
+  </data>
+  <data name="OpenChat" xml:space="preserve">
+    <value>Abrir Chat</value>
+  </data>
 </root>
