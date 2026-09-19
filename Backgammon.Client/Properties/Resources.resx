@@ -242,4 +242,16 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="OpenChat" xml:space="preserve">
     <value>Abrir Chat</value>
   </data>
+  <data name="FriendRequests" xml:space="preserve">
+    <value>Solicitudes</value>
+  </data>
+  <data name="AddFriend" xml:space="preserve">
+    <value>Añadir Amigo</value>
+  </data>
+  <data name="ViewProfile" xml:space="preserve">
+    <value>Ver Perfil</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
 </root>
