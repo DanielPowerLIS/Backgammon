@@ -188,4 +188,31 @@ c) Move four checkers 6 points each.
 8. If a match includes a guest player, any points earned by the guest will not be recorded if the guest wins. If the registered player wins, the points earned are recorded normally.
 9. In each match, every player has a total of 2 minutes of global time to make checker movements throughout the entire game. At the beginning of each turn, the player has 7 seconds to make their move without using any of their global time.</value>
   </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="CreateAnAccount" xml:space="preserve">
+    <value>Create an account</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="PaternalLastName" xml:space="preserve">
+    <value>Paternal last name</value>
+  </data>
+  <data name="MaternalLastName" xml:space="preserve">
+    <value>Maternal last name</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
 </root>

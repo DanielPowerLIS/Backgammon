@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\Pages\AccountRegistration.xaml.cs">
+      <DependentUpon>AccountRegistration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\Language.xaml.cs">
       <DependentUpon>Language.xaml</DependentUpon>
     </Compile>
@@ -64,6 +67,10 @@
     <Compile Include="Views\Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Pages\AccountRegistration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\Language.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
