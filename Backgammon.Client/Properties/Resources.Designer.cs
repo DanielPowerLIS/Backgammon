@@ -70,6 +70,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Añadir Amigo.
+        /// </summary>
+        public static string AddFriend {
+            get {
+                return ResourceManager.GetString("AddFriend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Agregar Enlace.
         /// </summary>
         public static string AddLink {
@@ -183,6 +192,15 @@ namespace Backgammon.Client.Properties {
         public static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Solicitudes.
+        /// </summary>
+        public static string FriendRequests {
+            get {
+                return ResourceManager.GetString("FriendRequests", resourceCulture);
             }
         }
         
@@ -315,6 +333,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Eliminar.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Reglas.
         /// </summary>
         public static string Rules {
@@ -392,6 +419,15 @@ namespace Backgammon.Client.Properties {
         public static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ver Perfil.
+        /// </summary>
+        public static string ViewProfile {
+            get {
+                return ResourceManager.GetString("ViewProfile", resourceCulture);
             }
         }
         

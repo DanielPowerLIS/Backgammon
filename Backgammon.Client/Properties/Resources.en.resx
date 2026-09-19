@@ -242,4 +242,16 @@ c) Move four checkers 6 points each.
   <data name="OpenChat" xml:space="preserve">
     <value>Open Chat</value>
   </data>
+  <data name="FriendRequests" xml:space="preserve">
+    <value>Friend Requests</value>
+  </data>
+  <data name="AddFriend" xml:space="preserve">
+    <value>Add Friend</value>
+  </data>
+  <data name="ViewProfile" xml:space="preserve">
+    <value>View Profile</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
 </root>

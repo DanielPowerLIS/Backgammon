@@ -1,0 +1,58 @@
+﻿<Page x:Class="Backgammon.Client.Views.Pages.Friends"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Backgammon.Client.Views.Pages"
+      xmlns:properties="clr-namespace:Backgammon.Client.Properties"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Friends"
+      Background="White">
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.Friends}" HorizontalAlignment="Center" FontSize="30" Margin="0,0,0,15" />
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,15">
+            <Button Content="{x:Static properties:Resources.FriendRequests}" Width="130" Height="35" Margin="0,0,10,0"/>
+            <Button Content="{x:Static properties:Resources.AddFriend}" Width="130" Height="35" Margin="0,0,0,0"/>
+        </StackPanel>
+        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="2">
+            <ListView x:Name="FriendList">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="120"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Ellipse Grid.Column="0" Width="40" Height="40" Fill="LightGray"/>
+                            <TextBlock Grid.Column="1" Text="Something" VerticalAlignment="Center" FontSize="16"/>
+                            <Ellipse Grid.Column="2" Width="20" Height="20" Fill="Green" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Button Grid.Column="3" Content="{x:Static properties:Resources.ViewProfile}" Width="100" Height="30"/>
+                            <Button Grid.Column="4" Content="{x:Static properties:Resources.Remove}" Width="100" Height="30"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
+            </ListView>
+            
+        </Border>
+        <Button Grid.Row="3" Content="{x:Static properties:Resources.Back}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
+    </Grid>
+</Page>
