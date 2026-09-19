@@ -157,7 +157,7 @@
     <value>Points</value>
   </data>
   <data name="Account" xml:space="preserve">
-    <value>Acount</value>
+    <value>Account</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
@@ -259,5 +259,8 @@ c) Move four checkers 6 points each.
   </data>
   <data name="Reject" xml:space="preserve">
     <value>Reject</value>
+  </data>
+  <data name="LikedEmail" xml:space="preserve">
+    <value>Linked Email</value>
   </data>
 </root>

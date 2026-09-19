@@ -279,6 +279,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Correo Asociado.
+        /// </summary>
+        public static string LikedEmail {
+            get {
+                return ResourceManager.GetString("LikedEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Apellido materno.
         /// </summary>
         public static string MaternalLastName {
