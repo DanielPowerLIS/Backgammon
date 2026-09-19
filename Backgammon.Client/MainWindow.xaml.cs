@@ -13,7 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Backgammon.Client.Dialog;
+
+using Backgammon.Client.Views.Dialog;
 
 namespace Backgammon.Client
 {
@@ -25,7 +26,7 @@ namespace Backgammon.Client
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Home());
+            MainFrame.Navigate(new AccountRegistration());
             Loaded += MainWindow_Loaded;
         }
 
