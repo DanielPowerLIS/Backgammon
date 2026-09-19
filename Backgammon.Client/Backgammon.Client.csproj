@@ -55,7 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Dialog\AlertDialog.xaml.cs">
+    <Compile Include="Views\Dialog\AlertDialog.xaml.cs">
       <DependentUpon>AlertDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\AccountRegistration.xaml.cs">
@@ -73,7 +73,7 @@
     <Compile Include="Views\Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
-    <Page Include="Dialog\AlertDialog.xaml">
+    <Page Include="Views\Dialog\AlertDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
