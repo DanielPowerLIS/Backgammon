@@ -1,0 +1,31 @@
+﻿<Window x:Class="Backgammon.Client.Dialog.AlertDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Backgammon.Client.Dialog"
+        xmlns:properties="clr-namespace:Backgammon.Client.Properties"
+        mc:Ignorable="d"
+        Title="AlertDialog" Height="220" Width="400"
+        ResizeMode="NoResize"
+        Background="#07111F" WindowStartupLocation="CenterOwner" WindowStyle="ToolWindow"
+        >
+    
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock x:Name="TxtTitle"  Grid.Row="0" Text="Título" FontSize="22" FontWeight="Bold" Foreground="#F19CFF" HorizontalAlignment="Center" TextWrapping="Wrap" >
+            
+        </TextBlock>
+
+
+        <TextBlock x:Name="TxtMessage" Grid.Row="1" Text="Aquí irá el mensaje de alerta" Foreground="#00D9FF" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" />
+        
+        
+        <Button x:Name="BtnAccept" Content="Aceptar" Width="100" Height="30" Foreground="#F19CFF" Background="#07111F" BorderBrush="#00d9ff" HorizontalAlignment="Center" Grid.Row="2" Click="BtnAccept_Click" BorderThickness="2,2,2,2"/>
+
+    </Grid>
+</Window>
