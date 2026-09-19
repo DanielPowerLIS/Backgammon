@@ -200,4 +200,10 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="AddLink" xml:space="preserve">
     <value>Agregar Enlace</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="SendMessageError" xml:space="preserve">
+    <value>Su mensaje no ha podido ser enviado. Porfavor verifique su conexión e intente de nuevo</value>
+  </data>
 </root>

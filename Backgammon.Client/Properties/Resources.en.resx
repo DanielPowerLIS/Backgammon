@@ -200,4 +200,10 @@ c) Move four checkers 6 points each.
   <data name="AddLink" xml:space="preserve">
     <value>Add Link</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="SendMessageError" xml:space="preserve">
+    <value>Your message could not be sent. Please check your connection and try again.</value>
+  </data>
 </root>
