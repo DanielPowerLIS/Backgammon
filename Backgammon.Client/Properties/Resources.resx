@@ -260,4 +260,7 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Reject" xml:space="preserve">
     <value>Rechazar</value>
   </data>
+  <data name="LikedEmail" xml:space="preserve">
+    <value>Correo Asociado</value>
+  </data>
 </root>
