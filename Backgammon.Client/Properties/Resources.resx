@@ -206,4 +206,31 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="SendMessageError" xml:space="preserve">
     <value>Su mensaje no ha podido ser enviado. Porfavor verifique su conexión e intente de nuevo</value>
   </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Correo electrónico</value>
+  </data>
+  <data name="CreateAnAccount" xml:space="preserve">
+    <value>Crear una cuenta</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Nombre(s)</value>
+  </data>
+  <data name="PaternalLastName" xml:space="preserve">
+    <value>Apellido paterno</value>
+  </data>
+  <data name="MaternalLastName" xml:space="preserve">
+    <value>Apellido materno</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Crear cuenta</value>
+  </data>
+  <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>¿Ya tienes una cuenta?</value>
+  </data>
 </root>

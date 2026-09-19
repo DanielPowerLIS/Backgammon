@@ -206,4 +206,31 @@ c) Move four checkers 6 points each.
   <data name="SendMessageError" xml:space="preserve">
     <value>Your message could not be sent. Please check your connection and try again.</value>
   </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="CreateAnAccount" xml:space="preserve">
+    <value>Create an account</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="PaternalLastName" xml:space="preserve">
+    <value>Paternal last name</value>
+  </data>
+  <data name="MaternalLastName" xml:space="preserve">
+    <value>Maternal last name</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>Already have an account?</value>
+  </data>
 </root>
