@@ -254,4 +254,10 @@ c) Move four checkers 6 points each.
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
 </root>
