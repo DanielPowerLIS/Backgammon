@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Backgammon.Client.Pages.Dialog
+namespace Backgammon.Client.Views.Dialog
 {
     public partial class AlertDialog : Window
     {
