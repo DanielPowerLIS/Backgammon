@@ -61,6 +61,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Aceptar.
+        /// </summary>
+        public static string Accept {
+            get {
+                return ResourceManager.GetString("Accept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cuenta.
         /// </summary>
         public static string Account {
@@ -196,7 +205,7 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Solicitudes.
+        ///   Busca una cadena traducida similar a Solicitudes De Amistad.
         /// </summary>
         public static string FriendRequests {
             get {
@@ -329,6 +338,15 @@ namespace Backgammon.Client.Properties {
         public static string Profile {
             get {
                 return ResourceManager.GetString("Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Rechazar.
+        /// </summary>
+        public static string Reject {
+            get {
+                return ResourceManager.GetString("Reject", resourceCulture);
             }
         }
         

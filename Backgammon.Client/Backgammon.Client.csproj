@@ -61,6 +61,9 @@
     <Compile Include="Views\Pages\AccountRegistration.xaml.cs">
       <DependentUpon>AccountRegistration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\FriendRequests.xaml.cs">
+      <DependentUpon>FriendRequests.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\Friends.xaml.cs">
       <DependentUpon>Friends.xaml</DependentUpon>
     </Compile>
@@ -84,6 +87,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\AccountRegistration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\FriendRequests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
