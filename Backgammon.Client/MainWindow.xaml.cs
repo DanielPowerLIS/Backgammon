@@ -34,8 +34,8 @@ namespace Backgammon.Client
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             AlertDialog alert = new AlertDialog(
-                Properties.Resources.NoFriendsAddedTitle,
-                Properties.Resources.NoFriendsAddedMessage,
+                Properties.Resources.KickConnectionErrorTitle,
+                Properties.Resources.KickConnectionErrorMessage,
                 Properties.Resources.Close,
                 AlertType.Error
             );

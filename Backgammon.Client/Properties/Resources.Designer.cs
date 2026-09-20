@@ -241,6 +241,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo obtener la información sobre tus amigos. Intente más tarde..
+        /// </summary>
+        public static string FriendsRetrievalErrorMessage {
+            get {
+                return ResourceManager.GetString("FriendsRetrievalErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No Se Pueden Recuperar Amigos.
+        /// </summary>
+        public static string FriendsRetrievalErrorTitle {
+            get {
+                return ResourceManager.GetString("FriendsRetrievalErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a 1. En el Backgammon participan dos jugadores (A y B). Cada uno de ellos dispone de 15 fichas. Cada rival maneja fichas de diferente color. En cada caso, las fichas circulan como lo indican las flechas, contando cada pico como uno. 
         ///2. Para iniciar el juego, cada participante tira un sólo dado, ganando el derecho de iniciar el jugador que obtenga la puntuación más alta. En caso de empate se repiten los tiros.
         ///3. Gana el juego el primero que logre sacar sus propias fichas del tablero. Antes de poder empezar [resto de la cadena truncado]&quot;;.
@@ -288,6 +306,42 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No fue posible expulsar al jugador debido a un problema de conexión. Inténtalo nuevamente..
+        /// </summary>
+        public static string KickConnectionErrorMessage {
+            get {
+                return ResourceManager.GetString("KickConnectionErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error Conexión Expulsión.
+        /// </summary>
+        public static string KickConnectionErrorTitle {
+            get {
+                return ResourceManager.GetString("KickConnectionErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El jugador ya no se encuentra en la sala..
+        /// </summary>
+        public static string KickFailedMessage {
+            get {
+                return ResourceManager.GetString("KickFailedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Expulsión No Completada.
+        /// </summary>
+        public static string KickFailedTitle {
+            get {
+                return ResourceManager.GetString("KickFailedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Idioma.
         /// </summary>
         public static string Language {
@@ -297,11 +351,47 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No fue posible guardar el idioma seleccionado. Inténtelo nuevamente más tarde..
+        /// </summary>
+        public static string LanguageSaveErrorMessage {
+            get {
+                return ResourceManager.GetString("LanguageSaveErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error Al Guardar Idioma.
+        /// </summary>
+        public static string LanguageSaveErrorTitle {
+            get {
+                return ResourceManager.GetString("LanguageSaveErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Clasificaciones.
         /// </summary>
         public static string Leaderboard {
             get {
                 return ResourceManager.GetString("Leaderboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No fue posible obtener la clasificación. Verifica tu conexión e inténtelo más tarde.
+        /// </summary>
+        public static string LeaderboardLoadErrorMessage {
+            get {
+                return ResourceManager.GetString("LeaderboardLoadErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error Conexión Clasificación.
+        /// </summary>
+        public static string LeaderboardLoadErrorTitle {
+            get {
+                return ResourceManager.GetString("LeaderboardLoadErrorTitle", resourceCulture);
             }
         }
         
@@ -320,6 +410,42 @@ namespace Backgammon.Client.Properties {
         public static string LikedEmail {
             get {
                 return ResourceManager.GetString("LikedEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se puedo iniciar la sala. Intente más tarde..
+        /// </summary>
+        public static string LobbyStartErrorMessage {
+            get {
+                return ResourceManager.GetString("LobbyStartErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error Iniciar Sala.
+        /// </summary>
+        public static string LobbyStartErrorTitle {
+            get {
+                return ResourceManager.GetString("LobbyStartErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La sala ya no se encuentra disponible para recibir a otro jugador..
+        /// </summary>
+        public static string LobbyUnavailableMessage {
+            get {
+                return ResourceManager.GetString("LobbyUnavailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sala No Disponible.
+        /// </summary>
+        public static string LobbyUnavailableTitle {
+            get {
+                return ResourceManager.GetString("LobbyUnavailableTitle", resourceCulture);
             }
         }
         
@@ -360,6 +486,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No existen jugadores disponibles en la clasificación..
+        /// </summary>
+        public static string NoRankingsMessage {
+            get {
+                return ResourceManager.GetString("NoRankingsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sin Clasificaciones.
+        /// </summary>
+        public static string NoRankingsTitle {
+            get {
+                return ResourceManager.GetString("NoRankingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Abrir Chat.
         /// </summary>
         public static string OpenChat {
@@ -392,6 +536,24 @@ namespace Backgammon.Client.Properties {
         public static string Play {
             get {
                 return ResourceManager.GetString("Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El jugador [nombre de usuario] ya no se encuentra disponible..
+        /// </summary>
+        public static string PlayerUnavailableMessage {
+            get {
+                return ResourceManager.GetString("PlayerUnavailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Jugador No Disponible.
+        /// </summary>
+        public static string PlayerUnavailableTitle {
+            get {
+                return ResourceManager.GetString("PlayerUnavailableTitle", resourceCulture);
             }
         }
         
@@ -468,11 +630,38 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No fue posible cargar las reglas del juego. Inténtelo nuevamente..
+        /// </summary>
+        public static string RulesErrorMessage {
+            get {
+                return ResourceManager.GetString("RulesErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error Reglas.
+        /// </summary>
+        public static string RulesErrorTitle {
+            get {
+                return ResourceManager.GetString("RulesErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Su mensaje no ha podido ser enviado. Porfavor verifique su conexión e intente de nuevo.
         /// </summary>
-        public static string SendMessageError {
+        public static string SendMessageErrorMessage {
             get {
-                return ResourceManager.GetString("SendMessageError", resourceCulture);
+                return ResourceManager.GetString("SendMessageErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error Al Enviar Mensaje.
+        /// </summary>
+        public static string SendMessageErrorTitle {
+            get {
+                return ResourceManager.GetString("SendMessageErrorTitle", resourceCulture);
             }
         }
         
@@ -527,6 +716,24 @@ namespace Backgammon.Client.Properties {
         public static string StartGame {
             get {
                 return ResourceManager.GetString("StartGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a [Nombre de usuario] fue expulsado de la sala..
+        /// </summary>
+        public static string SuccessfulKickMessage {
+            get {
+                return ResourceManager.GetString("SuccessfulKickMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Expulsión Exitosa.
+        /// </summary>
+        public static string SuccessfulKickTitle {
+            get {
+                return ResourceManager.GetString("SuccessfulKickTitle", resourceCulture);
             }
         }
         
