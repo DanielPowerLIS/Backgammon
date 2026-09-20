@@ -9,15 +9,58 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MainMenu"
       Background="White">
+    <Page.Resources>
 
-    <Grid>
-        <Label Content="BACKGAMMON" HorizontalAlignment="Center" Margin="0,32,0,0" VerticalAlignment="Top" FontSize="45"/>
-        <Button Content="{x:Static properties:Resources.Play}" HorizontalAlignment="Center" Margin="0,157,0,0" VerticalAlignment="Top" Width="176" Height="26"/>
-        <Button Content="{x:Static properties:Resources.Leaderboard}" HorizontalAlignment="Center" Margin="0,189,0,0" VerticalAlignment="Top" Width="176" Height="26"/>
-        <Button Content="{x:Static properties:Resources.Profile}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="176" Height="25" Margin="0,222,0,0"/>
-        <Button Content="{x:Static properties:Resources.Friends}" HorizontalAlignment="Center" Margin="0,252,0,0" VerticalAlignment="Top" Width="176" Height="26"/>
-        <Button Content="{x:Static properties:Resources.Settings}" HorizontalAlignment="Center" Margin="0,284,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.922,3.018" Width="176" Height="26"/>
-        <Button Content="{x:Static properties:Resources.SignOut}" HorizontalAlignment="Left" Margin="40,388,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.922,3.018" Width="75" Height="20"/>
+        <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5,0.5" GradientOrigin="0.5,0.35" RadiusX="0.85" RadiusY="0.85">
+            <GradientStop Color="#171C2B" Offset="0"/>
+            <GradientStop Color="#0C1220" Offset="0.55"/>
+            <GradientStop Color="#050914" Offset="1"/>
+        </RadialGradientBrush>
+        
+        <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#080D1A"/>
+        <SolidColorBrush x:Key="CyanAccentBrush" Color="#00C9F2"/>
+        <SolidColorBrush x:Key="PinkAccentBrush" Color="#E795EC"/>
+        
+        <Style x:Key="MainMenuButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CyanAccentBrush}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Foreground" Value="{StaticResource PinkAccentBrush}"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="MinWidth" Value="176"/>
+            <Setter Property="MinHeight"  Value="30"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource PageBackgroundBrush}">
+
+        <Grid Margin="30">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="BACKGAMMON" HorizontalAlignment="Center" FontSize="45" Foreground="{StaticResource CyanAccentBrush}" Margin="0,10,0,20">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#00C9F2" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="{x:Static properties:Resources.Play}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
+                <Button Content="{x:Static properties:Resources.Leaderboard}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
+                <Button Content="{x:Static properties:Resources.Profile}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
+                <Button Content="{x:Static properties:Resources.Friends}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
+                <Button Content="{x:Static properties:Resources.Settings}" Style="{StaticResource MainMenuButtonStyle}"/>
+            </StackPanel>
+            
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.SignOut}" Style="{StaticResource MainMenuButtonStyle}" MinWidth="100" HorizontalAlignment="Left" Margin="0,15,0,0"/>
+
+        </Grid>
 
     </Grid>
+
 </Page>
