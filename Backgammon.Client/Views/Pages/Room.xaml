@@ -7,43 +7,92 @@
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Room"
-      Background="White">
+      Title="Room">
 
-    <Grid>
-        <Grid>
+    <Page.Resources>
+
+        <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5,0.5" GradientOrigin="0.5,0.35" RadiusX="0.85" RadiusY="0.85">
+            <GradientStop Color="#171C2B" Offset="0"/>
+            <GradientStop Color="#0C1220" Offset="0.55"/>
+            <GradientStop Color="#050914" Offset="1"/>
+        </RadialGradientBrush>
+        <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#080D1A"/>
+        <SolidColorBrush x:Key="CyanAccentBrush" Color="#00C9F2"/>
+        <SolidColorBrush x:Key="PinkAccentBrush" Color="#E795EC"/>
+        <SolidColorBrush x:Key="DangerBrush" Color="#FF3B4F"/>
+        <Style x:Key="RoomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CyanAccentBrush}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Foreground" Value="{StaticResource PinkAccentBrush}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <Style x:Key="KickButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource DangerBrush}"/>
+            <Setter Property="BorderThickness"  Value="2"/>
+            <Setter Property="Foreground"  Value="{StaticResource DangerBrush}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource PageBackgroundBrush}">
+
+        <Grid Margin="20">
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.LeaveRoom}" Style="{StaticResource RoomButtonStyle}" HorizontalAlignment="Left" MinWidth="130" MinHeight="35" Margin="0,0,0,10"/>
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="SALA" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="45" Foreground="{StaticResource PinkAccentBrush}">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#E795EC" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
+                </TextBlock.Effect>
+
+            </TextBlock>
+
             <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Border Width="100" Height="100" BorderBrush="Black" BorderThickness="1">
+                <Border Width="150" Height="150" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2">
                     <Image x:Name="ImgHost"/>
                 </Border>
-                <TextBlock x:Name="TxtHostUsername" Text="Jugador1" HorizontalAlignment="Center" Margin="0,8,0,0"/>
-                <Border Width="100" Height="25" BorderBrush="Black" BorderThickness="1" CornerRadius="15" Margin="0,8,0,0">
-                    <TextBlock x:Name="TxtHostStatus" Text="Listo" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TxtHostUsername" Text="Jugador1" Foreground="{StaticResource CyanAccentBrush}" FontSize="20" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                <Border Width="120" Height="30" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="1" CornerRadius="15" Margin="0,8,0,0">
+                    <TextBlock x:Name="TxtHostStatus" Text="Listo" Foreground="{StaticResource PinkAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
+
             </StackPanel>
-            <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Border Width="100" Height="100" BorderBrush="Black" BorderThickness="1">
-                    <Image x:Name="ImgGuest"/>
-                </Border>
-                <TextBlock x:Name="TxtGuestUsername" Text="Jugador2" HorizontalAlignment="Center" Margin="0,8,0,0"/>
-                <Border Width="100" Height="25" BorderBrush="Black" BorderThickness="1" CornerRadius="15" Margin="0,8,0,0">
-                    <TextBlock x:Name="TxtGuestStatus" Text="Listo" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Border>
-            </StackPanel>
-            <Button Content="{x:Static properties:Resources.LeaveRoom}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,10,10,10" Width="100" Height="30" FontSize="15"/>
-            <Button Content="{x:Static properties:Resources.OpenChat}" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,10,10,10" Width="100" Height="30" FontSize="15"/>
-            <Button Content="{x:Static properties:Resources.StartGame}" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,10,10,10" Width="100" Height="30" FontSize="15"/>
+
+            <Grid Grid.Row="1" Grid.Column="1">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Border Width="150" Height="150" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2">
+                        <Image x:Name="ImgGuest"/>
+                    </Border>
+
+                    <TextBlock x:Name="TxtGuestUsername" Text="Jugador2" Foreground="{StaticResource CyanAccentBrush}" FontSize="20" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    <Border Width="120" Height="30" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="1" CornerRadius="15" Margin="0,8,0,0">
+                        <TextBlock x:Name="TxtGuestStatus" Text="Listo" Foreground="{StaticResource PinkAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </StackPanel>
+                <Button x:Name="BtnKick" Content="{x:Static properties:Resources.Kick}" Style="{StaticResource KickButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Center" MinWidth="100" Height="35"/>
+            </Grid>
+
+            <Button Grid.Row="2" Grid.Column="0" Content="{x:Static properties:Resources.OpenChat}" Style="{StaticResource RoomButtonStyle}" HorizontalAlignment="Left" MinWidth="130" Height="35"  Margin="0,10,0,0"/>
+            <Button Grid.Row="2" Grid.Column="1" Content="{x:Static properties:Resources.StartGame}" Style="{StaticResource RoomButtonStyle}" HorizontalAlignment="Right" MinWidth="100"  Height="35" Margin="0,10,0,0"/>
         </Grid>
 
     </Grid>
+
 </Page>

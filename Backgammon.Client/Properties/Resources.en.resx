@@ -263,4 +263,7 @@ c) Move four checkers 6 points each.
   <data name="LikedEmail" xml:space="preserve">
     <value>Linked Email</value>
   </data>
+  <data name="Kick" xml:space="preserve">
+    <value>Kick</value>
+  </data>
 </root>
