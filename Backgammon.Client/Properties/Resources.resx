@@ -362,4 +362,16 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="KickConnectionErrorMessage" xml:space="preserve">
     <value>No fue posible expulsar al jugador debido a un problema de conexión. Inténtalo nuevamente.</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Inicio de sesión</value>
+  </data>
+  <data name="UsernameOrEmail" xml:space="preserve">
+    <value>Usuario/Correo electrónico</value>
+  </data>
+  <data name="DoNotHaveAnAccount" xml:space="preserve">
+    <value>¿No tienes una cuenta?</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Regístrate</value>
+  </data>
 </root>
