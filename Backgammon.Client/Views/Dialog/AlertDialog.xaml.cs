@@ -20,6 +20,7 @@ namespace Backgammon.Client.Views.Dialog
         {
             InitializeComponent();
 
+            Title = Properties.Resources.Backgammon;
             TxtTitle.Text = title;
             TxtMessage.Text = message;
             BtnAccept.Content = ButtonText;

@@ -281,4 +281,13 @@ c) Move four checkers 6 points each.
   <data name="Room" xml:space="preserve">
     <value>Room</value>
   </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="NoFriendsAddedFA" xml:space="preserve">
+    <value>No Friends Added</value>
+  </data>
+  <data name="Backgammon" xml:space="preserve">
+    <value>Backgammon</value>
+  </data>
 </root>

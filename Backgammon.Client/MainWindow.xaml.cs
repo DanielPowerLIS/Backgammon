@@ -26,14 +26,14 @@ namespace Backgammon.Client
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Settings());
+            MainFrame.Navigate(new Rules());
             Loaded += MainWindow_Loaded;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             AlertDialog alert = new AlertDialog(
-                "Error",
+                Properties.Resources.NoFriendsAddedFA,
                 Properties.Resources.SendMessageError,
                 Properties.Resources.Close
             );

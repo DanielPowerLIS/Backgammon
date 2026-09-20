@@ -124,6 +124,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Backgammon.
+        /// </summary>
+        public static string Backgammon {
+            get {
+                return ResourceManager.GetString("Backgammon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Cambiar Contraseña.
         /// </summary>
         public static string ChangePassword {
@@ -333,6 +342,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Sin Amigos Añadidos.
+        /// </summary>
+        public static string NoFriendsAddedFA {
+            get {
+                return ResourceManager.GetString("NoFriendsAddedFA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Abrir Chat.
         /// </summary>
         public static string OpenChat {
@@ -392,6 +410,15 @@ namespace Backgammon.Client.Properties {
         public static string Profile {
             get {
                 return ResourceManager.GetString("Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Listo.
+        /// </summary>
+        public static string Ready {
+            get {
+                return ResourceManager.GetString("Ready", resourceCulture);
             }
         }
         

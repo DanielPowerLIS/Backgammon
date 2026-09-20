@@ -57,7 +57,7 @@
             </Grid.RowDefinitions>
 
             <Button Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.LeaveRoom}" Style="{StaticResource RoomButtonStyle}" HorizontalAlignment="Left" MinWidth="130" MinHeight="35" Margin="0,0,0,10"/>
-            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="SALA" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="45" Foreground="{StaticResource PinkAccentBrush}">
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{x:Static properties:Resources.Room}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="45" Foreground="{StaticResource PinkAccentBrush}">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#E795EC" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
                 </TextBlock.Effect>
@@ -70,7 +70,7 @@
                 </Border>
                 <TextBlock x:Name="TxtHostUsername" Text="Jugador1" Foreground="{StaticResource CyanAccentBrush}" FontSize="20" HorizontalAlignment="Center" Margin="0,8,0,0"/>
                 <Border Width="120" Height="30" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="1" CornerRadius="15" Margin="0,8,0,0">
-                    <TextBlock x:Name="TxtHostStatus" Text="Listo" Foreground="{StaticResource PinkAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TxtHostStatus" Text="{x:Static properties:Resources.Ready}" Foreground="{StaticResource PinkAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
             </StackPanel>
@@ -83,7 +83,7 @@
 
                     <TextBlock x:Name="TxtGuestUsername" Text="Jugador2" Foreground="{StaticResource CyanAccentBrush}" FontSize="20" HorizontalAlignment="Center" Margin="0,8,0,0"/>
                     <Border Width="120" Height="30" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="1" CornerRadius="15" Margin="0,8,0,0">
-                        <TextBlock x:Name="TxtGuestStatus" Text="Listo" Foreground="{StaticResource PinkAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="TxtGuestStatus" Text="{x:Static properties:Resources.Ready}" Foreground="{StaticResource PinkAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </StackPanel>
                 <Button x:Name="BtnKick" Content="{x:Static properties:Resources.Kick}" Style="{StaticResource KickButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Center" MinWidth="100" Height="35"/>

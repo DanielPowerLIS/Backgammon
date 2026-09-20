@@ -281,4 +281,13 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Room" xml:space="preserve">
     <value>Sala</value>
   </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Listo</value>
+  </data>
+  <data name="NoFriendsAddedFA" xml:space="preserve">
+    <value>Sin Amigos Añadidos</value>
+  </data>
+  <data name="Backgammon" xml:space="preserve">
+    <value>Backgammon</value>
+  </data>
 </root>
