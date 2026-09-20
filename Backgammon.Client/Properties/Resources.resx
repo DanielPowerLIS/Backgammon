@@ -203,7 +203,7 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Close" xml:space="preserve">
     <value>Cerrar</value>
   </data>
-  <data name="SendMessageError" xml:space="preserve">
+  <data name="SendMessageErrorMessage" xml:space="preserve">
     <value>Su mensaje no ha podido ser enviado. Porfavor verifique su conexión e intente de nuevo</value>
   </data>
   <data name="EmailAddress" xml:space="preserve">
@@ -292,5 +292,74 @@ c) Mover cuatro fichas 6 casillas cada una.
   </data>
   <data name="NoFriendsAddedMessage" xml:space="preserve">
     <value>Todavía no tienes amigos agregados</value>
+  </data>
+  <data name="FriendsRetrievalErrorTitle" xml:space="preserve">
+    <value>No Se Pueden Recuperar Amigos</value>
+  </data>
+  <data name="FriendsRetrievalErrorMessage" xml:space="preserve">
+    <value>No se pudo obtener la información sobre tus amigos. Intente más tarde.</value>
+  </data>
+  <data name="PlayerUnavailableTitle" xml:space="preserve">
+    <value>Jugador No Disponible</value>
+  </data>
+  <data name="PlayerUnavailableMessage" xml:space="preserve">
+    <value>El jugador [nombre de usuario] ya no se encuentra disponible.</value>
+  </data>
+  <data name="LobbyUnavailableTitle" xml:space="preserve">
+    <value>Sala No Disponible</value>
+  </data>
+  <data name="LobbyUnavailableMessage" xml:space="preserve">
+    <value>La sala ya no se encuentra disponible para recibir a otro jugador.</value>
+  </data>
+  <data name="LobbyStartErrorTitle" xml:space="preserve">
+    <value>Error Iniciar Sala</value>
+  </data>
+  <data name="LobbyStartErrorMessage" xml:space="preserve">
+    <value>No se puedo iniciar la sala. Intente más tarde.</value>
+  </data>
+  <data name="SendMessageErrorTitle" xml:space="preserve">
+    <value>Error Al Enviar Mensaje</value>
+  </data>
+  <data name="NoRankingsTitle" xml:space="preserve">
+    <value>Sin Clasificaciones</value>
+  </data>
+  <data name="NoRankingsMessage" xml:space="preserve">
+    <value>No existen jugadores disponibles en la clasificación.</value>
+  </data>
+  <data name="LeaderboardLoadErrorTitle" xml:space="preserve">
+    <value>Error Conexión Clasificación</value>
+  </data>
+  <data name="LeaderboardLoadErrorMessage" xml:space="preserve">
+    <value>No fue posible obtener la clasificación. Verifica tu conexión e inténtelo más tarde</value>
+  </data>
+  <data name="LanguageSaveErrorTitle" xml:space="preserve">
+    <value>Error Al Guardar Idioma</value>
+  </data>
+  <data name="LanguageSaveErrorMessage" xml:space="preserve">
+    <value>No fue posible guardar el idioma seleccionado. Inténtelo nuevamente más tarde.</value>
+  </data>
+  <data name="RulesErrorTitle" xml:space="preserve">
+    <value>Error Reglas</value>
+  </data>
+  <data name="RulesErrorMessage" xml:space="preserve">
+    <value>No fue posible cargar las reglas del juego. Inténtelo nuevamente.</value>
+  </data>
+  <data name="SuccessfulKickTitle" xml:space="preserve">
+    <value>Expulsión Exitosa</value>
+  </data>
+  <data name="SuccessfulKickMessage" xml:space="preserve">
+    <value>[Nombre de usuario] fue expulsado de la sala.</value>
+  </data>
+  <data name="KickFailedTitle" xml:space="preserve">
+    <value>Expulsión No Completada</value>
+  </data>
+  <data name="KickFailedMessage" xml:space="preserve">
+    <value>El jugador ya no se encuentra en la sala.</value>
+  </data>
+  <data name="KickConnectionErrorTitle" xml:space="preserve">
+    <value>Error Conexión Expulsión</value>
+  </data>
+  <data name="KickConnectionErrorMessage" xml:space="preserve">
+    <value>No fue posible expulsar al jugador debido a un problema de conexión. Inténtalo nuevamente.</value>
   </data>
 </root>

@@ -203,7 +203,7 @@ c) Move four checkers 6 points each.
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>
-  <data name="SendMessageError" xml:space="preserve">
+  <data name="SendMessageErrorMessage" xml:space="preserve">
     <value>Your message could not be sent. Please check your connection and try again.</value>
   </data>
   <data name="EmailAddress" xml:space="preserve">
@@ -292,5 +292,74 @@ c) Move four checkers 6 points each.
   </data>
   <data name="NoFriendsAddedMessage" xml:space="preserve">
     <value>You haven't added any friends yet.</value>
+  </data>
+  <data name="FriendsRetrievalErrorTitle" xml:space="preserve">
+    <value>Friends Retrieval Error</value>
+  </data>
+  <data name="FriendsRetrievalErrorMessage" xml:space="preserve">
+    <value>We couldn't retrieve information about your friends. Check your connection or try again later.</value>
+  </data>
+  <data name="PlayerUnavailableTitle" xml:space="preserve">
+    <value>Player Unavailable</value>
+  </data>
+  <data name="PlayerUnavailableMessage" xml:space="preserve">
+    <value>The player [username] is no longer available</value>
+  </data>
+  <data name="LobbyUnavailableTitle" xml:space="preserve">
+    <value>Lobby Unavailable</value>
+  </data>
+  <data name="LobbyUnavailableMessage" xml:space="preserve">
+    <value>The lobby is no longer available to accept another player.</value>
+  </data>
+  <data name="LobbyStartErrorTitle" xml:space="preserve">
+    <value>Lobby Start Error</value>
+  </data>
+  <data name="LobbyStartErrorMessage" xml:space="preserve">
+    <value>The lobby could not be started. Please try again later.</value>
+  </data>
+  <data name="SendMessageErrorTitle" xml:space="preserve">
+    <value>Send Message Error</value>
+  </data>
+  <data name="NoRankingsTitle" xml:space="preserve">
+    <value>No Rankings</value>
+  </data>
+  <data name="NoRankingsMessage" xml:space="preserve">
+    <value>No players are available on the leaderboard.</value>
+  </data>
+  <data name="LeaderboardLoadErrorTitle" xml:space="preserve">
+    <value>Leaderboard Load Errror</value>
+  </data>
+  <data name="LeaderboardLoadErrorMessage" xml:space="preserve">
+    <value>The leaderboard could not be loaded. Please check your connection and try again later.</value>
+  </data>
+  <data name="LanguageSaveErrorTitle" xml:space="preserve">
+    <value>Language Save Error</value>
+  </data>
+  <data name="LanguageSaveErrorMessage" xml:space="preserve">
+    <value>The selected language could not be saved. Please try again later.</value>
+  </data>
+  <data name="RulesErrorTitle" xml:space="preserve">
+    <value>Rules Error</value>
+  </data>
+  <data name="RulesErrorMessage" xml:space="preserve">
+    <value>The game rules could not be loaded. Please try again.</value>
+  </data>
+  <data name="SuccessfulKickTitle" xml:space="preserve">
+    <value>Successful Kick</value>
+  </data>
+  <data name="SuccessfulKickMessage" xml:space="preserve">
+    <value>[Username] was kicked from the lobby.</value>
+  </data>
+  <data name="KickFailedTitle" xml:space="preserve">
+    <value>Kick Failed</value>
+  </data>
+  <data name="KickFailedMessage" xml:space="preserve">
+    <value>The player is no longer in the lobby.</value>
+  </data>
+  <data name="KickConnectionErrorTitle" xml:space="preserve">
+    <value>Kick Connection Error</value>
+  </data>
+  <data name="KickConnectionErrorMessage" xml:space="preserve">
+    <value>The player could not be kicked due to a connection issue. Please try again.</value>
   </data>
 </root>
