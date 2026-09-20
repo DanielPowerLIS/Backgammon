@@ -362,4 +362,16 @@ c) Move four checkers 6 points each.
   <data name="KickConnectionErrorMessage" xml:space="preserve">
     <value>The player could not be kicked due to a connection issue. Please try again.</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="UsernameOrEmail" xml:space="preserve">
+    <value>Username/Email</value>
+  </data>
+  <data name="DoNotHaveAnAccount" xml:space="preserve">
+    <value>Don’t have an account?</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
 </root>
