@@ -26,7 +26,7 @@ namespace Backgammon.Client
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Profile());
+            MainFrame.Navigate(new Rules());
             Loaded += MainWindow_Loaded;
         }
 
