@@ -7,8 +7,9 @@
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Friends"
+      Title="{x:Static properties:Resources.Friends}"
       Background="White">
+    
     <Page.Resources>
         <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5, 0.5" GradientOrigin="0.5, 0.35" RadiusX="0.85" RadiusY="0.85">
             <GradientStop Color="#171C2B" Offset="0" />

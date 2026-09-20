@@ -266,4 +266,19 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Kick" xml:space="preserve">
     <value>Expulsar</value>
   </data>
+  <data name="AccountRegistration" xml:space="preserve">
+    <value>Registro De Cuenta</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Inicio</value>
+  </data>
+  <data name="MainMenu" xml:space="preserve">
+    <value>Menú Principal</value>
+  </data>
+  <data name="Preinitiation" xml:space="preserve">
+    <value>Preinicio</value>
+  </data>
+  <data name="Room" xml:space="preserve">
+    <value>Sala</value>
+  </data>
 </root>

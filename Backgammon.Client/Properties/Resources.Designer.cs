@@ -79,6 +79,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Registro De Cuenta.
+        /// </summary>
+        public static string AccountRegistration {
+            get {
+                return ResourceManager.GetString("AccountRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Añadir Amigo.
         /// </summary>
         public static string AddFriend {
@@ -243,6 +252,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Inicio.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Unirse.
         /// </summary>
         public static string Join {
@@ -293,6 +311,15 @@ namespace Backgammon.Client.Properties {
         public static string LikedEmail {
             get {
                 return ResourceManager.GetString("LikedEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Menú Principal.
+        /// </summary>
+        public static string MainMenu {
+            get {
+                return ResourceManager.GetString("MainMenu", resourceCulture);
             }
         }
         
@@ -351,6 +378,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Preinicio.
+        /// </summary>
+        public static string Preinitiation {
+            get {
+                return ResourceManager.GetString("Preinitiation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Perfil.
         /// </summary>
         public static string Profile {
@@ -374,6 +410,15 @@ namespace Backgammon.Client.Properties {
         public static string Remove {
             get {
                 return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sala.
+        /// </summary>
+        public static string Room {
+            get {
+                return ResourceManager.GetString("Room", resourceCulture);
             }
         }
         

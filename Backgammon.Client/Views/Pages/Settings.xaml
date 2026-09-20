@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Backgammon.Client.Views.Pages"
         xmlns:properties="clr-namespace:Backgammon.Client.Properties"
         mc:Ignorable="d"
-        Title="Settings" Height="450" Width="800" FontSize="50">
+        Title="{x:Static properties:Resources.Settings}" Height="450" Width="800" FontSize="50">
 
     <Page.Resources>
         <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5,0.5" GradientOrigin="0.5,0.35" RadiusX="0.85" RadiusY="0.85">
