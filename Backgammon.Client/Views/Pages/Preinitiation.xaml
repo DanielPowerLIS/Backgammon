@@ -7,14 +7,33 @@
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Preinitiation"
-      Background="White">
+      Title="Preinitiation">
 
-    <Grid>
-        <Label Content="Backgammon" HorizontalAlignment="Center" Height="75" Margin="0,37,0,0" VerticalAlignment="Top" Width="288" FontSize="45"/>
-        <Button Content="{x:Static properties:Resources.CreateLobby}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click" Width="176" Height="26"/>
-        <Button Content="{x:Static properties:Resources.Join}" HorizontalAlignment="Center" Margin="0,284,0,0" VerticalAlignment="Top" Width="176" Height="26"/>
-        <Button Content="{x:Static properties:Resources.Back}" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click" Width="75" Height="20" Margin="28,388,0,0"/>
+    <Page.Resources>
+        <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5, 0.5" GradientOrigin="0.5, 0.35" RadiusX="0.85" RadiusY="0.85">
+            <GradientStop Color="#171C2B" Offset="0" />
+            <GradientStop Color="#0C1220" Offset="0.55" />
+            <GradientStop Color="#050914" Offset="1" />
+        </RadialGradientBrush>
+        <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#080D1A" />
+        <SolidColorBrush x:Key="CyanAccentBrush" Color="#00C9F2" />
+        <SolidColorBrush x:Key="PinkAccentBrush" Color="#E795EC" />
+        <Style x:Key="PreinitiationButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource CyanAccentBrush}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Foreground" Value="{StaticResource PinkAccentBrush}" />
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid Background="{StaticResource PageBackgroundBrush}">
+        <Label Foreground ="{StaticResource CyanAccentBrush}" Content="BACKGAMMON" HorizontalAlignment="Center" Height="75" Margin="0,37,0,0" VerticalAlignment="Top" Width="370" FontSize="50"/>
+        <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.CreateLobby}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click" Width="180" Height="30" FontSize="20"/>
+        <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Join}" HorizontalAlignment="Center" Margin="0,284,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="20"/>
+        <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Back}" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click" Width="180" Height="30" Margin="28,388,0,0" FontSize="20"/>
 
     </Grid>
 </Page>
