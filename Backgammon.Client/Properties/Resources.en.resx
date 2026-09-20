@@ -266,4 +266,19 @@ c) Move four checkers 6 points each.
   <data name="Kick" xml:space="preserve">
     <value>Kick</value>
   </data>
+  <data name="AccountRegistration" xml:space="preserve">
+    <value>Account Registration</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="MainMenu" xml:space="preserve">
+    <value>Main Menu</value>
+  </data>
+  <data name="Preinitiation" xml:space="preserve">
+    <value>Preinitiation</value>
+  </data>
+  <data name="Room" xml:space="preserve">
+    <value>Room</value>
+  </data>
 </root>

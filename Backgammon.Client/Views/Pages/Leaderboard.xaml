@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450"
       d:DesignWidth="800"
-      Title="Leaderboard">
+      Title="{x:Static properties:Resources.Leaderboard}">
 
     <Page.Resources>
 
