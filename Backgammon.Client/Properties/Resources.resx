@@ -284,10 +284,13 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Ready" xml:space="preserve">
     <value>Listo</value>
   </data>
-  <data name="NoFriendsAddedFA" xml:space="preserve">
+  <data name="NoFriendsAddedTitle" xml:space="preserve">
     <value>Sin Amigos Añadidos</value>
   </data>
   <data name="Backgammon" xml:space="preserve">
     <value>Backgammon</value>
+  </data>
+  <data name="NoFriendsAddedMessage" xml:space="preserve">
+    <value>Todavía no tienes amigos agregados</value>
   </data>
 </root>

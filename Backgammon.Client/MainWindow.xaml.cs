@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Backgammon.Client.Utils;
 
 using Backgammon.Client.Views.Dialog;
 
@@ -33,9 +34,10 @@ namespace Backgammon.Client
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             AlertDialog alert = new AlertDialog(
-                Properties.Resources.NoFriendsAddedFA,
-                Properties.Resources.SendMessageError,
-                Properties.Resources.Close
+                Properties.Resources.NoFriendsAddedTitle,
+                Properties.Resources.NoFriendsAddedMessage,
+                Properties.Resources.Close,
+                AlertType.Error
             );
 
             alert.Owner = this;
