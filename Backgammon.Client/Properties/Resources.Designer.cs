@@ -342,11 +342,20 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Todavía no tienes amigos agregados.
+        /// </summary>
+        public static string NoFriendsAddedMessage {
+            get {
+                return ResourceManager.GetString("NoFriendsAddedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Sin Amigos Añadidos.
         /// </summary>
-        public static string NoFriendsAddedFA {
+        public static string NoFriendsAddedTitle {
             get {
-                return ResourceManager.GetString("NoFriendsAddedFA", resourceCulture);
+                return ResourceManager.GetString("NoFriendsAddedTitle", resourceCulture);
             }
         }
         

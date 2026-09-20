@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utils\AlerType.cs" />
     <Compile Include="Views\Dialog\AlertDialog.xaml.cs">
       <DependentUpon>AlertDialog.xaml</DependentUpon>
     </Compile>

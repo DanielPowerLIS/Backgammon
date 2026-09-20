@@ -284,10 +284,13 @@ c) Move four checkers 6 points each.
   <data name="Ready" xml:space="preserve">
     <value>Ready</value>
   </data>
-  <data name="NoFriendsAddedFA" xml:space="preserve">
+  <data name="NoFriendsAddedTitle" xml:space="preserve">
     <value>No Friends Added</value>
   </data>
   <data name="Backgammon" xml:space="preserve">
     <value>Backgammon</value>
+  </data>
+  <data name="NoFriendsAddedMessage" xml:space="preserve">
+    <value>You haven't added any friends yet.</value>
   </data>
 </root>
