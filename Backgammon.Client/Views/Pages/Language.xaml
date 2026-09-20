@@ -7,15 +7,56 @@
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Language"
-      Background="White">
+      Title="Language">
+    
+    <Page.Resources>
+        <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5, 0.5" GradientOrigin="0.5, 0.35" RadiusX="0.85" RadiusY="0.85">
+            <GradientStop Color="#171C2B" Offset="0" />
+            <GradientStop Color="#0C1220" Offset="0.55" />
+            <GradientStop Color="#050914" Offset="1" />
+        </RadialGradientBrush>
+        <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#080D1A" />
+        <SolidColorBrush x:Key="CyanAccentBrush" Color="#00C9F2" />
+        <SolidColorBrush x:Key="PinkAccentBrush" Color="#E795EC" />
+        <Style x:Key="LanguageButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource CyanAccentBrush}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Foreground" Value="{StaticResource CyanAccentBrush}" />
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
 
-    <Grid>
-        <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="{x:Static properties:Resources.Language}" VerticalAlignment="Top" FontSize="45"/>
-        <StackPanel Margin="31,87,31,87" Width="740" Height="270">
-            <Button Content="{x:Static properties:Resources.Spanish}" Width="129" Height="29" Margin="0,10,0,10" FontSize="14"/>
-            <Button Content="{x:Static properties:Resources.English}" Width="130" Height="29" Margin="0,10,0,10" FontSize="14"/>
-        </StackPanel>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource PageBackgroundBrush}">
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Foreground="{StaticResource PinkAccentBrush}"  Grid.Row="0" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="{x:Static properties:Resources.Language}" VerticalAlignment="Top" FontSize="30">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#E795EC"
+                                      BlurRadius="3"
+                                      ShadowDepth="0"
+                                      Opacity="0.8"/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+
+            <Border Grid.Row="1" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Background="{StaticResource ControlBackgroundBrush}" Padding="20">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Button Style="{StaticResource LanguageButtonStyle}" Content="{x:Static properties:Resources.Spanish}" Width="180" Height="40" Margin="0,10,0,10" FontSize="14"/>
+                    <Button Style="{StaticResource LanguageButtonStyle}" Content="{x:Static properties:Resources.English}" Width="180" Height="40" Margin="0,10,0,10" FontSize="14"/>
+                </StackPanel>
+            </Border>
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.Back}" Style="{StaticResource LanguageButtonStyle}" Foreground="{StaticResource PinkAccentBrush}"  Width="100" Height="35" Margin="0,15,0,0" FontSize="14" HorizontalAlignment="Right"/>
+
+
+        </Grid>
 
     </Grid>
 </Page>
