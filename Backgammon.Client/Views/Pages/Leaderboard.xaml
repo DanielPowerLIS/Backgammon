@@ -8,55 +8,74 @@
       mc:Ignorable="d" 
       d:DesignHeight="450"
       d:DesignWidth="800"
-      Title="Leaderboard"
-      Background="White">
+      Title="Leaderboard">
 
-    <Grid>
+    <Page.Resources>
 
-        <TextBlock
-            HorizontalAlignment="Center"
-            Margin="0,16,0,0"
-            VerticalAlignment="Top"
-            FontSize="25"
-            Text="{x:Static properties:Resources.Leaderboard}"/>
+        <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5,0.5" GradientOrigin="0.5,0.35" RadiusX="0.85" RadiusY="0.85">
+            <GradientStop Color="#171C2B" Offset="0"/>
+            <GradientStop Color="#0C1220" Offset="0.55"/>
+            <GradientStop Color="#050914" Offset="1"/>
+        </RadialGradientBrush>
 
-        <Border
-            BorderBrush="Black"
-            BorderThickness="1"
-            Margin="52,54,52,54">
+        <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#080D1A"/>
+        <SolidColorBrush x:Key="CyanAccentBrush" Color="#00C9F2"/>
+        <SolidColorBrush x:Key="PinkAccentBrush" Color="#E795EC"/>
+        <Style x:Key="LeaderboardButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CyanAccentBrush}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Foreground" Value="{StaticResource PinkAccentBrush}"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+    </Page.Resources>
 
-            <ListBox x:Name="LeaderboardListBox">
+    <Grid Background="{StaticResource PageBackgroundBrush}">
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-                <ListBoxItem>
-                    <Grid Width="650">
+            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.Leaderboard}" HorizontalAlignment="Center" FontSize="30" Foreground="{StaticResource PinkAccentBrush}" Margin="0,0,0,20">
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="300"/>
-                            <ColumnDefinition Width="170"/>
-                            <ColumnDefinition Width="170"/>
-                        </Grid.ColumnDefinitions>
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#E795EC" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
+                </TextBlock.Effect>
 
-                        <TextBlock
-                            Grid.Column="0"
-                            Text="Nombre de usuario" FontSize="15"/>
+            </TextBlock>
 
-                        <TextBlock
-                            Grid.Column="1"
-                            Text="{x:Static properties:Resources.Wins}" FontSize="15"/>
+            <Border Grid.Row="1" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Background="{StaticResource ControlBackgroundBrush}" Padding="10">
+                <ListBox x:Name="LeaderboardListBox" Background="Transparent" BorderThickness="0">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBoxItem>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="170"/>
+                                <ColumnDefinition Width="170"/>
+                            </Grid.ColumnDefinitions>
 
-                        <TextBlock
-                            Grid.Column="2"
-                            Text="{x:Static properties:Resources.Points}" FontSize="15"/>
+                            <Ellipse Grid.Column="0" Width="40" Height="40" Fill="#3D7EA6" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="Nombre de usuario" FontSize="18" Foreground="{StaticResource CyanAccentBrush}" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="{x:Static properties:Resources.Wins}" FontSize="18" Foreground="{StaticResource CyanAccentBrush}" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="3" Text="{x:Static properties:Resources.Points}" FontSize="18" Foreground="{StaticResource CyanAccentBrush}" VerticalAlignment="Center"/>
+                        </Grid>
+                    </ListBoxItem>
+                </ListBox>
+            </Border>
 
-                    </Grid>
-                </ListBoxItem>
-
-               
-
-            </ListBox>
-
-        </Border>
-        <Button Content="{x:Static properties:Resources.Back}" HorizontalAlignment="Left" Margin="708,401,0,0" VerticalAlignment="Top"/>
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.Back}" Style="{StaticResource LeaderboardButtonStyle}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
+        </Grid>
 
     </Grid>
+
 </Page>
