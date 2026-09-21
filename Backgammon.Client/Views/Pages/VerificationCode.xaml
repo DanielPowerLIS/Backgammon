@@ -30,7 +30,114 @@
                 Offset="1" />
 
         </RadialGradientBrush>
-        
+
+        <Style
+            x:Key="VerificationDigitTextBoxStyle"
+            TargetType="TextBox">
+
+            <Setter Property="Width" Value="50" />
+            <Setter Property="Height" Value="60" />
+            <Setter Property="Margin" Value="5,0" />
+            <Setter Property="MaxLength" Value="1" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#999999" />
+            <Setter Property="Background" Value="#F5F5F5" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border
+                            x:Name="InputBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="12">
+
+                            <ScrollViewer
+                                x:Name="PART_ContentHost"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch" />
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter
+                                    TargetName="InputBorder"
+                                    Property="BorderBrush"
+                                    Value="#17B8B1" />
+                                <Setter
+                                    TargetName="InputBorder"
+                                    Property="BorderThickness"
+                                    Value="2" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style
+            x:Key="VerifyCodeButtonStyle"
+            TargetType="Button">
+
+            <Setter Property="Height" Value="52" />
+            <Setter Property="Background" Value="#17B8B1" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Cursor" Value="Hand" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="ButtonBorder"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="10">
+
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter
+                                    TargetName="ButtonBorder"
+                                    Property="Background"
+                                    Value="#20C5BD" />
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter
+                                    TargetName="ButtonBorder"
+                                    Property="Background"
+                                    Value="#129F99" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style
+            x:Key="ResendButtonStyle"
+            TargetType="Button">
+
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="#17B8B1" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="4,0" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+
     </Page.Resources>
 
     <Grid Background="{StaticResource PageBackgroundBrush}">
@@ -50,9 +157,95 @@
                     VerticalAlignment="Center"
                     Background="#F5F5F5"
                     CornerRadius="28">
-                    
-                    
-                    
+
+                    <Grid Margin="40,35">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Grid.Row="0"
+                            HorizontalAlignment="Center"
+                            FontFamily="Segoe UI"
+                            FontSize="24"
+                            FontWeight="Bold"
+                            Foreground="#202020"
+                            Text="{x:Static properties:Resources.VerificationCode}" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Width="330"
+                            Margin="0,28,0,0"
+                            HorizontalAlignment="Center"
+                            FontFamily="Segoe UI"
+                            FontSize="14"
+                            Foreground="#7D88A5"
+                            Text="{x:Static properties:Resources.VerificationCodeInstruction}"
+                            TextAlignment="Center"
+                            TextWrapping="Wrap" />
+
+                        <StackPanel
+                            Grid.Row="2"
+                            Margin="0,28,0,0"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+
+                            <TextBox
+                                x:Name="textBoxDigit1"
+                                Style="{StaticResource VerificationDigitTextBoxStyle}" />
+
+                            <TextBox
+                                x:Name="textBoxDigit2"
+                                Style="{StaticResource VerificationDigitTextBoxStyle}" />
+
+                            <TextBox
+                                x:Name="textBoxDigit3"
+                                Style="{StaticResource VerificationDigitTextBoxStyle}" />
+
+                            <TextBox
+                                x:Name="textBoxDigit4"
+                                Style="{StaticResource VerificationDigitTextBoxStyle}" />
+
+                            <TextBox
+                                x:Name="textBoxDigit5"
+                                Style="{StaticResource VerificationDigitTextBoxStyle}" />
+
+                            <TextBox
+                                x:Name="textBoxDigit6"
+                                Style="{StaticResource VerificationDigitTextBoxStyle}" />
+                        </StackPanel>
+
+                        <Button
+                            x:Name="buttonVerifyCode"
+                            Grid.Row="3"
+                            Margin="0,34,0,0"
+                            Content="{x:Static properties:Resources.VerifyCode}"
+                            Style="{StaticResource VerifyCodeButtonStyle}" />
+
+                        <StackPanel
+                            Grid.Row="4"
+                            Margin="0,25,0,0"
+                            HorizontalAlignment="Center"
+                            Orientation="Horizontal">
+
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe UI"
+                                FontSize="12"
+                                Foreground="#7D88A5"
+                                Text="{x:Static properties:Resources.DidNotReceiveCode}" />
+
+                            <Button
+                                x:Name="buttonResend"
+                                Content="{x:Static properties:Resources.Resend}"
+                                Style="{StaticResource ResendButtonStyle}" />
+                        </StackPanel>
+                    </Grid>
+
                 </Border>
                 
             </Grid>
