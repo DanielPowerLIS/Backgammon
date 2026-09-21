@@ -383,4 +383,19 @@ c) Move four checkers 6 points each.
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm password</value>
   </data>
+  <data name="VerificationCode" xml:space="preserve">
+    <value>Verification code</value>
+  </data>
+  <data name="VerificationCodeInstruction" xml:space="preserve">
+    <value>Enter the 6-digit code we sent to your email</value>
+  </data>
+  <data name="VerifyCode" xml:space="preserve">
+    <value>Verify code</value>
+  </data>
+  <data name="DidNotReceiveCode" xml:space="preserve">
+    <value>Didn’t receive the code?</value>
+  </data>
+  <data name="Resend" xml:space="preserve">
+    <value>Resend</value>
+  </data>
 </root>

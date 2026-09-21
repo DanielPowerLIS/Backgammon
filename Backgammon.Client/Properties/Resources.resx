@@ -383,4 +383,19 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirmar contraseña</value>
   </data>
+  <data name="VerificationCode" xml:space="preserve">
+    <value>Código de verificación</value>
+  </data>
+  <data name="VerificationCodeInstruction" xml:space="preserve">
+    <value>Ingresa el código de 6 dígitos que enviamos a tu correo electrónico</value>
+  </data>
+  <data name="VerifyCode" xml:space="preserve">
+    <value>Verificar código</value>
+  </data>
+  <data name="DidNotReceiveCode" xml:space="preserve">
+    <value>¿No recibiste el código?</value>
+  </data>
+  <data name="Resend" xml:space="preserve">
+    <value>Reenviar</value>
+  </data>
 </root>
