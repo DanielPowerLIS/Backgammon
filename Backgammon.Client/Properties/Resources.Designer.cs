@@ -133,7 +133,7 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cambiar Contraseña.
+        ///   Looks up a localized string similar to Cambiar contraseña.
         /// </summary>
         public static string ChangePassword {
             get {
@@ -147,6 +147,15 @@ namespace Backgammon.Client.Properties {
         public static string Close {
             get {
                 return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirmar contraseña.
+        /// </summary>
+        public static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
             }
         }
         
@@ -174,6 +183,15 @@ namespace Backgammon.Client.Properties {
         public static string CreateLobby {
             get {
                 return ResourceManager.GetString("CreateLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contraseña actual.
+        /// </summary>
+        public static string CurrentPassword {
+            get {
+                return ResourceManager.GetString("CurrentPassword", resourceCulture);
             }
         }
         
@@ -482,6 +500,15 @@ namespace Backgammon.Client.Properties {
         public static string MaternalLastName {
             get {
                 return ResourceManager.GetString("MaternalLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contraseña nueva.
+        /// </summary>
+        public static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
             }
         }
         
