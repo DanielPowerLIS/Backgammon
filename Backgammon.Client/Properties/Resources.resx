@@ -163,7 +163,7 @@
     <value>Idioma</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
-    <value>Cambiar Contraseña</value>
+    <value>Cambiar contraseña</value>
   </data>
   <data name="Spanish" xml:space="preserve">
     <value>Español</value>
@@ -373,5 +373,14 @@ c) Mover cuatro fichas 6 casillas cada una.
   </data>
   <data name="SignUp" xml:space="preserve">
     <value>Regístrate</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Contraseña actual</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Contraseña nueva</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirmar contraseña</value>
   </data>
 </root>
