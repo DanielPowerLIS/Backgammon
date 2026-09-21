@@ -214,6 +214,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿No recibiste el código?.
+        /// </summary>
+        public static string DidNotReceiveCode {
+            get {
+                return ResourceManager.GetString("DidNotReceiveCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ¿No tienes una cuenta?.
         /// </summary>
         public static string DoNotHaveAnAccount {
@@ -657,6 +666,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reenviar.
+        /// </summary>
+        public static string Resend {
+            get {
+                return ResourceManager.GetString("Resend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sala.
         /// </summary>
         public static string Room {
@@ -806,6 +824,33 @@ namespace Backgammon.Client.Properties {
         public static string UsernameOrEmail {
             get {
                 return ResourceManager.GetString("UsernameOrEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Código de verificación.
+        /// </summary>
+        public static string VerificationCode {
+            get {
+                return ResourceManager.GetString("VerificationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ingresa el código de 6 dígitos que enviamos a tu correo electrónico.
+        /// </summary>
+        public static string VerificationCodeInstruction {
+            get {
+                return ResourceManager.GetString("VerificationCodeInstruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verificar código.
+        /// </summary>
+        public static string VerifyCode {
+            get {
+                return ResourceManager.GetString("VerifyCode", resourceCulture);
             }
         }
         
