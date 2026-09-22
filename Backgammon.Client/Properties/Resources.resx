@@ -278,7 +278,7 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Preinitiation" xml:space="preserve">
     <value>Preinicio</value>
   </data>
-  <data name="Room" xml:space="preserve">
+  <data name="Lobby" xml:space="preserve">
     <value>Sala</value>
   </data>
   <data name="Ready" xml:space="preserve">

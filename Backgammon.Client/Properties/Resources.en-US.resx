@@ -278,8 +278,8 @@ c) Move four checkers 6 points each.
   <data name="Preinitiation" xml:space="preserve">
     <value>Preinitiation</value>
   </data>
-  <data name="Room" xml:space="preserve">
-    <value>Room</value>
+  <data name="Lobby" xml:space="preserve">
+    <value>Lobby</value>
   </data>
   <data name="Ready" xml:space="preserve">
     <value>Ready</value>

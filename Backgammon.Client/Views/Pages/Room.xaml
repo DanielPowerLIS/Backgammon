@@ -7,7 +7,7 @@
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="{x:Static properties:Resources.Room}">
+      Title="{x:Static properties:Resources.Lobby}">
 
     <Page.Resources>
 
@@ -57,7 +57,7 @@
             </Grid.RowDefinitions>
 
             <Button Grid.Row="0" Grid.Column="0" Content="{x:Static properties:Resources.LeaveRoom}" Style="{StaticResource RoomButtonStyle}" HorizontalAlignment="Left" MinWidth="130" MinHeight="35" Margin="0,0,0,10"/>
-            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{x:Static properties:Resources.Room}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="45" Foreground="{StaticResource PinkAccentBrush}">
+            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="{x:Static properties:Resources.Lobby}" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="45" Foreground="{StaticResource PinkAccentBrush}">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#E795EC" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
                 </TextBlock.Effect>
