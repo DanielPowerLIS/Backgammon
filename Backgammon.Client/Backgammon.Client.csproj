@@ -47,6 +47,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -65,6 +67,60 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\Account.cs">
+      <DependentUpon>Backgammon_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AvailableState.cs">
+      <DependentUpon>Backgammon_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Avatar.cs">
+      <DependentUpon>Backgammon_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Backgammon_Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Backgammon_Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Backgammon_Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Backgammon_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Backgammon_Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Backgammon_Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\FriendRequest.cs">
+      <DependentUpon>Backgammon_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\FriendShip.cs">
+      <DependentUpon>Backgammon_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Lobby.cs">
+      <DependentUpon>Backgammon_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Match.cs">
+      <DependentUpon>Backgammon_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Participate.cs">
+      <DependentUpon>Backgammon_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Play.cs">
+      <DependentUpon>Backgammon_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Profile.cs">
+      <DependentUpon>Backgammon_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SocialMedia.cs">
+      <DependentUpon>Backgammon_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\StateLobby.cs">
+      <DependentUpon>Backgammon_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TypeSocialMedia.cs">
+      <DependentUpon>Backgammon_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Utils\AlerType.cs" />
     <Compile Include="Views\Dialog\AlertDialog.xaml.cs">
       <DependentUpon>AlertDialog.xaml</DependentUpon>
@@ -219,6 +275,13 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Data\Backgammon_Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Backgammon_Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\Backgammon_Model.edmx.diagram">
+      <DependentUpon>Backgammon_Model.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -228,8 +291,21 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Data\" />
+    <Content Include="Data\Backgammon_Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Backgammon_Model.edmx</DependentUpon>
+      <LastGenOutput>Backgammon_Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\Backgammon_Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Backgammon_Model.edmx</DependentUpon>
+      <LastGenOutput>Backgammon_Model.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
