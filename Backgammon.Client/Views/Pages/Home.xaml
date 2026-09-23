@@ -116,7 +116,7 @@
                     Height="72"/>
 
                 <Button
-                    Content="{x:Static properties:Resources.Guest}"
+                    Content="{x:Static properties:Resources.buttonGuest}"
                     Style="{StaticResource HomeButtonStyle}"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"

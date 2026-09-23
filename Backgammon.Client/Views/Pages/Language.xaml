@@ -49,11 +49,11 @@
 
             <Border Grid.Row="1" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Background="{StaticResource ControlBackgroundBrush}" Padding="20">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Button Style="{StaticResource LanguageButtonStyle}" Content="{x:Static properties:Resources.Spanish}" Width="180" Height="40" Margin="0,10,0,10" FontSize="14"/>
-                    <Button Style="{StaticResource LanguageButtonStyle}" Content="{x:Static properties:Resources.English}" Width="180" Height="40" Margin="0,10,0,10" FontSize="14"/>
+                    <Button Style="{StaticResource LanguageButtonStyle}" Content="{x:Static properties:Resources.buttonSpanish}" Width="180" Height="40" Margin="0,10,0,10" FontSize="14"/>
+                    <Button Style="{StaticResource LanguageButtonStyle}" Content="{x:Static properties:Resources.buttonEnglish}" Width="180" Height="40" Margin="0,10,0,10" FontSize="14"/>
                 </StackPanel>
             </Border>
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.Back}" Style="{StaticResource LanguageButtonStyle}" Foreground="{StaticResource PinkAccentBrush}"  Width="100" Height="35" Margin="0,15,0,0" FontSize="14" HorizontalAlignment="Right"/>
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.buttonBack}" Style="{StaticResource LanguageButtonStyle}" Foreground="{StaticResource PinkAccentBrush}"  Width="100" Height="35" Margin="0,15,0,0" FontSize="14" HorizontalAlignment="Right"/>
 
 
         </Grid>

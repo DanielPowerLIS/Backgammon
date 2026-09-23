@@ -66,14 +66,14 @@
 
                             <Ellipse Grid.Column="0" Width="40" Height="40" Fill="#3D7EA6" HorizontalAlignment="Center"/>
                             <TextBlock Grid.Column="1" Text="Nombre de usuario" FontSize="18" Foreground="{StaticResource CyanAccentBrush}" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Column="2" Text="{x:Static properties:Resources.Wins}" FontSize="18" Foreground="{StaticResource CyanAccentBrush}" VerticalAlignment="Center"/>
-                            <TextBlock Grid.Column="3" Text="{x:Static properties:Resources.Points}" FontSize="18" Foreground="{StaticResource CyanAccentBrush}" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="{x:Static properties:Resources.textBlockWins}" FontSize="18" Foreground="{StaticResource CyanAccentBrush}" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="3" Text="{x:Static properties:Resources.textBlockPoints}" FontSize="18" Foreground="{StaticResource CyanAccentBrush}" VerticalAlignment="Center"/>
                         </Grid>
                     </ListBoxItem>
                 </ListBox>
             </Border>
 
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.Back}" Style="{StaticResource LeaderboardButtonStyle}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.buttonBack}" Style="{StaticResource LeaderboardButtonStyle}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
         </Grid>
 
     </Grid>

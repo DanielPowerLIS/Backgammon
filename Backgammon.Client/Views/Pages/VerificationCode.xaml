@@ -223,7 +223,7 @@
                             x:Name="buttonVerifyCode"
                             Grid.Row="3"
                             Margin="0,34,0,0"
-                            Content="{x:Static properties:Resources.VerifyCode}"
+                            Content="{x:Static properties:Resources.buttonVerifyCode}"
                             Style="{StaticResource VerifyCodeButtonStyle}" />
 
                         <StackPanel
@@ -241,7 +241,7 @@
 
                             <Button
                                 x:Name="buttonResend"
-                                Content="{x:Static properties:Resources.Resend}"
+                                Content="{x:Static properties:Resources.buttonResend}"
                                 Style="{StaticResource ResendButtonStyle}" />
                         </StackPanel>
                     </Grid>

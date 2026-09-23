@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Guest" xml:space="preserve">
+  <data name="buttonGuest" xml:space="preserve">
     <value>Invitado</value>
   </data>
-  <data name="Play" xml:space="preserve">
+  <data name="buttonPlay" xml:space="preserve">
     <value>Jugar</value>
   </data>
   <data name="SignIn" xml:space="preserve">
@@ -138,43 +138,31 @@
   <data name="Settings" xml:space="preserve">
     <value>Configuración</value>
   </data>
-  <data name="SignOut" xml:space="preserve">
+  <data name="buttonSignOut" xml:space="preserve">
     <value>Cerrar Sesión</value>
   </data>
-  <data name="CreateLobby" xml:space="preserve">
-    <value>Crear Sala</value>
-  </data>
-  <data name="Join" xml:space="preserve">
+  <data name="buttonJoin" xml:space="preserve">
     <value>Unirse</value>
   </data>
-  <data name="Back" xml:space="preserve">
-    <value>Volver</value>
-  </data>
-  <data name="Wins" xml:space="preserve">
+  <data name="textBlockWins" xml:space="preserve">
     <value>Victorias</value>
   </data>
-  <data name="Points" xml:space="preserve">
+  <data name="textBlockPoints" xml:space="preserve">
     <value>Puntos</value>
-  </data>
-  <data name="Account" xml:space="preserve">
-    <value>Cuenta</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Idioma</value>
   </data>
-  <data name="ChangePassword" xml:space="preserve">
-    <value>Cambiar contraseña</value>
-  </data>
-  <data name="Spanish" xml:space="preserve">
+  <data name="buttonSpanish" xml:space="preserve">
     <value>Español</value>
   </data>
-  <data name="English" xml:space="preserve">
+  <data name="buttonEnglish" xml:space="preserve">
     <value>Inglés</value>
   </data>
-  <data name="Rules" xml:space="preserve">
+  <data name="textBlockRules" xml:space="preserve">
     <value>Reglas</value>
   </data>
-  <data name="GameRules" xml:space="preserve">
+  <data name="textBlockRulesContent" xml:space="preserve">
     <value>1. En el Backgammon participan dos jugadores (A y B). Cada uno de ellos dispone de 15 fichas. Cada rival maneja fichas de diferente color. En cada caso, las fichas circulan como lo indican las flechas, contando cada pico como uno. 
 2. Para iniciar el juego, cada participante tira un sólo dado, ganando el derecho de iniciar el jugador que obtenga la puntuación más alta. En caso de empate se repiten los tiros.
 3. Gana el juego el primero que logre sacar sus propias fichas del tablero. Antes de poder empezar a sacar fichas, es necesario que todas se encuentren en el último pico del tablero. Si se observa bien el campo, notará que cuenta con cuatro cuadrantes.
@@ -188,22 +176,19 @@ c) Mover cuatro fichas 6 casillas cada una.
 8. Si una partida cuenta con un jugador invitado, en caso de ganar el invitado, la puntuación obtenida no se verá reflejada en alguna parte, en caso de ganar el jugador registrado la puntuación se refleja de manera normal.
 9. Para cada partida, cada jugador tendrá 2 minutos de manera global para poder realizar movimientos de fichas en toda la partida.  Antes de empezar su tiempo global de cada jugador, hay 7 segundos en cada turno para que el jugador pueda mover sus fichas sin usar tiempo global.</value>
   </data>
-  <data name="DateJoined" xml:space="preserve">
+  <data name="textBlockDateJoined" xml:space="preserve">
     <value>Fecha de registro</value>
   </data>
-  <data name="Description" xml:space="preserve">
+  <data name="textBlockDescription" xml:space="preserve">
     <value>Descripción</value>
   </data>
-  <data name="SocialMedia" xml:space="preserve">
+  <data name="textBlockSocialMedia" xml:space="preserve">
     <value>Redes Sociales</value>
   </data>
-  <data name="AddLink" xml:space="preserve">
-    <value>Agregar Enlace</value>
-  </data>
-  <data name="Close" xml:space="preserve">
+  <data name="buttonClose" xml:space="preserve">
     <value>Cerrar</value>
   </data>
-  <data name="SendMessageErrorMessage" xml:space="preserve">
+  <data name="textBlockSendMessageErrorMessage" xml:space="preserve">
     <value>Su mensaje no ha podido ser enviado. Porfavor verifique su conexión e intente de nuevo</value>
   </data>
   <data name="EmailAddress" xml:space="preserve">
@@ -212,13 +197,13 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="CreateAnAccount" xml:space="preserve">
     <value>Crear una cuenta</value>
   </data>
-  <data name="FirstName" xml:space="preserve">
+  <data name="textBoxFirstName" xml:space="preserve">
     <value>Nombre(s)</value>
   </data>
-  <data name="PaternalLastName" xml:space="preserve">
+  <data name="textBoxPaternalLastName" xml:space="preserve">
     <value>Apellido paterno</value>
   </data>
-  <data name="MaternalLastName" xml:space="preserve">
+  <data name="textBoxMaternalLastName" xml:space="preserve">
     <value>Apellido materno</value>
   </data>
   <data name="Username" xml:space="preserve">
@@ -227,43 +212,34 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Password" xml:space="preserve">
     <value>Contraseña</value>
   </data>
-  <data name="CreateAccount" xml:space="preserve">
+  <data name="buttonCreateAccount" xml:space="preserve">
     <value>Crear cuenta</value>
-  </data>
-  <data name="AlreadyHaveAccount" xml:space="preserve">
-    <value>¿Ya tienes una cuenta?</value>
   </data>
   <data name="StartGame" xml:space="preserve">
     <value>Iniciar Juego</value>
   </data>
-  <data name="LeaveRoom" xml:space="preserve">
-    <value>Salir Del Juego</value>
-  </data>
-  <data name="OpenChat" xml:space="preserve">
+  <data name="buttonOpenChat" xml:space="preserve">
     <value>Abrir Chat</value>
   </data>
   <data name="FriendRequests" xml:space="preserve">
     <value>Solicitudes De Amistad</value>
   </data>
-  <data name="AddFriend" xml:space="preserve">
+  <data name="textBlockAddFriend" xml:space="preserve">
     <value>Añadir Amigo</value>
   </data>
-  <data name="ViewProfile" xml:space="preserve">
+  <data name="buttonViewProfile" xml:space="preserve">
     <value>Ver Perfil</value>
   </data>
-  <data name="Remove" xml:space="preserve">
+  <data name="buttonRemove" xml:space="preserve">
     <value>Eliminar</value>
   </data>
-  <data name="Accept" xml:space="preserve">
+  <data name="buttonAccept" xml:space="preserve">
     <value>Aceptar</value>
   </data>
-  <data name="Reject" xml:space="preserve">
+  <data name="buttonReject" xml:space="preserve">
     <value>Rechazar</value>
   </data>
-  <data name="LikedEmail" xml:space="preserve">
-    <value>Correo Asociado</value>
-  </data>
-  <data name="Kick" xml:space="preserve">
+  <data name="buttonKick" xml:space="preserve">
     <value>Expulsar</value>
   </data>
   <data name="AccountRegistration" xml:space="preserve">
@@ -271,9 +247,6 @@ c) Mover cuatro fichas 6 casillas cada una.
   </data>
   <data name="Home" xml:space="preserve">
     <value>Inicio</value>
-  </data>
-  <data name="MainMenu" xml:space="preserve">
-    <value>Menú Principal</value>
   </data>
   <data name="Preinitiation" xml:space="preserve">
     <value>Preinicio</value>
@@ -284,82 +257,70 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Ready" xml:space="preserve">
     <value>Listo</value>
   </data>
-  <data name="NoFriendsAddedTitle" xml:space="preserve">
-    <value>Sin Amigos Añadidos</value>
-  </data>
   <data name="Backgammon" xml:space="preserve">
     <value>Backgammon</value>
   </data>
-  <data name="NoFriendsAddedMessage" xml:space="preserve">
+  <data name="textBlockNoFriendsAddedMessage" xml:space="preserve">
     <value>Todavía no tienes amigos agregados</value>
   </data>
-  <data name="FriendsRetrievalErrorTitle" xml:space="preserve">
+  <data name="textBlockFriendsRetrievalErrorTitle" xml:space="preserve">
     <value>No Se Pueden Recuperar Amigos</value>
   </data>
-  <data name="FriendsRetrievalErrorMessage" xml:space="preserve">
+  <data name="textBlockFriendsRetrievalErrorMessage" xml:space="preserve">
     <value>No se pudo obtener la información sobre tus amigos. Intente más tarde.</value>
   </data>
-  <data name="PlayerUnavailableTitle" xml:space="preserve">
+  <data name="textBlockPlayerUnavailableTitle" xml:space="preserve">
     <value>Jugador No Disponible</value>
   </data>
-  <data name="PlayerUnavailableMessage" xml:space="preserve">
+  <data name="textBlockPlayerUnavailableMessage" xml:space="preserve">
     <value>El jugador [nombre de usuario] ya no se encuentra disponible.</value>
   </data>
-  <data name="LobbyUnavailableTitle" xml:space="preserve">
+  <data name="textBlockLobbyUnavailableTitle" xml:space="preserve">
     <value>Sala No Disponible</value>
   </data>
-  <data name="LobbyUnavailableMessage" xml:space="preserve">
+  <data name="textBlockLobbyUnavailableMessage" xml:space="preserve">
     <value>La sala ya no se encuentra disponible para recibir a otro jugador.</value>
   </data>
-  <data name="LobbyStartErrorTitle" xml:space="preserve">
+  <data name="textBlockLobbyStartErrorTitle" xml:space="preserve">
     <value>Error Iniciar Sala</value>
   </data>
-  <data name="LobbyStartErrorMessage" xml:space="preserve">
-    <value>No se puedo iniciar la sala. Intente más tarde.</value>
-  </data>
-  <data name="SendMessageErrorTitle" xml:space="preserve">
+  <data name="textBlockSendMessageErrorTitle" xml:space="preserve">
     <value>Error Al Enviar Mensaje</value>
   </data>
-  <data name="NoRankingsTitle" xml:space="preserve">
-    <value>Sin Clasificaciones</value>
-  </data>
-  <data name="NoRankingsMessage" xml:space="preserve">
-    <value>No existen jugadores disponibles en la clasificación.</value>
-  </data>
-  <data name="LeaderboardLoadErrorTitle" xml:space="preserve">
+  <data name="textBlockLeaderboardLoadErrorTitle" xml:space="preserve">
     <value>Error Conexión Clasificación</value>
   </data>
-  <data name="LeaderboardLoadErrorMessage" xml:space="preserve">
+  <data name="textBlockLeaderboardLoadErrorMessage" xml:space="preserve">
     <value>No fue posible obtener la clasificación. Verifica tu conexión e inténtelo más tarde</value>
   </data>
-  <data name="LanguageSaveErrorTitle" xml:space="preserve">
+  <data name="textBlockLanguageSaveErrorTitle" xml:space="preserve">
     <value>Error Al Guardar Idioma</value>
   </data>
-  <data name="LanguageSaveErrorMessage" xml:space="preserve">
+  <data name="textBlockLanguageSaveErrorMessage" xml:space="preserve">
     <value>No fue posible guardar el idioma seleccionado. Inténtelo nuevamente más tarde.</value>
   </data>
-  <data name="RulesErrorTitle" xml:space="preserve">
+  <data name="textBlockRulesErrorTitle" xml:space="preserve">
     <value>Error Reglas</value>
   </data>
-  <data name="RulesErrorMessage" xml:space="preserve">
+  <data name="textBlockRulesErrorMessage" xml:space="preserve">
     <value>No fue posible cargar las reglas del juego. Inténtelo nuevamente.</value>
   </data>
-  <data name="SuccessfulKickTitle" xml:space="preserve">
+  <data name="textBlockSuccessfulKickTitle" xml:space="preserve">
     <value>Expulsión Exitosa</value>
   </data>
-  <data name="SuccessfulKickMessage" xml:space="preserve">
+  <data name="textBlockSuccessfulKickMessage" xml:space="preserve">
     <value>[Nombre de usuario] fue expulsado de la sala.</value>
   </data>
-  <data name="KickFailedTitle" xml:space="preserve">
+  <data name="textBlockKickFailedTitle" xml:space="preserve">
     <value>Expulsión No Completada</value>
   </data>
-  <data name="KickFailedMessage" xml:space="preserve">
+  <data name="textBlockKickFailedMessage" xml:space="preserve">
     <value>El jugador ya no se encuentra en la sala.</value>
   </data>
-  <data name="KickConnectionErrorTitle" xml:space="preserve">
+  <data name="textBlockKickConnectionErrorTitle" xml:space="preserve">
     <value>Error Conexión Expulsión</value>
   </data>
-  <data name="KickConnectionErrorMessage" xml:space="preserve">
+  <data name="textBlockKickConnectionErrorMessage" xml:space="preserve">
     <value>No fue posible expulsar al jugador debido a un problema de conexión. Inténtalo nuevamente.</value>
   </data>
   <data name="Login" xml:space="preserve">
@@ -371,16 +332,16 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="DoNotHaveAnAccount" xml:space="preserve">
     <value>¿No tienes una cuenta?</value>
   </data>
-  <data name="SignUp" xml:space="preserve">
+  <data name="buttonSignUp" xml:space="preserve">
     <value>Regístrate</value>
   </data>
-  <data name="CurrentPassword" xml:space="preserve">
+  <data name="passwordBoxCurrentPassword" xml:space="preserve">
     <value>Contraseña actual</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Contraseña nueva</value>
   </data>
-  <data name="ConfirmPassword" xml:space="preserve">
+  <data name="passwordBoxConfirmPassword" xml:space="preserve">
     <value>Confirmar contraseña</value>
   </data>
   <data name="VerificationCode" xml:space="preserve">
@@ -389,13 +350,52 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="VerificationCodeInstruction" xml:space="preserve">
     <value>Ingresa el código de 6 dígitos que enviamos a tu correo electrónico</value>
   </data>
-  <data name="VerifyCode" xml:space="preserve">
+  <data name="buttonVerifyCode" xml:space="preserve">
     <value>Verificar código</value>
   </data>
   <data name="DidNotReceiveCode" xml:space="preserve">
     <value>¿No recibiste el código?</value>
   </data>
-  <data name="Resend" xml:space="preserve">
+  <data name="buttonResend" xml:space="preserve">
     <value>Reenviar</value>
+  </data>
+  <data name="buttonBack" xml:space="preserve">
+    <value>Volver</value>
+  </data>
+  <data name="textBlockChangePassword" xml:space="preserve">
+    <value>Cambiar contraseña</value>
+  </data>
+  <data name="textBlockAlreadyHaveAccount" xml:space="preserve">
+    <value>¿Ya tienes una cuenta?</value>
+  </data>
+  <data name="buttonAddLink" xml:space="preserve">
+    <value>Agregar Enlace</value>
+  </data>
+  <data name="textBlockLobbyStartErrorMessage" xml:space="preserve">
+    <value>No se puedo iniciar la sala. Intente más tarde.</value>
+  </data>
+  <data name="buttonLeaveLobby" xml:space="preserve">
+    <value>Salir Del Juego</value>
+  </data>
+  <data name="textBlockLinkedEmail" xml:space="preserve">
+    <value>Correo Asociado</value>
+  </data>
+  <data name="MainMenu" xml:space="preserve">
+    <value>Menú Principal</value>
+  </data>
+  <data name="textBlockNoRankingsTitle" xml:space="preserve">
+    <value>Sin Clasificaciones</value>
+  </data>
+  <data name="textBlockNoRankingsMessage" xml:space="preserve">
+    <value>No existen jugadores disponibles en la clasificación.</value>
+  </data>
+  <data name="textBlockNoFriendsAddedTitle" xml:space="preserve">
+    <value>Sin Amigos Añadidos</value>
+  </data>
+  <data name="buttonCreateLobby" xml:space="preserve">
+    <value>Crear Sala</value>
+  </data>
+  <data name="buttonAcount" xml:space="preserve">
+    <value>Cuenta</value>
   </data>
 </root>

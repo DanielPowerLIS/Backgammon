@@ -293,7 +293,7 @@
                         <TextBox
                             x:Name="textBoxFirstName"
                             Grid.Row="4"
-                            Tag="{x:Static properties:Resources.FirstName}"
+                            Tag="{x:Static properties:Resources.textBoxFirstName}"
                             Style="{StaticResource RegistrationTextBoxStyle}" />
 
                         <Grid Grid.Row="6">
@@ -306,13 +306,13 @@
                             <TextBox
                                 x:Name="textBoxPaternalLastName"
                                 Grid.Column="0"
-                                Tag="{x:Static properties:Resources.PaternalLastName}"
+                                Tag="{x:Static properties:Resources.textBoxPaternalLastName}"
                                 Style="{StaticResource RegistrationTextBoxStyle}" />
 
                             <TextBox
                                 x:Name="textBoxMaternalLastName"
                                 Grid.Column="2"
-                                Tag="{x:Static properties:Resources.MaternalLastName}"
+                                Tag="{x:Static properties:Resources.textBoxMaternalLastName}"
                                 Style="{StaticResource RegistrationTextBoxStyle}" />
                         </Grid>
 
@@ -341,7 +341,7 @@
                         <Button
                              x:Name="buttonCreateAccount"
                              Grid.Row="12"
-                             Content="{x:Static properties:Resources.CreateAccount}"
+                             Content="{x:Static properties:Resources.buttonCreateAccount}"
                              Style="{StaticResource CreateAccountButtonStyle}" />
 
                         <StackPanel
@@ -356,7 +356,7 @@
                                 Foreground="#7D8494"
                                 FontFamily="Segoe UI"
                                 FontSize="12"
-                                Text="{x:Static properties:Resources.AlreadyHaveAccount}" />
+                                Text="{x:Static properties:Resources.textBlockAlreadyHaveAccount}" />
 
                             <Button
                                 x:Name="buttonSignIn"
