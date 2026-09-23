@@ -326,7 +326,7 @@
 
                             <Button
                                 x:Name="buttonSignUp"
-                                Content="{x:Static properties:Resources.SignUp}"
+                                Content="{x:Static properties:Resources.buttonSignUp}"
                                 Margin="8,0,0,0"
                                 Style="{StaticResource SignUpLinkButtonStyle}" />
                         </StackPanel>

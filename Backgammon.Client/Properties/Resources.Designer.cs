@@ -61,65 +61,11 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Aceptar.
-        /// </summary>
-        public static string Accept {
-            get {
-                return ResourceManager.GetString("Accept", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Cuenta.
-        /// </summary>
-        public static string Account {
-            get {
-                return ResourceManager.GetString("Account", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Registro De Cuenta.
         /// </summary>
         public static string AccountRegistration {
             get {
                 return ResourceManager.GetString("AccountRegistration", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Añadir Amigo.
-        /// </summary>
-        public static string AddFriend {
-            get {
-                return ResourceManager.GetString("AddFriend", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Agregar Enlace.
-        /// </summary>
-        public static string AddLink {
-            get {
-                return ResourceManager.GetString("AddLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a ¿Ya tienes una cuenta?.
-        /// </summary>
-        public static string AlreadyHaveAccount {
-            get {
-                return ResourceManager.GetString("AlreadyHaveAccount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Volver.
-        /// </summary>
-        public static string Back {
-            get {
-                return ResourceManager.GetString("Back", resourceCulture);
             }
         }
         
@@ -133,38 +79,200 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Cambiar contraseña.
+        ///   Busca una cadena traducida similar a Aceptar.
         /// </summary>
-        public static string ChangePassword {
+        public static string buttonAccept {
             get {
-                return ResourceManager.GetString("ChangePassword", resourceCulture);
+                return ResourceManager.GetString("buttonAccept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cuenta.
+        /// </summary>
+        public static string buttonAcount {
+            get {
+                return ResourceManager.GetString("buttonAcount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Agregar Enlace.
+        /// </summary>
+        public static string buttonAddLink {
+            get {
+                return ResourceManager.GetString("buttonAddLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Volver.
+        /// </summary>
+        public static string buttonBack {
+            get {
+                return ResourceManager.GetString("buttonBack", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Cerrar.
         /// </summary>
-        public static string Close {
+        public static string buttonClose {
             get {
-                return ResourceManager.GetString("Close", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Confirmar contraseña.
-        /// </summary>
-        public static string ConfirmPassword {
-            get {
-                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+                return ResourceManager.GetString("buttonClose", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Crear cuenta.
         /// </summary>
-        public static string CreateAccount {
+        public static string buttonCreateAccount {
             get {
-                return ResourceManager.GetString("CreateAccount", resourceCulture);
+                return ResourceManager.GetString("buttonCreateAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Crear Sala.
+        /// </summary>
+        public static string buttonCreateLobby {
+            get {
+                return ResourceManager.GetString("buttonCreateLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Inglés.
+        /// </summary>
+        public static string buttonEnglish {
+            get {
+                return ResourceManager.GetString("buttonEnglish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Invitado.
+        /// </summary>
+        public static string buttonGuest {
+            get {
+                return ResourceManager.GetString("buttonGuest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Unirse.
+        /// </summary>
+        public static string buttonJoin {
+            get {
+                return ResourceManager.GetString("buttonJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Expulsar.
+        /// </summary>
+        public static string buttonKick {
+            get {
+                return ResourceManager.GetString("buttonKick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Salir Del Juego.
+        /// </summary>
+        public static string buttonLeaveLobby {
+            get {
+                return ResourceManager.GetString("buttonLeaveLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Abrir Chat.
+        /// </summary>
+        public static string buttonOpenChat {
+            get {
+                return ResourceManager.GetString("buttonOpenChat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Jugar.
+        /// </summary>
+        public static string buttonPlay {
+            get {
+                return ResourceManager.GetString("buttonPlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Rechazar.
+        /// </summary>
+        public static string buttonReject {
+            get {
+                return ResourceManager.GetString("buttonReject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Eliminar.
+        /// </summary>
+        public static string buttonRemove {
+            get {
+                return ResourceManager.GetString("buttonRemove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reenviar.
+        /// </summary>
+        public static string buttonResend {
+            get {
+                return ResourceManager.GetString("buttonResend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cerrar Sesión.
+        /// </summary>
+        public static string buttonSignOut {
+            get {
+                return ResourceManager.GetString("buttonSignOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Regístrate.
+        /// </summary>
+        public static string buttonSignUp {
+            get {
+                return ResourceManager.GetString("buttonSignUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Español.
+        /// </summary>
+        public static string buttonSpanish {
+            get {
+                return ResourceManager.GetString("buttonSpanish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Verificar código.
+        /// </summary>
+        public static string buttonVerifyCode {
+            get {
+                return ResourceManager.GetString("buttonVerifyCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ver Perfil.
+        /// </summary>
+        public static string buttonViewProfile {
+            get {
+                return ResourceManager.GetString("buttonViewProfile", resourceCulture);
             }
         }
         
@@ -174,42 +282,6 @@ namespace Backgammon.Client.Properties {
         public static string CreateAnAccount {
             get {
                 return ResourceManager.GetString("CreateAnAccount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Crear Sala.
-        /// </summary>
-        public static string CreateLobby {
-            get {
-                return ResourceManager.GetString("CreateLobby", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Contraseña actual.
-        /// </summary>
-        public static string CurrentPassword {
-            get {
-                return ResourceManager.GetString("CurrentPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Fecha de registro.
-        /// </summary>
-        public static string DateJoined {
-            get {
-                return ResourceManager.GetString("DateJoined", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Descripción.
-        /// </summary>
-        public static string Description {
-            get {
-                return ResourceManager.GetString("Description", resourceCulture);
             }
         }
         
@@ -241,24 +313,6 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Inglés.
-        /// </summary>
-        public static string English {
-            get {
-                return ResourceManager.GetString("English", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Nombre(s).
-        /// </summary>
-        public static string FirstName {
-            get {
-                return ResourceManager.GetString("FirstName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Solicitudes De Amistad.
         /// </summary>
         public static string FriendRequests {
@@ -277,103 +331,11 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No se pudo obtener la información sobre tus amigos. Intente más tarde..
-        /// </summary>
-        public static string FriendsRetrievalErrorMessage {
-            get {
-                return ResourceManager.GetString("FriendsRetrievalErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a No Se Pueden Recuperar Amigos.
-        /// </summary>
-        public static string FriendsRetrievalErrorTitle {
-            get {
-                return ResourceManager.GetString("FriendsRetrievalErrorTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a 1. En el Backgammon participan dos jugadores (A y B). Cada uno de ellos dispone de 15 fichas. Cada rival maneja fichas de diferente color. En cada caso, las fichas circulan como lo indican las flechas, contando cada pico como uno. 
-        ///2. Para iniciar el juego, cada participante tira un sólo dado, ganando el derecho de iniciar el jugador que obtenga la puntuación más alta. En caso de empate se repiten los tiros.
-        ///3. Gana el juego el primero que logre sacar sus propias fichas del tablero. Antes de poder empezar [resto de la cadena truncado]&quot;;.
-        /// </summary>
-        public static string GameRules {
-            get {
-                return ResourceManager.GetString("GameRules", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Invitado.
-        /// </summary>
-        public static string Guest {
-            get {
-                return ResourceManager.GetString("Guest", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Inicio.
         /// </summary>
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Unirse.
-        /// </summary>
-        public static string Join {
-            get {
-                return ResourceManager.GetString("Join", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Expulsar.
-        /// </summary>
-        public static string Kick {
-            get {
-                return ResourceManager.GetString("Kick", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a No fue posible expulsar al jugador debido a un problema de conexión. Inténtalo nuevamente..
-        /// </summary>
-        public static string KickConnectionErrorMessage {
-            get {
-                return ResourceManager.GetString("KickConnectionErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Error Conexión Expulsión.
-        /// </summary>
-        public static string KickConnectionErrorTitle {
-            get {
-                return ResourceManager.GetString("KickConnectionErrorTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a El jugador ya no se encuentra en la sala..
-        /// </summary>
-        public static string KickFailedMessage {
-            get {
-                return ResourceManager.GetString("KickFailedMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Expulsión No Completada.
-        /// </summary>
-        public static string KickFailedTitle {
-            get {
-                return ResourceManager.GetString("KickFailedTitle", resourceCulture);
             }
         }
         
@@ -387,24 +349,6 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No fue posible guardar el idioma seleccionado. Inténtelo nuevamente más tarde..
-        /// </summary>
-        public static string LanguageSaveErrorMessage {
-            get {
-                return ResourceManager.GetString("LanguageSaveErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Error Al Guardar Idioma.
-        /// </summary>
-        public static string LanguageSaveErrorTitle {
-            get {
-                return ResourceManager.GetString("LanguageSaveErrorTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Clasificaciones.
         /// </summary>
         public static string Leaderboard {
@@ -414,83 +358,11 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No fue posible obtener la clasificación. Verifica tu conexión e inténtelo más tarde.
-        /// </summary>
-        public static string LeaderboardLoadErrorMessage {
-            get {
-                return ResourceManager.GetString("LeaderboardLoadErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Error Conexión Clasificación.
-        /// </summary>
-        public static string LeaderboardLoadErrorTitle {
-            get {
-                return ResourceManager.GetString("LeaderboardLoadErrorTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Salir Del Juego.
-        /// </summary>
-        public static string LeaveRoom {
-            get {
-                return ResourceManager.GetString("LeaveRoom", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Correo Asociado.
-        /// </summary>
-        public static string LikedEmail {
-            get {
-                return ResourceManager.GetString("LikedEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Sala.
         /// </summary>
         public static string Lobby {
             get {
                 return ResourceManager.GetString("Lobby", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a No se puedo iniciar la sala. Intente más tarde..
-        /// </summary>
-        public static string LobbyStartErrorMessage {
-            get {
-                return ResourceManager.GetString("LobbyStartErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Error Iniciar Sala.
-        /// </summary>
-        public static string LobbyStartErrorTitle {
-            get {
-                return ResourceManager.GetString("LobbyStartErrorTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a La sala ya no se encuentra disponible para recibir a otro jugador..
-        /// </summary>
-        public static string LobbyUnavailableMessage {
-            get {
-                return ResourceManager.GetString("LobbyUnavailableMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Sala No Disponible.
-        /// </summary>
-        public static string LobbyUnavailableTitle {
-            get {
-                return ResourceManager.GetString("LobbyUnavailableTitle", resourceCulture);
             }
         }
         
@@ -513,65 +385,11 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Apellido materno.
-        /// </summary>
-        public static string MaternalLastName {
-            get {
-                return ResourceManager.GetString("MaternalLastName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Contraseña nueva.
         /// </summary>
         public static string NewPassword {
             get {
                 return ResourceManager.GetString("NewPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Todavía no tienes amigos agregados.
-        /// </summary>
-        public static string NoFriendsAddedMessage {
-            get {
-                return ResourceManager.GetString("NoFriendsAddedMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Sin Amigos Añadidos.
-        /// </summary>
-        public static string NoFriendsAddedTitle {
-            get {
-                return ResourceManager.GetString("NoFriendsAddedTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a No existen jugadores disponibles en la clasificación..
-        /// </summary>
-        public static string NoRankingsMessage {
-            get {
-                return ResourceManager.GetString("NoRankingsMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Sin Clasificaciones.
-        /// </summary>
-        public static string NoRankingsTitle {
-            get {
-                return ResourceManager.GetString("NoRankingsTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Abrir Chat.
-        /// </summary>
-        public static string OpenChat {
-            get {
-                return ResourceManager.GetString("OpenChat", resourceCulture);
             }
         }
         
@@ -585,47 +403,20 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Apellido paterno.
+        ///   Busca una cadena traducida similar a Confirmar contraseña.
         /// </summary>
-        public static string PaternalLastName {
+        public static string passwordBoxConfirmPassword {
             get {
-                return ResourceManager.GetString("PaternalLastName", resourceCulture);
+                return ResourceManager.GetString("passwordBoxConfirmPassword", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Jugar.
+        ///   Busca una cadena traducida similar a Contraseña actual.
         /// </summary>
-        public static string Play {
+        public static string passwordBoxCurrentPassword {
             get {
-                return ResourceManager.GetString("Play", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a El jugador [nombre de usuario] ya no se encuentra disponible..
-        /// </summary>
-        public static string PlayerUnavailableMessage {
-            get {
-                return ResourceManager.GetString("PlayerUnavailableMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Jugador No Disponible.
-        /// </summary>
-        public static string PlayerUnavailableTitle {
-            get {
-                return ResourceManager.GetString("PlayerUnavailableTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Puntos.
-        /// </summary>
-        public static string Points {
-            get {
-                return ResourceManager.GetString("Points", resourceCulture);
+                return ResourceManager.GetString("passwordBoxCurrentPassword", resourceCulture);
             }
         }
         
@@ -657,78 +448,6 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Rechazar.
-        /// </summary>
-        public static string Reject {
-            get {
-                return ResourceManager.GetString("Reject", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Eliminar.
-        /// </summary>
-        public static string Remove {
-            get {
-                return ResourceManager.GetString("Remove", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Reenviar.
-        /// </summary>
-        public static string Resend {
-            get {
-                return ResourceManager.GetString("Resend", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Reglas.
-        /// </summary>
-        public static string Rules {
-            get {
-                return ResourceManager.GetString("Rules", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a No fue posible cargar las reglas del juego. Inténtelo nuevamente..
-        /// </summary>
-        public static string RulesErrorMessage {
-            get {
-                return ResourceManager.GetString("RulesErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Error Reglas.
-        /// </summary>
-        public static string RulesErrorTitle {
-            get {
-                return ResourceManager.GetString("RulesErrorTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Su mensaje no ha podido ser enviado. Porfavor verifique su conexión e intente de nuevo.
-        /// </summary>
-        public static string SendMessageErrorMessage {
-            get {
-                return ResourceManager.GetString("SendMessageErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Error Al Enviar Mensaje.
-        /// </summary>
-        public static string SendMessageErrorTitle {
-            get {
-                return ResourceManager.GetString("SendMessageErrorTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Configuración.
         /// </summary>
         public static string Settings {
@@ -747,42 +466,6 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Cerrar Sesión.
-        /// </summary>
-        public static string SignOut {
-            get {
-                return ResourceManager.GetString("SignOut", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Regístrate.
-        /// </summary>
-        public static string SignUp {
-            get {
-                return ResourceManager.GetString("SignUp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Redes Sociales.
-        /// </summary>
-        public static string SocialMedia {
-            get {
-                return ResourceManager.GetString("SocialMedia", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Español.
-        /// </summary>
-        public static string Spanish {
-            get {
-                return ResourceManager.GetString("Spanish", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Busca una cadena traducida similar a Iniciar Juego.
         /// </summary>
         public static string StartGame {
@@ -792,20 +475,364 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Añadir Amigo.
+        /// </summary>
+        public static string textBlockAddFriend {
+            get {
+                return ResourceManager.GetString("textBlockAddFriend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a ¿Ya tienes una cuenta?.
+        /// </summary>
+        public static string textBlockAlreadyHaveAccount {
+            get {
+                return ResourceManager.GetString("textBlockAlreadyHaveAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Cambiar contraseña.
+        /// </summary>
+        public static string textBlockChangePassword {
+            get {
+                return ResourceManager.GetString("textBlockChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Fecha de registro.
+        /// </summary>
+        public static string textBlockDateJoined {
+            get {
+                return ResourceManager.GetString("textBlockDateJoined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Descripción.
+        /// </summary>
+        public static string textBlockDescription {
+            get {
+                return ResourceManager.GetString("textBlockDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo obtener la información sobre tus amigos. Intente más tarde..
+        /// </summary>
+        public static string textBlockFriendsRetrievalErrorMessage {
+            get {
+                return ResourceManager.GetString("textBlockFriendsRetrievalErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No Se Pueden Recuperar Amigos.
+        /// </summary>
+        public static string textBlockFriendsRetrievalErrorTitle {
+            get {
+                return ResourceManager.GetString("textBlockFriendsRetrievalErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No fue posible expulsar al jugador debido a un problema de conexión. Inténtalo nuevamente..
+        /// </summary>
+        public static string textBlockKickConnectionErrorMessage {
+            get {
+                return ResourceManager.GetString("textBlockKickConnectionErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error Conexión Expulsión.
+        /// </summary>
+        public static string textBlockKickConnectionErrorTitle {
+            get {
+                return ResourceManager.GetString("textBlockKickConnectionErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El jugador ya no se encuentra en la sala..
+        /// </summary>
+        public static string textBlockKickFailedMessage {
+            get {
+                return ResourceManager.GetString("textBlockKickFailedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Expulsión No Completada.
+        /// </summary>
+        public static string textBlockKickFailedTitle {
+            get {
+                return ResourceManager.GetString("textBlockKickFailedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No fue posible guardar el idioma seleccionado. Inténtelo nuevamente más tarde..
+        /// </summary>
+        public static string textBlockLanguageSaveErrorMessage {
+            get {
+                return ResourceManager.GetString("textBlockLanguageSaveErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error Al Guardar Idioma.
+        /// </summary>
+        public static string textBlockLanguageSaveErrorTitle {
+            get {
+                return ResourceManager.GetString("textBlockLanguageSaveErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No fue posible obtener la clasificación. Verifica tu conexión e inténtelo más tarde.
+        /// </summary>
+        public static string textBlockLeaderboardLoadErrorMessage {
+            get {
+                return ResourceManager.GetString("textBlockLeaderboardLoadErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error Conexión Clasificación.
+        /// </summary>
+        public static string textBlockLeaderboardLoadErrorTitle {
+            get {
+                return ResourceManager.GetString("textBlockLeaderboardLoadErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Correo Asociado.
+        /// </summary>
+        public static string textBlockLinkedEmail {
+            get {
+                return ResourceManager.GetString("textBlockLinkedEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se puedo iniciar la sala. Intente más tarde..
+        /// </summary>
+        public static string textBlockLobbyStartErrorMessage {
+            get {
+                return ResourceManager.GetString("textBlockLobbyStartErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error Iniciar Sala.
+        /// </summary>
+        public static string textBlockLobbyStartErrorTitle {
+            get {
+                return ResourceManager.GetString("textBlockLobbyStartErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La sala ya no se encuentra disponible para recibir a otro jugador..
+        /// </summary>
+        public static string textBlockLobbyUnavailableMessage {
+            get {
+                return ResourceManager.GetString("textBlockLobbyUnavailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sala No Disponible.
+        /// </summary>
+        public static string textBlockLobbyUnavailableTitle {
+            get {
+                return ResourceManager.GetString("textBlockLobbyUnavailableTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Todavía no tienes amigos agregados.
+        /// </summary>
+        public static string textBlockNoFriendsAddedMessage {
+            get {
+                return ResourceManager.GetString("textBlockNoFriendsAddedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sin Amigos Añadidos.
+        /// </summary>
+        public static string textBlockNoFriendsAddedTitle {
+            get {
+                return ResourceManager.GetString("textBlockNoFriendsAddedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No existen jugadores disponibles en la clasificación..
+        /// </summary>
+        public static string textBlockNoRankingsMessage {
+            get {
+                return ResourceManager.GetString("textBlockNoRankingsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Sin Clasificaciones.
+        /// </summary>
+        public static string textBlockNoRankingsTitle {
+            get {
+                return ResourceManager.GetString("textBlockNoRankingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a El jugador [nombre de usuario] ya no se encuentra disponible..
+        /// </summary>
+        public static string textBlockPlayerUnavailableMessage {
+            get {
+                return ResourceManager.GetString("textBlockPlayerUnavailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Jugador No Disponible.
+        /// </summary>
+        public static string textBlockPlayerUnavailableTitle {
+            get {
+                return ResourceManager.GetString("textBlockPlayerUnavailableTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Puntos.
+        /// </summary>
+        public static string textBlockPoints {
+            get {
+                return ResourceManager.GetString("textBlockPoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Reglas.
+        /// </summary>
+        public static string textBlockRules {
+            get {
+                return ResourceManager.GetString("textBlockRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a 1. En el Backgammon participan dos jugadores (A y B). Cada uno de ellos dispone de 15 fichas. Cada rival maneja fichas de diferente color. En cada caso, las fichas circulan como lo indican las flechas, contando cada pico como uno. 
+        ///2. Para iniciar el juego, cada participante tira un sólo dado, ganando el derecho de iniciar el jugador que obtenga la puntuación más alta. En caso de empate se repiten los tiros.
+        ///3. Gana el juego el primero que logre sacar sus propias fichas del tablero. Antes de poder empezar [resto de la cadena truncado]&quot;;.
+        /// </summary>
+        public static string textBlockRulesContent {
+            get {
+                return ResourceManager.GetString("textBlockRulesContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No fue posible cargar las reglas del juego. Inténtelo nuevamente..
+        /// </summary>
+        public static string textBlockRulesErrorMessage {
+            get {
+                return ResourceManager.GetString("textBlockRulesErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error Reglas.
+        /// </summary>
+        public static string textBlockRulesErrorTitle {
+            get {
+                return ResourceManager.GetString("textBlockRulesErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Su mensaje no ha podido ser enviado. Porfavor verifique su conexión e intente de nuevo.
+        /// </summary>
+        public static string textBlockSendMessageErrorMessage {
+            get {
+                return ResourceManager.GetString("textBlockSendMessageErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Error Al Enviar Mensaje.
+        /// </summary>
+        public static string textBlockSendMessageErrorTitle {
+            get {
+                return ResourceManager.GetString("textBlockSendMessageErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Redes Sociales.
+        /// </summary>
+        public static string textBlockSocialMedia {
+            get {
+                return ResourceManager.GetString("textBlockSocialMedia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a [Nombre de usuario] fue expulsado de la sala..
         /// </summary>
-        public static string SuccessfulKickMessage {
+        public static string textBlockSuccessfulKickMessage {
             get {
-                return ResourceManager.GetString("SuccessfulKickMessage", resourceCulture);
+                return ResourceManager.GetString("textBlockSuccessfulKickMessage", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Expulsión Exitosa.
         /// </summary>
-        public static string SuccessfulKickTitle {
+        public static string textBlockSuccessfulKickTitle {
             get {
-                return ResourceManager.GetString("SuccessfulKickTitle", resourceCulture);
+                return ResourceManager.GetString("textBlockSuccessfulKickTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Victorias.
+        /// </summary>
+        public static string textBlockWins {
+            get {
+                return ResourceManager.GetString("textBlockWins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Nombre(s).
+        /// </summary>
+        public static string textBoxFirstName {
+            get {
+                return ResourceManager.GetString("textBoxFirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Apellido materno.
+        /// </summary>
+        public static string textBoxMaternalLastName {
+            get {
+                return ResourceManager.GetString("textBoxMaternalLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Apellido paterno.
+        /// </summary>
+        public static string textBoxPaternalLastName {
+            get {
+                return ResourceManager.GetString("textBoxPaternalLastName", resourceCulture);
             }
         }
         
@@ -842,33 +869,6 @@ namespace Backgammon.Client.Properties {
         public static string VerificationCodeInstruction {
             get {
                 return ResourceManager.GetString("VerificationCodeInstruction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Verificar código.
-        /// </summary>
-        public static string VerifyCode {
-            get {
-                return ResourceManager.GetString("VerifyCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Ver Perfil.
-        /// </summary>
-        public static string ViewProfile {
-            get {
-                return ResourceManager.GetString("ViewProfile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Victorias.
-        /// </summary>
-        public static string Wins {
-            get {
-                return ResourceManager.GetString("Wins", resourceCulture);
             }
         }
     }

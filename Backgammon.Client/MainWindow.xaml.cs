@@ -24,16 +24,16 @@ namespace Backgammon.Client
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Rules());
+            MainFrame.Navigate(new Account());
             Loaded += MainWindow_Loaded;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             AlertDialog alert = new AlertDialog(
-                Properties.Resources.KickConnectionErrorTitle,
-                Properties.Resources.KickConnectionErrorMessage,
-                Properties.Resources.Close,
+                Properties.Resources.textBlockKickConnectionErrorTitle,
+                Properties.Resources.textBlockKickConnectionErrorMessage,
+                Properties.Resources.buttonClose,
                 AlertType.Error
             );
 

@@ -52,7 +52,7 @@
                     TextAlignment="Center"/>
                 </Button>
                 <Button Style="{StaticResource FriendButtonStyle}" MinWidth="130" MinHeight="35" Margin="0,0,0,0">
-                    <TextBlock Text="{x:Static properties:Resources.AddFriend}"
+                    <TextBlock Text="{x:Static properties:Resources.textBlockAddFriend}"
                    TextWrapping="Wrap"
                    TextAlignment="Center"/>
                 </Button>
@@ -80,8 +80,8 @@
                                 <Ellipse Grid.Column="0" Width="40" Height="40" Fill="#3d7ea6"/>
                                 <TextBlock Foreground="{StaticResource CyanAccentBrush}" Grid.Column="1" Text="Something" VerticalAlignment="Center" FontSize="16"/>
                                 <Ellipse Grid.Column="2" Width="20" Height="20" Fill="Green" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <Button Style="{StaticResource FriendButtonStyle}" Grid.Column="3" Content="{x:Static properties:Resources.ViewProfile}" Width="100" Height="30"/>
-                                <Button Style="{StaticResource FriendButtonStyle}" Grid.Column="4" Content="{x:Static properties:Resources.Remove}" Width="100" Height="30"/>
+                                <Button Style="{StaticResource FriendButtonStyle}" Grid.Column="3" Content="{x:Static properties:Resources.buttonViewProfile}" Width="100" Height="30"/>
+                                <Button Style="{StaticResource FriendButtonStyle}" Grid.Column="4" Content="{x:Static properties:Resources.buttonRemove}" Width="100" Height="30"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -89,7 +89,7 @@
                 </ListView>
 
             </Border>
-            <Button Style="{StaticResource FriendButtonStyle}" Grid.Row="3" Content="{x:Static properties:Resources.Back}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
+            <Button Style="{StaticResource FriendButtonStyle}" Grid.Row="3" Content="{x:Static properties:Resources.buttonBack}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
         </Grid>
     </Grid>
 </Page>

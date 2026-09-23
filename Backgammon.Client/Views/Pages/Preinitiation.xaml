@@ -31,9 +31,9 @@
     
     <Grid Background="{StaticResource PageBackgroundBrush}">
         <TextBlock Text="BACKGAMMON"  Foreground="{StaticResource CyanAccentBrush}"  HorizontalAlignment="Center"  VerticalAlignment="Top"  Margin="0,37,0,0"  FontFamily="Segoe UI"  FontSize="50"  TextAlignment="Center"/>
-        <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.CreateLobby}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click" Width="180" Height="30" FontSize="20"/>
-        <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Join}" HorizontalAlignment="Center" Margin="0,284,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="20"/>
-        <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Back}" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click" Width="180" Height="30" Margin="28,388,0,0" FontSize="20"/>
+        <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.buttonCreateLobby}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click" Width="180" Height="30" FontSize="20"/>
+        <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.buttonJoin}" HorizontalAlignment="Center" Margin="0,284,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="20"/>
+        <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.buttonBack}" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click" Width="180" Height="30" Margin="28,388,0,0" FontSize="20"/>
 
     </Grid>
 </Page>

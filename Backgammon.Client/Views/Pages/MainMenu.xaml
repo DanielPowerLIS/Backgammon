@@ -49,14 +49,14 @@
             </TextBlock>
 
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Content="{x:Static properties:Resources.Play}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
+                <Button Content="{x:Static properties:Resources.buttonPlay}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
                 <Button Content="{x:Static properties:Resources.Leaderboard}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
                 <Button Content="{x:Static properties:Resources.Profile}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
                 <Button Content="{x:Static properties:Resources.Friends}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
                 <Button Content="{x:Static properties:Resources.Settings}" Style="{StaticResource MainMenuButtonStyle}"/>
             </StackPanel>
             
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.SignOut}" Style="{StaticResource MainMenuButtonStyle}" MinWidth="100" HorizontalAlignment="Left" Margin="0,15,0,0"/>
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.buttonSignOut}" Style="{StaticResource MainMenuButtonStyle}" MinWidth="100" HorizontalAlignment="Left" Margin="0,15,0,0"/>
 
         </Grid>
 

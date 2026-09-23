@@ -65,15 +65,15 @@
                                 </Grid.ColumnDefinitions>
                                 <Ellipse Grid.Column="0" Width="40" Height="40" Fill="#3D7EA6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="1" Text="Something" VerticalAlignment="Center" FontSize="18" Foreground="{StaticResource CyanAccentBrush}"/>
-                                <Button Grid.Column="2" Content="{x:Static properties:Resources.Accept}" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FriendRequestButtonStyle}"/>
-                                <Button Grid.Column="3" Content="{x:Static properties:Resources.Reject}" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FriendRequestButtonStyle}"/>
+                                <Button Grid.Column="2" Content="{x:Static properties:Resources.buttonAccept}" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FriendRequestButtonStyle}"/>
+                                <Button Grid.Column="3" Content="{x:Static properties:Resources.buttonReject}" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FriendRequestButtonStyle}"/>
 
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </Border>
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.Back}" Style ="{StaticResource FriendRequestButtonStyle}" Width="100" Height="35" HorizontalAlignment="Right"  Margin="0,15,20,10"/>
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.buttonBack}" Style ="{StaticResource FriendRequestButtonStyle}" Width="100" Height="35" HorizontalAlignment="Right"  Margin="0,15,20,10"/>
 
         </Grid>
     </Grid>
