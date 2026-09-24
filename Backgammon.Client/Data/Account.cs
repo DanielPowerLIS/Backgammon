@@ -10,22 +10,22 @@
 namespace Backgammon.Client.Data
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Account
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Account()
         {
-            this.FriendRequests = new HashSet<FriendRequest>();
-            this.FriendRequests1 = new HashSet<FriendRequest>();
-            this.FriendShips = new HashSet<FriendShip>();
-            this.FriendShips1 = new HashSet<FriendShip>();
-            this.Matches = new HashSet<Match>();
-            this.Participates = new HashSet<Participate>();
-            this.Participates1 = new HashSet<Participate>();
-            this.Plays = new HashSet<Play>();
-            this.Plays1 = new HashSet<Play>();
+            this.FriendRequests = new ObservableCollection<FriendRequest>();
+            this.FriendRequests1 = new ObservableCollection<FriendRequest>();
+            this.FriendShips = new ObservableCollection<FriendShip>();
+            this.FriendShips1 = new ObservableCollection<FriendShip>();
+            this.Matches = new ObservableCollection<Match>();
+            this.Participates = new ObservableCollection<Participate>();
+            this.Participates1 = new ObservableCollection<Participate>();
+            this.Plays = new ObservableCollection<Play>();
+            this.Plays1 = new ObservableCollection<Play>();
         }
     
         public string email { get; set; }
@@ -41,22 +41,22 @@ namespace Backgammon.Client.Data
     
         public virtual Profile Profile { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FriendRequest> FriendRequests { get; set; }
+        public virtual ObservableCollection<FriendRequest> FriendRequests { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FriendRequest> FriendRequests1 { get; set; }
+        public virtual ObservableCollection<FriendRequest> FriendRequests1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FriendShip> FriendShips { get; set; }
+        public virtual ObservableCollection<FriendShip> FriendShips { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FriendShip> FriendShips1 { get; set; }
+        public virtual ObservableCollection<FriendShip> FriendShips1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Match> Matches { get; set; }
+        public virtual ObservableCollection<Match> Matches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Participate> Participates { get; set; }
+        public virtual ObservableCollection<Participate> Participates { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Participate> Participates1 { get; set; }
+        public virtual ObservableCollection<Participate> Participates1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Play> Plays { get; set; }
+        public virtual ObservableCollection<Play> Plays { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Play> Plays1 { get; set; }
+        public virtual ObservableCollection<Play> Plays1 { get; set; }
     }
 }

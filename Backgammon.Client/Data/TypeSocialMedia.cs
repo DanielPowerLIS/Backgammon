@@ -10,20 +10,20 @@
 namespace Backgammon.Client.Data
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class TypeSocialMedia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TypeSocialMedia()
         {
-            this.SocialMedias = new HashSet<SocialMedia>();
+            this.SocialMedias = new ObservableCollection<SocialMedia>();
         }
     
         public string type { get; set; }
         public int idTypeSocialMediaPK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SocialMedia> SocialMedias { get; set; }
+        public virtual ObservableCollection<SocialMedia> SocialMedias { get; set; }
     }
 }

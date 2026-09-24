@@ -13,10 +13,10 @@ namespace Backgammon.Client.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class backgammonEntities : DbContext
+    public partial class BackgammonEntities : DbContext
     {
-        public backgammonEntities()
-            : base("name=backgammonEntities")
+        public BackgammonEntities()
+            : base("name=BackgammonEntities")
         {
         }
     

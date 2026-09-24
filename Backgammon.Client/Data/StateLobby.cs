@@ -10,20 +10,20 @@
 namespace Backgammon.Client.Data
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class StateLobby
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public StateLobby()
         {
-            this.Lobbies = new HashSet<Lobby>();
+            this.Lobbies = new ObservableCollection<Lobby>();
         }
     
         public string stateLobby1 { get; set; }
         public int idStateLobbyPK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lobby> Lobbies { get; set; }
+        public virtual ObservableCollection<Lobby> Lobbies { get; set; }
     }
 }

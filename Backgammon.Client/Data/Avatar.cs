@@ -10,20 +10,20 @@
 namespace Backgammon.Client.Data
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Avatar
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Avatar()
         {
-            this.Profiles = new HashSet<Profile>();
+            this.Profiles = new ObservableCollection<Profile>();
         }
     
         public byte[] availableAvatar { get; set; }
         public int idAvatar { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Profile> Profiles { get; set; }
+        public virtual ObservableCollection<Profile> Profiles { get; set; }
     }
 }
