@@ -283,6 +283,8 @@
       <DependentUpon>Backgammon_Model.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Backgammon.Client.Data.AvailableState.datasource" />
+    <None Include="Properties\DataSources\Backgammon.Client.Data.Profile.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

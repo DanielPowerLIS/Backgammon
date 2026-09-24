@@ -10,14 +10,14 @@
 namespace Backgammon.Client.Data
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Match
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Match()
         {
-            this.Plays = new HashSet<Play>();
+            this.Plays = new ObservableCollection<Play>();
         }
     
         public System.DateTime startTime { get; set; }
@@ -28,6 +28,6 @@ namespace Backgammon.Client.Data
     
         public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Play> Plays { get; set; }
+        public virtual ObservableCollection<Play> Plays { get; set; }
     }
 }

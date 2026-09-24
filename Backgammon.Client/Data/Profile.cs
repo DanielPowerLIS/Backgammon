@@ -10,15 +10,15 @@
 namespace Backgammon.Client.Data
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class Profile
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Profile()
         {
-            this.Accounts = new HashSet<Account>();
-            this.SocialMedias = new HashSet<SocialMedia>();
+            this.Accounts = new ObservableCollection<Account>();
+            this.SocialMedias = new ObservableCollection<SocialMedia>();
         }
     
         public int victories { get; set; }
@@ -30,10 +30,10 @@ namespace Backgammon.Client.Data
         public int idProfilePK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ObservableCollection<Account> Accounts { get; set; }
         public virtual AvailableState AvailableState { get; set; }
         public virtual Avatar Avatar { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SocialMedia> SocialMedias { get; set; }
+        public virtual ObservableCollection<SocialMedia> SocialMedias { get; set; }
     }
 }

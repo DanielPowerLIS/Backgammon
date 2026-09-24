@@ -767,7 +767,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="backgammonEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="BackgammonEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="AvailableStates" EntityType="Self.AvailableState" />
           <EntitySet Name="Avatars" EntityType="Self.Avatar" />
@@ -855,7 +855,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BackgammonModelStoreContainer" CdmEntityContainer="backgammonEntities">
+        <EntityContainerMapping StorageEntityContainer="BackgammonModelStoreContainer" CdmEntityContainer="BackgammonEntities">
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="BackgammonModel.Account">
               <MappingFragment StoreEntitySet="Account">
