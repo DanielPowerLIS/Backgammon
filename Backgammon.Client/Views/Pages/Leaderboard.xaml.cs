@@ -1,6 +1,11 @@
 ﻿using Backgammon.Client.Data;
+using Backgammon.Client.Services;
+using Backgammon.Client.Utils;
+using Backgammon.Client.Views.Dialog;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,23 +23,46 @@ namespace Backgammon.Client.Views.Pages
 {
     public partial class Leaderboard : Page
     {
-        private readonly BackgammonEntities context;
+        private readonly LeaderboardService _leaderboardService;
         public Leaderboard()
         {
             InitializeComponent();
 
-            context = new BackgammonEntities();
+            _leaderboardService = new LeaderboardService();
 
-            var accounts = context.Profiles
-                .OrderByDescending(a => a.points)
-                .ToList();
-
-            LeaderboardListBox.ItemsSource = accounts;
+            Loaded += OnLeaderboardLoaded;
         }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void OnLeaderboardLoaded(object sender, RoutedEventArgs e)
         {
+            LoadLeaderboard();
+        }
 
+        private void LoadLeaderboard()
+        {
+            try 
+            {
+                List<Profile> playerProfiles = _leaderboardService.GetLeaderboard();
+                LeaderboardListBox.ItemsSource = playerProfiles;
+            }catch (SqlException) 
+            { 
+                ShowLeaderboardError();
+            }catch(EntityException)
+            {
+                ShowLeaderboardError();
+            }
+        }
+
+        private void ShowLeaderboardError()
+        {
+            AlertDialog alertDialog = new AlertDialog(
+                Properties.Resources.textBlockLeaderboardLoadErrorTitle,
+                Properties.Resources.textBlockLeaderboardLoadErrorMessage,
+                Properties.Resources.buttonAccept,
+                AlertType.Error);
+
+            alertDialog.Owner = Window.GetWindow(this);
+            alertDialog.ShowDialog();
         }
     }
 }

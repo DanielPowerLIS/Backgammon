@@ -25,21 +25,21 @@ namespace Backgammon.Client
         {
             InitializeComponent();
             MainFrame.Navigate(new Leaderboard());
-            Loaded += MainWindow_Loaded;
+            //Loaded += MainWindow_Loaded;
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            AlertDialog alert = new AlertDialog(
-                Properties.Resources.textBlockKickConnectionErrorTitle,
-                Properties.Resources.textBlockKickConnectionErrorMessage,
-                Properties.Resources.buttonClose,
-                AlertType.Error
-            );
+        //private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    AlertDialog alert = new AlertDialog(
+        //        Properties.Resources.textBlockKickConnectionErrorTitle,
+        //        Properties.Resources.textBlockKickConnectionErrorMessage,
+        //        Properties.Resources.buttonClose,
+        //        AlertType.Error
+        //    );
 
-            alert.Owner = this;
-            alert.ShowDialog();
-        }
+        //    alert.Owner = this;
+        //    alert.ShowDialog();
+        //}
 
     }
 }
