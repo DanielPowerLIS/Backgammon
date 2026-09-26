@@ -124,6 +124,9 @@
     <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Services\LeaderboardService.cs" />
     <Compile Include="Utils\AlerType.cs" />
+    <Compile Include="Views\Dialog\AccountDialog.xaml.cs">
+      <DependentUpon>AccountDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialog\AlertDialog.xaml.cs">
       <DependentUpon>AlertDialog.xaml</DependentUpon>
     </Compile>
@@ -172,6 +175,10 @@
     <Compile Include="Views\Pages\VerificationCode.xaml.cs">
       <DependentUpon>VerificationCode.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Dialog\AccountDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Dialog\AlertDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

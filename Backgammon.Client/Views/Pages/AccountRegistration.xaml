@@ -86,7 +86,8 @@
                                 <TextBlock
                                     x:Name="Placeholder"
                                     Text="{Binding Tag,
-                                        RelativeSource={RelativeSource TemplatedParent}}"
+                                       RelativeSource={RelativeSource TemplatedParent},
+                                       StringFormat='{}{0} *'}"
                                     Margin="16,0,0,0"
                                     VerticalAlignment="Center"
                                     Foreground="#7D7D7D"
@@ -334,7 +335,8 @@
                                 VerticalAlignment="Center"
                                 Foreground="#7D7D7D"
                                 IsHitTestVisible="False"
-                                Text="{x:Static properties:Resources.PasswordBox_Password}" />
+                                Text="{Binding Source={x:Static properties:Resources.PasswordBox_Password},
+                                    StringFormat='{}{0} *'}" />
 
                            
                         </Grid>
