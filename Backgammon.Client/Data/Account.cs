@@ -28,16 +28,16 @@ namespace Backgammon.Client.Data
             this.Plays1 = new ObservableCollection<Play>();
         }
     
-        public string email { get; set; }
-        public string password { get; set; }
-        public Nullable<System.DateTime> lastModified { get; set; }
-        public System.DateTime registrationDate { get; set; }
-        public string accountCode { get; set; }
-        public string name { get; set; }
-        public string paternalSurname { get; set; }
-        public string maternalSurname { get; set; }
-        public int idProfileFK { get; set; }
-        public int idAccountPK { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public Nullable<System.DateTime> LastModified { get; set; }
+        public System.DateTime RegistrationDate { get; set; }
+        public string AccountCode { get; set; }
+        public string Name { get; set; }
+        public string PaternalSurname { get; set; }
+        public string MaternalSurname { get; set; }
+        public int IdProfileFK { get; set; }
+        public int IdAccountPK { get; set; }
     
         public virtual Profile Profile { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

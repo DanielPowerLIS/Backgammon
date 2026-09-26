@@ -76,7 +76,7 @@
                              HorizontalAlignment="Center"/>
 
                                 <TextBlock Grid.Column="1"
-                               Text="{Binding username}"
+                               Text="{Binding Username}"
                                FontSize="18"
                                Foreground="{StaticResource CyanAccentBrush}"
                                VerticalAlignment="Center"/>
@@ -88,7 +88,7 @@
                                    Foreground="{StaticResource PinkAccentBrush}"
                                    HorizontalAlignment="Center"/>
 
-                                    <TextBlock Text="{Binding victories}"
+                                    <TextBlock Text="{Binding Wins}"
                                    FontSize="18"
                                    Foreground="{StaticResource CyanAccentBrush}"
                                    HorizontalAlignment="Center"/>
@@ -101,7 +101,7 @@
                                    Foreground="{StaticResource PinkAccentBrush}"
                                    HorizontalAlignment="Center"/>
 
-                                    <TextBlock Text="{Binding points}"
+                                    <TextBlock Text="{Binding Points}"
                                    FontSize="18"
                                    Foreground="{StaticResource CyanAccentBrush}"
                                    HorizontalAlignment="Center"/>

@@ -20,8 +20,8 @@ namespace Backgammon.Client.Data
             this.SocialMedias = new ObservableCollection<SocialMedia>();
         }
     
-        public string type { get; set; }
-        public int idTypeSocialMediaPK { get; set; }
+        public string Type { get; set; }
+        public int IdTypeSocialMediaPK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<SocialMedia> SocialMedias { get; set; }

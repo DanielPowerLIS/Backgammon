@@ -14,9 +14,9 @@ namespace Backgammon.Client.Data
     
     public partial class FriendShip
     {
-        public int accountOneFK { get; set; }
-        public int accountTwoFK { get; set; }
-        public int idFriendShipPK { get; set; }
+        public int AccountOneId { get; set; }
+        public int AccountTwoId { get; set; }
+        public int IdFriendShipPK { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Account Account1 { get; set; }

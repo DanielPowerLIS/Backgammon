@@ -14,10 +14,10 @@ namespace Backgammon.Client.Data
     
     public partial class SocialMedia
     {
-        public string link { get; set; }
-        public int idProfileFK { get; set; }
-        public int idTypeSocialMediaFK { get; set; }
-        public int idSocialMediaPK { get; set; }
+        public string Link { get; set; }
+        public int IdProfileFK { get; set; }
+        public int IdTypeSocialMediaFK { get; set; }
+        public int IdSocialMediaPK { get; set; }
     
         public virtual Profile Profile { get; set; }
         public virtual TypeSocialMedia TypeSocialMedia { get; set; }

@@ -20,11 +20,11 @@ namespace Backgammon.Client.Data
             this.Plays = new ObservableCollection<Play>();
         }
     
-        public System.DateTime startTime { get; set; }
-        public System.DateTime endTime { get; set; }
-        public int winnerPlayer { get; set; }
-        public int winnerPoints { get; set; }
-        public int idMatchPK { get; set; }
+        public System.DateTime StartTime { get; set; }
+        public System.DateTime EndTime { get; set; }
+        public int WinnerPlayer { get; set; }
+        public int WinnerPoints { get; set; }
+        public int IdMatchPK { get; set; }
     
         public virtual Account Account { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

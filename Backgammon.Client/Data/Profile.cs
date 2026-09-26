@@ -21,13 +21,13 @@ namespace Backgammon.Client.Data
             this.SocialMedias = new ObservableCollection<SocialMedia>();
         }
     
-        public int victories { get; set; }
-        public int idAvatarFK { get; set; }
-        public string username { get; set; }
-        public int points { get; set; }
-        public int idAvailableStateFK { get; set; }
-        public string description { get; set; }
-        public int idProfilePK { get; set; }
+        public int Wins { get; set; }
+        public int IdAvatarFK { get; set; }
+        public string Username { get; set; }
+        public int Points { get; set; }
+        public int IdAvailableStateFK { get; set; }
+        public string Description { get; set; }
+        public int IdProfilePK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<Account> Accounts { get; set; }

@@ -20,8 +20,8 @@ namespace Backgammon.Client.Data
             this.Lobbies = new ObservableCollection<Lobby>();
         }
     
-        public string stateLobby1 { get; set; }
-        public int idStateLobbyPK { get; set; }
+        public string StateLobby1 { get; set; }
+        public int IdStateLobbyPK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<Lobby> Lobbies { get; set; }

@@ -10,16 +10,16 @@ namespace Backgammon.Client.Repositories
 {
     public class ProfileRepository
     {
-        private readonly BackgammonEntities _dataBaseContext;
+        private readonly BackgammonEntities _databaseContext;
 
         public ProfileRepository()
         {
-            _dataBaseContext = new BackgammonEntities();
+            _databaseContext = new BackgammonEntities();
         }
 
         public List<Profile> GetAllProfiles()
         {
-            return _dataBaseContext.Profiles.ToList();
+            return _databaseContext.Profiles.ToList();
         }
 
     }

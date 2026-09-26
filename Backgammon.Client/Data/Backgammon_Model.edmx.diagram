@@ -4,37 +4,37 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f35935b5a0d4407bbe9a6a0ac0e47c84" Name="Diagram1" ZoomLevel="47">
-        <EntityTypeShape EntityType="BackgammonModel.Account" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BackgammonModel.AvailableState" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="BackgammonModel.Avatar" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="BackgammonModel.FriendRequest" Width="1.5" PointX="7.5" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BackgammonModel.FriendShip" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BackgammonModel.Lobby" Width="1.5" PointX="10.5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="BackgammonModel.Match" Width="1.5" PointX="7.5" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BackgammonModel.Participate" Width="1.5" PointX="10.5" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BackgammonModel.Play" Width="1.5" PointX="9.75" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="BackgammonModel.Profile" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BackgammonModel.SocialMedia" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BackgammonModel.StateLobby" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BackgammonModel.TypeSocialMedia" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <AssociationConnector Association="BackgammonModel.FK_Account_Profile" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_FriendRequest_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_FriendRequest_Account1" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_FriendShip_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_FriendShip_Account1" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_Match_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_Participate_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_Participate_Account1" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_Play_Account" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_Play_Account1" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_Profile_AvailableState" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_Profile_Avatar" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_Lobby_StateLobby" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_Participate_Lobby" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_Play_Match" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_SocialMedia_Profile" ManuallyRouted="false" />
-        <AssociationConnector Association="BackgammonModel.FK_SocialMedia_TypeSocialMedia" ManuallyRouted="false" />
+      <Diagram DiagramId="f35935b5a0d4407bbe9a6a0ac0e47c84" Name="Diagram1" ZoomLevel="40">
+        <EntityTypeShape EntityType="BackgammonModel.Account" Width="1.5" PointX="11.875" PointY="8.75" />
+        <EntityTypeShape EntityType="BackgammonModel.AvailableState" Width="1.5" PointX="7.375" PointY="7.375" />
+        <EntityTypeShape EntityType="BackgammonModel.Avatar" Width="1.5" PointX="7.375" PointY="4.375" />
+        <EntityTypeShape EntityType="BackgammonModel.FriendRequest" Width="1.5" PointX="14.125" PointY="10.375" />
+        <EntityTypeShape EntityType="BackgammonModel.FriendShip" Width="1.5" PointX="14.125" PointY="16.125" />
+        <EntityTypeShape EntityType="BackgammonModel.Lobby" Width="1.5" PointX="14.875" PointY="19.125" />
+        <EntityTypeShape EntityType="BackgammonModel.Match" Width="1.5" PointX="14.125" PointY="7.25" />
+        <EntityTypeShape EntityType="BackgammonModel.Participate" Width="1.5" PointX="17.125" PointY="13" />
+        <EntityTypeShape EntityType="BackgammonModel.Play" Width="1.5" PointX="16.375" PointY="9.25" />
+        <EntityTypeShape EntityType="BackgammonModel.Profile" Width="1.5" PointX="9.625" PointY="6.625" />
+        <EntityTypeShape EntityType="BackgammonModel.SocialMedia" Width="1.5" PointX="11.875" PointY="5.125" />
+        <EntityTypeShape EntityType="BackgammonModel.StateLobby" Width="1.5" PointX="12.625" PointY="19.375" />
+        <EntityTypeShape EntityType="BackgammonModel.TypeSocialMedia" Width="1.5" PointX="9.625" PointY="3.375" />
+        <AssociationConnector Association="BackgammonModel.FK_Account_Profile" />
+        <AssociationConnector Association="BackgammonModel.FK_FriendRequest_Account" />
+        <AssociationConnector Association="BackgammonModel.FK_FriendRequest_Account1" />
+        <AssociationConnector Association="BackgammonModel.FK_FriendShip_Account" />
+        <AssociationConnector Association="BackgammonModel.FK_FriendShip_Account1" />
+        <AssociationConnector Association="BackgammonModel.FK_Match_Account" />
+        <AssociationConnector Association="BackgammonModel.FK_Participate_Account" />
+        <AssociationConnector Association="BackgammonModel.FK_Participate_Account1" />
+        <AssociationConnector Association="BackgammonModel.FK_Play_Account" />
+        <AssociationConnector Association="BackgammonModel.FK_Play_Account1" />
+        <AssociationConnector Association="BackgammonModel.FK_Profile_AvailableState" />
+        <AssociationConnector Association="BackgammonModel.FK_Profile_Avatar" />
+        <AssociationConnector Association="BackgammonModel.FK_Lobby_StateLobby" />
+        <AssociationConnector Association="BackgammonModel.FK_Participate_Lobby" />
+        <AssociationConnector Association="BackgammonModel.FK_Play_Match" />
+        <AssociationConnector Association="BackgammonModel.FK_SocialMedia_Profile" />
+        <AssociationConnector Association="BackgammonModel.FK_SocialMedia_TypeSocialMedia" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
