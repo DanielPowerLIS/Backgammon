@@ -14,10 +14,10 @@ namespace Backgammon.Client.Data
     
     public partial class Participate
     {
-        public int idLobbyFK { get; set; }
-        public int playerOneFK { get; set; }
-        public int playerTwoFK { get; set; }
-        public int idParticipatePK { get; set; }
+        public int IdLobbyFK { get; set; }
+        public int PlayerOneFK { get; set; }
+        public int PlayerTwoFK { get; set; }
+        public int IdParticipatePK { get; set; }
     
         public virtual Account Account { get; set; }
         public virtual Account Account1 { get; set; }

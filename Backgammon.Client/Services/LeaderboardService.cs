@@ -11,18 +11,18 @@ namespace Backgammon.Client.Services
 {
     public class LeaderboardService
     {
-        private readonly ProfileRepository profileRepository;
+        private readonly ProfileRepository _profileRepository;
 
         public LeaderboardService()
         {
-            profileRepository = new ProfileRepository();
+            _profileRepository = new ProfileRepository();
         }
 
         public List<Profile> GetLeaderboard()
         { 
-            List<Profile> profiles = profileRepository.GetAllProfiles();
+            List<Profile> profiles = _profileRepository.GetAllProfiles();
 
-            return profiles.OrderByDescending(profile => profile.victories).ToList();
+            return profiles.OrderByDescending(profile => profile.Wins).ToList();
         }
     }
 }

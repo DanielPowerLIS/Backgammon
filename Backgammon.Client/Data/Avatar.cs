@@ -20,8 +20,8 @@ namespace Backgammon.Client.Data
             this.Profiles = new ObservableCollection<Profile>();
         }
     
-        public byte[] availableAvatar { get; set; }
-        public int idAvatar { get; set; }
+        public byte[] AvailableAvatar { get; set; }
+        public int IdAvatarPK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<Profile> Profiles { get; set; }

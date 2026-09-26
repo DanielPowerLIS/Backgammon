@@ -4,132 +4,132 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BackgammonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BackgammonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
-            <PropertyRef Name="idAccountPK" />
+            <PropertyRef Name="IdAccountPK" />
           </Key>
-          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="lastModified" Type="datetime" />
-          <Property Name="registrationDate" Type="datetime" Nullable="false" />
-          <Property Name="accountCode" Type="nchar" MaxLength="8" />
-          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="paternalSurname" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="maternalSurname" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="idProfileFK" Type="int" Nullable="false" />
-          <Property Name="idAccountPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastModified" Type="datetime" />
+          <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
+          <Property Name="AccountCode" Type="nchar" MaxLength="8" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PaternalSurname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MaternalSurname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdProfileFK" Type="int" Nullable="false" />
+          <Property Name="IdAccountPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="AvailableState">
           <Key>
-            <PropertyRef Name="idAvailableStatePK" />
+            <PropertyRef Name="IdAvailableStatePK" />
           </Key>
-          <Property Name="state" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="idAvailableStatePK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdAvailableStatePK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Avatar">
           <Key>
-            <PropertyRef Name="idAvatar" />
+            <PropertyRef Name="IdAvatarPK" />
           </Key>
-          <Property Name="availableAvatar" Type="varbinary(max)" Nullable="false" />
-          <Property Name="idAvatar" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AvailableAvatar" Type="varbinary(max)" Nullable="false" />
+          <Property Name="IdAvatarPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="FriendRequest">
           <Key>
-            <PropertyRef Name="idFriendRequestPK" />
+            <PropertyRef Name="IdFriendRequestPK" />
           </Key>
-          <Property Name="issuingAccountFK" Type="int" Nullable="false" />
-          <Property Name="receivingAccountFK" Type="int" Nullable="false" />
-          <Property Name="idFriendRequestPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IssuingAccountFK" Type="int" Nullable="false" />
+          <Property Name="ReceivingAccountFK" Type="int" Nullable="false" />
+          <Property Name="IdFriendRequestPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="FriendShip">
           <Key>
-            <PropertyRef Name="idFriendShipPK" />
+            <PropertyRef Name="IdFriendShipPK" />
           </Key>
-          <Property Name="accountOneFK" Type="int" Nullable="false" />
-          <Property Name="accountTwoFK" Type="int" Nullable="false" />
-          <Property Name="idFriendShipPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountOneId" Type="int" Nullable="false" />
+          <Property Name="AccountTwoId" Type="int" Nullable="false" />
+          <Property Name="IdFriendShipPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Lobby">
           <Key>
-            <PropertyRef Name="idLobbyPK" />
+            <PropertyRef Name="IdLobbyPK" />
           </Key>
-          <Property Name="lobbyCode" Type="nchar" MaxLength="6" Nullable="false" />
-          <Property Name="idStateLobbyFK" Type="int" Nullable="false" />
-          <Property Name="idLobbyPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LobbyCode" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="IdStateLobbyFK" Type="int" Nullable="false" />
+          <Property Name="IdLobbyPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Match">
           <Key>
-            <PropertyRef Name="idMatchPK" />
+            <PropertyRef Name="IdMatchPK" />
           </Key>
-          <Property Name="startTime" Type="datetime" Nullable="false" />
-          <Property Name="endTime" Type="datetime" Nullable="false" />
-          <Property Name="winnerPlayer" Type="int" Nullable="false" />
-          <Property Name="winnerPoints" Type="int" Nullable="false" />
-          <Property Name="idMatchPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="WinnerPlayer" Type="int" Nullable="false" />
+          <Property Name="WinnerPoints" Type="int" Nullable="false" />
+          <Property Name="IdMatchPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Participate">
           <Key>
-            <PropertyRef Name="idParticipatePK" />
+            <PropertyRef Name="IdParticipatePK" />
           </Key>
-          <Property Name="idLobbyFK" Type="int" Nullable="false" />
-          <Property Name="playerOneFK" Type="int" Nullable="false" />
-          <Property Name="playerTwoFK" Type="int" Nullable="false" />
-          <Property Name="idParticipatePK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdLobbyFK" Type="int" Nullable="false" />
+          <Property Name="PlayerOneFK" Type="int" Nullable="false" />
+          <Property Name="PlayerTwoFK" Type="int" Nullable="false" />
+          <Property Name="IdParticipatePK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Play">
           <Key>
-            <PropertyRef Name="idPlayPK" />
+            <PropertyRef Name="IdPlayPK" />
           </Key>
-          <Property Name="idMatchFK" Type="int" Nullable="false" />
-          <Property Name="playerOneFK" Type="int" Nullable="false" />
-          <Property Name="playerTwoFK" Type="int" Nullable="false" />
-          <Property Name="idPlayPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMatchFK" Type="int" Nullable="false" />
+          <Property Name="PlayerOneFK" Type="int" Nullable="false" />
+          <Property Name="PlayerTwoFK" Type="int" Nullable="false" />
+          <Property Name="IdPlayPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
-            <PropertyRef Name="idProfilePK" />
+            <PropertyRef Name="IdProfilePK" />
           </Key>
-          <Property Name="victories" Type="int" Nullable="false" />
-          <Property Name="idAvatarFK" Type="int" Nullable="false" />
-          <Property Name="username" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="points" Type="int" Nullable="false" />
-          <Property Name="idAvailableStateFK" Type="int" Nullable="false" />
-          <Property Name="description" Type="nvarchar" MaxLength="255" />
-          <Property Name="idProfilePK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Wins" Type="int" Nullable="false" />
+          <Property Name="IdAvatarFK" Type="int" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Points" Type="int" Nullable="false" />
+          <Property Name="IdAvailableStateFK" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="IdProfilePK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="SocialMedia">
           <Key>
-            <PropertyRef Name="idSocialMediaPK" />
+            <PropertyRef Name="IdSocialMediaPK" />
           </Key>
-          <Property Name="link" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="idProfileFK" Type="int" Nullable="false" />
-          <Property Name="idTypeSocialMediaFK" Type="int" Nullable="false" />
-          <Property Name="idSocialMediaPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Link" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="IdProfileFK" Type="int" Nullable="false" />
+          <Property Name="IdTypeSocialMediaFK" Type="int" Nullable="false" />
+          <Property Name="IdSocialMediaPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="StateLobby">
           <Key>
-            <PropertyRef Name="idStateLobbyPK" />
+            <PropertyRef Name="IdStateLobbyPK" />
           </Key>
-          <Property Name="stateLobby" Type="nvarchar" MaxLength="100" />
-          <Property Name="idStateLobbyPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateLobby" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdStateLobbyPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="TypeSocialMedia">
           <Key>
-            <PropertyRef Name="idTypeSocialMediaPK" />
+            <PropertyRef Name="IdTypeSocialMediaPK" />
           </Key>
-          <Property Name="type" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="idTypeSocialMediaPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IdTypeSocialMediaPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <Association Name="FK_Account_Profile">
           <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
           <End Role="Account" Type="Self.Account" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Profile">
-              <PropertyRef Name="idProfilePK" />
+              <PropertyRef Name="IdProfilePK" />
             </Principal>
             <Dependent Role="Account">
-              <PropertyRef Name="idProfileFK" />
+              <PropertyRef Name="IdProfileFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -138,10 +138,10 @@
           <End Role="FriendRequest" Type="Self.FriendRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
+              <PropertyRef Name="IdAccountPK" />
             </Principal>
             <Dependent Role="FriendRequest">
-              <PropertyRef Name="issuingAccountFK" />
+              <PropertyRef Name="IssuingAccountFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -150,10 +150,10 @@
           <End Role="FriendRequest" Type="Self.FriendRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
+              <PropertyRef Name="IdAccountPK" />
             </Principal>
             <Dependent Role="FriendRequest">
-              <PropertyRef Name="receivingAccountFK" />
+              <PropertyRef Name="ReceivingAccountFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -162,10 +162,10 @@
           <End Role="FriendShip" Type="Self.FriendShip" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
+              <PropertyRef Name="IdAccountPK" />
             </Principal>
             <Dependent Role="FriendShip">
-              <PropertyRef Name="accountOneFK" />
+              <PropertyRef Name="AccountOneId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -174,10 +174,10 @@
           <End Role="FriendShip" Type="Self.FriendShip" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
+              <PropertyRef Name="IdAccountPK" />
             </Principal>
             <Dependent Role="FriendShip">
-              <PropertyRef Name="accountTwoFK" />
+              <PropertyRef Name="AccountTwoId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -186,10 +186,10 @@
           <End Role="Lobby" Type="Self.Lobby" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StateLobby">
-              <PropertyRef Name="idStateLobbyPK" />
+              <PropertyRef Name="IdStateLobbyPK" />
             </Principal>
             <Dependent Role="Lobby">
-              <PropertyRef Name="idStateLobbyFK" />
+              <PropertyRef Name="IdStateLobbyFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -198,10 +198,10 @@
           <End Role="Match" Type="Self.Match" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
+              <PropertyRef Name="IdAccountPK" />
             </Principal>
             <Dependent Role="Match">
-              <PropertyRef Name="winnerPlayer" />
+              <PropertyRef Name="WinnerPlayer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -210,10 +210,10 @@
           <End Role="Participate" Type="Self.Participate" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
+              <PropertyRef Name="IdAccountPK" />
             </Principal>
             <Dependent Role="Participate">
-              <PropertyRef Name="playerOneFK" />
+              <PropertyRef Name="PlayerOneFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -222,10 +222,10 @@
           <End Role="Participate" Type="Self.Participate" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
+              <PropertyRef Name="IdAccountPK" />
             </Principal>
             <Dependent Role="Participate">
-              <PropertyRef Name="playerTwoFK" />
+              <PropertyRef Name="PlayerTwoFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -234,10 +234,10 @@
           <End Role="Participate" Type="Self.Participate" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Lobby">
-              <PropertyRef Name="idLobbyPK" />
+              <PropertyRef Name="IdLobbyPK" />
             </Principal>
             <Dependent Role="Participate">
-              <PropertyRef Name="idLobbyFK" />
+              <PropertyRef Name="IdLobbyFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -246,10 +246,10 @@
           <End Role="Play" Type="Self.Play" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
+              <PropertyRef Name="IdAccountPK" />
             </Principal>
             <Dependent Role="Play">
-              <PropertyRef Name="playerOneFK" />
+              <PropertyRef Name="PlayerOneFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -258,10 +258,10 @@
           <End Role="Play" Type="Self.Play" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
+              <PropertyRef Name="IdAccountPK" />
             </Principal>
             <Dependent Role="Play">
-              <PropertyRef Name="playerTwoFK" />
+              <PropertyRef Name="PlayerTwoFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -270,10 +270,10 @@
           <End Role="Play" Type="Self.Play" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Match">
-              <PropertyRef Name="idMatchPK" />
+              <PropertyRef Name="IdMatchPK" />
             </Principal>
             <Dependent Role="Play">
-              <PropertyRef Name="idMatchFK" />
+              <PropertyRef Name="IdMatchFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -282,10 +282,10 @@
           <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AvailableState">
-              <PropertyRef Name="idAvailableStatePK" />
+              <PropertyRef Name="IdAvailableStatePK" />
             </Principal>
             <Dependent Role="Profile">
-              <PropertyRef Name="idAvailableStateFK" />
+              <PropertyRef Name="IdAvailableStateFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -294,10 +294,10 @@
           <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Avatar">
-              <PropertyRef Name="idAvatar" />
+              <PropertyRef Name="IdAvatarPK" />
             </Principal>
             <Dependent Role="Profile">
-              <PropertyRef Name="idAvatarFK" />
+              <PropertyRef Name="IdAvatarFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -306,10 +306,10 @@
           <End Role="SocialMedia" Type="Self.SocialMedia" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Profile">
-              <PropertyRef Name="idProfilePK" />
+              <PropertyRef Name="IdProfilePK" />
             </Principal>
             <Dependent Role="SocialMedia">
-              <PropertyRef Name="idProfileFK" />
+              <PropertyRef Name="IdProfileFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -318,10 +318,10 @@
           <End Role="SocialMedia" Type="Self.SocialMedia" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TypeSocialMedia">
-              <PropertyRef Name="idTypeSocialMediaPK" />
+              <PropertyRef Name="IdTypeSocialMediaPK" />
             </Principal>
             <Dependent Role="SocialMedia">
-              <PropertyRef Name="idTypeSocialMediaFK" />
+              <PropertyRef Name="IdTypeSocialMediaFK" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -408,449 +408,448 @@
             <End Role="SocialMedia" EntitySet="SocialMedia" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BackgammonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Account">
-          <Key>
-            <PropertyRef Name="idAccountPK" />
-          </Key>
-          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="lastModified" Type="DateTime" Precision="3" />
-          <Property Name="registrationDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="accountCode" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="paternalSurname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="maternalSurname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="idProfileFK" Type="Int32" Nullable="false" />
-          <Property Name="idAccountPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Profile" Relationship="Self.FK_Account_Profile" FromRole="Account" ToRole="Profile" />
-          <NavigationProperty Name="FriendRequests" Relationship="Self.FK_FriendRequest_Account" FromRole="Account" ToRole="FriendRequest" />
-          <NavigationProperty Name="FriendRequests1" Relationship="Self.FK_FriendRequest_Account1" FromRole="Account" ToRole="FriendRequest" />
-          <NavigationProperty Name="FriendShips" Relationship="Self.FK_FriendShip_Account" FromRole="Account" ToRole="FriendShip" />
-          <NavigationProperty Name="FriendShips1" Relationship="Self.FK_FriendShip_Account1" FromRole="Account" ToRole="FriendShip" />
-          <NavigationProperty Name="Matches" Relationship="Self.FK_Match_Account" FromRole="Account" ToRole="Match" />
-          <NavigationProperty Name="Participates" Relationship="Self.FK_Participate_Account" FromRole="Account" ToRole="Participate" />
-          <NavigationProperty Name="Participates1" Relationship="Self.FK_Participate_Account1" FromRole="Account" ToRole="Participate" />
-          <NavigationProperty Name="Plays" Relationship="Self.FK_Play_Account" FromRole="Account" ToRole="Play" />
-          <NavigationProperty Name="Plays1" Relationship="Self.FK_Play_Account1" FromRole="Account" ToRole="Play" />
-        </EntityType>
-        <EntityType Name="AvailableState">
-          <Key>
-            <PropertyRef Name="idAvailableStatePK" />
-          </Key>
-          <Property Name="state" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="idAvailableStatePK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Profiles" Relationship="Self.FK_Profile_AvailableState" FromRole="AvailableState" ToRole="Profile" />
-        </EntityType>
-        <EntityType Name="Avatar">
-          <Key>
-            <PropertyRef Name="idAvatar" />
-          </Key>
-          <Property Name="availableAvatar" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="idAvatar" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Profiles" Relationship="Self.FK_Profile_Avatar" FromRole="Avatar" ToRole="Profile" />
-        </EntityType>
-        <EntityType Name="FriendRequest">
-          <Key>
-            <PropertyRef Name="idFriendRequestPK" />
-          </Key>
-          <Property Name="issuingAccountFK" Type="Int32" Nullable="false" />
-          <Property Name="receivingAccountFK" Type="Int32" Nullable="false" />
-          <Property Name="idFriendRequestPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_FriendRequest_Account" FromRole="FriendRequest" ToRole="Account" />
-          <NavigationProperty Name="Account1" Relationship="Self.FK_FriendRequest_Account1" FromRole="FriendRequest" ToRole="Account" />
-        </EntityType>
-        <EntityType Name="FriendShip">
-          <Key>
-            <PropertyRef Name="idFriendShipPK" />
-          </Key>
-          <Property Name="accountOneFK" Type="Int32" Nullable="false" />
-          <Property Name="accountTwoFK" Type="Int32" Nullable="false" />
-          <Property Name="idFriendShipPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_FriendShip_Account" FromRole="FriendShip" ToRole="Account" />
-          <NavigationProperty Name="Account1" Relationship="Self.FK_FriendShip_Account1" FromRole="FriendShip" ToRole="Account" />
-        </EntityType>
-        <EntityType Name="Lobby">
-          <Key>
-            <PropertyRef Name="idLobbyPK" />
-          </Key>
-          <Property Name="lobbyCode" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="idStateLobbyFK" Type="Int32" Nullable="false" />
-          <Property Name="idLobbyPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="StateLobby" Relationship="Self.FK_Lobby_StateLobby" FromRole="Lobby" ToRole="StateLobby" />
-          <NavigationProperty Name="Participates" Relationship="Self.FK_Participate_Lobby" FromRole="Lobby" ToRole="Participate" />
-        </EntityType>
-        <EntityType Name="Match">
-          <Key>
-            <PropertyRef Name="idMatchPK" />
-          </Key>
-          <Property Name="startTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="endTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="winnerPlayer" Type="Int32" Nullable="false" />
-          <Property Name="winnerPoints" Type="Int32" Nullable="false" />
-          <Property Name="idMatchPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_Match_Account" FromRole="Match" ToRole="Account" />
-          <NavigationProperty Name="Plays" Relationship="Self.FK_Play_Match" FromRole="Match" ToRole="Play" />
-        </EntityType>
-        <EntityType Name="Participate">
-          <Key>
-            <PropertyRef Name="idParticipatePK" />
-          </Key>
-          <Property Name="idLobbyFK" Type="Int32" Nullable="false" />
-          <Property Name="playerOneFK" Type="Int32" Nullable="false" />
-          <Property Name="playerTwoFK" Type="Int32" Nullable="false" />
-          <Property Name="idParticipatePK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_Participate_Account" FromRole="Participate" ToRole="Account" />
-          <NavigationProperty Name="Account1" Relationship="Self.FK_Participate_Account1" FromRole="Participate" ToRole="Account" />
-          <NavigationProperty Name="Lobby" Relationship="Self.FK_Participate_Lobby" FromRole="Participate" ToRole="Lobby" />
-        </EntityType>
-        <EntityType Name="Play">
-          <Key>
-            <PropertyRef Name="idPlayPK" />
-          </Key>
-          <Property Name="idMatchFK" Type="Int32" Nullable="false" />
-          <Property Name="playerOneFK" Type="Int32" Nullable="false" />
-          <Property Name="playerTwoFK" Type="Int32" Nullable="false" />
-          <Property Name="idPlayPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Account" Relationship="Self.FK_Play_Account" FromRole="Play" ToRole="Account" />
-          <NavigationProperty Name="Account1" Relationship="Self.FK_Play_Account1" FromRole="Play" ToRole="Account" />
-          <NavigationProperty Name="Match" Relationship="Self.FK_Play_Match" FromRole="Play" ToRole="Match" />
-        </EntityType>
-        <EntityType Name="Profile">
-          <Key>
-            <PropertyRef Name="idProfilePK" />
-          </Key>
-          <Property Name="victories" Type="Int32" Nullable="false" />
-          <Property Name="idAvatarFK" Type="Int32" Nullable="false" />
-          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="points" Type="Int32" Nullable="false" />
-          <Property Name="idAvailableStateFK" Type="Int32" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="idProfilePK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Accounts" Relationship="Self.FK_Account_Profile" FromRole="Profile" ToRole="Account" />
-          <NavigationProperty Name="AvailableState" Relationship="Self.FK_Profile_AvailableState" FromRole="Profile" ToRole="AvailableState" />
-          <NavigationProperty Name="Avatar" Relationship="Self.FK_Profile_Avatar" FromRole="Profile" ToRole="Avatar" />
-          <NavigationProperty Name="SocialMedias" Relationship="Self.FK_SocialMedia_Profile" FromRole="Profile" ToRole="SocialMedia" />
-        </EntityType>
-        <EntityType Name="SocialMedia">
-          <Key>
-            <PropertyRef Name="idSocialMediaPK" />
-          </Key>
-          <Property Name="link" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="idProfileFK" Type="Int32" Nullable="false" />
-          <Property Name="idTypeSocialMediaFK" Type="Int32" Nullable="false" />
-          <Property Name="idSocialMediaPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Profile" Relationship="Self.FK_SocialMedia_Profile" FromRole="SocialMedia" ToRole="Profile" />
-          <NavigationProperty Name="TypeSocialMedia" Relationship="Self.FK_SocialMedia_TypeSocialMedia" FromRole="SocialMedia" ToRole="TypeSocialMedia" />
-        </EntityType>
-        <EntityType Name="StateLobby">
-          <Key>
-            <PropertyRef Name="idStateLobbyPK" />
-          </Key>
-          <Property Name="stateLobby1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="idStateLobbyPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Lobbies" Relationship="Self.FK_Lobby_StateLobby" FromRole="StateLobby" ToRole="Lobby" />
-        </EntityType>
-        <EntityType Name="TypeSocialMedia">
-          <Key>
-            <PropertyRef Name="idTypeSocialMediaPK" />
-          </Key>
-          <Property Name="type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="idTypeSocialMediaPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="SocialMedias" Relationship="Self.FK_SocialMedia_TypeSocialMedia" FromRole="TypeSocialMedia" ToRole="SocialMedia" />
-        </EntityType>
-        <Association Name="FK_Account_Profile">
-          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
-          <End Role="Account" Type="Self.Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Profile">
-              <PropertyRef Name="idProfilePK" />
-            </Principal>
-            <Dependent Role="Account">
-              <PropertyRef Name="idProfileFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FriendRequest_Account">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="FriendRequest" Type="Self.FriendRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
-            </Principal>
-            <Dependent Role="FriendRequest">
-              <PropertyRef Name="issuingAccountFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FriendRequest_Account1">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="FriendRequest" Type="Self.FriendRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
-            </Principal>
-            <Dependent Role="FriendRequest">
-              <PropertyRef Name="receivingAccountFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FriendShip_Account">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="FriendShip" Type="Self.FriendShip" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
-            </Principal>
-            <Dependent Role="FriendShip">
-              <PropertyRef Name="accountOneFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FriendShip_Account1">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="FriendShip" Type="Self.FriendShip" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
-            </Principal>
-            <Dependent Role="FriendShip">
-              <PropertyRef Name="accountTwoFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Match_Account">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="Match" Type="Self.Match" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
-            </Principal>
-            <Dependent Role="Match">
-              <PropertyRef Name="winnerPlayer" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Participate_Account">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="Participate" Type="Self.Participate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
-            </Principal>
-            <Dependent Role="Participate">
-              <PropertyRef Name="playerOneFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Participate_Account1">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="Participate" Type="Self.Participate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
-            </Principal>
-            <Dependent Role="Participate">
-              <PropertyRef Name="playerTwoFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Play_Account">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="Play" Type="Self.Play" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
-            </Principal>
-            <Dependent Role="Play">
-              <PropertyRef Name="playerOneFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Play_Account1">
-          <End Role="Account" Type="Self.Account" Multiplicity="1" />
-          <End Role="Play" Type="Self.Play" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Account">
-              <PropertyRef Name="idAccountPK" />
-            </Principal>
-            <Dependent Role="Play">
-              <PropertyRef Name="playerTwoFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Profile_AvailableState">
-          <End Role="AvailableState" Type="Self.AvailableState" Multiplicity="1" />
-          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AvailableState">
-              <PropertyRef Name="idAvailableStatePK" />
-            </Principal>
-            <Dependent Role="Profile">
-              <PropertyRef Name="idAvailableStateFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Profile_Avatar">
-          <End Role="Avatar" Type="Self.Avatar" Multiplicity="1" />
-          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Avatar">
-              <PropertyRef Name="idAvatar" />
-            </Principal>
-            <Dependent Role="Profile">
-              <PropertyRef Name="idAvatarFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Lobby_StateLobby">
-          <End Role="StateLobby" Type="Self.StateLobby" Multiplicity="1" />
-          <End Role="Lobby" Type="Self.Lobby" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StateLobby">
-              <PropertyRef Name="idStateLobbyPK" />
-            </Principal>
-            <Dependent Role="Lobby">
-              <PropertyRef Name="idStateLobbyFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Participate_Lobby">
-          <End Role="Lobby" Type="Self.Lobby" Multiplicity="1" />
-          <End Role="Participate" Type="Self.Participate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Lobby">
-              <PropertyRef Name="idLobbyPK" />
-            </Principal>
-            <Dependent Role="Participate">
-              <PropertyRef Name="idLobbyFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Play_Match">
-          <End Role="Match" Type="Self.Match" Multiplicity="1" />
-          <End Role="Play" Type="Self.Play" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Match">
-              <PropertyRef Name="idMatchPK" />
-            </Principal>
-            <Dependent Role="Play">
-              <PropertyRef Name="idMatchFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SocialMedia_Profile">
-          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
-          <End Role="SocialMedia" Type="Self.SocialMedia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Profile">
-              <PropertyRef Name="idProfilePK" />
-            </Principal>
-            <Dependent Role="SocialMedia">
-              <PropertyRef Name="idProfileFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SocialMedia_TypeSocialMedia">
-          <End Role="TypeSocialMedia" Type="Self.TypeSocialMedia" Multiplicity="1" />
-          <End Role="SocialMedia" Type="Self.SocialMedia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeSocialMedia">
-              <PropertyRef Name="idTypeSocialMediaPK" />
-            </Principal>
-            <Dependent Role="SocialMedia">
-              <PropertyRef Name="idTypeSocialMediaFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="BackgammonEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Accounts" EntityType="Self.Account" />
-          <EntitySet Name="AvailableStates" EntityType="Self.AvailableState" />
-          <EntitySet Name="Avatars" EntityType="Self.Avatar" />
-          <EntitySet Name="FriendRequests" EntityType="Self.FriendRequest" />
-          <EntitySet Name="FriendShips" EntityType="Self.FriendShip" />
-          <EntitySet Name="Lobbies" EntityType="Self.Lobby" />
-          <EntitySet Name="Matches" EntityType="Self.Match" />
-          <EntitySet Name="Participates" EntityType="Self.Participate" />
-          <EntitySet Name="Plays" EntityType="Self.Play" />
-          <EntitySet Name="Profiles" EntityType="Self.Profile" />
-          <EntitySet Name="SocialMedias" EntityType="Self.SocialMedia" />
-          <EntitySet Name="StateLobbies" EntityType="Self.StateLobby" />
-          <EntitySet Name="TypeSocialMedias" EntityType="Self.TypeSocialMedia" />
-          <AssociationSet Name="FK_Account_Profile" Association="Self.FK_Account_Profile">
+          <EntitySet Name="Accounts" EntityType="BackgammonModel.Account" />
+          <EntitySet Name="AvailableStates" EntityType="BackgammonModel.AvailableState" />
+          <EntitySet Name="Avatars" EntityType="BackgammonModel.Avatar" />
+          <EntitySet Name="FriendRequests" EntityType="BackgammonModel.FriendRequest" />
+          <EntitySet Name="FriendShips" EntityType="BackgammonModel.FriendShip" />
+          <EntitySet Name="Lobbies" EntityType="BackgammonModel.Lobby" />
+          <EntitySet Name="Matches" EntityType="BackgammonModel.Match" />
+          <EntitySet Name="Participates" EntityType="BackgammonModel.Participate" />
+          <EntitySet Name="Plays" EntityType="BackgammonModel.Play" />
+          <EntitySet Name="Profiles" EntityType="BackgammonModel.Profile" />
+          <EntitySet Name="SocialMedias" EntityType="BackgammonModel.SocialMedia" />
+          <EntitySet Name="StateLobbies" EntityType="BackgammonModel.StateLobby" />
+          <EntitySet Name="TypeSocialMedias" EntityType="BackgammonModel.TypeSocialMedia" />
+          <AssociationSet Name="FK_Account_Profile" Association="BackgammonModel.FK_Account_Profile">
             <End Role="Profile" EntitySet="Profiles" />
             <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
-          <AssociationSet Name="FK_FriendRequest_Account" Association="Self.FK_FriendRequest_Account">
+          <AssociationSet Name="FK_FriendRequest_Account" Association="BackgammonModel.FK_FriendRequest_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="FriendRequest" EntitySet="FriendRequests" />
           </AssociationSet>
-          <AssociationSet Name="FK_FriendRequest_Account1" Association="Self.FK_FriendRequest_Account1">
+          <AssociationSet Name="FK_FriendRequest_Account1" Association="BackgammonModel.FK_FriendRequest_Account1">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="FriendRequest" EntitySet="FriendRequests" />
           </AssociationSet>
-          <AssociationSet Name="FK_FriendShip_Account" Association="Self.FK_FriendShip_Account">
+          <AssociationSet Name="FK_FriendShip_Account" Association="BackgammonModel.FK_FriendShip_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="FriendShip" EntitySet="FriendShips" />
           </AssociationSet>
-          <AssociationSet Name="FK_FriendShip_Account1" Association="Self.FK_FriendShip_Account1">
+          <AssociationSet Name="FK_FriendShip_Account1" Association="BackgammonModel.FK_FriendShip_Account1">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="FriendShip" EntitySet="FriendShips" />
           </AssociationSet>
-          <AssociationSet Name="FK_Match_Account" Association="Self.FK_Match_Account">
+          <AssociationSet Name="FK_Match_Account" Association="BackgammonModel.FK_Match_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Match" EntitySet="Matches" />
           </AssociationSet>
-          <AssociationSet Name="FK_Participate_Account" Association="Self.FK_Participate_Account">
+          <AssociationSet Name="FK_Participate_Account" Association="BackgammonModel.FK_Participate_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Participate" EntitySet="Participates" />
           </AssociationSet>
-          <AssociationSet Name="FK_Participate_Account1" Association="Self.FK_Participate_Account1">
+          <AssociationSet Name="FK_Participate_Account1" Association="BackgammonModel.FK_Participate_Account1">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Participate" EntitySet="Participates" />
           </AssociationSet>
-          <AssociationSet Name="FK_Play_Account" Association="Self.FK_Play_Account">
+          <AssociationSet Name="FK_Play_Account" Association="BackgammonModel.FK_Play_Account">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Play" EntitySet="Plays" />
           </AssociationSet>
-          <AssociationSet Name="FK_Play_Account1" Association="Self.FK_Play_Account1">
+          <AssociationSet Name="FK_Play_Account1" Association="BackgammonModel.FK_Play_Account1">
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Play" EntitySet="Plays" />
           </AssociationSet>
-          <AssociationSet Name="FK_Profile_AvailableState" Association="Self.FK_Profile_AvailableState">
+          <AssociationSet Name="FK_Profile_AvailableState" Association="BackgammonModel.FK_Profile_AvailableState">
             <End Role="AvailableState" EntitySet="AvailableStates" />
             <End Role="Profile" EntitySet="Profiles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Profile_Avatar" Association="Self.FK_Profile_Avatar">
+          <AssociationSet Name="FK_Profile_Avatar" Association="BackgammonModel.FK_Profile_Avatar">
             <End Role="Avatar" EntitySet="Avatars" />
             <End Role="Profile" EntitySet="Profiles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Lobby_StateLobby" Association="Self.FK_Lobby_StateLobby">
+          <AssociationSet Name="FK_Lobby_StateLobby" Association="BackgammonModel.FK_Lobby_StateLobby">
             <End Role="StateLobby" EntitySet="StateLobbies" />
             <End Role="Lobby" EntitySet="Lobbies" />
           </AssociationSet>
-          <AssociationSet Name="FK_Participate_Lobby" Association="Self.FK_Participate_Lobby">
+          <AssociationSet Name="FK_Participate_Lobby" Association="BackgammonModel.FK_Participate_Lobby">
             <End Role="Lobby" EntitySet="Lobbies" />
             <End Role="Participate" EntitySet="Participates" />
           </AssociationSet>
-          <AssociationSet Name="FK_Play_Match" Association="Self.FK_Play_Match">
+          <AssociationSet Name="FK_Play_Match" Association="BackgammonModel.FK_Play_Match">
             <End Role="Match" EntitySet="Matches" />
             <End Role="Play" EntitySet="Plays" />
           </AssociationSet>
-          <AssociationSet Name="FK_SocialMedia_Profile" Association="Self.FK_SocialMedia_Profile">
+          <AssociationSet Name="FK_SocialMedia_Profile" Association="BackgammonModel.FK_SocialMedia_Profile">
             <End Role="Profile" EntitySet="Profiles" />
             <End Role="SocialMedia" EntitySet="SocialMedias" />
           </AssociationSet>
-          <AssociationSet Name="FK_SocialMedia_TypeSocialMedia" Association="Self.FK_SocialMedia_TypeSocialMedia">
+          <AssociationSet Name="FK_SocialMedia_TypeSocialMedia" Association="BackgammonModel.FK_SocialMedia_TypeSocialMedia">
             <End Role="TypeSocialMedia" EntitySet="TypeSocialMedias" />
             <End Role="SocialMedia" EntitySet="SocialMedias" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="IdAccountPK" />
+          </Key>
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastModified" Type="DateTime" Precision="3" />
+          <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AccountCode" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PaternalSurname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MaternalSurname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdProfileFK" Type="Int32" Nullable="false" />
+          <Property Name="IdAccountPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Profile" Relationship="BackgammonModel.FK_Account_Profile" FromRole="Account" ToRole="Profile" />
+          <NavigationProperty Name="FriendRequests" Relationship="BackgammonModel.FK_FriendRequest_Account" FromRole="Account" ToRole="FriendRequest" />
+          <NavigationProperty Name="FriendRequests1" Relationship="BackgammonModel.FK_FriendRequest_Account1" FromRole="Account" ToRole="FriendRequest" />
+          <NavigationProperty Name="FriendShips" Relationship="BackgammonModel.FK_FriendShip_Account" FromRole="Account" ToRole="FriendShip" />
+          <NavigationProperty Name="FriendShips1" Relationship="BackgammonModel.FK_FriendShip_Account1" FromRole="Account" ToRole="FriendShip" />
+          <NavigationProperty Name="Matches" Relationship="BackgammonModel.FK_Match_Account" FromRole="Account" ToRole="Match" />
+          <NavigationProperty Name="Participates" Relationship="BackgammonModel.FK_Participate_Account" FromRole="Account" ToRole="Participate" />
+          <NavigationProperty Name="Participates1" Relationship="BackgammonModel.FK_Participate_Account1" FromRole="Account" ToRole="Participate" />
+          <NavigationProperty Name="Plays" Relationship="BackgammonModel.FK_Play_Account" FromRole="Account" ToRole="Play" />
+          <NavigationProperty Name="Plays1" Relationship="BackgammonModel.FK_Play_Account1" FromRole="Account" ToRole="Play" />
+        </EntityType>
+        <EntityType Name="AvailableState">
+          <Key>
+            <PropertyRef Name="IdAvailableStatePK" />
+          </Key>
+          <Property Name="State" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdAvailableStatePK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Profiles" Relationship="BackgammonModel.FK_Profile_AvailableState" FromRole="AvailableState" ToRole="Profile" />
+        </EntityType>
+        <EntityType Name="Avatar">
+          <Key>
+            <PropertyRef Name="IdAvatarPK" />
+          </Key>
+          <Property Name="AvailableAvatar" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="IdAvatarPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Profiles" Relationship="BackgammonModel.FK_Profile_Avatar" FromRole="Avatar" ToRole="Profile" />
+        </EntityType>
+        <EntityType Name="FriendRequest">
+          <Key>
+            <PropertyRef Name="IdFriendRequestPK" />
+          </Key>
+          <Property Name="IssuingAccountFK" Type="Int32" Nullable="false" />
+          <Property Name="ReceivingAccountFK" Type="Int32" Nullable="false" />
+          <Property Name="IdFriendRequestPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Account" Relationship="BackgammonModel.FK_FriendRequest_Account" FromRole="FriendRequest" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="BackgammonModel.FK_FriendRequest_Account1" FromRole="FriendRequest" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="FriendShip">
+          <Key>
+            <PropertyRef Name="IdFriendShipPK" />
+          </Key>
+          <Property Name="AccountOneId" Type="Int32" Nullable="false" />
+          <Property Name="AccountTwoId" Type="Int32" Nullable="false" />
+          <Property Name="IdFriendShipPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Account" Relationship="BackgammonModel.FK_FriendShip_Account" FromRole="FriendShip" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="BackgammonModel.FK_FriendShip_Account1" FromRole="FriendShip" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Lobby">
+          <Key>
+            <PropertyRef Name="IdLobbyPK" />
+          </Key>
+          <Property Name="LobbyCode" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="IdStateLobbyFK" Type="Int32" Nullable="false" />
+          <Property Name="IdLobbyPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="StateLobby" Relationship="BackgammonModel.FK_Lobby_StateLobby" FromRole="Lobby" ToRole="StateLobby" />
+          <NavigationProperty Name="Participates" Relationship="BackgammonModel.FK_Participate_Lobby" FromRole="Lobby" ToRole="Participate" />
+        </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="IdMatchPK" />
+          </Key>
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WinnerPlayer" Type="Int32" Nullable="false" />
+          <Property Name="WinnerPoints" Type="Int32" Nullable="false" />
+          <Property Name="IdMatchPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Account" Relationship="BackgammonModel.FK_Match_Account" FromRole="Match" ToRole="Account" />
+          <NavigationProperty Name="Plays" Relationship="BackgammonModel.FK_Play_Match" FromRole="Match" ToRole="Play" />
+        </EntityType>
+        <EntityType Name="Participate">
+          <Key>
+            <PropertyRef Name="IdParticipatePK" />
+          </Key>
+          <Property Name="IdLobbyFK" Type="Int32" Nullable="false" />
+          <Property Name="PlayerOneFK" Type="Int32" Nullable="false" />
+          <Property Name="PlayerTwoFK" Type="Int32" Nullable="false" />
+          <Property Name="IdParticipatePK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Account" Relationship="BackgammonModel.FK_Participate_Account" FromRole="Participate" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="BackgammonModel.FK_Participate_Account1" FromRole="Participate" ToRole="Account" />
+          <NavigationProperty Name="Lobby" Relationship="BackgammonModel.FK_Participate_Lobby" FromRole="Participate" ToRole="Lobby" />
+        </EntityType>
+        <EntityType Name="Play">
+          <Key>
+            <PropertyRef Name="IdPlayPK" />
+          </Key>
+          <Property Name="IdMatchFK" Type="Int32" Nullable="false" />
+          <Property Name="PlayerOneFK" Type="Int32" Nullable="false" />
+          <Property Name="PlayerTwoFK" Type="Int32" Nullable="false" />
+          <Property Name="IdPlayPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Account" Relationship="BackgammonModel.FK_Play_Account" FromRole="Play" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="BackgammonModel.FK_Play_Account1" FromRole="Play" ToRole="Account" />
+          <NavigationProperty Name="Match" Relationship="BackgammonModel.FK_Play_Match" FromRole="Play" ToRole="Match" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="IdProfilePK" />
+          </Key>
+          <Property Name="Wins" Type="Int32" Nullable="false" />
+          <Property Name="IdAvatarFK" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Points" Type="Int32" Nullable="false" />
+          <Property Name="IdAvailableStateFK" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IdProfilePK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Accounts" Relationship="BackgammonModel.FK_Account_Profile" FromRole="Profile" ToRole="Account" />
+          <NavigationProperty Name="AvailableState" Relationship="BackgammonModel.FK_Profile_AvailableState" FromRole="Profile" ToRole="AvailableState" />
+          <NavigationProperty Name="Avatar" Relationship="BackgammonModel.FK_Profile_Avatar" FromRole="Profile" ToRole="Avatar" />
+          <NavigationProperty Name="SocialMedias" Relationship="BackgammonModel.FK_SocialMedia_Profile" FromRole="Profile" ToRole="SocialMedia" />
+        </EntityType>
+        <EntityType Name="SocialMedia">
+          <Key>
+            <PropertyRef Name="IdSocialMediaPK" />
+          </Key>
+          <Property Name="Link" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IdProfileFK" Type="Int32" Nullable="false" />
+          <Property Name="IdTypeSocialMediaFK" Type="Int32" Nullable="false" />
+          <Property Name="IdSocialMediaPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Profile" Relationship="BackgammonModel.FK_SocialMedia_Profile" FromRole="SocialMedia" ToRole="Profile" />
+          <NavigationProperty Name="TypeSocialMedia" Relationship="BackgammonModel.FK_SocialMedia_TypeSocialMedia" FromRole="SocialMedia" ToRole="TypeSocialMedia" />
+        </EntityType>
+        <EntityType Name="StateLobby">
+          <Key>
+            <PropertyRef Name="IdStateLobbyPK" />
+          </Key>
+          <Property Name="StateLobby1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdStateLobbyPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Lobbies" Relationship="BackgammonModel.FK_Lobby_StateLobby" FromRole="StateLobby" ToRole="Lobby" />
+        </EntityType>
+        <EntityType Name="TypeSocialMedia">
+          <Key>
+            <PropertyRef Name="IdTypeSocialMediaPK" />
+          </Key>
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdTypeSocialMediaPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="SocialMedias" Relationship="BackgammonModel.FK_SocialMedia_TypeSocialMedia" FromRole="TypeSocialMedia" ToRole="SocialMedia" />
+        </EntityType>
+        <Association Name="FK_Account_Profile">
+          <End Type="BackgammonModel.Profile" Role="Profile" Multiplicity="1" />
+          <End Type="BackgammonModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="IdProfilePK" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="IdProfileFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FriendRequest_Account">
+          <End Type="BackgammonModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="BackgammonModel.FriendRequest" Role="FriendRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IdAccountPK" />
+            </Principal>
+            <Dependent Role="FriendRequest">
+              <PropertyRef Name="IssuingAccountFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FriendRequest_Account1">
+          <End Type="BackgammonModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="BackgammonModel.FriendRequest" Role="FriendRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IdAccountPK" />
+            </Principal>
+            <Dependent Role="FriendRequest">
+              <PropertyRef Name="ReceivingAccountFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FriendShip_Account">
+          <End Type="BackgammonModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="BackgammonModel.FriendShip" Role="FriendShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IdAccountPK" />
+            </Principal>
+            <Dependent Role="FriendShip">
+              <PropertyRef Name="AccountOneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FriendShip_Account1">
+          <End Type="BackgammonModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="BackgammonModel.FriendShip" Role="FriendShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IdAccountPK" />
+            </Principal>
+            <Dependent Role="FriendShip">
+              <PropertyRef Name="AccountTwoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_Account">
+          <End Type="BackgammonModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="BackgammonModel.Match" Role="Match" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IdAccountPK" />
+            </Principal>
+            <Dependent Role="Match">
+              <PropertyRef Name="WinnerPlayer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participate_Account">
+          <End Type="BackgammonModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="BackgammonModel.Participate" Role="Participate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IdAccountPK" />
+            </Principal>
+            <Dependent Role="Participate">
+              <PropertyRef Name="PlayerOneFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participate_Account1">
+          <End Type="BackgammonModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="BackgammonModel.Participate" Role="Participate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IdAccountPK" />
+            </Principal>
+            <Dependent Role="Participate">
+              <PropertyRef Name="PlayerTwoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Play_Account">
+          <End Type="BackgammonModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="BackgammonModel.Play" Role="Play" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IdAccountPK" />
+            </Principal>
+            <Dependent Role="Play">
+              <PropertyRef Name="PlayerOneFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Play_Account1">
+          <End Type="BackgammonModel.Account" Role="Account" Multiplicity="1" />
+          <End Type="BackgammonModel.Play" Role="Play" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="IdAccountPK" />
+            </Principal>
+            <Dependent Role="Play">
+              <PropertyRef Name="PlayerTwoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_AvailableState">
+          <End Type="BackgammonModel.AvailableState" Role="AvailableState" Multiplicity="1" />
+          <End Type="BackgammonModel.Profile" Role="Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AvailableState">
+              <PropertyRef Name="IdAvailableStatePK" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="IdAvailableStateFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_Avatar">
+          <End Type="BackgammonModel.Avatar" Role="Avatar" Multiplicity="1" />
+          <End Type="BackgammonModel.Profile" Role="Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Avatar">
+              <PropertyRef Name="IdAvatarPK" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="IdAvatarFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lobby_StateLobby">
+          <End Type="BackgammonModel.StateLobby" Role="StateLobby" Multiplicity="1" />
+          <End Type="BackgammonModel.Lobby" Role="Lobby" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StateLobby">
+              <PropertyRef Name="IdStateLobbyPK" />
+            </Principal>
+            <Dependent Role="Lobby">
+              <PropertyRef Name="IdStateLobbyFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participate_Lobby">
+          <End Type="BackgammonModel.Lobby" Role="Lobby" Multiplicity="1" />
+          <End Type="BackgammonModel.Participate" Role="Participate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lobby">
+              <PropertyRef Name="IdLobbyPK" />
+            </Principal>
+            <Dependent Role="Participate">
+              <PropertyRef Name="IdLobbyFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Play_Match">
+          <End Type="BackgammonModel.Match" Role="Match" Multiplicity="1" />
+          <End Type="BackgammonModel.Play" Role="Play" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="IdMatchPK" />
+            </Principal>
+            <Dependent Role="Play">
+              <PropertyRef Name="IdMatchFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SocialMedia_Profile">
+          <End Type="BackgammonModel.Profile" Role="Profile" Multiplicity="1" />
+          <End Type="BackgammonModel.SocialMedia" Role="SocialMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="IdProfilePK" />
+            </Principal>
+            <Dependent Role="SocialMedia">
+              <PropertyRef Name="IdProfileFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SocialMedia_TypeSocialMedia">
+          <End Type="BackgammonModel.TypeSocialMedia" Role="TypeSocialMedia" Multiplicity="1" />
+          <End Type="BackgammonModel.SocialMedia" Role="SocialMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeSocialMedia">
+              <PropertyRef Name="IdTypeSocialMediaPK" />
+            </Principal>
+            <Dependent Role="SocialMedia">
+              <PropertyRef Name="IdTypeSocialMediaFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -859,129 +858,129 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="BackgammonModel.Account">
               <MappingFragment StoreEntitySet="Account">
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="lastModified" ColumnName="lastModified" />
-                <ScalarProperty Name="registrationDate" ColumnName="registrationDate" />
-                <ScalarProperty Name="accountCode" ColumnName="accountCode" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="paternalSurname" ColumnName="paternalSurname" />
-                <ScalarProperty Name="maternalSurname" ColumnName="maternalSurname" />
-                <ScalarProperty Name="idProfileFK" ColumnName="idProfileFK" />
-                <ScalarProperty Name="idAccountPK" ColumnName="idAccountPK" />
+                <ScalarProperty Name="IdAccountPK" ColumnName="IdAccountPK" />
+                <ScalarProperty Name="IdProfileFK" ColumnName="IdProfileFK" />
+                <ScalarProperty Name="MaternalSurname" ColumnName="MaternalSurname" />
+                <ScalarProperty Name="PaternalSurname" ColumnName="PaternalSurname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AvailableStates">
             <EntityTypeMapping TypeName="BackgammonModel.AvailableState">
               <MappingFragment StoreEntitySet="AvailableState">
-                <ScalarProperty Name="state" ColumnName="state" />
-                <ScalarProperty Name="idAvailableStatePK" ColumnName="idAvailableStatePK" />
+                <ScalarProperty Name="IdAvailableStatePK" ColumnName="IdAvailableStatePK" />
+                <ScalarProperty Name="State" ColumnName="State" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Avatars">
             <EntityTypeMapping TypeName="BackgammonModel.Avatar">
               <MappingFragment StoreEntitySet="Avatar">
-                <ScalarProperty Name="availableAvatar" ColumnName="availableAvatar" />
-                <ScalarProperty Name="idAvatar" ColumnName="idAvatar" />
+                <ScalarProperty Name="IdAvatarPK" ColumnName="IdAvatarPK" />
+                <ScalarProperty Name="AvailableAvatar" ColumnName="AvailableAvatar" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FriendRequests">
             <EntityTypeMapping TypeName="BackgammonModel.FriendRequest">
               <MappingFragment StoreEntitySet="FriendRequest">
-                <ScalarProperty Name="issuingAccountFK" ColumnName="issuingAccountFK" />
-                <ScalarProperty Name="receivingAccountFK" ColumnName="receivingAccountFK" />
-                <ScalarProperty Name="idFriendRequestPK" ColumnName="idFriendRequestPK" />
+                <ScalarProperty Name="IdFriendRequestPK" ColumnName="IdFriendRequestPK" />
+                <ScalarProperty Name="ReceivingAccountFK" ColumnName="ReceivingAccountFK" />
+                <ScalarProperty Name="IssuingAccountFK" ColumnName="IssuingAccountFK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FriendShips">
             <EntityTypeMapping TypeName="BackgammonModel.FriendShip">
               <MappingFragment StoreEntitySet="FriendShip">
-                <ScalarProperty Name="accountOneFK" ColumnName="accountOneFK" />
-                <ScalarProperty Name="accountTwoFK" ColumnName="accountTwoFK" />
-                <ScalarProperty Name="idFriendShipPK" ColumnName="idFriendShipPK" />
+                <ScalarProperty Name="IdFriendShipPK" ColumnName="IdFriendShipPK" />
+                <ScalarProperty Name="AccountTwoId" ColumnName="AccountTwoId" />
+                <ScalarProperty Name="AccountOneId" ColumnName="AccountOneId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Lobbies">
             <EntityTypeMapping TypeName="BackgammonModel.Lobby">
               <MappingFragment StoreEntitySet="Lobby">
-                <ScalarProperty Name="lobbyCode" ColumnName="lobbyCode" />
-                <ScalarProperty Name="idStateLobbyFK" ColumnName="idStateLobbyFK" />
-                <ScalarProperty Name="idLobbyPK" ColumnName="idLobbyPK" />
+                <ScalarProperty Name="IdLobbyPK" ColumnName="IdLobbyPK" />
+                <ScalarProperty Name="IdStateLobbyFK" ColumnName="IdStateLobbyFK" />
+                <ScalarProperty Name="LobbyCode" ColumnName="LobbyCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Matches">
             <EntityTypeMapping TypeName="BackgammonModel.Match">
               <MappingFragment StoreEntitySet="Match">
-                <ScalarProperty Name="startTime" ColumnName="startTime" />
-                <ScalarProperty Name="endTime" ColumnName="endTime" />
-                <ScalarProperty Name="winnerPlayer" ColumnName="winnerPlayer" />
-                <ScalarProperty Name="winnerPoints" ColumnName="winnerPoints" />
-                <ScalarProperty Name="idMatchPK" ColumnName="idMatchPK" />
+                <ScalarProperty Name="IdMatchPK" ColumnName="IdMatchPK" />
+                <ScalarProperty Name="WinnerPoints" ColumnName="WinnerPoints" />
+                <ScalarProperty Name="WinnerPlayer" ColumnName="WinnerPlayer" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Participates">
             <EntityTypeMapping TypeName="BackgammonModel.Participate">
               <MappingFragment StoreEntitySet="Participate">
-                <ScalarProperty Name="idLobbyFK" ColumnName="idLobbyFK" />
-                <ScalarProperty Name="playerOneFK" ColumnName="playerOneFK" />
-                <ScalarProperty Name="playerTwoFK" ColumnName="playerTwoFK" />
-                <ScalarProperty Name="idParticipatePK" ColumnName="idParticipatePK" />
+                <ScalarProperty Name="IdParticipatePK" ColumnName="IdParticipatePK" />
+                <ScalarProperty Name="PlayerTwoFK" ColumnName="PlayerTwoFK" />
+                <ScalarProperty Name="PlayerOneFK" ColumnName="PlayerOneFK" />
+                <ScalarProperty Name="IdLobbyFK" ColumnName="IdLobbyFK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Plays">
             <EntityTypeMapping TypeName="BackgammonModel.Play">
               <MappingFragment StoreEntitySet="Play">
-                <ScalarProperty Name="idMatchFK" ColumnName="idMatchFK" />
-                <ScalarProperty Name="playerOneFK" ColumnName="playerOneFK" />
-                <ScalarProperty Name="playerTwoFK" ColumnName="playerTwoFK" />
-                <ScalarProperty Name="idPlayPK" ColumnName="idPlayPK" />
+                <ScalarProperty Name="IdPlayPK" ColumnName="IdPlayPK" />
+                <ScalarProperty Name="PlayerTwoFK" ColumnName="PlayerTwoFK" />
+                <ScalarProperty Name="PlayerOneFK" ColumnName="PlayerOneFK" />
+                <ScalarProperty Name="IdMatchFK" ColumnName="IdMatchFK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Profiles">
             <EntityTypeMapping TypeName="BackgammonModel.Profile">
               <MappingFragment StoreEntitySet="Profile">
-                <ScalarProperty Name="victories" ColumnName="victories" />
-                <ScalarProperty Name="idAvatarFK" ColumnName="idAvatarFK" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="points" ColumnName="points" />
-                <ScalarProperty Name="idAvailableStateFK" ColumnName="idAvailableStateFK" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="idProfilePK" ColumnName="idProfilePK" />
+                <ScalarProperty Name="IdProfilePK" ColumnName="IdProfilePK" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdAvailableStateFK" ColumnName="IdAvailableStateFK" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="IdAvatarFK" ColumnName="IdAvatarFK" />
+                <ScalarProperty Name="Wins" ColumnName="Wins" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SocialMedias">
             <EntityTypeMapping TypeName="BackgammonModel.SocialMedia">
               <MappingFragment StoreEntitySet="SocialMedia">
-                <ScalarProperty Name="link" ColumnName="link" />
-                <ScalarProperty Name="idProfileFK" ColumnName="idProfileFK" />
-                <ScalarProperty Name="idTypeSocialMediaFK" ColumnName="idTypeSocialMediaFK" />
-                <ScalarProperty Name="idSocialMediaPK" ColumnName="idSocialMediaPK" />
+                <ScalarProperty Name="IdSocialMediaPK" ColumnName="IdSocialMediaPK" />
+                <ScalarProperty Name="IdTypeSocialMediaFK" ColumnName="IdTypeSocialMediaFK" />
+                <ScalarProperty Name="IdProfileFK" ColumnName="IdProfileFK" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StateLobbies">
             <EntityTypeMapping TypeName="BackgammonModel.StateLobby">
               <MappingFragment StoreEntitySet="StateLobby">
-                <ScalarProperty Name="stateLobby1" ColumnName="stateLobby" />
-                <ScalarProperty Name="idStateLobbyPK" ColumnName="idStateLobbyPK" />
+                <ScalarProperty Name="IdStateLobbyPK" ColumnName="IdStateLobbyPK" />
+                <ScalarProperty Name="StateLobby1" ColumnName="StateLobby" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TypeSocialMedias">
             <EntityTypeMapping TypeName="BackgammonModel.TypeSocialMedia">
               <MappingFragment StoreEntitySet="TypeSocialMedia">
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="idTypeSocialMediaPK" ColumnName="idTypeSocialMediaPK" />
+                <ScalarProperty Name="IdTypeSocialMediaPK" ColumnName="IdTypeSocialMediaPK" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
