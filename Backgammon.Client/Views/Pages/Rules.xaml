@@ -8,7 +8,7 @@
       xmlns:properties="clr-namespace:Backgammon.Client.Properties" 
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="{x:Static properties:Resources.textBlockRules}">
+      Title="{x:Static properties:Resources.TextBlock_Rules}">
     
     <Page.Resources>
         <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5,0.5" GradientOrigin="0.5,0.35" RadiusX="0.85" RadiusY="0.85">
@@ -40,7 +40,7 @@
             </Grid.RowDefinitions>
 
 
-            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.textBlockRules}" HorizontalAlignment="Center" FontSize="30" Foreground="{StaticResource PinkAccentBrush}" Margin="0,0,0,20">
+            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.TextBlock_Rules}" HorizontalAlignment="Center" FontSize="30" Foreground="{StaticResource PinkAccentBrush}" Margin="0,0,0,20">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#E795EC" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
                 </TextBlock.Effect>
@@ -48,12 +48,12 @@
 
             <Border Grid.Row="1" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Background="{StaticResource ControlBackgroundBrush}" Padding="10">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <TextBlock Text="{x:Static properties:Resources.textBlockRulesContent}" Foreground="{StaticResource CyanAccentBrush}" FontSize="18" TextWrapping="Wrap" TextAlignment="Justify" Margin="20"/>
+                    <TextBlock Text="{x:Static properties:Resources.TextBlock_RulesContent}" Foreground="{StaticResource CyanAccentBrush}" FontSize="18" TextWrapping="Wrap" TextAlignment="Justify" Margin="20"/>
                 </ScrollViewer>
 
             </Border>
 
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.buttonBack}" Style="{StaticResource RulesButtonStyle}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_Back}" Style="{StaticResource RulesButtonStyle}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
 
         </Grid>
 

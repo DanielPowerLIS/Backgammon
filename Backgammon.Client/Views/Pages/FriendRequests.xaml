@@ -7,7 +7,7 @@
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="{x:Static properties:Resources.FriendRequests}">
+      Title="{x:Static properties:Resources.TextBlock_FriendRequests}">
     
     <Page.Resources>
         <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5, 0.5" GradientOrigin="0.5, 0.35" RadiusX="0.85" RadiusY="0.85">
@@ -37,7 +37,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.FriendRequests}" HorizontalAlignment="Center" FontSize="30" Margin="0,15,0,20" Foreground="{StaticResource PinkAccentBrush}">
+            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.TextBlock_FriendRequests}" HorizontalAlignment="Center" FontSize="30" Margin="0,15,0,20" Foreground="{StaticResource PinkAccentBrush}">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#E795EC" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
                 </TextBlock.Effect>
@@ -65,15 +65,15 @@
                                 </Grid.ColumnDefinitions>
                                 <Ellipse Grid.Column="0" Width="40" Height="40" Fill="#3D7EA6" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="1" Text="Something" VerticalAlignment="Center" FontSize="18" Foreground="{StaticResource CyanAccentBrush}"/>
-                                <Button Grid.Column="2" Content="{x:Static properties:Resources.buttonAccept}" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FriendRequestButtonStyle}"/>
-                                <Button Grid.Column="3" Content="{x:Static properties:Resources.buttonReject}" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FriendRequestButtonStyle}"/>
+                                <Button Grid.Column="2" Content="{x:Static properties:Resources.Button_Accept}" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FriendRequestButtonStyle}"/>
+                                <Button Grid.Column="3" Content="{x:Static properties:Resources.Button_Reject}" Width="100" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FriendRequestButtonStyle}"/>
 
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </Border>
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.buttonBack}" Style ="{StaticResource FriendRequestButtonStyle}" Width="100" Height="35" HorizontalAlignment="Right"  Margin="0,15,20,10"/>
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_Back}" Style ="{StaticResource FriendRequestButtonStyle}" Width="100" Height="35" HorizontalAlignment="Right"  Margin="0,15,20,10"/>
 
         </Grid>
     </Grid>

@@ -174,7 +174,7 @@
                             FontSize="24"
                             FontWeight="Bold"
                             Foreground="#202020"
-                            Text="{x:Static properties:Resources.VerificationCode}" />
+                            Text="{x:Static properties:Resources.TextBlock_VerificationCode}" />
 
                         <TextBlock
                             Grid.Row="1"
@@ -184,7 +184,7 @@
                             FontFamily="Segoe UI"
                             FontSize="14"
                             Foreground="#7D88A5"
-                            Text="{x:Static properties:Resources.VerificationCodeInstruction}"
+                            Text="{x:Static properties:Resources.TextBlock_VerificationCodeInstruction}"
                             TextAlignment="Center"
                             TextWrapping="Wrap" />
 
@@ -223,7 +223,7 @@
                             x:Name="buttonVerifyCode"
                             Grid.Row="3"
                             Margin="0,34,0,0"
-                            Content="{x:Static properties:Resources.buttonVerifyCode}"
+                            Content="{x:Static properties:Resources.Button_VerifyCode}"
                             Style="{StaticResource VerifyCodeButtonStyle}" />
 
                         <StackPanel
@@ -237,11 +237,11 @@
                                 FontFamily="Segoe UI"
                                 FontSize="12"
                                 Foreground="#7D88A5"
-                                Text="{x:Static properties:Resources.DidNotReceiveCode}" />
+                                Text="{x:Static properties:Resources.TextBlock_DidNotReceiveCode}" />
 
                             <Button
                                 x:Name="buttonResend"
-                                Content="{x:Static properties:Resources.buttonResend}"
+                                Content="{x:Static properties:Resources.Button_Resend}"
                                 Style="{StaticResource ResendButtonStyle}" />
                         </StackPanel>
                     </Grid>

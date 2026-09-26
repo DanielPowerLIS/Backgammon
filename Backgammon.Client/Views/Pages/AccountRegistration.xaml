@@ -7,7 +7,7 @@
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="900"
-      Title="{x:Static properties:Resources.AccountRegistration}">
+      Title="{x:Static properties:Resources.TextBlock_AccountRegistration}">
 
     <Page.Resources>
         <RadialGradientBrush
@@ -275,7 +275,7 @@
 
                         <TextBlock
                             Grid.Row="0"
-                            Text="{x:Static properties:Resources.CreateAnAccount}"
+                            Text="{x:Static properties:Resources.TextBlock_CreateAnAccount}"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Foreground="#191919"
@@ -287,13 +287,13 @@
                         <TextBox
                             x:Name="textBoxEmail"
                             Grid.Row="2"
-                            Tag="{x:Static properties:Resources.EmailAddress}"
+                            Tag="{x:Static properties:Resources.TextBox_EmailAddress}"
                             Style="{StaticResource RegistrationTextBoxStyle}" />
 
                         <TextBox
                             x:Name="textBoxFirstName"
                             Grid.Row="4"
-                            Tag="{x:Static properties:Resources.textBoxFirstName}"
+                            Tag="{x:Static properties:Resources.TextBox_FirstName}"
                             Style="{StaticResource RegistrationTextBoxStyle}" />
 
                         <Grid Grid.Row="6">
@@ -306,20 +306,20 @@
                             <TextBox
                                 x:Name="textBoxPaternalLastName"
                                 Grid.Column="0"
-                                Tag="{x:Static properties:Resources.textBoxPaternalLastName}"
+                                Tag="{x:Static properties:Resources.TextBox_PaternalLastName}"
                                 Style="{StaticResource RegistrationTextBoxStyle}" />
 
                             <TextBox
                                 x:Name="textBoxMaternalLastName"
                                 Grid.Column="2"
-                                Tag="{x:Static properties:Resources.textBoxMaternalLastName}"
+                                Tag="{x:Static properties:Resources.TextBox_MaternalLastName}"
                                 Style="{StaticResource RegistrationTextBoxStyle}" />
                         </Grid>
 
                         <TextBox
                             x:Name="textBoxUsername"
                             Grid.Row="8"
-                            Tag="{x:Static properties:Resources.Username}"
+                            Tag="{x:Static properties:Resources.TextBox_Username}"
                             Style="{StaticResource RegistrationTextBoxStyle}" />
 
                         <Grid Grid.Row="10">
@@ -334,14 +334,14 @@
                                 VerticalAlignment="Center"
                                 Foreground="#7D7D7D"
                                 IsHitTestVisible="False"
-                                Text="{x:Static properties:Resources.Password}" />
+                                Text="{x:Static properties:Resources.PasswordBox_Password}" />
 
                            
                         </Grid>
                         <Button
                              x:Name="buttonCreateAccount"
                              Grid.Row="12"
-                             Content="{x:Static properties:Resources.buttonCreateAccount}"
+                             Content="{x:Static properties:Resources.Button_CreateAccount}"
                              Style="{StaticResource CreateAccountButtonStyle}" />
 
                         <StackPanel
@@ -356,12 +356,12 @@
                                 Foreground="#7D8494"
                                 FontFamily="Segoe UI"
                                 FontSize="12"
-                                Text="{x:Static properties:Resources.textBlockAlreadyHaveAccount}" />
+                                Text="{x:Static properties:Resources.TextBlock_AlreadyHaveAccount}" />
 
                             <Button
                                 x:Name="buttonSignIn"
                                 Margin="6,0,0,0"
-                                Content="{x:Static properties:Resources.SignIn}"
+                                Content="{x:Static properties:Resources.Button_SignIn}"
                                 Style="{StaticResource SignInLinkButtonStyle}" />
                         </StackPanel>
                     </Grid>

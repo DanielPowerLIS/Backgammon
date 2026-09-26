@@ -7,7 +7,7 @@
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="900"
-      Title="{x:Static properties:Resources.Home}">
+      Title="{x:Static properties:Resources.TextBlock_Home}">
 
     <Page.Resources>
         <RadialGradientBrush
@@ -107,7 +107,7 @@
                 </TextBlock>
 
                 <Button
-                    Content="{x:Static properties:Resources.SignIn}"
+                    Content="{x:Static properties:Resources.Button_SignIn}"
                     Style="{StaticResource HomeButtonStyle}"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
@@ -116,7 +116,7 @@
                     Height="72"/>
 
                 <Button
-                    Content="{x:Static properties:Resources.buttonGuest}"
+                    Content="{x:Static properties:Resources.Button_Guest}"
                     Style="{StaticResource HomeButtonStyle}"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
