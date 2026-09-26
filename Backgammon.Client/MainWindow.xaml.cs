@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Backgammon.Client.Utils;
 
 using Backgammon.Client.Views.Dialog;
+using Backgammon.Client.Views.Game;
 
 namespace Backgammon.Client
 {
@@ -24,7 +25,7 @@ namespace Backgammon.Client
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Leaderboard());
+            MainFrame.Navigate(new GamePage());
             //Loaded += MainWindow_Loaded;
         }
 
