@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Backgammon.Client.Views.Pages"
         xmlns:properties="clr-namespace:Backgammon.Client.Properties"
         mc:Ignorable="d"
-        Title="{x:Static properties:Resources.Settings}" Height="450" Width="800" FontSize="50">
+        Title="{x:Static properties:Resources.TextBlock_Button_Settings}" Height="450" Width="800" FontSize="50">
 
     <Page.Resources>
         <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5,0.5" GradientOrigin="0.5,0.35" RadiusX="0.85" RadiusY="0.85">
@@ -37,7 +37,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.Settings}" HorizontalAlignment="Center" FontSize="30" Foreground="{StaticResource PinkAccentBrush}" Margin="0,0,0,20">
+            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.TextBlock_Button_Settings}" HorizontalAlignment="Center" FontSize="30" Foreground="{StaticResource PinkAccentBrush}" Margin="0,0,0,20">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#E795EC" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
                 </TextBlock.Effect>
@@ -45,13 +45,13 @@
 
             <Border Grid.Row="1" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Background="{StaticResource ControlBackgroundBrush}" Padding="20">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Button Content="{x:Static properties:Resources.buttonAcount}" Style="{StaticResource SettingsButtonStyle}" MinWidth="150" MinHeight="40" Margin="0,0,0,15"/>
-                    <Button Content="{x:Static properties:Resources.Language}" Style="{StaticResource SettingsButtonStyle}" MinWidth="150" MinHeight="40" Margin="0,0,0,15"/>
-                    <Button Content="{x:Static properties:Resources.textBlockChangePassword}" Style="{StaticResource SettingsButtonStyle}" MinWidth="180" MinHeight="40"/>
+                    <Button Content="{x:Static properties:Resources.TextBlock_Button_Account}" Style="{StaticResource SettingsButtonStyle}" MinWidth="150" MinHeight="40" Margin="0,0,0,15"/>
+                    <Button Content="{x:Static properties:Resources.TextBlock_Button_Language}" Style="{StaticResource SettingsButtonStyle}" MinWidth="150" MinHeight="40" Margin="0,0,0,15"/>
+                    <Button Content="{x:Static properties:Resources.TextBlock_Button_ChangePassword}" Style="{StaticResource SettingsButtonStyle}" MinWidth="180" MinHeight="40"/>
                 </StackPanel>
             </Border>
 
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.buttonBack}" Style="{StaticResource SettingsButtonStyle}" Foreground="{StaticResource PinkAccentBrush}" MinWidth="100"  MinHeight="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_Back}" Style="{StaticResource SettingsButtonStyle}" Foreground="{StaticResource PinkAccentBrush}" MinWidth="100"  MinHeight="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
         </Grid>
 
     </Grid>

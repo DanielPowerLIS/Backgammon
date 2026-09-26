@@ -7,7 +7,7 @@
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="{x:Static properties:Resources.Friends}"
+      Title="{x:Static properties:Resources.TextBlock_Button_Friends}"
       Background="White">
     
     <Page.Resources>
@@ -39,7 +39,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.Friends}" HorizontalAlignment="Center" FontSize="30" Margin="0,0,0,15" Foreground="{StaticResource PinkAccentBrush}" >
+            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.TextBlock_Button_Friends}" HorizontalAlignment="Center" FontSize="30" Margin="0,0,0,15" Foreground="{StaticResource PinkAccentBrush}" >
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#E795EC" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
                 </TextBlock.Effect>
@@ -47,12 +47,12 @@
             
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,15">
                 <Button Style="{StaticResource FriendButtonStyle}" MinWidth="130" MinHeight="35" Margin="0,0,10,0" >
-                    <TextBlock Text="{x:Static properties:Resources.FriendRequests}"
+                    <TextBlock Text="{x:Static properties:Resources.TextBlock_FriendRequests}"
                     TextWrapping="Wrap"
                     TextAlignment="Center"/>
                 </Button>
                 <Button Style="{StaticResource FriendButtonStyle}" MinWidth="130" MinHeight="35" Margin="0,0,0,0">
-                    <TextBlock Text="{x:Static properties:Resources.textBlockAddFriend}"
+                    <TextBlock Text="{x:Static properties:Resources.TextBlock_Button_AddFriend}"
                    TextWrapping="Wrap"
                    TextAlignment="Center"/>
                 </Button>
@@ -80,8 +80,8 @@
                                 <Ellipse Grid.Column="0" Width="40" Height="40" Fill="#3d7ea6"/>
                                 <TextBlock Foreground="{StaticResource CyanAccentBrush}" Grid.Column="1" Text="Something" VerticalAlignment="Center" FontSize="16"/>
                                 <Ellipse Grid.Column="2" Width="20" Height="20" Fill="Green" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <Button Style="{StaticResource FriendButtonStyle}" Grid.Column="3" Content="{x:Static properties:Resources.buttonViewProfile}" Width="100" Height="30"/>
-                                <Button Style="{StaticResource FriendButtonStyle}" Grid.Column="4" Content="{x:Static properties:Resources.buttonRemove}" Width="100" Height="30"/>
+                                <Button Style="{StaticResource FriendButtonStyle}" Grid.Column="3" Content="{x:Static properties:Resources.Button_ViewProfile}" Width="100" Height="30"/>
+                                <Button Style="{StaticResource FriendButtonStyle}" Grid.Column="4" Content="{x:Static properties:Resources.Button_Remove}" Width="100" Height="30"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -89,7 +89,7 @@
                 </ListView>
 
             </Border>
-            <Button Style="{StaticResource FriendButtonStyle}" Grid.Row="3" Content="{x:Static properties:Resources.buttonBack}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
+            <Button Style="{StaticResource FriendButtonStyle}" Grid.Row="3" Content="{x:Static properties:Resources.Button_Back}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
         </Grid>
     </Grid>
 </Page>

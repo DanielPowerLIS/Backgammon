@@ -7,7 +7,7 @@
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="{x:Static properties:Resources.Language}">
+      Title="{x:Static properties:Resources.TextBlock_Button_Language}">
     
     <Page.Resources>
         <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5, 0.5" GradientOrigin="0.5, 0.35" RadiusX="0.85" RadiusY="0.85">
@@ -36,8 +36,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
-            <TextBlock Foreground="{StaticResource PinkAccentBrush}"  Grid.Row="0" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="{x:Static properties:Resources.Language}" VerticalAlignment="Top" FontSize="30">
+
+            <TextBlock Foreground="{StaticResource PinkAccentBrush}"  Grid.Row="0" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Button_Language}" VerticalAlignment="Top" FontSize="30">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#E795EC"
                                       BlurRadius="3"
@@ -49,11 +49,11 @@
 
             <Border Grid.Row="1" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Background="{StaticResource ControlBackgroundBrush}" Padding="20">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Button Style="{StaticResource LanguageButtonStyle}" Content="{x:Static properties:Resources.buttonSpanish}" Width="180" Height="40" Margin="0,10,0,10" FontSize="14"/>
-                    <Button Style="{StaticResource LanguageButtonStyle}" Content="{x:Static properties:Resources.buttonEnglish}" Width="180" Height="40" Margin="0,10,0,10" FontSize="14"/>
+                    <Button Style="{StaticResource LanguageButtonStyle}" Content="{x:Static properties:Resources.Button_Spanish}" Width="180" Height="40" Margin="0,10,0,10" FontSize="14"/>
+                    <Button Style="{StaticResource LanguageButtonStyle}" Content="{x:Static properties:Resources.Button_English}" Width="180" Height="40" Margin="0,10,0,10" FontSize="14"/>
                 </StackPanel>
             </Border>
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.buttonBack}" Style="{StaticResource LanguageButtonStyle}" Foreground="{StaticResource PinkAccentBrush}"  Width="100" Height="35" Margin="0,15,0,0" FontSize="14" HorizontalAlignment="Right"/>
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_Back}" Style="{StaticResource LanguageButtonStyle}" Foreground="{StaticResource PinkAccentBrush}"  Width="100" Height="35" Margin="0,15,0,0" FontSize="14" HorizontalAlignment="Right"/>
 
 
         </Grid>

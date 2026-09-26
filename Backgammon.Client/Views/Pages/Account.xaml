@@ -7,7 +7,7 @@
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="{x:Static properties:Resources.buttonAcount}"
+      Title="{x:Static properties:Resources.TextBlock_Button_Account}"
       Background="White">
 
     <Page.Resources>
@@ -41,7 +41,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.buttonAcount}" FontSize="30" Foreground="{StaticResource PinkAccentBrush}" HorizontalAlignment="Center"
+            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.TextBlock_Button_Account}" FontSize="30" Foreground="{StaticResource PinkAccentBrush}" HorizontalAlignment="Center"
                        Margin="0,0,0,20">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#E795EC" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
@@ -61,11 +61,11 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static properties:Resources.textBlockLinkedEmail}" FontSize="20" Foreground="{StaticResource CyanAccentBrush}"
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static properties:Resources.TextBlock_LinkedEmail}" FontSize="20" Foreground="{StaticResource CyanAccentBrush}"
                                Margin="0,10,20,10" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtEmail" Text="jdaniel070905@gmail.com" FontSize="20" Foreground="{StaticResource PinkAccentBrush}"
                                Margin="0,10,0,10" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.textBlockDateJoined}" FontSize="20" Foreground="{StaticResource CyanAccentBrush}"
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.TextBlock_DateJoined}" FontSize="20" Foreground="{StaticResource CyanAccentBrush}"
                                Margin="0,10,20,10" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtRegistrationDate" Text="08/26/2026" FontSize="20" Foreground="{StaticResource PinkAccentBrush}"
                                Margin="0,10,0,10" VerticalAlignment="Center"/>
@@ -74,7 +74,7 @@
 
             </Border>
 
-            <Button Grid.Row="2"  Content="{x:Static properties:Resources.buttonBack}" Style="{StaticResource AccountButtonStyle}" Width="100" Height="35"
+            <Button Grid.Row="2"  Content="{x:Static properties:Resources.Button_Back}" Style="{StaticResource AccountButtonStyle}" Width="100" Height="35"
                     HorizontalAlignment="Right" Margin="0,15,0,0"/>
         </Grid>
 

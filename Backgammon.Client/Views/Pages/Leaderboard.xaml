@@ -8,7 +8,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450"
       d:DesignWidth="800"
-      Title="{x:Static properties:Resources.Leaderboard}">
+      Title="{x:Static properties:Resources.TextBlock_Button_Leaderboard}">
 
     <Page.Resources>
 
@@ -39,7 +39,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.Leaderboard}" HorizontalAlignment="Center" FontSize="30" Foreground="{StaticResource PinkAccentBrush}" Margin="0,0,0,20">
+            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.TextBlock_Button_Leaderboard}" HorizontalAlignment="Center" FontSize="30" Foreground="{StaticResource PinkAccentBrush}" Margin="0,0,0,20">
 
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#E795EC" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
@@ -83,7 +83,7 @@
 
                                 <StackPanel Grid.Column="2"
                                 HorizontalAlignment="Center">
-                                    <TextBlock Text="{x:Static properties:Resources.textBlockWins}"
+                                    <TextBlock Text="{x:Static properties:Resources.TextBlock_Wins}"
                                    FontSize="14"
                                    Foreground="{StaticResource PinkAccentBrush}"
                                    HorizontalAlignment="Center"/>
@@ -96,7 +96,7 @@
 
                                 <StackPanel Grid.Column="3"
                                 HorizontalAlignment="Center">
-                                    <TextBlock Text="{x:Static properties:Resources.textBlockPoints}"
+                                    <TextBlock Text="{x:Static properties:Resources.TextBlock_Points}"
                                    FontSize="14"
                                    Foreground="{StaticResource PinkAccentBrush}"
                                    HorizontalAlignment="Center"/>
@@ -114,7 +114,7 @@
                 </ListBox>
             </Border>
 
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.buttonBack}" Style="{StaticResource LeaderboardButtonStyle}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_Back}" Style="{StaticResource LeaderboardButtonStyle}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
         </Grid>
 
     </Grid>

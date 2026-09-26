@@ -7,7 +7,7 @@
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="900"
-      Title="{x:Static properties:Resources.Login}">
+      Title="{x:Static properties:Resources.TextBlock_Login}">
 
     <Page.Resources>
         <RadialGradientBrush
@@ -270,7 +270,7 @@
 
                         <TextBlock
                             Grid.Row="0"
-                            Text="{x:Static properties:Resources.Login}"
+                            Text="{x:Static properties:Resources.TextBlock_Login}"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontFamily="Segoe UI"
@@ -282,7 +282,7 @@
                             x:Name="textBoxUsernameOrEmail"
                             Grid.Row="2"
                             Height="54"
-                            Tag="{x:Static properties:Resources.UsernameOrEmail}"
+                            Tag="{x:Static properties:Resources.TextBox_UsernameOrEmail}"
                             Style="{StaticResource LoginTextBoxStyle}" />
 
                         <Grid
@@ -296,7 +296,7 @@
 
                             <TextBlock
                                 x:Name="textBlockPasswordPlaceholder"
-                                Text="{x:Static properties:Resources.Password}"
+                                Text="{x:Static properties:Resources.PasswordBox_Password}"
                                 Margin="16,0,0,0"
                                 VerticalAlignment="Center"
                                 Foreground="#7D7D7D"
@@ -309,7 +309,7 @@
                             x:Name="buttonSignIn"
                             Grid.Row="6"
                             Height="54"
-                            Content="{x:Static properties:Resources.SignIn}"
+                            Content="{x:Static properties:Resources.Button_SignIn}"
                             Style="{StaticResource SignInButtonStyle}" />
 
                         <StackPanel
@@ -318,7 +318,7 @@
                             Orientation="Horizontal">
 
                             <TextBlock
-                                Text="{x:Static properties:Resources.DoNotHaveAnAccount}"
+                                Text="{x:Static properties:Resources.TextBlock_DoNotHaveAnAccount}"
                                 VerticalAlignment="Center"
                                 FontFamily="Segoe UI"
                                 FontSize="12"
@@ -326,7 +326,7 @@
 
                             <Button
                                 x:Name="buttonSignUp"
-                                Content="{x:Static properties:Resources.buttonSignUp}"
+                                Content="{x:Static properties:Resources.Button_SignUp}"
                                 Margin="8,0,0,0"
                                 Style="{StaticResource SignUpLinkButtonStyle}" />
                         </StackPanel>

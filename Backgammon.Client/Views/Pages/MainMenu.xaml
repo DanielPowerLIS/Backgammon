@@ -7,7 +7,7 @@
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="{x:Static properties:Resources.MainMenu}">
+      Title="{x:Static properties:Resources.TextBlock_MainMenu}">
     <Page.Resources>
 
         <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5,0.5" GradientOrigin="0.5,0.35" RadiusX="0.85" RadiusY="0.85">
@@ -49,14 +49,14 @@
             </TextBlock>
 
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Content="{x:Static properties:Resources.buttonPlay}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
-                <Button Content="{x:Static properties:Resources.Leaderboard}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
-                <Button Content="{x:Static properties:Resources.Profile}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
-                <Button Content="{x:Static properties:Resources.Friends}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
-                <Button Content="{x:Static properties:Resources.Settings}" Style="{StaticResource MainMenuButtonStyle}"/>
+                <Button Content="{x:Static properties:Resources.Button_Play}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
+                <Button Content="{x:Static properties:Resources.TextBlock_Button_Leaderboard}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
+                <Button Content="{x:Static properties:Resources.TextBlock_Button_Profile}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
+                <Button Content="{x:Static properties:Resources.TextBlock_Button_Friends}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
+                <Button Content="{x:Static properties:Resources.TextBlock_Button_Settings}" Style="{StaticResource MainMenuButtonStyle}"/>
             </StackPanel>
-            
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.buttonSignOut}" Style="{StaticResource MainMenuButtonStyle}" MinWidth="100" HorizontalAlignment="Left" Margin="0,15,0,0"/>
+
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_SignOut}" Style="{StaticResource MainMenuButtonStyle}" MinWidth="100" HorizontalAlignment="Left" Margin="0,15,0,0"/>
 
         </Grid>
 
