@@ -709,6 +709,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Por favor no deje ningún campo marcado como obligatorio vacío..
+        /// </summary>
+        public static string TextBlock_RequiredFieldsMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_RequiredFieldsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Campos obligatorios.
+        /// </summary>
+        public static string TextBlock_RequiredFieldsTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_RequiredFieldsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reglas.
         /// </summary>
         public static string TextBlock_Rules {
