@@ -121,6 +121,8 @@
     <Compile Include="Data\TypeSocialMedia.cs">
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\ProfileRepository.cs" />
+    <Compile Include="Services\LeaderboardService.cs" />
     <Compile Include="Utils\AlerType.cs" />
     <Compile Include="Views\Dialog\AlertDialog.xaml.cs">
       <DependentUpon>AlertDialog.xaml</DependentUpon>
@@ -146,8 +148,8 @@
     <Compile Include="Views\Pages\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\Profile.xaml.cs">
-      <DependentUpon>Profile.xaml</DependentUpon>
+    <Compile Include="Views\Pages\PlayerProfile.xaml.cs">
+      <DependentUpon>PlayerProfile.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\Room.xaml.cs">
       <DependentUpon>Room.xaml</DependentUpon>
@@ -227,7 +229,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\Profile.xaml">
+    <Page Include="Views\Pages\PlayerProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -289,9 +291,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-	  <None Include="DBSecrets.config" >
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
+    <None Include="DBSecrets.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -15,12 +15,9 @@ using System.Windows.Shapes;
 
 namespace Backgammon.Client.Views.Pages
 {
-    /// <summary>
-    /// Lógica de interacción para Profile.xaml
-    /// </summary>
-    public partial class Profile : Page
+    public partial class PlayerProfile : Page
     {
-        public Profile()
+        public PlayerProfile()
         {
             InitializeComponent();
         }
