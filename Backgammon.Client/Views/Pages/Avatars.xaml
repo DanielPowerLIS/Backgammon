@@ -1,0 +1,256 @@
+﻿<Page x:Class="Backgammon.Client.Views.Pages.Avatars"
+      x:Name="AvatarPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:properties="clr-namespace:Backgammon.Client.Properties"
+      Title="{x:Static properties:Resources.TextBlock_SelectAvatarTitle}">
+
+    <Page.Resources>
+        <RadialGradientBrush
+            x:Key="PageBackgroundBrush"
+            Center="0.5,0.5"
+            GradientOrigin="0.5,0.35"
+            RadiusX="0.85"
+            RadiusY="0.85">
+
+            <GradientStop Color="#171C2B" Offset="0" />
+            <GradientStop Color="#0C1220" Offset="0.55" />
+            <GradientStop Color="#050914" Offset="1" />
+        </RadialGradientBrush>
+
+        <SolidColorBrush
+            x:Key="CyanAccentBrush"
+            Color="#00C9F2" />
+
+        <SolidColorBrush
+            x:Key="PinkAccentBrush"
+            Color="#E795EC" />
+
+        <Style
+            x:Key="AvatarItemStyle"
+            TargetType="ListBoxItem">
+
+            <Setter Property="Margin" Value="6" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Grid Width="160" Height="160">
+
+                            <Ellipse
+                                x:Name="AvatarBorder"
+                                Margin="4"
+                                Fill="#080D1A"
+                                Stroke="{StaticResource CyanAccentBrush}"
+                                StrokeThickness="2" />
+
+                            <Ellipse Margin="16">
+                                <Ellipse.Fill>
+                                    <ImageBrush
+                                        ImageSource="{Binding Image}"
+                                        Stretch="Uniform" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <Ellipse
+                                x:Name="SelectionIndicator"
+                                Width="32"
+                                Height="32"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Fill="#080D1A"
+                                Stroke="#2DC653"
+                                StrokeThickness="5"
+                                Visibility="Collapsed" />
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter
+                                    TargetName="SelectionIndicator"
+                                    Property="Visibility"
+                                    Value="Visible" />
+                            </Trigger>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter
+                                    TargetName="AvatarBorder"
+                                    Property="StrokeThickness"
+                                    Value="3" />
+                            </Trigger>
+
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter
+                                    TargetName="AvatarBorder"
+                                    Property="Stroke"
+                                    Value="{StaticResource PinkAccentBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style
+            x:Key="BackButtonStyle"
+            TargetType="Button">
+
+            <Setter Property="Background" Value="#080D1A" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource PinkAccentBrush}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource CyanAccentBrush}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Padding" Value="12,5" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="ButtonBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            CornerRadius="6">
+
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter
+                                    TargetName="ButtonBorder"
+                                    Property="Background"
+                                    Value="#173044" />
+                            </Trigger>
+
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter
+                                    TargetName="ButtonBorder"
+                                    Property="BorderBrush"
+                                    Value="{StaticResource PinkAccentBrush}" />
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter
+                                    TargetName="ButtonBorder"
+                                    Property="Background"
+                                    Value="#22465A" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource PageBackgroundBrush}">
+        <Viewbox Stretch="Uniform">
+            <Grid Width="960" Height="540">
+
+                <Border
+                    Margin="28"
+                    Padding="16"
+                    BorderBrush="{StaticResource CyanAccentBrush}"
+                    BorderThickness="2"
+                    CornerRadius="64">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Text="{x:Static properties:Resources.TextBlock_SelectAvatarTitle}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="Segoe UI"
+                            FontSize="28"
+                            FontWeight="SemiBold"
+                            Foreground="{StaticResource CyanAccentBrush}" />
+
+                        <Grid Grid.Row="1">
+                            <ListBox
+                                x:Name="listBoxAvatars"
+                                Width="560"
+                                HorizontalAlignment="Center"
+                                ItemsSource="{Binding AvailableAvatars,
+                                    ElementName=AvatarPage}"
+                                SelectedValuePath="Id"
+                                SelectionMode="Single"
+                                ItemContainerStyle="{StaticResource AvatarItemStyle}"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="0"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                ScrollViewer.CanContentScroll="False">
+
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="3" />
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+
+                            <TextBlock
+                                Text="{x:Static properties:Resources.TextBlock_NoAvatarsAvailableMessage}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe UI"
+                                FontSize="20"
+                                Foreground="{StaticResource PinkAccentBrush}"
+                                TextAlignment="Center"
+                                IsHitTestVisible="False">
+
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter
+                                            Property="Visibility"
+                                            Value="Collapsed" />
+
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding HasItems,
+                                                    ElementName=listBoxAvatars}"
+                                                Value="False">
+
+                                                <Setter
+                                                    Property="Visibility"
+                                                    Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+
+                        <Button
+                            x:Name="buttonBack"
+                            Grid.Row="2"
+                            Width="120"
+                            Height="44"
+                            Margin="12,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="{x:Static properties:Resources.Button_Back}"
+                            Style="{StaticResource BackButtonStyle}"
+                            Click="OnBackClick" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </Viewbox>
+    </Grid>
+</Page>

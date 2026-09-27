@@ -464,4 +464,19 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_LoginConnectionErrorMessage" xml:space="preserve">
     <value>An error occurred while signing in. Please try again later.</value>
   </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Button_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TextBlock_SignOutConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to sign out?</value>
+  </data>
+  <data name="TextBlock_SelectAvatarTitle" xml:space="preserve">
+    <value>Select an avatar</value>
+  </data>
+  <data name="TextBlock_NoAvatarsAvailableMessage" xml:space="preserve">
+    <value>Aún no hay avatares disponibles.</value>
+  </data>
 </root>
