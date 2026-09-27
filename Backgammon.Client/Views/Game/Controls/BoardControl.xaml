@@ -1,17 +1,135 @@
 ﻿<UserControl x:Class="Backgammon.Client.Views.Game.Controls.BoardControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Backgammon.Client.Views.Game.Controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="500"
-             xmlns:controls="clr-namespace:Backgammon.Client.Views.Game.Controls">
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:Backgammon.Client.Views.Game.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="500"
+             d:DesignWidth="820">
 
-    <Canvas x:Name="BoardCanvas" Background="#050914">
-        <Polygon Points="50,30,100, 30 75, 220" Stroke="#00C9F2" StrokeThickness="2"/>
-        <Polygon Points="110, 30 160, 30 135, 220" Stroke="#E795EC" StrokeThickness="2"/>
-        <controls:CheckerControl x:Name="TestChecker" Canvas.Left="55" Canvas.Top="70"/>
-    </Canvas>
-    
+    <Viewbox Stretch="Uniform">
+        <Border BorderBrush="#00C9F2"
+        BorderThickness="2"
+        CornerRadius="8"
+        Padding="10"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+
+            <Canvas x:Name="BoardCanvas"
+            Width="780"
+            Height="450"
+            Background="#171C2B">
+
+                <Polygon Points="40,30 90,30 65,185"
+                 Stroke="#00C9F2"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="90,30 140,30 115,185"
+                 Stroke="#E795EC"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="140,30 190,30 165,185"
+                 Stroke="#00C9F2"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="190,30 240,30 215,185"
+                 Stroke="#E795EC"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="240,30 290,30 265,185"
+                 Stroke="#00C9F2"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="290,30 340,30 315,185"
+                 Stroke="#E795EC"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="440,30 490,30 465,185"
+                 Stroke="#00C9F2"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="490,30 540,30 515,185"
+                 Stroke="#E795EC"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="540,30 590,30 565,185"
+                 Stroke="#00C9F2"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="590,30 640,30 615,185"
+                 Stroke="#E795EC"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="640,30 690,30 665,185"
+                 Stroke="#00C9F2"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="690,30 740,30 715,185"
+                 Stroke="#E795EC"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="40,420 90,420 65,265"
+                 Stroke="#E795EC"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="90,420 140,420 115,265"
+                 Stroke="#00C9F2"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="140,420 190,420 165,265"
+                 Stroke="#E795EC"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="190,420 240,420 215,265"
+                 Stroke="#00C9F2"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="240,420 290,420 265,265"
+                 Stroke="#E795EC"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="290,420 340,420 315,265"
+                 Stroke="#00C9F2"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="440,420 490,420 465,265"
+                 Stroke="#E795EC"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="490,420 540,420 515,265"
+                 Stroke="#00C9F2"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="540,420 590,420 565,265"
+                 Stroke="#E795EC"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="590,420 640,420 615,265"
+                 Stroke="#00C9F2"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="640,420 690,420 665,265"
+                 Stroke="#E795EC"
+                 StrokeThickness="2"/>
+
+                <Polygon Points="690,420 740,420 715,265"
+                 Stroke="#00C9F2"
+                 StrokeThickness="2"/>
+
+                <Rectangle Canvas.Left="340"
+                   Canvas.Top="30"
+                   Width="100"
+                   Height="390"
+                   Fill="#101522"
+                   Stroke="#00C9F2"
+                   StrokeThickness="3"/>
+
+                <controls:CheckerControl x:Name="TestChecker"
+                                 Canvas.Left="45"
+                                 Canvas.Top="35"/>
+
+            </Canvas>
+        </Border>
+    </Viewbox>
 </UserControl>
