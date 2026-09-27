@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f35935b5a0d4407bbe9a6a0ac0e47c84" Name="Diagram1" ZoomLevel="40">
+      <Diagram DiagramId="f35935b5a0d4407bbe9a6a0ac0e47c84" Name="Diagram1" ZoomLevel="112">
         <EntityTypeShape EntityType="BackgammonModel.Account" Width="1.5" PointX="11.875" PointY="8.75" />
         <EntityTypeShape EntityType="BackgammonModel.AvailableState" Width="1.5" PointX="7.375" PointY="7.375" />
         <EntityTypeShape EntityType="BackgammonModel.Avatar" Width="1.5" PointX="7.375" PointY="4.375" />

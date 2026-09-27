@@ -122,7 +122,10 @@
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Repositories\ProfileRepository.cs" />
+    <Compile Include="Repositories\RegistrationRepository.cs" />
+    <Compile Include="Services\AccountCodeGenerator.cs" />
     <Compile Include="Services\LeaderboardService.cs" />
+    <Compile Include="Services\PasswordHashService.cs" />
     <Compile Include="Utils\AlerType.cs" />
     <Compile Include="Views\Dialog\AccountDialog.xaml.cs">
       <DependentUpon>AccountDialog.xaml</DependentUpon>
