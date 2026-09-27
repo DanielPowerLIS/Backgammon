@@ -506,4 +506,10 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_FriendSearchRequiredMessage" xml:space="preserve">
     <value>Enter an email or player code.</value>
   </data>
+  <data name="TextBlock_PlayerProfileTitle" xml:space="preserve">
+    <value>Player profile</value>
+  </data>
+  <data name="Button_SendFriendRequest" xml:space="preserve">
+    <value>Send request</value>
+  </data>
 </root>

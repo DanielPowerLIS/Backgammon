@@ -250,6 +250,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enviar solicitud.
+        /// </summary>
+        public static string Button_SendFriendRequest {
+            get {
+                return ResourceManager.GetString("Button_SendFriendRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Iniciar sesión.
         /// </summary>
         public static string Button_SignIn {
@@ -849,6 +858,15 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_NoRankingsTitle {
             get {
                 return ResourceManager.GetString("TextBlock_NoRankingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Perfil del jugador.
+        /// </summary>
+        public static string TextBlock_PlayerProfileTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_PlayerProfileTitle", resourceCulture);
             }
         }
         
