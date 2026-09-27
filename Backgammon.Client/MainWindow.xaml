@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:Backgammon.Client"
         xmlns:properties="clr-namespace:Backgammon.Client.Properties"
         mc:Ignorable="d"
-        Title="{Binding Content.Title, ElementName=MainFrame}" Height="450" Width="800">
+        ResizeMode="CanResize"
+        Height="700" Width="1200"
+        MinHeight="550" MinWidth="950"
+        Title="{Binding Content.Title, ElementName=MainFrame}" >
     <Grid>
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>
