@@ -121,6 +121,7 @@
     <Compile Include="Data\TypeSocialMedia.cs">
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AvatarOption.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
     <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Repositories\RegistrationRepository.cs" />
@@ -152,6 +153,9 @@
     </Compile>
     <Compile Include="Views\Pages\AccountRegistration.xaml.cs">
       <DependentUpon>AccountRegistration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Avatars.xaml.cs">
+      <DependentUpon>Avatars.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
@@ -212,6 +216,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\AccountRegistration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Avatars.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

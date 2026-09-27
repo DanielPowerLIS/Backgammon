@@ -473,4 +473,10 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_SignOutConfirmationMessage" xml:space="preserve">
     <value>Are you sure you want to sign out?</value>
   </data>
+  <data name="TextBlock_SelectAvatarTitle" xml:space="preserve">
+    <value>Select an avatar</value>
+  </data>
+  <data name="TextBlock_NoAvatarsAvailableMessage" xml:space="preserve">
+    <value>Aún no hay avatares disponibles.</value>
+  </data>
 </root>

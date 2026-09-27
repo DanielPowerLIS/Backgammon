@@ -754,6 +754,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aún no hay avatares disponibles..
+        /// </summary>
+        public static string TextBlock_NoAvatarsAvailableMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_NoAvatarsAvailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Todavía no tienes amigos agregados.
         /// </summary>
         public static string TextBlock_NoFriendsAddedMessage {
@@ -941,6 +950,15 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_RulesErrorTitle {
             get {
                 return ResourceManager.GetString("TextBlock_RulesErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selecciona un avatar.
+        /// </summary>
+        public static string TextBlock_SelectAvatarTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_SelectAvatarTitle", resourceCulture);
             }
         }
         

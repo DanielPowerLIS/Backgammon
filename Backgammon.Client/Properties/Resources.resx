@@ -473,4 +473,10 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_SignOutConfirmationMessage" xml:space="preserve">
     <value>¿Seguro que quieres cerrar sesión?</value>
   </data>
+  <data name="TextBlock_SelectAvatarTitle" xml:space="preserve">
+    <value>Selecciona un avatar</value>
+  </data>
+  <data name="TextBlock_NoAvatarsAvailableMessage" xml:space="preserve">
+    <value>Aún no hay avatares disponibles.</value>
+  </data>
 </root>
