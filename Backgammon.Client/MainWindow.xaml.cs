@@ -25,22 +25,10 @@ namespace Backgammon.Client
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Leaderboard());
-            //Loaded += MainWindow_Loaded;
+            MainFrame.Navigate(new AccountRegistration());
+
+
         }
-
-        //private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    AlertDialog alert = new AlertDialog(
-        //        Properties.Resources.textBlockKickConnectionErrorTitle,
-        //        Properties.Resources.textBlockKickConnectionErrorMessage,
-        //        Properties.Resources.buttonClose,
-        //        AlertType.Error
-        //    );
-
-        //    alert.Owner = this;
-        //    alert.ShowDialog();
-        //}
-
+        
     }
 }

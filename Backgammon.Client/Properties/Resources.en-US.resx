@@ -398,4 +398,10 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_Button_AddFriend" xml:space="preserve">
     <value>Add friend</value>
   </data>
+  <data name="TextBlock_RequiredFieldsTitle" xml:space="preserve">
+    <value>Required fields</value>
+  </data>
+  <data name="TextBlock_RequiredFieldsMessage" xml:space="preserve">
+    <value>Please fill in all required fields.</value>
+  </data>
 </root>

@@ -398,4 +398,10 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_Button_AddFriend" xml:space="preserve">
     <value>Añadir amigo</value>
   </data>
+  <data name="TextBlock_RequiredFieldsTitle" xml:space="preserve">
+    <value>Campos obligatorios</value>
+  </data>
+  <data name="TextBlock_RequiredFieldsMessage" xml:space="preserve">
+    <value>Por favor no deje ningún campo marcado como obligatorio vacío.</value>
+  </data>
 </root>
