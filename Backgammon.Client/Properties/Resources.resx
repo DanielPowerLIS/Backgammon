@@ -494,4 +494,16 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_SocialLinkLimitMessage" xml:space="preserve">
     <value>Solo se permite un enlace por red social.</value>
   </data>
+  <data name="TextBox_FriendEmailOrCode" xml:space="preserve">
+    <value>Correo/Código de jugador</value>
+  </data>
+  <data name="Button_AddFriendByEmail" xml:space="preserve">
+    <value>Agregar por correo</value>
+  </data>
+  <data name="Button_AddFriendByCode" xml:space="preserve">
+    <value>Agregar por código</value>
+  </data>
+  <data name="TextBlock_FriendSearchRequiredMessage" xml:space="preserve">
+    <value>Escribe el correo/código.</value>
+  </data>
 </root>

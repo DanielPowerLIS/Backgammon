@@ -70,6 +70,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agregar por código.
+        /// </summary>
+        public static string Button_AddFriendByCode {
+            get {
+                return ResourceManager.GetString("Button_AddFriendByCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agregar por correo.
+        /// </summary>
+        public static string Button_AddFriendByEmail {
+            get {
+                return ResourceManager.GetString("Button_AddFriendByEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Agregar enlace.
         /// </summary>
         public static string Button_AddLink {
@@ -507,6 +525,15 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_FriendRequests {
             get {
                 return ResourceManager.GetString("TextBlock_FriendRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Escribe el correo/código..
+        /// </summary>
+        public static string TextBlock_FriendSearchRequiredMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_FriendSearchRequiredMessage", resourceCulture);
             }
         }
         
@@ -1121,6 +1148,15 @@ namespace Backgammon.Client.Properties {
         public static string TextBox_FirstName {
             get {
                 return ResourceManager.GetString("TextBox_FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Correo/Código de jugador.
+        /// </summary>
+        public static string TextBox_FriendEmailOrCode {
+            get {
+                return ResourceManager.GetString("TextBox_FriendEmailOrCode", resourceCulture);
             }
         }
         
