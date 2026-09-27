@@ -512,4 +512,16 @@ c) Move four checkers 6 points each.
   <data name="Button_SendFriendRequest" xml:space="preserve">
     <value>Send request</value>
   </data>
+  <data name="TextBlock_AddSocialNetworkTitle" xml:space="preserve">
+    <value>Add social network</value>
+  </data>
+  <data name="TextBlock_SelectSocialNetworkMessage" xml:space="preserve">
+    <value>Select a social network</value>
+  </data>
+  <data name="TextBlock_SocialNetworkAlreadyAdded" xml:space="preserve">
+    <value>Added</value>
+  </data>
+  <data name="TextBlock_NoSocialNetworksAvailableMessage" xml:space="preserve">
+    <value>No social networks are available.</value>
+  </data>
 </root>

@@ -512,4 +512,16 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Button_SendFriendRequest" xml:space="preserve">
     <value>Enviar solicitud</value>
   </data>
+  <data name="TextBlock_AddSocialNetworkTitle" xml:space="preserve">
+    <value>Agregar red social</value>
+  </data>
+  <data name="TextBlock_SelectSocialNetworkMessage" xml:space="preserve">
+    <value>Selecciona una red social</value>
+  </data>
+  <data name="TextBlock_SocialNetworkAlreadyAdded" xml:space="preserve">
+    <value>Agregada</value>
+  </data>
+  <data name="TextBlock_NoSocialNetworksAvailableMessage" xml:space="preserve">
+    <value>No hay redes sociales disponibles.</value>
+  </data>
 </root>

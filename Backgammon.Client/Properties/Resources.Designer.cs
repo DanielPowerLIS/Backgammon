@@ -376,6 +376,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agregar red social.
+        /// </summary>
+        public static string TextBlock_AddSocialNetworkTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_AddSocialNetworkTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ¿Ya tienes una cuenta?.
         /// </summary>
         public static string TextBlock_AlreadyHaveAccount {
@@ -862,6 +871,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No hay redes sociales disponibles..
+        /// </summary>
+        public static string TextBlock_NoSocialNetworksAvailableMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_NoSocialNetworksAvailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Perfil del jugador.
         /// </summary>
         public static string TextBlock_PlayerProfileTitle {
@@ -1035,6 +1053,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Selecciona una red social.
+        /// </summary>
+        public static string TextBlock_SelectSocialNetworkMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_SelectSocialNetworkMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Su mensaje no ha podido ser enviado. Porfavor verifique su conexión e intente de nuevo.
         /// </summary>
         public static string TextBlock_SendMessageErrorMessage {
@@ -1085,6 +1112,15 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_SocialMedia {
             get {
                 return ResourceManager.GetString("TextBlock_SocialMedia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agregada.
+        /// </summary>
+        public static string TextBlock_SocialNetworkAlreadyAdded {
+            get {
+                return ResourceManager.GetString("TextBlock_SocialNetworkAlreadyAdded", resourceCulture);
             }
         }
         

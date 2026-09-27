@@ -122,6 +122,7 @@
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AvatarOption.cs" />
+    <Compile Include="Models\SocialNetworkOption.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
     <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Repositories\RegistrationRepository.cs" />
@@ -151,6 +152,9 @@
     </Compile>
     <Compile Include="Views\Dialog\FriendProfileDialog.xaml.cs">
       <DependentUpon>FriendProfileDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\SelectSocialNetworkDialog.xaml.cs">
+      <DependentUpon>SelectSocialNetworkDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Game\Controls\BoardControl.xaml.cs">
       <DependentUpon>BoardControl.xaml</DependentUpon>
@@ -225,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialog\FriendProfileDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialog\SelectSocialNetworkDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
