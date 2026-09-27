@@ -404,4 +404,40 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_RequiredFieldsMessage" xml:space="preserve">
     <value>Please fill in all required fields.</value>
   </data>
+  <data name="TextBlock_InvalidPasswordTitle" xml:space="preserve">
+    <value>Invalid password</value>
+  </data>
+  <data name="TextBlock_InvalidPasswordMessage" xml:space="preserve">
+    <value>The password must have at least 8 characters and include a special character.</value>
+  </data>
+  <data name="TextBlock_EmailAlreadyUsedTitle" xml:space="preserve">
+    <value>Email already registered</value>
+  </data>
+  <data name="TextBlock_EmailAlreadyUsedMessage" xml:space="preserve">
+    <value>This email is already registered to another account.</value>
+  </data>
+  <data name="TextBlock_RegistrationConnectionErrorTitle" xml:space="preserve">
+    <value>Connection error</value>
+  </data>
+  <data name="TextBlock_RegistrationConnectionErrorMessage" xml:space="preserve">
+    <value>An error occurred during registration. Please try again later.</value>
+  </data>
+  <data name="TextBlock_UsernameAlreadyUsedTitle" xml:space="preserve">
+    <value>Username already registered</value>
+  </data>
+  <data name="TextBlock_UsernameAlreadyUsedMessage" xml:space="preserve">
+    <value>This username is already in use.</value>
+  </data>
+  <data name="TextBlock_RegistrationSuccessTitle" xml:space="preserve">
+    <value>Account created</value>
+  </data>
+  <data name="TextBlock_RegistrationSuccessMessage" xml:space="preserve">
+    <value>The account was registered successfully.</value>
+  </data>
+  <data name="TextBlock_RegistrationSaveErrorTitle" xml:space="preserve">
+    <value>Could not create account</value>
+  </data>
+  <data name="TextBlock_RegistrationSaveErrorMessage" xml:space="preserve">
+    <value>The account could not be saved. Please try again.</value>
+  </data>
 </root>

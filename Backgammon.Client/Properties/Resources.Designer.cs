@@ -439,6 +439,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Este correo ya ha sido registrado en otra cuenta..
+        /// </summary>
+        public static string TextBlock_EmailAlreadyUsedMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_EmailAlreadyUsedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Correo ya registrado.
+        /// </summary>
+        public static string TextBlock_EmailAlreadyUsedTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_EmailAlreadyUsedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Solicitudes de amistad.
         /// </summary>
         public static string TextBlock_FriendRequests {
@@ -471,6 +489,24 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_Home {
             get {
                 return ResourceManager.GetString("TextBlock_Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La contraseña debe contener 8 o más caracteres e incluir algún carácter especial..
+        /// </summary>
+        public static string TextBlock_InvalidPasswordMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_InvalidPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contraseña inválida.
+        /// </summary>
+        public static string TextBlock_InvalidPasswordTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_InvalidPasswordTitle", resourceCulture);
             }
         }
         
@@ -709,6 +745,60 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ocurrió un error al registrarse, por favor intenta nuevamente más tarde..
+        /// </summary>
+        public static string TextBlock_RegistrationConnectionErrorMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_RegistrationConnectionErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error de conexión.
+        /// </summary>
+        public static string TextBlock_RegistrationConnectionErrorTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_RegistrationConnectionErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No fue posible guardar la cuenta. Inténtalo nuevamente..
+        /// </summary>
+        public static string TextBlock_RegistrationSaveErrorMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_RegistrationSaveErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se pudo crear la cuenta.
+        /// </summary>
+        public static string TextBlock_RegistrationSaveErrorTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_RegistrationSaveErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La cuenta se registró correctamente..
+        /// </summary>
+        public static string TextBlock_RegistrationSuccessMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_RegistrationSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cuenta creada.
+        /// </summary>
+        public static string TextBlock_RegistrationSuccessTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_RegistrationSuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Por favor no deje ningún campo marcado como obligatorio vacío..
         /// </summary>
         public static string TextBlock_RequiredFieldsMessage {
@@ -806,6 +896,24 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_SuccessfulKickTitle {
             get {
                 return ResourceManager.GetString("TextBlock_SuccessfulKickTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El nombre de usuario ya está en uso..
+        /// </summary>
+        public static string TextBlock_UsernameAlreadyUsedMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_UsernameAlreadyUsedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nombre de usuario ya registrado.
+        /// </summary>
+        public static string TextBlock_UsernameAlreadyUsedTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_UsernameAlreadyUsedTitle", resourceCulture);
             }
         }
         

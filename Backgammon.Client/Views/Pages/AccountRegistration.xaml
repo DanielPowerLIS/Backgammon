@@ -344,7 +344,8 @@
                              x:Name="buttonCreateAccount"
                              Grid.Row="12"
                              Content="{x:Static properties:Resources.Button_CreateAccount}"
-                             Style="{StaticResource CreateAccountButtonStyle}" />
+                             Style="{StaticResource CreateAccountButtonStyle}"
+                             Click="OnCreateAccountClick"/>
 
                         <StackPanel
                             Grid.Row="14"

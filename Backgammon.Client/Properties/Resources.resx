@@ -404,4 +404,40 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_RequiredFieldsMessage" xml:space="preserve">
     <value>Por favor no deje ningún campo marcado como obligatorio vacío.</value>
   </data>
+  <data name="TextBlock_InvalidPasswordTitle" xml:space="preserve">
+    <value>Contraseña inválida</value>
+  </data>
+  <data name="TextBlock_InvalidPasswordMessage" xml:space="preserve">
+    <value>La contraseña debe contener 8 o más caracteres e incluir algún carácter especial.</value>
+  </data>
+  <data name="TextBlock_EmailAlreadyUsedTitle" xml:space="preserve">
+    <value>Correo ya registrado</value>
+  </data>
+  <data name="TextBlock_EmailAlreadyUsedMessage" xml:space="preserve">
+    <value>Este correo ya ha sido registrado en otra cuenta.</value>
+  </data>
+  <data name="TextBlock_RegistrationConnectionErrorTitle" xml:space="preserve">
+    <value>Error de conexión</value>
+  </data>
+  <data name="TextBlock_RegistrationConnectionErrorMessage" xml:space="preserve">
+    <value>Ocurrió un error al registrarse, por favor intenta nuevamente más tarde.</value>
+  </data>
+  <data name="TextBlock_UsernameAlreadyUsedTitle" xml:space="preserve">
+    <value>Nombre de usuario ya registrado</value>
+  </data>
+  <data name="TextBlock_UsernameAlreadyUsedMessage" xml:space="preserve">
+    <value>El nombre de usuario ya está en uso.</value>
+  </data>
+  <data name="TextBlock_RegistrationSuccessTitle" xml:space="preserve">
+    <value>Cuenta creada</value>
+  </data>
+  <data name="TextBlock_RegistrationSuccessMessage" xml:space="preserve">
+    <value>La cuenta se registró correctamente.</value>
+  </data>
+  <data name="TextBlock_RegistrationSaveErrorTitle" xml:space="preserve">
+    <value>No se pudo crear la cuenta</value>
+  </data>
+  <data name="TextBlock_RegistrationSaveErrorMessage" xml:space="preserve">
+    <value>No fue posible guardar la cuenta. Inténtalo nuevamente.</value>
+  </data>
 </root>

@@ -10,7 +10,7 @@
             <PropertyRef Name="IdAccountPK" />
           </Key>
           <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="LastModified" Type="datetime" />
           <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
           <Property Name="AccountCode" Type="nchar" MaxLength="8" />
@@ -500,7 +500,7 @@
             <PropertyRef Name="IdAccountPK" />
           </Key>
           <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastModified" Type="DateTime" Precision="3" />
           <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="AccountCode" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
