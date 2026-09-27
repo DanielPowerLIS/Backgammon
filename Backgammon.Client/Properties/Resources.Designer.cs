@@ -88,11 +88,29 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancelar.
+        /// </summary>
+        public static string Button_Cancel {
+            get {
+                return ResourceManager.GetString("Button_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cerrar.
         /// </summary>
         public static string Button_Close {
             get {
                 return ResourceManager.GetString("Button_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirmar.
+        /// </summary>
+        public static string Button_Confirm {
+            get {
+                return ResourceManager.GetString("Button_Confirm", resourceCulture);
             }
         }
         
@@ -941,6 +959,15 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_SendMessageErrorTitle {
             get {
                 return ResourceManager.GetString("TextBlock_SendMessageErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ¿Seguro que quieres cerrar sesión?.
+        /// </summary>
+        public static string TextBlock_SignOutConfirmationMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_SignOutConfirmationMessage", resourceCulture);
             }
         }
         

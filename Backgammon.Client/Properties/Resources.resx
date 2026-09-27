@@ -464,4 +464,13 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_LoginConnectionErrorMessage" xml:space="preserve">
     <value>Ocurrió un error al iniciar sesión, por favor intenta nuevamente más tarde.</value>
   </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="Button_Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="TextBlock_SignOutConfirmationMessage" xml:space="preserve">
+    <value>¿Seguro que quieres cerrar sesión?</value>
+  </data>
 </root>
