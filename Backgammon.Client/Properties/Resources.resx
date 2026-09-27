@@ -506,4 +506,25 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_FriendSearchRequiredMessage" xml:space="preserve">
     <value>Escribe el correo/código.</value>
   </data>
+  <data name="TextBlock_PlayerProfileTitle" xml:space="preserve">
+    <value>Perfil del jugador</value>
+  </data>
+  <data name="Button_SendFriendRequest" xml:space="preserve">
+    <value>Enviar solicitud</value>
+  </data>
+  <data name="TextBlock_AddSocialNetworkTitle" xml:space="preserve">
+    <value>Agregar red social</value>
+  </data>
+  <data name="TextBlock_SelectSocialNetworkMessage" xml:space="preserve">
+    <value>Selecciona una red social</value>
+  </data>
+  <data name="TextBlock_SocialNetworkAlreadyAdded" xml:space="preserve">
+    <value>Agregada</value>
+  </data>
+  <data name="TextBlock_NoSocialNetworksAvailableMessage" xml:space="preserve">
+    <value>No hay redes sociales disponibles.</value>
+  </data>
+  <data name="TextBlock_RemoveFriendConfirmationMessage" xml:space="preserve">
+    <value>¿Seguro que quieres eliminar a {0} de tus amigos?</value>
+  </data>
 </root>
