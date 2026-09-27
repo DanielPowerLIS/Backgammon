@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Backgammon.Client.Utils
 {
-    public enum LoginResult
+    public enum FriendSearchMode
     {
-        Success,
-        UserNotFound,
-        IncorrectPassword
+        None,
+        Email,
+        AccountCode
     }
 }

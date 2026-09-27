@@ -479,4 +479,31 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_NoAvatarsAvailableMessage" xml:space="preserve">
     <value>Aún no hay avatares disponibles.</value>
   </data>
+  <data name="TextBlock_ChangeAvatarConfirmationMessage" xml:space="preserve">
+    <value>Do you want to change your avatar to this one?</value>
+  </data>
+  <data name="Button_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="TextBlock_AddSocialLinkTitleFormat" xml:space="preserve">
+    <value>Add {0}</value>
+  </data>
+  <data name="TextBlock_SocialLinkLabelFormat" xml:space="preserve">
+    <value>{0} link</value>
+  </data>
+  <data name="TextBlock_SocialLinkLimitMessage" xml:space="preserve">
+    <value>Only one link per social network is allowed.</value>
+  </data>
+  <data name="TextBox_FriendEmailOrCode" xml:space="preserve">
+    <value>Email/Player code</value>
+  </data>
+  <data name="Button_AddFriendByEmail" xml:space="preserve">
+    <value>Add by email</value>
+  </data>
+  <data name="Button_AddFriendByCode" xml:space="preserve">
+    <value>Add by code</value>
+  </data>
+  <data name="TextBlock_FriendSearchRequiredMessage" xml:space="preserve">
+    <value>Enter an email or player code.</value>
+  </data>
 </root>

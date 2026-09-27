@@ -129,12 +129,22 @@
     <Compile Include="Services\LeaderboardService.cs" />
     <Compile Include="Services\PasswordHashService.cs" />
     <Compile Include="Utils\AlerType.cs" />
+    <Compile Include="Utils\FriendSearchMode.cs" />
     <Compile Include="Utils\LoginResult.cs" />
     <Compile Include="Views\Dialog\AccountDialog.xaml.cs">
       <DependentUpon>AccountDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dialog\AddFriendDialog.xaml.cs">
+      <DependentUpon>AddFriendDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\AddSocialLinkDialog.xaml.cs">
+      <DependentUpon>AddSocialLinkDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialog\AlertDialog.xaml.cs">
       <DependentUpon>AlertDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\ChangeAvatarDialog.xaml.cs">
+      <DependentUpon>ChangeAvatarDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialog\ConfirmationDialog.xaml.cs">
       <DependentUpon>ConfirmationDialog.xaml</DependentUpon>
@@ -191,7 +201,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Dialog\AddFriendDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialog\AddSocialLinkDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Dialog\AlertDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialog\ChangeAvatarDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
