@@ -133,6 +133,9 @@
     <Compile Include="Views\Dialog\AccountDialog.xaml.cs">
       <DependentUpon>AccountDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dialog\AddSocialLinkDialog.xaml.cs">
+      <DependentUpon>AddSocialLinkDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialog\AlertDialog.xaml.cs">
       <DependentUpon>AlertDialog.xaml</DependentUpon>
     </Compile>
@@ -191,6 +194,10 @@
       <DependentUpon>VerificationCode.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Dialog\AccountDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialog\AddSocialLinkDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

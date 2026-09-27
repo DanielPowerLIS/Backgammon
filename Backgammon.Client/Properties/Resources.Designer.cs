@@ -223,6 +223,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Guardar.
+        /// </summary>
+        public static string Button_Save {
+            get {
+                return ResourceManager.GetString("Button_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Iniciar sesión.
         /// </summary>
         public static string Button_SignIn {
@@ -327,6 +336,15 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_AccountRegistration {
             get {
                 return ResourceManager.GetString("TextBlock_AccountRegistration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agregar {0}.
+        /// </summary>
+        public static string TextBlock_AddSocialLinkTitleFormat {
+            get {
+                return ResourceManager.GetString("TextBlock_AddSocialLinkTitleFormat", resourceCulture);
             }
         }
         
@@ -995,6 +1013,24 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_SignOutConfirmationMessage {
             get {
                 return ResourceManager.GetString("TextBlock_SignOutConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enlace de {0}.
+        /// </summary>
+        public static string TextBlock_SocialLinkLabelFormat {
+            get {
+                return ResourceManager.GetString("TextBlock_SocialLinkLabelFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Solo se permite un enlace por red social..
+        /// </summary>
+        public static string TextBlock_SocialLinkLimitMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_SocialLinkLimitMessage", resourceCulture);
             }
         }
         

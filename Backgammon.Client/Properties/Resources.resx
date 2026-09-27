@@ -482,4 +482,16 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_ChangeAvatarConfirmationMessage" xml:space="preserve">
     <value>¿Quieres cambiar tu avatar por este?</value>
   </data>
+  <data name="Button_Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="TextBlock_AddSocialLinkTitleFormat" xml:space="preserve">
+    <value>Agregar {0}</value>
+  </data>
+  <data name="TextBlock_SocialLinkLabelFormat" xml:space="preserve">
+    <value>Enlace de {0}</value>
+  </data>
+  <data name="TextBlock_SocialLinkLimitMessage" xml:space="preserve">
+    <value>Solo se permite un enlace por red social.</value>
+  </data>
 </root>
