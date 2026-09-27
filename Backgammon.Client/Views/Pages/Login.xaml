@@ -310,7 +310,8 @@
                             Grid.Row="6"
                             Height="54"
                             Content="{x:Static properties:Resources.Button_SignIn}"
-                            Style="{StaticResource SignInButtonStyle}" />
+                            Style="{StaticResource SignInButtonStyle}"
+                            Click="OnSignInClick"/>
 
                         <StackPanel
                             Grid.Row="8"

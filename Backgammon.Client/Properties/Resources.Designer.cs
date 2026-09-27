@@ -655,6 +655,78 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ocurrió un error al iniciar sesión, por favor intenta nuevamente más tarde..
+        /// </summary>
+        public static string TextBlock_LoginConnectionErrorMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_LoginConnectionErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error de conexión.
+        /// </summary>
+        public static string TextBlock_LoginConnectionErrorTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_LoginConnectionErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contraseña incorrecta..
+        /// </summary>
+        public static string TextBlock_LoginIncorrectPasswordMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_LoginIncorrectPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contraseña incorrecta.
+        /// </summary>
+        public static string TextBlock_LoginIncorrectPasswordTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_LoginIncorrectPasswordTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Credenciales correctas, bienvenido..
+        /// </summary>
+        public static string TextBlock_LoginSuccessMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_LoginSuccessMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sesión iniciada.
+        /// </summary>
+        public static string TextBlock_LoginSuccessTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_LoginSuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se encontró el usuario especificado; por favor verifica el usuario o correo ingresado..
+        /// </summary>
+        public static string TextBlock_LoginUserNotFoundMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_LoginUserNotFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuario no encontrado..
+        /// </summary>
+        public static string TextBlock_LoginUserNotFoundTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_LoginUserNotFoundTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Menú principal.
         /// </summary>
         public static string TextBlock_MainMenu {

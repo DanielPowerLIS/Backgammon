@@ -440,4 +440,28 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_RegistrationSaveErrorMessage" xml:space="preserve">
     <value>No fue posible guardar la cuenta. Inténtalo nuevamente.</value>
   </data>
+  <data name="TextBlock_LoginUserNotFoundTitle" xml:space="preserve">
+    <value>Usuario no encontrado.</value>
+  </data>
+  <data name="TextBlock_LoginUserNotFoundMessage" xml:space="preserve">
+    <value>No se encontró el usuario especificado; por favor verifica el usuario o correo ingresado.</value>
+  </data>
+  <data name="TextBlock_LoginIncorrectPasswordTitle" xml:space="preserve">
+    <value>Contraseña incorrecta</value>
+  </data>
+  <data name="TextBlock_LoginIncorrectPasswordMessage" xml:space="preserve">
+    <value>Contraseña incorrecta.</value>
+  </data>
+  <data name="TextBlock_LoginSuccessTitle" xml:space="preserve">
+    <value>Sesión iniciada</value>
+  </data>
+  <data name="TextBlock_LoginSuccessMessage" xml:space="preserve">
+    <value>Credenciales correctas, bienvenido.</value>
+  </data>
+  <data name="TextBlock_LoginConnectionErrorTitle" xml:space="preserve">
+    <value>Error de conexión</value>
+  </data>
+  <data name="TextBlock_LoginConnectionErrorMessage" xml:space="preserve">
+    <value>Ocurrió un error al iniciar sesión, por favor intenta nuevamente más tarde.</value>
+  </data>
 </root>
