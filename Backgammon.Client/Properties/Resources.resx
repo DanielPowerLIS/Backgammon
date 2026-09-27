@@ -479,4 +479,7 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_NoAvatarsAvailableMessage" xml:space="preserve">
     <value>Aún no hay avatares disponibles.</value>
   </data>
+  <data name="TextBlock_ChangeAvatarConfirmationMessage" xml:space="preserve">
+    <value>¿Quieres cambiar tu avatar por este?</value>
+  </data>
 </root>

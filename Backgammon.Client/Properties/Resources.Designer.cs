@@ -421,6 +421,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Quieres cambiar tu avatar por este?.
+        /// </summary>
+        public static string TextBlock_ChangeAvatarConfirmationMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_ChangeAvatarConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crear una cuenta.
         /// </summary>
         public static string TextBlock_CreateAnAccount {

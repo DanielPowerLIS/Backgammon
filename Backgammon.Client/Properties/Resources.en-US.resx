@@ -479,4 +479,7 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_NoAvatarsAvailableMessage" xml:space="preserve">
     <value>Aún no hay avatares disponibles.</value>
   </data>
+  <data name="TextBlock_ChangeAvatarConfirmationMessage" xml:space="preserve">
+    <value>Do you want to change your avatar to this one?</value>
+  </data>
 </root>
