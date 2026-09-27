@@ -988,6 +988,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Seguro que quieres eliminar a {0} de tus amigos?.
+        /// </summary>
+        public static string TextBlock_RemoveFriendConfirmationMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_RemoveFriendConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Por favor no deje ningún campo marcado como obligatorio vacío..
         /// </summary>
         public static string TextBlock_RequiredFieldsMessage {

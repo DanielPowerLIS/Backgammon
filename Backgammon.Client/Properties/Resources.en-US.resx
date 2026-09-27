@@ -524,4 +524,7 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_NoSocialNetworksAvailableMessage" xml:space="preserve">
     <value>No social networks are available.</value>
   </data>
+  <data name="TextBlock_RemoveFriendConfirmationMessage" xml:space="preserve">
+    <value>Are you sure you want to remove {0} from your friends?</value>
+  </data>
 </root>

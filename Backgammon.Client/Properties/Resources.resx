@@ -524,4 +524,7 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_NoSocialNetworksAvailableMessage" xml:space="preserve">
     <value>No hay redes sociales disponibles.</value>
   </data>
+  <data name="TextBlock_RemoveFriendConfirmationMessage" xml:space="preserve">
+    <value>¿Seguro que quieres eliminar a {0} de tus amigos?</value>
+  </data>
 </root>
