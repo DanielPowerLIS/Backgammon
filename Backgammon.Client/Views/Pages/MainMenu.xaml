@@ -49,14 +49,14 @@
             </TextBlock>
 
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Content="{x:Static properties:Resources.Button_Play}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
-                <Button Content="{x:Static properties:Resources.TextBlock_Button_Leaderboard}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
-                <Button Content="{x:Static properties:Resources.TextBlock_Button_Profile}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
-                <Button Content="{x:Static properties:Resources.TextBlock_Button_Friends}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8"/>
-                <Button Content="{x:Static properties:Resources.TextBlock_Button_Settings}" Style="{StaticResource MainMenuButtonStyle}"/>
+                <Button Content="{x:Static properties:Resources.Button_Play}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8" Click="OnPlayClick"/>
+                <Button Content="{x:Static properties:Resources.TextBlock_Button_Leaderboard}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8" Click="OnLeaderboardClick"/>
+                <Button Content="{x:Static properties:Resources.TextBlock_Button_Profile}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8" Click="OnProfileClick"/>
+                <Button Content="{x:Static properties:Resources.TextBlock_Button_Friends}" Style="{StaticResource MainMenuButtonStyle}" Margin="0,0,0,8" Click="OnFriendsClick"/>
+                <Button Content="{x:Static properties:Resources.TextBlock_Button_Settings}" Style="{StaticResource MainMenuButtonStyle}" Click="OnSettingsClick"/>
             </StackPanel>
 
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_SignOut}" Style="{StaticResource MainMenuButtonStyle}" MinWidth="100" HorizontalAlignment="Left" Margin="0,15,0,0"/>
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_SignOut}" Style="{StaticResource MainMenuButtonStyle}" MinWidth="100" HorizontalAlignment="Left" Margin="0,15,0,0" />
 
         </Grid>
 

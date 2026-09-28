@@ -30,5 +30,13 @@ namespace Backgammon.Client.Views.Pages
             FriendList.Items.Add("Amigo 3");
             FriendList.Items.Add("Amigo 4");
         }
+
+        private void OnBackClick(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack) 
+            {
+                NavigationService.GoBack();
+            }
+        }
     }
 }

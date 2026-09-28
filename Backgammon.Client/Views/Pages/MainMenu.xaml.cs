@@ -24,5 +24,30 @@ namespace Backgammon.Client.Views.Pages
         {
             InitializeComponent();
         }
+
+        private void OnPlayClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Preinitiation());
+        }
+
+        private void OnLeaderboardClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Leaderboard());
+        }
+
+        private void OnProfileClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new PlayerProfile());
+        }
+
+        private void OnFriendsClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Friends());
+        }
+
+        private void OnSettingsClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Settings());
+        }
     }
 }

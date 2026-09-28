@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Backgammon.Client.Views.Pages"
         xmlns:properties="clr-namespace:Backgammon.Client.Properties"
         mc:Ignorable="d"
-        Title="{x:Static properties:Resources.TextBlock_Button_Settings}" Height="450" Width="800" FontSize="50">
+        d:DesignHeight="450"
+        d:DesignWidth="800"
+        Title="{x:Static properties:Resources.TextBlock_Button_Settings}" FontSize="50">
 
     <Page.Resources>
         <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5,0.5" GradientOrigin="0.5,0.35" RadiusX="0.85" RadiusY="0.85">
@@ -51,7 +53,7 @@
                 </StackPanel>
             </Border>
 
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_Back}" Style="{StaticResource SettingsButtonStyle}" Foreground="{StaticResource PinkAccentBrush}" MinWidth="100"  MinHeight="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_Back}" Style="{StaticResource SettingsButtonStyle}" Foreground="{StaticResource PinkAccentBrush}" MinWidth="100"  MinHeight="35" HorizontalAlignment="Right" Margin="0,15,0,0" Click="OnBackClick"/>
         </Grid>
 
     </Grid>
