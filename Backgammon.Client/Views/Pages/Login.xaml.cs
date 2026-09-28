@@ -104,6 +104,7 @@ namespace Backgammon.Client.Views.Pages
                     ShowLoginDialog(
                         Properties.Resources.TextBlock_LoginSuccessTitle,
                         Properties.Resources.TextBlock_LoginSuccessMessage);
+                    NavigationService.Navigate(new MainMenu());
                     break;
             }
         }

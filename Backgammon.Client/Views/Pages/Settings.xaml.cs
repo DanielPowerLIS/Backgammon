@@ -28,5 +28,13 @@ namespace Backgammon.Client.Views.Pages
         {
 
         }
+
+        private void OnBackClick(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack) 
+            {
+                NavigationService.GoBack();
+            }
+        }
     }
 }

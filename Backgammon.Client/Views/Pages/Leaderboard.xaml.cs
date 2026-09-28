@@ -64,5 +64,13 @@ namespace Backgammon.Client.Views.Pages
             alertDialog.Owner = Window.GetWindow(this);
             alertDialog.ShowDialog();
         }
+
+        private void OnBackClick(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack) 
+            {
+                NavigationService.GoBack();
+            }
+        }
     }
 }

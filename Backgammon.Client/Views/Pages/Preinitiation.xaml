@@ -28,12 +28,16 @@
             <Setter Property="Cursor" Value="Hand"/>
         </Style>
     </Page.Resources>
-    
-    <Grid Background="{StaticResource PageBackgroundBrush}">
-        <TextBlock Text="BACKGAMMON"  Foreground="{StaticResource CyanAccentBrush}"  HorizontalAlignment="Center"  VerticalAlignment="Top"  Margin="0,37,0,0"  FontFamily="Segoe UI"  FontSize="50"  TextAlignment="Center"/>
-        <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Button_CreateLobby}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="Button_Click" Width="180" Height="30" FontSize="20"/>
-        <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Button_Join}" HorizontalAlignment="Center" Margin="0,284,0,0" VerticalAlignment="Top" Width="180" Height="30" FontSize="20"/>
-        <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Button_Back}" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Button_Click" Width="180" Height="30" Margin="28,388,0,0" FontSize="20"/>
 
+    <Grid Background="{StaticResource PageBackgroundBrush}">
+        <Viewbox Stretch="Uniform">
+            <Grid Width="800" Height="450" >
+                <TextBlock Text="BACKGAMMON"  Foreground="{StaticResource CyanAccentBrush}"  HorizontalAlignment="Center"  VerticalAlignment="Top"  Margin="0,37,0,0"  FontFamily="Segoe UI"  FontSize="50"  TextAlignment="Center"/>
+                <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Button_CreateLobby}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="OnCreateLobbyClick" Width="180" Height="30" FontSize="20"/>
+                <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Button_Join}" HorizontalAlignment="Center" Margin="0,284,0,0" VerticalAlignment="Top" Click="OnJoinClick" Width="180" Height="30" FontSize="20"/>
+                <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Button_Back}" HorizontalAlignment="Left" VerticalAlignment="Top" Click="OnBackClick" Width="180" Height="30" Margin="550,388,0,0" FontSize="20"/>
+
+            </Grid>
+        </Viewbox>
     </Grid>
 </Page>

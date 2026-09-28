@@ -89,7 +89,7 @@
                 </ListView>
 
             </Border>
-            <Button Style="{StaticResource FriendButtonStyle}" Grid.Row="3" Content="{x:Static properties:Resources.Button_Back}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0"/>
+            <Button Style="{StaticResource FriendButtonStyle}" Grid.Row="3" Content="{x:Static properties:Resources.Button_Back}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0" Click="OnBackClick"/>
         </Grid>
     </Grid>
 </Page>
