@@ -334,6 +334,7 @@
                     </Grid>
 
                 </Border>
+                <Button Content="{x:Static properties:Resources.Button_Back}" Background="#080D1A" BorderBrush="#00C9F2" BorderThickness="2" Foreground="#E795EC" FontSize="16" Cursor="Hand" HorizontalAlignment="Left" Margin="750,400,0,0" VerticalAlignment="Top" Width="100" Height="35" Click="OnBackClick"/>
             </Grid>
         </Viewbox>
     </Grid>

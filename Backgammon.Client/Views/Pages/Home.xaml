@@ -109,6 +109,7 @@
                 <Button
                     Content="{x:Static properties:Resources.Button_SignIn}"
                     Style="{StaticResource HomeButtonStyle}"
+                    Click="ButtonSignIn"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Margin="0,230,0,0"
