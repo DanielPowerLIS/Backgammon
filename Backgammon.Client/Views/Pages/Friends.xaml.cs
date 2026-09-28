@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Backgammon.Client.Views.Dialog;
+
 namespace Backgammon.Client.Views.Pages
 {
     /// <summary>
@@ -37,6 +39,17 @@ namespace Backgammon.Client.Views.Pages
             {
                 NavigationService.GoBack();
             }
+        }
+        
+        private bool ConfirmFriendRemoval(string username)
+        {
+            string message = string.Format(
+                Properties.Resources.TextBlock_RemoveFriendConfirmationMessage,
+                username);
+
+            ConfirmationDialog dialog = new ConfirmationDialog(message);
+
+            return dialog.ShowOver(Window.GetWindow(this));
         }
     }
 }

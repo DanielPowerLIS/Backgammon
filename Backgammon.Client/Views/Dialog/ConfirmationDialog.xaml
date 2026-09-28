@@ -1,0 +1,163 @@
+﻿<Window x:Class="Backgammon.Client.Views.Dialog.ConfirmationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:properties="clr-namespace:Backgammon.Client.Properties"
+        mc:Ignorable="d"
+        Width="900"
+        Height="500"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStartupLocation="Manual">
+
+    <Window.Resources>
+        <SolidColorBrush
+            x:Key="DialogBackgroundBrush"
+            Color="#080D1A" />
+
+        <SolidColorBrush
+            x:Key="CyanAccentBrush"
+            Color="#00C9F2" />
+
+        <SolidColorBrush
+            x:Key="PinkAccentBrush"
+            Color="#E795EC" />
+
+        <Style
+            x:Key="ConfirmationButtonStyle"
+            TargetType="Button">
+
+            <Setter Property="Width" Value="150" />
+            <Setter Property="MinHeight" Value="42" />
+            <Setter Property="Padding" Value="12,6" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Background"
+                    Value="{StaticResource DialogBackgroundBrush}" />
+            <Setter Property="Foreground"
+                    Value="{StaticResource PinkAccentBrush}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource CyanAccentBrush}" />
+            <Setter Property="BorderThickness" Value="2" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="ButtonBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}">
+
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                RecognizesAccessKey="True" />
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter
+                                    TargetName="ButtonBorder"
+                                    Property="Background"
+                                    Value="#173044" />
+                            </Trigger>
+
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter
+                                    TargetName="ButtonBorder"
+                                    Property="BorderBrush"
+                                    Value="{StaticResource PinkAccentBrush}" />
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter
+                                    TargetName="ButtonBorder"
+                                    Property="Background"
+                                    Value="#22465A" />
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter
+                                    TargetName="ButtonBorder"
+                                    Property="Opacity"
+                                    Value="0.5" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#40FFFFFF">
+        <Viewbox
+            Margin="20"
+            Stretch="Uniform"
+            StretchDirection="DownOnly"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+
+            <Border
+                Width="520"
+                MinHeight="185"
+                Padding="28,24,28,20"
+                Background="{StaticResource DialogBackgroundBrush}"
+                BorderBrush="{StaticResource CyanAccentBrush}"
+                BorderThickness="2">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock
+                        x:Name="MessageText"
+                        Grid.Row="0"
+                        Margin="0,0,0,30"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Top"
+                        FontFamily="Segoe UI"
+                        FontSize="22"
+                        FontWeight="SemiBold"
+                        Foreground="{StaticResource PinkAccentBrush}"
+                        TextAlignment="Center"
+                        TextWrapping="Wrap" />
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button
+                            x:Name="buttonConfirm"
+                            Grid.Column="0"
+                            Content="{x:Static properties:Resources.Button_Confirm}"
+                            Style="{StaticResource ConfirmationButtonStyle}"
+                            HorizontalAlignment="Left"
+                            IsDefault="True"
+                            Click="OnConfirmClick" />
+
+                        <Button
+                            x:Name="buttonCancel"
+                            Grid.Column="2"
+                            Content="{x:Static properties:Resources.Button_Cancel}"
+                            Style="{StaticResource ConfirmationButtonStyle}"
+                            HorizontalAlignment="Right"
+                            IsCancel="True" />
+                    </Grid>
+                </Grid>
+            </Border>
+        </Viewbox>
+    </Grid>
+</Window>
