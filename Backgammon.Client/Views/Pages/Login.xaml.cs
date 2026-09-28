@@ -122,5 +122,13 @@ namespace Backgammon.Client.Views.Pages
             AccountDialog dialog = new AccountDialog(title, message);
             dialog.ShowOver(Window.GetWindow(this));
         }
+
+        private void OnBackClick(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack) 
+            { 
+                NavigationService.GoBack();
+            }
+        }
     }
 }
