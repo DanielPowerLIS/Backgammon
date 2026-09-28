@@ -121,6 +121,8 @@
     <Compile Include="Data\TypeSocialMedia.cs">
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AvatarOption.cs" />
+    <Compile Include="Models\SocialNetworkOption.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
     <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Repositories\RegistrationRepository.cs" />
@@ -128,12 +130,31 @@
     <Compile Include="Services\LeaderboardService.cs" />
     <Compile Include="Services\PasswordHashService.cs" />
     <Compile Include="Utils\AlerType.cs" />
+    <Compile Include="Utils\FriendSearchMode.cs" />
     <Compile Include="Utils\LoginResult.cs" />
     <Compile Include="Views\Dialog\AccountDialog.xaml.cs">
       <DependentUpon>AccountDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dialog\AddFriendDialog.xaml.cs">
+      <DependentUpon>AddFriendDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\AddSocialLinkDialog.xaml.cs">
+      <DependentUpon>AddSocialLinkDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialog\AlertDialog.xaml.cs">
       <DependentUpon>AlertDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\ChangeAvatarDialog.xaml.cs">
+      <DependentUpon>ChangeAvatarDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\ConfirmationDialog.xaml.cs">
+      <DependentUpon>ConfirmationDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\FriendProfileDialog.xaml.cs">
+      <DependentUpon>FriendProfileDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\SelectSocialNetworkDialog.xaml.cs">
+      <DependentUpon>SelectSocialNetworkDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Game\Controls\BoardControl.xaml.cs">
       <DependentUpon>BoardControl.xaml</DependentUpon>
@@ -149,6 +170,9 @@
     </Compile>
     <Compile Include="Views\Pages\AccountRegistration.xaml.cs">
       <DependentUpon>AccountRegistration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Avatars.xaml.cs">
+      <DependentUpon>Avatars.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
@@ -184,7 +208,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Dialog\AddFriendDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialog\AddSocialLinkDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Dialog\AlertDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialog\ChangeAvatarDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialog\ConfirmationDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialog\FriendProfileDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialog\SelectSocialNetworkDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -205,6 +253,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\AccountRegistration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Avatars.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

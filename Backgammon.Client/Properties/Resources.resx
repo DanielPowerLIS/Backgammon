@@ -464,4 +464,67 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_LoginConnectionErrorMessage" xml:space="preserve">
     <value>Ocurrió un error al iniciar sesión, por favor intenta nuevamente más tarde.</value>
   </data>
+  <data name="Button_Confirm" xml:space="preserve">
+    <value>Confirmar</value>
+  </data>
+  <data name="Button_Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="TextBlock_SignOutConfirmationMessage" xml:space="preserve">
+    <value>¿Seguro que quieres cerrar sesión?</value>
+  </data>
+  <data name="TextBlock_SelectAvatarTitle" xml:space="preserve">
+    <value>Selecciona un avatar</value>
+  </data>
+  <data name="TextBlock_NoAvatarsAvailableMessage" xml:space="preserve">
+    <value>Aún no hay avatares disponibles.</value>
+  </data>
+  <data name="TextBlock_ChangeAvatarConfirmationMessage" xml:space="preserve">
+    <value>¿Quieres cambiar tu avatar por este?</value>
+  </data>
+  <data name="Button_Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
+  <data name="TextBlock_AddSocialLinkTitleFormat" xml:space="preserve">
+    <value>Agregar {0}</value>
+  </data>
+  <data name="TextBlock_SocialLinkLabelFormat" xml:space="preserve">
+    <value>Enlace de {0}</value>
+  </data>
+  <data name="TextBlock_SocialLinkLimitMessage" xml:space="preserve">
+    <value>Solo se permite un enlace por red social.</value>
+  </data>
+  <data name="TextBox_FriendEmailOrCode" xml:space="preserve">
+    <value>Correo/Código de jugador</value>
+  </data>
+  <data name="Button_AddFriendByEmail" xml:space="preserve">
+    <value>Agregar por correo</value>
+  </data>
+  <data name="Button_AddFriendByCode" xml:space="preserve">
+    <value>Agregar por código</value>
+  </data>
+  <data name="TextBlock_FriendSearchRequiredMessage" xml:space="preserve">
+    <value>Escribe el correo/código.</value>
+  </data>
+  <data name="TextBlock_PlayerProfileTitle" xml:space="preserve">
+    <value>Perfil del jugador</value>
+  </data>
+  <data name="Button_SendFriendRequest" xml:space="preserve">
+    <value>Enviar solicitud</value>
+  </data>
+  <data name="TextBlock_AddSocialNetworkTitle" xml:space="preserve">
+    <value>Agregar red social</value>
+  </data>
+  <data name="TextBlock_SelectSocialNetworkMessage" xml:space="preserve">
+    <value>Selecciona una red social</value>
+  </data>
+  <data name="TextBlock_SocialNetworkAlreadyAdded" xml:space="preserve">
+    <value>Agregada</value>
+  </data>
+  <data name="TextBlock_NoSocialNetworksAvailableMessage" xml:space="preserve">
+    <value>No hay redes sociales disponibles.</value>
+  </data>
+  <data name="TextBlock_RemoveFriendConfirmationMessage" xml:space="preserve">
+    <value>¿Seguro que quieres eliminar a {0} de tus amigos?</value>
+  </data>
 </root>

@@ -70,6 +70,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agregar por código.
+        /// </summary>
+        public static string Button_AddFriendByCode {
+            get {
+                return ResourceManager.GetString("Button_AddFriendByCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agregar por correo.
+        /// </summary>
+        public static string Button_AddFriendByEmail {
+            get {
+                return ResourceManager.GetString("Button_AddFriendByEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Agregar enlace.
         /// </summary>
         public static string Button_AddLink {
@@ -88,11 +106,29 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancelar.
+        /// </summary>
+        public static string Button_Cancel {
+            get {
+                return ResourceManager.GetString("Button_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cerrar.
         /// </summary>
         public static string Button_Close {
             get {
                 return ResourceManager.GetString("Button_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirmar.
+        /// </summary>
+        public static string Button_Confirm {
+            get {
+                return ResourceManager.GetString("Button_Confirm", resourceCulture);
             }
         }
         
@@ -205,6 +241,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Guardar.
+        /// </summary>
+        public static string Button_Save {
+            get {
+                return ResourceManager.GetString("Button_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enviar solicitud.
+        /// </summary>
+        public static string Button_SendFriendRequest {
+            get {
+                return ResourceManager.GetString("Button_SendFriendRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Iniciar sesión.
         /// </summary>
         public static string Button_SignIn {
@@ -313,6 +367,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agregar {0}.
+        /// </summary>
+        public static string TextBlock_AddSocialLinkTitleFormat {
+            get {
+                return ResourceManager.GetString("TextBlock_AddSocialLinkTitleFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agregar red social.
+        /// </summary>
+        public static string TextBlock_AddSocialNetworkTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_AddSocialNetworkTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ¿Ya tienes una cuenta?.
         /// </summary>
         public static string TextBlock_AlreadyHaveAccount {
@@ -403,6 +475,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Quieres cambiar tu avatar por este?.
+        /// </summary>
+        public static string TextBlock_ChangeAvatarConfirmationMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_ChangeAvatarConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crear una cuenta.
         /// </summary>
         public static string TextBlock_CreateAnAccount {
@@ -462,6 +543,15 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_FriendRequests {
             get {
                 return ResourceManager.GetString("TextBlock_FriendRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Escribe el correo/código..
+        /// </summary>
+        public static string TextBlock_FriendSearchRequiredMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_FriendSearchRequiredMessage", resourceCulture);
             }
         }
         
@@ -736,6 +826,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Aún no hay avatares disponibles..
+        /// </summary>
+        public static string TextBlock_NoAvatarsAvailableMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_NoAvatarsAvailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Todavía no tienes amigos agregados.
         /// </summary>
         public static string TextBlock_NoFriendsAddedMessage {
@@ -768,6 +867,24 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_NoRankingsTitle {
             get {
                 return ResourceManager.GetString("TextBlock_NoRankingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No hay redes sociales disponibles..
+        /// </summary>
+        public static string TextBlock_NoSocialNetworksAvailableMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_NoSocialNetworksAvailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Perfil del jugador.
+        /// </summary>
+        public static string TextBlock_PlayerProfileTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_PlayerProfileTitle", resourceCulture);
             }
         }
         
@@ -871,6 +988,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Seguro que quieres eliminar a {0} de tus amigos?.
+        /// </summary>
+        public static string TextBlock_RemoveFriendConfirmationMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_RemoveFriendConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Por favor no deje ningún campo marcado como obligatorio vacío..
         /// </summary>
         public static string TextBlock_RequiredFieldsMessage {
@@ -927,6 +1053,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Selecciona un avatar.
+        /// </summary>
+        public static string TextBlock_SelectAvatarTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_SelectAvatarTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selecciona una red social.
+        /// </summary>
+        public static string TextBlock_SelectSocialNetworkMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_SelectSocialNetworkMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Su mensaje no ha podido ser enviado. Porfavor verifique su conexión e intente de nuevo.
         /// </summary>
         public static string TextBlock_SendMessageErrorMessage {
@@ -945,11 +1089,47 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ¿Seguro que quieres cerrar sesión?.
+        /// </summary>
+        public static string TextBlock_SignOutConfirmationMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_SignOutConfirmationMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enlace de {0}.
+        /// </summary>
+        public static string TextBlock_SocialLinkLabelFormat {
+            get {
+                return ResourceManager.GetString("TextBlock_SocialLinkLabelFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Solo se permite un enlace por red social..
+        /// </summary>
+        public static string TextBlock_SocialLinkLimitMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_SocialLinkLimitMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Redes sociales.
         /// </summary>
         public static string TextBlock_SocialMedia {
             get {
                 return ResourceManager.GetString("TextBlock_SocialMedia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agregada.
+        /// </summary>
+        public static string TextBlock_SocialNetworkAlreadyAdded {
+            get {
+                return ResourceManager.GetString("TextBlock_SocialNetworkAlreadyAdded", resourceCulture);
             }
         }
         
@@ -1031,6 +1211,15 @@ namespace Backgammon.Client.Properties {
         public static string TextBox_FirstName {
             get {
                 return ResourceManager.GetString("TextBox_FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Correo/Código de jugador.
+        /// </summary>
+        public static string TextBox_FriendEmailOrCode {
+            get {
+                return ResourceManager.GetString("TextBox_FriendEmailOrCode", resourceCulture);
             }
         }
         
