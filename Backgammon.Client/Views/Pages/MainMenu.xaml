@@ -56,7 +56,7 @@
                 <Button Content="{x:Static properties:Resources.TextBlock_Button_Settings}" Style="{StaticResource MainMenuButtonStyle}" Click="OnSettingsClick"/>
             </StackPanel>
 
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_SignOut}" Style="{StaticResource MainMenuButtonStyle}" MinWidth="100" HorizontalAlignment="Left" Margin="0,15,0,0" />
+            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_SignOut}" Style="{StaticResource MainMenuButtonStyle}" MinWidth="100" HorizontalAlignment="Left" Margin="0,15,0,0" Click="OnSignOutClick" />
 
         </Grid>
 
