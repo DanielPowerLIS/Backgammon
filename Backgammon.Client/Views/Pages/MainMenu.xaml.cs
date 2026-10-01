@@ -1,23 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Backgammon.Client.Views.Pages
 {
-    /// <summary>
-    /// Lógica de interacción para MainMenu.xaml
-    /// </summary>
     public partial class MainMenu : Page
     {
         public MainMenu()
@@ -34,7 +20,6 @@ namespace Backgammon.Client.Views.Pages
         {
             NavigationService.Navigate(new Leaderboard());
         }
-
         private void OnProfileClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new PlayerProfile());
@@ -48,6 +33,10 @@ namespace Backgammon.Client.Views.Pages
         private void OnSettingsClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Settings());
+        }
+        private void OnSignOutClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Home());
         }
     }
 }
