@@ -47,8 +47,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -150,6 +152,9 @@
     <Compile Include="Views\Dialog\ConfirmationDialog.xaml.cs">
       <DependentUpon>ConfirmationDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dialog\DiceRollDialog.xaml.cs">
+      <DependentUpon>DiceRollDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialog\FriendProfileDialog.xaml.cs">
       <DependentUpon>FriendProfileDialog.xaml</DependentUpon>
     </Compile>
@@ -158,7 +163,11 @@
     </Compile>
     <Compile Include="Views\Game\BoardPoint.cs" />
     <Compile Include="Views\Game\BoardState.cs" />
-    <Compile Include="Views\Game\PlayerColor.cs" />
+    <Compile Include="Views\Game\Controls\DieControl.xaml.cs">
+      <DependentUpon>DieControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Game\DiceResult.cs" />
+    <Compile Include="Models\PlayerColor.cs" />
     <Compile Include="Views\Game\Controls\BoardControl.xaml.cs">
       <DependentUpon>BoardControl.xaml</DependentUpon>
     </Compile>
@@ -231,6 +240,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Dialog\DiceRollDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Dialog\FriendProfileDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -244,6 +257,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Game\Controls\CheckerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Game\Controls\DieControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
