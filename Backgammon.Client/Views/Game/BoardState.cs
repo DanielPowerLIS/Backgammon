@@ -1,4 +1,5 @@
 ﻿using System;
+using Backgammon.Client.Models.Game;
 
 namespace Backgammon.Client.Views.Game
 {

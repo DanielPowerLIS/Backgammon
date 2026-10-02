@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Backgammon.Client.Views.Dialog;
+using Backgammon.Client.Models.Game;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Backgammon.Client.Views.Game
 {
@@ -20,11 +10,16 @@ namespace Backgammon.Client.Views.Game
         public GamePage()
         {
             InitializeComponent();
+            GameBoard.RenderBoard(BoardState.CreateInitial());
         }
 
-        private void OnMoveCheckerClick(object sender, RoutedEventArgs e)
+        private void OnRollDiceButtonClick(object sender, RoutedEventArgs e)
         {
-            GameBoard.MoveTestChecker();
+            var diceDialog = new DiceRollDialog(PlayerColor.White);
+            diceDialog.Owner = Window.GetWindow(this);
+            diceDialog.ShowDialog();
+
+            DiceResult result = diceDialog.Result;
         }
     }
 }

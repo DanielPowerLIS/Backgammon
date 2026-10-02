@@ -1,8 +1,7 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using Backgammon.Client.Models.Game;
 
 namespace Backgammon.Client.Views.Game.Controls
 {
@@ -11,6 +10,9 @@ namespace Backgammon.Client.Views.Game.Controls
         private const string WhiteCheckerHex = "#00C9F2";
         private const string BlackCheckerHex = "#E795EC";
         private const string NoneCheckerHex = "#4A5366";
+        private const string WhiteCheckerStrokeHex = "#E795EC";
+        private const string BlackCheckerStrokeHex = "#00C9F2";
+        private const string NoneCheckerStrokeHex = "#00C9F2";
 
         public static readonly DependencyProperty CheckerColorProperty =
             DependencyProperty.Register(nameof(CheckerColor), typeof(PlayerColor), 
@@ -35,12 +37,14 @@ namespace Backgammon.Client.Views.Game.Controls
 
         private void ApplyCheckerColor(PlayerColor checkerColor)
         {
-            string colorHex = GetColorHex(checkerColor);
+            string fillHex = GetFillHex(checkerColor);
+            string strokeHex = GetStrokeHex(checkerColor);
 
-            CheckerEllipse.Fill = (Brush)new BrushConverter().ConvertFromString(colorHex);
+            CheckerEllipse.Fill = (Brush)new BrushConverter().ConvertFromString(fillHex);
+            CheckerEllipse.Stroke = (Brush)new BrushConverter().ConvertFromString(strokeHex);
         }
 
-        private static string GetColorHex(PlayerColor checkerColor)
+        private static string GetFillHex(PlayerColor checkerColor)
         {
             switch (checkerColor)
             {
@@ -52,5 +56,19 @@ namespace Backgammon.Client.Views.Game.Controls
                     return NoneCheckerHex;
             }
         }
+
+        private static string GetStrokeHex(PlayerColor checkerColor)
+        {
+            switch (checkerColor)
+            {
+                case PlayerColor.White:
+                    return WhiteCheckerStrokeHex;
+                case PlayerColor.Black:
+                    return BlackCheckerStrokeHex;
+                default:
+                    return NoneCheckerStrokeHex;
+            }
+        }
+
     }
 }

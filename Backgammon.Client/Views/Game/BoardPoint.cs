@@ -1,4 +1,6 @@
-﻿namespace Backgammon.Client.Views.Game
+﻿using Backgammon.Client.Models.Game;
+
+namespace Backgammon.Client.Views.Game
 {
     public class BoardPoint
     {
