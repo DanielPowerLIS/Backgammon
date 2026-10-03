@@ -364,3 +364,7 @@ FodyWeavers.xsd
 
 #Local base credentials
 DBSecrets.config
+
+#SonarQube
+.sonarqube/
+analizar-sonar.bat
