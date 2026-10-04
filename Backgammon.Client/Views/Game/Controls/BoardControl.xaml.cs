@@ -100,7 +100,7 @@ namespace Backgammon.Client.Views.Game.Controls
         {
             if(pointNumber >= TopRowMinPointNumber)
             {
-                return BoardTop + stackIndex * checkerSpacing;
+                return BoardTop  - CheckerMarginFromEdge + stackIndex * checkerSpacing;
             }
 
             return BoardBottom - CheckerMarginFromEdge - CheckerSize - stackIndex * checkerSpacing;

@@ -8,12 +8,12 @@ namespace Backgammon.Client.Views.Game.Controls
 {
     public partial class DieControl : UserControl
     {
-        private const int MinDieValue = 1;
-        private const int MaxDieValue = 6;
         private const double DotSize = 14;
         private const double DotMargin = 4;
         private const int GridSize = 3;
+
         private Brush _currentDotBrush = Brushes.White;
+
         private static readonly (int Column, int Row)[][] DiceFaceLayouts =
         {
             new[] { (1, 1) },
@@ -23,12 +23,6 @@ namespace Backgammon.Client.Views.Game.Controls
             new[] { (0, 0), (0, 2), (1, 1), (2, 0), (2, 2) },
             new[] { (0, 0), (0, 1), (0, 2), (2, 0), (2, 1), (2, 2) }
         };
-        
-        public DieControl()
-        {
-            InitializeComponent();
-            SetupDotGrid();
-        }
 
         public static readonly DependencyProperty DieValueProperty =
             DependencyProperty.Register(
@@ -37,12 +31,18 @@ namespace Backgammon.Client.Views.Game.Controls
                 typeof(DieControl),
                 new PropertyMetadata(1, OnDieValueChanged));
 
-        public static readonly DependencyProperty DieColorProperty=
+        public static readonly DependencyProperty DieColorProperty =
             DependencyProperty.Register(
                 nameof(DieColor),
                 typeof(PlayerColor),
                 typeof(DieControl),
                 new PropertyMetadata(PlayerColor.None, OnDieColorChanged));
+
+        public DieControl()
+        {
+            InitializeComponent();
+            SetupDotGrid();
+        }
 
         public int DieValue
         {
@@ -50,23 +50,10 @@ namespace Backgammon.Client.Views.Game.Controls
             set { SetValue(DieValueProperty, value); }
         }
 
-        public PlayerColor DieColor 
+        public PlayerColor DieColor
         {
             get { return (PlayerColor)GetValue(DieColorProperty); }
             set { SetValue(DieColorProperty, value); }
-        }
-
-        private void SetupDotGrid() 
-        {
-            for (int rowIndex = 0; rowIndex < GridSize; rowIndex++) 
-            {
-                DotsGrid.RowDefinitions.Add(new RowDefinition());
-            }
-
-            for (int columnIndex = 0; columnIndex < GridSize; columnIndex++)
-            {
-                DotsGrid.ColumnDefinitions.Add(new ColumnDefinition());
-            }
         }
 
         private static void OnDieValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
@@ -81,32 +68,65 @@ namespace Backgammon.Client.Views.Game.Controls
             changedDie.ApplyDieColor((PlayerColor)e.NewValue);
         }
 
+        private void SetupDotGrid()
+        {
+            for (int rowIndex = 0; rowIndex < GridSize; rowIndex++)
+            {
+                DotsGrid.RowDefinitions.Add(new RowDefinition());
+            }
+
+            for (int columnIndex = 0; columnIndex < GridSize; columnIndex++)
+            {
+                DotsGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
+
+            CreateAllDots();
+        }
+
+        private void CreateAllDots()
+        {
+            for (int rowIndex = 0; rowIndex < GridSize; rowIndex++)
+            {
+                for (int columnIndex = 0; columnIndex < GridSize; columnIndex++)
+                {
+                    var dot = new Ellipse
+                    {
+                        Width = DotSize,
+                        Height = DotSize,
+                        Margin = new Thickness(DotMargin),
+                        Fill = _currentDotBrush,
+                        Visibility = Visibility.Hidden,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center
+                    };
+
+                    Grid.SetColumn(dot, columnIndex);
+                    Grid.SetRow(dot, rowIndex);
+                    DotsGrid.Children.Add(dot);
+                }
+            }
+        }
+
         private void DrawDots(int dieValue)
         {
-            DotsGrid.Children.Clear();
+            foreach (Ellipse dot in DotsGrid.Children)
+            {
+                dot.Visibility = Visibility.Hidden;
+            }
 
             (int Column, int Row)[] activePositions = DiceFaceLayouts[dieValue - 1];
 
             foreach ((int column, int row) in activePositions)
             {
-                Ellipse dot = CreateDot();
-                Grid.SetColumn(dot, column);
-                Grid.SetRow(dot, row);
-                DotsGrid.Children.Add(dot);
+                Ellipse activeDot = GetDotAt(column, row);
+                activeDot.Visibility = Visibility.Visible;
             }
         }
 
-        private Ellipse CreateDot()
+        private Ellipse GetDotAt(int column, int row)
         {
-            return new Ellipse
-            {
-                Width = DotSize,
-                Height = DotSize,
-                Margin = new Thickness(DotMargin),
-                Fill = _currentDotBrush,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center
-            };
+            int dotIndex = row * GridSize + column;
+            return (Ellipse)DotsGrid.Children[dotIndex];
         }
 
         private void ApplyDieColor(PlayerColor dieColor)
@@ -115,6 +135,12 @@ namespace Backgammon.Client.Views.Game.Controls
             _currentDotBrush = (Brush)new BrushConverter().ConvertFromString(colorHex);
 
             DieBorder.BorderBrush = _currentDotBrush;
+
+            foreach (Ellipse dot in DotsGrid.Children)
+            {
+                dot.Fill = _currentDotBrush;
+            }
+
             DrawDots(DieValue);
         }
 
@@ -130,6 +156,5 @@ namespace Backgammon.Client.Views.Game.Controls
                     return "#FFFFFF";
             }
         }
-
     }
 }
