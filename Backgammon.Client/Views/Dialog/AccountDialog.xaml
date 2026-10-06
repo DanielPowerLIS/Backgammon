@@ -10,55 +10,143 @@
         ShowInTaskbar="False"
         WindowStartupLocation="Manual">
 
+    <Window.Resources>
+        <LinearGradientBrush x:Key="NeonCloseButtonBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#21F0F5" Offset="0" />
+            <GradientStop Color="#00CBE5" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="NeonCloseButtonHoverBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#69FAFF" Offset="0" />
+            <GradientStop Color="#16DCEF" Offset="1" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="NeonCloseButtonPressedBrush" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#00BED4" Offset="0" />
+            <GradientStop Color="#009DBB" Offset="1" />
+        </LinearGradientBrush>
+
+        <Style x:Key="NeonHeadingOutlineStyle" TargetType="TextBlock">
+            <Setter Property="Text" Value="{Binding Text, ElementName=textBlockHeading}" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Foreground" Value="#EC99F4" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="IsHitTestVisible" Value="False" />
+            <Setter Property="Focusable" Value="False" />
+        </Style>
+    </Window.Resources>
+
     <Grid Background="#88000000">
-        <Border Width="370" Height="190"
-                Background="#FAFAFA"
-                CornerRadius="34"
+        <Border Width="470" MinHeight="250" MaxHeight="400"
+                Background="#071222"
+                BorderBrush="#00E5F4"
+                BorderThickness="2"
+                CornerRadius="22"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
-            <Grid Margin="26,25,26,18">
+            <Grid Margin="30,24,30,26">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="34"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
 
-                <TextBlock x:Name="textBlockHeading"
-                           Grid.Row="0"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           FontSize="18"
-                           FontWeight="Bold"
-                           Foreground="#202020"
-                           TextAlignment="Center"/>
+                <!-- Each outline layer follows the text assigned by the existing code-behind. -->
+                <Grid Grid.Row="0" MinHeight="50">
+                    <TextBlock Style="{StaticResource NeonHeadingOutlineStyle}">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform X="-1" Y="-1" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource NeonHeadingOutlineStyle}">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform X="1" Y="-1" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource NeonHeadingOutlineStyle}">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform X="-1" Y="1" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource NeonHeadingOutlineStyle}">
+                        <TextBlock.RenderTransform>
+                            <TranslateTransform X="1" Y="1" />
+                        </TextBlock.RenderTransform>
+                    </TextBlock>
+                    <TextBlock x:Name="textBlockHeading"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontFamily="Segoe UI"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Foreground="#071222"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap" />
+                </Grid>
 
                 <TextBlock x:Name="textBlockMessage"
                            Grid.Row="1"
+                           MinHeight="70"
+                           Margin="0,10,0,20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            TextAlignment="Center"
                            TextWrapping="Wrap"
-                           Foreground="#777777"
-                           FontSize="13"/>
+                           Foreground="#DDC5FA"
+                           FontFamily="Segoe UI"
+                           FontSize="16" />
 
                 <Button x:Name="buttonClose"
                         Content="{x:Static properties:Resources.Button_Close}"
                         Grid.Row="2"
-                        Height="28"
-                        Width="245"
-                        HorizontalAlignment="Center"
-                        Foreground="White"
-                        Background="#929297"
-                        BorderThickness="0"
+                        Height="50"
+                        HorizontalAlignment="Stretch"
+                        Foreground="#04121E"
+                        Background="{StaticResource NeonCloseButtonBrush}"
+                        BorderBrush="#8CF9FF"
+                        BorderThickness="2"
+                        FontFamily="Segoe UI"
+                        FontSize="20"
+                        FontWeight="Bold"
                         Cursor="Hand"
                         Click="CloseButton_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}"
-                                    CornerRadius="14">
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Padding="{TemplateBinding Padding}"
+                                    CornerRadius="8">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="#00DDF3"
+                                                      ShadowDepth="0"
+                                                      BlurRadius="18"
+                                                      Opacity="0.65" />
+                                </Border.Effect>
                                 <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"/>
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True" />
                             </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background"
+                                            Value="{StaticResource NeonCloseButtonHoverBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter Property="BorderBrush" Value="White" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="Background"
+                                            Value="{StaticResource NeonCloseButtonPressedBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.4" />
+                                    <Setter Property="Cursor" Value="Arrow" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
