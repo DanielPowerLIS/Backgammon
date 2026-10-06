@@ -34,7 +34,7 @@
 
     <Grid Background="{StaticResource PageBackgroundBrush}">
 
-        <Grid >
+        <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>

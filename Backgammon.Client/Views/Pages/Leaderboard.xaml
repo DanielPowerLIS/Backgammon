@@ -82,27 +82,39 @@
                                VerticalAlignment="Center"/>
 
                                 <StackPanel Grid.Column="2"
-                                HorizontalAlignment="Center">
+                                HorizontalAlignment="Center" Orientation="Horizontal" >
+                                    <StackPanel.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="FontSize" Value="20"/>
+                                            <Setter Property="Margin" Value="0,0,8,0"/>
+                                        </Style>
+                                    </StackPanel.Resources>
                                     <TextBlock Text="{x:Static properties:Resources.TextBlock_Wins}"
-                                   FontSize="14"
+                                   FontSize="20"
                                    Foreground="{StaticResource PinkAccentBrush}"
                                    HorizontalAlignment="Center"/>
 
                                     <TextBlock Text="{Binding Wins}"
-                                   FontSize="18"
+                                   FontSize="20"
                                    Foreground="{StaticResource CyanAccentBrush}"
                                    HorizontalAlignment="Center"/>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="3"
-                                HorizontalAlignment="Center">
+                                HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="FontSize" Value="20"/>
+                                            <Setter Property="Margin" Value="0,0,8,0"/>
+                                        </Style>
+                                    </StackPanel.Resources>
                                     <TextBlock Text="{x:Static properties:Resources.TextBlock_Points}"
-                                   FontSize="14"
+                                   FontSize="20"
                                    Foreground="{StaticResource PinkAccentBrush}"
                                    HorizontalAlignment="Center"/>
 
                                     <TextBlock Text="{Binding Points}"
-                                   FontSize="18"
+                                   FontSize="20"
                                    Foreground="{StaticResource CyanAccentBrush}"
                                    HorizontalAlignment="Center"/>
                                 </StackPanel>
