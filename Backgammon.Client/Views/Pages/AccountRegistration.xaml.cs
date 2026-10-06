@@ -269,5 +269,10 @@ namespace Backgammon.Client.Views.Pages
 
             accountDialog.ShowOver(Window.GetWindow(this));
         }
+
+        private void OnButtonSignInClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Login());
+        }
     }
 }

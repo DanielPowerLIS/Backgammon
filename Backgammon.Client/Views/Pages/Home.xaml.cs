@@ -12,7 +12,7 @@ namespace Backgammon.Client.Views.Pages
             InitializeComponent();
         }
 
-        private void ButtonSignIn(object sender, RoutedEventArgs e)
+        private void OnButtonSignIn(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Login());
         }
