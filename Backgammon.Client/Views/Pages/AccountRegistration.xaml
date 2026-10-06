@@ -365,7 +365,8 @@
                                 x:Name="buttonSignIn"
                                 Margin="6,0,0,0"
                                 Content="{x:Static properties:Resources.Button_SignIn}"
-                                Style="{StaticResource SignInLinkButtonStyle}" />
+                                Style="{StaticResource SignInLinkButtonStyle}" 
+                                Click="OnButtonSignInClick"/>
                         </StackPanel>
                     </Grid>
 
