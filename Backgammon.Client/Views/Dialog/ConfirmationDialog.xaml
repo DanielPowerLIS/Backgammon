@@ -50,7 +50,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border
-                            x:Name="ButtonBorder"
+                            x:Name="BorderButton"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -65,28 +65,28 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter
-                                    TargetName="ButtonBorder"
+                                    TargetName="BorderButton"
                                     Property="Background"
                                     Value="#173044" />
                             </Trigger>
 
                             <Trigger Property="IsKeyboardFocused" Value="True">
                                 <Setter
-                                    TargetName="ButtonBorder"
+                                    TargetName="BorderButton"
                                     Property="BorderBrush"
                                     Value="{StaticResource PinkAccentBrush}" />
                             </Trigger>
 
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter
-                                    TargetName="ButtonBorder"
+                                    TargetName="BorderButton"
                                     Property="Background"
                                     Value="#22465A" />
                             </Trigger>
 
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter
-                                    TargetName="ButtonBorder"
+                                    TargetName="BorderButton"
                                     Property="Opacity"
                                     Value="0.5" />
                             </Trigger>
@@ -120,7 +120,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock
-                        x:Name="MessageText"
+                        x:Name="textBlockMessage"
                         Grid.Row="0"
                         Margin="0,0,0,30"
                         HorizontalAlignment="Stretch"

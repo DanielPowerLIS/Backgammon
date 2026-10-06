@@ -20,8 +20,8 @@ namespace Backgammon.Client.Views.Dialog
         {
             InitializeComponent();
 
-            HeadingText.Text = heading;
-            MessageText.Text = message;
+            textBlockHeading.Text = heading;
+            textBlockMessage.Text = message;
         }
 
         public void ShowOver(Window owner)

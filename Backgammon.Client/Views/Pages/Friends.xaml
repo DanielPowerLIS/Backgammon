@@ -59,7 +59,7 @@
             </StackPanel>
             
             <Border Grid.Row="2" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Padding="10">
-                <ListView x:Name="FriendList" Background="Transparent" BorderThickness="0">
+                <ListView x:Name="listViewFriends" Background="Transparent" BorderThickness="0">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

@@ -23,7 +23,7 @@
                     <RowDefinition Height="34"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock x:Name="HeadingText"
+                <TextBlock x:Name="textBlockHeading"
                            Grid.Row="0"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
@@ -32,7 +32,7 @@
                            Foreground="#202020"
                            TextAlignment="Center"/>
 
-                <TextBlock x:Name="MessageText"
+                <TextBlock x:Name="textBlockMessage"
                            Grid.Row="1"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
@@ -41,7 +41,7 @@
                            Foreground="#777777"
                            FontSize="13"/>
 
-                <Button x:Name="CloseButton"
+                <Button x:Name="buttonClose"
                         Content="{x:Static properties:Resources.Button_Close}"
                         Grid.Row="2"
                         Height="28"

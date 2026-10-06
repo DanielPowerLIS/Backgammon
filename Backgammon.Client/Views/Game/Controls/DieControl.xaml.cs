@@ -72,12 +72,12 @@ namespace Backgammon.Client.Views.Game.Controls
         {
             for (int rowIndex = 0; rowIndex < GridSize; rowIndex++)
             {
-                DotsGrid.RowDefinitions.Add(new RowDefinition());
+                GridDots.RowDefinitions.Add(new RowDefinition());
             }
 
             for (int columnIndex = 0; columnIndex < GridSize; columnIndex++)
             {
-                DotsGrid.ColumnDefinitions.Add(new ColumnDefinition());
+                GridDots.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
             CreateAllDots();
@@ -102,14 +102,14 @@ namespace Backgammon.Client.Views.Game.Controls
 
                     Grid.SetColumn(dot, columnIndex);
                     Grid.SetRow(dot, rowIndex);
-                    DotsGrid.Children.Add(dot);
+                    GridDots.Children.Add(dot);
                 }
             }
         }
 
         private void DrawDots(int dieValue)
         {
-            foreach (Ellipse dot in DotsGrid.Children)
+            foreach (Ellipse dot in GridDots.Children)
             {
                 dot.Visibility = Visibility.Hidden;
             }
@@ -126,7 +126,7 @@ namespace Backgammon.Client.Views.Game.Controls
         private Ellipse GetDotAt(int column, int row)
         {
             int dotIndex = row * GridSize + column;
-            return (Ellipse)DotsGrid.Children[dotIndex];
+            return (Ellipse)GridDots.Children[dotIndex];
         }
 
         private void ApplyDieColor(PlayerColor dieColor)
@@ -134,9 +134,9 @@ namespace Backgammon.Client.Views.Game.Controls
             string colorHex = GetColorHex(dieColor);
             _currentDotBrush = (Brush)new BrushConverter().ConvertFromString(colorHex);
 
-            DieBorder.BorderBrush = _currentDotBrush;
+            BorderDie.BorderBrush = _currentDotBrush;
 
-            foreach (Ellipse dot in DotsGrid.Children)
+            foreach (Ellipse dot in GridDots.Children)
             {
                 dot.Fill = _currentDotBrush;
             }

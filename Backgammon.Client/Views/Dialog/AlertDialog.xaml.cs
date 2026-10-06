@@ -22,9 +22,9 @@ namespace Backgammon.Client.Views.Dialog
             InitializeComponent();
 
             Title = Properties.Resources.TextBlock_Backgammon;
-            TxtTitle.Text = title;
-            TxtMessage.Text = message;
-            BtnAccept.Content = ButtonText;
+            textBlockTitle.Text = title;
+            textBlockMessage.Text = message;
+            buttonAccept.Content = ButtonText;
 
             if (alertType == AlertType.Error)
             {
@@ -36,9 +36,9 @@ namespace Backgammon.Client.Views.Dialog
             SolidColorBrush redBrush =
                 new SolidColorBrush(Color.FromRgb(255, 59, 79));
 
-            TxtTitle.Foreground = redBrush;
-            BtnAccept.Foreground = redBrush;
-            BtnAccept.BorderBrush = redBrush;
+            textBlockTitle.Foreground = redBrush;
+            buttonAccept.Foreground = redBrush;
+            buttonAccept.BorderBrush = redBrush;
         }
         private void BtnAccept_Click(object sender, RoutedEventArgs e)
         {

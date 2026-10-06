@@ -52,7 +52,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Border
-                            x:Name="InputBorder"
+                            x:Name="BorderInput"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -67,11 +67,11 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsKeyboardFocused" Value="True">
                                 <Setter
-                                    TargetName="InputBorder"
+                                    TargetName="BorderInput"
                                     Property="BorderBrush"
                                     Value="#17B8B1" />
                                 <Setter
-                                    TargetName="InputBorder"
+                                    TargetName="BorderInput"
                                     Property="BorderThickness"
                                     Value="2" />
                             </Trigger>
@@ -97,7 +97,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border
-                            x:Name="ButtonBorder"
+                            x:Name="BorderButton"
                             Background="{TemplateBinding Background}"
                             CornerRadius="10">
 
@@ -109,14 +109,14 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter
-                                    TargetName="ButtonBorder"
+                                    TargetName="BorderButton"
                                     Property="Background"
                                     Value="#20C5BD" />
                             </Trigger>
 
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter
-                                    TargetName="ButtonBorder"
+                                    TargetName="BorderButton"
                                     Property="Background"
                                     Value="#129F99" />
                             </Trigger>

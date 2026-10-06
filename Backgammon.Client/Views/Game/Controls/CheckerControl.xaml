@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Backgammon.Client.Views.Game.Controls"
              mc:Ignorable="d"
              Width="40" Height="40">
-    
-    <Ellipse x:Name="CheckerEllipse" Fill="#4A5366" Stroke="#00C9F2" StrokeThickness="2"/>
+
+    <Ellipse x:Name="ellipseChecker" Fill="#4A5366" Stroke="#00C9F2" StrokeThickness="2"/>
     
 </UserControl>

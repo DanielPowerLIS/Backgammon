@@ -35,7 +35,7 @@ namespace Backgammon.Client.Views.Dialog
             }
 
             InitializeComponent();
-            networkItemsControl.ItemsSource = options.ToList();
+            itemsControlNetworks.ItemsSource = options.ToList();
         }
 
         private void OnNetworkClick(object sender, RoutedEventArgs e)

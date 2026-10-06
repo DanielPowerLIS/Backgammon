@@ -27,10 +27,10 @@ namespace Backgammon.Client.Views.Pages
             InitializeComponent();
 
             //Solo provisional o pruebas
-            FriendList.Items.Add("Amigo 1");
-            FriendList.Items.Add("Amigo 2");
-            FriendList.Items.Add("Amigo 3");
-            FriendList.Items.Add("Amigo 4");
+            listViewFriends.Items.Add("Amigo 1");
+            listViewFriends.Items.Add("Amigo 2");
+            listViewFriends.Items.Add("Amigo 3");
+            listViewFriends.Items.Add("Amigo 4");
         }
 
         private void OnBackClick(object sender, RoutedEventArgs e)

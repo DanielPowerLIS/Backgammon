@@ -40,8 +40,8 @@ namespace Backgammon.Client.Views.Game.Controls
             string fillHex = GetFillHex(checkerColor);
             string strokeHex = GetStrokeHex(checkerColor);
 
-            CheckerEllipse.Fill = (Brush)new BrushConverter().ConvertFromString(fillHex);
-            CheckerEllipse.Stroke = (Brush)new BrushConverter().ConvertFromString(strokeHex);
+            ellipseChecker.Fill = (Brush)new BrushConverter().ConvertFromString(fillHex);
+            ellipseChecker.Stroke = (Brush)new BrushConverter().ConvertFromString(strokeHex);
         }
 
         private static string GetFillHex(PlayerColor checkerColor)

@@ -15,7 +15,7 @@
             <ColumnDefinition Width="350"/>
         </Grid.ColumnDefinitions>
 
-        <controls:BoardControl x:Name="GameBoard"  Grid.Column="0" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <controls:BoardControl x:Name="boardControlGame"  Grid.Column="0" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <Grid Grid.Column="1" Margin="30">
             <Grid.RowDefinitions>
