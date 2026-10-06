@@ -19,25 +19,35 @@
         <SolidColorBrush x:Key="CyanAccentBrush" Color="#00C9F2" />
         <SolidColorBrush x:Key="PinkAccentBrush" Color="#E795EC" />
         <Style x:Key="PreinitiationButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}" />
-            <Setter Property="BorderBrush" Value="{StaticResource CyanAccentBrush}" />
-            <Setter Property="BorderThickness" Value="2" />
-            <Setter Property="Foreground" Value="{StaticResource PinkAccentBrush}" />
+            <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource CyanAccentBrush}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Foreground" Value="{StaticResource PinkAccentBrush}"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="280"/>
+            <Setter Property="Height"  Value="45"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
         </Style>
     </Page.Resources>
 
     <Grid Background="{StaticResource PageBackgroundBrush}">
-        <Viewbox Stretch="Uniform">
-            <Grid Width="800" Height="450" >
-                <TextBlock Text="BACKGAMMON"  Foreground="{StaticResource CyanAccentBrush}"  HorizontalAlignment="Center"  VerticalAlignment="Top"  Margin="0,37,0,0"  FontFamily="Segoe UI"  FontSize="50"  TextAlignment="Center"/>
-                <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Button_CreateLobby}" HorizontalAlignment="Center" VerticalAlignment="Center" Click="OnCreateLobbyClick" Width="180" Height="30" FontSize="20"/>
-                <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Button_Join}" HorizontalAlignment="Center" Margin="0,284,0,0" VerticalAlignment="Top" Click="OnJoinClick" Width="180" Height="30" FontSize="20"/>
-                <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Button_Back}" HorizontalAlignment="Left" VerticalAlignment="Top" Click="OnBackClick" Width="180" Height="30" Margin="550,388,0,0" FontSize="20"/>
 
-            </Grid>
-        </Viewbox>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"  Text="BACKGAMMON"  Foreground="{StaticResource CyanAccentBrush}"  HorizontalAlignment="Center"  VerticalAlignment="Top"  Margin="0,10,0,20"  FontFamily="Segoe UI"  FontSize="50"  TextAlignment="Center"/>
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Button_CreateLobby}"  Click="OnCreateLobbyClick" />
+                <Button Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Button_Join}" Click="OnJoinClick" />
+            </StackPanel>
+            
+            <Button Grid.Row="2" Style="{StaticResource PreinitiationButtonStyle}" Content="{x:Static properties:Resources.Button_Back}" HorizontalAlignment="Right" VerticalAlignment="Center" Click="OnBackClick" />
+          
+        </Grid>
     </Grid>
 </Page>
