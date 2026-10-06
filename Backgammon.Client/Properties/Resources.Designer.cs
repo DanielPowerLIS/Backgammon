@@ -583,6 +583,42 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ingresa un correo electrónico con un formato válido, por ejemplo: usuario@dominio.com..
+        /// </summary>
+        public static string TextBlock_InvalidEmailMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_InvalidEmailMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Correo inválido.
+        /// </summary>
+        public static string TextBlock_InvalidEmailTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_InvalidEmailTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El correo, usuario, nombres y apellidos no deben superar los {0} caracteres por campo..
+        /// </summary>
+        public static string TextBlock_InvalidFieldLengthMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_InvalidFieldLengthMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datos demasiado largos.
+        /// </summary>
+        public static string TextBlock_InvalidFieldLengthTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_InvalidFieldLengthTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to La contraseña debe contener 8 o más caracteres e incluir algún carácter especial..
         /// </summary>
         public static string TextBlock_InvalidPasswordMessage {

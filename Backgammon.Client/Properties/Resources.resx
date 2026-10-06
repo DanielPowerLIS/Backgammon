@@ -527,4 +527,16 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_RemoveFriendConfirmationMessage" xml:space="preserve">
     <value>¿Seguro que quieres eliminar a {0} de tus amigos?</value>
   </data>
+  <data name="TextBlock_InvalidFieldLengthTitle" xml:space="preserve">
+    <value>Datos demasiado largos</value>
+  </data>
+  <data name="TextBlock_InvalidFieldLengthMessage" xml:space="preserve">
+    <value>El correo, usuario, nombres y apellidos no deben superar los {0} caracteres por campo.</value>
+  </data>
+  <data name="TextBlock_InvalidEmailTitle" xml:space="preserve">
+    <value>Correo inválido</value>
+  </data>
+  <data name="TextBlock_InvalidEmailMessage" xml:space="preserve">
+    <value>Ingresa un correo electrónico con un formato válido, por ejemplo: usuario@dominio.com.</value>
+  </data>
 </root>

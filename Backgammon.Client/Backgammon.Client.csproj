@@ -124,6 +124,8 @@
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AvatarOption.cs" />
+    <Compile Include="Models\RegistrationLimits.cs" />
+    <Compile Include="Models\RegistrationValidationResult.cs" />
     <Compile Include="Models\SocialNetworkOption.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
     <Compile Include="Repositories\ProfileRepository.cs" />

@@ -527,4 +527,16 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_RemoveFriendConfirmationMessage" xml:space="preserve">
     <value>Are you sure you want to remove {0} from your friends?</value>
   </data>
+  <data name="TextBlock_InvalidFieldLengthTitle" xml:space="preserve">
+    <value>Input too long</value>
+  </data>
+  <data name="TextBlock_InvalidFieldLengthMessage" xml:space="preserve">
+    <value>Email, username, first name, and surnames must not exceed {0} characters per field.</value>
+  </data>
+  <data name="TextBlock_InvalidEmailTitle" xml:space="preserve">
+    <value>Invalid email</value>
+  </data>
+  <data name="TextBlock_InvalidEmailMessage" xml:space="preserve">
+    <value>Enter an email address in a valid format, for example: user@domain.com.</value>
+  </data>
 </root>
