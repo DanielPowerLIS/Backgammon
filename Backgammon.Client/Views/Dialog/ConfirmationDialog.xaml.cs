@@ -22,7 +22,7 @@ namespace Backgammon.Client.Views.Dialog
         public ConfirmationDialog(string message)
         {
             InitializeComponent();
-            MessageText.Text = message;
+            textBlockMessage.Text = message;
         }
 
         public bool ShowOver(Window owner)

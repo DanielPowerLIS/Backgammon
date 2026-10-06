@@ -43,7 +43,7 @@ namespace Backgammon.Client.Views.Pages
             try 
             {
                 List<Profile> playerProfiles = _leaderboardService.GetLeaderboard();
-                LeaderboardListBox.ItemsSource = playerProfiles;
+                listBoxLeaderboard.ItemsSource = playerProfiles;
             }catch (SqlException) 
             { 
                 ShowLeaderboardError();

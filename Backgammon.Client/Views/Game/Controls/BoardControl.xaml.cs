@@ -40,7 +40,7 @@ namespace Backgammon.Client.Views.Game.Controls
         {
             foreach (CheckerControl renderedChecker in _renderedCheckers)
             {
-                BoardCanvas.Children.Remove(renderedChecker);
+                CanvasBoard.Children.Remove(renderedChecker);
             }
 
             _renderedCheckers.Clear();
@@ -112,7 +112,7 @@ namespace Backgammon.Client.Views.Game.Controls
 
             Canvas.SetLeft(newChecker, checkerLeft);
             Canvas.SetTop(newChecker, checkerTop);
-            BoardCanvas.Children.Add(newChecker);
+            CanvasBoard.Children.Add(newChecker);
             _renderedCheckers.Add(newChecker);
         }
     }

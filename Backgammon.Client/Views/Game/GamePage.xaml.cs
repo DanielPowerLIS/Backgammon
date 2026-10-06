@@ -10,7 +10,7 @@ namespace Backgammon.Client.Views.Game
         public GamePage()
         {
             InitializeComponent();
-            GameBoard.RenderBoard(BoardState.CreateInitial());
+            boardControlGame.RenderBoard(BoardState.CreateInitial());
         }
 
         private void OnRollDiceButtonClick(object sender, RoutedEventArgs e)

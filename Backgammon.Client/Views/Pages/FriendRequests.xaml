@@ -44,7 +44,7 @@
             </TextBlock>
 
             <Border Grid.Row="1" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Padding="10" Margin="20,0,20,0">
-                <ListView x:Name="FriendRequestList" Background="Transparent" BorderThickness="0">
+                <ListView x:Name="listViewFriendRequests" Background="Transparent" BorderThickness="0">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

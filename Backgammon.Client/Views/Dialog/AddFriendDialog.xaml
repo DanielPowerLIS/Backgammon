@@ -46,7 +46,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border
-                            x:Name="ButtonBorder"
+                            x:Name="BorderButton"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -61,21 +61,21 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter
-                                    TargetName="ButtonBorder"
+                                    TargetName="BorderButton"
                                     Property="Background"
                                     Value="#173044" />
                             </Trigger>
 
                             <Trigger Property="IsKeyboardFocused" Value="True">
                                 <Setter
-                                    TargetName="ButtonBorder"
+                                    TargetName="BorderButton"
                                     Property="BorderBrush"
                                     Value="{StaticResource PinkAccentBrush}" />
                             </Trigger>
 
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter
-                                    TargetName="ButtonBorder"
+                                    TargetName="BorderButton"
                                     Property="Background"
                                     Value="#22465A" />
                             </Trigger>
@@ -104,7 +104,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Border
-                            x:Name="InputBorder"
+                            x:Name="BorderInput"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -117,7 +117,7 @@
                                     VerticalAlignment="Center" />
 
                                 <TextBlock
-                                    x:Name="Placeholder"
+                                    x:Name="textBlockPlaceholder"
                                     Text="{TemplateBinding Tag}"
                                     Margin="{TemplateBinding Padding}"
                                     HorizontalAlignment="Stretch"
@@ -132,14 +132,14 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="Text" Value="">
                                 <Setter
-                                    TargetName="Placeholder"
+                                    TargetName="textBlockPlaceholder"
                                     Property="Visibility"
                                     Value="Visible" />
                             </Trigger>
 
                             <Trigger Property="IsKeyboardFocused" Value="True">
                                 <Setter
-                                    TargetName="InputBorder"
+                                    TargetName="BorderInput"
                                     Property="BorderBrush"
                                     Value="{StaticResource PinkAccentBrush}" />
                             </Trigger>

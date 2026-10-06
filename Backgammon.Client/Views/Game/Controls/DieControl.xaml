@@ -6,10 +6,10 @@
              xmlns:local="clr-namespace:Backgammon.Client.Views.Game.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="80" d:DesignWidth="80">
-    
-   
 
-    <Border x:Name="DieBorder" CornerRadius="10" BorderThickness="2" Background="#171C3B" BorderBrush="White">
-        <Grid x:Name="DotsGrid" Margin="10"></Grid>
+
+
+    <Border x:Name="BorderDie" CornerRadius="10" BorderThickness="2" Background="#171C3B" BorderBrush="White">
+        <Grid x:Name="GridDots" Margin="10"></Grid>
     </Border>
 </UserControl>

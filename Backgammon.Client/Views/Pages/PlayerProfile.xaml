@@ -144,7 +144,7 @@
                                    VerticalAlignment="Center"/>
 
                         <TextBlock Grid.Column="1"
-                                   x:Name="TxtPoints"
+                                   x:Name="textBlockPoints"
                                    Text="350"
                                    FontSize="20"
                                    Foreground="{StaticResource PinkAccentBrush}"
@@ -158,7 +158,7 @@
                                    VerticalAlignment="Center"/>
 
                         <TextBlock Grid.Column="3"
-                                   x:Name="TxtWins"
+                                   x:Name="textBlockWins"
                                    Text="3"
                                    FontSize="20"
                                    Foreground="{StaticResource PinkAccentBrush}"
@@ -182,7 +182,7 @@
                                    VerticalAlignment="Center"/>
 
                         <TextBlock Grid.Column="1"
-                                   x:Name="TxtRegistrationDate"
+                                   x:Name="textBlockRegistrationDate"
                                    Text="08/26/2026"
                                    FontSize="20"
                                    Foreground="{StaticResource PinkAccentBrush}"
@@ -204,7 +204,7 @@
                                 Background="{StaticResource ControlBackgroundBrush}"
                                 Padding="8">
 
-                            <TextBlock x:Name="TxtDescription"
+                            <TextBlock x:Name="textBlockDescription"
                                        Text="Apasionado del backgammon"
                                        Foreground="{StaticResource PinkAccentBrush}"
                                        FontSize="16"
@@ -235,7 +235,7 @@
                                        Foreground="{StaticResource CyanAccentBrush}"/>
 
                             <TextBlock Grid.Column="1"
-                                       x:Name="TxtFacebook"
+                                       x:Name="textBlockFacebook"
                                        Text="https://facebook.com"
                                        FontSize="18"
                                        Foreground="{StaticResource PinkAccentBrush}"
@@ -262,7 +262,7 @@
                                        Foreground="{StaticResource CyanAccentBrush}"/>
 
                             <TextBlock Grid.Column="1"
-                                       x:Name="TxtInstagram"
+                                       x:Name="textBlockInstagram"
                                        Text="https://instagram.com"
                                        FontSize="18"
                                        Foreground="{StaticResource PinkAccentBrush}"
@@ -289,7 +289,7 @@
                                        Foreground="{StaticResource CyanAccentBrush}"/>
 
                             <TextBlock Grid.Column="1"
-                                       x:Name="TxtTikTok"
+                                       x:Name="textBlockTikTok"
                                        Text="Sin enlace"
                                        FontSize="18"
                                        Foreground="{StaticResource PinkAccentBrush}"/>

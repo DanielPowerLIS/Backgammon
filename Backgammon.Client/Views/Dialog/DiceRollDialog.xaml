@@ -12,17 +12,17 @@
         WindowStyle="None"
         Background="#171c2b">
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-        <TextBlock x:Name="RollStatusText" Text="Tirando dados..." Foreground="White" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+        <TextBlock x:Name="textBlockRollStatus" Text="Tirando dados..." Foreground="White" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Margin="15, 0" >
-                <controls:DieControl x:Name="FirstDie"/>
-                <TextBlock x:Name="FirstDieValueText" Foreground="White" FontSize="20" HorizontalAlignment="Center" Margin="0,8, 0, 0"/>
+                <controls:DieControl x:Name="dieControlFirst"/>
+                <TextBlock x:Name="textBlockFirstDieValue" Foreground="White" FontSize="20" HorizontalAlignment="Center" Margin="0,8, 0, 0"/>
             </StackPanel>
             <StackPanel Margin="15, 0" >
-                <controls:DieControl x:Name="SecondDie"/>
-                <TextBlock x:Name="SecondDieValueText" Foreground="White" FontSize="20" HorizontalAlignment="Center" Margin="0,8, 0, 0"/>
+                <controls:DieControl x:Name="dieControlSecond"/>
+                <TextBlock x:Name="textBlockSecondDieValue" Foreground="White" FontSize="20" HorizontalAlignment="Center" Margin="0,8, 0, 0"/>
             </StackPanel>
         </StackPanel>
-        <Button x:Name="ContinueButton" Content="Continuar" Width="120" Height="40" Margin="0,25,0,0" IsEnabled="False" Click="OnContinueButtonClick" />
+        <Button x:Name="buttonContinue" Content="Continuar" Width="120" Height="40" Margin="0,25,0,0" IsEnabled="False" Click="OnContinueButtonClick" />
     </StackPanel>
 </Window>

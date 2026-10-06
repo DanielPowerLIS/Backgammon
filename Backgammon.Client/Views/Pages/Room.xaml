@@ -66,11 +66,11 @@
 
             <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Border Width="150" Height="150" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2">
-                    <Image x:Name="ImgHost"/>
+                    <Image x:Name="imageHost"/>
                 </Border>
-                <TextBlock x:Name="TxtHostUsername" Text="Jugador1" Foreground="{StaticResource CyanAccentBrush}" FontSize="20" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                <TextBlock x:Name="textBlockHostUsername" Text="Jugador1" Foreground="{StaticResource CyanAccentBrush}" FontSize="20" HorizontalAlignment="Center" Margin="0,8,0,0"/>
                 <Border Width="120" Height="30" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="1" CornerRadius="15" Margin="0,8,0,0">
-                    <TextBlock x:Name="TxtHostStatus" Text="{x:Static properties:Resources.TextBlock_Ready}" Foreground="{StaticResource PinkAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="textBlockHostStatus" Text="{x:Static properties:Resources.TextBlock_Ready}" Foreground="{StaticResource PinkAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
 
             </StackPanel>
@@ -78,15 +78,15 @@
             <Grid Grid.Row="1" Grid.Column="1">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Border Width="150" Height="150" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2">
-                        <Image x:Name="ImgGuest"/>
+                        <Image x:Name="imageGuest"/>
                     </Border>
 
-                    <TextBlock x:Name="TxtGuestUsername" Text="Jugador2" Foreground="{StaticResource CyanAccentBrush}" FontSize="20" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                    <TextBlock x:Name="textBlockGuestUsername" Text="Jugador2" Foreground="{StaticResource CyanAccentBrush}" FontSize="20" HorizontalAlignment="Center" Margin="0,8,0,0"/>
                     <Border Width="120" Height="30" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="1" CornerRadius="15" Margin="0,8,0,0">
-                        <TextBlock x:Name="TxtGuestStatus" Text="{x:Static properties:Resources.TextBlock_Ready}" Foreground="{StaticResource PinkAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="textBlockGuestStatus" Text="{x:Static properties:Resources.TextBlock_Ready}" Foreground="{StaticResource PinkAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </StackPanel>
-                <Button x:Name="BtnKick" Content="{x:Static properties:Resources.Button_Kick}" Style="{StaticResource KickButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Center" MinWidth="100" Height="35"/>
+                <Button x:Name="buttonKick" Content="{x:Static properties:Resources.Button_Kick}" Style="{StaticResource KickButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Center" MinWidth="100" Height="35"/>
             </Grid>
 
             <Button Grid.Row="2" Grid.Column="0" Content="{x:Static properties:Resources.Button_OpenChat}" Style="{StaticResource RoomButtonStyle}" HorizontalAlignment="Left" MinWidth="130" Height="35"  Margin="0,10,0,0"/>

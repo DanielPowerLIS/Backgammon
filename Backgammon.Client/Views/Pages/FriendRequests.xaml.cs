@@ -24,10 +24,10 @@ namespace Backgammon.Client.Views.Pages
         {
             InitializeComponent();
 
-            FriendRequestList.Items.Add("Solicitud de amistad 1");
-            FriendRequestList.Items.Add("Solicitud de amistad 2");
-            FriendRequestList.Items.Add("Solicitud de amistad 3");
-            FriendRequestList.Items.Add("Solicitud de amistad 4");
+            listViewFriendRequests.Items.Add("Solicitud de amistad 1");
+            listViewFriendRequests.Items.Add("Solicitud de amistad 2");
+            listViewFriendRequests.Items.Add("Solicitud de amistad 3");
+            listViewFriendRequests.Items.Add("Solicitud de amistad 4");
         }
     }
 }

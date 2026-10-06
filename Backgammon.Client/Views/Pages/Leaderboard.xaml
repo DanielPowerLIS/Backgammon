@@ -48,7 +48,7 @@
             </TextBlock>
 
             <Border Grid.Row="1" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Background="{StaticResource ControlBackgroundBrush}" Padding="10">
-                <ListBox x:Name="LeaderboardListBox"
+                <ListBox x:Name="listBoxLeaderboard"
              Background="Transparent"
              BorderThickness="0">
 

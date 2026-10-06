@@ -39,8 +39,8 @@ namespace Backgammon.Client.Views.Dialog
 
         private void SetupDice()
         {
-            FirstDie.DieValue = MinDieValue;
-            SecondDie.DieValue = MinDieValue;
+            dieControlFirst.DieValue = MinDieValue;
+            dieControlSecond.DieValue = MinDieValue;
         }
 
         private void SetupTimer()
@@ -54,11 +54,11 @@ namespace Backgammon.Client.Views.Dialog
         {
             _elapsedMilliseconds += AnimationIntervalMilliseconds;
 
-            FirstDie.DieValue = _random.Next(MinDieValue, MaxDieValue + 1);
-            SecondDie.DieValue = _random.Next(MinDieValue, MaxDieValue + 1);
+            dieControlFirst.DieValue = _random.Next(MinDieValue, MaxDieValue + 1);
+            dieControlSecond.DieValue = _random.Next(MinDieValue, MaxDieValue + 1);
 
-            FirstDieValueText.Text = FirstDie.DieValue.ToString();
-            SecondDieValueText.Text = SecondDie.DieValue.ToString();
+            textBlockFirstDieValue.Text = dieControlFirst.DieValue.ToString();
+            textBlockSecondDieValue.Text = dieControlSecond.DieValue.ToString();
 
             if (_elapsedMilliseconds >= AnimationDurationMilliseconds)
             {
@@ -70,10 +70,10 @@ namespace Backgammon.Client.Views.Dialog
         {
             _animationTimer.Stop();
 
-            Result = new DiceResult(FirstDie.DieValue, SecondDie.DieValue);
+            Result = new DiceResult(dieControlFirst.DieValue, dieControlSecond.DieValue);
 
-            RollStatusText.Text = "¡Resultado!";
-            ContinueButton.IsEnabled = true;
+            textBlockRollStatus.Text = "¡Resultado!";
+            buttonContinue.IsEnabled = true;
         }
 
         private void OnContinueButtonClick(object sender, RoutedEventArgs e)
