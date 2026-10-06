@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,6 +22,7 @@ using System.Security.Cryptography;
 using Backgammon.Client.Repositories;
 using Backgammon.Client.Views.Dialog;
 using Backgammon.Client.Services;
+using Backgammon.Client.Models;
 using AccountEntity = Backgammon.Client.Data.Account;
 using ProfileEntity = Backgammon.Client.Data.Profile;
 
@@ -69,7 +71,7 @@ namespace Backgammon.Client.Views.Pages
                 return true;
             }
 
-                return false;
+            return false;
         }
 
         private bool HasValidPasswordFormat()
@@ -88,30 +90,100 @@ namespace Backgammon.Client.Views.Pages
             accountDialog.ShowOver(Window.GetWindow(this));
         }
 
-        
-        private bool ValidateLocalFields()
+
+        private RegistrationValidationResult ValidateLocalFields()
+        {
+            RegistrationValidationResult validationResult = ValidateRequiredFields();
+
+            if (!validationResult.IsValid)
+            {
+                return validationResult;
+            }
+
+            validationResult = ValidateFieldLengths();
+            if (!validationResult.IsValid)
+            {
+                return validationResult;
+            }
+
+            validationResult = ValidateEmailFormat();
+            if (!validationResult.IsValid)
+            {
+                return validationResult;
+            }
+
+            return ValidatePasswordFormat();
+        }
+
+        private RegistrationValidationResult ValidateRequiredFields()
         {
             if (FocusFirstEmptyField())
             {
-                ShowRegistrationError(
-                    Properties.Resources.TextBlock_RequiredFieldsTitle,
-                    Properties.Resources.TextBlock_RequiredFieldsMessage);
-
-                FocusFirstEmptyField();
-                return false;
+                return new RegistrationValidationResult
+                {
+                    IsValid = false,
+                    ErrorTitle = Properties.Resources.TextBlock_RequiredFieldsTitle,
+                    ErrorMessage = Properties.Resources.TextBlock_RequiredFieldsMessage
+                };
             }
 
+            return new RegistrationValidationResult { IsValid = true };
+        }
+
+        private RegistrationValidationResult ValidatePasswordFormat()
+        {
             if (!HasValidPasswordFormat())
             {
-                ShowRegistrationError(
-                    Properties.Resources.TextBlock_InvalidPasswordTitle,
-                    Properties.Resources.TextBlock_InvalidPasswordMessage);
+                return new RegistrationValidationResult
+                {
+                    IsValid = false,
+                    ErrorTitle = Properties.Resources.TextBlock_InvalidPasswordTitle,
+                    ErrorMessage = Properties.Resources.TextBlock_InvalidPasswordMessage
+                };
+            }
 
-                passwordBoxPassword.Focus();
+            return new RegistrationValidationResult { IsValid = true };
+        }
+
+        private RegistrationValidationResult ValidateEmailFormat()
+        {
+            string emailAddress = textBoxEmail.Text.Trim();
+
+            if (!HasValidEmailFormat(emailAddress))
+            {
+                textBoxEmail.Focus();
+                return new RegistrationValidationResult
+                {
+                    IsValid = false,
+                    ErrorTitle = Properties.Resources.TextBlock_InvalidEmailTitle,
+                    ErrorMessage = Properties.Resources.TextBlock_InvalidEmailMessage
+                };
+            }
+
+            return new RegistrationValidationResult { IsValid = true };
+        }
+
+        private bool HasValidEmailFormat(string emailAddress)
+        {
+            if (string.IsNullOrWhiteSpace(emailAddress) || emailAddress.Any(char.IsWhiteSpace))
+            {
                 return false;
             }
 
-            return true;
+            try
+            {
+                MailAddress parsedAddress = new MailAddress(emailAddress);
+                return string.Equals(parsedAddress.Address, emailAddress, StringComparison.Ordinal) &&
+                    Uri.CheckHostName(parsedAddress.Host) == UriHostNameType.Dns &&
+                    !parsedAddress.Host.Contains("_") &&
+                    parsedAddress.Host.Contains(".") &&
+                    !parsedAddress.Host.EndsWith(".", StringComparison.Ordinal) &&
+                    !parsedAddress.Host.Contains("..");
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
 
         private async Task<bool> CheckEmailAvailabilityAsync()
@@ -165,13 +237,16 @@ namespace Backgammon.Client.Views.Pages
 
         private async void OnCreateAccountClick(object sender, RoutedEventArgs e)
         {
-            if (!ValidateLocalFields())
+            RegistrationValidationResult validationResult = ValidateLocalFields();
+
+            if (!validationResult.IsValid)
             {
+                ShowRegistrationError(
+                    validationResult.ErrorTitle, validationResult.ErrorMessage);
                 return;
             }
 
             buttonCreateAccount.IsEnabled = false;
-
             try
             {
                 await RegisterAccountAsync();
@@ -273,6 +348,41 @@ namespace Backgammon.Client.Views.Pages
         private void OnButtonSignInClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Login());
+        }
+
+        private TextBox[] GetRegistrationTextFields()
+        {
+            return new TextBox[]
+            {
+                textBoxEmail,
+                textBoxFirstName,
+                textBoxPaternalLastName,
+                textBoxMaternalLastName,
+                textBoxUsername
+            };
+        }
+
+        private RegistrationValidationResult ValidateFieldLengths()
+        {
+            TextBox[] registrationFields = GetRegistrationTextFields();
+
+            foreach (TextBox registrationField in registrationFields)
+            {
+                if (registrationField.Text.Trim().Length >
+                    RegistrationLimits.TextFieldMaximumLength)
+                {
+                    return new RegistrationValidationResult
+                    {
+                        IsValid = false,
+                        ErrorTitle = Properties.Resources.TextBlock_InvalidFieldLengthTitle,
+                        ErrorMessage = string.Format(
+                            Properties.Resources.TextBlock_InvalidFieldLengthMessage,
+                            RegistrationLimits.TextFieldMaximumLength)
+                    };
+                }
+            }
+
+            return new RegistrationValidationResult { IsValid = true };
         }
     }
 }
