@@ -5,9 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Backgammon.Client.Views.Pages"
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
+      xmlns:localization="clr-namespace:Backgammon.Client.Localization"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="{x:Static properties:Resources.TextBlock_Button_Language}">
+      Title="{localization:LocalizedText ResourceKey=TextBlock_Button_Language}">
     
     <Page.Resources>
         <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5, 0.5" GradientOrigin="0.5, 0.35" RadiusX="0.85" RadiusY="0.85">
@@ -37,7 +38,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Foreground="{StaticResource PinkAccentBrush}"  Grid.Row="0" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Button_Language}" VerticalAlignment="Top" FontSize="30">
+            <TextBlock Foreground="{StaticResource PinkAccentBrush}"  Grid.Row="0" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="{localization:LocalizedText ResourceKey=TextBlock_Button_Language}" VerticalAlignment="Top" FontSize="30">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#E795EC"
                                       BlurRadius="3"
@@ -49,11 +50,11 @@
 
             <Border Grid.Row="1" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Background="{StaticResource ControlBackgroundBrush}" Padding="20">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Button Style="{StaticResource LanguageButtonStyle}" Content="{x:Static properties:Resources.Button_Spanish}" Width="180" Height="40" Margin="0,10,0,10" FontSize="14"/>
-                    <Button Style="{StaticResource LanguageButtonStyle}" Content="{x:Static properties:Resources.Button_English}" Width="180" Height="40" Margin="0,10,0,10" FontSize="14"/>
+                    <Button Style="{StaticResource LanguageButtonStyle}" Content="{localization:LocalizedText ResourceKey=Button_Spanish}" Width="180" Height="40" Margin="0,10,0,10" FontSize="14" Click="OnSpanishClick"/>
+                    <Button Style="{StaticResource LanguageButtonStyle}" Content="{localization:LocalizedText ResourceKey=Button_English}" Width="180" Height="40" Margin="0,10,0,10" FontSize="14" Click="OnEnglishClick"/>
                 </StackPanel>
             </Border>
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_Back}" Style="{StaticResource LanguageButtonStyle}" Foreground="{StaticResource PinkAccentBrush}"  Width="100" Height="35" Margin="0,15,0,0" FontSize="14" HorizontalAlignment="Right"/>
+            <Button Grid.Row="2" Content="{localization:LocalizedText ResourceKey=Button_Back}" Style="{StaticResource LanguageButtonStyle}" Foreground="{StaticResource PinkAccentBrush}"  Width="100" Height="35" Margin="0,15,0,0" FontSize="14" HorizontalAlignment="Right" Click="OnBackClick"/>
 
 
         </Grid>
