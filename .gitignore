@@ -368,3 +368,7 @@ DBSecrets.config
 #SonarQube
 .sonarqube/
 analizar-sonar.bat
+
+# Generated logs
+*.log
+*.log.*
