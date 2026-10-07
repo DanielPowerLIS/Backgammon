@@ -15,14 +15,15 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.Entity.Core;
 using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Data.Entity.Infrastructure;
 using System.Security.Cryptography;
+using System.Data.Entity.Validation;
 
 using Backgammon.Client.Repositories;
 using Backgammon.Client.Views.Dialog;
 using Backgammon.Client.Services;
 using Backgammon.Client.Models;
+using Backgammon.Client.Services.Logging;
 using AccountEntity = Backgammon.Client.Data.Account;
 using ProfileEntity = Backgammon.Client.Data.Profile;
 
@@ -33,8 +34,22 @@ namespace Backgammon.Client.Views.Pages
         private static readonly int MinimumPasswordLength = 8;
         private static readonly int DefaultAvatarId = 1;
         private static readonly int OfflineStateId = 3;
+
+        private readonly IApplicationLogger _applicationLogger;
         public AccountRegistration()
+            : this(new Log4NetApplicationLogger(typeof(AccountRegistration)))
         {
+        }
+
+        public AccountRegistration(IApplicationLogger applicationLogger)
+        {
+            if (applicationLogger == null)
+            {
+                throw new ArgumentNullException(nameof(applicationLogger));
+            }
+
+            _applicationLogger = applicationLogger;
+
             InitializeComponent();
         }
 
@@ -226,9 +241,11 @@ namespace Backgammon.Client.Views.Pages
             return true;
         }
 
-        private void ShowDatabaseError(Exception exception)
+        private void ShowDatabaseError(Exception errorException)
         {
-            Trace.TraceError(exception.ToString());
+            _applicationLogger.LogError(
+                errorException,
+                "Account registration failed during a database operation.");
 
             ShowRegistrationError(
                 Properties.Resources.TextBlock_RegistrationConnectionErrorTitle,
@@ -273,6 +290,7 @@ namespace Backgammon.Client.Views.Pages
             }
             catch (Exception exception) when (
                 exception is DbUpdateException ||
+                exception is DbEntityValidationException ||
                 exception is CryptographicException ||
                 exception is InvalidOperationException)
             {
@@ -327,9 +345,11 @@ namespace Backgammon.Client.Views.Pages
             };
         }
 
-        private void ShowSaveError(Exception exception)
+        private void ShowSaveError(Exception errorException)
         {
-            Trace.TraceError(exception.ToString());
+            _applicationLogger.LogError(
+                errorException,
+                "Account registration could not be completed.");
 
             ShowRegistrationError(
                 Properties.Resources.TextBlock_RegistrationSaveErrorTitle,
