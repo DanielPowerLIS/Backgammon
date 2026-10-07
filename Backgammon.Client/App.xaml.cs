@@ -1,6 +1,6 @@
-﻿using System.Globalization;
-using System.Threading;
-using System.Windows;
+﻿using System.Windows;
+
+using Backgammon.Client.Localization;
 
 namespace Backgammon.Client
 {
@@ -8,10 +8,7 @@ namespace Backgammon.Client
 	{
         protected override void OnStartup(StartupEventArgs e)
         {
-            CultureInfo culture = new CultureInfo("en-US");
-
-            Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = culture;
+            LocalizationService.Current.LoadPreferredLanguage();
 
             base.OnStartup(e);
         }

@@ -123,6 +123,9 @@
     <Compile Include="Data\TypeSocialMedia.cs">
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Localization\LanguageOptions.cs" />
+    <Compile Include="Localization\LocalizationService.cs" />
+    <Compile Include="Localization\LocalizedText.cs" />
     <Compile Include="Models\AvatarOption.cs" />
     <Compile Include="Models\RegistrationLimits.cs" />
     <Compile Include="Models\RegistrationValidationResult.cs" />
