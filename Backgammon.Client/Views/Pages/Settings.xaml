@@ -48,8 +48,8 @@
             <Border Grid.Row="1" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Background="{StaticResource ControlBackgroundBrush}" Padding="20">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
                     <Button Content="{x:Static properties:Resources.TextBlock_Button_Account}" Style="{StaticResource SettingsButtonStyle}" MinWidth="150" MinHeight="40" Margin="0,0,0,15"/>
-                    <Button Content="{x:Static properties:Resources.TextBlock_Button_Language}" Style="{StaticResource SettingsButtonStyle}" MinWidth="150" MinHeight="40" Margin="0,0,0,15"/>
-                    <Button Content="{x:Static properties:Resources.TextBlock_Button_ChangePassword}" Style="{StaticResource SettingsButtonStyle}" MinWidth="180" MinHeight="40" Click="OnLanguageClick"/>
+                    <Button Content="{x:Static properties:Resources.TextBlock_Button_Language}" Style="{StaticResource SettingsButtonStyle}" MinWidth="150" MinHeight="40" Margin="0,0,0,15" Click="OnLanguageClick"/>
+                    <Button Content="{x:Static properties:Resources.TextBlock_Button_ChangePassword}" Style="{StaticResource SettingsButtonStyle}" MinWidth="180" MinHeight="40"/>
                 </StackPanel>
             </Border>
 
