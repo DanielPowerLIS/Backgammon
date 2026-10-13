@@ -80,12 +80,12 @@
                              StrokeThickness="2"
                              Fill="#3D7EA6"/>
 
+
                     <TextBlock Grid.Row="1"
-                               Text="Nombre usuario"
-                               FontSize="20"
-                               Foreground="{StaticResource PinkAccentBrush}"
-                               HorizontalAlignment="Center"
-                               Margin="0,5"/>
+                            FontSize="20"
+                            Foreground="{StaticResource PinkAccentBrush}"
+                            HorizontalAlignment="Center"
+                            Margin="0,5"/>
 
                     <Grid Grid.Row="2"
                           Margin="40,20">
@@ -101,12 +101,14 @@
                                    Foreground="{StaticResource PinkAccentBrush}"
                                    VerticalAlignment="Center"/>
 
+
                         <TextBlock Grid.Column="1"
-                                   Text="Label"
                                    FontSize="20"
                                    Foreground="{StaticResource PinkAccentBrush}"
                                    Margin="20,0,0,0"
                                    VerticalAlignment="Center"/>
+                        
+                        
 
                     </Grid>
 
@@ -145,7 +147,7 @@
 
                         <TextBlock Grid.Column="1"
                                    x:Name="textBlockPoints"
-                                   Text="350"
+                                   Text=""
                                    FontSize="20"
                                    Foreground="{StaticResource PinkAccentBrush}"
                                    VerticalAlignment="Center"
@@ -159,7 +161,7 @@
 
                         <TextBlock Grid.Column="3"
                                    x:Name="textBlockWins"
-                                   Text="3"
+                                   Text=""
                                    FontSize="20"
                                    Foreground="{StaticResource PinkAccentBrush}"
                                    VerticalAlignment="Center"
@@ -183,7 +185,7 @@
 
                         <TextBlock Grid.Column="1"
                                    x:Name="textBlockRegistrationDate"
-                                   Text="08/26/2026"
+                                   Text=""
                                    FontSize="20"
                                    Foreground="{StaticResource PinkAccentBrush}"
                                    VerticalAlignment="Center"
@@ -204,11 +206,10 @@
                                 Background="{StaticResource ControlBackgroundBrush}"
                                 Padding="8">
 
-                            <TextBlock x:Name="textBlockDescription"
-                                       Text="Apasionado del backgammon"
-                                       Foreground="{StaticResource PinkAccentBrush}"
-                                       FontSize="16"
-                                       TextWrapping="Wrap"/>
+                                <TextBlock x:Name="textBlockDescription"
+                                   Foreground="{StaticResource PinkAccentBrush}"
+                                   FontSize="16"
+                                   TextWrapping="Wrap"/>
 
                         </Border>
 
@@ -236,7 +237,6 @@
 
                             <TextBlock Grid.Column="1"
                                        x:Name="textBlockFacebook"
-                                       Text="https://facebook.com"
                                        FontSize="18"
                                        Foreground="{StaticResource PinkAccentBrush}"
                                        TextWrapping="Wrap"/>
@@ -263,7 +263,6 @@
 
                             <TextBlock Grid.Column="1"
                                        x:Name="textBlockInstagram"
-                                       Text="https://instagram.com"
                                        FontSize="18"
                                        Foreground="{StaticResource PinkAccentBrush}"
                                        TextWrapping="Wrap"/>
@@ -290,7 +289,6 @@
 
                             <TextBlock Grid.Column="1"
                                        x:Name="textBlockTikTok"
-                                       Text="Sin enlace"
                                        FontSize="18"
                                        Foreground="{StaticResource PinkAccentBrush}"/>
 

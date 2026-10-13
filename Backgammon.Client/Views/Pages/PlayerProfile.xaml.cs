@@ -22,11 +22,6 @@ namespace Backgammon.Client.Views.Pages
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void OnBackClick(object sender, RoutedEventArgs e)
         {
             if (NavigationService.CanGoBack) 
