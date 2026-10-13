@@ -53,6 +53,10 @@
     <None Include="Domain\.gitkeep" />
     <None Include="Persistence\.gitkeep" />
     <None Include="Services\.gitkeep" />
+    <None Include="Services\Comunication\.gitkeep" />
+    <None Include="Services\Events\.gitkeep" />
+    <None Include="Services\Requests\.gitkeep" />
+    <None Include="Services\Responses\.gitkeep" />
     <None Include="SupportServices\.gitkeep" />
   </ItemGroup>
   <ItemGroup />
