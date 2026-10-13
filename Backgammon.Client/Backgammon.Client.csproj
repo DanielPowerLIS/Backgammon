@@ -54,6 +54,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -74,6 +75,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Comunication\LeaderboardClient.cs" />
+    <Compile Include="Connected Services\LeaderboardReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Data\Account.cs">
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
@@ -136,10 +143,8 @@
     <Compile Include="Models\RegistrationValidationResult.cs" />
     <Compile Include="Models\SocialNetworkOption.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
-    <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Repositories\RegistrationRepository.cs" />
     <Compile Include="Services\AccountCodeGenerator.cs" />
-    <Compile Include="Services\LeaderboardService.cs" />
     <Compile Include="Services\Logging\IApplicationLogger.cs" />
     <Compile Include="Services\Logging\Log4NetApplicationLogger.cs" />
     <Compile Include="Services\PasswordHashService.cs" />
@@ -398,8 +403,27 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Backgammon_Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Connected Services\LeaderboardReference\Backgammon.Client.LeaderboardReference.LeaderboardEntry.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\LeaderboardReference\Backgammon.Server.Services.Responses.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LeaderboardReference\service.wsdl" />
+    <None Include="Connected Services\LeaderboardReference\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LeaderboardReference\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Data\Backgammon_Model.edmx.diagram">
       <DependentUpon>Backgammon_Model.edmx</DependentUpon>
+    </None>
+    <None Include="Connected Services\LeaderboardReference\configuration91.svcinfo" />
+    <None Include="Connected Services\LeaderboardReference\configuration.svcinfo" />
+    <None Include="Connected Services\LeaderboardReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -418,7 +442,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Data\Backgammon_Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -433,6 +459,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\LeaderboardReference\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

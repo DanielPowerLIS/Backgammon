@@ -112,6 +112,7 @@
     <Compile Include="Persistence\Repositories\ProfileRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Comunication\LeaderboardServiceHost.cs" />
     <Compile Include="Services\LeaderboardService.cs" />
     <Compile Include="Services\Responses\LeaderboardEntry.cs" />
   </ItemGroup>
@@ -129,7 +130,6 @@
     <None Include="Persistence\Data\Backgammon_Model.edmx.diagram">
       <DependentUpon>Backgammon_Model.edmx</DependentUpon>
     </None>
-    <None Include="Services\Comunication\.gitkeep" />
     <None Include="Services\Events\.gitkeep" />
     <None Include="Services\Requests\.gitkeep" />
     <None Include="Services\Responses\.gitkeep" />
