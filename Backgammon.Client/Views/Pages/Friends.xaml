@@ -59,13 +59,22 @@
             </StackPanel>
             
             <Border Grid.Row="2" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Padding="10">
-                <ListView x:Name="listViewFriends" Background="Transparent" BorderThickness="0">
+
+                <ListView x:Name="listViewFriends"
+          Background="Transparent"
+          BorderThickness="0"
+          ItemsSource="{Binding Friends}"
+          HorizontalContentAlignment="Stretch">
+
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch"/>
+                            <Setter Property="Background"
+                    Value="Transparent"/>
                         </Style>
                     </ListView.ItemContainerStyle>
+
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="5">
@@ -77,17 +86,40 @@
                                     <ColumnDefinition Width="120"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Ellipse Grid.Column="0" Width="40" Height="40" Fill="#3d7ea6"/>
-                                <TextBlock Foreground="{StaticResource CyanAccentBrush}" Grid.Column="1" Text="Something" VerticalAlignment="Center" FontSize="16"/>
-                                <Ellipse Grid.Column="2" Width="20" Height="20" Fill="Green" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <Button Style="{StaticResource FriendButtonStyle}" Grid.Column="3" Content="{x:Static properties:Resources.Button_ViewProfile}" Width="100" Height="30"/>
-                                <Button Style="{StaticResource FriendButtonStyle}" Grid.Column="4" Content="{x:Static properties:Resources.Button_Remove}" Width="100" Height="30"/>
+                                <Ellipse Grid.Column="0"
+                         Width="40"
+                         Height="40"
+                         Fill="{Binding AvatarBrush}"/>
+
+                                <TextBlock Grid.Column="1"
+                           Text="{Binding Username}"
+                           Foreground="{StaticResource CyanAccentBrush}"
+                           VerticalAlignment="Center"
+                           FontSize="16"/>
+
+                                <Ellipse Grid.Column="2"
+                         Width="20"
+                         Height="20"
+                         Fill="{Binding StatusBrush}"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"/>
+
+                                <Button Grid.Column="3"
+                        Style="{StaticResource FriendButtonStyle}"
+                        Content="{x:Static properties:Resources.Button_ViewProfile}"
+                        Width="100"
+                        Height="30"/>
+
+                                <Button Grid.Column="4"
+                        Style="{StaticResource FriendButtonStyle}"
+                        Content="{x:Static properties:Resources.Button_Remove}"
+                        Width="100"
+                        Height="30"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
 
                 </ListView>
-
             </Border>
             <Button Style="{StaticResource FriendButtonStyle}" Grid.Row="3" Content="{x:Static properties:Resources.Button_Back}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0" Click="OnBackClick"/>
         </Grid>
