@@ -1,61 +1,69 @@
-﻿using Backgammon.Client.Data;
-using Backgammon.Client.Services;
-using Backgammon.Client.Utils;
-using Backgammon.Client.Views.Dialog;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
+﻿using System;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
+using Backgammon.Client.Comunication;
+using Backgammon.Client.LeaderboardReference;
+using Backgammon.Client.Services.Logging;
+using Backgammon.Client.Utils;
+using Backgammon.Client.Views.Dialog;
 
 namespace Backgammon.Client.Views.Pages
 {
     public partial class Leaderboard : Page
     {
-        private readonly LeaderboardService _leaderboardService;
+        private readonly LeaderboardClient _leaderboardClient;
+        private readonly IApplicationLogger _applicationLogger;
+
         public Leaderboard()
+            : this(new Log4NetApplicationLogger(typeof(Leaderboard)))
+        {
+        }
+
+        public Leaderboard(IApplicationLogger applicationLogger)
         {
             InitializeComponent();
 
-            _leaderboardService = new LeaderboardService();
+            _applicationLogger = applicationLogger
+                ?? throw new ArgumentNullException(nameof(applicationLogger));
+            _leaderboardClient = new LeaderboardClient();
 
             Loaded += OnLeaderboardLoaded;
         }
 
-        private void OnLeaderboardLoaded(object sender, RoutedEventArgs e)
+        private async void OnLeaderboardLoaded(
+            object eventSender,
+            RoutedEventArgs eventArgs)
         {
-            LoadLeaderboard();
+            await LoadLeaderboardAsync();
         }
 
-        private void LoadLeaderboard()
+        private async Task LoadLeaderboardAsync()
         {
-            try 
+            try
             {
-                List<Profile> playerProfiles = _leaderboardService.GetLeaderboard();
-                listBoxLeaderboard.ItemsSource = playerProfiles;
-            }catch (SqlException) 
-            { 
-                ShowLeaderboardError();
-            }catch(EntityException)
+                LeaderboardEntry[] leaderboardEntries =
+                    await _leaderboardClient.GetLeaderboardAsync();
+
+                listBoxLeaderboard.ItemsSource = leaderboardEntries;
+            }
+            catch (Exception errorException) when (
+                errorException is CommunicationException ||
+                errorException is TimeoutException)
             {
-                ShowLeaderboardError();
+                ShowLeaderboardError(errorException);
             }
         }
 
-        private void ShowLeaderboardError()
+        private void ShowLeaderboardError(Exception errorException)
         {
-            AlertDialog alertDialog = new AlertDialog(
+            _applicationLogger.LogError(
+                errorException,
+                "Failed to load the leaderboard from the server.");
+
+            var alertDialog = new AlertDialog(
                 Properties.Resources.TextBlock_LeaderboardLoadErrorTitle,
                 Properties.Resources.TextBlock_LeaderboardLoadErrorMessage,
                 Properties.Resources.Button_Accept,
@@ -65,9 +73,11 @@ namespace Backgammon.Client.Views.Pages
             alertDialog.ShowDialog();
         }
 
-        private void OnBackClick(object sender, RoutedEventArgs e)
+        private void OnBackClick(
+            object eventSender,
+            RoutedEventArgs eventArgs)
         {
-            if (NavigationService.CanGoBack) 
+            if (NavigationService.CanGoBack)
             {
                 NavigationService.GoBack();
             }
