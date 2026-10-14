@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.ServiceModel;
 using System.Threading.Tasks;
 
 using Backgammon.Server.Persistence.Data;
@@ -9,8 +8,7 @@ using Backgammon.Server.Services.Responses;
 
 namespace Backgammon.Server.Services
 {
-    [ServiceContract]
-    public class LeaderboardService
+    public class LeaderboardService : ILeaderboardService
     {
         private readonly ProfileRepository _profileRepository;
 
@@ -19,7 +17,6 @@ namespace Backgammon.Server.Services
             _profileRepository = new ProfileRepository();
         }
 
-        [OperationContract]
         public async Task<LeaderboardEntry[]> GetLeaderboardAsync()
         {
             List<Profile> playerProfiles =
