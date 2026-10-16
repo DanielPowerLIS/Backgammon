@@ -44,7 +44,7 @@ namespace Backgammon.Client.Views.Pages
         {
             try
             {
-                LeaderboardEntry[] leaderboardEntries =
+                LeaderboardEntryDto[] leaderboardEntries =
                     await _leaderboardClient.GetLeaderboardAsync();
 
                 listBoxLeaderboard.ItemsSource = leaderboardEntries;

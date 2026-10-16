@@ -3,7 +3,7 @@
 namespace Backgammon.Server.Services.Responses
 {
     [DataContract]
-    public class LeaderboardEntry
+    public class LeaderboardEntryDto
     {
         [DataMember]
         public string Username { get; set; }
