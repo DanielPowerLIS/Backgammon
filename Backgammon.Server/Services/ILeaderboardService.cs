@@ -9,6 +9,6 @@ namespace Backgammon.Server.Services
     public interface ILeaderboardService
     {
         [OperationContract]
-        Task<LeaderboardEntry[]> GetLeaderboardAsync();
+        Task<LeaderboardEntryDto[]> GetLeaderboardAsync();
     }
 }

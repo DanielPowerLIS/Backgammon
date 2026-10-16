@@ -115,7 +115,7 @@
     <Compile Include="Services\Comunication\LeaderboardServiceHost.cs" />
     <Compile Include="Services\ILeaderboardService.cs" />
     <Compile Include="Services\LeaderboardService.cs" />
-    <Compile Include="Services\Responses\LeaderboardEntry.cs" />
+    <Compile Include="Services\Responses\LeaderboardEntryDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

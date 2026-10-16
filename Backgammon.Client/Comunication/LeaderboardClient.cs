@@ -10,7 +10,7 @@ namespace Backgammon.Client.Comunication
         private static readonly string EndpointConfigurationName =
             "NetTcpBinding_LeaderboardService";
 
-        public async Task<LeaderboardEntry[]> GetLeaderboardAsync()
+        public async Task<LeaderboardEntryDto[]> GetLeaderboardAsync()
         {
             var serviceClient =
                 new LeaderboardServiceClient(EndpointConfigurationName);
@@ -18,7 +18,7 @@ namespace Backgammon.Client.Comunication
 
             try
             {
-                LeaderboardEntry[] leaderboardEntries =
+                LeaderboardEntryDto[] leaderboardEntries =
                     await serviceClient.GetLeaderboardAsync();
 
                 await Task.Factory.FromAsync(
