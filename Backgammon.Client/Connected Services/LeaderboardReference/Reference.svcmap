@@ -19,13 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="net.tcp://localhost:9001/LeaderboardService/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://localhost:9002/?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="33190bba-5d81-41ac-9dfb-4d858009974c" SourceId="1" SourceUrl="net.tcp://localhost:9001/LeaderboardService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="8aae2bed-9c9b-4731-93e1-592ea1aaf277" SourceId="1" SourceUrl="net.tcp://localhost:9001/LeaderboardService/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="8402f9e0-6ce3-43a3-90b9-5d38a5b684e1" SourceId="1" SourceUrl="net.tcp://localhost:9001/LeaderboardService/mex" />
-    <MetadataFile FileName="Backgammon.Server.Services.Responses.xsd" MetadataType="Schema" ID="0f0d170b-b622-44ad-8b3b-e9bb99a0031a" SourceId="1" SourceUrl="net.tcp://localhost:9001/LeaderboardService/mex" />
+    <MetadataFile FileName="LeaderboardService.wsdl" MetadataType="Wsdl" ID="5e6ed8a0-2cf8-49dd-8186-ad01492f0e0a" SourceId="1" SourceUrl="http://localhost:9002/?wsdl" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="199cbd13-a6c0-495e-829a-6624a2439c12" SourceId="1" SourceUrl="http://localhost:9002/?xsd=xsd0" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="f4767cdc-b8e4-43d1-bb7b-7fc1125e33de" SourceId="1" SourceUrl="http://localhost:9002/?xsd=xsd1" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="e6d99235-208d-4ea8-ae63-0980754bd048" SourceId="1" SourceUrl="http://localhost:9002/?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

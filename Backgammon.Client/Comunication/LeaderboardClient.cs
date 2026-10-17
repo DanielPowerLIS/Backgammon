@@ -8,7 +8,7 @@ namespace Backgammon.Client.Comunication
     internal class LeaderboardClient
     {
         private static readonly string EndpointConfigurationName =
-            "NetTcpBinding_LeaderboardService";
+            "NetTcpBinding_ILeaderboardService";
 
         public async Task<LeaderboardEntryDto[]> GetLeaderboardAsync()
         {

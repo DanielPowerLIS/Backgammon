@@ -5,7 +5,7 @@ using Backgammon.Server.Services.Responses;
 
 namespace Backgammon.Server.Services
 {
-    [ServiceContract(Name = "LeaderboardService")]
+    [ServiceContract]
     public interface ILeaderboardService
     {
         [OperationContract]

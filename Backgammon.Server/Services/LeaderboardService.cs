@@ -22,20 +22,24 @@ namespace Backgammon.Server.Services
             List<Profile> playerProfiles =
                 await _profileRepository.GetAllProfilesAsync();
 
-            return playerProfiles
+            LeaderboardEntryDto[] leaderboardEntries = playerProfiles
                 .OrderByDescending(playerProfile => playerProfile.Wins)
                 .Select(CreateLeaderboardEntryDto)
                 .ToArray();
+
+            return leaderboardEntries;
         }
 
         private LeaderboardEntryDto CreateLeaderboardEntryDto(Profile playerProfile)
         {
-            return new LeaderboardEntryDto
+            var leaderboardEntry = new LeaderboardEntryDto
             {
                 Username = playerProfile.Username,
                 Wins = playerProfile.Wins,
                 Points = playerProfile.Points
             };
+
+            return leaderboardEntry;
         }
     }
 }
