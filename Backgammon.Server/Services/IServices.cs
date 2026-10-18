@@ -19,4 +19,11 @@ namespace Backgammon.Server.Services
         [FaultContract(typeof(AuthenticationFault))]
         Task<PlayerSession> SignInAsync(Credentials playerCredentials);
     }
+
+    [ServiceContract]
+    public interface ILogOutService
+    {
+        [OperationContract]
+        void LogOut(string sessionId);
+    }
 }

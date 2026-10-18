@@ -545,4 +545,10 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_LoginInvalidCredentialsMessage" xml:space="preserve">
     <value>El nombre de usuario, correo o contraseña es incorrecto.</value>
   </data>
+  <data name="TextBlock_LogOutConnectionErrorTitle" xml:space="preserve">
+    <value>Cierre de sesión sin conexión</value>
+  </data>
+  <data name="TextBlock_LogOutConnectionErrorMessage" xml:space="preserve">
+    <value>La sesión se cerró en este dispositivo, pero no se pudo confirmar su cierre en el servidor.</value>
+  </data>
 </root>

@@ -12,8 +12,7 @@ namespace Backgammon.Client.Comunication
 
         public async Task<PlayerStanding[]> GetLeaderboardAsync()
         {
-            var serviceClient =
-                new LeaderboardServiceClient(EndpointConfigurationName);
+            var serviceClient = new LeaderboardServiceClient(EndpointConfigurationName);
             ICommunicationObject communicationChannel = serviceClient;
 
             try

@@ -77,6 +77,7 @@
     </ApplicationDefinition>
     <Compile Include="Comunication\AuthenticationClient.cs" />
     <Compile Include="Comunication\LeaderboardClient.cs" />
+    <Compile Include="Comunication\LogOutClient.cs" />
     <Compile Include="Connected Services\AuthenticationReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,7 +88,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\LogOutReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\Authentication\AuthenticationController.cs" />
+    <Compile Include="Controllers\Session\LogOutController.cs" />
     <Compile Include="Controllers\Session\PlayerSessionContext.cs" />
     <Compile Include="Data\Account.cs">
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
@@ -435,6 +442,13 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\LeaderboardReference\LeaderboardService.wsdl" />
+    <None Include="Connected Services\LogOutReference\LogOutService.wsdl" />
+    <None Include="Connected Services\LogOutReference\LogOutService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LogOutReference\LogOutService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Data\Backgammon_Model.edmx.diagram">
       <DependentUpon>Backgammon_Model.edmx</DependentUpon>
     </None>
@@ -447,6 +461,12 @@
     <None Include="Connected Services\AuthenticationReference\configuration91.svcinfo" />
     <None Include="Connected Services\AuthenticationReference\configuration.svcinfo" />
     <None Include="Connected Services\AuthenticationReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\LogOutReference\configuration91.svcinfo" />
+    <None Include="Connected Services\LogOutReference\configuration.svcinfo" />
+    <None Include="Connected Services\LogOutReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -488,6 +508,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AuthenticationReference\" />
     <WCFMetadataStorage Include="Connected Services\LeaderboardReference\" />
+    <WCFMetadataStorage Include="Connected Services\LogOutReference\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

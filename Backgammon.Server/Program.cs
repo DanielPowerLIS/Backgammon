@@ -17,18 +17,20 @@ namespace Backgammon.Server
 
             var leaderboardServiceHost = new LeaderboardServiceHost();
             var authenticationServiceHost = new AuthenticationServiceHost();
+            var logOutServiceHost = new LogOutServiceHost();
 
             try
             {
                 leaderboardServiceHost.Open();
                 authenticationServiceHost.Open();
+                logOutServiceHost.Open();
 
                 Console.WriteLine("Press ENTER to stop the server.");
                 Console.ReadLine();
             }
             finally
             {
-                CloseServiceHosts(leaderboardServiceHost, authenticationServiceHost);
+                CloseServiceHosts(leaderboardServiceHost, authenticationServiceHost, logOutServiceHost);
             }
         }
 
@@ -42,6 +44,21 @@ namespace Backgammon.Server
             finally
             {
                 leaderboardServiceHost.Close();
+            }
+        }
+
+        private static void CloseServiceHosts(
+            LeaderboardServiceHost leaderboardServiceHost,
+            AuthenticationServiceHost authenticationServiceHost,
+            LogOutServiceHost logOutServiceHost)
+        {
+            try
+            {
+                logOutServiceHost.Close();
+            }
+            finally
+            {
+                CloseServiceHosts(leaderboardServiceHost, authenticationServiceHost);
             }
         }
 
