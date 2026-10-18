@@ -15,9 +15,9 @@ namespace Backgammon.Client.LeaderboardReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="LeaderboardEntryDto", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Responses")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerStanding", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Responses")]
     [System.SerializableAttribute()]
-    public partial class LeaderboardEntryDto : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class PlayerStanding : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -95,10 +95,10 @@ namespace Backgammon.Client.LeaderboardReference {
     public interface ILeaderboardService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILeaderboardService/GetLeaderboard", ReplyAction="http://tempuri.org/ILeaderboardService/GetLeaderboardResponse")]
-        Backgammon.Client.LeaderboardReference.LeaderboardEntryDto[] GetLeaderboard();
+        Backgammon.Client.LeaderboardReference.PlayerStanding[] GetLeaderboard();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILeaderboardService/GetLeaderboard", ReplyAction="http://tempuri.org/ILeaderboardService/GetLeaderboardResponse")]
-        System.Threading.Tasks.Task<Backgammon.Client.LeaderboardReference.LeaderboardEntryDto[]> GetLeaderboardAsync();
+        System.Threading.Tasks.Task<Backgammon.Client.LeaderboardReference.PlayerStanding[]> GetLeaderboardAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -128,11 +128,11 @@ namespace Backgammon.Client.LeaderboardReference {
                 base(binding, remoteAddress) {
         }
         
-        public Backgammon.Client.LeaderboardReference.LeaderboardEntryDto[] GetLeaderboard() {
+        public Backgammon.Client.LeaderboardReference.PlayerStanding[] GetLeaderboard() {
             return base.Channel.GetLeaderboard();
         }
         
-        public System.Threading.Tasks.Task<Backgammon.Client.LeaderboardReference.LeaderboardEntryDto[]> GetLeaderboardAsync() {
+        public System.Threading.Tasks.Task<Backgammon.Client.LeaderboardReference.PlayerStanding[]> GetLeaderboardAsync() {
             return base.Channel.GetLeaderboardAsync();
         }
     }

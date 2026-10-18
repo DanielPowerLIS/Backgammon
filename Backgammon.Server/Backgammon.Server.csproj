@@ -115,7 +115,7 @@
     <Compile Include="Services\Comunication\LeaderboardServiceHost.cs" />
     <Compile Include="Services\IServices.cs" />
     <Compile Include="Services\LeaderboardService.cs" />
-    <Compile Include="Services\Responses\LeaderboardEntryDto.cs" />
+    <Compile Include="Services\Responses\PlayerStanding.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -133,7 +133,6 @@
     </None>
     <None Include="Services\Events\.gitkeep" />
     <None Include="Services\Requests\.gitkeep" />
-    <None Include="Services\Responses\.gitkeep" />
     <None Include="SupportServices\.gitkeep" />
   </ItemGroup>
   <ItemGroup>

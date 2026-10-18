@@ -403,7 +403,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Backgammon_Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Connected Services\LeaderboardReference\Backgammon.Client.LeaderboardReference.LeaderboardEntryDto.datasource">
+    <None Include="Connected Services\LeaderboardReference\Backgammon.Client.LeaderboardReference.PlayerStanding.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\LeaderboardReference\item.xsd">
