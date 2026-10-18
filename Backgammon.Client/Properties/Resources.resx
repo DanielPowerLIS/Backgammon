@@ -369,7 +369,7 @@ c) Mover cuatro fichas 6 casillas cada una.
     <value>No se puedo iniciar la sala. Intente más tarde.</value>
   </data>
   <data name="Button_LeaveLobby" xml:space="preserve">
-    <value>Salir Del Juego</value>
+    <value>Salir De La Sala</value>
   </data>
   <data name="TextBlock_LinkedEmail" xml:space="preserve">
     <value>Correo asociado</value>
