@@ -11,4 +11,12 @@ namespace Backgammon.Server.Services
         [OperationContract]
         Task<PlayerStanding[]> GetLeaderboardAsync();
     }
+
+    [ServiceContract]
+    public interface IAuthenticationService
+    {
+        [OperationContract]
+        [FaultContract(typeof(AuthenticationFault))]
+        Task<PlayerSession> SignInAsync(Credentials playerCredentials);
+    }
 }
