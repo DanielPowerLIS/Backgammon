@@ -817,6 +817,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El nombre de usuario, correo o contraseña es incorrecto..
+        /// </summary>
+        public static string TextBlock_LoginInvalidCredentialsMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_LoginInvalidCredentialsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se pudo iniciar sesión.
+        /// </summary>
+        public static string TextBlock_LoginInvalidCredentialsTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_LoginInvalidCredentialsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credenciales correctas, bienvenido..
         /// </summary>
         public static string TextBlock_LoginSuccessMessage {
@@ -849,6 +867,24 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_LoginUserNotFoundTitle {
             get {
                 return ResourceManager.GetString("TextBlock_LoginUserNotFoundTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La sesión se cerró en este dispositivo, pero no se pudo confirmar su cierre en el servidor..
+        /// </summary>
+        public static string TextBlock_LogOutConnectionErrorMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_LogOutConnectionErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cierre de sesión sin conexión.
+        /// </summary>
+        public static string TextBlock_LogOutConnectionErrorTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_LogOutConnectionErrorTitle", resourceCulture);
             }
         }
         
