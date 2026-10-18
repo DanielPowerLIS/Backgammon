@@ -25,8 +25,7 @@ namespace Backgammon.Server
                 authenticationServiceHost.Open();
                 logOutServiceHost.Open();
 
-                Console.WriteLine("Press ENTER to stop the server.");
-                Console.ReadLine();
+                RunRegistrationService();
             }
             finally
             {
@@ -71,6 +70,23 @@ namespace Backgammon.Server
             var configurationFile = new FileInfo(configurationPath);
 
             XmlConfigurator.Configure(configurationFile);
+        }
+
+        private static void RunRegistrationService()
+        {
+            var registrationServiceHost = new RegistrationServiceHost();
+
+            try
+            {
+                registrationServiceHost.Open();
+
+                Console.WriteLine("Press ENTER to stop the server.");
+                Console.ReadLine();
+            }
+            finally
+            {
+                registrationServiceHost.Close();
+            }
         }
     }
 }

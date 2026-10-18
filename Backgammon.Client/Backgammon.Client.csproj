@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.5.2\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.2\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -38,12 +37,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.5.2\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.5.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=3.5.0.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.3.5.0\lib\net462\log4net.dll</HintPath>
     </Reference>
@@ -78,6 +71,7 @@
     <Compile Include="Comunication\AuthenticationClient.cs" />
     <Compile Include="Comunication\LeaderboardClient.cs" />
     <Compile Include="Comunication\LogOutClient.cs" />
+    <Compile Include="Comunication\RegistrationClient.cs" />
     <Compile Include="Connected Services\AuthenticationReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -93,63 +87,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\RegistrationReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\Authentication\AuthenticationController.cs" />
+    <Compile Include="Controllers\Registration\RegistrationController.cs" />
     <Compile Include="Controllers\Session\LogOutController.cs" />
     <Compile Include="Controllers\Session\PlayerSessionContext.cs" />
-    <Compile Include="Data\Account.cs">
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\AvailableState.cs">
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Avatar.cs">
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Backgammon_Model.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Backgammon_Model.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Backgammon_Model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Backgammon_Model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Backgammon_Model.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Data\FriendRequest.cs">
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\FriendShip.cs">
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Lobby.cs">
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Match.cs">
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Participate.cs">
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Play.cs">
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Profile.cs">
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\SocialMedia.cs">
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\StateLobby.cs">
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\TypeSocialMedia.cs">
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Localization\LanguageOptions.cs" />
     <Compile Include="Localization\LocalizationService.cs" />
     <Compile Include="Localization\LocalizedText.cs" />
@@ -157,11 +103,8 @@
     <Compile Include="Models\RegistrationLimits.cs" />
     <Compile Include="Models\RegistrationValidationResult.cs" />
     <Compile Include="Models\SocialNetworkOption.cs" />
-    <Compile Include="Repositories\RegistrationRepository.cs" />
-    <Compile Include="Services\AccountCodeGenerator.cs" />
     <Compile Include="Services\Logging\IApplicationLogger.cs" />
     <Compile Include="Services\Logging\Log4NetApplicationLogger.cs" />
-    <Compile Include="Services\PasswordHashService.cs" />
     <Compile Include="Utils\AlerType.cs" />
     <Compile Include="Utils\FriendSearchMode.cs" />
     <Compile Include="Views\Dialog\AccountDialog.xaml.cs">
@@ -411,11 +354,8 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EntityDeploy Include="Data\Backgammon_Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Backgammon_Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <None Include="Connected Services\AuthenticationReference\AuthenticationService.wsdl" />
     <None Include="Connected Services\AuthenticationReference\AuthenticationService.xsd">
       <SubType>Designer</SubType>
@@ -449,8 +389,15 @@
     <None Include="Connected Services\LogOutReference\LogOutService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Data\Backgammon_Model.edmx.diagram">
-      <DependentUpon>Backgammon_Model.edmx</DependentUpon>
+    <None Include="Connected Services\RegistrationReference\RegistrationService.wsdl" />
+    <None Include="Connected Services\RegistrationReference\RegistrationService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\RegistrationReference\RegistrationService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\RegistrationReference\RegistrationService2.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\LeaderboardReference\configuration91.svcinfo" />
     <None Include="Connected Services\LeaderboardReference\configuration.svcinfo" />
@@ -470,18 +417,19 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\RegistrationReference\configuration91.svcinfo" />
+    <None Include="Connected Services\RegistrationReference\configuration.svcinfo" />
+    <None Include="Connected Services\RegistrationReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\Backgammon.Client.Data.AvailableState.datasource" />
-    <None Include="Properties\DataSources\Backgammon.Client.Data.Profile.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DBSecrets.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -491,32 +439,14 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Backgammon_Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Backgammon_Model.edmx</DependentUpon>
-      <LastGenOutput>Backgammon_Model.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Data\Backgammon_Model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Backgammon_Model.edmx</DependentUpon>
-      <LastGenOutput>Backgammon_Model.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AuthenticationReference\" />
     <WCFMetadataStorage Include="Connected Services\LeaderboardReference\" />
     <WCFMetadataStorage Include="Connected Services\LogOutReference\" />
+    <WCFMetadataStorage Include="Connected Services\RegistrationReference\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\EntityFramework.6.5.2\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.2\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.5.2\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.2\build\EntityFramework.targets'))" />
-  </Target>
-  <Import Project="..\packages\EntityFramework.6.5.2\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.2\build\EntityFramework.targets')" />
 </Project>

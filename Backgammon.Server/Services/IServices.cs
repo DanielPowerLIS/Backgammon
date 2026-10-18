@@ -26,4 +26,12 @@ namespace Backgammon.Server.Services
         [OperationContract]
         void LogOut(string sessionId);
     }
+
+    [ServiceContract]
+    public interface IRegistrationService
+    {
+        [OperationContract]
+        [FaultContract(typeof(RegistrationFault))]
+        Task RegisterAccountAsync(Account accountInformation);
+    }
 }

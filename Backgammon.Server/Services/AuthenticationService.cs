@@ -6,7 +6,7 @@ using System;
 using System.Data.Entity.Core;
 using System.Data.SqlClient;
 
-using Backgammon.Server.Persistence.Data;
+using Account = Backgammon.Server.Persistence.Data.Account;
 using Backgammon.Server.Persistence.Repositories;
 using Backgammon.Server.Services.Data;
 using Backgammon.Server.SupportServices;
