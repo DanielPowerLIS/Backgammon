@@ -1,41 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
-using System.Text;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Data.Entity.Core;
-using System.Data.SqlClient;
-using System.Data.Entity.Infrastructure;
-using System.Security.Cryptography;
-using System.Data.Entity.Validation;
 
-using Backgammon.Client.Repositories;
-using Backgammon.Client.Views.Dialog;
-using Backgammon.Client.Services;
+using Backgammon.Client.Controllers.Registration;
 using Backgammon.Client.Models;
+using Backgammon.Client.RegistrationReference;
 using Backgammon.Client.Services.Logging;
-using AccountEntity = Backgammon.Client.Data.Account;
-using ProfileEntity = Backgammon.Client.Data.Profile;
+using Backgammon.Client.Views.Dialog;
+
+using RegistrationAccount = Backgammon.Client.RegistrationReference.Account;
 
 namespace Backgammon.Client.Views.Pages
 {
     public partial class AccountRegistration : Page
     {
         private static readonly int MinimumPasswordLength = 8;
-        private static readonly int DefaultAvatarId = 1;
-        private static readonly int OfflineStateId = 3;
-
         private readonly IApplicationLogger _applicationLogger;
+        private readonly RegistrationController _registrationController;
+        private static readonly string InvalidInputErrorCode = "InvalidInput";
+        private static readonly string EmailAlreadyRegisteredErrorCode = "EmailAlreadyRegistered";
+        private static readonly string UsernameAlreadyTakenErrorCode = "UsernameAlreadyTaken";
         public AccountRegistration()
             : this(new Log4NetApplicationLogger(typeof(AccountRegistration)))
         {
@@ -49,8 +37,24 @@ namespace Backgammon.Client.Views.Pages
             }
 
             _applicationLogger = applicationLogger;
+            _registrationController = new RegistrationController();
 
             InitializeComponent();
+        }
+
+        private RegistrationAccount BuildAccountInformation()
+        {
+            var accountInformation = new RegistrationAccount
+            {
+                Email = textBoxEmail.Text.Trim(),
+                Password = passwordBoxPassword.Password,
+                Username = textBoxUsername.Text.Trim(),
+                Name = textBoxFirstName.Text.Trim(),
+                PaternalSurname = textBoxPaternalLastName.Text.Trim(),
+                MaternalSurname = textBoxMaternalLastName.Text.Trim()
+            };
+
+            return accountInformation;
         }
 
         private void OnPasswordChanged(object sender, RoutedEventArgs e)
@@ -201,51 +205,11 @@ namespace Backgammon.Client.Views.Pages
             }
         }
 
-        private async Task<bool> CheckEmailAvailabilityAsync()
-        {
-            RegistrationRepository registrationRepository = new RegistrationRepository();
-            string emailAddress = textBoxEmail.Text.Trim();
-            bool emailRegistered =
-                await registrationRepository.IsEmailRegisteredAsync(emailAddress);
-
-            if (emailRegistered)
-            {
-                ShowRegistrationError(
-                    Properties.Resources.TextBlock_EmailAlreadyUsedTitle,
-                    Properties.Resources.TextBlock_EmailAlreadyUsedMessage);
-
-                textBoxEmail.Focus();
-                return false;
-            }
-
-            return true;
-        }
-
-        private async Task<bool> CheckUsernameAvailabilityAsync()
-        {
-            RegistrationRepository registrationRepository = new RegistrationRepository();
-            string username = textBoxUsername.Text.Trim();
-            bool usernameRegistered =
-                await registrationRepository.IsUsernameRegisteredAsync(username);
-
-            if (usernameRegistered)
-            {
-                ShowRegistrationError(
-                    Properties.Resources.TextBlock_UsernameAlreadyUsedTitle,
-                    Properties.Resources.TextBlock_UsernameAlreadyUsedMessage);
-
-                textBoxUsername.Focus();
-                return false;
-            }
-
-            return true;
-        }
-
-        private void ShowDatabaseError(Exception errorException)
+        private void ShowConnectionError(Exception errorException)
         {
             _applicationLogger.LogError(
                 errorException,
-                "Account registration failed during a database operation.");
+                "Registration service request failed.");
 
             ShowRegistrationError(
                 Properties.Resources.TextBlock_RegistrationConnectionErrorTitle,
@@ -278,71 +242,22 @@ namespace Backgammon.Client.Views.Pages
         {
             try
             {
-                await SaveValidatedAccountAsync();
+                RegistrationAccount accountInformation = BuildAccountInformation();
+
+                await _registrationController.RegisterAccountAsync(accountInformation);
+
+                ShowRegistrationSuccess();
             }
-            catch (EntityException exception)
+            catch (FaultException<RegistrationFault> registrationException)
             {
-                ShowDatabaseError(exception);
+                ShowRegistrationFault(registrationException);
             }
-            catch (SqlException exception)
+            catch (Exception connectionException) when (
+                connectionException is CommunicationException ||
+                connectionException is TimeoutException)
             {
-                ShowDatabaseError(exception);
+                ShowConnectionError(connectionException);
             }
-            catch (Exception exception) when (
-                exception is DbUpdateException ||
-                exception is DbEntityValidationException ||
-                exception is CryptographicException ||
-                exception is InvalidOperationException)
-            {
-                ShowSaveError(exception);
-            }
-        }
-
-        private async Task SaveValidatedAccountAsync()
-        {
-            if (!await CheckEmailAvailabilityAsync())
-            {
-                return;
-            }
-
-            if (!await CheckUsernameAvailabilityAsync())
-            {
-                return;
-            }
-
-            AccountEntity account = await BuildAccountAsync();
-            RegistrationRepository repository = new RegistrationRepository();
-
-            await repository.CreateAccountAsync(account);
-            ShowRegistrationSuccess();
-        }
-
-        private async Task<AccountEntity> BuildAccountAsync()
-        {
-            string enteredPassword = passwordBoxPassword.Password;
-            PasswordHashService hashService = new PasswordHashService();
-            string passwordHash = await Task.Run(
-                () => hashService.HashPassword(enteredPassword));
-
-            ProfileEntity profile = new ProfileEntity
-            {
-                Username = textBoxUsername.Text.Trim(),
-                Wins = 0,
-                Points = 0,
-                IdAvatarFK = DefaultAvatarId,
-                IdAvailableStateFK = OfflineStateId
-            };
-
-            return new AccountEntity
-            {
-                Email = textBoxEmail.Text.Trim(),
-                Password = passwordHash,
-                RegistrationDate = DateTime.UtcNow,
-                Name = textBoxFirstName.Text.Trim(),
-                PaternalSurname = textBoxPaternalLastName.Text.Trim(),
-                MaternalSurname = textBoxMaternalLastName.Text.Trim(),
-                Profile = profile
-            };
         }
 
         private void ShowSaveError(Exception errorException)
@@ -403,6 +318,51 @@ namespace Backgammon.Client.Views.Pages
             }
 
             return new RegistrationValidationResult { IsValid = true };
+        }
+
+        private void ShowRegistrationFault(FaultException<RegistrationFault> registrationException)
+        {
+            string errorCode = registrationException.Detail.ErrorCode;
+
+            if (ShowAvailabilityError(errorCode))
+            {
+                return;
+            }
+
+            if (errorCode == InvalidInputErrorCode)
+            {
+                ShowRegistrationError(
+                    Properties.Resources.TextBlock_RegistrationInvalidInputTitle,
+                    Properties.Resources.TextBlock_RegistrationInvalidInputMessage);
+                return;
+            }
+
+            ShowSaveError(registrationException);
+        }
+
+        private bool ShowAvailabilityError(string errorCode)
+        {
+            if (errorCode == EmailAlreadyRegisteredErrorCode)
+            {
+                ShowRegistrationError(
+                    Properties.Resources.TextBlock_EmailAlreadyUsedTitle,
+                    Properties.Resources.TextBlock_EmailAlreadyUsedMessage);
+
+                textBoxEmail.Focus();
+                return true;
+            }
+
+            if (errorCode == UsernameAlreadyTakenErrorCode)
+            {
+                ShowRegistrationError(
+                    Properties.Resources.TextBlock_UsernameAlreadyUsedTitle,
+                    Properties.Resources.TextBlock_UsernameAlreadyUsedMessage);
+
+                textBoxUsername.Focus();
+                return true;
+            }
+
+            return false;
         }
     }
 }

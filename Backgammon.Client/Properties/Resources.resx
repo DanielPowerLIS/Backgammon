@@ -551,4 +551,10 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_LogOutConnectionErrorMessage" xml:space="preserve">
     <value>La sesión se cerró en este dispositivo, pero no se pudo confirmar su cierre en el servidor.</value>
   </data>
+  <data name="TextBlock_RegistrationInvalidInputTitle" xml:space="preserve">
+    <value>Datos de registro inválidos</value>
+  </data>
+  <data name="TextBlock_RegistrationInvalidInputMessage" xml:space="preserve">
+    <value>Revisa los datos ingresados. No cumplen los requisitos para crear la cuenta.</value>
+  </data>
 </root>

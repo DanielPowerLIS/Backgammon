@@ -1024,6 +1024,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Revisa los datos ingresados. No cumplen los requisitos para crear la cuenta..
+        /// </summary>
+        public static string TextBlock_RegistrationInvalidInputMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_RegistrationInvalidInputMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Datos de registro inválidos.
+        /// </summary>
+        public static string TextBlock_RegistrationInvalidInputTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_RegistrationInvalidInputTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No fue posible guardar la cuenta. Inténtalo nuevamente..
         /// </summary>
         public static string TextBlock_RegistrationSaveErrorMessage {
