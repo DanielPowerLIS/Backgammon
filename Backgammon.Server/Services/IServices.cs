@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel;
 using System.Threading.Tasks;
 
-using Backgammon.Server.Services.Responses;
+using Backgammon.Server.Services.Data;
 
 namespace Backgammon.Server.Services
 {
