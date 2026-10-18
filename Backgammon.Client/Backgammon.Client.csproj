@@ -354,6 +354,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Connected Services\AuthenticationReference\AuthenticationService.wsdl" />
     <None Include="Connected Services\AuthenticationReference\AuthenticationService.xsd">

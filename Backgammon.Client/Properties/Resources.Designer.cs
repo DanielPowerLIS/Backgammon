@@ -187,7 +187,7 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Salir Del Juego.
+        ///   Looks up a localized string similar to Salir De La Sala.
         /// </summary>
         public static string Button_LeaveLobby {
             get {
