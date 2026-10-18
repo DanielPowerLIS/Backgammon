@@ -1,16 +1,76 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.IO;
 
+using log4net.Config;
 using Backgammon.Server.Services.Comunication;
+using Backgammon.Server.SupportServices.Logging;
 
 namespace Backgammon.Server
 {
     internal class Program
     {
-        private static async Task Main()
+        private static void Main()
         {
-            var leaderboardServiceHost = new LeaderboardServiceHost();
+            ConfigureLogging();
+            var applicationLogger = new Log4NetApplicationLogger(typeof(Program));
+            applicationLogger.LogInformation("Server logging initialized.");
 
-            await leaderboardServiceHost.RunAsync();
+            var leaderboardServiceHost = new LeaderboardServiceHost();
+            var authenticationServiceHost = new AuthenticationServiceHost();
+            var logOutServiceHost = new LogOutServiceHost();
+
+            try
+            {
+                leaderboardServiceHost.Open();
+                authenticationServiceHost.Open();
+                logOutServiceHost.Open();
+
+                Console.WriteLine("Press ENTER to stop the server.");
+                Console.ReadLine();
+            }
+            finally
+            {
+                CloseServiceHosts(leaderboardServiceHost, authenticationServiceHost, logOutServiceHost);
+            }
+        }
+
+        private static void CloseServiceHosts(LeaderboardServiceHost leaderboardServiceHost,
+            AuthenticationServiceHost authenticationServiceHost)
+        {
+            try
+            {
+                authenticationServiceHost.Close();
+            }
+            finally
+            {
+                leaderboardServiceHost.Close();
+            }
+        }
+
+        private static void CloseServiceHosts(
+            LeaderboardServiceHost leaderboardServiceHost,
+            AuthenticationServiceHost authenticationServiceHost,
+            LogOutServiceHost logOutServiceHost)
+        {
+            try
+            {
+                logOutServiceHost.Close();
+            }
+            finally
+            {
+                CloseServiceHosts(leaderboardServiceHost, authenticationServiceHost);
+            }
+        }
+
+        private static void ConfigureLogging()
+        {
+            string configurationPath = Path.Combine(
+                AppDomain.CurrentDomain.BaseDirectory,
+                "log4net.config");
+
+            var configurationFile = new FileInfo(configurationPath);
+
+            XmlConfigurator.Configure(configurationFile);
         }
     }
 }

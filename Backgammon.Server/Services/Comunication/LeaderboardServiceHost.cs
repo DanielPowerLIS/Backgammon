@@ -1,6 +1,4 @@
-﻿using System;
-using System.ServiceModel;
-using System.Threading.Tasks;
+﻿using System.ServiceModel;
 
 using Backgammon.Server.Services;
 
@@ -8,26 +6,36 @@ namespace Backgammon.Server.Services.Comunication
 {
     internal class LeaderboardServiceHost
     {
-        public async Task RunAsync()
-        {
-            var serviceHost = new ServiceHost(typeof(LeaderboardService));
+        private readonly ServiceHost _serviceHost;
 
+        public LeaderboardServiceHost()
+        {
+            _serviceHost = new ServiceHost(typeof(LeaderboardService));
+        }
+
+        public void Open()  
+        {
+            _serviceHost.Open();
+        }
+
+        public void Close()
+        {
             try
             {
-                await Task.Factory.FromAsync(
-                    serviceHost.BeginOpen, serviceHost.EndOpen, null);
-
-                Console.WriteLine("Press ENTER to stop the server.");
-                await Console.In.ReadLineAsync();
-
-                await Task.Factory.FromAsync(
-                    serviceHost.BeginClose, serviceHost.EndClose, null);
+                if (_serviceHost.State == CommunicationState.Faulted)
+                {
+                    _serviceHost.Abort();
+                }
+                else
+                {
+                    _serviceHost.Close();
+                }
             }
             finally
             {
-                if (serviceHost.State != CommunicationState.Closed)
+                if (_serviceHost.State != CommunicationState.Closed)
                 {
-                    serviceHost.Abort();
+                    _serviceHost.Abort();
                 }
             }
         }
