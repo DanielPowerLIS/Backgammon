@@ -403,19 +403,19 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Backgammon_Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Connected Services\LeaderboardReference\Backgammon.Client.LeaderboardReference.LeaderboardEntryDto.datasource">
+    <None Include="Connected Services\LeaderboardReference\Backgammon.Client.LeaderboardReference.PlayerStanding.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\LeaderboardReference\Backgammon.Server.Services.Responses.xsd">
+    <None Include="Connected Services\LeaderboardReference\item.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\LeaderboardReference\service.wsdl" />
-    <None Include="Connected Services\LeaderboardReference\service.xsd">
+    <None Include="Connected Services\LeaderboardReference\item1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\LeaderboardReference\service1.xsd">
+    <None Include="Connected Services\LeaderboardReference\item2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\LeaderboardReference\LeaderboardService.wsdl" />
     <None Include="Data\Backgammon_Model.edmx.diagram">
       <DependentUpon>Backgammon_Model.edmx</DependentUpon>
     </None>

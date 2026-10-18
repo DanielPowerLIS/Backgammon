@@ -17,25 +17,29 @@ namespace Backgammon.Server.Services
             _profileRepository = new ProfileRepository();
         }
 
-        public async Task<LeaderboardEntryDto[]> GetLeaderboardAsync()
+        public async Task<PlayerStanding[]> GetLeaderboardAsync()
         {
             List<Profile> playerProfiles =
                 await _profileRepository.GetAllProfilesAsync();
 
-            return playerProfiles
+            PlayerStanding[] leaderboardEntries = playerProfiles
                 .OrderByDescending(playerProfile => playerProfile.Wins)
-                .Select(CreateLeaderboardEntryDto)
+                .Select(CreatePlayerStanding)
                 .ToArray();
+
+            return leaderboardEntries;
         }
 
-        private LeaderboardEntryDto CreateLeaderboardEntryDto(Profile playerProfile)
+        private PlayerStanding CreatePlayerStanding(Profile playerProfile)
         {
-            return new LeaderboardEntryDto
+            var leaderboardEntry = new PlayerStanding
             {
                 Username = playerProfile.Username,
                 Wins = playerProfile.Wins,
                 Points = playerProfile.Points
             };
+
+            return leaderboardEntry;
         }
     }
 }
