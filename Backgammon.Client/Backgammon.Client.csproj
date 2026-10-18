@@ -75,12 +75,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Comunication\AuthenticationClient.cs" />
     <Compile Include="Comunication\LeaderboardClient.cs" />
+    <Compile Include="Connected Services\AuthenticationReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\LeaderboardReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\Authentication\AuthenticationController.cs" />
+    <Compile Include="Controllers\Session\PlayerSessionContext.cs" />
     <Compile Include="Data\Account.cs">
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
@@ -142,7 +150,6 @@
     <Compile Include="Models\RegistrationLimits.cs" />
     <Compile Include="Models\RegistrationValidationResult.cs" />
     <Compile Include="Models\SocialNetworkOption.cs" />
-    <Compile Include="Repositories\LoginRepository.cs" />
     <Compile Include="Repositories\RegistrationRepository.cs" />
     <Compile Include="Services\AccountCodeGenerator.cs" />
     <Compile Include="Services\Logging\IApplicationLogger.cs" />
@@ -150,7 +157,6 @@
     <Compile Include="Services\PasswordHashService.cs" />
     <Compile Include="Utils\AlerType.cs" />
     <Compile Include="Utils\FriendSearchMode.cs" />
-    <Compile Include="Utils\LoginResult.cs" />
     <Compile Include="Views\Dialog\AccountDialog.xaml.cs">
       <DependentUpon>AccountDialog.xaml</DependentUpon>
     </Compile>
@@ -403,6 +409,19 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Backgammon_Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Connected Services\AuthenticationReference\AuthenticationService.wsdl" />
+    <None Include="Connected Services\AuthenticationReference\AuthenticationService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AuthenticationReference\AuthenticationService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AuthenticationReference\AuthenticationService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\AuthenticationReference\Backgammon.Client.AuthenticationReference.PlayerSession.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\LeaderboardReference\Backgammon.Client.LeaderboardReference.PlayerStanding.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -422,6 +441,12 @@
     <None Include="Connected Services\LeaderboardReference\configuration91.svcinfo" />
     <None Include="Connected Services\LeaderboardReference\configuration.svcinfo" />
     <None Include="Connected Services\LeaderboardReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\AuthenticationReference\configuration91.svcinfo" />
+    <None Include="Connected Services\AuthenticationReference\configuration.svcinfo" />
+    <None Include="Connected Services\AuthenticationReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -461,6 +486,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\AuthenticationReference\" />
     <WCFMetadataStorage Include="Connected Services\LeaderboardReference\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

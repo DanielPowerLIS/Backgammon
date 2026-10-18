@@ -119,6 +119,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
+    <Compile Include="Services\Comunication\AuthenticationServiceHost.cs" />
     <Compile Include="Services\Comunication\LeaderboardServiceHost.cs" />
     <Compile Include="Services\Data\AuthenticationFault.cs" />
     <Compile Include="Services\Data\Credentials.cs" />

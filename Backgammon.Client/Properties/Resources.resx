@@ -539,4 +539,10 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_InvalidEmailMessage" xml:space="preserve">
     <value>Ingresa un correo electrónico con un formato válido, por ejemplo: usuario@dominio.com.</value>
   </data>
+  <data name="TextBlock_LoginInvalidCredentialsTitle" xml:space="preserve">
+    <value>No se pudo iniciar sesión</value>
+  </data>
+  <data name="TextBlock_LoginInvalidCredentialsMessage" xml:space="preserve">
+    <value>El nombre de usuario, correo o contraseña es incorrecto.</value>
+  </data>
 </root>

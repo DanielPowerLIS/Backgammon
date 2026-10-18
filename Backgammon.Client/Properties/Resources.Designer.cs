@@ -817,6 +817,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El nombre de usuario, correo o contraseña es incorrecto..
+        /// </summary>
+        public static string TextBlock_LoginInvalidCredentialsMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_LoginInvalidCredentialsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se pudo iniciar sesión.
+        /// </summary>
+        public static string TextBlock_LoginInvalidCredentialsTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_LoginInvalidCredentialsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credenciales correctas, bienvenido..
         /// </summary>
         public static string TextBlock_LoginSuccessMessage {

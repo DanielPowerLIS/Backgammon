@@ -1,32 +1,31 @@
-﻿using Backgammon.Client.Repositories;
-using Backgammon.Client.Utils;
-using Backgammon.Client.Views.Dialog;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+﻿using System;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
+using Backgammon.Client.AuthenticationReference;
+using Backgammon.Client.Controllers.Authentication;
+using Backgammon.Client.Services.Logging;
+using Backgammon.Client.Utils;
+using Backgammon.Client.Views.Dialog;
 namespace Backgammon.Client.Views.Pages
 {
 
     public partial class Login : Page
     {
+        private static readonly string InvalidInputErrorCode = "InvalidInput";
+        private static readonly string InvalidCredentialsErrorCode = "InvalidCredentials";
+
+        private readonly AuthenticationController _authenticationController;
+        private readonly IApplicationLogger _applicationLogger;
+
         public Login()
         {
             InitializeComponent();
+
+            _authenticationController = new AuthenticationController();
+            _applicationLogger = new Log4NetApplicationLogger(typeof(Login));
         }
         private void OnPasswordChanged(object sender, RoutedEventArgs e)
         {
@@ -49,24 +48,33 @@ namespace Backgammon.Client.Views.Pages
 
             try
             {
-                LoginRepository repository = new LoginRepository();
-                LoginResult result = await repository.ValidateCredentialsAsync(
-                    textBoxUsernameOrEmail.Text.Trim(),
-                    passwordBoxPassword.Password);
-
-                ShowLoginResult(result);
-            }
-            catch (EntityException exception)
-            {
-                ShowConnectionError(exception);
-            }
-            catch (SqlException exception)
-            {
-                ShowConnectionError(exception);
+                await SignInWithFeedbackAsync();
             }
             finally
             {
                 buttonSignIn.IsEnabled = true;
+            }
+        }
+
+        private async Task SignInWithFeedbackAsync()
+        {
+            try
+            {
+                await _authenticationController.SignInAsync(
+                    textBoxUsernameOrEmail.Text.Trim(),
+                    passwordBoxPassword.Password);
+
+                ShowSuccessfulLogin();
+            }
+            catch (FaultException<AuthenticationFault> authenticationException)
+            {
+                ShowAuthenticationError(authenticationException);
+            }
+            catch (Exception connectionException) when (
+                connectionException is CommunicationException ||
+                connectionException is TimeoutException)
+            {
+                ShowConnectionError(connectionException);
             }
         }
 
@@ -84,34 +92,43 @@ namespace Backgammon.Client.Views.Pages
             return false;
         }
 
-        private void ShowLoginResult(LoginResult result)
+        private void ShowAuthenticationError(FaultException<AuthenticationFault> authenticationException)
         {
-            switch (result)
+            string errorCode = authenticationException.Detail.ErrorCode;
+
+            if (errorCode == InvalidInputErrorCode)
             {
-                case LoginResult.UserNotFound:
-                    ShowLoginDialog(
-                        Properties.Resources.TextBlock_LoginUserNotFoundTitle,
-                        Properties.Resources.TextBlock_LoginUserNotFoundMessage);
-                    break;
-
-                case LoginResult.IncorrectPassword:
-                    ShowLoginDialog(
-                        Properties.Resources.TextBlock_LoginIncorrectPasswordTitle,
-                        Properties.Resources.TextBlock_LoginIncorrectPasswordMessage);
-                    break;
-
-                case LoginResult.Success:
-                    ShowLoginDialog(
-                        Properties.Resources.TextBlock_LoginSuccessTitle,
-                        Properties.Resources.TextBlock_LoginSuccessMessage);
-                    NavigationService.Navigate(new MainMenu());
-                    break;
+                ShowLoginDialog(
+                    Properties.Resources.TextBlock_RequiredFieldsTitle,
+                    Properties.Resources.TextBlock_RequiredFieldsMessage);
+                return;
             }
+
+            if (errorCode == InvalidCredentialsErrorCode)
+            {
+                ShowLoginDialog(
+                    Properties.Resources.TextBlock_LoginInvalidCredentialsTitle,
+                    Properties.Resources.TextBlock_LoginInvalidCredentialsMessage);
+                return;
+            }
+
+            ShowConnectionError(authenticationException);
         }
 
-        private void ShowConnectionError(Exception exception)
+        private void ShowSuccessfulLogin()
         {
-            Trace.TraceError("Login database error: {0}", exception);
+            ShowLoginDialog(
+                Properties.Resources.TextBlock_LoginSuccessTitle,
+                Properties.Resources.TextBlock_LoginSuccessMessage);
+
+            NavigationService.Navigate(new MainMenu());
+        }
+
+        private void ShowConnectionError(Exception errorException)
+        {
+            _applicationLogger.LogError(
+                errorException,
+                "Sign-in service request failed.");
 
             ShowLoginDialog(
                 Properties.Resources.TextBlock_LoginConnectionErrorTitle,

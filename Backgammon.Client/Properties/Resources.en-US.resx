@@ -539,4 +539,10 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_InvalidEmailMessage" xml:space="preserve">
     <value>Enter an email address in a valid format, for example: user@domain.com.</value>
   </data>
+  <data name="TextBlock_LoginInvalidCredentialsTitle" xml:space="preserve">
+    <value>Sign-in failed</value>
+  </data>
+  <data name="TextBlock_LoginInvalidCredentialsMessage" xml:space="preserve">
+    <value>The username, email, or password is incorrect.</value>
+  </data>
 </root>
