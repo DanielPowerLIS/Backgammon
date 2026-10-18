@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Backgammon.Server.Services.Responses
+namespace Backgammon.Server.Services.Data
 {
     [DataContract]
     public class PlayerStanding

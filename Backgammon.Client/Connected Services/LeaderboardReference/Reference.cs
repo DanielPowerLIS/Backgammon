@@ -15,7 +15,7 @@ namespace Backgammon.Client.LeaderboardReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerStanding", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Responses")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerStanding", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
     [System.SerializableAttribute()]
     public partial class PlayerStanding : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         

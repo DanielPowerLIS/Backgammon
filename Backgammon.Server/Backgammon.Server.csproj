@@ -115,7 +115,7 @@
     <Compile Include="Services\Comunication\LeaderboardServiceHost.cs" />
     <Compile Include="Services\IServices.cs" />
     <Compile Include="Services\LeaderboardService.cs" />
-    <Compile Include="Services\Responses\PlayerStanding.cs" />
+    <Compile Include="Services\Data\PlayerStanding.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -131,8 +131,6 @@
     <None Include="Persistence\Data\Backgammon_Model.edmx.diagram">
       <DependentUpon>Backgammon_Model.edmx</DependentUpon>
     </None>
-    <None Include="Services\Events\.gitkeep" />
-    <None Include="Services\Requests\.gitkeep" />
     <None Include="SupportServices\.gitkeep" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +148,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
