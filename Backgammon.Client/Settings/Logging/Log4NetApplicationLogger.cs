@@ -3,7 +3,7 @@ using System.Globalization;
 
 using log4net;
 
-namespace Backgammon.Client.Services.Logging
+namespace Backgammon.Client.Settings.Logging
 {
     public sealed class Log4NetApplicationLogger : IApplicationLogger
     {

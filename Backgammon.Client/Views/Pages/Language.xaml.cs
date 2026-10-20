@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-using Backgammon.Client.Localization;
+using Backgammon.Client.Settings.Localization;
 
 namespace Backgammon.Client.Views.Pages
 {

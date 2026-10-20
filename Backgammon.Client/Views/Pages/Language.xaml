@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Backgammon.Client.Views.Pages"
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
-      xmlns:localization="clr-namespace:Backgammon.Client.Localization"
+      xmlns:localization="clr-namespace:Backgammon.Client.Settings.Localization"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="{localization:LocalizedText ResourceKey=TextBlock_Button_Language}">

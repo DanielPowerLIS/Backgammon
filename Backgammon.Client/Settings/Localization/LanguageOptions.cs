@@ -1,4 +1,4 @@
-﻿namespace Backgammon.Client.Localization
+﻿namespace Backgammon.Client.Settings.Localization
 {
     public static class LanguageOptions
     {
