@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using Backgammon.Client.AuthenticationReference;
 using Backgammon.Client.Controllers.Authentication;
 using Backgammon.Client.Settings.Logging;
-using Backgammon.Client.Utils;
 using Backgammon.Client.Views.Dialog;
 using Backgammon.Client.Controllers.Data;
 

@@ -6,7 +6,6 @@ using System.Windows.Navigation;
 
 using Backgammon.Client.Controllers.Session;
 using Backgammon.Client.Settings.Logging;
-using Backgammon.Client.Utils;
 using Backgammon.Client.Views.Dialog;
 
 namespace Backgammon.Client.Views.Pages

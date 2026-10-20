@@ -1,4 +1,4 @@
-﻿namespace Backgammon.Client.Models.Game
+﻿namespace Backgammon.Client.Controllers.Game
 {
     public enum PlayerColor
     {

@@ -1,8 +1,8 @@
-﻿using Backgammon.Client.Views.Dialog;
-using Backgammon.Client.Models.Game;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using Backgammon.Client.Models;
+
+using Backgammon.Client.Controllers.Game;
+using Backgammon.Client.Views.Dialog;
 
 namespace Backgammon.Client.Views.Game
 {
