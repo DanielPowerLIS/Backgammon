@@ -28,9 +28,9 @@ namespace Backgammon.Client.Controllers.Registration
             _registrationClient = new RegistrationClient();
         }
 
-        public async Task<RegistrationValidationResult> RegisterAccountAsync(Account accountInformation)
+        public async Task<InputValidationResult> RegisterAccountAsync(Account accountInformation)
         {
-            RegistrationValidationResult validationResult =
+            InputValidationResult validationResult =
                 ValidateLocalFields(accountInformation);
 
             if (!validationResult.IsValid)
@@ -43,9 +43,9 @@ namespace Backgammon.Client.Controllers.Registration
             return validationResult;
         }
 
-        private RegistrationValidationResult ValidateLocalFields(Account accountInformation)
+        private InputValidationResult ValidateLocalFields(Account accountInformation)
         {
-            RegistrationValidationResult validationResult =
+            InputValidationResult validationResult =
                 ValidateRequiredFields(accountInformation);
 
             if (!validationResult.IsValid)
@@ -63,9 +63,9 @@ namespace Backgammon.Client.Controllers.Registration
             return ValidateFieldFormats(accountInformation);
         }
 
-        private RegistrationValidationResult ValidateFieldFormats(Account accountInformation)
+        private InputValidationResult ValidateFieldFormats(Account accountInformation)
         {
-            RegistrationValidationResult validationResult =
+            InputValidationResult validationResult =
                 ValidateEmailFormat(accountInformation.Email);
 
             if (!validationResult.IsValid)
@@ -98,7 +98,7 @@ namespace Backgammon.Client.Controllers.Registration
             return requiredFields;
         }
 
-        private RegistrationValidationResult ValidateRequiredFields(Account accountInformation)
+        private InputValidationResult ValidateRequiredFields(Account accountInformation)
         {
             if (accountInformation == null)
             {
@@ -115,14 +115,14 @@ namespace Backgammon.Client.Controllers.Registration
                 }
             }
 
-            var validationResult = new RegistrationValidationResult { IsValid = true };
+            var validationResult = new InputValidationResult { IsValid = true };
 
             return validationResult;
         }
 
-        private RegistrationValidationResult CreateValidationError(string errorCode, string fieldName)
+        private InputValidationResult CreateValidationError(string errorCode, string fieldName)
         {
-            var validationResult = new RegistrationValidationResult
+            var validationResult = new InputValidationResult
             {
                 IsValid = false,
                 ErrorCode = errorCode,
@@ -132,7 +132,7 @@ namespace Backgammon.Client.Controllers.Registration
             return validationResult;
         }
 
-        private RegistrationValidationResult ValidateFieldLengths(Account accountInformation)
+        private InputValidationResult ValidateFieldLengths(Account accountInformation)
         {
             foreach (KeyValuePair<string, string> registrationField in
                 GetRequiredFields(accountInformation))
@@ -146,7 +146,7 @@ namespace Backgammon.Client.Controllers.Registration
                 }
             }
 
-            var validationResult = new RegistrationValidationResult 
+            var validationResult = new InputValidationResult 
             {
                 IsValid = true 
             };
@@ -154,7 +154,7 @@ namespace Backgammon.Client.Controllers.Registration
             return validationResult;
         }
 
-        private RegistrationValidationResult ValidateUsernameFormat(string playerUsername)
+        private InputValidationResult ValidateUsernameFormat(string playerUsername)
         {
             if (playerUsername.Contains("@"))
             {
@@ -162,7 +162,7 @@ namespace Backgammon.Client.Controllers.Registration
                     InvalidUsernameErrorCode, nameof(Account.Username));
             }
 
-            var validationResult = new RegistrationValidationResult 
+            var validationResult = new InputValidationResult 
             { 
                 IsValid = true 
             };
@@ -170,7 +170,7 @@ namespace Backgammon.Client.Controllers.Registration
             return validationResult;
         }
 
-        private RegistrationValidationResult ValidatePasswordFormat(string suppliedPassword)
+        private InputValidationResult ValidatePasswordFormat(string suppliedPassword)
         {
             bool hasMinimumLength = suppliedPassword.Length >= MinimumPasswordLength;
             bool hasSpecialCharacter = suppliedPassword.Any(
@@ -183,7 +183,7 @@ namespace Backgammon.Client.Controllers.Registration
                     InvalidPasswordErrorCode, nameof(Account.Password));
             }
 
-            var validationResult = new RegistrationValidationResult
+            var validationResult = new InputValidationResult
             {
                 IsValid = true
             };
@@ -191,7 +191,7 @@ namespace Backgammon.Client.Controllers.Registration
             return validationResult;
         }
 
-        private RegistrationValidationResult ValidateEmailFormat(string emailAddress)
+        private InputValidationResult ValidateEmailFormat(string emailAddress)
         {
             if (!HasValidEmailFormat(emailAddress.Trim()))
             {
@@ -199,7 +199,7 @@ namespace Backgammon.Client.Controllers.Registration
                     InvalidEmailErrorCode, nameof(Account.Email));
             }
 
-            var validationResult = new RegistrationValidationResult
+            var validationResult = new InputValidationResult
             {
                 IsValid = true
             };

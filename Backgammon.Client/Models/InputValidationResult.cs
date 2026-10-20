@@ -1,6 +1,6 @@
 ﻿namespace Backgammon.Client.Models
 {
-    internal sealed class RegistrationValidationResult
+    internal sealed class InputValidationResult
     {
         public bool IsValid { get; set; }
 

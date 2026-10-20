@@ -112,7 +112,7 @@ namespace Backgammon.Client.Views.Pages
         {
             RegistrationAccount accountInformation = BuildAccountInformation();
 
-            RegistrationValidationResult validationResult =
+            InputValidationResult validationResult =
                 await _registrationController.RegisterAccountAsync(accountInformation);
 
             if (!validationResult.IsValid)
@@ -124,7 +124,7 @@ namespace Backgammon.Client.Views.Pages
             ShowRegistrationSuccess();
         }
 
-        private void ShowLocalValidationError(RegistrationValidationResult validationResult)
+        private void ShowLocalValidationError(InputValidationResult validationResult)
         {
             string resourcePrefix = "TextBlock_" + validationResult.ErrorCode;
 

@@ -9,6 +9,8 @@ using Backgammon.Client.Controllers.Authentication;
 using Backgammon.Client.Services.Logging;
 using Backgammon.Client.Utils;
 using Backgammon.Client.Views.Dialog;
+using Backgammon.Client.Models;
+
 namespace Backgammon.Client.Views.Pages
 {
 
@@ -39,11 +41,6 @@ namespace Backgammon.Client.Views.Pages
 
         private async void OnSignInClick(object sender, RoutedEventArgs e)
         {
-            if (!HasCompleteCredentials())
-            {
-                return;
-            }
-
             IsEnabled = false;
 
             try
@@ -56,15 +53,35 @@ namespace Backgammon.Client.Views.Pages
             }
         }
 
+        private async Task SubmitSignInAsync()
+        {
+            InputValidationResult validationResult =
+                await _authenticationController.SignInAsync(
+                    textBoxUsernameOrEmail.Text,
+                    passwordBoxPassword.Password);
+
+            if (!validationResult.IsValid)
+            {
+                IsEnabled = true;
+                ShowLoginDialog(
+                    Properties.Resources.TextBlock_RequiredFieldsTitle,
+                    Properties.Resources.TextBlock_RequiredFieldsMessage);
+
+                Control targetControl =
+                    validationResult.FieldName == nameof(Credentials.Password)
+                        ? (Control)passwordBoxPassword : textBoxUsernameOrEmail;
+                targetControl.Focus();
+                return;
+            }
+
+            ShowSuccessfulLogin();
+        }
+
         private async Task SignInWithFeedbackAsync()
         {
             try
             {
-                await _authenticationController.SignInAsync(
-                    textBoxUsernameOrEmail.Text.Trim(),
-                    passwordBoxPassword.Password);
-
-                ShowSuccessfulLogin();
+                await SubmitSignInAsync();
             }
             catch (FaultException<AuthenticationFault> authenticationException)
             {
@@ -76,20 +93,6 @@ namespace Backgammon.Client.Views.Pages
             {
                 ShowConnectionError(connectionException);
             }
-        }
-
-        private bool HasCompleteCredentials()
-        {
-            if (!string.IsNullOrWhiteSpace(textBoxUsernameOrEmail.Text) &&
-                !string.IsNullOrEmpty(passwordBoxPassword.Password))
-            {
-                return true;
-            }
-
-            ShowLoginDialog(
-                Properties.Resources.TextBlock_RequiredFieldsTitle,
-                Properties.Resources.TextBlock_RequiredFieldsMessage);
-            return false;
         }
 
         private void ShowAuthenticationError(FaultException<AuthenticationFault> authenticationException)

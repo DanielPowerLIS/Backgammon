@@ -102,7 +102,7 @@
     <Compile Include="Localization\LocalizedText.cs" />
     <Compile Include="Models\AvatarOption.cs" />
     <Compile Include="Models\RegistrationLimits.cs" />
-    <Compile Include="Models\RegistrationValidationResult.cs" />
+    <Compile Include="Models\InputValidationResult.cs" />
     <Compile Include="Models\SocialNetworkOption.cs" />
     <Compile Include="Services\Logging\IApplicationLogger.cs" />
     <Compile Include="Services\Logging\Log4NetApplicationLogger.cs" />
