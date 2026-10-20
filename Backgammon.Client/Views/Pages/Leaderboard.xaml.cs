@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-using Backgammon.Client.Comunication;
+using Backgammon.Client.Controllers.Leaderboard;
 using Backgammon.Client.LeaderboardReference;
 using Backgammon.Client.Services.Logging;
 using Backgammon.Client.Utils;
@@ -14,7 +14,7 @@ namespace Backgammon.Client.Views.Pages
 {
     public partial class Leaderboard : Page
     {
-        private readonly LeaderboardClient _leaderboardClient;
+        private readonly LeaderboardController _leaderboardController;
         private readonly IApplicationLogger _applicationLogger;
 
         public Leaderboard()
@@ -28,7 +28,7 @@ namespace Backgammon.Client.Views.Pages
 
             _applicationLogger = applicationLogger
                 ?? throw new ArgumentNullException(nameof(applicationLogger));
-            _leaderboardClient = new LeaderboardClient();
+            _leaderboardController = new LeaderboardController();
 
             Loaded += OnLeaderboardLoaded;
         }
@@ -45,7 +45,7 @@ namespace Backgammon.Client.Views.Pages
             try
             {
                 PlayerStanding[] leaderboardEntries =
-                    await _leaderboardClient.GetLeaderboardAsync();
+                    await _leaderboardController.GetLeaderboardAsync();
 
                 listBoxLeaderboard.ItemsSource = leaderboardEntries;
             }

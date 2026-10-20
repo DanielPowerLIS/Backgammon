@@ -94,6 +94,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\Authentication\AuthenticationController.cs" />
+    <Compile Include="Controllers\Leaderboard\LeaderboardController.cs" />
     <Compile Include="Controllers\Registration\RegistrationController.cs" />
     <Compile Include="Controllers\Session\LogOutController.cs" />
     <Compile Include="Controllers\Session\PlayerSessionContext.cs" />
@@ -102,7 +103,7 @@
     <Compile Include="Localization\LocalizedText.cs" />
     <Compile Include="Models\AvatarOption.cs" />
     <Compile Include="Models\RegistrationLimits.cs" />
-    <Compile Include="Models\RegistrationValidationResult.cs" />
+    <Compile Include="Models\InputValidationResult.cs" />
     <Compile Include="Models\SocialNetworkOption.cs" />
     <Compile Include="Services\Logging\IApplicationLogger.cs" />
     <Compile Include="Services\Logging\Log4NetApplicationLogger.cs" />
