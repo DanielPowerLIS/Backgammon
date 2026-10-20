@@ -5,7 +5,6 @@ using Backgammon.Client.Views.Models;
 
 namespace Backgammon.Client.Views.Dialog
 {
-    
     public partial class ChangeAvatarDialog : Window
     {
         public AvatarOption SelectedAvatar { get; }

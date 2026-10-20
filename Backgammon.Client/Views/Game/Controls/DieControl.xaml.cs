@@ -2,7 +2,8 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using Backgammon.Client.Models.Game;
+
+using Backgammon.Client.Controllers.Game;
 
 namespace Backgammon.Client.Views.Game.Controls
 {
