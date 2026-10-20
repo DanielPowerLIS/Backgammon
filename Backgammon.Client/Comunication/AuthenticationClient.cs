@@ -21,10 +21,7 @@ namespace Backgammon.Client.Comunication
                 PlayerSession playerSession =
                     await serviceClient.SignInAsync(playerCredentials);
 
-                await Task.Factory.FromAsync(
-                    communicationChannel.BeginClose,
-                    communicationChannel.EndClose,
-                    null);
+                await ServiceChannelCloser.CloseAfterResponseAsync(communicationChannel);
 
                 return playerSession;
             }

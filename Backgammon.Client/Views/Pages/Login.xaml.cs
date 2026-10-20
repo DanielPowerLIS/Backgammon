@@ -44,7 +44,7 @@ namespace Backgammon.Client.Views.Pages
                 return;
             }
 
-            buttonSignIn.IsEnabled = false;
+            IsEnabled = false;
 
             try
             {
@@ -52,7 +52,7 @@ namespace Backgammon.Client.Views.Pages
             }
             finally
             {
-                buttonSignIn.IsEnabled = true;
+                IsEnabled = true;
             }
         }
 
@@ -120,6 +120,8 @@ namespace Backgammon.Client.Views.Pages
             ShowLoginDialog(
                 Properties.Resources.TextBlock_LoginSuccessTitle,
                 Properties.Resources.TextBlock_LoginSuccessMessage);
+
+            IsEnabled = true;
 
             NavigationService.Navigate(new MainMenu());
         }

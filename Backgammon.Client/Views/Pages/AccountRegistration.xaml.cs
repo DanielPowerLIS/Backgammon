@@ -125,7 +125,8 @@ namespace Backgammon.Client.Views.Pages
                 return validationResult;
             }
 
-            validationResult = ValidateEmailFormat();
+            validationResult = ValidateIdentifierFormats();
+
             if (!validationResult.IsValid)
             {
                 return validationResult;
@@ -182,6 +183,35 @@ namespace Backgammon.Client.Views.Pages
             return new RegistrationValidationResult { IsValid = true };
         }
 
+        private RegistrationValidationResult ValidateUsernameFormat()
+        {
+            if (textBoxUsername.Text.Contains("@"))
+            {
+                textBoxUsername.Focus();
+
+                return new RegistrationValidationResult
+                {
+                    IsValid = false,
+                    ErrorTitle = Properties.Resources.TextBlock_InvalidUsernameTitle,
+                    ErrorMessage = Properties.Resources.TextBlock_InvalidUsernameMessage
+                };
+            }
+
+            return new RegistrationValidationResult { IsValid = true };
+        }
+
+        private RegistrationValidationResult ValidateIdentifierFormats()
+        {
+            RegistrationValidationResult validationResult = ValidateEmailFormat();
+
+            if (!validationResult.IsValid)
+            {
+                return validationResult;
+            }
+
+            return ValidateUsernameFormat();
+        }
+
         private bool HasValidEmailFormat(string emailAddress)
         {
             if (string.IsNullOrWhiteSpace(emailAddress) || emailAddress.Any(char.IsWhiteSpace))
@@ -227,14 +257,15 @@ namespace Backgammon.Client.Views.Pages
                 return;
             }
 
-            buttonCreateAccount.IsEnabled = false;
+            IsEnabled = false;
+
             try
             {
                 await RegisterAccountAsync();
             }
             finally
             {
-                buttonCreateAccount.IsEnabled = true;
+                IsEnabled = true;
             }
         }
 

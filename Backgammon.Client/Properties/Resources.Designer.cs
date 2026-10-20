@@ -637,6 +637,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El nombre de usuario no puede contener @..
+        /// </summary>
+        public static string TextBlock_InvalidUsernameMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_InvalidUsernameMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nombre de usuario inválido.
+        /// </summary>
+        public static string TextBlock_InvalidUsernameTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_InvalidUsernameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No fue posible expulsar al jugador debido a un problema de conexión. Inténtalo nuevamente..
         /// </summary>
         public static string TextBlock_KickConnectionErrorMessage {

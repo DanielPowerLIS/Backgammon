@@ -15,19 +15,21 @@ namespace Backgammon.Server.Persistence.Repositories
 
         public async Task<List<Account>> GetAccountsByIdentifierAsync(string accountIdentifier)
         {
+            bool isEmailIdentifier = accountIdentifier.Contains("@");
+
             using (var databaseContext = new BackgammonEntities())
             {
                 List<Account> matchingAccounts = await databaseContext.Accounts
                     .AsNoTracking()
                     .Include(playerAccount => playerAccount.Profile)
-                    .Where(playerAccount => playerAccount.Email == accountIdentifier ||
-                        playerAccount.Profile.Username == accountIdentifier)
+                    .Where(playerAccount => isEmailIdentifier
+                        ? playerAccount.Email == accountIdentifier
+                        : playerAccount.Profile.Username == accountIdentifier)
                     .ToListAsync();
 
                 return matchingAccounts;
             }
         }
-
         public async Task<bool> IsEmailRegisteredAsync(string emailAddress)
         {
             using (var databaseContext = new BackgammonEntities())
