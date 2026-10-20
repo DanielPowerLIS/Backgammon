@@ -1,6 +1,6 @@
 ﻿using Backgammon.Client.Models.Game;
 
-namespace Backgammon.Client.Views.Game
+namespace Backgammon.Client.Models
 {
     public class BoardPoint
     {

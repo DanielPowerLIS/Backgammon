@@ -1,4 +1,4 @@
-﻿namespace Backgammon.Client.Views.Game
+﻿namespace Backgammon.Client.Models
 {
     public class DiceResult
     {
