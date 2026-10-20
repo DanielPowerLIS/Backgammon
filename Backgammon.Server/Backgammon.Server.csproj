@@ -123,12 +123,15 @@
     <Compile Include="Services\Comunication\RegistrationServiceHost.cs" />
     <Compile Include="Services\Comunication\AuthenticationServiceHost.cs" />
     <Compile Include="Services\Comunication\LeaderboardServiceHost.cs" />
+    <Compile Include="Services\Contracts\IAuthenticationService.cs" />
+    <Compile Include="Services\Contracts\ILogOutService.cs" />
+    <Compile Include="Services\Contracts\IRegistrationService.cs" />
     <Compile Include="Services\Data\Account.cs" />
     <Compile Include="Services\Data\AuthenticationFault.cs" />
     <Compile Include="Services\Data\Credentials.cs" />
     <Compile Include="Services\Data\PlayerSession.cs" />
     <Compile Include="Services\Data\RegistrationFault.cs" />
-    <Compile Include="Services\IServices.cs" />
+    <Compile Include="Services\Contracts\ILeaderboardService.cs" />
     <Compile Include="Services\LeaderboardService.cs" />
     <Compile Include="Services\Data\PlayerStanding.cs" />
     <Compile Include="Services\LogOutService.cs" />

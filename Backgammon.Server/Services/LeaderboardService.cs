@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Backgammon.Server.Persistence.Data;
 using Backgammon.Server.Persistence.Repositories;
 using Backgammon.Server.Services.Data;
+using Backgammon.Server.Services.Contracts;
 
 namespace Backgammon.Server.Services
 {
