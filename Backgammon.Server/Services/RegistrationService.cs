@@ -15,6 +15,7 @@ using Backgammon.Server.SupportServices;
 using Backgammon.Server.Services.Data;
 using AccountEntity = Backgammon.Server.Persistence.Data.Account;
 using ProfileEntity = Backgammon.Server.Persistence.Data.Profile;
+using Backgammon.Server.Services.Contracts;
 
 namespace Backgammon.Server.Services
 {
