@@ -112,6 +112,7 @@ namespace Backgammon.Server.Services
         {
             ValidateRequiredFields(accountInformation);
             ValidateFieldLengths(accountInformation);
+            ValidateUsernameFormat(accountInformation.Username);
 
             string emailAddress = accountInformation.Email.Trim();
 
@@ -121,6 +122,14 @@ namespace Backgammon.Server.Services
             }
 
             ValidatePasswordFormat(accountInformation.Password);
+        }
+
+        private void ValidateUsernameFormat(string playerUsername)
+        {
+            if (playerUsername.Contains("@"))
+            {
+                throw CreateRegistrationFault(InvalidInputErrorCode);
+            }
         }
 
         private async Task ValidateAvailabilityAsync(Account accountInformation)

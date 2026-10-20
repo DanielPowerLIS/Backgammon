@@ -20,10 +20,7 @@ namespace Backgammon.Client.Comunication
             {
                 await serviceClient.RegisterAccountAsync(accountInformation);
 
-                await Task.Factory.FromAsync(
-                    communicationChannel.BeginClose,
-                    communicationChannel.EndClose,
-                    null);
+                await ServiceChannelCloser.CloseAfterResponseAsync(communicationChannel);
             }
             finally
             {

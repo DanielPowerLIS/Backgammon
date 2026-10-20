@@ -20,10 +20,7 @@ namespace Backgammon.Client.Comunication
                 PlayerStanding[] leaderboardEntries =
                     await serviceClient.GetLeaderboardAsync();
 
-                await Task.Factory.FromAsync(
-                    communicationChannel.BeginClose,
-                    communicationChannel.EndClose, null);
-
+                await ServiceChannelCloser.CloseAfterResponseAsync(communicationChannel);
                 return leaderboardEntries;
             }
             finally

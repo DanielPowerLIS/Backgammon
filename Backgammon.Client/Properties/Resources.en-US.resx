@@ -557,4 +557,10 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_RegistrationInvalidInputMessage" xml:space="preserve">
     <value>Check the information entered. It does not meet the requirements for creating an account.</value>
   </data>
+  <data name="TextBlock_InvalidUsernameTitle" xml:space="preserve">
+    <value>Invalid username</value>
+  </data>
+  <data name="TextBlock_InvalidUsernameMessage" xml:space="preserve">
+    <value>The username cannot contain @.</value>
+  </data>
 </root>

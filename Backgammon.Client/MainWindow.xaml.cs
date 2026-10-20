@@ -1,22 +1,8 @@
-﻿using Backgammon.Client.Views.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Backgammon.Client.Utils;
 
-using Backgammon.Client.Views.Dialog;
-using Backgammon.Client.Views.Game;
+using Backgammon.Client.Views.Pages;
 
 namespace Backgammon.Client
 {
@@ -25,8 +11,20 @@ namespace Backgammon.Client
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new Home());
 
+            MainFrame.Navigating += OnFrameNavigating;
+            MainFrame.Navigate(new Home());
+        }
+
+        private void OnFrameNavigating(
+            object eventSender,
+            NavigatingCancelEventArgs navigationArguments)
+        {
+            if (MainFrame.Content is Page activePage &&
+                !activePage.IsEnabled)
+            {
+                navigationArguments.Cancel = true;
+            }
         }
     }
 }
