@@ -1,6 +1,6 @@
-﻿namespace Backgammon.Client.Models
+﻿namespace Backgammon.Client.Controllers.Data
 {
-    internal sealed class InputValidationResult
+    public sealed class InputValidationResult
     {
         public bool IsValid { get; set; }
 

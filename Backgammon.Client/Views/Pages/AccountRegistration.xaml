@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:Backgammon.Client.Views.Pages"
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
-      xmlns:models="clr-namespace:Backgammon.Client.Models"
+      xmlns:registration="clr-namespace:Backgammon.Client.Controllers.Registration"
       mc:Ignorable="d"
       d:DesignHeight="480" d:DesignWidth="900"
       Title="{x:Static properties:Resources.TextBlock_AccountRegistration}">
@@ -282,11 +282,11 @@
                         <TextBox x:Name="textBoxEmail" Grid.Row="2"
                                  Tag="{x:Static properties:Resources.TextBox_EmailAddress}"
                                  Style="{StaticResource RegistrationTextBoxStyle}"
-                                 MaxLength="{x:Static models:RegistrationLimits.TextFieldMaximumLength}"/>
+                                 MaxLength="{x:Static registration:RegistrationLimits.TextFieldMaximumLength}"/>
                         <TextBox x:Name="textBoxFirstName" Grid.Row="4"
                                  Tag="{x:Static properties:Resources.TextBox_FirstName}"
                                  Style="{StaticResource RegistrationTextBoxStyle}"
-                                 MaxLength="{x:Static models:RegistrationLimits.TextFieldMaximumLength}" />
+                                 MaxLength="{x:Static registration:RegistrationLimits.TextFieldMaximumLength}" />
 
                         <Grid Grid.Row="6">
                             <Grid.ColumnDefinitions>
@@ -297,17 +297,17 @@
                             <TextBox x:Name="textBoxPaternalLastName" Grid.Column="0"
                                      Tag="{x:Static properties:Resources.TextBox_PaternalLastName}"
                                      Style="{StaticResource RegistrationTextBoxStyle}"
-                                     MaxLength="{x:Static models:RegistrationLimits.TextFieldMaximumLength}"/>
+                                     MaxLength="{x:Static registration:RegistrationLimits.TextFieldMaximumLength}"/>
                             <TextBox x:Name="textBoxMaternalLastName" Grid.Column="2"
                                      Tag="{x:Static properties:Resources.TextBox_MaternalLastName}"
                                      Style="{StaticResource RegistrationTextBoxStyle}"
-                                     MaxLength="{x:Static models:RegistrationLimits.TextFieldMaximumLength}"/>
+                                     MaxLength="{x:Static registration:RegistrationLimits.TextFieldMaximumLength}"/>
                         </Grid>
 
                         <TextBox x:Name="textBoxUsername" Grid.Row="8"
                                  Tag="{x:Static properties:Resources.TextBox_Username}"
                                  Style="{StaticResource RegistrationTextBoxStyle}"
-                                 MaxLength="{x:Static models:RegistrationLimits.TextFieldMaximumLength}"/>
+                                 MaxLength="{x:Static registration:RegistrationLimits.TextFieldMaximumLength}"/>
 
                         <Grid Grid.Row="10">
                             <PasswordBox x:Name="passwordBoxPassword"

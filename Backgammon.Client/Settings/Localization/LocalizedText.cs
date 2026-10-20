@@ -2,7 +2,7 @@
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Backgammon.Client.Localization
+namespace Backgammon.Client.Settings.Localization
 {
     public sealed class LocalizedText : MarkupExtension
     {

@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using System.Threading.Tasks;
 
-using Backgammon.Client.Services.Logging;
+using Backgammon.Client.Settings.Logging;
 
 namespace Backgammon.Client.Comunication
 {

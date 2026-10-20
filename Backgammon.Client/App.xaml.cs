@@ -4,8 +4,8 @@ using System;
 using System.IO;
 using System.Windows;
 
-using Backgammon.Client.Localization;
-using Backgammon.Client.Services.Logging;
+using Backgammon.Client.Settings.Localization;
+using Backgammon.Client.Settings.Logging;
 
 namespace Backgammon.Client
 {

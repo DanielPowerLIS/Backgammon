@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 using Backgammon.Client.Controllers.Leaderboard;
 using Backgammon.Client.LeaderboardReference;
-using Backgammon.Client.Services.Logging;
+using Backgammon.Client.Settings.Logging;
 using Backgammon.Client.Utils;
 using Backgammon.Client.Views.Dialog;
 

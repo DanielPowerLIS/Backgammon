@@ -6,10 +6,10 @@ using System.Windows.Controls;
 using System.Collections.Generic;
 
 using Backgammon.Client.Controllers.Registration;
-using Backgammon.Client.Models;
 using Backgammon.Client.RegistrationReference;
-using Backgammon.Client.Services.Logging;
+using Backgammon.Client.Settings.Logging;
 using Backgammon.Client.Views.Dialog;
+using Backgammon.Client.Controllers.Data;
 
 using RegistrationAccount = Backgammon.Client.RegistrationReference.Account;
 

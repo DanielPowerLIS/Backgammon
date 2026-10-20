@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Backgammon.Client.Services.Logging
+namespace Backgammon.Client.Settings.Logging
 {
     public interface IApplicationLogger
     {

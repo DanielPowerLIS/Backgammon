@@ -4,7 +4,7 @@ using System.Linq;
 using System;
 using System.Net.Mail;
 
-using Backgammon.Client.Models;
+using Backgammon.Client.Controllers.Data;
 using Backgammon.Client.Comunication;
 using Backgammon.Client.RegistrationReference;
 

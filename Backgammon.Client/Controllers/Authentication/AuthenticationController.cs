@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System;
 
-using Backgammon.Client.Models;
+using Backgammon.Client.Controllers.Data;
 using Backgammon.Client.AuthenticationReference;
 using Backgammon.Client.Comunication;
 using Backgammon.Client.Controllers.Session;
