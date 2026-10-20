@@ -2,6 +2,7 @@
 using Backgammon.Client.Models.Game;
 using System.Windows;
 using System.Windows.Controls;
+using Backgammon.Client.Models;
 
 namespace Backgammon.Client.Views.Game
 {

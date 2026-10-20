@@ -135,12 +135,12 @@
     <Compile Include="Views\Dialog\SelectSocialNetworkDialog.xaml.cs">
       <DependentUpon>SelectSocialNetworkDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Game\BoardPoint.cs" />
-    <Compile Include="Views\Game\BoardState.cs" />
+    <Compile Include="Models\BoardPoint.cs" />
+    <Compile Include="Models\BoardState.cs" />
     <Compile Include="Views\Game\Controls\DieControl.xaml.cs">
       <DependentUpon>DieControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Game\DiceResult.cs" />
+    <Compile Include="Models\DiceResult.cs" />
     <Compile Include="Models\PlayerColor.cs" />
     <Compile Include="Views\Game\Controls\BoardControl.xaml.cs">
       <DependentUpon>BoardControl.xaml</DependentUpon>

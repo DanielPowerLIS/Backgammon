@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using Backgammon.Client.Models;
 using Backgammon.Client.Models.Game;
 
 namespace Backgammon.Client.Views.Game.Controls
