@@ -9,7 +9,7 @@ using Backgammon.Client.Controllers.Authentication;
 using Backgammon.Client.Settings.Logging;
 using Backgammon.Client.Utils;
 using Backgammon.Client.Views.Dialog;
-using Backgammon.Client.Models;
+using Backgammon.Client.Controllers.Data;
 
 namespace Backgammon.Client.Views.Pages
 {

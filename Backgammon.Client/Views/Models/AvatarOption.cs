@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
 using System.IO;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Backgammon.Client.Models
+namespace Backgammon.Client.Views.Models
 {
     public sealed class AvatarOption
     {

@@ -101,10 +101,10 @@
     <Compile Include="Settings\Localization\LanguageOptions.cs" />
     <Compile Include="Settings\Localization\LocalizationService.cs" />
     <Compile Include="Settings\Localization\LocalizedText.cs" />
-    <Compile Include="Models\AvatarOption.cs" />
-    <Compile Include="Models\RegistrationLimits.cs" />
-    <Compile Include="Models\InputValidationResult.cs" />
-    <Compile Include="Models\SocialNetworkOption.cs" />
+    <Compile Include="Views\Models\AvatarOption.cs" />
+    <Compile Include="Controllers\Registration\RegistrationLimits.cs" />
+    <Compile Include="Controllers\Data\InputValidationResult.cs" />
+    <Compile Include="Views\Models\SocialNetworkOption.cs" />
     <Compile Include="Settings\Logging\IApplicationLogger.cs" />
     <Compile Include="Settings\Logging\Log4NetApplicationLogger.cs" />
     <Compile Include="Utils\AlerType.cs" />
