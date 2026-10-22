@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace Backgammon.Client.Views.Pages
 {
-    /// <summary>
-    /// Lógica de interacción para Preinitiation.xaml
-    /// </summary>
     public partial class Preinitiation : Page
     {
         public Preinitiation()
@@ -27,7 +24,7 @@ namespace Backgammon.Client.Views.Pages
 
         private void OnCreateLobbyClick(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Room());
         }
 
         private void OnJoinClick(object sender, RoutedEventArgs e)
