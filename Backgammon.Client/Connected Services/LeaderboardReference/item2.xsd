@@ -14,4 +14,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerStanding" nillable="true" type="tns:PlayerStanding" />
+  <xs:complexType name="LeaderboardFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LeaderboardFault" nillable="true" type="tns:LeaderboardFault" />
 </xs:schema>

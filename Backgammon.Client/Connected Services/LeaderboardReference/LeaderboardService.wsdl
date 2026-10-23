@@ -32,8 +32,8 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:9002/?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:9002/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:9002/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" />
+      <xsd:import schemaLocation="http://localhost:9002/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ILeaderboardService_GetLeaderboard_InputMessage">
@@ -42,10 +42,14 @@
   <wsdl:message name="ILeaderboardService_GetLeaderboard_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLeaderboardResponse" />
   </wsdl:message>
+  <wsdl:message name="ILeaderboardService_GetLeaderboard_LeaderboardFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q1:LeaderboardFault" />
+  </wsdl:message>
   <wsdl:portType name="ILeaderboardService">
     <wsdl:operation name="GetLeaderboard">
       <wsdl:input wsaw:Action="http://tempuri.org/ILeaderboardService/GetLeaderboard" message="tns:ILeaderboardService_GetLeaderboard_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILeaderboardService/GetLeaderboardResponse" message="tns:ILeaderboardService_GetLeaderboard_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILeaderboardService/GetLeaderboardLeaderboardFaultFault" name="LeaderboardFaultFault" message="tns:ILeaderboardService_GetLeaderboard_LeaderboardFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ILeaderboardService" type="tns:ILeaderboardService">
@@ -59,6 +63,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="LeaderboardFaultFault">
+        <soap12:fault use="literal" name="LeaderboardFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="LeaderboardService">

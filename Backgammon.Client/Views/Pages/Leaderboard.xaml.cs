@@ -43,11 +43,15 @@ namespace Backgammon.Client.Views.Pages
 
                 listBoxLeaderboard.ItemsSource = leaderboardEntries;
             }
-            catch (Exception errorException) when (
-                errorException is CommunicationException ||
-                errorException is TimeoutException)
+            catch (FaultException<LeaderboardFault> leaderboardException)
             {
-                ShowLeaderboardError(errorException);
+                ShowLeaderboardError(leaderboardException);
+            }
+            catch (Exception connectionException) when (
+                connectionException is CommunicationException ||
+                connectionException is TimeoutException)
+            {
+                ShowLeaderboardError(connectionException);
             }
         }
 
