@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System;
 using System.Data.Entity.Core;
 using System.Data.SqlClient;
@@ -29,9 +28,9 @@ namespace Backgammon.Server.Services
             _profileRepository = new ProfileRepository();
         }
 
-        public async Task<PlayerStanding[]> GetLeaderboardAsync()
+        public PlayerStanding[] GetLeaderboard()
         {
-            List<Profile> playerProfiles = await GetProfilesAsync();
+            List<Profile> playerProfiles = GetProfiles();
 
             PlayerStanding[] leaderboardEntries = playerProfiles
                 .OrderByDescending(playerProfile => playerProfile.Wins)
@@ -41,11 +40,11 @@ namespace Backgammon.Server.Services
             return leaderboardEntries;
         }
 
-        private async Task<List<Profile>> GetProfilesAsync()
+        private List<Profile> GetProfiles()
         {
             try
             {
-                return await _profileRepository.GetAllProfilesAsync();
+                return _profileRepository.GetAllProfilesAsync().GetAwaiter().GetResult();
             }
             catch (Exception databaseException) when (
                 databaseException is EntityException ||

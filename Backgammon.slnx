@@ -2,6 +2,8 @@
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
   </Folder>
+  <Project Path="Backgammon.Client.Tests/Backgammon.Client.Tests.csproj" Id="a97f2efe-5dbe-4902-99b2-64b3ac54eb4c" />
   <Project Path="Backgammon.Client/Backgammon.Client.csproj" Id="dba002d2-cc44-4367-86f1-f72933e85f03" />
+  <Project Path="Backgammon.Server.Tests/Backgammon.Server.Tests.csproj" Id="06ea79cf-2e83-4309-8f0b-c44d08c370e0" />
   <Project Path="Backgammon.Server/Backgammon.Server.csproj" Id="bd427669-e27a-4d13-9c86-06a7c3ee9d3a" />
 </Solution>
