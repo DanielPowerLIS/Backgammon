@@ -19,14 +19,14 @@ namespace Backgammon.Client.Views.Pages
         private static readonly string InvalidCredentialsErrorCode = "InvalidCredentials";
 
         private readonly AuthenticationController _authenticationController;
-        private readonly IApplicationLogger _applicationLogger;
+        private static readonly IApplicationLogger ApplicationLogger =
+            new Log4NetApplicationLogger(typeof(Login));
 
         public Login()
         {
             InitializeComponent();
 
             _authenticationController = new AuthenticationController();
-            _applicationLogger = new Log4NetApplicationLogger(typeof(Login));
         }
         private void OnPasswordChanged(object sender, RoutedEventArgs e)
         {
@@ -130,7 +130,7 @@ namespace Backgammon.Client.Views.Pages
 
         private void ShowConnectionError(Exception errorException)
         {
-            _applicationLogger.LogError(
+            ApplicationLogger.LogError(
                 errorException,
                 "Sign-in service request failed.");
 

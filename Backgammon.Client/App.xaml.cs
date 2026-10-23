@@ -11,17 +11,17 @@ namespace Backgammon.Client
 {
     public partial class App : Application
     {
+        private static readonly IApplicationLogger ApplicationLogger =
+            new Log4NetApplicationLogger(typeof(App));
 
         private static readonly string LoggingConfigurationFileName =
             "log4net.config";
+
         protected override void OnStartup(StartupEventArgs e)
         {
             ConfigureLogging();
 
-            IApplicationLogger applicationLogger =
-                new Log4NetApplicationLogger(typeof(App));
-
-            applicationLogger.LogInformation("Application started.");
+            ApplicationLogger.LogInformation("Application started.");
 
             LocalizationService.Current.LoadPreferredLanguage();
 
