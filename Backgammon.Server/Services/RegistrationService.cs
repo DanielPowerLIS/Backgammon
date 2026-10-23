@@ -283,7 +283,8 @@ namespace Backgammon.Server.Services
             {
                 await ValidateAvailabilityAsync(accountInformation);
 
-                ApplicationLogger.LogWarning(
+                ApplicationLogger.LogError(
+                    errorException,
                     "Account registration encountered an unresolved uniqueness conflict.");
 
                 throw CreateRegistrationFault(ServiceUnavailableErrorCode);
