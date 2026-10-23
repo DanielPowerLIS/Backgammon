@@ -90,11 +90,57 @@ namespace Backgammon.Client.LeaderboardReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LeaderboardFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class LeaderboardFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorCodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorCode {
+            get {
+                return this.ErrorCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorCodeField, value) != true)) {
+                    this.ErrorCodeField = value;
+                    this.RaisePropertyChanged("ErrorCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="LeaderboardReference.ILeaderboardService")]
     public interface ILeaderboardService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILeaderboardService/GetLeaderboard", ReplyAction="http://tempuri.org/ILeaderboardService/GetLeaderboardResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.LeaderboardReference.LeaderboardFault), Action="http://tempuri.org/ILeaderboardService/GetLeaderboardLeaderboardFaultFault", Name="LeaderboardFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
         Backgammon.Client.LeaderboardReference.PlayerStanding[] GetLeaderboard();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILeaderboardService/GetLeaderboard", ReplyAction="http://tempuri.org/ILeaderboardService/GetLeaderboardResponse")]

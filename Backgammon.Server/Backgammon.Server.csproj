@@ -131,6 +131,7 @@
     <Compile Include="Services\Data\AuthenticationFault.cs" />
     <Compile Include="Services\Data\Avatar.cs" />
     <Compile Include="Services\Data\Credentials.cs" />
+    <Compile Include="Services\Data\LeaderboardFault.cs" />
     <Compile Include="Services\Data\PlayerSession.cs" />
     <Compile Include="Services\Data\ProfileService.cs" />
     <Compile Include="Services\Data\RegistrationFault.cs" />

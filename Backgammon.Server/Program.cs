@@ -9,11 +9,13 @@ namespace Backgammon.Server
 {
     internal class Program
     {
+        private static readonly IApplicationLogger ApplicationLogger =
+            new Log4NetApplicationLogger(typeof(Program));
+
         private static void Main()
         {
             ConfigureLogging();
-            var applicationLogger = new Log4NetApplicationLogger(typeof(Program));
-            applicationLogger.LogInformation("Server logging initialized.");
+            ApplicationLogger.LogInformation("Server logging initialized.");
 
             var leaderboardServiceHost = new LeaderboardServiceHost();
             var authenticationServiceHost = new AuthenticationServiceHost();

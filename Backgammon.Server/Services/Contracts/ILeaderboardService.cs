@@ -9,7 +9,10 @@ namespace Backgammon.Server.Services.Contracts
     public interface ILeaderboardService
     {
         [OperationContract]
+        [FaultContract(typeof(LeaderboardFault))]
         Task<PlayerStanding[]> GetLeaderboardAsync();
+
+
     }
 
 }

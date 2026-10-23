@@ -15,19 +15,13 @@ namespace Backgammon.Client.Views.Pages
     public partial class Leaderboard : Page
     {
         private readonly LeaderboardController _leaderboardController;
-        private readonly IApplicationLogger _applicationLogger;
+        private static readonly IApplicationLogger ApplicationLogger =
+            new Log4NetApplicationLogger(typeof(Leaderboard));
 
         public Leaderboard()
-            : this(new Log4NetApplicationLogger(typeof(Leaderboard)))
-        {
-        }
-
-        public Leaderboard(IApplicationLogger applicationLogger)
         {
             InitializeComponent();
 
-            _applicationLogger = applicationLogger
-                ?? throw new ArgumentNullException(nameof(applicationLogger));
             _leaderboardController = new LeaderboardController();
 
             Loaded += OnLeaderboardLoaded;
@@ -49,17 +43,21 @@ namespace Backgammon.Client.Views.Pages
 
                 listBoxLeaderboard.ItemsSource = leaderboardEntries;
             }
-            catch (Exception errorException) when (
-                errorException is CommunicationException ||
-                errorException is TimeoutException)
+            catch (FaultException<LeaderboardFault> leaderboardException)
             {
-                ShowLeaderboardError(errorException);
+                ShowLeaderboardError(leaderboardException);
+            }
+            catch (Exception connectionException) when (
+                connectionException is CommunicationException ||
+                connectionException is TimeoutException)
+            {
+                ShowLeaderboardError(connectionException);
             }
         }
 
         private void ShowLeaderboardError(Exception errorException)
         {
-            _applicationLogger.LogError(
+            ApplicationLogger.LogError(
                 errorException,
                 "Failed to load the leaderboard from the server.");
 

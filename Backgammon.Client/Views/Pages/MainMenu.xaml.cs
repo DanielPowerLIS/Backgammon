@@ -13,14 +13,14 @@ namespace Backgammon.Client.Views.Pages
     public partial class MainMenu : Page
     {
         private readonly LogOutController _logOutController;
-        private readonly IApplicationLogger _applicationLogger;
+        private static readonly IApplicationLogger ApplicationLogger =
+            new Log4NetApplicationLogger(typeof(MainMenu));
 
         public MainMenu()
         {
             InitializeComponent();
 
             _logOutController = new LogOutController();
-            _applicationLogger = new Log4NetApplicationLogger(typeof(MainMenu));
         }
 
         private void OnPlayClick(object sender, RoutedEventArgs e)
@@ -89,7 +89,7 @@ namespace Backgammon.Client.Views.Pages
 
         private void ShowLogOutConnectionError(Exception errorException)
         {
-            _applicationLogger.LogError(
+            ApplicationLogger.LogError(
                 errorException,
                 "Remote sign-out could not be confirmed.");
 

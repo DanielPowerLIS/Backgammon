@@ -17,26 +17,16 @@ namespace Backgammon.Client.Views.Pages
 {
     public partial class AccountRegistration : Page
     {
-        private readonly IApplicationLogger _applicationLogger;
+        private static readonly IApplicationLogger ApplicationLogger =
+            new Log4NetApplicationLogger(typeof(AccountRegistration));
         private readonly RegistrationController _registrationController;
         private static readonly string InvalidInputErrorCode = "InvalidInput";
         private static readonly string EmailAlreadyRegisteredErrorCode = "EmailAlreadyRegistered";
         private static readonly string UsernameAlreadyTakenErrorCode = "UsernameAlreadyTaken";
         private static readonly string InvalidFieldLengthErrorCode = "InvalidFieldLength";
-        
+
         public AccountRegistration()
-            : this(new Log4NetApplicationLogger(typeof(AccountRegistration)))
         {
-        }
-
-        public AccountRegistration(IApplicationLogger applicationLogger)
-        {
-            if (applicationLogger == null)
-            {
-                throw new ArgumentNullException(nameof(applicationLogger));
-            }
-
-            _applicationLogger = applicationLogger;
             _registrationController = new RegistrationController();
 
             InitializeComponent();
@@ -155,7 +145,7 @@ namespace Backgammon.Client.Views.Pages
 
         private void ShowConnectionError(Exception errorException)
         {
-            _applicationLogger.LogError(
+            ApplicationLogger.LogError(
                 errorException,
                 "Registration service request failed.");
 
@@ -195,7 +185,7 @@ namespace Backgammon.Client.Views.Pages
 
         private void ShowSaveError(Exception errorException)
         {
-            _applicationLogger.LogError(
+            ApplicationLogger.LogError(
                 errorException,
                 "Account registration could not be completed.");
 
