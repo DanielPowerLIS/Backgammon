@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using System.Net.Mail;
-using System.Threading.Tasks;
 using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
@@ -43,13 +42,13 @@ namespace Backgammon.Server.Services
             _passwordHashService = new PasswordHashService();
         }
 
-        public async Task RegisterAccountAsync(Account accountInformation)
+        public void RegisterAccount(Account accountInformation)
         {
             ValidateAccountInformation(accountInformation);
 
             try
             {
-                await RegisterValidatedAccountAsync(accountInformation);
+                RegisterValidatedAccount(accountInformation);
             }
             catch (Exception errorException) when (
                 IsRegistrationFailure(errorException))
@@ -133,19 +132,21 @@ namespace Backgammon.Server.Services
             }
         }
 
-        private async Task ValidateAvailabilityAsync(Account accountInformation)
+        private void ValidateAvailability(Account accountInformation)
         {
             string emailAddress = accountInformation.Email.Trim();
             string playerUsername = accountInformation.Username.Trim();
 
-            bool emailRegistered = await _accountRepository.IsEmailRegisteredAsync(emailAddress);
+            bool emailRegistered = _accountRepository
+                .IsEmailRegisteredAsync(emailAddress).GetAwaiter().GetResult();
 
             if (emailRegistered)
             {
                 throw CreateRegistrationFault(EmailAlreadyRegisteredErrorCode);
             }
 
-            bool usernameRegistered = await _accountRepository.IsUsernameRegisteredAsync(playerUsername);
+            bool usernameRegistered = _accountRepository
+                .IsUsernameRegisteredAsync(playerUsername).GetAwaiter().GetResult();
 
             if (usernameRegistered)
             {
@@ -268,20 +269,21 @@ namespace Backgammon.Server.Services
             return false;
         }
 
-        private async Task RegisterValidatedAccountAsync(Account accountInformation)
+        private void RegisterValidatedAccount(Account accountInformation)
         {
-            await ValidateAvailabilityAsync(accountInformation);
+            ValidateAvailability(accountInformation);
 
             AccountEntity playerAccount = CreateAccount(accountInformation);
 
             try
             {
-                await _accountRepository.CreateAccountAsync(playerAccount);
+                _accountRepository.CreateAccountAsync(playerAccount)
+                    .GetAwaiter().GetResult();
             }
             catch (Exception errorException) when (
                 IsUniqueViolation(errorException))
             {
-                await ValidateAvailabilityAsync(accountInformation);
+                ValidateAvailability(accountInformation);
 
                 ApplicationLogger.LogError(
                     errorException,

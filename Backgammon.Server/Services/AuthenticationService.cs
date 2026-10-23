@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using System.Threading.Tasks;
 using System;
 using System.Data.Entity.Core;
 using System.Data.SqlClient;
@@ -34,13 +33,13 @@ namespace Backgammon.Server.Services
             _playerSessionService = new PlayerSessionService();
         }
 
-        public async Task<PlayerSession> SignInAsync(Credentials playerCredentials)
+        public PlayerSession SignIn(Credentials playerCredentials)
         {
             ValidateCredentials(playerCredentials);
 
             string accountIdentifier = playerCredentials.Identifier.Trim();
 
-            List<Account> matchingAccounts = await FindAccountsAsync(accountIdentifier);
+            List<Account> matchingAccounts = FindAccounts(accountIdentifier);
 
             PlayerSession playerSession = CreateAuthenticatedSession(
                 matchingAccounts, playerCredentials.Password);
@@ -48,12 +47,14 @@ namespace Backgammon.Server.Services
             return playerSession;
         }
 
-        private async Task<List<Account>> FindAccountsAsync(string accountIdentifier)
+        private List<Account> FindAccounts(string accountIdentifier)
         {
             try
-            { 
-                List<Account> matchingAccounts =
-                    await _accountRepository.GetAccountsByIdentifierAsync(accountIdentifier);
+            {
+                List<Account> matchingAccounts = _accountRepository
+                    .GetAccountsByIdentifierAsync(accountIdentifier)
+                    .GetAwaiter()
+                    .GetResult();
 
                 return matchingAccounts;
             }

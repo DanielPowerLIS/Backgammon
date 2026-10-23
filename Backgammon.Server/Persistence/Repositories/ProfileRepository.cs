@@ -14,7 +14,8 @@ namespace Backgammon.Server.Persistence.Repositories
             {
                 return await databaseContext.Profiles
                     .AsNoTracking()
-                    .ToListAsync();
+                    .ToListAsync()
+                    .ConfigureAwait(false);
             }
         }
     }

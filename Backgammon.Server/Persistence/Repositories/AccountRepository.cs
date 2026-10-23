@@ -25,7 +25,8 @@ namespace Backgammon.Server.Persistence.Repositories
                     .Where(playerAccount => isEmailIdentifier
                         ? playerAccount.Email == accountIdentifier
                         : playerAccount.Profile.Username == accountIdentifier)
-                    .ToListAsync();
+                    .ToListAsync()
+                    .ConfigureAwait(false);
 
                 return matchingAccounts;
             }
@@ -35,7 +36,8 @@ namespace Backgammon.Server.Persistence.Repositories
             using (var databaseContext = new BackgammonEntities())
             {
                 bool emailRegistered = await databaseContext.Accounts
-                    .AnyAsync(playerAccount => playerAccount.Email == emailAddress);
+                    .AnyAsync(playerAccount => playerAccount.Email == emailAddress)
+                    .ConfigureAwait(false);
 
                 return emailRegistered;
             }
@@ -46,7 +48,8 @@ namespace Backgammon.Server.Persistence.Repositories
             using (var databaseContext = new BackgammonEntities())
             {
                 bool usernameRegistered = await databaseContext.Profiles
-                    .AnyAsync(playerProfile => playerProfile.Username == playerUsername);
+                    .AnyAsync(playerProfile => playerProfile.Username == playerUsername)
+                    .ConfigureAwait(false);
 
                 return usernameRegistered;
             }
@@ -57,11 +60,13 @@ namespace Backgammon.Server.Persistence.Repositories
             using (var databaseContext = new BackgammonEntities())
             {
                 playerAccount.AccountCode =
-                    await GenerateAvailableCodeAsync(databaseContext);
+                    await GenerateAvailableCodeAsync(databaseContext)
+                    .ConfigureAwait(false);
 
                 databaseContext.Accounts.Add(playerAccount);
 
-                await databaseContext.SaveChangesAsync();
+                await databaseContext.SaveChangesAsync()
+                    .ConfigureAwait(false);
             }
         }
 
@@ -75,7 +80,8 @@ namespace Backgammon.Server.Persistence.Repositories
                 string accountCode = codeGenerator.Generate();
 
                 bool codeRegistered = await databaseContext.Accounts
-                    .AnyAsync(playerAccount => playerAccount.AccountCode == accountCode);
+                    .AnyAsync(playerAccount => playerAccount.AccountCode == accountCode)
+                    .ConfigureAwait(false);
 
                 if (!codeRegistered)
                 {

@@ -1,5 +1,4 @@
 ﻿using System.ServiceModel;
-using System.Threading.Tasks;
 
 using Backgammon.Server.Services.Data;
 
@@ -10,6 +9,6 @@ namespace Backgammon.Server.Services.Contracts
     {
         [OperationContract]
         [FaultContract(typeof(AuthenticationFault))]
-        Task<PlayerSession> SignInAsync(Credentials playerCredentials);
+        PlayerSession SignIn(Credentials playerCredentials);
     }
 }
