@@ -56,5 +56,33 @@ namespace Backgammon.Client.Settings.Logging
 
             _applicationLogger.Error(formattedMessage, errorException);
         }
+
+        public void LogDebug(
+            string messageTemplate,
+            params object[] argumentValues)
+        {
+            _applicationLogger.DebugFormat(
+                CultureInfo.InvariantCulture,
+                messageTemplate,
+                argumentValues);
+        }
+
+        public void LogFatal(
+            Exception errorException,
+            string messageTemplate,
+            params object[] argumentValues)
+        {
+            if (!_applicationLogger.IsFatalEnabled)
+            {
+                return;
+            }
+
+            string formattedMessage = string.Format(
+                CultureInfo.InvariantCulture,
+                messageTemplate,
+                argumentValues);
+
+            _applicationLogger.Fatal(formattedMessage, errorException);
+        }
     }
 }
