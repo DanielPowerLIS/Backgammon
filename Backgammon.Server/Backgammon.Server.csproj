@@ -133,7 +133,6 @@
     <Compile Include="Services\Data\Credentials.cs" />
     <Compile Include="Services\Data\LeaderboardFault.cs" />
     <Compile Include="Services\Data\PlayerSession.cs" />
-    <Compile Include="Services\Data\ProfileService.cs" />
     <Compile Include="Services\Data\RegistrationFault.cs" />
     <Compile Include="Services\Contracts\ILeaderboardService.cs" />
     <Compile Include="Services\Data\SocialMediaLink.cs" />

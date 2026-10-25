@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using Backgammon.Client.Views.Pages;
 
 namespace Backgammon.Client.Views.Pages
 {
