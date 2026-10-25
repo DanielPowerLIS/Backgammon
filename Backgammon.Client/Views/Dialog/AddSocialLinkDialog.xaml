@@ -227,15 +227,14 @@
                     Content="{x:Static properties:Resources.Button_Save}"
                     Style="{StaticResource DialogButtonStyle}"
                     IsEnabled="False"
-                    IsDefault="True"
-                    Click="OnSaveClick" />
+                    IsDefault="True"/>
 
                 <Button
                     x:Name="buttonCancel"
                     Grid.Column="2"
                     Content="{x:Static properties:Resources.Button_Cancel}"
                     Style="{StaticResource DialogButtonStyle}"
-                    IsCancel="True" />
+                    IsCancel="True"/>
             </Grid>
         </Grid>
     </Border>

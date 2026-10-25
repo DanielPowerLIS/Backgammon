@@ -112,7 +112,7 @@
                         FontSize="20"
                         FontWeight="Bold"
                         Cursor="Hand"
-                        Click="CloseButton_Click">
+                        Click="OnCloseButtonClick">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}"

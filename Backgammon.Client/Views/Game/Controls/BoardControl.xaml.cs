@@ -7,19 +7,19 @@ namespace Backgammon.Client.Views.Game.Controls
 {
     public partial class BoardControl : UserControl
     {
-        private const double BoardTop = 30;
-        private const double BoardBottom = 415;
-        private const double PointWidth = 50;
-        private const double PointBaseLeft = 40;
-        private const double BarWidth = 100;
-        private const double CheckerSize = 40;
-        private const double CheckerMarginFromEdge = 5;
-        private const double StackAreaHeight = 140;
-        private const double CheckerOffserWithinPoint = (PointWidth - CheckerSize)/2;
-        private const int MaxCheckersWithoutOverlap = 3;
-        private const int TopRowMinPointNumber = 13;
-        private const int TotalColumns = 12;
-        private const int ColumnsPerHalf = 6;
+        private static readonly double BoardTop = 30;
+        private static readonly double BoardBottom = 415;
+        private static readonly double PointWidth = 50;
+        private static readonly double PointBaseLeft = 40;
+        private static readonly double BarWidth = 100;  
+        private static readonly double CheckerSize = 40;
+        private static readonly double CheckerMarginFromEdge = 5;
+        private static readonly double StackAreaHeight = 140;
+        private static readonly double CheckerOffserWithinPoint = (PointWidth - CheckerSize) / 2;
+        private static readonly int MaxCheckersWithoutOverlap = 3;
+        private static readonly int TopRowMinPointNumber = 13;
+        private static readonly int TotalColumns = 12;
+        private static readonly int ColumnsPerHalf = 6;
         private readonly List<CheckerControl> _renderedCheckers = new List<CheckerControl>();
 
         public BoardControl()

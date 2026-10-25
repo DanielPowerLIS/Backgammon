@@ -1,7 +1,8 @@
-﻿using Backgammon.Client.Views.Game;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+
+using Backgammon.Client.Views.Game;
 
 namespace Backgammon.Client.Views.Pages
 {

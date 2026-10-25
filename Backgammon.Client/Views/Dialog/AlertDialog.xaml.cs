@@ -7,14 +7,13 @@ namespace Backgammon.Client.Views.Dialog
 {
     public partial class AlertDialog : Window
     {
-        public AlertDialog(string title, string message, string ButtonText, AlertType alertType)
+        public AlertDialog(string title, string message, AlertType alertType)
         {
             InitializeComponent();
 
             Title = Properties.Resources.TextBlock_Backgammon;
             textBlockTitle.Text = title;
             textBlockMessage.Text = message;
-            buttonAccept.Content = ButtonText;
 
             if (alertType == AlertType.Error)
             {
@@ -30,7 +29,7 @@ namespace Backgammon.Client.Views.Dialog
             buttonAccept.Foreground = redBrush;
             buttonAccept.BorderBrush = redBrush;
         }
-        private void BtnAccept_Click(object sender, RoutedEventArgs e)
+        private void OnAcceptClick(object sender, RoutedEventArgs e)
         {
             Close();
         }

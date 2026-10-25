@@ -64,7 +64,6 @@ namespace Backgammon.Client.Views.Pages
             var alertDialog = new AlertDialog(
                 Properties.Resources.TextBlock_LeaderboardLoadErrorTitle,
                 Properties.Resources.TextBlock_LeaderboardLoadErrorMessage,
-                Properties.Resources.Button_Accept,
                 AlertType.Error);
 
             alertDialog.Owner = Window.GetWindow(this);

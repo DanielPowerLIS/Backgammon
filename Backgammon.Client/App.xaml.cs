@@ -1,8 +1,9 @@
-﻿using log4net;
-using log4net.Config;
-using System;
+﻿using System;
 using System.IO;
 using System.Windows;
+
+using log4net;
+using log4net.Config;
 
 using Backgammon.Client.Settings.Localization;
 using Backgammon.Client.Settings.Logging;

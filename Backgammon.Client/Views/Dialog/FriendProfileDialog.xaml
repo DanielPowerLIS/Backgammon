@@ -144,7 +144,7 @@
                     <Ellipse Margin="12">
                         <Ellipse.Fill>
                             <ImageBrush
-                                x:Name="avatarBrush"
+                                x:Name="imageBrushAvatar"
                                 Stretch="Uniform" />
                         </Ellipse.Fill>
                     </Ellipse>
