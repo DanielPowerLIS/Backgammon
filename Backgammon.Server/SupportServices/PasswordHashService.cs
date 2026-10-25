@@ -20,18 +20,17 @@ namespace Backgammon.Server.SupportServices
                 generator.GetBytes(salt);
             }
 
-            byte[] hash;
             using (Rfc2898DeriveBytes derivation =
                 new Rfc2898DeriveBytes(
                     password, salt, IterationCount, HashAlgorithmName.SHA256))
             {
-                hash = derivation.GetBytes(HashLength);
+                byte[] hash = derivation.GetBytes(HashLength);
+
+                string encodedSalt = Convert.ToBase64String(salt);
+                string encodedHash = Convert.ToBase64String(hash);
+
+                return $"PBKDF2-SHA256${IterationCount}${encodedSalt}${encodedHash}";
             }
-
-            string encodedSalt = Convert.ToBase64String(salt);
-            string encodedHash = Convert.ToBase64String(hash);
-
-            return $"PBKDF2-SHA256${IterationCount}${encodedSalt}${encodedHash}";
         }
 
         public bool VerifyPassword(string password, string storedHash)
