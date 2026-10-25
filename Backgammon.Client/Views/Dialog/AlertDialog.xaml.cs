@@ -29,7 +29,7 @@ namespace Backgammon.Client.Views.Dialog
             buttonAccept.Foreground = redBrush;
             buttonAccept.BorderBrush = redBrush;
         }
-        private void BtnAccept_Click(object sender, RoutedEventArgs e)
+        private void OnAcceptClick(object sender, RoutedEventArgs e)
         {
             Close();
         }
