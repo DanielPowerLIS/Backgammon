@@ -17,6 +17,23 @@ namespace Backgammon.Server
             ConfigureLogging();
             ApplicationLogger.LogInformation("Server logging initialized.");
 
+            try
+            {
+                RunServer();
+            }
+            catch (Exception serverException)
+            {
+                ApplicationLogger.LogFatal(
+                    serverException,
+                    "An unrecoverable failure prevented the server from continuing.");
+
+                throw;
+            }
+        }
+
+        private static void RunServer()
+        {
+
             var leaderboardServiceHost = new LeaderboardServiceHost();
             var authenticationServiceHost = new AuthenticationServiceHost();
             var logOutServiceHost = new LogOutServiceHost();
