@@ -4,6 +4,7 @@ using System.ServiceModel;
 using System;
 using System.Data.Entity.Core;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
 
 using Account = Backgammon.Server.Persistence.Data.Account;
 using Backgammon.Server.Persistence.Repositories;
@@ -37,6 +38,24 @@ namespace Backgammon.Server.Services
         {
             ValidateCredentials(playerCredentials);
 
+            try
+            {
+                return AuthenticatePlayer(playerCredentials);
+            }
+            catch (Exception authenticationException) when (
+                IsAuthenticationFailure(authenticationException))
+            {
+                ApplicationLogger.LogError(
+                    authenticationException,
+                    "A technical failure prevented sign-in from completing.");
+
+                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+            }
+        }
+
+        private PlayerSession AuthenticatePlayer(Credentials playerCredentials)
+        {
+
             string accountIdentifier = playerCredentials.Identifier.Trim();
 
             List<Account> matchingAccounts = FindAccounts(accountIdentifier);
@@ -44,32 +63,29 @@ namespace Backgammon.Server.Services
             PlayerSession playerSession = CreateAuthenticatedSession(
                 matchingAccounts, playerCredentials.Password);
 
-            ApplicationLogger.LogInformation("Player {0} signed in successfully.");
+            ApplicationLogger.LogInformation(
+                "Player {0} signed in successfully.",
+                playerSession.PlayerId);
 
             return playerSession;
         }
 
+        private bool IsAuthenticationFailure(Exception authenticationException)
+        {
+            return authenticationException is EntityException ||
+                authenticationException is SqlException ||
+                authenticationException is CryptographicException ||
+                authenticationException is InvalidOperationException;
+        }
+
         private List<Account> FindAccounts(string accountIdentifier)
         {
-            try
-            {
-                List<Account> matchingAccounts = _accountRepository
-                    .GetAccountsByIdentifierAsync(accountIdentifier)
-                    .GetAwaiter()
-                    .GetResult();
+            List<Account> matchingAccounts = _accountRepository
+                .GetAccountsByIdentifierAsync(accountIdentifier)
+                .GetAwaiter()
+                .GetResult();
 
-                return matchingAccounts;
-            }
-            catch (Exception errorException) when (
-                errorException is EntityException ||
-                errorException is SqlException)
-            {
-                ApplicationLogger.LogError(
-                    errorException,
-                    "Database query failed during sign-in.");
-
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
-            }
+            return matchingAccounts;
         }
 
         private PlayerSession CreateAuthenticatedSession(List<Account> matchingAccounts, string suppliedPassword)
