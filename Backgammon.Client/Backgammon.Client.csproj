@@ -108,7 +108,6 @@
     <Compile Include="Settings\Logging\IApplicationLogger.cs" />
     <Compile Include="Settings\Logging\Log4NetApplicationLogger.cs" />
     <Compile Include="Views\Models\AlertType.cs" />
-    <Compile Include="Controllers\Data\FriendSearchMode.cs" />
     <Compile Include="Views\Dialog\AccountDialog.xaml.cs">
       <DependentUpon>AccountDialog.xaml</DependentUpon>
     </Compile>
