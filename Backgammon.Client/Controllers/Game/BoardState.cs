@@ -4,22 +4,22 @@ namespace Backgammon.Client.Controllers.Game
 {
     public class BoardState
     {
-        private const int TotalPoints = 24;
+        private static readonly int TotalPoints = 24;
 
-        private const int WhiteBackPoint = 24;
-        private const int WhiteMidPoint = 13;
-        private const int WhiteOuterPoint = 8;
-        private const int WhiteHomePoint = 6;
+        private static readonly int WhiteBackPoint = 24;
+        private static readonly int WhiteMidPoint = 13;
+        private static readonly int WhiteOuterPoint = 8;
+        private static readonly int WhiteHomePoint = 6;
 
-        private const int BlackBackPoint = 1;
-        private const int BlackMidPoint = 12;
-        private const int BlackOuterPoint = 17;
-        private const int BlackHomePoint = 19;
+        private static readonly int BlackBackPoint = 1;
+        private static readonly int BlackMidPoint = 12;
+        private static readonly int BlackOuterPoint = 17;
+        private static readonly int BlackHomePoint = 19;
 
-        private const int BackCheckerCount = 2;
-        private const int MidCheckerCount = 5;
-        private const int OuterCheckerCount = 3;
-        private const int HomeCheckerCount = 5;
+        private static readonly int BackCheckerCount = 2;
+        private static readonly int MidCheckerCount = 5;
+        private static readonly int OuterCheckerCount = 3;
+        private static readonly int HomeCheckerCount = 5;
 
         private readonly BoardPoint[] _points;
 
