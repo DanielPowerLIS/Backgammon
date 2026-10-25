@@ -9,11 +9,15 @@
         }
 
         public int FirstDieValue { get; }
+
         public int SecondDieValue { get; }
 
         public bool IsDouble
         {
-            get {  return FirstDieValue == SecondDieValue; }
+            get
+            {
+                return FirstDieValue == SecondDieValue;
+            }
         }
     }
 }

@@ -11,7 +11,12 @@
       Background="White">
     
     <Page.Resources>
-        <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5, 0.5" GradientOrigin="0.5, 0.35" RadiusX="0.85" RadiusY="0.85">
+        <RadialGradientBrush 
+            x:Key="PageBackgroundBrush" 
+            Center="0.5, 0.5" 
+            GradientOrigin="0.5, 0.35" 
+            RadiusX="0.85" 
+            RadiusY="0.85">
             <GradientStop Color="#171C2B" Offset="0" />
             <GradientStop Color="#0C1220" Offset="0.55" />
             <GradientStop Color="#050914" Offset="1" />
@@ -39,39 +44,65 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.TextBlock_Button_Friends}" HorizontalAlignment="Center" FontSize="30" Margin="0,0,0,15" Foreground="{StaticResource PinkAccentBrush}" >
+            <TextBlock 
+                Grid.Row="0" 
+                Text="{x:Static properties:Resources.TextBlock_Button_Friends}" 
+                HorizontalAlignment="Center" 
+                FontSize="30" 
+                Margin="0,0,0,15" 
+                Foreground="{StaticResource PinkAccentBrush}" >
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#E795EC" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
                 </TextBlock.Effect>
             </TextBlock>
             
-            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,15">
-                <Button Style="{StaticResource FriendButtonStyle}" MinWidth="130" MinHeight="35" Margin="0,0,10,0" >
+            <StackPanel 
+                Grid.Row="1" 
+                Orientation="Horizontal" 
+                HorizontalAlignment="Right" 
+                Margin="0,0,0,15">
+                <Button 
+                    Style="{StaticResource FriendButtonStyle}" 
+                    MinWidth="130" 
+                    MinHeight="35" 
+                    Margin="0,0,10,0" >
                     <TextBlock Text="{x:Static properties:Resources.TextBlock_FriendRequests}"
                     TextWrapping="Wrap"
                     TextAlignment="Center"/>
                 </Button>
-                <Button Style="{StaticResource FriendButtonStyle}" MinWidth="130" MinHeight="35" Margin="0,0,0,0">
-                    <TextBlock Text="{x:Static properties:Resources.TextBlock_Button_AddFriend}"
-                   TextWrapping="Wrap"
-                   TextAlignment="Center"/>
+                <Button 
+                    Style="{StaticResource FriendButtonStyle}" 
+                    MinWidth="130" 
+                    MinHeight="35" 
+                    Margin="0,0,0,0">
+                    <TextBlock 
+                        Text="{x:Static properties:Resources.TextBlock_Button_AddFriend}"
+                        TextWrapping="Wrap"
+                        TextAlignment="Center"/>
                 </Button>
             </StackPanel>
             
-            <Border Grid.Row="2" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Padding="10">
+            <Border 
+                Grid.Row="2" 
+                BorderBrush="{StaticResource CyanAccentBrush}" 
+                BorderThickness="2" 
+                Padding="10">
 
-                <ListView x:Name="listViewFriends"
-          Background="Transparent"
-          BorderThickness="0"
-          ItemsSource="{Binding Friends}"
-          HorizontalContentAlignment="Stretch">
+                <ListView 
+                     x:Name="listViewFriends"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     ItemsSource="{Binding Friends}"
+                     HorizontalContentAlignment="Stretch">
 
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment"
-                    Value="Stretch"/>
-                            <Setter Property="Background"
-                    Value="Transparent"/>
+                            <Setter 
+                                Property="HorizontalContentAlignment"
+                                Value="Stretch"/>
+                            <Setter 
+                                Property="Background"
+                                Value="Transparent"/>
                         </Style>
                     </ListView.ItemContainerStyle>
 
@@ -86,42 +117,55 @@
                                     <ColumnDefinition Width="120"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Ellipse Grid.Column="0"
-                         Width="40"
-                         Height="40"
-                         Fill="{Binding AvatarBrush}"/>
+                                <Ellipse 
+                                    Grid.Column="0"
+                                     Width="40"
+                                     Height="40"
+                                     Fill="{Binding AvatarBrush}"/>
 
-                                <TextBlock Grid.Column="1"
-                           Text="{Binding Username}"
-                           Foreground="{StaticResource CyanAccentBrush}"
-                           VerticalAlignment="Center"
-                           FontSize="16"/>
+                                <TextBlock 
+                                    Grid.Column="1"
+                                   Text="{Binding Username}"
+                                   Foreground="{StaticResource CyanAccentBrush}"
+                                   VerticalAlignment="Center"
+                                   FontSize="16"/>
 
-                                <Ellipse Grid.Column="2"
-                         Width="20"
-                         Height="20"
-                         Fill="{Binding StatusBrush}"
-                         HorizontalAlignment="Center"
-                         VerticalAlignment="Center"/>
+                                <Ellipse 
+                                    Grid.Column="2"
+                                     Width="20"
+                                     Height="20"
+                                     Fill="{Binding StatusBrush}"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"/>
 
-                                <Button Grid.Column="3"
-                        Style="{StaticResource FriendButtonStyle}"
-                        Content="{x:Static properties:Resources.Button_ViewProfile}"
-                        Width="100"
-                        Height="30"/>
+                                <Button 
+                                    Grid.Column="3"
+                                    Style="{StaticResource FriendButtonStyle}"
+                                    Content="{x:Static properties:Resources.Button_ViewProfile}"
+                                    Width="100"
+                                    Height="30"/>
 
-                                <Button Grid.Column="4"
-                        Style="{StaticResource FriendButtonStyle}"
-                        Content="{x:Static properties:Resources.Button_Remove}"
-                        Width="100"
-                        Height="30"/>
+                                <Button 
+                                    Grid.Column="4"
+                                    Style="{StaticResource FriendButtonStyle}"
+                                    Content="{x:Static properties:Resources.Button_Remove}"
+                                    Width="100"
+                                    Height="30"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
 
                 </ListView>
             </Border>
-            <Button Style="{StaticResource FriendButtonStyle}" Grid.Row="3" Content="{x:Static properties:Resources.Button_Back}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0" Click="OnBackClick"/>
+            <Button 
+                Style="{StaticResource FriendButtonStyle}" 
+                Grid.Row="3" 
+                Content="{x:Static properties:Resources.Button_Back}" 
+                Width="100" 
+                Height="35" 
+                HorizontalAlignment="Right" 
+                Margin="0,15,0,0" 
+                Click="OnBackClick"/>
         </Grid>
     </Grid>
 </Page>

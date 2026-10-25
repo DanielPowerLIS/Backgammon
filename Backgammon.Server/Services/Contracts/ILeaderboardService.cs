@@ -11,7 +11,6 @@ namespace Backgammon.Server.Services.Contracts
         [FaultContract(typeof(LeaderboardFault))]
         PlayerStanding[] GetLeaderboard();
 
-
     }
 
 }

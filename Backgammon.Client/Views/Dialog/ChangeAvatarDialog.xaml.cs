@@ -7,7 +7,6 @@ namespace Backgammon.Client.Views.Dialog
 {
     public partial class ChangeAvatarDialog : Window
     {
-        public AvatarOption SelectedAvatar { get; }
 
         public ChangeAvatarDialog(AvatarOption selectedAvatar)
         {
@@ -21,6 +20,8 @@ namespace Backgammon.Client.Views.Dialog
             SelectedAvatar = selectedAvatar;
             DataContext = selectedAvatar;
         }
+
+        public AvatarOption SelectedAvatar { get; }
 
         public bool ShowFor(Window owner)
         {

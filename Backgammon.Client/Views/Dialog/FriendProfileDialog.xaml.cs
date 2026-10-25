@@ -6,8 +6,7 @@ namespace Backgammon.Client.Views.Dialog
 {
     public partial class FriendProfileDialog : Window
     {
-        public int TargetAccountId { get; }
-
+        
         public FriendProfileDialog(
             int accountId, string username, ImageSource avatarImage)
         {
@@ -18,6 +17,19 @@ namespace Backgammon.Client.Views.Dialog
             TargetAccountId = accountId;
             textBlockUsername.Text = username;
             imageBrushAvatar.ImageSource = avatarImage;
+        }
+
+        public int TargetAccountId { get; }
+
+        public bool ShowFor(Window owner)
+        {
+            if (owner == null)
+            {
+                throw new ArgumentNullException(nameof(owner));
+            }
+
+            Owner = owner;
+            return ShowDialog() == true;
         }
 
         private void ValidatePlayer(
@@ -39,17 +51,6 @@ namespace Backgammon.Client.Views.Dialog
             {
                 throw new ArgumentNullException(nameof(avatarImage));
             }
-        }
-
-        public bool ShowFor(Window owner)
-        {
-            if (owner == null)
-            {
-                throw new ArgumentNullException(nameof(owner));
-            }
-
-            Owner = owner;
-            return ShowDialog() == true;
         }
 
         private void OnSendRequestClick(object sender, RoutedEventArgs e)

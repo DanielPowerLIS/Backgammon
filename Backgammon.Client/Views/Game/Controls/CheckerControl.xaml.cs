@@ -8,6 +8,9 @@ namespace Backgammon.Client.Views.Game.Controls
 {
     public partial class CheckerControl : UserControl
     {
+        public static readonly DependencyProperty CheckerColorProperty =
+            DependencyProperty.Register(nameof(CheckerColor), typeof(PlayerColor),
+                typeof(CheckerControl), new PropertyMetadata(PlayerColor.None, OnCheckerColorChanged));
         private static readonly string WhiteCheckerHex = "#00C9F2";
         private static readonly string BlackCheckerHex = "#E795EC";
         private static readonly string NoneCheckerHex = "#4A5366";
@@ -15,9 +18,6 @@ namespace Backgammon.Client.Views.Game.Controls
         private static readonly string BlackCheckerStrokeHex = "#00C9F2";
         private static readonly string NoneCheckerStrokeHex = "#00C9F2";
 
-        public static readonly DependencyProperty CheckerColorProperty =
-            DependencyProperty.Register(nameof(CheckerColor), typeof(PlayerColor), 
-                typeof(CheckerControl), new PropertyMetadata(PlayerColor.None, OnCheckerColorChanged));
         public CheckerControl()
         {
             InitializeComponent();
@@ -25,8 +25,14 @@ namespace Backgammon.Client.Views.Game.Controls
 
         public PlayerColor CheckerColor
         {
-            get { return (PlayerColor)GetValue(CheckerColorProperty); }
-            set { SetValue(CheckerColorProperty, value); }
+            get
+            {
+                return (PlayerColor)GetValue(CheckerColorProperty);
+            }
+            set
+            {
+                SetValue(CheckerColorProperty, value);
+            }
         }
 
         private static void OnCheckerColorChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)

@@ -4,11 +4,6 @@ namespace Backgammon.Client.Views.Models
 {
     public sealed class SocialNetworkOption
     {
-        public int Id { get; }
-        public string Name { get; }
-        public bool HasLink { get; }
-
-        public bool IsAvailable => !HasLink;
 
         public SocialNetworkOption(int id, string name, bool hasLink)
         {
@@ -28,5 +23,13 @@ namespace Backgammon.Client.Views.Models
             Name = name;
             HasLink = hasLink;
         }
+
+        public int Id { get; }
+
+        public string Name { get; }
+        
+        public bool HasLink { get; }
+
+        public bool IsAvailable => !HasLink;
     }
 }

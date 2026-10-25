@@ -8,10 +8,6 @@ namespace Backgammon.Client.Views.Models
     public sealed class AvatarOption
     {
 
-        public int Id { get; }
-
-        public ImageSource Image { get; }
-
         public AvatarOption(int id, byte[] imageData)
         {
             if (id <= 0)
@@ -22,6 +18,10 @@ namespace Backgammon.Client.Views.Models
             Id = id;
             Image = CreateImage(imageData);
         }
+
+        public int Id { get; }
+
+        public ImageSource Image { get; }
 
         private BitmapImage CreateImage(byte[] imageData)
         {

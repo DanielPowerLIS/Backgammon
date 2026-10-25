@@ -11,13 +11,16 @@
       Title="{x:Static properties:Resources.TextBlock_Button_Leaderboard}">
 
     <Page.Resources>
-
-        <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5,0.5" GradientOrigin="0.5,0.35" RadiusX="0.85" RadiusY="0.85">
+        <RadialGradientBrush 
+            x:Key="PageBackgroundBrush" 
+            Center="0.5,0.5" 
+            GradientOrigin="0.5,0.35" 
+            RadiusX="0.85" 
+            RadiusY="0.85">
             <GradientStop Color="#171C2B" Offset="0"/>
             <GradientStop Color="#0C1220" Offset="0.55"/>
             <GradientStop Color="#050914" Offset="1"/>
         </RadialGradientBrush>
-
         <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#080D1A"/>
         <SolidColorBrush x:Key="CyanAccentBrush" Color="#00C9F2"/>
         <SolidColorBrush x:Key="PinkAccentBrush" Color="#E795EC"/>
@@ -30,7 +33,6 @@
             <Setter Property="Cursor" Value="Hand"/>
         </Style>
     </Page.Resources>
-
     <Grid Background="{StaticResource PageBackgroundBrush}">
         <Grid Margin="30">
             <Grid.RowDefinitions>
@@ -38,27 +40,33 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-
-            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.TextBlock_Button_Leaderboard}" HorizontalAlignment="Center" FontSize="30" Foreground="{StaticResource PinkAccentBrush}" Margin="0,0,0,20">
-
+            <TextBlock 
+                Grid.Row="0" 
+                Text="{x:Static properties:Resources.TextBlock_Button_Leaderboard}" 
+                HorizontalAlignment="Center" 
+                FontSize="30" 
+                Foreground="{StaticResource PinkAccentBrush}" 
+                Margin="0,0,0,20">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#E795EC" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
                 </TextBlock.Effect>
-
             </TextBlock>
-
-            <Border Grid.Row="1" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Background="{StaticResource ControlBackgroundBrush}" Padding="10">
-                <ListBox x:Name="listBoxLeaderboard"
-             Background="Transparent"
-             BorderThickness="0">
-
+            <Border 
+                Grid.Row="1" 
+                BorderBrush="{StaticResource CyanAccentBrush}" 
+                BorderThickness="2" 
+                Background="{StaticResource ControlBackgroundBrush}" 
+                Padding="10">
+                <ListBox 
+                     x:Name="listBoxLeaderboard"
+                     Background="Transparent"
+                     BorderThickness="0">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                             <Setter Property="Background" Value="Transparent"/>
                         </Style>
                     </ListBox.ItemContainerStyle>
-
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="5">
@@ -68,19 +76,18 @@
                                     <ColumnDefinition Width="170"/>
                                     <ColumnDefinition Width="170"/>
                                 </Grid.ColumnDefinitions>
-
-                                <Ellipse Grid.Column="0"
-                             Width="40"
-                             Height="40"
-                             Fill="#3D7EA6"
-                             HorizontalAlignment="Center"/>
-
-                                <TextBlock Grid.Column="1"
-                               Text="{Binding Username}"
-                               FontSize="18"
-                               Foreground="{StaticResource CyanAccentBrush}"
-                               VerticalAlignment="Center"/>
-
+                                <Ellipse 
+                                     Grid.Column="0"
+                                     Width="40"
+                                     Height="40"
+                                     Fill="#3D7EA6"
+                                     HorizontalAlignment="Center"/>
+                                <TextBlock 
+                                     Grid.Column="1"
+                                     Text="{Binding Username}"
+                                     FontSize="18"
+                                     Foreground="{StaticResource CyanAccentBrush}"
+                                     VerticalAlignment="Center"/>
                                 <StackPanel Grid.Column="2"
                                 HorizontalAlignment="Center" Orientation="Horizontal" >
                                     <StackPanel.Resources>
@@ -89,46 +96,53 @@
                                             <Setter Property="Margin" Value="0,0,8,0"/>
                                         </Style>
                                     </StackPanel.Resources>
-                                    <TextBlock Text="{x:Static properties:Resources.TextBlock_Wins}"
-                                   FontSize="20"
-                                   Foreground="{StaticResource PinkAccentBrush}"
-                                   HorizontalAlignment="Center"/>
+                                    <TextBlock 
+                                        Text="{x:Static properties:Resources.TextBlock_Wins}"
+                                        FontSize="20"
+                                        Foreground="{StaticResource PinkAccentBrush}"
+                                        HorizontalAlignment="Center"/>
 
-                                    <TextBlock Text="{Binding Wins}"
-                                   FontSize="20"
-                                   Foreground="{StaticResource CyanAccentBrush}"
-                                   HorizontalAlignment="Center"/>
+                                    <TextBlock 
+                                        Text="{Binding Wins}"
+                                        FontSize="20"
+                                        Foreground="{StaticResource CyanAccentBrush}"
+                                        HorizontalAlignment="Center"/>
                                 </StackPanel>
-
-                                <StackPanel Grid.Column="3"
-                                HorizontalAlignment="Center" Orientation="Horizontal">
+                                <StackPanel 
+                                    Grid.Column="3"
+                                    HorizontalAlignment="Center" Orientation="Horizontal">
                                     <StackPanel.Resources>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="FontSize" Value="20"/>
                                             <Setter Property="Margin" Value="0,0,8,0"/>
                                         </Style>
                                     </StackPanel.Resources>
-                                    <TextBlock Text="{x:Static properties:Resources.TextBlock_Points}"
-                                   FontSize="20"
-                                   Foreground="{StaticResource PinkAccentBrush}"
-                                   HorizontalAlignment="Center"/>
+                                    <TextBlock 
+                                         Text="{x:Static properties:Resources.TextBlock_Points}"
+                                         FontSize="20"
+                                         Foreground="{StaticResource PinkAccentBrush}"
+                                         HorizontalAlignment="Center"/>
 
-                                    <TextBlock Text="{Binding Points}"
-                                   FontSize="20"
-                                   Foreground="{StaticResource CyanAccentBrush}"
-                                   HorizontalAlignment="Center"/>
+                                    <TextBlock 
+                                        Text="{Binding Points}"
+                                        FontSize="20"
+                                        Foreground="{StaticResource CyanAccentBrush}"
+                                        HorizontalAlignment="Center"/>
                                 </StackPanel>
-
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
-
                 </ListBox>
             </Border>
-
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_Back}" Style="{StaticResource LeaderboardButtonStyle}" Width="100" Height="35" HorizontalAlignment="Right" Margin="0,15,0,0" Click="OnBackClick"/>
+            <Button 
+                Grid.Row="2" 
+                Content="{x:Static properties:Resources.Button_Back}" 
+                Style="{StaticResource LeaderboardButtonStyle}" 
+                Width="100" 
+                Height="35" 
+                HorizontalAlignment="Right" 
+                Margin="0,15,0,0" 
+                Click="OnBackClick"/>
         </Grid>
-
     </Grid>
-
 </Page>

@@ -13,7 +13,7 @@ namespace Backgammon.Server.SupportServices
             TimeSpan.FromMinutes(30);
 
         private static readonly Dictionary<string, PlayerSession> ActiveSessions =
-           new Dictionary<string, PlayerSession>();
+            new Dictionary<string, PlayerSession>();
 
         private static readonly object SessionSynchronization = new object();
 

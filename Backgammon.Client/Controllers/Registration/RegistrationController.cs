@@ -21,7 +21,6 @@ namespace Backgammon.Client.Controllers.Registration
         private static readonly string InvalidEmailErrorCode = "InvalidEmail";
 
         private static readonly int MinimumPasswordLength = 8;
-        
 
         public RegistrationController()
         {
