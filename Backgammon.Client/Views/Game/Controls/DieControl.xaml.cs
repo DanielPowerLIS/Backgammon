@@ -9,9 +9,9 @@ namespace Backgammon.Client.Views.Game.Controls
 {
     public partial class DieControl : UserControl
     {
-        private const double DotSize = 14;
-        private const double DotMargin = 4;
-        private const int GridSize = 3;
+        private static readonly double DotSize = 14;
+        private static readonly double DotMargin = 4;
+        private static readonly int GridSize = 3;
 
         private Brush _currentDotBrush = Brushes.White;
 

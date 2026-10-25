@@ -8,12 +8,12 @@ namespace Backgammon.Client.Views.Game.Controls
 {
     public partial class CheckerControl : UserControl
     {
-        private const string WhiteCheckerHex = "#00C9F2";
-        private const string BlackCheckerHex = "#E795EC";
-        private const string NoneCheckerHex = "#4A5366";
-        private const string WhiteCheckerStrokeHex = "#E795EC";
-        private const string BlackCheckerStrokeHex = "#00C9F2";
-        private const string NoneCheckerStrokeHex = "#00C9F2";
+        private static readonly string WhiteCheckerHex = "#00C9F2";
+        private static readonly string BlackCheckerHex = "#E795EC";
+        private static readonly string NoneCheckerHex = "#4A5366";
+        private static readonly string WhiteCheckerStrokeHex = "#E795EC";
+        private static readonly string BlackCheckerStrokeHex = "#00C9F2";
+        private static readonly string NoneCheckerStrokeHex = "#00C9F2";
 
         public static readonly DependencyProperty CheckerColorProperty =
             DependencyProperty.Register(nameof(CheckerColor), typeof(PlayerColor), 

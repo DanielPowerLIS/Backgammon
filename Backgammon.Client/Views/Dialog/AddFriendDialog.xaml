@@ -204,14 +204,14 @@
                     Grid.Column="0"
                     Content="{x:Static properties:Resources.Button_AddFriendByEmail}"
                     Style="{StaticResource FriendDialogButtonStyle}"
-                    Click="OnAddByEmailClick" />
+                    IsEnabled="False"/>
 
                 <Button
                     x:Name="buttonAddByCode"
                     Grid.Column="2"
                     Content="{x:Static properties:Resources.Button_AddFriendByCode}"
                     Style="{StaticResource FriendDialogButtonStyle}"
-                    Click="OnAddByCodeClick" />
+                    IsEnabled="False"/>
             </Grid>
 
             <Button

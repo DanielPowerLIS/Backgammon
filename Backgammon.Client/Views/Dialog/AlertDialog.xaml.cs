@@ -7,14 +7,13 @@ namespace Backgammon.Client.Views.Dialog
 {
     public partial class AlertDialog : Window
     {
-        public AlertDialog(string title, string message, string ButtonText, AlertType alertType)
+        public AlertDialog(string title, string message, AlertType alertType)
         {
             InitializeComponent();
 
             Title = Properties.Resources.TextBlock_Backgammon;
             textBlockTitle.Text = title;
             textBlockMessage.Text = message;
-            buttonAccept.Content = ButtonText;
 
             if (alertType == AlertType.Error)
             {

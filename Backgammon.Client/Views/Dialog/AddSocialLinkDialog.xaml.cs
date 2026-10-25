@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace Backgammon.Client.Views.Dialog
 {
-    /// <summary>
-    /// Interaction logic for AddSocialLinkDialog.xaml
-    /// </summary>
     public partial class AddSocialLinkDialog : Window
     {
-        public string Link { get; private set; } = string.Empty;
 
         public AddSocialLinkDialog(
             string socialNetworkName, string exampleLink)
@@ -30,7 +25,6 @@ namespace Backgammon.Client.Views.Dialog
 
             InitializeComponent();
             SetDialogText(socialNetworkName, exampleLink);
-            textBoxLink.TextChanged += OnLinkTextChanged;
         }
 
         private void SetDialogText(
@@ -47,29 +41,6 @@ namespace Backgammon.Client.Views.Dialog
                 socialNetworkName);
 
             textBoxLink.Tag = exampleLink;
-        }
-
-        private void OnLinkTextChanged(
-            object sender, TextChangedEventArgs e)
-        {
-            buttonSave.IsEnabled =
-                !string.IsNullOrWhiteSpace(textBoxLink.Text);
-        }
-
-        private void OnSaveClick(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(textBoxLink.Text))
-            {
-                return;
-            }
-
-            Link = textBoxLink.Text.Trim();
-            DialogResult = true;
-        }
-
-        private void OnCloseClick(object sender, RoutedEventArgs e)
-        {
-            DialogResult = false;
         }
 
         public bool ShowFor(Window owner)

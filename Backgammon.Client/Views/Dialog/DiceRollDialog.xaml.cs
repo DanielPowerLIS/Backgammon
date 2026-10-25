@@ -8,10 +8,10 @@ namespace Backgammon.Client.Views.Dialog
 {
     public partial class DiceRollDialog : Window
     {
-        private const int MinDieValue = 1;
-        private const int MaxDieValue = 6;
-        private const int AnimationIntervalMilliseconds = 100;
-        private const int AnimationDurationMilliseconds = 1000;
+        private static readonly int MinDieValue = 1;
+        private static readonly int MaxDieValue = 6;
+        private static readonly int AnimationIntervalMilliseconds = 100;
+        private static readonly int AnimationDurationMilliseconds = 1000;
         private readonly Random _random = new Random();
         private readonly DispatcherTimer _animationTimer = new DispatcherTimer();
         private readonly PlayerColor _currentPlayerColor;
