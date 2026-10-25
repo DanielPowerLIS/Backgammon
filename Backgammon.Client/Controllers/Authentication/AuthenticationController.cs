@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using System;
 
 using Backgammon.Client.Controllers.Data;
 using Backgammon.Client.AuthenticationReference;
@@ -34,9 +33,8 @@ namespace Backgammon.Client.Controllers.Authentication
                 Identifier = accountIdentifier.Trim(),
                 Password = suppliedPassword
             };
-
+               
             PlayerSession playerSession = await _authenticationClient.SignInAsync(playerCredentials);
-
             PlayerSessionContext.StoreSession(playerSession);
 
             return validationResult;

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="PlayerProfile">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Avatar" nillable="true" type="tns:Avatar" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FacebookLink" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InstagramLink" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Points" type="xs:int" />
+      <xs:element minOccurs="0" name="RegistrationDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TikTokLink" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Wins" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerProfile" nillable="true" type="tns:PlayerProfile" />
+  <xs:complexType name="Avatar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ImageBytes" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="idAvatar" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Avatar" nillable="true" type="tns:Avatar" />
+  <xs:complexType name="ArrayOfAvatar">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Avatar" nillable="true" type="tns:Avatar" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAvatar" nillable="true" type="tns:ArrayOfAvatar" />
+  <xs:complexType name="ArrayOfSocialMediaType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SocialMediaType" nillable="true" type="tns:SocialMediaType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSocialMediaType" nillable="true" type="tns:ArrayOfSocialMediaType" />
+  <xs:complexType name="SocialMediaType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IdType" type="xs:int" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SocialMediaType" nillable="true" type="tns:SocialMediaType" />
+  <xs:complexType name="SocialMediaLink">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IdSocialMedia" type="xs:int" />
+      <xs:element minOccurs="0" name="IdTypeSocialMedia" type="xs:int" />
+      <xs:element minOccurs="0" name="Url" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SocialMediaLink" nillable="true" type="tns:SocialMediaLink" />
+  <xs:complexType name="SocialMediaLinkAlreadyExistsFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SocialMediaLinkAlreadyExistsFault" nillable="true" type="tns:SocialMediaLinkAlreadyExistsFault" />
+</xs:schema>

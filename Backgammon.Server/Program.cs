@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-
 using log4net.Config;
 using Backgammon.Server.Services.Comunication;
 using Backgammon.Server.SupportServices.Logging;
@@ -20,22 +19,29 @@ namespace Backgammon.Server
             var leaderboardServiceHost = new LeaderboardServiceHost();
             var authenticationServiceHost = new AuthenticationServiceHost();
             var logOutServiceHost = new LogOutServiceHost();
+            var profileServiceHost = new ProfileServiceHost();
 
             try
             {
                 leaderboardServiceHost.Open();
                 authenticationServiceHost.Open();
                 logOutServiceHost.Open();
+                profileServiceHost.Open();
 
                 RunRegistrationService();
             }
             finally
             {
-                CloseServiceHosts(leaderboardServiceHost, authenticationServiceHost, logOutServiceHost);
+                CloseServiceHosts(
+                    leaderboardServiceHost,
+                    authenticationServiceHost,
+                    logOutServiceHost,
+                    profileServiceHost);
             }
         }
 
-        private static void CloseServiceHosts(LeaderboardServiceHost leaderboardServiceHost,
+        private static void CloseServiceHosts(
+            LeaderboardServiceHost leaderboardServiceHost,
             AuthenticationServiceHost authenticationServiceHost)
         {
             try
@@ -60,6 +66,22 @@ namespace Backgammon.Server
             finally
             {
                 CloseServiceHosts(leaderboardServiceHost, authenticationServiceHost);
+            }
+        }
+
+        private static void CloseServiceHosts(
+            LeaderboardServiceHost leaderboardServiceHost,
+            AuthenticationServiceHost authenticationServiceHost,
+            LogOutServiceHost logOutServiceHost,
+            ProfileServiceHost profileServiceHost)
+        {
+            try
+            {
+                profileServiceHost.Close();
+            }
+            finally
+            {
+                CloseServiceHosts(leaderboardServiceHost, authenticationServiceHost, logOutServiceHost);
             }
         }
 

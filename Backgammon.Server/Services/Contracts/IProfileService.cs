@@ -8,6 +8,9 @@ namespace Backgammon.Server.Services.Contracts
     public interface IProfileService
     {
         [OperationContract]
+        PlayerProfile GetPlayerProfile(string sessionId);
+
+        [OperationContract]
         List<Avatar> GetAvailableAvatars(string sessionId);
 
         [OperationContract]
