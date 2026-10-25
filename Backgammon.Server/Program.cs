@@ -33,7 +33,6 @@ namespace Backgammon.Server
 
         private static void RunServer()
         {
-
             var leaderboardServiceHost = new LeaderboardServiceHost();
             var authenticationServiceHost = new AuthenticationServiceHost();
             var logOutServiceHost = new LogOutServiceHost();
@@ -50,56 +49,31 @@ namespace Backgammon.Server
             }
             finally
             {
-                CloseServiceHosts(
-                    leaderboardServiceHost,
-                    authenticationServiceHost,
-                    logOutServiceHost,
-                    profileServiceHost);
+                CloseServiceHosts(new Action[]
+                    {
+                        profileServiceHost.Close,
+                        logOutServiceHost.Close,
+                        authenticationServiceHost.Close,
+                        leaderboardServiceHost.Close
+                    });
             }
         }
 
         private static void CloseServiceHosts(
-            LeaderboardServiceHost leaderboardServiceHost,
-            AuthenticationServiceHost authenticationServiceHost)
+            Action[] closeOperations, int operationIndex = 0)
         {
-            try
+            if (operationIndex >= closeOperations.Length)
             {
-                authenticationServiceHost.Close();
+                return;
             }
-            finally
-            {
-                leaderboardServiceHost.Close();
-            }
-        }
 
-        private static void CloseServiceHosts(
-            LeaderboardServiceHost leaderboardServiceHost,
-            AuthenticationServiceHost authenticationServiceHost,
-            LogOutServiceHost logOutServiceHost)
-        {
             try
             {
-                logOutServiceHost.Close();
+                closeOperations[operationIndex]();
             }
             finally
             {
-                CloseServiceHosts(leaderboardServiceHost, authenticationServiceHost);
-            }
-        }
-
-        private static void CloseServiceHosts(
-            LeaderboardServiceHost leaderboardServiceHost,
-            AuthenticationServiceHost authenticationServiceHost,
-            LogOutServiceHost logOutServiceHost,
-            ProfileServiceHost profileServiceHost)
-        {
-            try
-            {
-                profileServiceHost.Close();
-            }
-            finally
-            {
-                CloseServiceHosts(leaderboardServiceHost, authenticationServiceHost, logOutServiceHost);
+                CloseServiceHosts(closeOperations, operationIndex + 1);
             }
         }
 
