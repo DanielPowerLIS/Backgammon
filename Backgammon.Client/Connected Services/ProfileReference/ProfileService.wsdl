@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ProfileService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IProfileService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:9002/ProfileService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:9002/ProfileService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:9002/ProfileService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IProfileService_GetPlayerProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerProfile" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_GetPlayerProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_GetAvailableAvatars_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAvailableAvatars" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_GetAvailableAvatars_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAvailableAvatarsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_ChangeAvatar_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeAvatar" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_ChangeAvatar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeAvatarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_UpdateDescription_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDescription" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_UpdateDescription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDescriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_GetSocialMediaTypes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSocialMediaTypes" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_GetSocialMediaTypes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSocialMediaTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_AddSocialMediaLink_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddSocialMediaLink" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_AddSocialMediaLink_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddSocialMediaLinkResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_AddSocialMediaLink_SocialMediaLinkAlreadyExistsFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q1:SocialMediaLinkAlreadyExistsFault" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_RemoveSocialMediaLink_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveSocialMediaLink" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_RemoveSocialMediaLink_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveSocialMediaLinkResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_UpdateSocialMediaLink_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSocialMediaLink" />
+  </wsdl:message>
+  <wsdl:message name="IProfileService_UpdateSocialMediaLink_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSocialMediaLinkResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IProfileService">
+    <wsdl:operation name="GetPlayerProfile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/GetPlayerProfile" message="tns:IProfileService_GetPlayerProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/GetPlayerProfileResponse" message="tns:IProfileService_GetPlayerProfile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableAvatars">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/GetAvailableAvatars" message="tns:IProfileService_GetAvailableAvatars_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/GetAvailableAvatarsResponse" message="tns:IProfileService_GetAvailableAvatars_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeAvatar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/ChangeAvatar" message="tns:IProfileService_ChangeAvatar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/ChangeAvatarResponse" message="tns:IProfileService_ChangeAvatar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDescription">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/UpdateDescription" message="tns:IProfileService_UpdateDescription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/UpdateDescriptionResponse" message="tns:IProfileService_UpdateDescription_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSocialMediaTypes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/GetSocialMediaTypes" message="tns:IProfileService_GetSocialMediaTypes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/GetSocialMediaTypesResponse" message="tns:IProfileService_GetSocialMediaTypes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSocialMediaLink">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/AddSocialMediaLink" message="tns:IProfileService_AddSocialMediaLink_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/AddSocialMediaLinkResponse" message="tns:IProfileService_AddSocialMediaLink_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IProfileService/AddSocialMediaLinkSocialMediaLinkAlreadyExistsFaultFault" name="SocialMediaLinkAlreadyExistsFaultFault" message="tns:IProfileService_AddSocialMediaLink_SocialMediaLinkAlreadyExistsFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSocialMediaLink">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/RemoveSocialMediaLink" message="tns:IProfileService_RemoveSocialMediaLink_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/RemoveSocialMediaLinkResponse" message="tns:IProfileService_RemoveSocialMediaLink_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSocialMediaLink">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProfileService/UpdateSocialMediaLink" message="tns:IProfileService_UpdateSocialMediaLink_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProfileService/UpdateSocialMediaLinkResponse" message="tns:IProfileService_UpdateSocialMediaLink_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IProfileService" type="tns:IProfileService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IProfileService_policy" />
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetPlayerProfile">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/GetPlayerProfile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAvailableAvatars">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/GetAvailableAvatars" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeAvatar">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/ChangeAvatar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDescription">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/UpdateDescription" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSocialMediaTypes">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/GetSocialMediaTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSocialMediaLink">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/AddSocialMediaLink" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SocialMediaLinkAlreadyExistsFaultFault">
+        <soap12:fault use="literal" name="SocialMediaLinkAlreadyExistsFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSocialMediaLink">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/RemoveSocialMediaLink" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSocialMediaLink">
+      <soap12:operation soapAction="http://tempuri.org/IProfileService/UpdateSocialMediaLink" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ProfileService">
+    <wsdl:port name="NetTcpBinding_IProfileService" binding="tns:NetTcpBinding_IProfileService">
+      <soap12:address location="net.tcp://localhost:9001/ProfileService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:9001/ProfileService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>DANIELLIS\jdani</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

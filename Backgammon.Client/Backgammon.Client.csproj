@@ -71,6 +71,7 @@
     <Compile Include="Comunication\AuthenticationClient.cs" />
     <Compile Include="Comunication\LeaderboardClient.cs" />
     <Compile Include="Comunication\LogOutClient.cs" />
+    <Compile Include="Comunication\ProfileClient.cs" />
     <Compile Include="Comunication\RegistrationClient.cs" />
     <Compile Include="Comunication\ServiceChannelCloser.cs" />
     <Compile Include="Connected Services\AuthenticationReference\Reference.cs">
@@ -88,6 +89,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ProfileReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\RegistrationReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -95,6 +101,7 @@
     </Compile>
     <Compile Include="Controllers\Authentication\AuthenticationController.cs" />
     <Compile Include="Controllers\Leaderboard\LeaderboardController.cs" />
+    <Compile Include="Controllers\Profile\ProfileController.cs" />
     <Compile Include="Controllers\Registration\RegistrationController.cs" />
     <Compile Include="Controllers\Session\LogOutController.cs" />
     <Compile Include="Controllers\Session\PlayerSessionContext.cs" />
@@ -390,6 +397,28 @@
     <None Include="Connected Services\LogOutReference\LogOutService1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ProfileReference\Backgammon.Client.ProfileReference.Avatar.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProfileReference\Backgammon.Client.ProfileReference.PlayerProfile.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProfileReference\Backgammon.Client.ProfileReference.SocialMediaLink.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProfileReference\Backgammon.Client.ProfileReference.SocialMediaType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ProfileReference\ProfileService.wsdl" />
+    <None Include="Connected Services\ProfileReference\ProfileService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProfileReference\ProfileService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ProfileReference\ProfileService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\RegistrationReference\RegistrationService.wsdl" />
     <None Include="Connected Services\RegistrationReference\RegistrationService.xsd">
       <SubType>Designer</SubType>
@@ -424,6 +453,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\ProfileReference\ProfileService.disco" />
+    <None Include="Connected Services\ProfileReference\configuration91.svcinfo" />
+    <None Include="Connected Services\ProfileReference\configuration.svcinfo" />
+    <None Include="Connected Services\ProfileReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -447,6 +483,7 @@
     <WCFMetadataStorage Include="Connected Services\AuthenticationReference\" />
     <WCFMetadataStorage Include="Connected Services\LeaderboardReference\" />
     <WCFMetadataStorage Include="Connected Services\LogOutReference\" />
+    <WCFMetadataStorage Include="Connected Services\ProfileReference\" />
     <WCFMetadataStorage Include="Connected Services\RegistrationReference\" />
   </ItemGroup>
   <ItemGroup />
