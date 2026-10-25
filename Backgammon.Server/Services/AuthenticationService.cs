@@ -72,7 +72,7 @@ namespace Backgammon.Server.Services
             }
         }
 
-        private PlayerSession CreateAuthenticatedSession( List<Account> matchingAccounts, string suppliedPassword)
+        private PlayerSession CreateAuthenticatedSession(List<Account> matchingAccounts, string suppliedPassword)
         {
             Account[] authenticatedAccounts = matchingAccounts
                 .Where(playerAccount => playerAccount.Profile != null &&

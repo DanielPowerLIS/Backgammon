@@ -48,7 +48,7 @@ namespace Backgammon.Client.Views.Game.Controls
 
         private void RenderPointCheckers(BoardPoint boardPoint)
         {
-            if(boardPoint.Count == 0)
+            if (boardPoint.Count == 0)
             {
                 return;
             }
@@ -57,7 +57,7 @@ namespace Backgammon.Client.Views.Game.Controls
             int columnIndex = GetColumnIndex(boardPoint.Number);
             double checkerLeft = CalculateCheckerLeft(columnIndex);
 
-            for(int stackIndex = 0; stackIndex < boardPoint.Count; stackIndex++) 
+            for (int stackIndex = 0; stackIndex < boardPoint.Count; stackIndex++) 
             {
                 double checkerTop = CalculateCheckerTop(boardPoint.Number, stackIndex, checkerSpacing);
                 AddCheckerToCanvas(boardPoint.Owner, checkerLeft, checkerTop);
@@ -88,7 +88,7 @@ namespace Backgammon.Client.Views.Game.Controls
         {
             double pointLeft = PointBaseLeft + columnIndex * PointWidth;
 
-            if(columnIndex >= ColumnsPerHalf)
+            if (columnIndex >= ColumnsPerHalf)
             {
                 pointLeft += BarWidth;
             }
@@ -98,9 +98,9 @@ namespace Backgammon.Client.Views.Game.Controls
 
         private static double CalculateCheckerTop(int pointNumber, int stackIndex, double checkerSpacing) 
         {
-            if(pointNumber >= TopRowMinPointNumber)
+            if (pointNumber >= TopRowMinPointNumber)
             {
-                return BoardTop  - CheckerMarginFromEdge + stackIndex * checkerSpacing;
+                return BoardTop - CheckerMarginFromEdge + stackIndex * checkerSpacing;
             }
 
             return BoardBottom - CheckerMarginFromEdge - CheckerSize - stackIndex * checkerSpacing;

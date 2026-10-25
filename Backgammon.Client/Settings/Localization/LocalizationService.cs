@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Data;
+
 namespace Backgammon.Client.Settings.Localization
 {
     public sealed class LocalizationService : INotifyPropertyChanged

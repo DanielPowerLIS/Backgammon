@@ -7,18 +7,16 @@ using Backgammon.Client.Views.Models;
 
 namespace Backgammon.Client.Views.Pages
 {
-    /// <summary>
-    /// Interaction logic for Avatars.xaml
-    /// </summary>
     public partial class Avatars : Page
     {
-        public ObservableCollection<AvatarOption> AvailableAvatars { get; }
-            = new ObservableCollection<AvatarOption>();
 
         public Avatars()
         {
             InitializeComponent();
         }
+
+        public ObservableCollection<AvatarOption> AvailableAvatars { get; }
+            = new ObservableCollection<AvatarOption>();
 
         public void AddAvatar(int avatarId, byte[] imageData)
         {

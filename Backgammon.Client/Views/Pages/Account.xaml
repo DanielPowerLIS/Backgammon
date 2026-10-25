@@ -11,15 +11,32 @@
       Background="White">
 
     <Page.Resources>
-        <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5,0.5" GradientOrigin="0.5,0.35" RadiusX="0.85" RadiusY="0.85">
-            <GradientStop Color="#171C2B" Offset="0"/>
-            <GradientStop Color="#0C1220" Offset="0.55"/>
-            <GradientStop Color="#050914" Offset="1"/>
+        <RadialGradientBrush 
+            x:Key="PageBackgroundBrush" 
+            Center="0.5,0.5" 
+            GradientOrigin="0.5,0.35" 
+            RadiusX="0.85" 
+            RadiusY="0.85">
+            <GradientStop 
+                Color="#171C2B" 
+                Offset="0"/>
+            <GradientStop 
+                Color="#0C1220" 
+                Offset="0.55"/>
+            <GradientStop 
+                Color="#050914" 
+                Offset="1"/>
         </RadialGradientBrush>
 
-        <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#080D1A"/>
-        <SolidColorBrush x:Key="CyanAccentBrush" Color="#00C9F2"/>
-        <SolidColorBrush x:Key="PinkAccentBrush" Color="#E795EC"/>
+        <SolidColorBrush 
+            x:Key="ControlBackgroundBrush" 
+            Color="#080D1A"/>
+        <SolidColorBrush 
+            x:Key="CyanAccentBrush" 
+            Color="#00C9F2"/>
+        <SolidColorBrush 
+            x:Key="PinkAccentBrush" 
+            Color="#E795EC"/>
 
         <Style x:Key="AccountButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
@@ -41,14 +58,23 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.TextBlock_Button_Account}" FontSize="30" Foreground="{StaticResource PinkAccentBrush}" HorizontalAlignment="Center"
-                       Margin="0,0,0,20">
+            <TextBlock 
+                Grid.Row="0" 
+                Text="{x:Static properties:Resources.TextBlock_Button_Account}" 
+                FontSize="30" Foreground="{StaticResource PinkAccentBrush}" 
+                HorizontalAlignment="Center"
+                Margin="0,0,0,20">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#E795EC" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
                 </TextBlock.Effect>
             </TextBlock>
 
-            <Border Grid.Row="1" BorderBrush="{StaticResource CyanAccentBrush}" BorderThickness="2" Background="{StaticResource ControlBackgroundBrush}" Padding="20">
+            <Border 
+                Grid.Row="1" 
+                BorderBrush="{StaticResource CyanAccentBrush}" 
+                BorderThickness="2" 
+                Background="{StaticResource ControlBackgroundBrush}" 
+                Padding="20">
 
                 <Grid>
                     <Grid.RowDefinitions>
@@ -60,22 +86,48 @@
                         <ColumnDefinition Width="220"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
-                    <TextBlock Grid.Row="0" Grid.Column="0" Text="{x:Static properties:Resources.TextBlock_LinkedEmail}" FontSize="20" Foreground="{StaticResource CyanAccentBrush}"
-                               Margin="0,10,20,10" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="textBlockEmail" Text="" FontSize="20" Foreground="{StaticResource PinkAccentBrush}"
-                               Margin="0,10,0,10" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Grid.Column="0" Text="{x:Static properties:Resources.TextBlock_DateJoined}" FontSize="20" Foreground="{StaticResource CyanAccentBrush}"
-                               Margin="0,10,20,10" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="textBlockRegistrationDate" Text="   " FontSize="20" Foreground="{StaticResource PinkAccentBrush}"
-                               Margin="0,10,0,10" VerticalAlignment="Center"/>
-
+                    <TextBlock 
+                        Grid.Row="0" 
+                        Grid.Column="0" 
+                        Text="{x:Static properties:Resources.TextBlock_LinkedEmail}" 
+                        FontSize="20" 
+                        Foreground="{StaticResource CyanAccentBrush}"
+                        Margin="0,10,20,10" VerticalAlignment="Center"/>
+                    <TextBlock 
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        x:Name="textBlockEmail" 
+                        Text="" FontSize="20" 
+                        Foreground="{StaticResource PinkAccentBrush}"
+                        Margin="0,10,0,10" 
+                        TextWrapping="Wrap" 
+                        VerticalAlignment="Center"/>
+                    <TextBlock 
+                        Grid.Row="1" 
+                        Grid.Column="0" 
+                        Text="{x:Static properties:Resources.TextBlock_DateJoined}" 
+                        FontSize="20" 
+                        Foreground="{StaticResource CyanAccentBrush}"
+                        Margin="0,10,20,10" VerticalAlignment="Center"/>
+                    <TextBlock 
+                        Grid.Row="1" 
+                        Grid.Column="1" 
+                        x:Name="textBlockRegistrationDate" 
+                        Text="   " 
+                        FontSize="20" 
+                        Foreground="{StaticResource PinkAccentBrush}"
+                        Margin="0,10,0,10" 
+                        VerticalAlignment="Center"/>
                 </Grid>
-
             </Border>
-
-            <Button Grid.Row="2"  Content="{x:Static properties:Resources.Button_Back}" Style="{StaticResource AccountButtonStyle}" Width="100" Height="35"
-                    HorizontalAlignment="Right" Margin="0,15,0,0"/>
+            <Button 
+                Grid.Row="2" 
+                Content="{x:Static properties:Resources.Button_Back}" 
+                Style="{StaticResource AccountButtonStyle}" 
+                Width="100" 
+                Height="35"
+                HorizontalAlignment="Right" 
+                Margin="0,15,0,0"/>
         </Grid>
 
     </Grid>

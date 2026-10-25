@@ -15,8 +15,13 @@
             <ColumnDefinition Width="350"/>
         </Grid.ColumnDefinitions>
 
-        <controls:BoardControl x:Name="boardControlGame"  Grid.Column="0" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+        <controls:BoardControl
+            x:Name="boardControlGame"
+            Grid.Column="0"
+            Margin="20"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" />
+        
         <Grid Grid.Column="1" Margin="30">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -28,26 +33,62 @@
 
             <Border Grid.Row="0" Padding="20" CornerRadius="15" Background="#303B63">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock Text="AQUI VA POZO" Foreground="White" FontSize="22" FontWeight="Bold" VerticalAlignment="Center"/>
-                    <TextBlock Text="120" Margin="20, 0, 0, 0" Foreground="White" FontSize="36"/>
+                    <TextBlock
+                        Text="AQUI VA POZO"
+                        Foreground="White"
+                        FontSize="22"
+                        FontWeight="Bold"
+                        VerticalAlignment="Center" />
+                    <TextBlock 
+                        Text="120" 
+                        Margin="20, 0, 0, 0" 
+                        Foreground="White" 
+                        FontSize="36"/>
                 </StackPanel>
             </Border>
             <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock Text="Es tu turno" Foreground="White" FontSize="32" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <TextBlock Text="00:07" Foreground="White" FontSize="26" HorizontalAlignment="Center"/>
+                <TextBlock
+                    Text="Es tu turno"
+                    Foreground="White"
+                    FontSize="32"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"/>
+                <TextBlock Text="00:07" 
+                           Foreground="White" 
+                           FontSize="26" 
+                           HorizontalAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 10">
-                <TextBlock Text="Tiempo global" Foreground="White" FontSize="30" FontWeight="Bold" VerticalAlignment="Center"/>
+                <TextBlock
+                    Text="Tiempo global"
+                    Foreground="White"
+                    FontSize="30"
+                    FontWeight="Bold"
+                    VerticalAlignment="Center" />
                 <TextBlock Text="02:00" Margin="15,0,0,0" Foreground="White" FontSize="25" VerticalAlignment="Center"/>
 
             </StackPanel>
 
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 10">
-                <Button Content="Deshacer" Width="120" Height="45" Margin="5"/>
-                <Button Content="Confirmar" Width="120" Height="45" Margin="5"/>
+                <Button Content="Deshacer" 
+                        Width="120" 
+                        Height="45" 
+                        Margin="5"/>
+                <Button Content="Confirmar" 
+                        Width="120" 
+                        Height="45" 
+                        Margin="5"/>
             </StackPanel>
-            <Button Grid.Row="4" Content="Tirar dados" Width="140" Height="45" Margin="0,0,0,15" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="OnRollDiceButtonClick"/>
+            <Button
+                Grid.Row="4"
+                Content="Tirar dados"
+                Width="140"
+                Height="45"
+                Margin="0,0,0,15"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Click="OnRollDiceButtonClick"/>
         </Grid>
 
     </Grid>

@@ -26,7 +26,7 @@ namespace Backgammon.Client.Controllers.Game
         public BoardState() 
         {
             _points = new BoardPoint[TotalPoints];
-            for(int pointIndex = 0; pointIndex < TotalPoints; pointIndex++)
+            for (int pointIndex = 0; pointIndex < TotalPoints; pointIndex++)
             {
                 _points[pointIndex] = new BoardPoint(pointIndex + 1);
             }

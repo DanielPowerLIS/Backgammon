@@ -8,15 +8,8 @@ using Backgammon.Client.Views.Models;
 
 namespace Backgammon.Client.Views.Dialog
 {
-    /// <summary>
-    /// Interaction logic for SelectSocialNetworkDialog.xaml
-    /// </summary>
     public partial class SelectSocialNetworkDialog : Window
     {
-        public int SelectedNetworkId { get; private set; }
-
-        public string SelectedNetworkName { get; private set; }
-            = string.Empty;
 
         public SelectSocialNetworkDialog(
             IEnumerable<SocialNetworkOption> options)
@@ -28,6 +21,22 @@ namespace Backgammon.Client.Views.Dialog
 
             InitializeComponent();
             itemsControlNetworks.ItemsSource = options.ToList();
+        }
+
+        public int SelectedNetworkId { get; private set; }
+
+        public string SelectedNetworkName { get; private set; }
+            = string.Empty;
+
+        public bool ShowFor(Window owner)
+        {
+            if (owner == null)
+            {
+                throw new ArgumentNullException(nameof(owner));
+            }
+
+            Owner = owner;
+            return ShowDialog() == true;
         }
 
         private void OnNetworkClick(object sender, RoutedEventArgs e)
@@ -47,17 +56,6 @@ namespace Backgammon.Client.Views.Dialog
         private void OnCloseClick(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
-        }
-
-        public bool ShowFor(Window owner)
-        {
-            if (owner == null)
-            {
-                throw new ArgumentNullException(nameof(owner));
-            }
-
-            Owner = owner;
-            return ShowDialog() == true;
         }
     }
 }

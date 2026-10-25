@@ -9,17 +9,19 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="{x:Static properties:Resources.TextBlock_MainMenu}">
     <Page.Resources>
-
-        <RadialGradientBrush x:Key="PageBackgroundBrush" Center="0.5,0.5" GradientOrigin="0.5,0.35" RadiusX="0.85" RadiusY="0.85">
+        <RadialGradientBrush 
+            x:Key="PageBackgroundBrush" 
+            Center="0.5,0.5" 
+            GradientOrigin="0.5,0.35" 
+            RadiusX="0.85" 
+            RadiusY="0.85">
             <GradientStop Color="#171C2B" Offset="0"/>
             <GradientStop Color="#0C1220" Offset="0.55"/>
             <GradientStop Color="#050914" Offset="1"/>
         </RadialGradientBrush>
-        
         <SolidColorBrush x:Key="ControlBackgroundBrush" Color="#080D1A"/>
         <SolidColorBrush x:Key="CyanAccentBrush" Color="#00C9F2"/>
         <SolidColorBrush x:Key="PinkAccentBrush" Color="#E795EC"/>
-        
         <Style x:Key="MainMenuButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource ControlBackgroundBrush}"/>
             <Setter Property="BorderBrush" Value="{StaticResource CyanAccentBrush}"/>
@@ -33,35 +35,54 @@
             <Setter Property="Margin" Value="0,0,0,8"/>
         </Style>
     </Page.Resources>
-
     <Grid Background="{StaticResource PageBackgroundBrush}">
-
         <Grid Margin="30">
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-
-            <TextBlock Grid.Row="0" Text="BACKGAMMON" HorizontalAlignment="Center" FontSize="50" Foreground="{StaticResource CyanAccentBrush}" Margin="0,10,0,20">
+            <TextBlock 
+                Grid.Row="0" 
+                Text="BACKGAMMON" 
+                HorizontalAlignment="Center" 
+                FontSize="50" 
+                Foreground="{StaticResource CyanAccentBrush}" 
+                Margin="0,10,0,20">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#00C9F2" BlurRadius="3" ShadowDepth="0" Opacity="0.8"/>
                 </TextBlock.Effect>
             </TextBlock>
-
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                <Button Content="{x:Static properties:Resources.Button_Play}" Style="{StaticResource MainMenuButtonStyle}" Click="OnPlayClick"/>
-                <Button Content="{x:Static properties:Resources.TextBlock_Button_Leaderboard}" Style="{StaticResource MainMenuButtonStyle}"  Click="OnLeaderboardClick"/>
-                <Button Content="{x:Static properties:Resources.TextBlock_Button_Profile}" Style="{StaticResource MainMenuButtonStyle}" Click="OnProfileClick"/>
-                <Button Content="{x:Static properties:Resources.TextBlock_Button_Friends}" Style="{StaticResource MainMenuButtonStyle}" Click="OnFriendsClick"/>
-                <Button Content="{x:Static properties:Resources.TextBlock_Button_Settings}" Style="{StaticResource MainMenuButtonStyle}" Click="OnSettingsClick"/>
+                <Button 
+                    Content="{x:Static properties:Resources.Button_Play}" 
+                    Style="{StaticResource MainMenuButtonStyle}" 
+                    Click="OnPlayClick"/>
+                <Button 
+                    Content="{x:Static properties:Resources.TextBlock_Button_Leaderboard}" 
+                    Style="{StaticResource MainMenuButtonStyle}"  
+                    Click="OnLeaderboardClick"/>
+                <Button 
+                    Content="{x:Static properties:Resources.TextBlock_Button_Profile}" 
+                    Style="{StaticResource MainMenuButtonStyle}" 
+                    Click="OnProfileClick"/>
+                <Button 
+                    Content="{x:Static properties:Resources.TextBlock_Button_Friends}" 
+                    Style="{StaticResource MainMenuButtonStyle}" 
+                    Click="OnFriendsClick"/>
+                <Button 
+                    Content="{x:Static properties:Resources.TextBlock_Button_Settings}" 
+                    Style="{StaticResource MainMenuButtonStyle}" 
+                    Click="OnSettingsClick"/>
             </StackPanel>
-
-            <Button Grid.Row="2" Content="{x:Static properties:Resources.Button_SignOut}" Style="{StaticResource MainMenuButtonStyle}" MinWidth="100" HorizontalAlignment="Left" Margin="0,15,0,0" Click="OnSignOutClick" />
-
+            <Button 
+                Grid.Row="2" 
+                Content="{x:Static properties:Resources.Button_SignOut}" 
+                Style="{StaticResource MainMenuButtonStyle}" 
+                MinWidth="100" 
+                HorizontalAlignment="Left" 
+                Margin="0,15,0,0" 
+                Click="OnSignOutClick" />
         </Grid>
-
     </Grid>
-
 </Page>

@@ -32,6 +32,7 @@ namespace Backgammon.Client.Views.Pages
         {
             NavigationService.Navigate(new Leaderboard());
         }
+
         private void OnProfileClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new PlayerProfile());
@@ -46,6 +47,7 @@ namespace Backgammon.Client.Views.Pages
         {
             NavigationService.Navigate(new Settings());
         }
+
         private async void OnSignOutClick(object sender, RoutedEventArgs e)
         {
             IsEnabled = false;

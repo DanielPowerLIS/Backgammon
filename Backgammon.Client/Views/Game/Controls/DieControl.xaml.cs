@@ -9,6 +9,21 @@ namespace Backgammon.Client.Views.Game.Controls
 {
     public partial class DieControl : UserControl
     {
+
+        public static readonly DependencyProperty DieValueProperty =
+            DependencyProperty.Register(
+            nameof(DieValue),
+            typeof(int),
+            typeof(DieControl),
+            new PropertyMetadata(1, OnDieValueChanged));
+
+        public static readonly DependencyProperty DieColorProperty =
+            DependencyProperty.Register(
+            nameof(DieColor),
+            typeof(PlayerColor),
+            typeof(DieControl),
+            new PropertyMetadata(PlayerColor.None, OnDieColorChanged));
+
         private static readonly double DotSize = 14;
         private static readonly double DotMargin = 4;
         private static readonly int GridSize = 3;
@@ -25,20 +40,6 @@ namespace Backgammon.Client.Views.Game.Controls
             new[] { (0, 0), (0, 1), (0, 2), (2, 0), (2, 1), (2, 2) }
         };
 
-        public static readonly DependencyProperty DieValueProperty =
-            DependencyProperty.Register(
-                nameof(DieValue),
-                typeof(int),
-                typeof(DieControl),
-                new PropertyMetadata(1, OnDieValueChanged));
-
-        public static readonly DependencyProperty DieColorProperty =
-            DependencyProperty.Register(
-                nameof(DieColor),
-                typeof(PlayerColor),
-                typeof(DieControl),
-                new PropertyMetadata(PlayerColor.None, OnDieColorChanged));
-
         public DieControl()
         {
             InitializeComponent();
@@ -47,14 +48,26 @@ namespace Backgammon.Client.Views.Game.Controls
 
         public int DieValue
         {
-            get { return (int)GetValue(DieValueProperty); }
-            set { SetValue(DieValueProperty, value); }
+            get
+            {
+                return (int)GetValue(DieValueProperty);
+            }
+            set
+            {
+                SetValue(DieValueProperty, value);
+            }
         }
 
         public PlayerColor DieColor
         {
-            get { return (PlayerColor)GetValue(DieColorProperty); }
-            set { SetValue(DieColorProperty, value); }
+            get
+            {
+                return (PlayerColor)GetValue(DieColorProperty);
+            }
+            set
+            {
+                SetValue(DieColorProperty, value);
+            }
         }
 
         private static void OnDieValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)

@@ -33,6 +33,5 @@ namespace Backgammon.Server.Services.Contracts
         [OperationContract]
         SocialMediaLink UpdateSocialMediaLink(string sessionId, int socialMediaLinkId, string url);
 
-
     }
 }

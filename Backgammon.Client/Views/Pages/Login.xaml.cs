@@ -28,6 +28,7 @@ namespace Backgammon.Client.Views.Pages
 
             _authenticationController = new AuthenticationController();
         }
+
         private void OnPasswordChanged(object sender, RoutedEventArgs e)
         {
             PasswordBox passwordBox = (PasswordBox)sender;

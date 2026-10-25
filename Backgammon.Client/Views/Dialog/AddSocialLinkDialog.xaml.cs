@@ -27,6 +27,17 @@ namespace Backgammon.Client.Views.Dialog
             SetDialogText(socialNetworkName, exampleLink);
         }
 
+        public bool ShowFor(Window owner)
+        {
+            if (owner == null)
+            {
+                throw new ArgumentNullException(nameof(owner));
+            }
+
+            Owner = owner;
+            return ShowDialog() == true;
+        }
+
         private void SetDialogText(
             string socialNetworkName, string exampleLink)
         {
@@ -43,15 +54,5 @@ namespace Backgammon.Client.Views.Dialog
             textBoxLink.Tag = exampleLink;
         }
 
-        public bool ShowFor(Window owner)
-        {
-            if (owner == null)
-            {
-                throw new ArgumentNullException(nameof(owner));
-            }
-
-            Owner = owner;
-            return ShowDialog() == true;
-        }
     }
 }
