@@ -302,7 +302,7 @@ namespace Backgammon.Server.Services
 
             var dataAvatar = new Avatar
             {
-                idAvatar = dbAvatar.IdAvatarPK,
+                IdAvatar = dbAvatar.IdAvatarPK,
                 ImageBytes = dbAvatar.AvailableAvatar
             };
 
