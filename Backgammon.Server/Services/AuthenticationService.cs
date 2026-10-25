@@ -44,6 +44,8 @@ namespace Backgammon.Server.Services
             PlayerSession playerSession = CreateAuthenticatedSession(
                 matchingAccounts, playerCredentials.Password);
 
+            ApplicationLogger.LogInformation("Player {0} signed in successfully.");
+
             return playerSession;
         }
 
@@ -80,6 +82,8 @@ namespace Backgammon.Server.Services
 
             if (authenticatedAccounts.Length != 1)
             {
+                ApplicationLogger.LogWarning("Sign-in rejected. Invalid credentials.");
+
                 throw CreateAuthenticationFault(InvalidCredentialsErrorCode);
             }
 

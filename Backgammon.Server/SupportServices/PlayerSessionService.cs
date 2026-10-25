@@ -77,6 +77,15 @@ namespace Backgammon.Server.SupportServices
             }
         }
 
+        public int GetProfileId(string sessionId)
+        {
+            PlayerSession activeSession = GetSession(sessionId, true);
+
+            int profileId = activeSession.PlayerId;
+
+            return profileId;
+        }
+
         private void RemoveExpiredSessions()
         {
             lock (SessionSynchronization)

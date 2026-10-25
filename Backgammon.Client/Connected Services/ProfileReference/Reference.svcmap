@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="9c088d2e-eab7-4664-891c-ece81735a425" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:9002/ProfileService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ProfileService.xsd" MetadataType="Schema" ID="a0e2e937-9c75-4395-90e8-ec08710bcaf0" SourceId="1" SourceUrl="http://localhost:9002/ProfileService?xsd=xsd2" />
+    <MetadataFile FileName="ProfileService1.xsd" MetadataType="Schema" ID="6438439e-2662-4535-8841-0f6d26f74e8d" SourceId="1" SourceUrl="http://localhost:9002/ProfileService?xsd=xsd0" />
+    <MetadataFile FileName="ProfileService2.xsd" MetadataType="Schema" ID="1f4a1da6-7ba1-476b-b669-6f5d0dc1a82b" SourceId="1" SourceUrl="http://localhost:9002/ProfileService?xsd=xsd1" />
+    <MetadataFile FileName="ProfileService.disco" MetadataType="Disco" ID="9d0607b1-9572-4a7c-b65d-32c345103238" SourceId="1" SourceUrl="http://localhost:9002/ProfileService?disco" />
+    <MetadataFile FileName="ProfileService.wsdl" MetadataType="Wsdl" ID="868f5e9c-0eae-41f2-b26e-86b6ae89d832" SourceId="1" SourceUrl="http://localhost:9002/ProfileService?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
