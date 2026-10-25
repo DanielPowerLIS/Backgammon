@@ -29,7 +29,7 @@ namespace Backgammon.Client.Views.Dialog
             ShowDialog();
         }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
             Close();
         }

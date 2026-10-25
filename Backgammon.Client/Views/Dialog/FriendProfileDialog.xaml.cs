@@ -17,7 +17,7 @@ namespace Backgammon.Client.Views.Dialog
 
             TargetAccountId = accountId;
             textBlockUsername.Text = username;
-            avatarBrush.ImageSource = avatarImage;
+            imageBrushAvatar.ImageSource = avatarImage;
         }
 
         private void ValidatePlayer(

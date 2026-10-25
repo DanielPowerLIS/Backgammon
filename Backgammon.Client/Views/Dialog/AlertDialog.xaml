@@ -24,7 +24,7 @@
         <TextBlock x:Name="textBlockMessage" Grid.Row="1" Text="Aquí irá el mensaje de alerta" Foreground="#00D9FF" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" />
 
 
-        <Button x:Name="buttonAccept" Content="{x:Static properties:Resources.Button_Accept}" Width="100" Height="30" Foreground="#F19CFF" Background="#07111F" BorderBrush="#00d9ff" HorizontalAlignment="Center" Grid.Row="2" Click="BtnAccept_Click" BorderThickness="2,2,2,2"/>
+        <Button x:Name="buttonAccept" Content="{x:Static properties:Resources.Button_Accept}" Width="100" Height="30" Foreground="#F19CFF" Background="#07111F" BorderBrush="#00d9ff" HorizontalAlignment="Center" Grid.Row="2" Click="OnAcceptClick" BorderThickness="2,2,2,2"/>
 
     </Grid>
 </Window>

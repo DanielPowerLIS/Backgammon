@@ -6,7 +6,7 @@ namespace Backgammon.Server.Services.Data
     public class Avatar
     {
         [DataMember]
-        public int idAvatar { get; set; }
+        public int IdAvatar { get; set; }
 
         [DataMember]
         public byte[] ImageBytes { get; set; }
