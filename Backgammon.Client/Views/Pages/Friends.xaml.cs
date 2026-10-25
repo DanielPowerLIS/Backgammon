@@ -17,9 +17,6 @@ using Backgammon.Client.Views.Dialog;
 
 namespace Backgammon.Client.Views.Pages
 {
-    /// <summary>
-    /// Lógica de interacción para Friends.xaml
-    /// </summary>
     public partial class Friends : Page
     {
         public Friends()
@@ -35,15 +32,5 @@ namespace Backgammon.Client.Views.Pages
             }
         }
         
-        private bool ConfirmFriendRemoval(string username)
-        {
-            string message = string.Format(
-                Properties.Resources.TextBlock_RemoveFriendConfirmationMessage,
-                username);
-
-            ConfirmationDialog dialog = new ConfirmationDialog(message);
-
-            return dialog.ShowOver(Window.GetWindow(this));
-        }
     }
 }
