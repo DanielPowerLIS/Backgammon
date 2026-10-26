@@ -1,14 +1,16 @@
-﻿using Backgammon.Server.Persistence.Repositories;
-using Backgammon.Server.Services.Contracts;
-using Backgammon.Server.Services.Data;
-using Backgammon.Server.SupportServices;
-using Backgammon.Server.SupportServices.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Data.SqlClient;
 using System.Linq;
 using System.ServiceModel;
+
+using Backgammon.Server.Persistence.Repositories;
+using Backgammon.Server.Services.Contracts;
+using Backgammon.Server.Services.Data;
+using Backgammon.Server.SupportServices;
+using Backgammon.Server.SupportServices.Logging;
+using Backgammon.Server.Persistence.Repositories.InterfacesRepositories;
 using AccountEntity = Backgammon.Server.Persistence.Data.Account;
 using AvatarEntity = Backgammon.Server.Persistence.Data.Avatar;
 using ProfileEntity = Backgammon.Server.Persistence.Data.Profile;
@@ -20,7 +22,7 @@ namespace Backgammon.Server.Services
 {
     public class ProfileService : IProfileService
     {
-        private readonly ProfileRepository _profileRepository;
+        private readonly IProfileRepository _profileRepository;
         private readonly PlayerSessionService _playerSessionService;
 
         private static readonly string ServiceUnavailableErrorCode = "ServiceUnavailable";
