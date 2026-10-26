@@ -82,7 +82,8 @@
                 Width="100"
                 Height="35"
                 HorizontalAlignment="Right"
-                Margin="0,15,0,0" />
+                Margin="0,15,0,0" 
+                Click="OnBackClick"/>
 
         </Grid>
 

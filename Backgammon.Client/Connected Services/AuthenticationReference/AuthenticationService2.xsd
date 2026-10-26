@@ -10,6 +10,7 @@
   <xs:complexType name="PlayerSession">
     <xs:sequence>
       <xs:element minOccurs="0" name="ExpiresAtUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IsGuest" type="xs:boolean" />
       <xs:element minOccurs="0" name="PlayerId" type="xs:int" />
       <xs:element minOccurs="0" name="SessionId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />

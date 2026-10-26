@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="PlayerSession">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExpiresAtUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IsGuest" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PlayerId" type="xs:int" />
+      <xs:element minOccurs="0" name="SessionId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerSession" nillable="true" type="tns:PlayerSession" />
+  <xs:complexType name="GuestAccessFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GuestAccessFault" nillable="true" type="tns:GuestAccessFault" />
+</xs:schema>

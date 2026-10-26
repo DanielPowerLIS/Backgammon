@@ -59,14 +59,17 @@
                     Style="{StaticResource MainMenuButtonStyle}" 
                     Click="OnPlayClick"/>
                 <Button 
+                    x:Name="buttonLeaderboard"
                     Content="{x:Static properties:Resources.TextBlock_Button_Leaderboard}" 
                     Style="{StaticResource MainMenuButtonStyle}"  
                     Click="OnLeaderboardClick"/>
                 <Button 
+                    x:Name="buttonProfile"
                     Content="{x:Static properties:Resources.TextBlock_Button_Profile}" 
                     Style="{StaticResource MainMenuButtonStyle}" 
                     Click="OnProfileClick"/>
                 <Button 
+                    x:Name="buttonFriends"
                     Content="{x:Static properties:Resources.TextBlock_Button_Friends}" 
                     Style="{StaticResource MainMenuButtonStyle}" 
                     Click="OnFriendsClick"/>
@@ -83,6 +86,19 @@
                 HorizontalAlignment="Left" 
                 Margin="0,15,0,0" 
                 Click="OnSignOutClick" />
+
+            <Button
+                x:Name="buttonRules"
+                Grid.Row="2"
+                Content="¡"
+                ToolTip="{x:Static properties:Resources.TextBlock_Rules}"
+                Style="{StaticResource MainMenuButtonStyle}"
+                Width="45"
+                Height="35"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0,15,0,0"
+                Click="OnRulesClick" />
         </Grid>
     </Grid>
 </Page>

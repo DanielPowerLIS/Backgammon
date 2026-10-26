@@ -87,6 +87,9 @@ namespace Backgammon.Client.AuthenticationReference {
         private System.DateTime ExpiresAtUtcField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsGuestField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PlayerIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -114,6 +117,19 @@ namespace Backgammon.Client.AuthenticationReference {
                 if ((this.ExpiresAtUtcField.Equals(value) != true)) {
                     this.ExpiresAtUtcField = value;
                     this.RaisePropertyChanged("ExpiresAtUtc");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsGuest {
+            get {
+                return this.IsGuestField;
+            }
+            set {
+                if ((this.IsGuestField.Equals(value) != true)) {
+                    this.IsGuestField = value;
+                    this.RaisePropertyChanged("IsGuest");
                 }
             }
         }

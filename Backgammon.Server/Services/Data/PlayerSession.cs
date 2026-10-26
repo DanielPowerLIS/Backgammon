@@ -17,5 +17,8 @@ namespace Backgammon.Server.Services.Data
 
         [DataMember]
         public DateTime ExpiresAtUtc { get; set; }
+
+        [DataMember]
+        public bool IsGuest { get; set; }
     }
 }

@@ -33,6 +33,22 @@ namespace Backgammon.Server
 
         private static void RunServer()
         {
+            var guestAccessServiceHost = new GuestAccessServiceHost();
+
+            try
+            {
+                guestAccessServiceHost.Open();
+
+                RunCoreServices();
+            }
+            finally
+            {
+                guestAccessServiceHost.Close();
+            }
+        }
+
+        private static void RunCoreServices()
+        {
             var leaderboardServiceHost = new LeaderboardServiceHost();
             var authenticationServiceHost = new AuthenticationServiceHost();
             var logOutServiceHost = new LogOutServiceHost();

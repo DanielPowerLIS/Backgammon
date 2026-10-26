@@ -123,7 +123,8 @@
                     VerticalAlignment="Top"
                     Margin="0,315,0,0"
                     Width="285"
-                    Height="52"/>
+                    Height="52"
+                    Click="OnGuestClick"/>
 
             </Grid>
         </Viewbox>

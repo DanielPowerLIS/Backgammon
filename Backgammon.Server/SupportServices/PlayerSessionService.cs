@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Linq;
+using System.Threading;
 
 using Backgammon.Server.Services.Data;
 
@@ -19,25 +20,28 @@ namespace Backgammon.Server.SupportServices
 
         private static readonly int SessionTokenLength = 32;
 
+        private static int _lastGuestPlayerId = 0;
+
         public PlayerSession CreateSession(int playerId, string playerUsername)
         {
-
-            RemoveExpiredSessions();
-
-            var playerSession = new PlayerSession
-            {
-                SessionId = CreateSessionId(),
-                PlayerId = playerId,
-                Username = playerUsername,
-                ExpiresAtUtc = DateTime.UtcNow.Add(SessionInactivityTimeout)
-            };
-
-            lock (SessionSynchronization)
-            {
-                ActiveSessions.Add(playerSession.SessionId, CopySession(playerSession));
-            }
+            PlayerSession playerSession = CreatePlayerSession(
+                playerId, playerUsername, false);
 
             return playerSession;
+        }
+
+        public PlayerSession CreateGuestSession()
+        {
+            var usernameGenerator = new GuestUsernameGenerator();
+
+            string guestUsername = usernameGenerator.Generate();
+
+            int guestPlayerId = Interlocked.Decrement(ref _lastGuestPlayerId);
+
+            PlayerSession guestSession = CreatePlayerSession(
+                guestPlayerId, guestUsername, true);
+
+            return guestSession;
         }
 
         public void RemoveSession(string sessionId)
@@ -86,6 +90,28 @@ namespace Backgammon.Server.SupportServices
             return profileId;
         }
 
+        private PlayerSession CreatePlayerSession(
+            int playerId, string playerUsername, bool isGuest)
+        {
+            RemoveExpiredSessions();
+
+            var playerSession = new PlayerSession
+            {
+                SessionId = CreateSessionId(),
+                PlayerId = playerId,
+                Username = playerUsername,
+                IsGuest = isGuest,
+                ExpiresAtUtc = DateTime.UtcNow.Add(SessionInactivityTimeout)
+            };
+
+            lock (SessionSynchronization)
+            {
+                ActiveSessions.Add(playerSession.SessionId, CopySession(playerSession));
+            }
+
+            return playerSession;
+        }
+
         private void RemoveExpiredSessions()
         {
             lock (SessionSynchronization)
@@ -129,6 +155,7 @@ namespace Backgammon.Server.SupportServices
                 SessionId = sourceSession.SessionId,
                 PlayerId = sourceSession.PlayerId,
                 Username = sourceSession.Username,
+                IsGuest = sourceSession.IsGuest,
                 ExpiresAtUtc = sourceSession.ExpiresAtUtc
             };
 
