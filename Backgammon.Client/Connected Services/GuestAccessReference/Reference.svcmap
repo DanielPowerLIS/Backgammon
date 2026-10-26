@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="c5cfa4ed-660f-4cfe-ba8a-ec63e43ea533" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:9002/GuestAccessService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="GuestAccessService.xsd" MetadataType="Schema" ID="d4dd7dc7-c0c2-4a69-bfa1-589a1a4ec910" SourceId="1" SourceUrl="http://localhost:9002/GuestAccessService?xsd=xsd2" />
+    <MetadataFile FileName="GuestAccessService1.xsd" MetadataType="Schema" ID="dfc11d24-c6ca-40b8-8d85-03e884ca25e0" SourceId="1" SourceUrl="http://localhost:9002/GuestAccessService?xsd=xsd0" />
+    <MetadataFile FileName="GuestAccessService.wsdl" MetadataType="Wsdl" ID="61887f98-4e44-493f-8f0f-8e1752a45e8d" SourceId="1" SourceUrl="http://localhost:9002/GuestAccessService?wsdl" />
+    <MetadataFile FileName="GuestAccessService2.xsd" MetadataType="Schema" ID="ae68534e-2185-4690-b0ff-7b478dbb668d" SourceId="1" SourceUrl="http://localhost:9002/GuestAccessService?xsd=xsd1" />
+    <MetadataFile FileName="GuestAccessService.disco" MetadataType="Disco" ID="b85a6d62-b4c8-41a3-8d07-f1da482e9ad8" SourceId="1" SourceUrl="http://localhost:9002/GuestAccessService?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

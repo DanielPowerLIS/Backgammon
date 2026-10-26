@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.ComponentModel;
+
+using Backgammon.Client.Controllers.Session;
 
 namespace Backgammon.Client.Views.Pages
 {
@@ -19,6 +11,8 @@ namespace Backgammon.Client.Views.Pages
         public Settings()
         {
             InitializeComponent();
+
+            Loaded += OnPageLoaded;
         }
 
         private void OnBackClick(object sender, RoutedEventArgs e)
@@ -29,6 +23,20 @@ namespace Backgammon.Client.Views.Pages
         private void OnLanguageClick(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Language());
+        }
+
+        private void OnPageLoaded(object sender, RoutedEventArgs e)
+        {
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
+
+            bool accountFeaturesEnabled =
+                !PlayerSessionContext.GetSession().IsGuest;
+
+            buttonAccount.IsEnabled = accountFeaturesEnabled;
+            buttonChangePassword.IsEnabled = accountFeaturesEnabled;
         }
     }
 }

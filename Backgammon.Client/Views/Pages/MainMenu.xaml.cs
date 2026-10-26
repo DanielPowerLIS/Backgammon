@@ -3,6 +3,7 @@ using System.ServiceModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using System.ComponentModel;
 
 using Backgammon.Client.Controllers.Session;
 using Backgammon.Client.Settings.Logging;
@@ -21,6 +22,8 @@ namespace Backgammon.Client.Views.Pages
             InitializeComponent();
 
             _logOutController = new LogOutController();
+
+            Loaded += OnPageLoaded;
         }
 
         private void OnPlayClick(object sender, RoutedEventArgs e)
@@ -69,6 +72,11 @@ namespace Backgammon.Client.Views.Pages
             }
         }
 
+        private void OnRulesClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Rules());
+        }
+
         private void NavigateHomeAfterLogOut()
         {
             NavigationService.Navigated += OnLogOutNavigationCompleted;
@@ -100,6 +108,21 @@ namespace Backgammon.Client.Views.Pages
                 Properties.Resources.TextBlock_LogOutConnectionErrorMessage);
 
             connectionDialog.ShowOver(Window.GetWindow(this));
+        }
+
+        private void OnPageLoaded(object sender, RoutedEventArgs e)
+        {
+            if (DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
+
+            bool accountFeaturesEnabled =
+                !PlayerSessionContext.GetSession().IsGuest;
+
+            buttonLeaderboard.IsEnabled = accountFeaturesEnabled;
+            buttonProfile.IsEnabled = accountFeaturesEnabled;
+            buttonFriends.IsEnabled = accountFeaturesEnabled;
         }
     }
 }

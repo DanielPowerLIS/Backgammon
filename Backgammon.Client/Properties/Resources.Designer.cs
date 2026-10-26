@@ -574,6 +574,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No fue posible acceder como invitado. Inténtalo nuevamente más tarde..
+        /// </summary>
+        public static string TextBlock_GuestAccessErrorMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_GuestAccessErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error de acceso como invitado.
+        /// </summary>
+        public static string TextBlock_GuestAccessErrorTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_GuestAccessErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inicio.
         /// </summary>
         public static string TextBlock_Home {

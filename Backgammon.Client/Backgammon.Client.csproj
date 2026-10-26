@@ -69,12 +69,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Comunication\AuthenticationClient.cs" />
+    <Compile Include="Comunication\GuestAccessClient.cs" />
     <Compile Include="Comunication\LeaderboardClient.cs" />
     <Compile Include="Comunication\LogOutClient.cs" />
     <Compile Include="Comunication\ProfileClient.cs" />
     <Compile Include="Comunication\RegistrationClient.cs" />
     <Compile Include="Comunication\ServiceChannelCloser.cs" />
     <Compile Include="Connected Services\AuthenticationReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\GuestAccessReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -100,6 +106,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\Authentication\AuthenticationController.cs" />
+    <Compile Include="Controllers\GuestAccess\GuestAccessController.cs" />
     <Compile Include="Controllers\Leaderboard\LeaderboardController.cs" />
     <Compile Include="Controllers\Profile\ProfileController.cs" />
     <Compile Include="Controllers\Registration\RegistrationController.cs" />
@@ -377,6 +384,19 @@
     <None Include="Connected Services\AuthenticationReference\Backgammon.Client.AuthenticationReference.PlayerSession.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\GuestAccessReference\Backgammon.Client.GuestAccessReference.PlayerSession.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\GuestAccessReference\GuestAccessService.wsdl" />
+    <None Include="Connected Services\GuestAccessReference\GuestAccessService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GuestAccessReference\GuestAccessService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GuestAccessReference\GuestAccessService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\LeaderboardReference\Backgammon.Client.LeaderboardReference.PlayerStanding.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -460,6 +480,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\GuestAccessReference\GuestAccessService.disco" />
+    <None Include="Connected Services\GuestAccessReference\configuration91.svcinfo" />
+    <None Include="Connected Services\GuestAccessReference\configuration.svcinfo" />
+    <None Include="Connected Services\GuestAccessReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -481,6 +508,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AuthenticationReference\" />
+    <WCFMetadataStorage Include="Connected Services\GuestAccessReference\" />
     <WCFMetadataStorage Include="Connected Services\LeaderboardReference\" />
     <WCFMetadataStorage Include="Connected Services\LogOutReference\" />
     <WCFMetadataStorage Include="Connected Services\ProfileReference\" />
