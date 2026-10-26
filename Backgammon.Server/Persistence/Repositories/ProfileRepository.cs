@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
+
 using Backgammon.Server.Persistence.Data;
+using Backgammon.Server.Persistence.Repositories.InterfacesRepositories;
 
 namespace Backgammon.Server.Persistence.Repositories
 {
-    public class ProfileRepository
+    public class ProfileRepository : IProfileRepository
     {
         public async Task<List<Profile>> GetAllProfilesAsync()
         {

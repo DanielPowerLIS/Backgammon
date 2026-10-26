@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.ServiceModel;
 
 using Backgammon.Server.Persistence.Data;
+using Backgammon.Server.Persistence.Repositories.InterfacesRepositories;
 using Backgammon.Server.Persistence.Repositories;
 using Backgammon.Server.Services.Data;
 using Backgammon.Server.Services.Contracts;
@@ -15,7 +16,7 @@ namespace Backgammon.Server.Services
 {
     public class LeaderboardService : ILeaderboardService
     {
-        private readonly ProfileRepository _profileRepository;
+        private readonly IProfileRepository _profileRepository;
 
         private static readonly string ServiceUnavailableErrorCode =
             "ServiceUnavailable";

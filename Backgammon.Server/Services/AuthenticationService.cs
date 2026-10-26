@@ -1,23 +1,24 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Security.Cryptography;
+using System.ServiceModel;
 
-using Account = Backgammon.Server.Persistence.Data.Account;
 using Backgammon.Server.Persistence.Repositories;
+using Backgammon.Server.Persistence.Repositories.InterfacesRepositories;
+using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
 using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;
-using Backgammon.Server.Services.Contracts;
+using Account = Backgammon.Server.Persistence.Data.Account;
 
 namespace Backgammon.Server.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly AccountRepository _accountRepository;
+        private readonly IAccountRepository _accountRepository;
         private readonly PasswordHashService _passwordHashService;
         private readonly PlayerSessionService _playerSessionService;
         private static readonly string InvalidInputErrorCode = "InvalidInput";

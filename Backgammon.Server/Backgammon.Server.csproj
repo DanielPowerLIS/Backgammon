@@ -130,6 +130,8 @@
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Repositories\AccountRepository.cs" />
+    <Compile Include="Persistence\Repositories\InterfacesRepositories\IAccountRepository.cs" />
+    <Compile Include="Persistence\Repositories\InterfacesRepositories\IProfileRepository.cs" />
     <Compile Include="Persistence\Repositories\ProfileRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -212,6 +214,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -1,26 +1,27 @@
-﻿using System.ServiceModel;
-using System;
-using System.Linq;
-using System.Net.Mail;
+﻿using System;
 using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Net.Mail;
 using System.Security.Cryptography;
+using System.ServiceModel;
 
-using Backgammon.Server.SupportServices.Logging;
 using Backgammon.Server.Persistence.Repositories;
-using Backgammon.Server.SupportServices;
+using Backgammon.Server.Persistence.Repositories.InterfacesRepositories;
+using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
+using Backgammon.Server.SupportServices;
+using Backgammon.Server.SupportServices.Logging;
 using AccountEntity = Backgammon.Server.Persistence.Data.Account;
 using ProfileEntity = Backgammon.Server.Persistence.Data.Profile;
-using Backgammon.Server.Services.Contracts;
 
 namespace Backgammon.Server.Services
 {
     public class RegistrationService : IRegistrationService
     {
-        private readonly AccountRepository _accountRepository;
+        private readonly IAccountRepository _accountRepository;
         private readonly PasswordHashService _passwordHashService;
         private static readonly string InvalidInputErrorCode = "InvalidInput";
         private static readonly string EmailAlreadyRegisteredErrorCode = "EmailAlreadyRegistered";

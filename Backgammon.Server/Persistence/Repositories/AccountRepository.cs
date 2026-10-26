@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using System;
 
-using Backgammon.Server.SupportServices;
 using Backgammon.Server.Persistence.Data;
+using Backgammon.Server.Persistence.Repositories.InterfacesRepositories;
+using Backgammon.Server.SupportServices;
 
 namespace Backgammon.Server.Persistence.Repositories
 {
-    public class AccountRepository
+    public class AccountRepository : IAccountRepository
     {
         private static readonly int MaximumCodeAttempts = 10;
 
