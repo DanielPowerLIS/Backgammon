@@ -101,7 +101,8 @@ namespace Backgammon.Server.SupportServices
                 PlayerId = playerId,
                 Username = playerUsername,
                 IsGuest = isGuest,
-                ExpiresAtUtc = DateTime.UtcNow.Add(SessionInactivityTimeout)
+                ExpiresAtUtc = DateTime.UtcNow.Add(SessionInactivityTimeout),
+                IsPlaying = false
             };
 
             lock (SessionSynchronization)
@@ -156,7 +157,8 @@ namespace Backgammon.Server.SupportServices
                 PlayerId = sourceSession.PlayerId,
                 Username = sourceSession.Username,
                 IsGuest = sourceSession.IsGuest,
-                ExpiresAtUtc = sourceSession.ExpiresAtUtc
+                ExpiresAtUtc = sourceSession.ExpiresAtUtc,
+                IsPlaying = sourceSession.IsPlaying
             };
 
             return sessionCopy;

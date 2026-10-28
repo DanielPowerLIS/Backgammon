@@ -26,7 +26,6 @@ namespace Backgammon.Server.Persistence.Data
         }
     
         public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<AvailableState> AvailableStates { get; set; }
         public virtual DbSet<Avatar> Avatars { get; set; }
         public virtual DbSet<FriendRequest> FriendRequests { get; set; }
         public virtual DbSet<FriendShip> FriendShips { get; set; }

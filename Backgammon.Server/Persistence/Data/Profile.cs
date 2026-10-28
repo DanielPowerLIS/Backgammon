@@ -25,13 +25,11 @@ namespace Backgammon.Server.Persistence.Data
         public int IdAvatarFK { get; set; }
         public string Username { get; set; }
         public int Points { get; set; }
-        public int IdAvailableStateFK { get; set; }
         public string Description { get; set; }
         public int IdProfilePK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<Account> Accounts { get; set; }
-        public virtual AvailableState AvailableState { get; set; }
         public virtual Avatar Avatar { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ObservableCollection<SocialMedia> SocialMedias { get; set; }

@@ -32,7 +32,6 @@ namespace Backgammon.Server.Services
         private static readonly int MaximumTextFieldLength = 100;
         private static readonly int MinimumPasswordLength = 8;
         private static readonly int DefaultAvatarId = 1;
-        private static readonly int OfflineStateId = 3;
 
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(RegistrationService));
@@ -103,7 +102,6 @@ namespace Backgammon.Server.Services
                 Wins = 0,
                 Points = 0,
                 IdAvatarFK = DefaultAvatarId,
-                IdAvailableStateFK = OfflineStateId
             };
 
             return playerProfile;

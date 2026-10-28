@@ -78,9 +78,6 @@
     <Compile Include="Persistence\Data\Account.cs">
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Data\AvailableState.cs">
-      <DependentUpon>Backgammon_Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Persistence\Data\Avatar.cs">
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
