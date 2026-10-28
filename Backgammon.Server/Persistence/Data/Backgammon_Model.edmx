@@ -20,13 +20,6 @@
           <Property Name="IdProfileFK" Type="int" Nullable="false" />
           <Property Name="IdAccountPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
-        <EntityType Name="AvailableState">
-          <Key>
-            <PropertyRef Name="IdAvailableStatePK" />
-          </Key>
-          <Property Name="State" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="IdAvailableStatePK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-        </EntityType>
         <EntityType Name="Avatar">
           <Key>
             <PropertyRef Name="IdAvatarPK" />
@@ -94,7 +87,6 @@
           <Property Name="IdAvatarFK" Type="int" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Points" Type="int" Nullable="false" />
-          <Property Name="IdAvailableStateFK" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="255" />
           <Property Name="IdProfilePK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
@@ -277,18 +269,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Profile_AvailableState">
-          <End Role="AvailableState" Type="Self.AvailableState" Multiplicity="1" />
-          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AvailableState">
-              <PropertyRef Name="IdAvailableStatePK" />
-            </Principal>
-            <Dependent Role="Profile">
-              <PropertyRef Name="IdAvailableStateFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Profile_Avatar">
           <End Role="Avatar" Type="Self.Avatar" Multiplicity="1" />
           <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
@@ -327,7 +307,6 @@
         </Association>
         <EntityContainer Name="BackgammonModelStoreContainer">
           <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AvailableState" EntityType="Self.AvailableState" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Avatar" EntityType="Self.Avatar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FriendRequest" EntityType="Self.FriendRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FriendShip" EntityType="Self.FriendShip" Schema="dbo" store:Type="Tables" />
@@ -391,10 +370,6 @@
             <End Role="Match" EntitySet="Match" />
             <End Role="Play" EntitySet="Play" />
           </AssociationSet>
-          <AssociationSet Name="FK_Profile_AvailableState" Association="Self.FK_Profile_AvailableState">
-            <End Role="AvailableState" EntitySet="AvailableState" />
-            <End Role="Profile" EntitySet="Profile" />
-          </AssociationSet>
           <AssociationSet Name="FK_Profile_Avatar" Association="Self.FK_Profile_Avatar">
             <End Role="Avatar" EntitySet="Avatar" />
             <End Role="Profile" EntitySet="Profile" />
@@ -414,7 +389,6 @@
       <Schema Namespace="BackgammonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="BackgammonEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="BackgammonModel.Account" />
-          <EntitySet Name="AvailableStates" EntityType="BackgammonModel.AvailableState" />
           <EntitySet Name="Avatars" EntityType="BackgammonModel.Avatar" />
           <EntitySet Name="FriendRequests" EntityType="BackgammonModel.FriendRequest" />
           <EntitySet Name="FriendShips" EntityType="BackgammonModel.FriendShip" />
@@ -466,10 +440,6 @@
             <End Role="Account" EntitySet="Accounts" />
             <End Role="Play" EntitySet="Plays" />
           </AssociationSet>
-          <AssociationSet Name="FK_Profile_AvailableState" Association="BackgammonModel.FK_Profile_AvailableState">
-            <End Role="AvailableState" EntitySet="AvailableStates" />
-            <End Role="Profile" EntitySet="Profiles" />
-          </AssociationSet>
           <AssociationSet Name="FK_Profile_Avatar" Association="BackgammonModel.FK_Profile_Avatar">
             <End Role="Avatar" EntitySet="Avatars" />
             <End Role="Profile" EntitySet="Profiles" />
@@ -519,14 +489,6 @@
           <NavigationProperty Name="Participates1" Relationship="BackgammonModel.FK_Participate_Account1" FromRole="Account" ToRole="Participate" />
           <NavigationProperty Name="Plays" Relationship="BackgammonModel.FK_Play_Account" FromRole="Account" ToRole="Play" />
           <NavigationProperty Name="Plays1" Relationship="BackgammonModel.FK_Play_Account1" FromRole="Account" ToRole="Play" />
-        </EntityType>
-        <EntityType Name="AvailableState">
-          <Key>
-            <PropertyRef Name="IdAvailableStatePK" />
-          </Key>
-          <Property Name="State" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="IdAvailableStatePK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Profiles" Relationship="BackgammonModel.FK_Profile_AvailableState" FromRole="AvailableState" ToRole="Profile" />
         </EntityType>
         <EntityType Name="Avatar">
           <Key>
@@ -610,11 +572,9 @@
           <Property Name="IdAvatarFK" Type="Int32" Nullable="false" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Points" Type="Int32" Nullable="false" />
-          <Property Name="IdAvailableStateFK" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IdProfilePK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Accounts" Relationship="BackgammonModel.FK_Account_Profile" FromRole="Profile" ToRole="Account" />
-          <NavigationProperty Name="AvailableState" Relationship="BackgammonModel.FK_Profile_AvailableState" FromRole="Profile" ToRole="AvailableState" />
           <NavigationProperty Name="Avatar" Relationship="BackgammonModel.FK_Profile_Avatar" FromRole="Profile" ToRole="Avatar" />
           <NavigationProperty Name="SocialMedias" Relationship="BackgammonModel.FK_SocialMedia_Profile" FromRole="Profile" ToRole="SocialMedia" />
         </EntityType>
@@ -765,18 +725,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Profile_AvailableState">
-          <End Type="BackgammonModel.AvailableState" Role="AvailableState" Multiplicity="1" />
-          <End Type="BackgammonModel.Profile" Role="Profile" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AvailableState">
-              <PropertyRef Name="IdAvailableStatePK" />
-            </Principal>
-            <Dependent Role="Profile">
-              <PropertyRef Name="IdAvailableStateFK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Profile_Avatar">
           <End Type="BackgammonModel.Avatar" Role="Avatar" Multiplicity="1" />
           <End Type="BackgammonModel.Profile" Role="Profile" Multiplicity="*" />
@@ -871,14 +819,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AvailableStates">
-            <EntityTypeMapping TypeName="BackgammonModel.AvailableState">
-              <MappingFragment StoreEntitySet="AvailableState">
-                <ScalarProperty Name="IdAvailableStatePK" ColumnName="IdAvailableStatePK" />
-                <ScalarProperty Name="State" ColumnName="State" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Avatars">
             <EntityTypeMapping TypeName="BackgammonModel.Avatar">
               <MappingFragment StoreEntitySet="Avatar">
@@ -950,7 +890,6 @@
               <MappingFragment StoreEntitySet="Profile">
                 <ScalarProperty Name="IdProfilePK" ColumnName="IdProfilePK" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="IdAvailableStateFK" ColumnName="IdAvailableStateFK" />
                 <ScalarProperty Name="Points" ColumnName="Points" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="IdAvatarFK" ColumnName="IdAvatarFK" />

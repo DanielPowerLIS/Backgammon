@@ -34,7 +34,8 @@ namespace Backgammon.Client.Controllers.GuestAccess
                 PlayerId = guestSession.PlayerId,
                 Username = guestSession.Username,
                 IsGuest = guestSession.IsGuest,
-                ExpiresAtUtc = guestSession.ExpiresAtUtc
+                ExpiresAtUtc = guestSession.ExpiresAtUtc,
+                IsPlaying = guestSession.IsPlaying
             };
 
             return playerSession;

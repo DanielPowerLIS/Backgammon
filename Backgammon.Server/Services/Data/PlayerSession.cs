@@ -20,5 +20,8 @@ namespace Backgammon.Server.Services.Data
 
         [DataMember]
         public bool IsGuest { get; set; }
+
+        [DataMember]
+        public bool IsPlaying { get; set; }
     }
 }

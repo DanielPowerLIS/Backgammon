@@ -90,6 +90,9 @@ namespace Backgammon.Client.AuthenticationReference {
         private bool IsGuestField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsPlayingField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PlayerIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -130,6 +133,19 @@ namespace Backgammon.Client.AuthenticationReference {
                 if ((this.IsGuestField.Equals(value) != true)) {
                     this.IsGuestField = value;
                     this.RaisePropertyChanged("IsGuest");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPlaying {
+            get {
+                return this.IsPlayingField;
+            }
+            set {
+                if ((this.IsPlayingField.Equals(value) != true)) {
+                    this.IsPlayingField = value;
+                    this.RaisePropertyChanged("IsPlaying");
                 }
             }
         }
