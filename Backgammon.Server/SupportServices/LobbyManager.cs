@@ -1,9 +1,8 @@
-﻿
+﻿using System;
+using System.Collections.Concurrent;
 
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
-using System;
-using System.Collections.Concurrent;
 
 namespace Backgammon.Server.SupportServices
 {
@@ -11,6 +10,11 @@ namespace Backgammon.Server.SupportServices
     {
         private const int RoomCodeLength = 6;
         private const int StartIndex = 0;
+
+        private static readonly string CodeLobbyDoesNotExistMessage = "The lobby code does not exist.";
+        private static readonly string LobbyFullMessage = "The lobby is already full.";
+        private static readonly string HostCannotJoinMessage = "The host cannot join their own lobby.";
+
 
         private static readonly ConcurrentDictionary<string, LobbyRoomSession> ActiveRooms =
             new ConcurrentDictionary<string, LobbyRoomSession>();
@@ -24,7 +28,6 @@ namespace Backgammon.Server.SupportServices
             {
                 RoomId = roomId,
                 HostPlayerId = hostPlayerId,
-                CurrentState = LobbyState.WaitingForPlayers
             };
 
             LobbyRoomSession session = new LobbyRoomSession
@@ -43,21 +46,20 @@ namespace Backgammon.Server.SupportServices
         {
             if (!ActiveRooms.TryGetValue(roomId, out LobbyRoomSession session))
             {
-                throw new InvalidOperationException("The lobby code does not exist.");
+                throw new InvalidOperationException(CodeLobbyDoesNotExistMessage);
             }
 
             if (session.RoomData.IsFull)
             {
-                throw new InvalidOperationException("The lobby is already full.");
+                throw new InvalidOperationException(LobbyFullMessage);
             }
 
             if (session.RoomData.HostPlayerId == guestId)
             {
-                throw new InvalidOperationException("The host cannot join their own lobby.");
+                throw new InvalidOperationException(HostCannotJoinMessage);
             }
 
             session.RoomData.GuestPlayerId = guestId;
-            session.RoomData.CurrentState = LobbyState.WaitingForPlayers;
             session.GuestCallback = guestCallback;
 
             return session;

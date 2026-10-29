@@ -156,7 +156,6 @@
     <Compile Include="Services\Data\Lobby.cs" />
     <Compile Include="Services\Data\LobbyFault.cs" />
     <Compile Include="Services\LobbyService.cs" />
-    <Compile Include="Services\Data\LobbyState.cs" />
     <Compile Include="Services\Data\PlayerProfile.cs" />
     <Compile Include="Services\Data\PlayerSession.cs" />
     <Compile Include="Services\Data\ProfileNotFoundFault.cs" />

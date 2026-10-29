@@ -1,8 +1,8 @@
-﻿
+﻿using System.ServiceModel;
 
 using Backgammon.Client.Comunication;
 using Backgammon.Client.Controllers.Callbacks;
-using System.ServiceModel;
+
 using WcfLobby = Backgammon.Client.LobbyReference.Lobby;
 
 namespace Backgammon.Client.Controllers.Lobby
