@@ -17,5 +17,20 @@ namespace Backgammon.Client.Views.Pages
         {
             NavigationService.Navigate(new GamePage());
         }
+
+        private void OnLeaveLobby(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnKickPlayer(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnOpenChat(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -134,6 +134,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\Comunication\GuestAccessServiceHost.cs" />
+    <Compile Include="Services\Comunication\LobbyServiceHost.cs" />
     <Compile Include="Services\Comunication\LogOutServiceHost.cs" />
     <Compile Include="Services\Comunication\ProfileServiceHost.cs" />
     <Compile Include="Services\Comunication\RegistrationServiceHost.cs" />
@@ -141,6 +142,8 @@
     <Compile Include="Services\Comunication\LeaderboardServiceHost.cs" />
     <Compile Include="Services\Contracts\IAuthenticationService.cs" />
     <Compile Include="Services\Contracts\IGuestAccessService.cs" />
+    <Compile Include="Services\Contracts\ILobbyCallback.cs" />
+    <Compile Include="Services\Contracts\ILobbyService.cs" />
     <Compile Include="Services\Contracts\ILogOutService.cs" />
     <Compile Include="Services\Contracts\IProfileService.cs" />
     <Compile Include="Services\Contracts\IRegistrationService.cs" />
@@ -150,6 +153,10 @@
     <Compile Include="Services\Data\Credentials.cs" />
     <Compile Include="Services\Data\GuestAccessFault.cs" />
     <Compile Include="Services\Data\LeaderboardFault.cs" />
+    <Compile Include="Services\Data\Lobby.cs" />
+    <Compile Include="Services\Data\LobbyFault.cs" />
+    <Compile Include="Services\LobbyService.cs" />
+    <Compile Include="Services\Data\LobbyState.cs" />
     <Compile Include="Services\Data\PlayerProfile.cs" />
     <Compile Include="Services\Data\PlayerSession.cs" />
     <Compile Include="Services\Data\ProfileNotFoundFault.cs" />
@@ -166,6 +173,8 @@
     <Compile Include="Services\RegistrationService.cs" />
     <Compile Include="SupportServices\AccountCodeGenerator.cs" />
     <Compile Include="SupportServices\GuestUsernameGenerator.cs" />
+    <Compile Include="SupportServices\LobbyManager.cs" />
+    <Compile Include="SupportServices\LobbyRoomSession.cs" />
     <Compile Include="SupportServices\Logging\IApplicationLogger.cs" />
     <Compile Include="SupportServices\Logging\Log4NetApplicationLogger.cs" />
     <Compile Include="SupportServices\PasswordHashService.cs" />
