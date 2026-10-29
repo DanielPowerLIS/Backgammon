@@ -150,7 +150,10 @@ namespace Backgammon.Client.Comunication
             }
         }
 
-        public async Task<SocialMediaLink> UpdateSocialMediaLinkAsync(string sessionId, int socialMediaLinkId, string url)
+        public async Task<SocialMediaLink> UpdateSocialMediaLinkAsync(
+                string sessionId,
+                int socialMediaLinkId,
+                string url)
         {
             var serviceClient = new ProfileServiceClient(EndpointConfigurationName);
             ICommunicationObject communicationChannel = serviceClient;
@@ -170,5 +173,7 @@ namespace Backgammon.Client.Comunication
                 }
             }
         }
+
+
     }
 }

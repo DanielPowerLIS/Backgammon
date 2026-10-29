@@ -130,20 +130,15 @@ namespace Backgammon.Client.Controllers.Profile
             }
         }
 
-        public async Task<SocialMediaLink> UpdateSocialMediaLinkAsync(string sessionId, int socialMediaLinkId, string url)
+        public async Task<SocialMediaLink> UpdateSocialMediaLinkAsync(
+                string sessionId,
+                int socialMediaLinkId,
+                string url)
         {
-            try
-            {
-                return await _profileClient.UpdateSocialMediaLinkAsync(sessionId, socialMediaLinkId, url);
-            }
-            catch (CommunicationException)
-            {
-                return null;
-            }
-            catch (TimeoutException)
-            {
-                return null;
-            }
+            return await _profileClient.UpdateSocialMediaLinkAsync(sessionId, socialMediaLinkId, url);
         }
+
+
+
     }
 }
