@@ -28,9 +28,9 @@ namespace Backgammon.Server.Services
         private static readonly string ServiceUnavailableErrorCode = "ServiceUnavailable";
         private static readonly string ProfileNotFoundErrorCode = "ProfileNotFound";
 
-        private const int FacebookTypeId = 1;
-        private const int InstagramTypeId = 2;
-        private const int TikTokTypeId = 3;
+        private static readonly int FacebookTypeId = 1;
+        private static readonly int InstagramTypeId = 2;
+        private static readonly int TikTokTypeId = 3;
 
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(ProfileService));
@@ -288,9 +288,18 @@ namespace Backgammon.Server.Services
         {
             foreach (SocialMediaEntity social in dbProfile.SocialMedias)
             {
-                if (social.IdTypeSocialMediaFK == FacebookTypeId) playerProfile.FacebookLink = social.Link;
-                else if (social.IdTypeSocialMediaFK == InstagramTypeId) playerProfile.InstagramLink = social.Link;
-                else if (social.IdTypeSocialMediaFK == TikTokTypeId) playerProfile.TikTokLink = social.Link;
+                if (social.IdTypeSocialMediaFK == FacebookTypeId)
+                {
+                    playerProfile.FacebookLink = social.Link;
+                }
+                else if (social.IdTypeSocialMediaFK == InstagramTypeId)
+                {
+                    playerProfile.InstagramLink = social.Link;
+                }
+                else if (social.IdTypeSocialMediaFK == TikTokTypeId)
+                {
+                    playerProfile.TikTokLink = social.Link;
+                }
             }
         }
 
@@ -353,7 +362,9 @@ namespace Backgammon.Server.Services
             return isDbError;
         }
 
-        private FaultException<ProfileNotFoundFault> LogAndCreateServiceFault(Exception errorException, string logMessage)
+        private FaultException<ProfileNotFoundFault> LogAndCreateServiceFault(
+                Exception errorException,
+                string logMessage)
         {
             ApplicationLogger.LogError(errorException, logMessage);
 

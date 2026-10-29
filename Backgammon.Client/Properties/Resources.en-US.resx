@@ -569,4 +569,19 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_GuestAccessErrorMessage" xml:space="preserve">
     <value>Guest access could not be completed. Please try again later.</value>
   </data>
+  <data name="Message_ProfileLoadError" xml:space="preserve">
+    <value>Could not load profile information. Please check your connection.</value>
+  </data>
+  <data name="Title_ConnectionError" xml:space="preserve">
+    <value>Connection Error</value>
+  </data>
+  <data name="Title_SessionError" xml:space="preserve">
+    <value>Session Error</value>
+  </data>
+  <data name="TextBlock_NoDescription" xml:space="preserve">
+    <value>No description...</value>
+  </data>
+  <data name="TextBlock_NotLinked" xml:space="preserve">
+    <value>Not linked</value>
+  </data>
 </root>

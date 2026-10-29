@@ -1,11 +1,11 @@
 ﻿using System;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using Backgammon.Client.Controllers.Profile;
 using Backgammon.Client.Controllers.Session;
+using WcfPlayerProfile = Backgammon.Client.ProfileReference.PlayerProfile;
 
 namespace Backgammon.Client.Views.Pages
 {
@@ -27,66 +27,67 @@ namespace Backgammon.Client.Views.Pages
             {
                 var currentSession = PlayerSessionContext.GetSession();
 
-                Backgammon.Client.ProfileReference.PlayerProfile profileData =
+                WcfPlayerProfile profileData =
                     await _profileController.GetPlayerProfileAsync(currentSession.SessionId);
 
                 if (profileData != null)
                 {
-                    textBlockPoints.Text = profileData.Points.ToString();
-                    textBlockWins.Text = profileData.Wins.ToString();
-
-                    if (string.IsNullOrWhiteSpace(profileData.Description))
-                    {
-                        textBlockDescription.Text = "Sin descripción...";
-                    }
-                    else
-                    {
-                        textBlockDescription.Text = profileData.Description;
-                    }
-
-                    LoadSocialMediaLinks(profileData);
-
-                    ellipseAvatar.Fill = (Brush)FindResource("CyanAccentBrush");
+                    PopulateProfileUi(profileData);
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo cargar la información del perfil. Verifica tu conexión.",
-                                    "Error de conexión", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show(
+                        Properties.Resources.Message_ProfileLoadError,
+                        Properties.Resources.Title_ConnectionError,
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
                 }
             }
             catch (InvalidOperationException ex)
             {
-                MessageBox.Show(ex.Message, "Error de Sesión", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(
+                    ex.Message,
+                    Properties.Resources.Title_SessionError,
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             }
         }
 
-        private void LoadSocialMediaLinks(Backgammon.Client.ProfileReference.PlayerProfile profile)
+        private void PopulateProfileUi(WcfPlayerProfile profileData)
         {
-            if (string.IsNullOrWhiteSpace(profile.FacebookLink))
+            textBlockPoints.Text = profileData.Points.ToString();
+            textBlockWins.Text = profileData.Wins.ToString();
+
+            if (string.IsNullOrWhiteSpace(profileData.Description))
             {
-                textBlockFacebook.Text = "No enlazado";
+                textBlockDescription.Text = Properties.Resources.TextBlock_NoDescription;
             }
             else
             {
-                textBlockFacebook.Text = profile.FacebookLink;
+                textBlockDescription.Text = profileData.Description;
             }
 
-            if (string.IsNullOrWhiteSpace(profile.InstagramLink))
-            {
-                textBlockInstagram.Text = "No enlazado";
-            }
-            else
-            {
-                textBlockInstagram.Text = profile.InstagramLink;
-            }
+            LoadSocialMediaLinks(profileData);
 
-            if (string.IsNullOrWhiteSpace(profile.TikTokLink))
+            ellipseAvatar.Fill = (Brush)FindResource("CyanAccentBrush");
+        }
+
+        private void LoadSocialMediaLinks(WcfPlayerProfile profile)
+        {
+            SetSocialMediaLinkText(textBlockFacebook, profile.FacebookLink);
+            SetSocialMediaLinkText(textBlockInstagram, profile.InstagramLink);
+            SetSocialMediaLinkText(textBlockTikTok, profile.TikTokLink);
+        }
+
+        private void SetSocialMediaLinkText(TextBlock textBlock, string url)
+        {
+            if (string.IsNullOrWhiteSpace(url))
             {
-                textBlockTikTok.Text = "No enlazado";
+                textBlock.Text = Properties.Resources.TextBlock_NotLinked;
             }
             else
             {
-                textBlockTikTok.Text = profile.TikTokLink;
+                textBlock.Text = url;
             }
         }
 
@@ -100,20 +101,17 @@ namespace Backgammon.Client.Views.Pages
 
         private void OnAddFacebookClick(object sender, RoutedEventArgs e)
         {
-            // TODO : Implementar la funcionalidad para agregar Facebook
-            MessageBox.Show("Funcionalidad para agregar Facebook en desarrollo.");
+            //TODO: Funcionalidad de ventana emergente pendiente
         }
 
         private void OnAddInstagramClick(object sender, RoutedEventArgs e)
         {
-            // TODO : Implementar la funcionalidad para agregar Instagram
-            MessageBox.Show("Funcionalidad para agregar Instagram en desarrollo.");
+            //TODO: Funcionalidad de ventana emergente pendiente
         }
 
         private void OnAddTikTokClick(object sender, RoutedEventArgs e)
         {
-            // TODO : Implementar la funcionalidad para agregar TikTok
-            MessageBox.Show("Funcionalidad para agregar TikTok en desarrollo.");
+            //TODO: Funcionalidad de ventana emergente pendiente
         }
     }
 }

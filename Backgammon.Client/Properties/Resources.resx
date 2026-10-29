@@ -569,4 +569,19 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_GuestAccessErrorMessage" xml:space="preserve">
     <value>No fue posible acceder como invitado. Inténtalo nuevamente más tarde.</value>
   </data>
+  <data name="Message_ProfileLoadError" xml:space="preserve">
+    <value>No se pudo cargar la información del perfil. Verifica tu conexión.</value>
+  </data>
+  <data name="Title_ConnectionError" xml:space="preserve">
+    <value>Error de conexión</value>
+  </data>
+  <data name="Title_SessionError" xml:space="preserve">
+    <value>Error de Sesión</value>
+  </data>
+  <data name="TextBlock_NoDescription" xml:space="preserve">
+    <value>Sin descripción...</value>
+  </data>
+  <data name="TextBlock_NotLinked" xml:space="preserve">
+    <value>No enlazado</value>
+  </data>
 </root>
