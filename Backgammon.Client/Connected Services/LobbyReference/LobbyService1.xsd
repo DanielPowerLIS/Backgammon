@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:9002/LobbyService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" />
+  <xs:element name="CreateLobby">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUser" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateLobbyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="CreateLobbyResult" nillable="true" type="q1:Lobby" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JoinLobby">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idUser" type="xs:int" />
+        <xs:element minOccurs="0" name="roomId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JoinLobbyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JoinLobbyResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="OnLobbyUpdated">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="lobby" nillable="true" type="q2:Lobby" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
