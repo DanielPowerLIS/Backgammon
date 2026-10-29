@@ -6,9 +6,9 @@ using Backgammon.Client.Views.Game;
 
 namespace Backgammon.Client.Views.Pages
 {
-    public partial class Room : Page
+    public partial class Lobby : Page
     {
-        public Room()
+        public Lobby()
         {
             InitializeComponent();
         }
