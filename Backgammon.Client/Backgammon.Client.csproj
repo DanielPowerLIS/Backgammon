@@ -192,8 +192,8 @@
     <Compile Include="Views\Pages\PlayerProfile.xaml.cs">
       <DependentUpon>PlayerProfile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\Room.xaml.cs">
-      <DependentUpon>Room.xaml</DependentUpon>
+    <Compile Include="Views\Pages\Lobby.xaml.cs">
+      <DependentUpon>Lobby.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\Rules.xaml.cs">
       <DependentUpon>Rules.xaml</DependentUpon>
@@ -326,7 +326,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\Room.xaml">
+    <Page Include="Views\Pages\Lobby.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
