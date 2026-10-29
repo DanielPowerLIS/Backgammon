@@ -1,5 +1,4 @@
-﻿using Backgammon.Server.Services;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 
 namespace Backgammon.Server.Services.Comunication
 {

@@ -1,19 +1,27 @@
-﻿using Backgammon.Server.Services.Contracts;
+﻿using System;
+using System.ServiceModel;
+
+using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
 using Backgammon.Server.SupportServices;
-using System;
-using System.ServiceModel;
 
 namespace Backgammon.Server.Services
 {
+
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class LobbyService : ILobbyService
     {
+
+        private static readonly string JoinLobbyErrorCode = "LobbyJoinFailed";
+
         public Lobby CreateLobby(int idUser)
         {
             ILobbyCallback callback = OperationContext.Current.GetCallbackChannel<ILobbyCallback>();
 
-            return LobbyManager.CreateRoom(idUser, callback);
+            
+            Lobby lobby = LobbyManager.CreateRoom(idUser, callback);
+            
+            return lobby;
         }
 
         public bool JoinLobby(int idUser, string roomId)
@@ -31,8 +39,7 @@ namespace Backgammon.Server.Services
             {
                 var fault = new LobbyFault
                 {
-                    ErrorCode = "LobbyJoinFailed",
-                    ErrorMessage = ex.Message
+                    ErrorCode = JoinLobbyErrorCode
                 };
 
                 throw new FaultException<LobbyFault>(fault);

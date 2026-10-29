@@ -1,5 +1,6 @@
-﻿using Backgammon.Server.Services.Data;
-using System.ServiceModel;
+﻿using System.ServiceModel;
+
+using Backgammon.Server.Services.Data;
 
 namespace Backgammon.Server.Services.Contracts
 {

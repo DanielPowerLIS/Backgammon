@@ -1,5 +1,4 @@
-﻿
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace Backgammon.Server.Services.Data
 {
@@ -16,8 +15,6 @@ namespace Backgammon.Server.Services.Data
         public int GuestPlayerId { get; set; }
 
         [DataMember]
-        public LobbyState CurrentState { get; set; }
-
         public bool IsFull
         {
             get 

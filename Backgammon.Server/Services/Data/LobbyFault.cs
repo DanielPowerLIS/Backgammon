@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace Backgammon.Server.Services.Data
 {
@@ -13,7 +8,5 @@ namespace Backgammon.Server.Services.Data
         [DataMember]
         public string ErrorCode { get; set; }
 
-        [DataMember]
-        public string ErrorMessage { get; set;  }
     }
 }
