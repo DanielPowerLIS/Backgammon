@@ -1,0 +1,144 @@
+﻿<Window x:Class="Backgammon.Client.Views.Dialog.JoinLobbyDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:properties="clr-namespace:Backgammon.Client.Properties"
+        Title="{x:Static properties:Resources.TextBlock_JoinLobbyTitle}"
+        Width="600"
+        Height="280"
+        FontFamily="Segoe UI"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        FocusManager.FocusedElement="{Binding ElementName=textBoxRoomCode}">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="DialogBackgroundBrush" Color="#080D1A" />
+        <SolidColorBrush x:Key="CyanAccentBrush" Color="#00C9F2" />
+        <SolidColorBrush x:Key="PinkAccentBrush" Color="#E795EC" />
+
+        <Style x:Key="RoomDialogButtonStyle" TargetType="Button">
+            <Setter Property="Height" Value="44" />
+            <Setter Property="Background" Value="{StaticResource DialogBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource PinkAccentBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource CyanAccentBrush}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="borderButton"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="borderButton" Property="Background" Value="#173044" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="borderButton" Property="BorderBrush"
+                                        Value="{StaticResource PinkAccentBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="borderButton" Property="Background" Value="#22465A" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RoomCodeTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Background" Value="{StaticResource DialogBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource PinkAccentBrush}" />
+            <Setter Property="CaretBrush" Value="{StaticResource PinkAccentBrush}" />
+            <Setter Property="SelectionBrush" Value="{StaticResource CyanAccentBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource CyanAccentBrush}" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="FontSize" Value="26" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="14,4" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="borderInput"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="12">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          Margin="{TemplateBinding Padding}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="borderInput" Property="BorderBrush"
+                                        Value="{StaticResource PinkAccentBrush}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="{StaticResource DialogBackgroundBrush}"
+            BorderBrush="{StaticResource CyanAccentBrush}"
+            BorderThickness="2"
+            Padding="64,38,64,36">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="34" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock x:Name="textBlockInstruction" Grid.Row="0"
+                       Text="{x:Static properties:Resources.TextBlock_EnterRoomCode}"
+                       Foreground="{StaticResource CyanAccentBrush}"
+                       FontSize="26"
+                       FontWeight="SemiBold"
+                       TextAlignment="Center"
+                       HorizontalAlignment="Center" />
+
+            <TextBox x:Name="textBoxRoomCode"
+                     Grid.Row="2"
+                     Style="{StaticResource RoomCodeTextBoxStyle}"
+                     MaxLength="6"
+                     CharacterCasing="Upper"
+                     AutomationProperties.Name="{x:Static properties:Resources.TextBox_RoomCode}" />
+
+            <Grid Grid.Row="4" Margin="32,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="18" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="buttonJoin"
+                        Grid.Column="0"
+                        Content="{x:Static properties:Resources.Button_Join}"
+                        Style="{StaticResource RoomDialogButtonStyle}"
+                        IsDefault="True" />
+
+                <Button x:Name="buttonCancel"
+                        Grid.Column="2"
+                        Content="{x:Static properties:Resources.Button_Cancel}"
+                        Style="{StaticResource RoomDialogButtonStyle}"
+                        IsCancel="True" />
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

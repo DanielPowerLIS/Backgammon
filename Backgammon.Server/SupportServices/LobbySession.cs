@@ -10,5 +10,7 @@ namespace Backgammon.Server.SupportServices
         public IPreinitiationCallback HostCallback { get; set; }
         
         public IPreinitiationCallback GuestCallback { get; set; }
+
+        public Entrance Queue { get; } = new Entrance();
     }
 }

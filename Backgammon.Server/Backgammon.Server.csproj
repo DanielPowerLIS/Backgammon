@@ -171,6 +171,7 @@
     <Compile Include="Services\ProfileService.cs" />
     <Compile Include="Services\RegistrationService.cs" />
     <Compile Include="SupportServices\CodeGenerator.cs" />
+    <Compile Include="SupportServices\Entrance.cs" />
     <Compile Include="SupportServices\GuestUsernameGenerator.cs" />
     <Compile Include="SupportServices\LobbyManager.cs" />
     <Compile Include="SupportServices\LobbySession.cs" />

@@ -584,4 +584,13 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_NotLinked" xml:space="preserve">
     <value>Not linked</value>
   </data>
+  <data name="TextBlock_JoinLobbyTitle" xml:space="preserve">
+    <value>Join a room</value>
+  </data>
+  <data name="TextBlock_EnterRoomCode" xml:space="preserve">
+    <value>Enter the room code</value>
+  </data>
+  <data name="TextBox_RoomCode" xml:space="preserve">
+    <value>Room code</value>
+  </data>
 </root>

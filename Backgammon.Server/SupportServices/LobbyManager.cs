@@ -18,7 +18,7 @@ namespace Backgammon.Server.SupportServices
         private static readonly ConcurrentDictionary<string, LobbySession> ActiveRooms =
             new ConcurrentDictionary<string, LobbySession>();
 
-        public static Lobby CreateRoom(int hostPlayerId, IPreinitiationCallback hostCallback) 
+        public static Lobby CreateRoom(PlayerSession hostPlayer, IPreinitiationCallback hostCallback)
         {
             var codeGenerator = new CodeGenerator();
 
@@ -27,7 +27,9 @@ namespace Backgammon.Server.SupportServices
             Lobby lobbyData = new Lobby
             {
                 RoomId = roomId,
-                HostPlayerId = hostPlayerId,
+                HostPlayerId = hostPlayer.PlayerId,
+                HostUsername = hostPlayer.Username,
+                GuestUsername = string.Empty
             };
 
             LobbySession session = new LobbySession
@@ -42,27 +44,33 @@ namespace Backgammon.Server.SupportServices
         }
 
 
-        public static LobbySession JoinRoom(int guestId, string roomId, IPreinitiationCallback guestCallback)
-        {
-            if (!ActiveRooms.TryGetValue(roomId, out LobbySession session))
+        public static LobbySession JoinRoom(PlayerSession guestPlayer, string roomId,
+            IPreinitiationCallback guestCallback)
+        {   
+
+            if (!ActiveRooms.TryGetValue(roomId, out LobbySession lobbySession))
             {
                 throw new InvalidOperationException(CodeLobbyDoesNotExistMessage);
             }
 
-            if (session.RoomData.IsFull)
+            lock (lobbySession.Queue)
             {
-                throw new InvalidOperationException(LobbyFullMessage);
+                if (lobbySession.RoomData.HostPlayerId == guestPlayer.PlayerId)
+                {
+                    throw new InvalidOperationException(HostCannotJoinMessage);
+                }
+
+                if (lobbySession.RoomData.IsFull)
+                {
+                    throw new InvalidOperationException(LobbyFullMessage);
+                }
+
+                lobbySession.RoomData.GuestPlayerId = guestPlayer.PlayerId;
+                lobbySession.RoomData.GuestUsername = guestPlayer.Username;
+                lobbySession.GuestCallback = guestCallback;
             }
 
-            if (session.RoomData.HostPlayerId == guestId)
-            {
-                throw new InvalidOperationException(HostCannotJoinMessage);
-            }
-
-            session.RoomData.GuestPlayerId = guestId;
-            session.GuestCallback = guestCallback;
-
-            return session;
+            return lobbySession;
         }
     }
 }

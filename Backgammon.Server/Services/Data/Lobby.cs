@@ -12,7 +12,13 @@ namespace Backgammon.Server.Services.Data
         public int HostPlayerId { get; set; }
 
         [DataMember]
+        public string HostUsername { get; set; }
+
+        [DataMember]
         public int GuestPlayerId { get; set; }
+
+        [DataMember]
+        public string GuestUsername { get; set; }
 
         public bool IsFull
         {

@@ -584,4 +584,13 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_NotLinked" xml:space="preserve">
     <value>No enlazado</value>
   </data>
+  <data name="TextBlock_JoinLobbyTitle" xml:space="preserve">
+    <value>Unirse a una sala</value>
+  </data>
+  <data name="TextBlock_EnterRoomCode" xml:space="preserve">
+    <value>Introduce el código de sala</value>
+  </data>
+  <data name="TextBox_RoomCode" xml:space="preserve">
+    <value>Código de sala</value>
+  </data>
 </root>
