@@ -1,7 +1,8 @@
 ﻿using System.ServiceModel;
+using System.Threading.Tasks;
 
 using Backgammon.Client.PreinitiationReference;
-using WcfLobby = Backgammon.Client.PreinitiationReference.Lobby;
+using CurrentLobby = Backgammon.Client.PreinitiationReference.Lobby;
 
 namespace Backgammon.Client.Comunication
 {
@@ -14,18 +15,18 @@ namespace Backgammon.Client.Comunication
             _serviceClient = new PreinitiationServiceClient(callbackContext);
         } 
 
-        public WcfLobby CreateLobby(string SessionId)
+        public CurrentLobby CreateLobby(string sessionId)
         {
-            WcfLobby createdLobby = _serviceClient.CreateLobby(SessionId);
+            CurrentLobby createdLobby = _serviceClient.CreateLobby(sessionId);
 
             return createdLobby;
-        }   
+        }
 
-        public bool JoinLobby(string sessionId, string roomId) 
+        public async Task<CurrentLobby> JoinLobbyAsync(string sessionId, string roomId)
         {
-            bool joinResult = _serviceClient.JoinLobby(sessionId, roomId);
+            CurrentLobby joinedLobby = await _serviceClient.JoinLobbyAsync(sessionId, roomId);
 
-            return joinResult;
+            return joinedLobby;
         }
     }
 }

@@ -26,10 +26,13 @@ namespace Backgammon.Client.PreinitiationReference {
         private int GuestPlayerIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GuestUsernameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int HostPlayerIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsFullField;
+        private string HostUsernameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RoomIdField;
@@ -58,6 +61,19 @@ namespace Backgammon.Client.PreinitiationReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GuestUsername {
+            get {
+                return this.GuestUsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GuestUsernameField, value) != true)) {
+                    this.GuestUsernameField = value;
+                    this.RaisePropertyChanged("GuestUsername");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int HostPlayerId {
             get {
                 return this.HostPlayerIdField;
@@ -71,14 +87,14 @@ namespace Backgammon.Client.PreinitiationReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsFull {
+        public string HostUsername {
             get {
-                return this.IsFullField;
+                return this.HostUsernameField;
             }
             set {
-                if ((this.IsFullField.Equals(value) != true)) {
-                    this.IsFullField = value;
-                    this.RaisePropertyChanged("IsFull");
+                if ((object.ReferenceEquals(this.HostUsernameField, value) != true)) {
+                    this.HostUsernameField = value;
+                    this.RaisePropertyChanged("HostUsername");
                 }
             }
         }
@@ -106,21 +122,68 @@ namespace Backgammon.Client.PreinitiationReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PreinitiationFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class PreinitiationFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorCodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorCode {
+            get {
+                return this.ErrorCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorCodeField, value) != true)) {
+                    this.ErrorCodeField = value;
+                    this.RaisePropertyChanged("ErrorCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="PreinitiationReference.IPreinitiationService", CallbackContract=typeof(Backgammon.Client.PreinitiationReference.IPreinitiationServiceCallback))]
     public interface IPreinitiationService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPreinitiationService/CreateLobby", ReplyAction="http://tempuri.org/IPreinitiationService/CreateLobbyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.PreinitiationReference.PreinitiationFault), Action="http://tempuri.org/IPreinitiationService/CreateLobbyPreinitiationFaultFault", Name="PreinitiationFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
         Backgammon.Client.PreinitiationReference.Lobby CreateLobby(string sessionId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPreinitiationService/CreateLobby", ReplyAction="http://tempuri.org/IPreinitiationService/CreateLobbyResponse")]
         System.Threading.Tasks.Task<Backgammon.Client.PreinitiationReference.Lobby> CreateLobbyAsync(string sessionId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPreinitiationService/JoinLobby", ReplyAction="http://tempuri.org/IPreinitiationService/JoinLobbyResponse")]
-        bool JoinLobby(string sessionId, string roomId);
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.PreinitiationReference.PreinitiationFault), Action="http://tempuri.org/IPreinitiationService/JoinLobbyPreinitiationFaultFault", Name="PreinitiationFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        Backgammon.Client.PreinitiationReference.Lobby JoinLobby(string sessionId, string roomId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPreinitiationService/JoinLobby", ReplyAction="http://tempuri.org/IPreinitiationService/JoinLobbyResponse")]
-        System.Threading.Tasks.Task<bool> JoinLobbyAsync(string sessionId, string roomId);
+        System.Threading.Tasks.Task<Backgammon.Client.PreinitiationReference.Lobby> JoinLobbyAsync(string sessionId, string roomId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -166,11 +229,11 @@ namespace Backgammon.Client.PreinitiationReference {
             return base.Channel.CreateLobbyAsync(sessionId);
         }
         
-        public bool JoinLobby(string sessionId, string roomId) {
+        public Backgammon.Client.PreinitiationReference.Lobby JoinLobby(string sessionId, string roomId) {
             return base.Channel.JoinLobby(sessionId, roomId);
         }
         
-        public System.Threading.Tasks.Task<bool> JoinLobbyAsync(string sessionId, string roomId) {
+        public System.Threading.Tasks.Task<Backgammon.Client.PreinitiationReference.Lobby> JoinLobbyAsync(string sessionId, string roomId) {
             return base.Channel.JoinLobbyAsync(sessionId, roomId);
         }
     }

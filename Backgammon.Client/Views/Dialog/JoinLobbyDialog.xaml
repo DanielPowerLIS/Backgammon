@@ -31,7 +31,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="borderButton"
+                        <Border x:Name="BorderButton"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -41,14 +41,14 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="borderButton" Property="Background" Value="#173044" />
+                                <Setter TargetName="BorderButton" Property="Background" Value="#173044" />
                             </Trigger>
                             <Trigger Property="IsKeyboardFocused" Value="True">
-                                <Setter TargetName="borderButton" Property="BorderBrush"
+                                <Setter TargetName="BorderButton" Property="BorderBrush"
                                         Value="{StaticResource PinkAccentBrush}" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="borderButton" Property="Background" Value="#22465A" />
+                                <Setter TargetName="BorderButton" Property="Background" Value="#22465A" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -72,7 +72,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border x:Name="borderInput"
+                        <Border x:Name="BorderInput"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -82,7 +82,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsKeyboardFocused" Value="True">
-                                <Setter TargetName="borderInput" Property="BorderBrush"
+                                <Setter TargetName="BorderInput" Property="BorderBrush"
                                         Value="{StaticResource PinkAccentBrush}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -131,7 +131,8 @@
                         Grid.Column="0"
                         Content="{x:Static properties:Resources.Button_Join}"
                         Style="{StaticResource RoomDialogButtonStyle}"
-                        IsDefault="True" />
+                        IsDefault="True" 
+                        Click="OnJoinClick"/>
 
                 <Button x:Name="buttonCancel"
                         Grid.Column="2"

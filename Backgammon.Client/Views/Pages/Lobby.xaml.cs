@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
@@ -18,13 +19,54 @@ namespace Backgammon.Client.Views.Pages
             _lobbyController = new LobbyController();
 
             Loaded += OnPageLoaded;
+            Unloaded += OnPageUnloaded;
         }
 
         private void OnPageLoaded(object sender, RoutedEventArgs e)
         {
-            string playerUsername = _lobbyController.GetCurrentPlayerUsername();
+            _lobbyController.LobbyUpdated -= OnLobbyUpdated;
+            _lobbyController.LobbyUpdated += OnLobbyUpdated;
 
-            textBlockHostUsername.Text = playerUsername;
+            _lobbyController.StartListening();
+
+            RefreshPlayers();
+        }
+
+        private void OnPageUnloaded(object sender, RoutedEventArgs e)
+        {
+            _lobbyController.StopListening();
+
+            _lobbyController.LobbyUpdated -= OnLobbyUpdated;
+        }
+
+        private void OnLobbyUpdated()
+        {
+            bool hasThreadAccess = Dispatcher.CheckAccess();
+
+            if (!hasThreadAccess)
+            {
+                var refreshAction = new Action(RefreshPlayers);
+                Dispatcher.BeginInvoke(refreshAction);
+                return;
+            }
+
+            RefreshPlayers();
+        }
+
+        private void RefreshPlayers()
+        {
+            if (!IsLoaded)
+            {
+                return;
+            }
+
+            string hostUsername = _lobbyController.GetHostUsername();
+            string guestUsername = _lobbyController.GetGuestUsername();
+            string roomCode = _lobbyController.GetRoomCode();
+
+            textBlockHostUsername.Text = hostUsername;
+            textBlockGuestUsername.Text = guestUsername;
+            textBlockRoomCode.Text = roomCode;
         }
 
         private void OnPlay(object sender, RoutedEventArgs e)

@@ -3,10 +3,17 @@
   <xs:complexType name="Lobby">
     <xs:sequence>
       <xs:element minOccurs="0" name="GuestPlayerId" type="xs:int" />
+      <xs:element minOccurs="0" name="GuestUsername" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="HostPlayerId" type="xs:int" />
-      <xs:element minOccurs="0" name="IsFull" type="xs:boolean" />
+      <xs:element minOccurs="0" name="HostUsername" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RoomId" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Lobby" nillable="true" type="tns:Lobby" />
+  <xs:complexType name="PreinitiationFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PreinitiationFault" nillable="true" type="tns:PreinitiationFault" />
 </xs:schema>

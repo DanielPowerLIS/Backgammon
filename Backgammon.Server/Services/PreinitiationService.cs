@@ -22,11 +22,13 @@ namespace Backgammon.Server.Services
         private static readonly string JoinLobbyErrorCode = "LobbyJoinFailed";
         private static readonly string SessionExpiredErrorCode = "SessionExpired";
         private static readonly string InvalidRoomCodeErrorCode = "InvalidRoomCode";
+        private static readonly string ServiceUnavailableErrorCode = "ServiceUnavailable";
+
         private static readonly string RoomCodePattern = @"\A[A-Z0-9]{6}\z";
 
         private static readonly TimeSpan RoomCodeValidationTimeout = TimeSpan.FromSeconds(1);
 
-        private static readonly Regex RoomCodeExpression = new Regex(RoomCodePattern,RegexOptions.None,
+        private static readonly Regex RoomCodeExpression = new Regex(RoomCodePattern, RegexOptions.None,
             RoomCodeValidationTimeout);
 
         public Lobby CreateLobby(string sessionId)
@@ -44,18 +46,15 @@ namespace Backgammon.Server.Services
         public Lobby JoinLobby(string sessionId, string roomId)
         {
             PlayerSession playerSession = GetPlayerSession(sessionId);
-
             ValidateRoomCode(roomId);
-
-            IPreinitiationCallback guestCallback = OperationContext.Current.GetCallbackChannel<IPreinitiationCallback>();
+            IPreinitiationCallback guestCallback = 
+                OperationContext.Current.GetCallbackChannel<IPreinitiationCallback>();
 
             try
             {
                 LobbySession lobbySession = LobbyManager.JoinRoom(playerSession, roomId, guestCallback);
-
                 Lobby lobby = lobbySession.RoomData;
-
-                lobbySession.HostCallback.OnLobbyUpdated(lobby);
+                UpdateHost(lobbySession, lobby);
 
                 return lobby;
             }
@@ -81,13 +80,46 @@ namespace Backgammon.Server.Services
                 throw CreatePreinitiationFault(SessionExpiredErrorCode);
             }
         }
+
         private void ValidateRoomCode(string roomId)
         {
-            bool validateRoomCode = roomId != null && RoomCodeExpression.IsMatch(roomId);
-
-            if (!validateRoomCode)
+            try
             {
-                throw CreatePreinitiationFault(InvalidRoomCodeErrorCode);
+                bool validateRoomCode = roomId != null && RoomCodeExpression.IsMatch(roomId);
+
+                if (!validateRoomCode)
+                {
+                    throw CreatePreinitiationFault(InvalidRoomCodeErrorCode);
+                }
+            }
+            catch (RegexMatchTimeoutException validationException)
+            {
+                ApplicationLogger.LogError(validationException,
+                    "Room code validation exceeded the execution time limit.");
+
+                throw CreatePreinitiationFault(ServiceUnavailableErrorCode);
+            }
+        }
+
+        private void UpdateHost(LobbySession lobbySession, Lobby lobby)
+        {
+            int guestPlayerId = lobby.GuestPlayerId;
+
+            try
+            {
+                lobbySession.HostCallback.OnLobbyUpdated(lobby);
+            }
+            catch (Exception callbackException) when (
+                callbackException is CommunicationException ||
+                callbackException is TimeoutException ||
+                callbackException is ObjectDisposedException)
+            {
+                LobbyManager.CancelJoin(lobbySession, guestPlayerId);
+
+                ApplicationLogger.LogError(callbackException,
+                    "The host of room {0} could not be notified.", lobby.RoomId);
+
+                throw CreatePreinitiationFault(ServiceUnavailableErrorCode);
             }
         }
 

@@ -673,6 +673,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El código de sala debe contener exactamente 6 caracteres: letras mayúsculas de la A a la Z y números del 0 al 9..
+        /// </summary>
+        public static string TextBlock_InvalidRoomCodeMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_InvalidRoomCodeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to El nombre de usuario no puede contener @..
         /// </summary>
         public static string TextBlock_InvalidUsernameMessage {
@@ -687,6 +696,15 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_InvalidUsernameTitle {
             get {
                 return ResourceManager.GetString("TextBlock_InvalidUsernameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No fue posible unirse a la sala. Comprueba el código e inténtalo de nuevo..
+        /// </summary>
+        public static string TextBlock_JoinLobbyErrorMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_JoinLobbyErrorMessage", resourceCulture);
             }
         }
         
@@ -1182,6 +1200,15 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_RequiredFieldsTitle {
             get {
                 return ResourceManager.GetString("TextBlock_RequiredFieldsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Código de sala.
+        /// </summary>
+        public static string TextBlock_RoomCodeLabel {
+            get {
+                return ResourceManager.GetString("TextBlock_RoomCodeLabel", resourceCulture);
             }
         }
         

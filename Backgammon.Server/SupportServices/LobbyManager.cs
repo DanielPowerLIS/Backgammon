@@ -8,12 +8,11 @@ namespace Backgammon.Server.SupportServices
 {
     internal static class LobbyManager
     {
-        private const int RoomCodeLength = 6;
+        private static readonly int RoomCodeLength = 6;
 
         private static readonly string CodeLobbyDoesNotExistMessage = "The lobby code does not exist.";
         private static readonly string LobbyFullMessage = "The lobby is already full.";
         private static readonly string HostCannotJoinMessage = "The host cannot join their own lobby.";
-
 
         private static readonly ConcurrentDictionary<string, LobbySession> ActiveRooms =
             new ConcurrentDictionary<string, LobbySession>();
@@ -43,7 +42,6 @@ namespace Backgammon.Server.SupportServices
             return lobbyData;
         }
 
-
         public static LobbySession JoinRoom(PlayerSession guestPlayer, string roomId,
             IPreinitiationCallback guestCallback)
         {   
@@ -71,6 +69,22 @@ namespace Backgammon.Server.SupportServices
             }
 
             return lobbySession;
+        }
+
+        public static void CancelJoin(
+            LobbySession lobbySession, int guestPlayerId)
+        {
+            lock (lobbySession.Queue)
+            {
+                if (lobbySession.RoomData.GuestPlayerId != guestPlayerId)
+                {
+                    return;
+                }
+
+                lobbySession.RoomData.GuestPlayerId = 0;
+                lobbySession.RoomData.GuestUsername = string.Empty;
+                lobbySession.GuestCallback = null;
+            }
         }
     }
 }

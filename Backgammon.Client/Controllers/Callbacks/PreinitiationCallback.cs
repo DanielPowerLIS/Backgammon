@@ -1,19 +1,14 @@
-﻿using System;
-
+﻿using Backgammon.Client.Controllers.Lobby;
 using Backgammon.Client.PreinitiationReference;
-using WcfLobby = Backgammon.Client.PreinitiationReference.Lobby;
+using CurrentLobby = Backgammon.Client.PreinitiationReference.Lobby;
 
 namespace Backgammon.Client.Controllers.Callbacks
 {
     internal class PreinitiationCallback : IPreinitiationServiceCallback
     {
-        public event Action<WcfLobby> RoomUpdated;
-        public void OnLobbyUpdated(WcfLobby lobby)
+        public void OnLobbyUpdated(CurrentLobby lobby)
         {
-            if (RoomUpdated != null) 
-            {
-                RoomUpdated.Invoke(lobby);
-            }
+            LobbyContext.StoreLobby(lobby);
         }
     }
 }
