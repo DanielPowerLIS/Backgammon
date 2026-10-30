@@ -2,13 +2,13 @@
 
 namespace Backgammon.Server.Services.Comunication
 {
-    internal class LobbyServiceHost
+    internal class PreinitiationServiceHost
     {
         private readonly ServiceHost _serviceHost;
 
-        public LobbyServiceHost()
+        public PreinitiationServiceHost()
         {
-            _serviceHost = new ServiceHost(typeof(LobbyService));
+            _serviceHost = new ServiceHost(typeof(PreinitiationService));
         }
 
         public void Open()

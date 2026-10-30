@@ -90,7 +90,6 @@
                 </Border>
                 <TextBlock
                     x:Name="textBlockHostUsername"
-                    Text="Jugador1"
                     Foreground="{StaticResource CyanAccentBrush}"
                     FontSize="20"
                     HorizontalAlignment="Center"

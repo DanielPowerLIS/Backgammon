@@ -3,7 +3,7 @@
 namespace Backgammon.Server.Services.Data
 {
     [DataContract]
-    public class LobbyFault
+    public class PreinitiationFault
     {
         [DataMember]
         public string ErrorCode { get; set; }

@@ -9,20 +9,20 @@ namespace Backgammon.Server.SupportServices
     internal static class LobbyManager
     {
         private const int RoomCodeLength = 6;
-        private const int StartIndex = 0;
 
         private static readonly string CodeLobbyDoesNotExistMessage = "The lobby code does not exist.";
         private static readonly string LobbyFullMessage = "The lobby is already full.";
         private static readonly string HostCannotJoinMessage = "The host cannot join their own lobby.";
 
 
-        private static readonly ConcurrentDictionary<string, LobbyRoomSession> ActiveRooms =
-            new ConcurrentDictionary<string, LobbyRoomSession>();
+        private static readonly ConcurrentDictionary<string, LobbySession> ActiveRooms =
+            new ConcurrentDictionary<string, LobbySession>();
 
-        public static Lobby CreateRoom(int hostPlayerId, ILobbyCallback hostCallback) 
+        public static Lobby CreateRoom(int hostPlayerId, IPreinitiationCallback hostCallback) 
         {
-            string newGuid = Guid.NewGuid().ToString();
-            string roomId = newGuid.Substring(StartIndex, RoomCodeLength).ToUpper();
+            var codeGenerator = new CodeGenerator();
+
+            string roomId = codeGenerator.Generate(RoomCodeLength);
 
             Lobby lobbyData = new Lobby
             {
@@ -30,7 +30,7 @@ namespace Backgammon.Server.SupportServices
                 HostPlayerId = hostPlayerId,
             };
 
-            LobbyRoomSession session = new LobbyRoomSession
+            LobbySession session = new LobbySession
             {
                 RoomData = lobbyData,
                 HostCallback = hostCallback
@@ -42,9 +42,9 @@ namespace Backgammon.Server.SupportServices
         }
 
 
-        public static LobbyRoomSession JoinRoom(int guestId, string roomId, ILobbyCallback guestCallback)
+        public static LobbySession JoinRoom(int guestId, string roomId, IPreinitiationCallback guestCallback)
         {
-            if (!ActiveRooms.TryGetValue(roomId, out LobbyRoomSession session))
+            if (!ActiveRooms.TryGetValue(roomId, out LobbySession session))
             {
                 throw new InvalidOperationException(CodeLobbyDoesNotExistMessage);
             }

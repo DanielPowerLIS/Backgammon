@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:9002/LobbyService" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:9002/PreinitiationService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="LobbyService.wsdl" MetadataType="Wsdl" ID="24bb43ba-7cab-464f-acc1-f6492a4b494a" SourceId="1" SourceUrl="http://localhost:9002/LobbyService?wsdl" />
-    <MetadataFile FileName="LobbyService.xsd" MetadataType="Schema" ID="2520d0c7-53a6-4533-9dee-17c1bb87f1cc" SourceId="1" SourceUrl="http://localhost:9002/LobbyService?xsd=xsd1" />
-    <MetadataFile FileName="LobbyService1.xsd" MetadataType="Schema" ID="197fb50e-ffac-4b36-a31a-8cd9e1e81dbb" SourceId="1" SourceUrl="http://localhost:9002/LobbyService?xsd=xsd0" />
-    <MetadataFile FileName="LobbyService2.xsd" MetadataType="Schema" ID="f4501ccf-bcf8-4126-93d9-8afcd6c104c9" SourceId="1" SourceUrl="http://localhost:9002/LobbyService?xsd=xsd2" />
-    <MetadataFile FileName="LobbyService.disco" MetadataType="Disco" ID="b56765bd-b670-44da-ae0f-ff916ea49f7c" SourceId="1" SourceUrl="http://localhost:9002/LobbyService?disco" />
+    <MetadataFile FileName="PreinitiationService.wsdl" MetadataType="Wsdl" ID="24bb43ba-7cab-464f-acc1-f6492a4b494a" SourceId="1" SourceUrl="http://localhost:9002/PreinitiationService?wsdl" />
+    <MetadataFile FileName="PreinitiationService.xsd" MetadataType="Schema" ID="2520d0c7-53a6-4533-9dee-17c1bb87f1cc" SourceId="1" SourceUrl="http://localhost:9002/PreinitiationService?xsd=xsd1" />
+    <MetadataFile FileName="PreinitiationService1.xsd" MetadataType="Schema" ID="197fb50e-ffac-4b36-a31a-8cd9e1e81dbb" SourceId="1" SourceUrl="http://localhost:9002/PreinitiationService?xsd=xsd0" />
+    <MetadataFile FileName="PreinitiationService2.xsd" MetadataType="Schema" ID="f4501ccf-bcf8-4126-93d9-8afcd6c104c9" SourceId="1" SourceUrl="http://localhost:9002/PreinitiationService?xsd=xsd2" />
+    <MetadataFile FileName="PreinitiationService.disco" MetadataType="Disco" ID="b56765bd-b670-44da-ae0f-ff916ea49f7c" SourceId="1" SourceUrl="http://localhost:9002/PreinitiationService?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -14,6 +14,8 @@ namespace Backgammon.Server.Persistence.Repositories
     {
         private static readonly int MaximumCodeAttempts = 10;
 
+        private static readonly int CodeLength = 8;
+
         public async Task<List<Account>> GetAccountsByIdentifierAsync(string accountIdentifier)
         {
             bool isEmailIdentifier = accountIdentifier.Contains("@");
@@ -74,11 +76,11 @@ namespace Backgammon.Server.Persistence.Repositories
         private async Task<string> GenerateAvailableCodeAsync(
             BackgammonEntities databaseContext)
         {
-            var codeGenerator = new AccountCodeGenerator();
+            var codeGenerator = new CodeGenerator();
 
             for (int codeAttempt = 0; codeAttempt < MaximumCodeAttempts; codeAttempt++)
             {
-                string accountCode = codeGenerator.Generate();
+                string accountCode = codeGenerator.Generate(CodeLength);
 
                 bool codeRegistered = await databaseContext.Accounts
                     .AnyAsync(playerAccount => playerAccount.AccountCode == accountCode)
