@@ -71,7 +71,7 @@
     <Compile Include="Comunication\AuthenticationClient.cs" />
     <Compile Include="Comunication\GuestAccessClient.cs" />
     <Compile Include="Comunication\LeaderboardClient.cs" />
-    <Compile Include="Comunication\LobbyClient.cs" />
+    <Compile Include="Comunication\PreinitiationClient.cs" />
     <Compile Include="Comunication\LogOutClient.cs" />
     <Compile Include="Comunication\ProfileClient.cs" />
     <Compile Include="Comunication\RegistrationClient.cs" />
@@ -91,7 +91,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\LobbyReference\Reference.cs">
+    <Compile Include="Connected Services\PreinitiationReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -112,10 +112,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\Authentication\AuthenticationController.cs" />
-    <Compile Include="Controllers\Callbacks\LobbyCallback.cs" />
+    <Compile Include="Controllers\Callbacks\PreinitiationCallback.cs" />
     <Compile Include="Controllers\GuestAccess\GuestAccessController.cs" />
     <Compile Include="Controllers\Leaderboard\LeaderboardController.cs" />
+    <Compile Include="Controllers\Lobby\LobbyContext.cs" />
     <Compile Include="Controllers\Lobby\LobbyController.cs" />
+    <Compile Include="Controllers\Preinitiation\PreinitiationController.cs" />
     <Compile Include="Controllers\Profile\ProfileController.cs" />
     <Compile Include="Controllers\Registration\RegistrationController.cs" />
     <Compile Include="Controllers\Session\LogOutController.cs" />
@@ -418,17 +420,17 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\LeaderboardReference\LeaderboardService.wsdl" />
-    <None Include="Connected Services\LobbyReference\Backgammon.Client.LobbyReference.Lobby.datasource">
+    <None Include="Connected Services\PreinitiationReference\Backgammon.Client.PreinitiationReference.Lobby.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\LobbyReference\LobbyService.wsdl" />
-    <None Include="Connected Services\LobbyReference\LobbyService.xsd">
+    <None Include="Connected Services\PreinitiationReference\PreinitiationService.wsdl" />
+    <None Include="Connected Services\PreinitiationReference\PreinitiationService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\LobbyReference\LobbyService1.xsd">
+    <None Include="Connected Services\PreinitiationReference\PreinitiationService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\LobbyReference\LobbyService2.xsd">
+    <None Include="Connected Services\PreinitiationReference\PreinitiationService2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\LogOutReference\LogOutService.wsdl" />
@@ -508,17 +510,16 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\LobbyReference\LobbyService.disco" />
-    <None Include="Connected Services\LobbyReference\configuration91.svcinfo" />
-    <None Include="Connected Services\LobbyReference\configuration.svcinfo" />
-    <None Include="Connected Services\LobbyReference\Reference.svcmap">
+    <None Include="Connected Services\PreinitiationReference\PreinitiationService.disco" />
+    <None Include="Connected Services\PreinitiationReference\configuration91.svcinfo" />
+    <None Include="Connected Services\PreinitiationReference\configuration.svcinfo" />
+    <None Include="Connected Services\PreinitiationReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Controllers\Callbacks\.gitkeep" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -538,7 +539,7 @@
     <WCFMetadataStorage Include="Connected Services\AuthenticationReference\" />
     <WCFMetadataStorage Include="Connected Services\GuestAccessReference\" />
     <WCFMetadataStorage Include="Connected Services\LeaderboardReference\" />
-    <WCFMetadataStorage Include="Connected Services\LobbyReference\" />
+    <WCFMetadataStorage Include="Connected Services\PreinitiationReference\" />
     <WCFMetadataStorage Include="Connected Services\LogOutReference\" />
     <WCFMetadataStorage Include="Connected Services\ProfileReference\" />
     <WCFMetadataStorage Include="Connected Services\RegistrationReference\" />

@@ -14,7 +14,6 @@ namespace Backgammon.Server.Services.Data
         [DataMember]
         public int GuestPlayerId { get; set; }
 
-        [DataMember]
         public bool IsFull
         {
             get 

@@ -1,24 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+
+using Backgammon.Client.Controllers.Preinitiation;
 
 namespace Backgammon.Client.Views.Pages
 {
     public partial class Preinitiation : Page
     {
+        private readonly PreinitiationController _preinitiationController;
+
         public Preinitiation()
         {
             InitializeComponent();
+            _preinitiationController = new PreinitiationController();
         }
 
         private void OnCreateLobbyClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Lobby());
+            if (_preinitiationController.CreateLobby())
+            {
+                NavigationService.Navigate(new Lobby());
+            }
         }
 
         private void OnJoinClick(object sender, RoutedEventArgs e)

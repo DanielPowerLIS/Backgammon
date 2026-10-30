@@ -1,10 +1,11 @@
-﻿using Backgammon.Client.LobbyReference;
-using WcfLobby = Backgammon.Client.LobbyReference.Lobby;
-using System;
+﻿using System;
+
+using Backgammon.Client.PreinitiationReference;
+using WcfLobby = Backgammon.Client.PreinitiationReference.Lobby;
 
 namespace Backgammon.Client.Controllers.Callbacks
 {
-    internal class LobbyCallback : ILobbyServiceCallback
+    internal class PreinitiationCallback : IPreinitiationServiceCallback
     {
         public event Action<WcfLobby> RoomUpdated;
         public void OnLobbyUpdated(WcfLobby lobby)
