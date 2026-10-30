@@ -32,8 +32,8 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:9002/PreinitiationService?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:9002/PreinitiationService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:9002/PreinitiationService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" />
+      <xsd:import schemaLocation="http://localhost:9002/PreinitiationService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IPreinitiationService_CreateLobby_InputMessage">
@@ -42,11 +42,17 @@
   <wsdl:message name="IPreinitiationService_CreateLobby_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreateLobbyResponse" />
   </wsdl:message>
+  <wsdl:message name="IPreinitiationService_CreateLobby_PreinitiationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q1:PreinitiationFault" />
+  </wsdl:message>
   <wsdl:message name="IPreinitiationService_JoinLobby_InputMessage">
     <wsdl:part name="parameters" element="tns:JoinLobby" />
   </wsdl:message>
   <wsdl:message name="IPreinitiationService_JoinLobby_OutputMessage">
     <wsdl:part name="parameters" element="tns:JoinLobbyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPreinitiationService_JoinLobby_PreinitiationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q2:PreinitiationFault" />
   </wsdl:message>
   <wsdl:message name="IPreinitiationService_OnLobbyUpdated_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnLobbyUpdated" />
@@ -55,10 +61,12 @@
     <wsdl:operation name="CreateLobby">
       <wsdl:input wsaw:Action="http://tempuri.org/IPreinitiationService/CreateLobby" message="tns:IPreinitiationService_CreateLobby_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPreinitiationService/CreateLobbyResponse" message="tns:IPreinitiationService_CreateLobby_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPreinitiationService/CreateLobbyPreinitiationFaultFault" name="PreinitiationFaultFault" message="tns:IPreinitiationService_CreateLobby_PreinitiationFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="JoinLobby">
       <wsdl:input wsaw:Action="http://tempuri.org/IPreinitiationService/JoinLobby" message="tns:IPreinitiationService_JoinLobby_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPreinitiationService/JoinLobbyResponse" message="tns:IPreinitiationService_JoinLobby_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IPreinitiationService/JoinLobbyPreinitiationFaultFault" name="PreinitiationFaultFault" message="tns:IPreinitiationService_JoinLobby_PreinitiationFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="OnLobbyUpdated">
       <wsdl:output wsaw:Action="http://tempuri.org/IPreinitiationService/OnLobbyUpdated" message="tns:IPreinitiationService_OnLobbyUpdated_OutputCallbackMessage" />
@@ -75,6 +83,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="PreinitiationFaultFault">
+        <soap12:fault use="literal" name="PreinitiationFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="JoinLobby">
       <soap12:operation soapAction="http://tempuri.org/IPreinitiationService/JoinLobby" style="document" />
@@ -84,6 +95,9 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="PreinitiationFaultFault">
+        <soap12:fault use="literal" name="PreinitiationFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="OnLobbyUpdated">
       <soap12:operation soapAction="http://tempuri.org/IPreinitiationService/OnLobbyUpdated" style="document" />

@@ -584,4 +584,22 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_NotLinked" xml:space="preserve">
     <value>Not linked</value>
   </data>
+  <data name="TextBlock_JoinLobbyTitle" xml:space="preserve">
+    <value>Join a room</value>
+  </data>
+  <data name="TextBlock_EnterRoomCode" xml:space="preserve">
+    <value>Enter the room code</value>
+  </data>
+  <data name="TextBox_RoomCode" xml:space="preserve">
+    <value>Room code</value>
+  </data>
+  <data name="TextBlock_InvalidRoomCodeMessage" xml:space="preserve">
+    <value>The room code must contain exactly 6 characters: uppercase letters from A to Z and digits from 0 to 9.</value>
+  </data>
+  <data name="TextBlock_JoinLobbyErrorMessage" xml:space="preserve">
+    <value>Unable to join the room. Check the code and try again.</value>
+  </data>
+  <data name="TextBlock_RoomCodeLabel" xml:space="preserve">
+    <value>Room code</value>
+  </data>
 </root>

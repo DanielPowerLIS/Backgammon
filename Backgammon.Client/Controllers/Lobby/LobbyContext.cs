@@ -8,6 +8,8 @@ namespace Backgammon.Client.Controllers.Lobby
     {
         private static CurrentLobby _currentLobby;
 
+        public static event Action LobbyUpdated;
+
         public static void StoreLobby(CurrentLobby lobby)
         {
             if (lobby == null)
@@ -16,6 +18,8 @@ namespace Backgammon.Client.Controllers.Lobby
             }
 
             _currentLobby = lobby;
+
+            LobbyChanged();
         }
 
         public static CurrentLobby GetLobby()
@@ -32,6 +36,16 @@ namespace Backgammon.Client.Controllers.Lobby
         public static void ClearLobby()
         {
             _currentLobby = null;
+        }
+
+        private static void LobbyChanged()
+        {
+            Action lobbyUpdatedHandler = LobbyUpdated;
+
+            if (lobbyUpdatedHandler != null)
+            {
+                lobbyUpdatedHandler.Invoke();
+            }
         }
     }
 }

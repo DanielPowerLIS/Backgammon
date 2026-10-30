@@ -125,6 +125,9 @@
     <Compile Include="Settings\Localization\LanguageOptions.cs" />
     <Compile Include="Settings\Localization\LocalizationService.cs" />
     <Compile Include="Settings\Localization\LocalizedText.cs" />
+    <Compile Include="Views\Dialog\JoinLobbyDialog.xaml.cs">
+      <DependentUpon>JoinLobbyDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Models\AvatarOption.cs" />
     <Compile Include="Controllers\Registration\RegistrationLimits.cs" />
     <Compile Include="Controllers\Data\InputValidationResult.cs" />
@@ -243,6 +246,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialog\FriendProfileDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialog\JoinLobbyDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -584,4 +584,22 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_NotLinked" xml:space="preserve">
     <value>No enlazado</value>
   </data>
+  <data name="TextBlock_JoinLobbyTitle" xml:space="preserve">
+    <value>Unirse a una sala</value>
+  </data>
+  <data name="TextBlock_EnterRoomCode" xml:space="preserve">
+    <value>Introduce el código de sala</value>
+  </data>
+  <data name="TextBox_RoomCode" xml:space="preserve">
+    <value>Código de sala</value>
+  </data>
+  <data name="TextBlock_InvalidRoomCodeMessage" xml:space="preserve">
+    <value>El código de sala debe contener exactamente 6 caracteres: letras mayúsculas de la A a la Z y números del 0 al 9.</value>
+  </data>
+  <data name="TextBlock_JoinLobbyErrorMessage" xml:space="preserve">
+    <value>No fue posible unirse a la sala. Comprueba el código e inténtalo de nuevo.</value>
+  </data>
+  <data name="TextBlock_RoomCodeLabel" xml:space="preserve">
+    <value>Código de sala</value>
+  </data>
 </root>

@@ -8,17 +8,16 @@ namespace Backgammon.Server.SupportServices
 {
     internal static class LobbyManager
     {
-        private const int RoomCodeLength = 6;
+        private static readonly int RoomCodeLength = 6;
 
         private static readonly string CodeLobbyDoesNotExistMessage = "The lobby code does not exist.";
         private static readonly string LobbyFullMessage = "The lobby is already full.";
         private static readonly string HostCannotJoinMessage = "The host cannot join their own lobby.";
 
-
         private static readonly ConcurrentDictionary<string, LobbySession> ActiveRooms =
             new ConcurrentDictionary<string, LobbySession>();
 
-        public static Lobby CreateRoom(int hostPlayerId, IPreinitiationCallback hostCallback) 
+        public static Lobby CreateRoom(PlayerSession hostPlayer, IPreinitiationCallback hostCallback)
         {
             var codeGenerator = new CodeGenerator();
 
@@ -27,7 +26,9 @@ namespace Backgammon.Server.SupportServices
             Lobby lobbyData = new Lobby
             {
                 RoomId = roomId,
-                HostPlayerId = hostPlayerId,
+                HostPlayerId = hostPlayer.PlayerId,
+                HostUsername = hostPlayer.Username,
+                GuestUsername = string.Empty
             };
 
             LobbySession session = new LobbySession
@@ -41,28 +42,49 @@ namespace Backgammon.Server.SupportServices
             return lobbyData;
         }
 
+        public static LobbySession JoinRoom(PlayerSession guestPlayer, string roomId,
+            IPreinitiationCallback guestCallback)
+        {   
 
-        public static LobbySession JoinRoom(int guestId, string roomId, IPreinitiationCallback guestCallback)
-        {
-            if (!ActiveRooms.TryGetValue(roomId, out LobbySession session))
+            if (!ActiveRooms.TryGetValue(roomId, out LobbySession lobbySession))
             {
                 throw new InvalidOperationException(CodeLobbyDoesNotExistMessage);
             }
 
-            if (session.RoomData.IsFull)
+            lock (lobbySession.Queue)
             {
-                throw new InvalidOperationException(LobbyFullMessage);
+                if (lobbySession.RoomData.HostPlayerId == guestPlayer.PlayerId)
+                {
+                    throw new InvalidOperationException(HostCannotJoinMessage);
+                }
+
+                if (lobbySession.RoomData.IsFull)
+                {
+                    throw new InvalidOperationException(LobbyFullMessage);
+                }
+
+                lobbySession.RoomData.GuestPlayerId = guestPlayer.PlayerId;
+                lobbySession.RoomData.GuestUsername = guestPlayer.Username;
+                lobbySession.GuestCallback = guestCallback;
             }
 
-            if (session.RoomData.HostPlayerId == guestId)
+            return lobbySession;
+        }
+
+        public static void CancelJoin(
+            LobbySession lobbySession, int guestPlayerId)
+        {
+            lock (lobbySession.Queue)
             {
-                throw new InvalidOperationException(HostCannotJoinMessage);
+                if (lobbySession.RoomData.GuestPlayerId != guestPlayerId)
+                {
+                    return;
+                }
+
+                lobbySession.RoomData.GuestPlayerId = 0;
+                lobbySession.RoomData.GuestUsername = string.Empty;
+                lobbySession.GuestCallback = null;
             }
-
-            session.RoomData.GuestPlayerId = guestId;
-            session.GuestCallback = guestCallback;
-
-            return session;
         }
     }
 }

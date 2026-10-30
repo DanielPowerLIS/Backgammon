@@ -8,9 +8,11 @@ namespace Backgammon.Server.Services.Contracts
     public interface IPreinitiationService
     {
         [OperationContract]
+        [FaultContract(typeof(PreinitiationFault))]
         Lobby CreateLobby(string sessionId);
 
         [OperationContract]
-        bool JoinLobby(string sessionId, string roomId);
+        [FaultContract(typeof(PreinitiationFault))]
+        Lobby JoinLobby(string sessionId, string roomId);
     }
 }

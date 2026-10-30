@@ -26,14 +26,14 @@
   <xs:element name="JoinLobbyResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="JoinLobbyResult" type="xs:boolean" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="JoinLobbyResult" nillable="true" type="q2:Lobby" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OnLobbyUpdated">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="lobby" nillable="true" type="q2:Lobby" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="lobby" nillable="true" type="q3:Lobby" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
