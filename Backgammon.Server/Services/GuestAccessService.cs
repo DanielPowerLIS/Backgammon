@@ -13,8 +13,7 @@ namespace Backgammon.Server.Services
     {
         private readonly PlayerSessionService _playerSessionService;
 
-        private static readonly string ServiceUnavailableErrorCode =
-            "ServiceUnavailable";
+        private static readonly string ServiceUnavailableErrorCode = "ServiceUnavailable";
 
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(GuestAccessService));
@@ -28,30 +27,26 @@ namespace Backgammon.Server.Services
         {
             try
             {
-                PlayerSession guestSession =
-                    _playerSessionService.CreateGuestSession();
+                PlayerSession guestSession = _playerSessionService.CreateGuestSession();
 
-                ApplicationLogger.LogInformation(
-                    "Guest {0} accessed the game.", guestSession.Username);
+                ApplicationLogger.LogInformation("Guest {0} accessed the game.", guestSession.Username);
 
                 return guestSession;
             }
-            catch (Exception guestException) when (
-                guestException is CryptographicException ||
-                guestException is InvalidOperationException)
+            catch (CryptographicException cryptographicException)
             {
-                ApplicationLogger.LogError(
-                    guestException, "Guest access could not be completed.");
+                ApplicationLogger.LogError(cryptographicException,
+                    "A cryptographic failure prevented guest access from completing.");
 
-                throw CreateGuestAccessFault();
+                throw CreateGuestAccessFault(ServiceUnavailableErrorCode);
             }
         }
 
-        private FaultException<GuestAccessFault> CreateGuestAccessFault()
+        private FaultException<GuestAccessFault> CreateGuestAccessFault(string errorCode)
         {
             var guestAccessFault = new GuestAccessFault
             {
-                ErrorCode = ServiceUnavailableErrorCode
+                ErrorCode = errorCode
             };
 
             var faultException =

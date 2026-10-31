@@ -154,15 +154,15 @@
     <Compile Include="Services\Data\GuestAccessFault.cs" />
     <Compile Include="Services\Data\LeaderboardFault.cs" />
     <Compile Include="Services\Data\Lobby.cs" />
+    <Compile Include="Services\Data\PlayerSessionFault.cs" />
     <Compile Include="Services\Data\PreinitiationFault.cs" />
     <Compile Include="Services\PreinitiationService.cs" />
     <Compile Include="Services\Data\PlayerProfile.cs" />
     <Compile Include="Services\Data\PlayerSession.cs" />
-    <Compile Include="Services\Data\ProfileNotFoundFault.cs" />
+    <Compile Include="Services\Data\PlayerProfileFault.cs" />
     <Compile Include="Services\Data\RegistrationFault.cs" />
     <Compile Include="Services\Contracts\ILeaderboardService.cs" />
     <Compile Include="Services\Data\SocialMediaLink.cs" />
-    <Compile Include="Services\Data\SocialMediaLinkAlreadyExistsFault.cs" />
     <Compile Include="Services\Data\SocialMediaType.cs" />
     <Compile Include="Services\GuestAccessService.cs" />
     <Compile Include="Services\LeaderboardService.cs" />

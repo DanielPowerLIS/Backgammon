@@ -18,8 +18,7 @@ namespace Backgammon.Server.Services
     {
         private readonly IProfileRepository _profileRepository;
 
-        private static readonly string ServiceUnavailableErrorCode =
-            "ServiceUnavailable";
+        private static readonly string ServiceUnavailableErrorCode = "ServiceUnavailable";
 
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(LeaderboardService));
@@ -47,21 +46,32 @@ namespace Backgammon.Server.Services
             {
                 return _profileRepository.GetAllProfilesAsync().GetAwaiter().GetResult();
             }
-            catch (Exception databaseException) when (
-                databaseException is EntityException ||
-                databaseException is SqlException)
+            catch (EntityException entityException)
             {
-                ApplicationLogger.LogError(
-                    databaseException,
-                    "Database query failed while loading the leaderboard.");
+                ApplicationLogger.LogError(entityException,
+                    "An Entity Framework failure prevented the leaderboard from loading.");
 
-                var leaderboardFault = new LeaderboardFault
-                {
-                    ErrorCode = ServiceUnavailableErrorCode
-                };
-
-                throw new FaultException<LeaderboardFault>(leaderboardFault);
+                throw CreateLeaderboardFault(ServiceUnavailableErrorCode);
             }
+            catch (SqlException databaseException)
+            {
+                ApplicationLogger.LogError(databaseException,
+                    "A SQL Server failure prevented the leaderboard from loading.");
+
+                throw CreateLeaderboardFault(ServiceUnavailableErrorCode);
+            }
+        }
+
+        private FaultException<LeaderboardFault> CreateLeaderboardFault(string errorCode)
+        {
+            var leaderboardFault = new LeaderboardFault
+            {
+                ErrorCode = errorCode
+            };
+
+            var faultException = new FaultException<LeaderboardFault>(leaderboardFault);
+
+            return faultException;
         }
 
         private PlayerStanding CreatePlayerStanding(Profile playerProfile)

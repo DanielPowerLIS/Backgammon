@@ -50,28 +50,48 @@ namespace Backgammon.Server.Services
             {
                 RegisterValidatedAccount(accountInformation);
             }
-            catch (Exception errorException) when (
-                IsRegistrationFailure(errorException))
+            catch (EntityException entityException)
             {
-                ApplicationLogger.LogError(
-                    errorException,
-                    "Account registration could not be completed.");
+                ApplicationLogger.LogError(entityException,
+                    "An Entity Framework failure prevented account registration.");
 
                 throw CreateRegistrationFault(ServiceUnavailableErrorCode);
             }
-        }
+            catch (SqlException databaseException)
+            {
+                ApplicationLogger.LogError(databaseException,
+                    "A SQL Server failure prevented account registration.");
 
-        private bool IsRegistrationFailure(Exception errorException)
-        {
-            bool registrationFailure =
-                errorException is EntityException ||
-                errorException is SqlException ||
-                errorException is DbUpdateException ||
-                errorException is DbEntityValidationException ||
-                errorException is CryptographicException ||
-                errorException is InvalidOperationException;
+                throw CreateRegistrationFault(ServiceUnavailableErrorCode);
+            }
+            catch (DbUpdateException updateException)
+            {
+                ApplicationLogger.LogError(updateException,
+                    "The account and profile could not be saved to the database.");
 
-            return registrationFailure;
+                throw CreateRegistrationFault(ServiceUnavailableErrorCode);
+            }
+            catch (DbEntityValidationException validationException)
+            {
+                ApplicationLogger.LogError(validationException,
+                    "Entity validation failed while saving the account and profile.");
+
+                throw CreateRegistrationFault(ServiceUnavailableErrorCode);
+            }
+            catch (CryptographicException cryptographicException)
+            {
+                ApplicationLogger.LogError(cryptographicException,
+                    "A cryptographic failure prevented account registration.");
+
+                throw CreateRegistrationFault(ServiceUnavailableErrorCode);
+            }
+            catch (InvalidOperationException operationException)
+            {
+                ApplicationLogger.LogError(operationException,
+                    "An invalid operation prevented account registration.");
+
+                throw CreateRegistrationFault(ServiceUnavailableErrorCode);
+            }
         }
 
         private AccountEntity CreateAccount(Account accountInformation)
@@ -209,8 +229,12 @@ namespace Backgammon.Server.Services
 
                 return validEmailFormat;
             }
-            catch (FormatException)
+            catch (FormatException formatException)
             {
+                ApplicationLogger.LogWarning(
+                    "Email address validation failed due to an invalid format. Reason: {0}",
+                    formatException.Message);
+
                 return false;
             }
         }
@@ -279,14 +303,35 @@ namespace Backgammon.Server.Services
                 _accountRepository.CreateAccountAsync(playerAccount)
                     .GetAwaiter().GetResult();
             }
-            catch (Exception errorException) when (
-                IsUniqueViolation(errorException))
+            catch (DbUpdateException updateException)
             {
+                bool duplicateDetected = IsUniqueViolation(updateException);
+
+                if (!duplicateDetected)
+                {
+                    throw;
+                }
+
+                ApplicationLogger.LogError(updateException,
+                    "Account registration encountered an unresolved uniqueness conflict.");
+
                 ValidateAvailability(accountInformation);
 
-                ApplicationLogger.LogError(
-                    errorException,
-                    "Account registration encountered an unresolved uniqueness conflict.");
+                throw CreateRegistrationFault(ServiceUnavailableErrorCode);
+            }
+            catch (SqlException databaseException)
+            {
+                bool duplicateDetected = IsUniqueViolation(databaseException);
+
+                if (!duplicateDetected)
+                {
+                    throw;
+                }
+
+                ApplicationLogger.LogError(databaseException,
+                    "Account registration encountered an unresolved SQL uniqueness conflict.");
+
+                ValidateAvailability(accountInformation);
 
                 throw CreateRegistrationFault(ServiceUnavailableErrorCode);
             }

@@ -1,15 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using System.Linq;
+using System.Security.Cryptography;
+using System.ServiceModel;
 using System.Threading;
 
+using Backgammon.Server.Services;
 using Backgammon.Server.Services.Data;
+using Backgammon.Server.SupportServices.Logging;
 
 namespace Backgammon.Server.SupportServices
 {
     internal class PlayerSessionService
     {
+        private static readonly IApplicationLogger ApplicationLogger =
+            new Log4NetApplicationLogger(typeof(PlayerSessionService));
+
+        private static readonly string SessionExpiredErrorCode = "SessionExpired";
+
         private static readonly TimeSpan SessionInactivityTimeout =
             TimeSpan.FromMinutes(30);
 
@@ -83,11 +91,22 @@ namespace Backgammon.Server.SupportServices
 
         public int GetProfileId(string sessionId)
         {
-            PlayerSession activeSession = GetSession(sessionId, true);
+            try
+            {
+                PlayerSession activeSession = GetSession(sessionId, true);
 
-            int profileId = activeSession.PlayerId;
+                int profileId = activeSession.PlayerId;
 
-            return profileId;
+                return profileId;
+            }
+            catch (UnauthorizedAccessException sessionException)
+            {
+                ApplicationLogger.LogWarning(
+                    "The profile operation was rejected because the session is invalid or expired. Reason: {0}",
+                    sessionException.Message);
+
+                throw CreatePlayerSessionFault(SessionExpiredErrorCode);
+            }
         }
 
         private PlayerSession CreatePlayerSession(
@@ -177,6 +196,20 @@ namespace Backgammon.Server.SupportServices
             string sessionId = Convert.ToBase64String(sessionToken);
 
             return sessionId;
+        }
+
+        private FaultException<PlayerProfileFault> CreatePlayerSessionFault(
+            string errorCode)
+        {
+            var profileFault = new PlayerProfileFault
+            {
+                ErrorCode = errorCode
+            };
+
+            var faultException =
+                new FaultException<PlayerProfileFault>(profileFault);
+
+            return faultException;
         }
     }
 }
