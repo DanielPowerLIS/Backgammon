@@ -92,8 +92,7 @@ namespace Backgammon.Server.Persistence.Repositories
                 }
             }
 
-            throw new InvalidOperationException(
-                "Could not generate an available account code.");
+            throw new InvalidOperationException("Could not generate an available account code.");
         }
     }
 }

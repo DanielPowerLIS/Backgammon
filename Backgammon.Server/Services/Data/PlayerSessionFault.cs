@@ -3,9 +3,9 @@
 namespace Backgammon.Server.Services.Data
 {
     [DataContract]
-    public class SocialMediaLinkAlreadyExistsFault
+    internal class PlayerSessionFault
     {
         [DataMember]
-        public string Message { get; set; }
+        public string ErrorCode { get; set; }
     }
 }

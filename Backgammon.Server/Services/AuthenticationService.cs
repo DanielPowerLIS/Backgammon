@@ -43,12 +43,27 @@ namespace Backgammon.Server.Services
             {
                 return AuthenticatePlayer(playerCredentials);
             }
-            catch (Exception authenticationException) when (
-                IsAuthenticationFailure(authenticationException))
+            catch (EntityException entityException)
             {
                 ApplicationLogger.LogError(
-                    authenticationException,
-                    "A technical failure prevented sign-in from completing.");
+                    entityException,
+                    "An Entity Framework failure prevented sign-in from completing.");
+
+                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+            }
+            catch (SqlException databaseException)
+            {
+                ApplicationLogger.LogError(
+                    databaseException,
+                    "A SQL Server failure prevented sign-in from completing.");
+
+                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+            }
+            catch (CryptographicException cryptographicException)
+            {
+                ApplicationLogger.LogError(
+                    cryptographicException,
+                    "A cryptographic failure prevented sign-in from completing.");
 
                 throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
             }
@@ -61,22 +76,11 @@ namespace Backgammon.Server.Services
 
             List<Account> matchingAccounts = FindAccounts(accountIdentifier);
 
-            PlayerSession playerSession = CreateAuthenticatedSession(
-                matchingAccounts, playerCredentials.Password);
+            PlayerSession playerSession = CreateAuthenticatedSession(matchingAccounts, playerCredentials.Password);
 
-            ApplicationLogger.LogInformation(
-                "Player {0} signed in successfully.",
-                playerSession.PlayerId);
+            ApplicationLogger.LogInformation("Player {0} signed in successfully.", playerSession.PlayerId);
 
             return playerSession;
-        }
-
-        private bool IsAuthenticationFailure(Exception authenticationException)
-        {
-            return authenticationException is EntityException ||
-                authenticationException is SqlException ||
-                authenticationException is CryptographicException ||
-                authenticationException is InvalidOperationException;
         }
 
         private List<Account> FindAccounts(string accountIdentifier)
@@ -94,8 +98,7 @@ namespace Backgammon.Server.Services
             Account[] authenticatedAccounts = matchingAccounts
                 .Where(playerAccount => playerAccount.Profile != null &&
                     _passwordHashService.VerifyPassword(
-                        suppliedPassword, playerAccount.Password))
-                .ToArray();
+                    suppliedPassword, playerAccount.Password)).ToArray();
 
             if (authenticatedAccounts.Length != 1)
             {
@@ -131,8 +134,7 @@ namespace Backgammon.Server.Services
                 ErrorCode = errorCode
             };
 
-            var faultException =
-                new FaultException<AuthenticationFault>(authenticationFault);
+            var faultException = new FaultException<AuthenticationFault>(authenticationFault);
 
             return faultException;
         }

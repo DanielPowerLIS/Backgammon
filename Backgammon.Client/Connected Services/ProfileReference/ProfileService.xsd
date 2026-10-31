@@ -15,11 +15,17 @@
   <xs:element name="PlayerProfile" nillable="true" type="tns:PlayerProfile" />
   <xs:complexType name="Avatar">
     <xs:sequence>
+      <xs:element minOccurs="0" name="IdAvatar" type="xs:int" />
       <xs:element minOccurs="0" name="ImageBytes" nillable="true" type="xs:base64Binary" />
-      <xs:element minOccurs="0" name="idAvatar" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Avatar" nillable="true" type="tns:Avatar" />
+  <xs:complexType name="PlayerProfileFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerProfileFault" nillable="true" type="tns:PlayerProfileFault" />
   <xs:complexType name="ArrayOfAvatar">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Avatar" nillable="true" type="tns:Avatar" />
@@ -47,10 +53,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SocialMediaLink" nillable="true" type="tns:SocialMediaLink" />
-  <xs:complexType name="SocialMediaLinkAlreadyExistsFault">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="SocialMediaLinkAlreadyExistsFault" nillable="true" type="tns:SocialMediaLinkAlreadyExistsFault" />
 </xs:schema>
