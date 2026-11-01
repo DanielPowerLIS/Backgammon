@@ -7,12 +7,16 @@ using System.Net.Mail;
 using Backgammon.Client.Controllers.Data;
 using Backgammon.Client.Comunication;
 using Backgammon.Client.RegistrationReference;
+using Backgammon.Client.Settings.Logging;
 
 namespace Backgammon.Client.Controllers.Registration
 {
     internal class RegistrationController
     {
         private readonly RegistrationClient _registrationClient;
+
+        private static readonly IApplicationLogger ApplicationLogger =
+            new Log4NetApplicationLogger(typeof(RegistrationController));
 
         private static readonly string RequiredFieldsErrorCode = "RequiredFields";
         private static readonly string InvalidFieldLengthErrorCode = "InvalidFieldLength";
@@ -208,8 +212,7 @@ namespace Backgammon.Client.Controllers.Registration
 
         private bool HasValidEmailFormat(string emailAddress)
         {
-            if (string.IsNullOrWhiteSpace(emailAddress) ||
-                emailAddress.Any(char.IsWhiteSpace))
+            if (string.IsNullOrWhiteSpace(emailAddress) || emailAddress.Any(char.IsWhiteSpace))
             {
                 return false;
             }
@@ -223,8 +226,12 @@ namespace Backgammon.Client.Controllers.Registration
 
                 return validEmailFormat;
             }
-            catch (FormatException)
+            catch (FormatException formatException)
             {
+                ApplicationLogger.LogWarning(
+                    "Email address validation failed due to an invalid format. Reason: {0}",
+                    formatException.Message);
+
                 return false;
             }
         }

@@ -59,11 +59,19 @@ namespace Backgammon.Client.Views.Pages
             {
                 await _logOutController.LogOutAsync();
             }
-            catch (Exception connectionException) when (
-                connectionException is CommunicationException ||
-                connectionException is TimeoutException)
+            catch (CommunicationException communicationException)
             {
-                ShowLogOutConnectionError(connectionException);
+                ApplicationLogger.LogError(communicationException,
+                    "A communication failure prevented remote sign-out from being confirmed.");
+
+                ShowLogOutConnectionError();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(timeoutException,
+                    "The sign-out request exceeded the time limit. Remote sign-out could not be confirmed.");
+
+                ShowLogOutConnectionError();
             }
             finally
             {
@@ -83,8 +91,7 @@ namespace Backgammon.Client.Views.Pages
             NavigationService.Navigate(new Home());
         }
 
-        private void OnLogOutNavigationCompleted(
-            object sender, NavigationEventArgs navigationArguments)
+        private void OnLogOutNavigationCompleted(object sender, NavigationEventArgs navigationArguments)
         {
             var navigationFrame = (Frame)sender;
             NavigationService pageNavigation = navigationFrame.NavigationService;
@@ -97,12 +104,8 @@ namespace Backgammon.Client.Views.Pages
             }
         }
 
-        private void ShowLogOutConnectionError(Exception errorException)
+        private void ShowLogOutConnectionError()
         {
-            ApplicationLogger.LogError(
-                errorException,
-                "Remote sign-out could not be confirmed.");
-
             var connectionDialog = new AccountDialog(
                 Properties.Resources.TextBlock_LogOutConnectionErrorTitle,
                 Properties.Resources.TextBlock_LogOutConnectionErrorMessage);
@@ -117,8 +120,7 @@ namespace Backgammon.Client.Views.Pages
                 return;
             }
 
-            bool accountFeaturesEnabled =
-                !PlayerSessionContext.GetSession().IsGuest;
+            bool accountFeaturesEnabled = !PlayerSessionContext.GetSession().IsGuest;
 
             buttonLeaderboard.IsEnabled = accountFeaturesEnabled;
             buttonProfile.IsEnabled = accountFeaturesEnabled;

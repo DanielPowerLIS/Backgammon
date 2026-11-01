@@ -75,8 +75,12 @@ namespace Backgammon.Server.Services
 
                 return playerSession;
             }
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException sessionException)
             {
+                ApplicationLogger.LogWarning(
+                    "The lobby operation was rejected because the session is invalid or expired. Reason: {0}",
+                    sessionException.Message);
+
                 throw CreatePreinitiationFault(SessionExpiredErrorCode);
             }
         }
@@ -109,15 +113,33 @@ namespace Backgammon.Server.Services
             {
                 lobbySession.HostCallback.OnLobbyUpdated(lobby);
             }
-            catch (Exception callbackException) when (
-                callbackException is CommunicationException ||
-                callbackException is TimeoutException ||
-                callbackException is ObjectDisposedException)
+            catch (CommunicationException communicationException)
             {
+                ApplicationLogger.LogError(communicationException,
+                    "A communication failure prevented the host of room {0} from being notified.",
+                    lobby.RoomId);
+
                 LobbyManager.CancelJoin(lobbySession, guestPlayerId);
 
-                ApplicationLogger.LogError(callbackException,
-                    "The host of room {0} could not be notified.", lobby.RoomId);
+                throw CreatePreinitiationFault(ServiceUnavailableErrorCode);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(timeoutException,
+                    "The callback to the host of room {0} exceeded the time limit.",
+                    lobby.RoomId);
+
+                LobbyManager.CancelJoin(lobbySession, guestPlayerId);
+
+                throw CreatePreinitiationFault(ServiceUnavailableErrorCode);
+            }
+            catch (ObjectDisposedException disposedException)
+            {
+                ApplicationLogger.LogError(disposedException,
+                    "The callback to the host of room {0} could not be completed because the channel was already disposed.",
+                    lobby.RoomId);
+
+                LobbyManager.CancelJoin(lobbySession, guestPlayerId);
 
                 throw CreatePreinitiationFault(ServiceUnavailableErrorCode);
             }

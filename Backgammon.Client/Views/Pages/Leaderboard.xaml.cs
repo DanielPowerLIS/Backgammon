@@ -27,9 +27,7 @@ namespace Backgammon.Client.Views.Pages
             Loaded += OnLeaderboardLoaded;
         }
 
-        private async void OnLeaderboardLoaded(
-            object eventSender,
-            RoutedEventArgs eventArgs)
+        private async void OnLeaderboardLoaded(object eventSender, RoutedEventArgs eventArgs)
         {
             await LoadLeaderboardAsync();
         }
@@ -38,29 +36,39 @@ namespace Backgammon.Client.Views.Pages
         {
             try
             {
-                PlayerStanding[] leaderboardEntries =
-                    await _leaderboardController.GetLeaderboardAsync();
+                PlayerStanding[] leaderboardEntries = await _leaderboardController.GetLeaderboardAsync();
 
                 listBoxLeaderboard.ItemsSource = leaderboardEntries;
             }
             catch (FaultException<LeaderboardFault> leaderboardException)
             {
-                ShowLeaderboardError(leaderboardException);
+                ApplicationLogger.LogError(
+                    leaderboardException,
+                    "The server could not load the leaderboard. Code: {0}",
+                    leaderboardException.Detail.ErrorCode);
+
+                ShowLeaderboardError();
             }
-            catch (Exception connectionException) when (
-                connectionException is CommunicationException ||
-                connectionException is TimeoutException)
+            catch (CommunicationException communicationException)
             {
-                ShowLeaderboardError(connectionException);
+                ApplicationLogger.LogError(
+                    communicationException,
+                    "A communication failure prevented the leaderboard from loading.");
+
+                ShowLeaderboardError();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(
+                    timeoutException,
+                    "The leaderboard request exceeded the time limit.");
+
+                ShowLeaderboardError();
             }
         }
 
-        private void ShowLeaderboardError(Exception errorException)
+        private void ShowLeaderboardError()
         {
-            ApplicationLogger.LogError(
-                errorException,
-                "Failed to load the leaderboard from the server.");
-
             var alertDialog = new AlertDialog(
                 Properties.Resources.TextBlock_LeaderboardLoadErrorTitle,
                 Properties.Resources.TextBlock_LeaderboardLoadErrorMessage,
