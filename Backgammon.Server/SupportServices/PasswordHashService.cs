@@ -19,14 +19,12 @@ namespace Backgammon.Server.SupportServices
         {
             byte[] salt = new byte[SaltLength];
 
-            using (RandomNumberGenerator generator =
-                RandomNumberGenerator.Create())
+            using (RandomNumberGenerator generator = RandomNumberGenerator.Create())
             {
                 generator.GetBytes(salt);
             }
 
-            using (Rfc2898DeriveBytes derivation =
-                new Rfc2898DeriveBytes(
+            using (Rfc2898DeriveBytes derivation = new Rfc2898DeriveBytes(
                     password, salt, IterationCount, HashAlgorithmName.SHA256))
             {
                 byte[] hash = derivation.GetBytes(HashLength);
@@ -57,8 +55,7 @@ namespace Backgammon.Server.SupportServices
             }
             catch (FormatException formatException)
             {
-                ApplicationLogger.LogError(
-                    formatException,
+                ApplicationLogger.LogError(formatException,
                     "Password verification failed because the stored password hash has an invalid format.");
 
                 return false;

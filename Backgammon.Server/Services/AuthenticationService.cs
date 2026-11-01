@@ -45,24 +45,21 @@ namespace Backgammon.Server.Services
             }
             catch (EntityException entityException)
             {
-                ApplicationLogger.LogError(
-                    entityException,
+                ApplicationLogger.LogError(entityException,
                     "An Entity Framework failure prevented sign-in from completing.");
 
                 throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
             }
             catch (SqlException databaseException)
             {
-                ApplicationLogger.LogError(
-                    databaseException,
+                ApplicationLogger.LogError(databaseException,
                     "A SQL Server failure prevented sign-in from completing.");
 
                 throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
             }
             catch (CryptographicException cryptographicException)
             {
-                ApplicationLogger.LogError(
-                    cryptographicException,
+                ApplicationLogger.LogError(cryptographicException,
                     "A cryptographic failure prevented sign-in from completing.");
 
                 throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
