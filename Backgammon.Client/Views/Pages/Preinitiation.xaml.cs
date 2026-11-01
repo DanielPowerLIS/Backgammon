@@ -21,6 +21,10 @@ namespace Backgammon.Client.Views.Pages
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(Preinitiation));
 
+        private static readonly string JoinLobbyErrorCode = "LobbyJoinFailed";
+        private static readonly string SessionExpiredErrorCode = "SessionExpired";
+        private static readonly string InvalidRoomCodeErrorCode = "InvalidRoomCode";
+
         public Preinitiation()
         {
             InitializeComponent();
@@ -69,17 +73,39 @@ namespace Backgammon.Client.Views.Pages
             }
             catch (FaultException<PreinitiationFault> lobbyException)
             {
-                ApplicationLogger.LogWarning(
-                    "The lobby join request was rejected. Code: {0}",
-                    lobbyException.Detail.ErrorCode);
+                string errorCode = lobbyException.Detail.ErrorCode;
+
+                if (errorCode == JoinLobbyErrorCode ||
+                    errorCode == SessionExpiredErrorCode ||
+                    errorCode == InvalidRoomCodeErrorCode)
+                {
+                    ApplicationLogger.LogWarning(
+                        "The lobby join request was rejected. Code: {0}",
+                        errorCode);
+                }
+                else
+                {
+                    ApplicationLogger.LogError(lobbyException,
+                        "The server could not complete the lobby join request. Code: {0}",
+                        errorCode);
+                }
+
                 ShowJoinMessage(Properties.Resources.TextBlock_JoinLobbyErrorMessage);
             }
-            catch (Exception connectionException) when (
-                connectionException is CommunicationException ||
-                connectionException is TimeoutException)
+            catch (CommunicationException communicationException)
             {
-                ApplicationLogger.LogError(connectionException,
-                    "Communication failed while joining the lobby.");
+                ApplicationLogger.LogError(
+                    communicationException,
+                    "A communication failure prevented the player from joining the lobby.");
+
+                ShowJoinMessage(Properties.Resources.TextBlock_JoinLobbyErrorMessage);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(
+                    timeoutException,
+                    "The lobby join request exceeded the time limit.");
+
                 ShowJoinMessage(Properties.Resources.TextBlock_JoinLobbyErrorMessage);
             }
         }
@@ -100,10 +126,7 @@ namespace Backgammon.Client.Views.Pages
 
         private void ShowJoinMessage(string message)
         {
-            var alertDialog = new AlertDialog(
-                Properties.Resources.TextBlock_JoinLobbyTitle,
-                message,
-                AlertType.Error)
+            var alertDialog = new AlertDialog(Properties.Resources.TextBlock_JoinLobbyTitle, message, AlertType.Error)
             {
                 Owner = Window.GetWindow(this)
             };

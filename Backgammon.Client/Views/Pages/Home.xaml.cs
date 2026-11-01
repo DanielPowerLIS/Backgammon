@@ -57,21 +57,30 @@ namespace Backgammon.Client.Views.Pages
             }
             catch (FaultException<GuestAccessFault> guestException)
             {
-                ShowGuestAccessError(guestException);
+                ApplicationLogger.LogError(guestException,
+                    "The server could not complete guest access. Code: {0}",
+                    guestException.Detail.ErrorCode);
+
+                ShowGuestAccessError();
             }
-            catch (Exception connectionException) when (
-                connectionException is CommunicationException ||
-                connectionException is TimeoutException)
+            catch (CommunicationException communicationException)
             {
-                ShowGuestAccessError(connectionException);
+                ApplicationLogger.LogError(communicationException,
+                    "A communication failure prevented guest access from completing.");
+
+                ShowGuestAccessError();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(timeoutException,
+                    "The guest access request exceeded the time limit.");
+
+                ShowGuestAccessError();
             }
         }
 
-        private void ShowGuestAccessError(Exception errorException)
+        private void ShowGuestAccessError()
         {
-            ApplicationLogger.LogError(
-                errorException, "Guest access request failed.");
-
             var errorDialog = new AccountDialog(
                 Properties.Resources.TextBlock_GuestAccessErrorTitle,
                 Properties.Resources.TextBlock_GuestAccessErrorMessage);

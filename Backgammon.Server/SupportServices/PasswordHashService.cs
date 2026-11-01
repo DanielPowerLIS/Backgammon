@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Security.Cryptography;
 
+using Backgammon.Server.SupportServices.Logging;
+
 namespace Backgammon.Server.SupportServices
 {
     internal class PasswordHashService
     {
+        private static readonly IApplicationLogger ApplicationLogger =
+            new Log4NetApplicationLogger(typeof(PasswordHashService));
+
         private static readonly int MaximumVerificationIterations = 2000000;
         private static readonly int SaltLength = 16;
         private static readonly int HashLength = 32;
@@ -50,8 +55,12 @@ namespace Backgammon.Server.SupportServices
             {
                 return VerifyParsedHash(password, parts);
             }
-            catch (FormatException)
+            catch (FormatException formatException)
             {
+                ApplicationLogger.LogError(
+                    formatException,
+                    "Password verification failed because the stored password hash has an invalid format.");
+
                 return false;
             }
         }

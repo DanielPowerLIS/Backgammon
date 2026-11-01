@@ -19,6 +19,7 @@ namespace Backgammon.Client.Views.Pages
         private static readonly string InvalidCredentialsErrorCode = "InvalidCredentials";
 
         private readonly AuthenticationController _authenticationController;
+
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(Login));
 
@@ -85,13 +86,40 @@ namespace Backgammon.Client.Views.Pages
             }
             catch (FaultException<AuthenticationFault> authenticationException)
             {
+                string errorCode = authenticationException.Detail.ErrorCode;
+
+                if (errorCode == InvalidInputErrorCode ||
+                    errorCode == InvalidCredentialsErrorCode)
+                {
+                    ApplicationLogger.LogWarning(
+                        "The sign-in request was rejected. Code: {0}",
+                        errorCode);
+                }
+                else
+                {
+                    ApplicationLogger.LogError(
+                        authenticationException,
+                        "The server could not complete sign-in. Code: {0}",
+                        errorCode);
+                }
+
                 ShowAuthenticationError(authenticationException);
             }
-            catch (Exception connectionException) when (
-                connectionException is CommunicationException ||
-                connectionException is TimeoutException)
+            catch (CommunicationException communicationException)
             {
-                ShowConnectionError(connectionException);
+                ApplicationLogger.LogError(
+                    communicationException,
+                    "A communication failure prevented sign-in from completing.");
+
+                ShowConnectionError();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(
+                    timeoutException,
+                    "The sign-in request exceeded the time limit.");
+
+                ShowConnectionError();
             }
         }
 
@@ -115,7 +143,7 @@ namespace Backgammon.Client.Views.Pages
                 return;
             }
 
-            ShowConnectionError(authenticationException);
+            ShowConnectionError();
         }
 
         private void ShowSuccessfulLogin()
@@ -129,12 +157,8 @@ namespace Backgammon.Client.Views.Pages
             NavigationService.Navigate(new MainMenu());
         }
 
-        private void ShowConnectionError(Exception errorException)
+        private void ShowConnectionError()
         {
-            ApplicationLogger.LogError(
-                errorException,
-                "Sign-in service request failed.");
-
             ShowLoginDialog(
                 Properties.Resources.TextBlock_LoginConnectionErrorTitle,
                 Properties.Resources.TextBlock_LoginConnectionErrorMessage);

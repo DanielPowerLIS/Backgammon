@@ -24,6 +24,10 @@ namespace Backgammon.Client.Views.Pages
         private static readonly string EmailAlreadyRegisteredErrorCode = "EmailAlreadyRegistered";
         private static readonly string UsernameAlreadyTakenErrorCode = "UsernameAlreadyTaken";
         private static readonly string InvalidFieldLengthErrorCode = "InvalidFieldLength";
+        private static readonly string RequiredFieldsErrorCode = "RequiredFields";
+        private static readonly string InvalidUsernameErrorCode = "InvalidUsername";
+        private static readonly string InvalidPasswordErrorCode = "InvalidPassword";
+        private static readonly string InvalidEmailErrorCode = "InvalidEmail";
 
         public AccountRegistration()
         {
@@ -87,14 +91,40 @@ namespace Backgammon.Client.Views.Pages
             }
             catch (FaultException<RegistrationFault> registrationException)
             {
+                string errorCode = registrationException.Detail.ErrorCode;
+
+                if (errorCode == InvalidInputErrorCode ||
+                    errorCode == EmailAlreadyRegisteredErrorCode ||
+                    errorCode == UsernameAlreadyTakenErrorCode)
+                {
+                    ApplicationLogger.LogWarning("The account registration request was rejected. Code: {0}",
+                        errorCode);
+                }
+                else
+                {
+                    ApplicationLogger.LogError(registrationException,
+                        "The server could not complete account registration. Code: {0}",
+                        errorCode);
+                }
+
                 IsEnabled = true;
                 ShowRegistrationFault(registrationException);
             }
-            catch (Exception connectionException) when (
-                connectionException is CommunicationException ||
-                connectionException is TimeoutException)
+            catch (CommunicationException communicationException)
             {
-                ShowConnectionError(connectionException);
+                ApplicationLogger.LogError(
+                    communicationException,
+                    "A communication failure prevented account registration from completing.");
+
+                ShowConnectionError();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(
+                    timeoutException,
+                    "The account registration request exceeded the time limit.");
+
+                ShowConnectionError();
             }
         }
 
@@ -116,25 +146,61 @@ namespace Backgammon.Client.Views.Pages
 
         private void ShowLocalValidationError(InputValidationResult validationResult)
         {
-            string resourcePrefix = "TextBlock_" + validationResult.ErrorCode;
+            string errorCode = validationResult.ErrorCode;
+            IsEnabled = true;
 
-            string errorTitle = Properties.Resources.ResourceManager.GetString(
-                resourcePrefix + "Title", Properties.Resources.Culture)
-                ?? Properties.Resources.TextBlock_RegistrationInvalidInputTitle;
-
-            string errorMessage = Properties.Resources.ResourceManager.GetString(
-                resourcePrefix + "Message", Properties.Resources.Culture)
-                ?? Properties.Resources.TextBlock_RegistrationInvalidInputMessage;
-
-            if (validationResult.ErrorCode == InvalidFieldLengthErrorCode)
+            if (errorCode == RequiredFieldsErrorCode)
             {
-                errorMessage = string.Format(
-                    errorMessage, RegistrationLimits.TextFieldMaximumLength);
+                ShowRegistrationError(
+                    Properties.Resources.TextBlock_RequiredFieldsTitle,
+                    Properties.Resources.TextBlock_RequiredFieldsMessage);
+            }
+            else if (errorCode == InvalidFieldLengthErrorCode)
+            {
+                string errorTitle =
+                    Properties.Resources.TextBlock_InvalidFieldLengthTitle;
+
+                string messageTemplate =
+                    Properties.Resources.TextBlock_InvalidFieldLengthMessage;
+
+                string errorMessage = string.Format(
+                    messageTemplate, RegistrationLimits.TextFieldMaximumLength);
+
+                ShowRegistrationError(errorTitle, errorMessage);
+            }
+            else
+            {
+                ShowLocalFormatError(errorCode);
             }
 
-            IsEnabled = true;
-            ShowRegistrationError(errorTitle, errorMessage);
             FocusRegistrationField(validationResult.FieldName);
+        }
+
+        private void ShowLocalFormatError(string errorCode)
+        {
+            string errorTitle =
+                Properties.Resources.TextBlock_RegistrationInvalidInputTitle;
+
+            string errorMessage =
+                Properties.Resources.TextBlock_RegistrationInvalidInputMessage;
+
+            if (errorCode == InvalidEmailErrorCode)
+            {
+                errorTitle = Properties.Resources.TextBlock_InvalidEmailTitle;
+                errorMessage = Properties.Resources.TextBlock_InvalidEmailMessage;
+            }
+            else if (errorCode == InvalidUsernameErrorCode)
+            {
+                errorTitle = Properties.Resources.TextBlock_InvalidUsernameTitle;
+                errorMessage = Properties.Resources.TextBlock_InvalidUsernameMessage;
+            }
+            else if (errorCode == InvalidPasswordErrorCode)
+            {
+                errorTitle = Properties.Resources.TextBlock_InvalidPasswordTitle;
+                errorMessage = Properties.Resources.TextBlock_InvalidPasswordMessage;
+            }
+
+            ShowRegistrationError(errorTitle, errorMessage);
         }
 
         private void ShowRegistrationError(string title, string message)
@@ -143,12 +209,8 @@ namespace Backgammon.Client.Views.Pages
             accountDialog.ShowOver(Window.GetWindow(this));
         }
 
-        private void ShowConnectionError(Exception errorException)
+        private void ShowConnectionError()
         {
-            ApplicationLogger.LogError(
-                errorException,
-                "Registration service request failed.");
-
             ShowRegistrationError(
                 Properties.Resources.TextBlock_RegistrationConnectionErrorTitle,
                 Properties.Resources.TextBlock_RegistrationConnectionErrorMessage);
@@ -180,18 +242,7 @@ namespace Backgammon.Client.Views.Pages
                 return;
             }
 
-            ShowSaveError(registrationException);
-        }
-
-        private void ShowSaveError(Exception errorException)
-        {
-            ApplicationLogger.LogError(
-                errorException,
-                "Account registration could not be completed.");
-
-            ShowRegistrationError(
-                Properties.Resources.TextBlock_RegistrationSaveErrorTitle,
-                Properties.Resources.TextBlock_RegistrationSaveErrorMessage);
+            ShowSaveError();
         }
 
         private bool ShowAvailabilityError(string errorCode)
@@ -217,6 +268,13 @@ namespace Backgammon.Client.Views.Pages
             }
 
             return false;
+        }
+
+        private void ShowSaveError()
+        {
+            ShowRegistrationError(
+                Properties.Resources.TextBlock_RegistrationSaveErrorTitle,
+                Properties.Resources.TextBlock_RegistrationSaveErrorMessage);
         }
 
         private void OnPasswordChanged(object sender, RoutedEventArgs e)

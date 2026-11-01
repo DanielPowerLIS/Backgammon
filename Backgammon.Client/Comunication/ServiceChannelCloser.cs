@@ -21,13 +21,15 @@ namespace Backgammon.Client.Comunication
                     communicationChannel.EndClose,
                     null);
             }
-            catch (Exception closeException) when (
-                closeException is CommunicationException ||
-                closeException is TimeoutException)
+            catch (CommunicationException communicationException)
             {
-                ApplicationLogger.LogError(
-                    closeException,
-                    "Service response received, but channel closure failed.");
+                ApplicationLogger.LogError(communicationException,
+                    "Service response received, but a communication failure prevented the channel from closing.");
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(timeoutException,
+                    "Service response received, but channel closure exceeded the time limit.");
             }
         }
     }
