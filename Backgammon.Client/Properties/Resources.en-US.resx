@@ -602,6 +602,8 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_RoomCodeLabel" xml:space="preserve">
     <value>Room code</value>
   </data>
+  <data name="Button_SendMessage" xml:space="preserve">
+    <value>Send</value>
   <data name="TextBlock_VerificationErrorTitle" xml:space="preserve">
     <value>Verification error</value>
   </data>

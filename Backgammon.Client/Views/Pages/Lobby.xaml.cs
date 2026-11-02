@@ -86,7 +86,12 @@ namespace Backgammon.Client.Views.Pages
 
         private void OnOpenChat(object sender, RoutedEventArgs e)
         {
+            var chatWindow = new Chat
+            {
+                Owner = Window.GetWindow(this)
+            };
 
+            chatWindow.ShowDialog();
         }
     }
 }
