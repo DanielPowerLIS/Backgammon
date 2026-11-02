@@ -24,11 +24,29 @@
   <wsdl:message name="IAuthenticationService_SignIn_AuthenticationFaultFault_FaultMessage">
     <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q1:AuthenticationFault" />
   </wsdl:message>
+  <wsdl:message name="IAuthenticationService_ConfirmVerification_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConfirmVerification" />
+  </wsdl:message>
+  <wsdl:message name="IAuthenticationService_ConfirmVerification_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConfirmVerificationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAuthenticationService_ConfirmVerification_VerificationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q2:VerificationFault" />
+  </wsdl:message>
+  <wsdl:message name="IAuthenticationService_ConfirmVerification_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q3:AuthenticationFault" />
+  </wsdl:message>
   <wsdl:portType name="IAuthenticationService">
     <wsdl:operation name="SignIn">
       <wsdl:input wsaw:Action="http://tempuri.org/IAuthenticationService/SignIn" message="tns:IAuthenticationService_SignIn_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IAuthenticationService/SignInResponse" message="tns:IAuthenticationService_SignIn_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IAuthenticationService/SignInAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:IAuthenticationService_SignIn_AuthenticationFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmVerification">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAuthenticationService/ConfirmVerification" message="tns:IAuthenticationService_ConfirmVerification_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAuthenticationService/ConfirmVerificationResponse" message="tns:IAuthenticationService_ConfirmVerification_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAuthenticationService/ConfirmVerificationVerificationFaultFault" name="VerificationFaultFault" message="tns:IAuthenticationService_ConfirmVerification_VerificationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IAuthenticationService/ConfirmVerificationAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:IAuthenticationService_ConfirmVerification_AuthenticationFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IAuthenticationService" type="tns:IAuthenticationService">
@@ -42,6 +60,21 @@
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap12:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmVerification">
+      <soap12:operation soapAction="http://tempuri.org/IAuthenticationService/ConfirmVerification" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="VerificationFaultFault">
+        <soap12:fault use="literal" name="VerificationFaultFault" namespace="" />
+      </wsdl:fault>
       <wsdl:fault name="AuthenticationFaultFault">
         <soap12:fault use="literal" name="AuthenticationFaultFault" namespace="" />
       </wsdl:fault>

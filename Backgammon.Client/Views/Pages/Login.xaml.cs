@@ -56,8 +56,7 @@ namespace Backgammon.Client.Views.Pages
 
         private async Task SubmitSignInAsync()
         {
-            InputValidationResult validationResult =
-                await _authenticationController.SignInAsync(
+            InputValidationResult validationResult = await _authenticationController.SignInAsync(
                     textBoxUsernameOrEmail.Text,
                     passwordBoxPassword.Password);
 
@@ -75,7 +74,7 @@ namespace Backgammon.Client.Views.Pages
                 return;
             }
 
-            ShowSuccessfulLogin();
+            OpenVerificationPage();
         }
 
         private async Task SignInWithFeedbackAsync()
@@ -146,15 +145,15 @@ namespace Backgammon.Client.Views.Pages
             ShowConnectionError();
         }
 
-        private void ShowSuccessfulLogin()
+        private void OpenVerificationPage()
         {
-            ShowLoginDialog(
-                Properties.Resources.TextBlock_LoginSuccessTitle,
-                Properties.Resources.TextBlock_LoginSuccessMessage);
+            string requestId = _authenticationController.RequestId;
+
+            var verificationPage = new VerificationCode(requestId);
 
             IsEnabled = true;
-
-            NavigationService.Navigate(new MainMenu());
+            
+            NavigationService.Navigate(verificationPage);
         }
 
         private void ShowConnectionError()

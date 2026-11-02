@@ -94,5 +94,25 @@ namespace Backgammon.Server.Persistence.Repositories
 
             throw new InvalidOperationException("Could not generate an available account code.");
         }
+
+        public async Task<Account> GetAccountByIdAsync(int accountId)
+        {
+            using (var databaseContext = new BackgammonEntities())
+            {
+                Account account = await databaseContext.Accounts
+                    .AsNoTracking()
+                    .Include(playerAccount => playerAccount.Profile)
+                    .SingleOrDefaultAsync(
+                        playerAccount => playerAccount.IdAccountPK == accountId)
+                    .ConfigureAwait(false);
+
+                if (account == null)
+                {
+                    throw new KeyNotFoundException("The requested account was not found.");
+                }
+
+                return account;
+            }
+        }
     }
 }

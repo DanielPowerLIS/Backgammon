@@ -1368,6 +1368,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Se agotaron los intentos disponibles. Inicia sesión nuevamente para solicitar otro código..
+        /// </summary>
+        public static string TextBlock_VerificationAttemptsExhaustedMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_VerificationAttemptsExhaustedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Código de verificación.
         /// </summary>
         public static string TextBlock_VerificationCode {
@@ -1377,11 +1386,65 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ingresa el código de 6 dígitos que enviamos a tu correo electrónico.
+        ///   Looks up a localized string similar to Ingresa el código de 6 caracteres que enviamos a tu correo electrónico..
         /// </summary>
         public static string TextBlock_VerificationCodeInstruction {
             get {
                 return ResourceManager.GetString("TextBlock_VerificationCodeInstruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error de verificación.
+        /// </summary>
+        public static string TextBlock_VerificationErrorTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_VerificationErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El código ha vencido. Inicia sesión nuevamente para solicitar otro..
+        /// </summary>
+        public static string TextBlock_VerificationExpiredMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_VerificationExpiredMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El código es incorrecto. Revisa el correo e inténtalo nuevamente..
+        /// </summary>
+        public static string TextBlock_VerificationInvalidCodeMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_VerificationInvalidCodeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Introduce un código de 6 caracteres, usando solamente letras mayúsculas y números..
+        /// </summary>
+        public static string TextBlock_VerificationInvalidFormatMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_VerificationInvalidFormatMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to La solicitud de verificación ya no está disponible. Inicia sesión nuevamente..
+        /// </summary>
+        public static string TextBlock_VerificationRequestNotFoundMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_VerificationRequestNotFoundMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No fue posible completar la verificación. Inténtalo nuevamente más tarde..
+        /// </summary>
+        public static string TextBlock_VerificationUnavailableMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_VerificationUnavailableMessage", resourceCulture);
             }
         }
         

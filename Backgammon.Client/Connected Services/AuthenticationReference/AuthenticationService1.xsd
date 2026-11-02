@@ -11,7 +11,22 @@
   <xs:element name="SignInResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="SignInResult" nillable="true" type="q2:PlayerSession" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="SignInResult" nillable="true" type="q2:VerificationRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConfirmVerification">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="requestId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConfirmVerificationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="ConfirmVerificationResult" nillable="true" type="q3:PlayerSession" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
