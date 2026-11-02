@@ -3,7 +3,6 @@
 using Backgammon.Client.Controllers.Data;
 using Backgammon.Client.AuthenticationReference;
 using Backgammon.Client.Comunication;
-using Backgammon.Client.Controllers.Session;
 
 namespace Backgammon.Client.Controllers.Authentication
 {
@@ -17,6 +16,8 @@ namespace Backgammon.Client.Controllers.Authentication
         {
             _authenticationClient = new AuthenticationClient();
         }
+
+        public string RequestId { get; private set; }
 
         public async Task<InputValidationResult> SignInAsync(string accountIdentifier, string suppliedPassword)
         {
@@ -33,9 +34,10 @@ namespace Backgammon.Client.Controllers.Authentication
                 Identifier = accountIdentifier.Trim(),
                 Password = suppliedPassword
             };
-               
-            PlayerSession playerSession = await _authenticationClient.SignInAsync(playerCredentials);
-            PlayerSessionContext.StoreSession(playerSession);
+
+            VerificationRequest request = await _authenticationClient.SignInAsync(playerCredentials);
+
+            RequestId = request.RequestId;
 
             return validationResult;
         }

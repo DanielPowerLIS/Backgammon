@@ -7,6 +7,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Credentials" nillable="true" type="tns:Credentials" />
+  <xs:complexType name="VerificationRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RequestId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VerificationRequest" nillable="true" type="tns:VerificationRequest" />
+  <xs:complexType name="AuthenticationFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AuthenticationFault" nillable="true" type="tns:AuthenticationFault" />
   <xs:complexType name="PlayerSession">
     <xs:sequence>
       <xs:element minOccurs="0" name="ExpiresAtUtc" type="xs:dateTime" />
@@ -18,10 +30,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerSession" nillable="true" type="tns:PlayerSession" />
-  <xs:complexType name="AuthenticationFault">
+  <xs:complexType name="VerificationFault">
     <xs:sequence>
       <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="AuthenticationFault" nillable="true" type="tns:AuthenticationFault" />
+  <xs:element name="VerificationFault" nillable="true" type="tns:VerificationFault" />
 </xs:schema>

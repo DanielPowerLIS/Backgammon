@@ -342,7 +342,7 @@ c) Mover cuatro fichas 6 casillas cada una.
     <value>Código de verificación</value>
   </data>
   <data name="TextBlock_VerificationCodeInstruction" xml:space="preserve">
-    <value>Ingresa el código de 6 dígitos que enviamos a tu correo electrónico</value>
+    <value>Ingresa el código de 6 caracteres que enviamos a tu correo electrónico.</value>
   </data>
   <data name="Button_VerifyCode" xml:space="preserve">
     <value>Verificar código</value>
@@ -604,5 +604,25 @@ c) Mover cuatro fichas 6 casillas cada una.
   </data>
   <data name="Button_SendMessage" xml:space="preserve">
     <value>Enviar</value>
+  <data name="TextBlock_VerificationErrorTitle" xml:space="preserve">
+    <value>Error de verificación</value>
+  </data>
+  <data name="TextBlock_VerificationInvalidFormatMessage" xml:space="preserve">
+    <value>Introduce un código de 6 caracteres, usando solamente letras mayúsculas y números.</value>
+  </data>
+  <data name="TextBlock_VerificationInvalidCodeMessage" xml:space="preserve">
+    <value>El código es incorrecto. Revisa el correo e inténtalo nuevamente.</value>
+  </data>
+  <data name="TextBlock_VerificationExpiredMessage" xml:space="preserve">
+    <value>El código ha vencido. Inicia sesión nuevamente para solicitar otro.</value>
+  </data>
+  <data name="TextBlock_VerificationAttemptsExhaustedMessage" xml:space="preserve">
+    <value>Se agotaron los intentos disponibles. Inicia sesión nuevamente para solicitar otro código.</value>
+  </data>
+  <data name="TextBlock_VerificationRequestNotFoundMessage" xml:space="preserve">
+    <value>La solicitud de verificación ya no está disponible. Inicia sesión nuevamente.</value>
+  </data>
+  <data name="TextBlock_VerificationUnavailableMessage" xml:space="preserve">
+    <value>No fue posible completar la verificación. Inténtalo nuevamente más tarde.</value>
   </data>
 </root>

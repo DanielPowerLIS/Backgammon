@@ -10,7 +10,7 @@ namespace Backgammon.Client.Comunication
         private static readonly string EndpointConfigurationName =
             "NetTcpBinding_IAuthenticationService";
 
-        public async Task<PlayerSession> SignInAsync(Credentials playerCredentials)
+        public async Task<VerificationRequest> SignInAsync(Credentials playerCredentials)
         {
             var serviceClient = new AuthenticationServiceClient(EndpointConfigurationName);
 
@@ -18,10 +18,32 @@ namespace Backgammon.Client.Comunication
 
             try
             {
-                PlayerSession playerSession =
-                    await serviceClient.SignInAsync(playerCredentials);
+                VerificationRequest request = await serviceClient.SignInAsync(playerCredentials);
 
                 await ServiceChannelCloser.CloseAfterResponseAsync(communicationChannel);
+
+                return request;
+            }
+            finally
+            {
+                if (communicationChannel.State != CommunicationState.Closed)
+                {
+                    communicationChannel.Abort();
+                }
+            }
+        }
+
+        public async Task<PlayerSession> ConfirmVerificationAsync(string requestId, string code)
+        {
+            var serviceClient =  new AuthenticationServiceClient(EndpointConfigurationName);
+
+            ICommunicationObject communicationChannel = serviceClient;
+
+            try
+            {
+                PlayerSession playerSession =  await serviceClient.ConfirmVerificationAsync(requestId, code);
+
+                await ServiceChannelCloser.CloseAfterResponseAsync( communicationChannel);
 
                 return playerSession;
             }
