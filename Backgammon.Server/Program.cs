@@ -54,6 +54,7 @@ namespace Backgammon.Server
             var logOutServiceHost = new LogOutServiceHost();
             var profileServiceHost = new ProfileServiceHost();
             var preinitiationServiceHost = new PreinitiationServiceHost(); 
+            var chatServiceHost = new ChatServiceHost();
 
             try
             {
@@ -62,6 +63,7 @@ namespace Backgammon.Server
                 logOutServiceHost.Open();
                 profileServiceHost.Open();
                 preinitiationServiceHost.Open();
+                chatServiceHost.Open();
 
                 RunRegistrationService();
             }
@@ -69,6 +71,7 @@ namespace Backgammon.Server
             {
                 CloseServiceHosts(new Action[]
                 {
+                    chatServiceHost.Close,
                     preinitiationServiceHost.Close,
                     profileServiceHost.Close,
                     logOutServiceHost.Close,

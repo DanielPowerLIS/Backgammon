@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="dd93bba9-e8ef-40ee-bbe3-3a4f7527bb8f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:9002/ChatService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="tempuri.org.wsdl" MetadataType="Wsdl" ID="c4ec7856-3bb0-4383-91e4-c61564c505ae" SourceId="1" SourceUrl="http://localhost:9002/ChatService?wsdl" />
+    <MetadataFile FileName="tempuri.org.xsd" MetadataType="Schema" ID="1a2eaaab-914f-4645-bbfb-2a8bb05fbfe2" SourceId="1" SourceUrl="http://localhost:9002/ChatService?xsd=xsd0" />
+    <MetadataFile FileName="schemas.microsoft.com.2003.10.Serialization.xsd" MetadataType="Schema" ID="345a88aa-e1ca-4a51-9fc0-096227ee0298" SourceId="1" SourceUrl="http://localhost:9002/ChatService?xsd=xsd1" />
+    <MetadataFile FileName="Backgammon.Server.Services.Data.xsd" MetadataType="Schema" ID="b0be0505-9bd3-47e2-9d3a-70d101eef799" SourceId="1" SourceUrl="http://localhost:9002/ChatService?xsd=xsd2" />
+  </Metadata>
+  <Extensions />
+</ReferenceGroup>

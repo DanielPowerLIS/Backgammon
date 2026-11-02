@@ -602,4 +602,7 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_RoomCodeLabel" xml:space="preserve">
     <value>Código de sala</value>
   </data>
+  <data name="Button_SendMessage" xml:space="preserve">
+    <value>Enviar</value>
+  </data>
 </root>

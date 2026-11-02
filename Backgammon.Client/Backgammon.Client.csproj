@@ -111,8 +111,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ChatReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\Authentication\AuthenticationController.cs" />
     <Compile Include="Controllers\Callbacks\PreinitiationCallback.cs" />
+    <Compile Include="Controllers\Chat\ChatCallback.cs" />
+    <Compile Include="Controllers\Chat\ChatController.cs" />
     <Compile Include="Controllers\GuestAccess\GuestAccessController.cs" />
     <Compile Include="Controllers\Leaderboard\LeaderboardController.cs" />
     <Compile Include="Controllers\Lobby\LobbyContext.cs" />
@@ -189,6 +196,9 @@
     </Compile>
     <Compile Include="Views\Pages\ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\Chat.xaml.cs">
+      <DependentUpon>Chat.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\FriendRequests.xaml.cs">
       <DependentUpon>FriendRequests.xaml</DependentUpon>
@@ -286,6 +296,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\ChangePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\Chat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -479,6 +493,20 @@
     <None Include="Connected Services\RegistrationReference\RegistrationService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\ChatReference\tempuri.org.wsdl" />
+    <None Include="Connected Services\ChatReference\tempuri.org.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ChatReference\Backgammon.Server.Services.Data.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ChatReference\schemas.microsoft.com.2003.10.Serialization.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ChatReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Connected Services\LeaderboardReference\configuration91.svcinfo" />
     <None Include="Connected Services\LeaderboardReference\configuration.svcinfo" />
     <None Include="Connected Services\LeaderboardReference\Reference.svcmap">
@@ -550,6 +578,7 @@
     <WCFMetadataStorage Include="Connected Services\LogOutReference\" />
     <WCFMetadataStorage Include="Connected Services\ProfileReference\" />
     <WCFMetadataStorage Include="Connected Services\RegistrationReference\" />
+    <WCFMetadataStorage Include="Connected Services\ChatReference\" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
