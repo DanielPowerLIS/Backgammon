@@ -76,6 +76,96 @@ namespace Backgammon.Client.AuthenticationReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="VerificationRequest", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class VerificationRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RequestIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RequestId {
+            get {
+                return this.RequestIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RequestIdField, value) != true)) {
+                    this.RequestIdField = value;
+                    this.RaisePropertyChanged("RequestId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AuthenticationFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class AuthenticationFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ErrorCodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorCode {
+            get {
+                return this.ErrorCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ErrorCodeField, value) != true)) {
+                    this.ErrorCodeField = value;
+                    this.RaisePropertyChanged("ErrorCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="PlayerSession", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
     [System.SerializableAttribute()]
     public partial class PlayerSession : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -201,9 +291,9 @@ namespace Backgammon.Client.AuthenticationReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AuthenticationFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="VerificationFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
     [System.SerializableAttribute()]
-    public partial class AuthenticationFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class VerificationFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -250,10 +340,20 @@ namespace Backgammon.Client.AuthenticationReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationService/SignIn", ReplyAction="http://tempuri.org/IAuthenticationService/SignInResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.AuthenticationReference.AuthenticationFault), Action="http://tempuri.org/IAuthenticationService/SignInAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
-        Backgammon.Client.AuthenticationReference.PlayerSession SignIn(Backgammon.Client.AuthenticationReference.Credentials playerCredentials);
+        Backgammon.Client.AuthenticationReference.VerificationRequest SignIn(Backgammon.Client.AuthenticationReference.Credentials playerCredentials);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationService/SignIn", ReplyAction="http://tempuri.org/IAuthenticationService/SignInResponse")]
-        System.Threading.Tasks.Task<Backgammon.Client.AuthenticationReference.PlayerSession> SignInAsync(Backgammon.Client.AuthenticationReference.Credentials playerCredentials);
+        System.Threading.Tasks.Task<Backgammon.Client.AuthenticationReference.VerificationRequest> SignInAsync(Backgammon.Client.AuthenticationReference.Credentials playerCredentials);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationService/ConfirmVerification", ReplyAction="http://tempuri.org/IAuthenticationService/ConfirmVerificationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.AuthenticationReference.VerificationFault), Action="http://tempuri.org/IAuthenticationService/ConfirmVerificationVerificationFaultFau" +
+            "lt", Name="VerificationFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.AuthenticationReference.AuthenticationFault), Action="http://tempuri.org/IAuthenticationService/ConfirmVerificationAuthenticationFaultF" +
+            "ault", Name="AuthenticationFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        Backgammon.Client.AuthenticationReference.PlayerSession ConfirmVerification(string requestId, string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAuthenticationService/ConfirmVerification", ReplyAction="http://tempuri.org/IAuthenticationService/ConfirmVerificationResponse")]
+        System.Threading.Tasks.Task<Backgammon.Client.AuthenticationReference.PlayerSession> ConfirmVerificationAsync(string requestId, string code);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -283,12 +383,20 @@ namespace Backgammon.Client.AuthenticationReference {
                 base(binding, remoteAddress) {
         }
         
-        public Backgammon.Client.AuthenticationReference.PlayerSession SignIn(Backgammon.Client.AuthenticationReference.Credentials playerCredentials) {
+        public Backgammon.Client.AuthenticationReference.VerificationRequest SignIn(Backgammon.Client.AuthenticationReference.Credentials playerCredentials) {
             return base.Channel.SignIn(playerCredentials);
         }
         
-        public System.Threading.Tasks.Task<Backgammon.Client.AuthenticationReference.PlayerSession> SignInAsync(Backgammon.Client.AuthenticationReference.Credentials playerCredentials) {
+        public System.Threading.Tasks.Task<Backgammon.Client.AuthenticationReference.VerificationRequest> SignInAsync(Backgammon.Client.AuthenticationReference.Credentials playerCredentials) {
             return base.Channel.SignInAsync(playerCredentials);
+        }
+        
+        public Backgammon.Client.AuthenticationReference.PlayerSession ConfirmVerification(string requestId, string code) {
+            return base.Channel.ConfirmVerification(requestId, code);
+        }
+        
+        public System.Threading.Tasks.Task<Backgammon.Client.AuthenticationReference.PlayerSession> ConfirmVerificationAsync(string requestId, string code) {
+            return base.Channel.ConfirmVerificationAsync(requestId, code);
         }
     }
 }

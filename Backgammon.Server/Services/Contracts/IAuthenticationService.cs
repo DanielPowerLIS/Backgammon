@@ -9,6 +9,11 @@ namespace Backgammon.Server.Services.Contracts
     {
         [OperationContract]
         [FaultContract(typeof(AuthenticationFault))]
-        PlayerSession SignIn(Credentials playerCredentials);
+        VerificationRequest SignIn(Credentials playerCredentials);
+
+        [OperationContract]
+        [FaultContract(typeof(VerificationFault))]
+        [FaultContract(typeof(AuthenticationFault))]
+        PlayerSession ConfirmVerification(string requestId, string code);
     }
 }
