@@ -124,13 +124,18 @@ namespace Backgammon.Server.SupportServices
                 throw new ArgumentNullException(nameof(playerSession));
             }
 
-            if (roomId == null)
-            {
-                throw new ArgumentNullException(nameof(roomId));
-            }
+            LobbySession lobbySession;
 
-            if (!ActiveRooms.TryGetValue(roomId, out LobbySession lobbySession))
+            try
             {
+                lobbySession = GetLobbySession(roomId);
+            }
+            catch (InvalidOperationException lobbyException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Chat departure was skipped because the lobby no longer exists. Reason: {0}",
+                    lobbyException.Message);
+
                 return;
             }
 
@@ -206,14 +211,14 @@ namespace Backgammon.Server.SupportServices
                 throw new ArgumentNullException(nameof(roomId));
             }
 
-            if (!ActiveRooms.TryGetValue(roomId, out LobbySession lobbySession))
+            bool lobbyFound = ActiveRooms.TryGetValue(roomId, out LobbySession lobbySession);
+
+            if (!lobbyFound || lobbySession == null)
             {
                 throw new InvalidOperationException(CodeLobbyDoesNotExistMessage);
             }
 
-            LobbySession foundLobbySession = lobbySession;
-
-            return foundLobbySession;
+            return lobbySession;
         }
 
         private static void ValidateGuestCanJoin(LobbySession lobbySession, PlayerSession guestPlayer)

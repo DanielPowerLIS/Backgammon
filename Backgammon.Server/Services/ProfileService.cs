@@ -25,7 +25,7 @@ namespace Backgammon.Server.Services
     public class ProfileService : IProfileService
     {
         private readonly IProfileRepository _profileRepository;
-        private readonly PlayerSessionService _playerSessionService;
+        private readonly PlayerSessionManager _playerSessionManager;
 
         private static readonly string ServiceUnavailableErrorCode = "ServiceUnavailable";
         private static readonly string ProfileNotFoundErrorCode = "ProfileNotFound";
@@ -40,12 +40,12 @@ namespace Backgammon.Server.Services
         public ProfileService()
         {
             _profileRepository = new ProfileRepository();
-            _playerSessionService = new PlayerSessionService();
+            _playerSessionManager = new PlayerSessionManager();
         }
 
         public PlayerProfile GetPlayerProfile(string sessionId)
         {
-            int profileId = _playerSessionService.GetProfileId(sessionId);
+            int profileId = _playerSessionManager.GetProfileId(sessionId);
             ProfileEntity dbProfile = FetchProfileDatabaseRecord(profileId);
 
             if (dbProfile == null)
@@ -72,14 +72,14 @@ namespace Backgammon.Server.Services
 
         public void ChangeAvatar(string sessionId, int idAvatar)
         {
-            int profileId = _playerSessionService.GetProfileId(sessionId);
+            int profileId = _playerSessionManager.GetProfileId(sessionId);
 
             ExecuteAvatarUpdate(profileId, idAvatar);
         }
 
         public void UpdateDescription(string sessionId, string description)
         {
-            int profileId = _playerSessionService.GetProfileId(sessionId);
+            int profileId = _playerSessionManager.GetProfileId(sessionId);
 
             ExecuteDescriptionUpdate(profileId, description);
         }
@@ -97,7 +97,7 @@ namespace Backgammon.Server.Services
 
         public SocialMediaLink AddSocialMediaLink(string sessionId, int socialMediaTypeId, string url)
         {
-            int profileId = _playerSessionService.GetProfileId(sessionId);
+            int profileId = _playerSessionManager.GetProfileId(sessionId);
 
             SocialMediaLinkEntity dbLink =
                 ExecuteAddSocialMediaLink(profileId, socialMediaTypeId, url);
@@ -109,7 +109,7 @@ namespace Backgammon.Server.Services
 
         public void RemoveSocialMediaLink(string sessionId, int socialMediaLinkId)
         {
-            int profileId = _playerSessionService.GetProfileId(sessionId);
+            int profileId = _playerSessionManager.GetProfileId(sessionId);
 
             ExecuteRemoveSocialMediaLink(profileId, socialMediaLinkId);
         }
@@ -117,7 +117,7 @@ namespace Backgammon.Server.Services
         public SocialMediaLink UpdateSocialMediaLink(
             string sessionId, int socialMediaLinkId, string url)
         {
-            int profileId = _playerSessionService.GetProfileId(sessionId);
+            int profileId = _playerSessionManager.GetProfileId(sessionId);
 
             SocialMediaLinkEntity updatedDbLink =
                 ExecuteUpdateSocialMediaLink(profileId, socialMediaLinkId, url);

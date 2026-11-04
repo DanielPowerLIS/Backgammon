@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Concurrent;
 using System.Security.Cryptography;
 using System.ServiceModel;
 using System.Threading;
@@ -11,20 +10,18 @@ using Backgammon.Server.SupportServices.Logging;
 
 namespace Backgammon.Server.SupportServices
 {
-    internal class PlayerSessionService
+    internal class PlayerSessionManager
     {
         private static readonly IApplicationLogger ApplicationLogger =
-            new Log4NetApplicationLogger(typeof(PlayerSessionService));
+            new Log4NetApplicationLogger(typeof(PlayerSessionManager));
 
         private static readonly string SessionExpiredErrorCode = "SessionExpired";
 
         private static readonly TimeSpan SessionInactivityTimeout =
             TimeSpan.FromMinutes(30);
 
-        private static readonly Dictionary<string, PlayerSession> ActiveSessions =
-            new Dictionary<string, PlayerSession>();
-
-        private static readonly object SessionSynchronization = new object();
+        private static readonly ConcurrentDictionary<string, PlayerSession> ActiveSessions =
+            new ConcurrentDictionary<string, PlayerSession>();
 
         private static readonly int SessionTokenLength = 32;
 
@@ -32,8 +29,7 @@ namespace Backgammon.Server.SupportServices
 
         public PlayerSession CreateSession(int playerId, string playerUsername)
         {
-            PlayerSession playerSession = CreatePlayerSession(
-                playerId, playerUsername, false);
+            PlayerSession playerSession = CreatePlayerSession(playerId, playerUsername, false);
 
             return playerSession;
         }
@@ -46,8 +42,7 @@ namespace Backgammon.Server.SupportServices
 
             int guestPlayerId = Interlocked.Decrement(ref _lastGuestPlayerId);
 
-            PlayerSession guestSession = CreatePlayerSession(
-                guestPlayerId, guestUsername, true);
+            PlayerSession guestSession = CreatePlayerSession(guestPlayerId, guestUsername, true);
 
             return guestSession;
         }
@@ -59,9 +54,24 @@ namespace Backgammon.Server.SupportServices
                 return;
             }
 
-            lock (SessionSynchronization)
+            PlayerSession storedSession;
+
+            try
             {
-                ActiveSessions.Remove(sessionId);
+                storedSession = FindStoredSession(sessionId);
+            }
+            catch (UnauthorizedAccessException sessionException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Session removal was skipped because the session no longer exists. Reason: {0}",
+                    sessionException.Message);
+
+                return;
+            }
+
+            lock (storedSession.Queue)
+            {
+                RemoveStoredSession(sessionId);
             }
         }
 
@@ -72,15 +82,19 @@ namespace Backgammon.Server.SupportServices
                 throw new UnauthorizedAccessException();
             }
 
-            lock (SessionSynchronization)
+            PlayerSession storedSession = FindStoredSession(sessionId);
+
+            lock (storedSession.Queue)
             {
+                FindStoredSession(sessionId);
+
                 DateTime currentTimeUtc = DateTime.UtcNow;
-                PlayerSession storedSession = GetStoredSession(sessionId, currentTimeUtc);
-                    
+
+                ValidateExpiration(storedSession, currentTimeUtc);
+
                 if (registerActivity)
                 {
-                    storedSession.ExpiresAtUtc =
-                        currentTimeUtc.Add(SessionInactivityTimeout);
+                    storedSession.ExpiresAtUtc = currentTimeUtc.Add(SessionInactivityTimeout);
                 }
 
                 PlayerSession sessionCopy = CopySession(storedSession);
@@ -109,6 +123,34 @@ namespace Backgammon.Server.SupportServices
             }
         }
 
+        private PlayerSession FindStoredSession(string sessionId)
+        {
+            bool sessionFound = ActiveSessions.TryGetValue(sessionId, out PlayerSession storedSession);
+
+            if (!sessionFound || storedSession == null)
+            {
+                throw new UnauthorizedAccessException();
+            }
+
+            return storedSession;
+        }
+
+        private void StoreSession(PlayerSession playerSession)
+        {
+            PlayerSession storedSession = CopySession(playerSession);
+
+            bool sessionStored = ActiveSessions.TryAdd(storedSession.SessionId, storedSession);
+
+            while (!sessionStored)
+            {
+                storedSession.SessionId = CreateSessionId();
+
+                sessionStored = ActiveSessions.TryAdd(storedSession.SessionId, storedSession);
+            }
+
+            playerSession.SessionId = storedSession.SessionId;
+        }
+
         private PlayerSession CreatePlayerSession(
             int playerId, string playerUsername, bool isGuest)
         {
@@ -124,48 +166,42 @@ namespace Backgammon.Server.SupportServices
                 IsPlaying = false
             };
 
-            lock (SessionSynchronization)
-            {
-                ActiveSessions.Add(playerSession.SessionId, CopySession(playerSession));
-            }
+            StoreSession(playerSession);
 
             return playerSession;
         }
 
+        private bool RemoveStoredSession(string sessionId)
+        {
+            bool sessionRemoved = ActiveSessions.TryRemove(sessionId, out _);
+
+            return sessionRemoved;
+        }
+
         private void RemoveExpiredSessions()
         {
-            lock (SessionSynchronization)
+            foreach (PlayerSession storedSession in ActiveSessions.Values)
             {
-                DateTime currentTimeUtc = DateTime.UtcNow;
-
-                string[] expiredSessionIds = ActiveSessions
-                    .Where(sessionEntry =>
-                        sessionEntry.Value.ExpiresAtUtc <= currentTimeUtc)
-                    .Select(sessionEntry => sessionEntry.Key)
-                    .ToArray();
-
-                foreach (string expiredSessionId in expiredSessionIds)
+                lock (storedSession.Queue)
                 {
-                    ActiveSessions.Remove(expiredSessionId);
+                    DateTime currentTimeUtc = DateTime.UtcNow;
+
+                    if (storedSession.ExpiresAtUtc <= currentTimeUtc)
+                    {
+                        RemoveStoredSession(storedSession.SessionId);
+                    }
                 }
             }
         }
 
-        private PlayerSession GetStoredSession(string sessionId, DateTime currentTimeUtc)
+        private void ValidateExpiration(PlayerSession storedSession, DateTime currentTimeUtc)
         {
-            if (!ActiveSessions.TryGetValue(sessionId, out PlayerSession storedSession))
-            {
-                throw new UnauthorizedAccessException();
-            }
-
             if (storedSession.ExpiresAtUtc <= currentTimeUtc)
             {
-                ActiveSessions.Remove(sessionId);
+                RemoveStoredSession(storedSession.SessionId);
 
                 throw new UnauthorizedAccessException();
             }
-
-            return storedSession;
         }
 
         private PlayerSession CopySession(PlayerSession sourceSession)
