@@ -217,8 +217,7 @@
     <Compile Include="SupportServices\Logging\IApplicationLogger.cs" />
     <Compile Include="SupportServices\Logging\Log4NetApplicationLogger.cs" />
     <Compile Include="SupportServices\PasswordHashService.cs" />
-    <Compile Include="SupportServices\PlayerSessionService.cs" />
-      
+    <Compile Include="SupportServices\PlayerSessionManager.cs" />
     <Compile Include="SupportServices\VerificationManager.cs" />
   </ItemGroup>
   <ItemGroup>

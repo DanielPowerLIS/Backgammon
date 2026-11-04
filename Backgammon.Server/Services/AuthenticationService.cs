@@ -27,7 +27,7 @@ namespace Backgammon.Server.Services
     {
         private readonly IAccountRepository _accountRepository;
         private readonly PasswordHashService _passwordHashService;
-        private readonly PlayerSessionService _playerSessionService;
+        private readonly PlayerSessionManager _playerSessionManager;
         private readonly CodeGenerator _codeGenerator;
         private readonly VerificationManager _verificationManager;
 
@@ -48,7 +48,7 @@ namespace Backgammon.Server.Services
         {
             _accountRepository = new AccountRepository();
             _passwordHashService = new PasswordHashService();
-            _playerSessionService = new PlayerSessionService();
+            _playerSessionManager = new PlayerSessionManager();
             _codeGenerator = new CodeGenerator();
             _verificationManager = new VerificationManager();
         }
@@ -143,7 +143,7 @@ namespace Backgammon.Server.Services
                 throw CreateAuthenticationFault(InvalidCredentialsErrorCode);
             }
 
-            PlayerSession playerSession = _playerSessionService.CreateSession(account.Profile.IdProfilePK,
+            PlayerSession playerSession = _playerSessionManager.CreateSession(account.Profile.IdProfilePK,
                 account.Profile.Username);
 
             return playerSession;

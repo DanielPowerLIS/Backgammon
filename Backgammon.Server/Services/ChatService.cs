@@ -12,7 +12,7 @@ namespace Backgammon.Server.Services
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class ChatService : IChatService
     {
-        private readonly PlayerSessionService _playerSessionService = new PlayerSessionService();
+        private readonly PlayerSessionManager _playerSessionManager = new PlayerSessionManager();
 
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(ChatService));
@@ -88,7 +88,7 @@ namespace Backgammon.Server.Services
         {
             try
             {
-                PlayerSession playerSession = _playerSessionService.GetSession(sessionId, true);
+                PlayerSession playerSession = _playerSessionManager.GetSession(sessionId, true);
 
                 return playerSession;
             }

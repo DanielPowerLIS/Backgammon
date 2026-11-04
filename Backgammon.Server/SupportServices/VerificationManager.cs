@@ -108,8 +108,7 @@ namespace Backgammon.Server.SupportServices
 
         private bool RemoveRequest(string requestId)
         {
-            bool requestRemoved = PendingRequests.TryRemove(
-                requestId, out _);
+            bool requestRemoved = PendingRequests.TryRemove(requestId, out _);
 
             return requestRemoved;
         }
