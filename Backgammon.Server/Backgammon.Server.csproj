@@ -208,6 +208,7 @@
     <Compile Include="Services\ProfileService.cs" />
     <Compile Include="Services\RegistrationService.cs" />
     <Compile Include="SupportServices\CodeGenerator.cs" />
+    <Compile Include="SupportServices\ChatManager.cs" />
     <Compile Include="SupportServices\EmailService.cs" />
     <Compile Include="SupportServices\Entrance.cs" />
     <Compile Include="SupportServices\GuestUsernameGenerator.cs" />
