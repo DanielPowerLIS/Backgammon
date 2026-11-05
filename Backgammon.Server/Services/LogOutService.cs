@@ -5,16 +5,16 @@ namespace Backgammon.Server.Services
 {
     public class LogOutService : ILogOutService
     {
-        private readonly PlayerSessionService _playerSessionService;
+        private readonly PlayerSessionManager _playerSessionManager;
 
         public LogOutService()
         {
-            _playerSessionService = new PlayerSessionService();
+            _playerSessionManager = new PlayerSessionManager();
         }
 
         public void LogOut(string sessionId)
         {
-            _playerSessionService.RemoveSession(sessionId);
+            _playerSessionManager.RemoveSession(sessionId);
         }
     }
 }

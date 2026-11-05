@@ -11,7 +11,7 @@ namespace Backgammon.Server.Services
 {
     public class GuestAccessService : IGuestAccessService
     {
-        private readonly PlayerSessionService _playerSessionService;
+        private readonly PlayerSessionManager _playerSessionManager;
 
         private static readonly string ServiceUnavailableErrorCode = "ServiceUnavailable";
 
@@ -20,14 +20,14 @@ namespace Backgammon.Server.Services
 
         public GuestAccessService()
         {
-            _playerSessionService = new PlayerSessionService();
+            _playerSessionManager = new PlayerSessionManager();
         }
 
         public PlayerSession AccessAsGuest()
         {
             try
             {
-                PlayerSession guestSession = _playerSessionService.CreateGuestSession();
+                PlayerSession guestSession = _playerSessionManager.CreateGuestSession();
 
                 ApplicationLogger.LogInformation("Guest {0} accessed the game.", guestSession.Username);
 

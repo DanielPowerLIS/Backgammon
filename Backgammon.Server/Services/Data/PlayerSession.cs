@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
+using Backgammon.Server.SupportServices;
+
 namespace Backgammon.Server.Services.Data
 {
     [DataContract]
@@ -23,5 +25,7 @@ namespace Backgammon.Server.Services.Data
 
         [DataMember]
         public bool IsPlaying { get; set; }
+
+        internal Entrance Queue { get; } = new Entrance();
     }
 }
