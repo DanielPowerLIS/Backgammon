@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ServiceModel;
 
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
@@ -12,13 +11,10 @@ namespace Backgammon.Server.SupportServices
     internal static class LobbyManager
     {
         private static readonly int RoomCodeLength = 6;
-        private static readonly int MaximumMessageLength = 200;
 
         private static readonly string CodeLobbyDoesNotExistMessage = "The lobby code does not exist.";
         private static readonly string LobbyFullMessage = "The lobby is already full.";
         private static readonly string HostCannotJoinMessage = "The host cannot join their own lobby.";
-        private static readonly string InvalidMessage = "The chat message is invalid or exceeds the maximum length.";
-        private static readonly string PlayerNotBelongLobby = "The player does not belong to this lobby.";
 
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(LobbyManager));
@@ -77,53 +73,28 @@ namespace Backgammon.Server.SupportServices
 
         public static List<ChatMessage> JoinChat(PlayerSession playerSession, string roomId, IChatCallback chatCallback)
         {
-            ValidateJoinChatArguments(playerSession, chatCallback);
-
             LobbySession lobbySession = GetLobbySession(roomId);
-            List<ChatMessage> chatMessages;
-
-            lock (lobbySession.Queue)
-            {
-                RegisterChatCallback(lobbySession, playerSession, chatCallback);
-                chatMessages = new List<ChatMessage>(lobbySession.ChatMessages);
-            }
+            List<ChatMessage> chatMessages = ChatManager.JoinChat(
+                lobbySession,
+                playerSession,
+                chatCallback);
 
             return chatMessages;
         }
 
         public static ChatMessage SendMessage(PlayerSession sender, string roomId, string message)
         {
-            if (sender == null)
-            {
-                throw new ArgumentNullException(nameof(sender));
-            }
-
-            string validMessage = ValidateMessage(message);
             LobbySession lobbySession = GetLobbySession(roomId);
-            ChatMessage chatMessage;
-            List<IChatCallback> callbacks;
-
-            lock (lobbySession.Queue)
-            {
-                chatMessage = CreateChatMessage(lobbySession, sender, validMessage);
-                lobbySession.ChatMessages.Add(chatMessage);
-                callbacks = GetChatCallbacks(lobbySession);
-            }
-
-            NotifyChatMessage(lobbySession, callbacks, chatMessage);
-
-            ChatMessage sentMessage = chatMessage;
+            ChatMessage sentMessage = ChatManager.SendMessage(
+                lobbySession,
+                sender,
+                message);
 
             return sentMessage;
         }
 
         public static void LeaveChat(PlayerSession playerSession, string roomId)
         {
-            if (playerSession == null)
-            {
-                throw new ArgumentNullException(nameof(playerSession));
-            }
-
             LobbySession lobbySession;
 
             try
@@ -139,10 +110,7 @@ namespace Backgammon.Server.SupportServices
                 return;
             }
 
-            lock (lobbySession.Queue)
-            {
-                RemoveChatCallback(lobbySession, playerSession.PlayerId);
-            }
+            ChatManager.LeaveChat(lobbySession, playerSession);
         }
 
         private static void ValidateCreateRoomArguments(PlayerSession hostPlayer, IPreinitiationCallback hostCallback)
@@ -255,177 +223,5 @@ namespace Backgammon.Server.SupportServices
             lobbySession.GuestChatCallback = null;
         }
 
-        private static void ValidateJoinChatArguments(PlayerSession playerSession, IChatCallback chatCallback)
-        {
-            if (playerSession == null)
-            {
-                throw new ArgumentNullException(nameof(playerSession));
-            }
-
-            if (chatCallback == null)
-            {
-                throw new ArgumentNullException(nameof(chatCallback));
-            }
-        }
-
-        private static void RegisterChatCallback(LobbySession lobbySession, PlayerSession playerSession,
-            IChatCallback chatCallback)
-        {
-            if (lobbySession.RoomData.HostPlayerId == playerSession.PlayerId)
-            {
-                lobbySession.HostChatCallback = chatCallback;
-            }
-            else if (lobbySession.RoomData.GuestPlayerId == playerSession.PlayerId)
-            {
-                lobbySession.GuestChatCallback = chatCallback;
-            }
-            else
-            {
-                throw new UnauthorizedAccessException(PlayerNotBelongLobby);
-            }
-        }
-
-        private static string ValidateMessage(string message)
-        {
-            if (string.IsNullOrWhiteSpace(message))
-            {
-                throw new ArgumentException(InvalidMessage, nameof(message));
-            }
-
-            string validMessage = message.Trim();
-
-            if (validMessage.Length > MaximumMessageLength)
-            {
-                throw new ArgumentOutOfRangeException(
-                    nameof(message), validMessage.Length, InvalidMessage);
-            }
-
-            return validMessage;
-        }
-
-        private static ChatMessage CreateChatMessage(LobbySession lobbySession, PlayerSession sender, string message)
-        {
-            string senderUsername = GetPlayerUsername(lobbySession, sender.PlayerId);
-            var chatMessage = new ChatMessage
-            {
-                SenderPlayerId = sender.PlayerId,
-                SenderUsername = senderUsername,
-                Message = message,
-                SendAtUtc = DateTime.UtcNow
-            };
-
-            ChatMessage createdChatMessage = chatMessage;
-
-            return createdChatMessage;
-        }
-
-        private static string GetPlayerUsername(
-            LobbySession lobbySession,
-            int playerId)
-        {
-            string playerUsername;
-
-            if (lobbySession.RoomData.HostPlayerId == playerId)
-            {
-                playerUsername = lobbySession.RoomData.HostUsername;
-            }
-            else if (lobbySession.RoomData.GuestPlayerId == playerId)
-            {
-                playerUsername = lobbySession.RoomData.GuestUsername;
-            }
-            else
-            {
-                throw new UnauthorizedAccessException(PlayerNotBelongLobby);
-            }
-
-            return playerUsername;
-        }
-
-        private static List<IChatCallback> GetChatCallbacks(LobbySession lobbySession)
-        {
-            var callbacks = new List<IChatCallback>();
-
-            if (lobbySession.HostChatCallback != null)
-            {
-                callbacks.Add(lobbySession.HostChatCallback);
-            }
-
-            if (lobbySession.GuestChatCallback != null)
-            {
-                callbacks.Add(lobbySession.GuestChatCallback);
-            }
-
-            return callbacks;
-        }
-
-        private static void NotifyChatMessage(LobbySession lobbySession, List<IChatCallback> callbacks,
-            ChatMessage chatMessage)
-        {
-            foreach (IChatCallback callback in callbacks)
-            {
-                TryNotifyChatMessage(lobbySession, callback, chatMessage);
-            }
-        }
-
-        private static void TryNotifyChatMessage(LobbySession lobbySession, IChatCallback chatCallback,
-            ChatMessage chatMessage)
-        {
-            try
-            {
-                chatCallback.OnMessageReceived(chatMessage);
-            }
-            catch (CommunicationException communicationException)
-            {
-                HandleChatCallbackFailure(
-                    lobbySession, chatCallback, communicationException);
-            }
-            catch (TimeoutException timeoutException)
-            {
-                HandleChatCallbackFailure(
-                    lobbySession, chatCallback, timeoutException);
-            }
-            catch (ObjectDisposedException disposedException)
-            {
-                HandleChatCallbackFailure(
-                    lobbySession, chatCallback, disposedException);
-            }
-        }
-
-        private static void HandleChatCallbackFailure(LobbySession lobbySession, IChatCallback chatCallback,
-            Exception callbackException)
-        {
-            ApplicationLogger.LogError(
-                callbackException,
-                "A chat message could not be delivered to a lobby participant.");
-
-            lock (lobbySession.Queue)
-            {
-                RemoveChatCallback(lobbySession, chatCallback);
-            }
-        }
-
-        private static void RemoveChatCallback(LobbySession lobbySession, IChatCallback chatCallback)
-        {
-            if (ReferenceEquals(lobbySession.HostChatCallback, chatCallback))
-            {
-                lobbySession.HostChatCallback = null;
-            }
-            else if (ReferenceEquals(lobbySession.GuestChatCallback, chatCallback))
-            {
-                lobbySession.GuestChatCallback = null;
-            }
-        }
-
-        private static void RemoveChatCallback(LobbySession lobbySession, int playerId)
-        {
-            if (lobbySession.RoomData.HostPlayerId == playerId)
-            {
-                lobbySession.HostChatCallback = null;
-            }
-            else if (lobbySession.RoomData.GuestPlayerId == playerId)
-            {
-                lobbySession.GuestChatCallback = null;
-            }
-        }
     }
 }
