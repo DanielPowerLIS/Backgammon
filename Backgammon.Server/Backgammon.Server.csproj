@@ -187,6 +187,7 @@
     <Compile Include="Services\Data\AuthenticationFault.cs" />
     <Compile Include="Services\Data\Avatar.cs" />
     <Compile Include="Services\Data\ChatMessage.cs" />
+    <Compile Include="Services\Data\ChatFault.cs" />
     <Compile Include="Services\Data\Credentials.cs" />
     <Compile Include="Services\Data\GuestAccessFault.cs" />
     <Compile Include="Services\Data\LeaderboardFault.cs" />

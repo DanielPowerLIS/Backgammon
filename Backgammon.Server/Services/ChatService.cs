@@ -17,95 +17,120 @@ namespace Backgammon.Server.Services
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(ChatService));
 
-        private static readonly string ChatOperationErrorMessage = "The chat operation could not be completed.";
+        private const string InvalidRequestCode = "InvalidRequest";
+        private const string AccessDeniedCode = "AccessDenied";
+        private const string LobbyUnavailableCode = "LobbyUnavailable";
+        private const string ServiceUnavailableCode = "ServiceUnavailable";
+        private const string ChatOperationErrorMessage = "The chat operation could not be completed.";
 
         public List<ChatMessage> JoinLobbyChat(string sessionId, string roomId)
         {
-            PlayerSession playerSession = GetPlayerSession(sessionId);
-            IChatCallback chatCallback = OperationContext.Current.GetCallbackChannel<IChatCallback>();
-
             try
             {
-                List<ChatMessage> chatMessages = LobbyManager.JoinChat(playerSession, roomId, chatCallback);
+                PlayerSession playerSession = _playerSessionManager.GetSession(sessionId, true);
+                IChatCallback chatCallback =
+                    OperationContext.Current.GetCallbackChannel<IChatCallback>();
+                List<ChatMessage> chatMessages =
+                    LobbyManager.JoinChat(playerSession, roomId, chatCallback);
 
                 return chatMessages;
             }
-            catch (ArgumentException chatException)
+            catch (ArgumentException)
             {
-                throw CreateChatFault(chatException, nameof(JoinLobbyChat));
+                throw CreateExpectedChatFault(InvalidRequestCode, nameof(JoinLobbyChat));
             }
-            catch (UnauthorizedAccessException chatException)
+            catch (UnauthorizedAccessException)
             {
-                throw CreateChatFault(chatException, nameof(JoinLobbyChat));
+                throw CreateExpectedChatFault(AccessDeniedCode, nameof(JoinLobbyChat));
             }
-            catch (InvalidOperationException chatException)
+            catch (InvalidOperationException)
             {
-                throw CreateChatFault(chatException, nameof(JoinLobbyChat));
+                throw CreateExpectedChatFault(LobbyUnavailableCode, nameof(JoinLobbyChat));
+            }
+            catch (Exception exception)
+            {
+                throw CreateUnexpectedChatFault(exception, nameof(JoinLobbyChat));
             }
         }
 
         public void SendMessage(string sessionId, string roomId, string message)
         {
-            PlayerSession playerSession = GetPlayerSession(sessionId);
-
             try
             {
+                PlayerSession playerSession = _playerSessionManager.GetSession(sessionId, true);
                 LobbyManager.SendMessage(playerSession, roomId, message);
             }
-            catch (ArgumentException chatException)
+            catch (ArgumentException)
             {
-                throw CreateChatFault(chatException, nameof(SendMessage));
+                throw CreateExpectedChatFault(InvalidRequestCode, nameof(SendMessage));
             }
-            catch (UnauthorizedAccessException chatException)
+            catch (UnauthorizedAccessException)
             {
-                throw CreateChatFault(chatException, nameof(SendMessage));
+                throw CreateExpectedChatFault(AccessDeniedCode, nameof(SendMessage));
             }
-            catch (InvalidOperationException chatException)
+            catch (InvalidOperationException)
             {
-                throw CreateChatFault(chatException, nameof(SendMessage));
+                throw CreateExpectedChatFault(LobbyUnavailableCode, nameof(SendMessage));
+            }
+            catch (Exception exception)
+            {
+                throw CreateUnexpectedChatFault(exception, nameof(SendMessage));
             }
         }
 
         public void LeaveLobbyChat(string sessionId, string roomId)
         {
-            PlayerSession playerSession = GetPlayerSession(sessionId);
-
-            try
-            {
-                LobbyManager.LeaveChat(playerSession, roomId);
-            }
-            catch (UnauthorizedAccessException chatException)
-            {
-                throw CreateChatFault(chatException, nameof(LeaveLobbyChat));
-            }
-            catch (ArgumentNullException chatException)
-            {
-                throw CreateChatFault(chatException, nameof(LeaveLobbyChat));
-            }
-        }
-
-        private PlayerSession GetPlayerSession(string sessionId)
-        {
             try
             {
                 PlayerSession playerSession = _playerSessionManager.GetSession(sessionId, true);
-
-                return playerSession;
+                LobbyManager.LeaveChat(playerSession, roomId);
             }
-            catch (UnauthorizedAccessException sessionException)
+            catch (ArgumentException)
             {
-                throw CreateChatFault(sessionException, nameof(GetPlayerSession));
+                throw CreateExpectedChatFault(InvalidRequestCode, nameof(LeaveLobbyChat));
+            }
+            catch (UnauthorizedAccessException)
+            {
+                throw CreateExpectedChatFault(AccessDeniedCode, nameof(LeaveLobbyChat));
+            }
+            catch (Exception exception)
+            {
+                throw CreateUnexpectedChatFault(exception, nameof(LeaveLobbyChat));
             }
         }
 
-        private FaultException CreateChatFault(Exception chatException, string operationName)
+        private FaultException<ChatFault> CreateExpectedChatFault(string errorCode, string operationName)
         {
-            ApplicationLogger.LogWarning("The chat operation {0} was rejected. Reason: {1}", operationName,
-                chatException.Message);
+            ApplicationLogger.LogWarning("Chat operation {0} was rejected with code {1}.", operationName, errorCode);
 
-            var chatFault = new FaultException(new FaultReason(ChatOperationErrorMessage));
+            FaultException<ChatFault> faultException = CreateFault(errorCode);
 
-            return chatFault;
+            return faultException;
+        }
+
+        private FaultException<ChatFault> CreateUnexpectedChatFault(
+            Exception exception,
+            string operationName)
+        {
+            ApplicationLogger.LogError(
+                exception,
+                "Unexpected error during chat operation {0}.",
+                operationName);
+
+            FaultException<ChatFault> faultException = CreateFault(ServiceUnavailableCode);
+
+            return faultException;
+        }
+
+        private FaultException<ChatFault> CreateFault(string errorCode)
+        {
+            ChatFault chatFault = new ChatFault();
+            chatFault.ErrorCode = errorCode;
+
+            FaultException<ChatFault> faultException =
+                new FaultException<ChatFault>(chatFault, ChatOperationErrorMessage);
+
+            return faultException;
         }
     }
 }

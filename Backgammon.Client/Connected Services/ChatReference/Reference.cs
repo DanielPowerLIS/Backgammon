@@ -95,6 +95,43 @@ namespace Backgammon.Client.ChatReference
             }
         }
     }
+
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(
+        Name="ChatFault",
+        Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    public partial class ChatFault : object, System.Runtime.Serialization.IExtensibleDataObject
+    {
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+
+        private string ErrorCodeField;
+
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
+                return this.extensionDataField;
+            }
+            set
+            {
+                this.extensionDataField = value;
+            }
+        }
+
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ErrorCode
+        {
+            get
+            {
+                return this.ErrorCodeField;
+            }
+            set
+            {
+                this.ErrorCodeField = value;
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(
@@ -106,6 +143,11 @@ namespace Backgammon.Client.ChatReference
         [System.ServiceModel.OperationContractAttribute(
             Action="http://tempuri.org/IChatService/JoinLobbyChat",
             ReplyAction="http://tempuri.org/IChatService/JoinLobbyChatResponse")]
+        [System.ServiceModel.FaultContractAttribute(
+            typeof(Backgammon.Client.ChatReference.ChatFault),
+            Action="http://tempuri.org/IChatService/JoinLobbyChatChatFaultFault",
+            Name="ChatFault",
+            Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
         Backgammon.Client.ChatReference.ChatMessage[] JoinLobbyChat(string sessionId, string roomId);
         
         [System.ServiceModel.OperationContractAttribute(
@@ -117,6 +159,11 @@ namespace Backgammon.Client.ChatReference
         [System.ServiceModel.OperationContractAttribute(
             Action="http://tempuri.org/IChatService/SendMessage",
             ReplyAction="http://tempuri.org/IChatService/SendMessageResponse")]
+        [System.ServiceModel.FaultContractAttribute(
+            typeof(Backgammon.Client.ChatReference.ChatFault),
+            Action="http://tempuri.org/IChatService/SendMessageChatFaultFault",
+            Name="ChatFault",
+            Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
         void SendMessage(string sessionId, string roomId, string message);
         
         [System.ServiceModel.OperationContractAttribute(
@@ -127,6 +174,11 @@ namespace Backgammon.Client.ChatReference
         [System.ServiceModel.OperationContractAttribute(
             Action="http://tempuri.org/IChatService/LeaveLobbyChat",
             ReplyAction="http://tempuri.org/IChatService/LeaveLobbyChatResponse")]
+        [System.ServiceModel.FaultContractAttribute(
+            typeof(Backgammon.Client.ChatReference.ChatFault),
+            Action="http://tempuri.org/IChatService/LeaveLobbyChatChatFaultFault",
+            Name="ChatFault",
+            Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
         void LeaveLobbyChat(string sessionId, string roomId);
         
         [System.ServiceModel.OperationContractAttribute(

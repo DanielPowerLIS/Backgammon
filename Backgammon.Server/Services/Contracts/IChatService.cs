@@ -9,12 +9,15 @@ namespace Backgammon.Server.Services.Contracts
     public interface IChatService
     {
         [OperationContract]
+        [FaultContract(typeof(ChatFault))]
         List<ChatMessage> JoinLobbyChat(string sessionId, string roomId);
 
         [OperationContract]
+        [FaultContract(typeof(ChatFault))]
         void SendMessage(string sessionId, string roomId, string message);
 
         [OperationContract]
+        [FaultContract(typeof(ChatFault))]
         void LeaveLobbyChat(string sessionId, string roomId);
     }
 }
