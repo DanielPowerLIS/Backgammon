@@ -3,6 +3,7 @@ using System.ServiceModel;
 using System.Threading.Tasks;
 
 using Backgammon.Client.ChatReference;
+using Backgammon.Client.Comunication;
 using Backgammon.Client.Controllers.Lobby;
 using Backgammon.Client.Controllers.Session;
 using Backgammon.Client.Settings.Logging;
@@ -13,14 +14,12 @@ namespace Backgammon.Client.Controllers.Chat
 {
     internal class ChatController
     {
-        private const string EndpointConfigurationName = "NetTcpBinding_IChatService";
-
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(ChatController));
 
         private readonly ChatCallback _chatCallback;
 
-        private ChatServiceClient _serviceClient;
+        private ChatClient _chatClient;
         private string _sessionId;
         private string _roomId;
         private bool _isJoined;
@@ -40,7 +39,7 @@ namespace Backgammon.Client.Controllers.Chat
         {
             ChatMessage[] previousMessages = new ChatMessage[0];
 
-            if (_serviceClient != null)
+            if (_chatClient != null)
             {
                 ApplicationLogger.LogWarning("A chat connection already exists for this controller.");
 
@@ -55,14 +54,13 @@ namespace Backgammon.Client.Controllers.Chat
             }
 
             var callbackContext = new InstanceContext(_chatCallback);
-
-            _serviceClient = new ChatServiceClient(callbackContext, EndpointConfigurationName);
+            _chatClient = new ChatClient(callbackContext);
 
             try
             {
-                _serviceClient.Open();
+                _chatClient.Open();
 
-                previousMessages = _serviceClient.JoinLobbyChat(_sessionId, _roomId);
+                previousMessages = _chatClient.JoinLobbyChat(_sessionId, _roomId);
 
                 _isJoined = true;
 
@@ -101,7 +99,7 @@ namespace Backgammon.Client.Controllers.Chat
 
             try
             {
-                await _serviceClient.SendMessageAsync(_sessionId, _roomId, message);
+                await _chatClient.SendMessageAsync(_sessionId, _roomId, message);
 
                 return true;
             }
@@ -123,16 +121,16 @@ namespace Backgammon.Client.Controllers.Chat
 
         public void LeaveChat()
         {
-            if (_serviceClient == null)
+            if (_chatClient == null)
             {
                 return;
             }
 
             try
             {
-                if (_isJoined && _serviceClient.State == CommunicationState.Opened)
+                if (_isJoined && _chatClient.IsOpen)
                 {
-                    _serviceClient.LeaveLobbyChat(_sessionId, _roomId);
+                    _chatClient.LeaveLobbyChat(_sessionId, _roomId);
                 }
             }
             catch (CommunicationException communicationException)
@@ -189,7 +187,7 @@ namespace Backgammon.Client.Controllers.Chat
 
         private bool IsJoined()
         {
-            bool isJoined = _isJoined && _serviceClient != null && _serviceClient.State == CommunicationState.Opened;
+            bool isJoined = _isJoined && _chatClient != null && _chatClient.IsOpen;
 
             return isJoined;
         }
@@ -216,47 +214,41 @@ namespace Backgammon.Client.Controllers.Chat
 
         private void CloseServiceClient()
         {
-            ChatServiceClient serviceClient = _serviceClient;
-            _serviceClient = null;
+            ChatClient chatClient = _chatClient;
+            _chatClient = null;
 
-            if (serviceClient == null)
+            if (chatClient == null)
             {
-                return;
-            }
-
-            if (serviceClient.State == CommunicationState.Faulted)
-            {
-                serviceClient.Abort();
                 return;
             }
 
             try
             {
-                serviceClient.Close();
+                chatClient.Close();
             }
             catch (CommunicationException communicationException)
             {
                 ApplicationLogger.LogError(communicationException, "The chat channel could not close normally.");
 
-                serviceClient.Abort();
+                chatClient.Abort();
             }
             catch (TimeoutException timeoutException)
             {
                 ApplicationLogger.LogError(timeoutException, "Closing the chat channel exceeded the time limit.");
 
-                serviceClient.Abort();
+                chatClient.Abort();
             }
         }
 
         private void AbortServiceClient()
         {
-            if (_serviceClient == null)
+            if (_chatClient == null)
             {
                 return;
             }
 
-            _serviceClient.Abort();
-            _serviceClient = null;
+            _chatClient.Abort();
+            _chatClient = null;
             _isJoined = false;
         }
     }

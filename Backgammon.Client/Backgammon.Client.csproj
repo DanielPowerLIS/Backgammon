@@ -69,6 +69,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Comunication\AuthenticationClient.cs" />
+    <Compile Include="Comunication\ChatClient.cs" />
     <Compile Include="Comunication\GuestAccessClient.cs" />
     <Compile Include="Comunication\LeaderboardClient.cs" />
     <Compile Include="Comunication\PreinitiationClient.cs" />
