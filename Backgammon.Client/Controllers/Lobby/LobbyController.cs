@@ -13,6 +13,8 @@ namespace Backgammon.Client.Controllers.Lobby
 
         public event Action LobbyUpdated;
 
+        public event Action<bool> LobbyClosed;
+
         private readonly LobbyClient _lobbyClient;
 
         public LobbyController()
@@ -36,11 +38,15 @@ namespace Backgammon.Client.Controllers.Lobby
         {
             LobbyContext.LobbyUpdated -= OnLobbyUpdated;
             LobbyContext.LobbyUpdated += OnLobbyUpdated;
+
+            LobbyContext.LobbyClosed -= OnLobbyClosed;
+            LobbyContext.LobbyClosed += OnLobbyClosed;
         }
 
         public void StopListening()
         {
             LobbyContext.LobbyUpdated -= OnLobbyUpdated;
+            LobbyContext.LobbyClosed -= OnLobbyClosed;
         }
 
         public string GetHostUsername()
@@ -67,6 +73,11 @@ namespace Backgammon.Client.Controllers.Lobby
             return roomCode;
         }
 
+        public void ClearLobby()
+        {
+            LobbyContext.ClearLobby();
+        }
+
         private void OnLobbyUpdated()
         {
             Action lobbyUpdatedHandler = LobbyUpdated;
@@ -74,6 +85,16 @@ namespace Backgammon.Client.Controllers.Lobby
             if (lobbyUpdatedHandler != null)
             {
                 lobbyUpdatedHandler.Invoke();
+            }
+        }
+
+        private void OnLobbyClosed(bool wasKicked)
+        {
+            Action<bool> lobbyClosedHandler = LobbyClosed;
+
+            if (lobbyClosedHandler != null)
+            {
+                lobbyClosedHandler.Invoke(wasKicked);
             }
         }
     }

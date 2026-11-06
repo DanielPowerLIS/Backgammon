@@ -10,5 +10,10 @@ namespace Backgammon.Client.Controllers.Callbacks
         {
             LobbyContext.StoreLobby(lobby);
         }
+
+        public void OnCloseLobby(bool wasKicked)
+        {
+            LobbyContext.CloseLobby(wasKicked);
+        }
     }
 }

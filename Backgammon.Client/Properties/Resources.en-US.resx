@@ -632,4 +632,16 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_LeaveLobbyErrorMessage" xml:space="preserve">
     <value>Could not leave the lobby. Please try again.</value>
   </data>
+  <data name="TextBlock_LobbyClosedTitle" xml:space="preserve">
+    <value>Room closed</value>
+  </data>
+  <data name="TextBlock_LobbyClosedMessage" xml:space="preserve">
+    <value>The host left the room. You have been returned to the main menu.</value>
+  </data>
+  <data name="TextBlock_LobbyKickedTitle" xml:space="preserve">
+    <value>Removed from room</value>
+  </data>
+  <data name="TextBlock_LobbyKickedMessage" xml:space="preserve">
+    <value>The host removed you from the room.</value>
+  </data>
 </root>

@@ -632,4 +632,16 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_LeaveLobbyErrorMessage" xml:space="preserve">
     <value>No fue posible salir de la sala. Inténtalo nuevamente.</value>
   </data>
+  <data name="TextBlock_LobbyClosedTitle" xml:space="preserve">
+    <value>Sala cerrada</value>
+  </data>
+  <data name="TextBlock_LobbyClosedMessage" xml:space="preserve">
+    <value>El anfitrión salió de la sala. Se te ha redirigido al menú principal.</value>
+  </data>
+  <data name="TextBlock_LobbyKickedTitle" xml:space="preserve">
+    <value>Expulsión de la sala</value>
+  </data>
+  <data name="TextBlock_LobbyKickedMessage" xml:space="preserve">
+    <value>El anfitrión te expulsó de la sala.</value>
+  </data>
 </root>

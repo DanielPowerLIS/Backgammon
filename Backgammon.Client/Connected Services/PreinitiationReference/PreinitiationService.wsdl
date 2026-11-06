@@ -4,27 +4,6 @@
     <wsp:ExactlyOne>
       <wsp:All>
         <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1" />
-        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <wsp:Policy>
-            <sp:TransportToken>
-              <wsp:Policy>
-                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
-                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
-                </msf:WindowsTransportSecurity>
-              </wsp:Policy>
-            </sp:TransportToken>
-            <sp:AlgorithmSuite>
-              <wsp:Policy>
-                <sp:Basic256 />
-              </wsp:Policy>
-            </sp:AlgorithmSuite>
-            <sp:Layout>
-              <wsp:Policy>
-                <sp:Strict />
-              </wsp:Policy>
-            </sp:Layout>
-          </wsp:Policy>
-        </sp:TransportBinding>
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>
@@ -57,6 +36,9 @@
   <wsdl:message name="IPreinitiationService_OnLobbyUpdated_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnLobbyUpdated" />
   </wsdl:message>
+  <wsdl:message name="IPreinitiationService_OnCloseLobby_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnCloseLobby" />
+  </wsdl:message>
   <wsdl:portType name="IPreinitiationService">
     <wsdl:operation name="CreateLobby">
       <wsdl:input wsaw:Action="http://tempuri.org/IPreinitiationService/CreateLobby" message="tns:IPreinitiationService_CreateLobby_InputMessage" />
@@ -70,6 +52,9 @@
     </wsdl:operation>
     <wsdl:operation name="OnLobbyUpdated">
       <wsdl:output wsaw:Action="http://tempuri.org/IPreinitiationService/OnLobbyUpdated" message="tns:IPreinitiationService_OnLobbyUpdated_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnCloseLobby">
+      <wsdl:output wsaw:Action="http://tempuri.org/IPreinitiationService/OnCloseLobby" message="tns:IPreinitiationService_OnCloseLobby_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IPreinitiationService" type="tns:IPreinitiationService">
@@ -105,15 +90,18 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="OnCloseLobby">
+      <soap12:operation soapAction="http://tempuri.org/IPreinitiationService/OnCloseLobby" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="PreinitiationService">
     <wsdl:port name="NetTcpBinding_IPreinitiationService" binding="tns:NetTcpBinding_IPreinitiationService">
       <soap12:address location="net.tcp://localhost:9001/PreinitiationService" />
       <wsa10:EndpointReference>
         <wsa10:Address>net.tcp://localhost:9001/PreinitiationService</wsa10:Address>
-        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>ADAIR\adair</Upn>
-        </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

@@ -10,6 +10,8 @@ namespace Backgammon.Client.Controllers.Lobby
 
         public static event Action LobbyUpdated;
 
+        public static event Action<bool> LobbyClosed;
+
         public static void StoreLobby(CurrentLobby lobby)
         {
             if (lobby == null)
@@ -31,6 +33,16 @@ namespace Backgammon.Client.Controllers.Lobby
             }
 
             return _currentLobby;
+        }
+
+        public static void CloseLobby(bool wasKicked)
+        {
+            Action<bool> lobbyClosedHandler = LobbyClosed;
+
+            if (lobbyClosedHandler != null)
+            {
+                lobbyClosedHandler.Invoke(wasKicked);
+            }
         }
 
         public static void ClearLobby()
