@@ -66,6 +66,16 @@ namespace Backgammon.Client.Controllers.Chat
 
                 return previousMessages;
             }
+            catch (FaultException<ChatFault> chatFault)
+            {
+                ApplicationLogger.LogWarning(
+                    "Joining the chat was rejected with code {0}.",
+                    chatFault.Detail.ErrorCode);
+
+                AbortServiceClient();
+
+                return previousMessages;
+            }
             catch (CommunicationException communicationException)
             {
                 ApplicationLogger.LogError(communicationException, "The request to join the lobby chat failed.");
@@ -103,6 +113,16 @@ namespace Backgammon.Client.Controllers.Chat
 
                 return true;
             }
+            catch (FaultException<ChatFault> chatFault)
+            {
+                ApplicationLogger.LogWarning(
+                    "Sending the chat message was rejected with code {0}.",
+                    chatFault.Detail.ErrorCode);
+
+                AbortServiceClient();
+
+                return false;
+            }
             catch (CommunicationException communicationException)
             {
                 ApplicationLogger.LogError(communicationException, "The chat message could not be sent.");
@@ -132,6 +152,12 @@ namespace Backgammon.Client.Controllers.Chat
                 {
                     _chatClient.LeaveLobbyChat(_sessionId, _roomId);
                 }
+            }
+            catch (FaultException<ChatFault> chatFault)
+            {
+                ApplicationLogger.LogWarning(
+                    "Leaving the chat was rejected with code {0}.",
+                    chatFault.Detail.ErrorCode);
             }
             catch (CommunicationException communicationException)
             {
