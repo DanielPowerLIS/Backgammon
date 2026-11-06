@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Threading.Tasks;
+
+using Backgammon.Client.Comunication;
+using Backgammon.Client.Controllers.Session;
 
 using CurrentLobby = Backgammon.Client.PreinitiationReference.Lobby;
 
@@ -8,6 +12,25 @@ namespace Backgammon.Client.Controllers.Lobby
     {
 
         public event Action LobbyUpdated;
+
+        private readonly LobbyClient _lobbyClient;
+
+        public LobbyController()
+        {
+            _lobbyClient = new LobbyClient();
+        }
+
+        public async Task LeaveLobbyAsync()
+        {
+            string sessionId = PlayerSessionContext.GetSession().SessionId;
+
+            CurrentLobby lobby = LobbyContext.GetLobby();
+            string roomId = lobby.RoomId;
+
+            await _lobbyClient.LeaveLobbyAsync(sessionId, roomId);
+
+            LobbyContext.ClearLobby();
+        }
 
         public void StartListening()
         {

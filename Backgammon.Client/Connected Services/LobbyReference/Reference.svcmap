@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="33eae9b9-8d8b-499a-85d8-8bb87bd2ec8d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:9002/LobbyService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="LobbyService.wsdl" MetadataType="Wsdl" ID="eb8cc78c-fce6-4f13-966c-46fbeadd0ae8" SourceId="1" SourceUrl="http://localhost:9002/LobbyService?wsdl" />
+    <MetadataFile FileName="LobbyService.xsd" MetadataType="Schema" ID="d9365c9d-0b72-4116-85fd-b92655838cd8" SourceId="1" SourceUrl="http://localhost:9002/LobbyService?xsd=xsd1" />
+    <MetadataFile FileName="LobbyService1.xsd" MetadataType="Schema" ID="c92ba468-5c8d-4252-b590-6464b3ad4195" SourceId="1" SourceUrl="http://localhost:9002/LobbyService?xsd=xsd0" />
+    <MetadataFile FileName="LobbyService2.xsd" MetadataType="Schema" ID="cf5892a4-3c43-4f7b-a073-e90a46e2ae85" SourceId="1" SourceUrl="http://localhost:9002/LobbyService?xsd=xsd2" />
+    <MetadataFile FileName="LobbyService.disco" MetadataType="Disco" ID="58082cca-fbd5-49b8-82cf-8b1a83afb2f8" SourceId="1" SourceUrl="http://localhost:9002/LobbyService?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
