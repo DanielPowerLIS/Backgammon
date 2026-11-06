@@ -166,6 +166,7 @@
     <Compile Include="Services\ChatService.cs" />
     <Compile Include="Services\Comunication\ChatServiceHost.cs" />
     <Compile Include="Services\Comunication\GuestAccessServiceHost.cs" />
+    <Compile Include="Services\Comunication\LobbyServiceHost.cs" />
     <Compile Include="Services\Comunication\PreinitiationServiceHost.cs" />
     <Compile Include="Services\Comunication\LogOutServiceHost.cs" />
     <Compile Include="Services\Comunication\ProfileServiceHost.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Services\Contracts\IChatCallback.cs" />
     <Compile Include="Services\Contracts\IChatService.cs" />
     <Compile Include="Services\Contracts\IGuestAccessService.cs" />
+    <Compile Include="Services\Contracts\ILobbyService.cs" />
     <Compile Include="Services\Contracts\IPreinitiationCallback.cs" />
     <Compile Include="Services\Contracts\IPreinitiationService.cs" />
     <Compile Include="Services\Contracts\ILogOutService.cs" />
@@ -189,10 +191,12 @@
     <Compile Include="Services\Data\GuestAccessFault.cs" />
     <Compile Include="Services\Data\LeaderboardFault.cs" />
     <Compile Include="Services\Data\Lobby.cs" />
+    <Compile Include="Services\Data\LobbyFault.cs" />
     <Compile Include="Services\Data\PlayerSessionFault.cs" />
     <Compile Include="Services\Data\PreinitiationFault.cs" />
     <Compile Include="Services\Data\VerificationFault.cs" />
     <Compile Include="Services\Data\VerificationRequest.cs" />
+    <Compile Include="Services\LobbyService.cs" />
     <Compile Include="Services\PreinitiationService.cs" />
     <Compile Include="Services\Data\PlayerProfile.cs" />
     <Compile Include="Services\Data\PlayerSession.cs" />

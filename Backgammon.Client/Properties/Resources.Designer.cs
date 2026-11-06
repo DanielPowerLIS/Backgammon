@@ -808,6 +808,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No fue posible salir de la sala. Inténtalo nuevamente..
+        /// </summary>
+        public static string TextBlock_LeaveLobbyErrorMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_LeaveLobbyErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error al salir de la sala.
+        /// </summary>
+        public static string TextBlock_LeaveLobbyErrorTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_LeaveLobbyErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Correo asociado.
         /// </summary>
         public static string TextBlock_LinkedEmail {

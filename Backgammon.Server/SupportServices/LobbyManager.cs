@@ -16,6 +16,13 @@ namespace Backgammon.Server.SupportServices
         private static readonly string LobbyFullMessage = "The lobby is already full.";
         private static readonly string HostCannotJoinMessage = "The host cannot join their own lobby.";
 
+        private static readonly string HostCannotLeaveMessage = "Host departure is not available yet.";
+
+        private static readonly string PlayerNotGuestMessage = 
+            "The player does not occupy the guest position in this lobby.";
+
+        private static readonly string PlayerNotMemberMessage = "The player does not belong to this lobby.";
+
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(LobbyManager));
 
@@ -46,14 +53,14 @@ namespace Backgammon.Server.SupportServices
             ValidateJoinRoomArguments(guestPlayer, roomId, guestCallback);
 
             LobbySession lobbySession = GetLobbySession(roomId);
+            LobbySession joinedLobbySession;
 
             lock (lobbySession.Queue)
             {
                 ValidateGuestCanJoin(lobbySession, guestPlayer);
                 AddGuestToLobby(lobbySession, guestPlayer, guestCallback);
+                joinedLobbySession = CreateLobbySessionCopy(lobbySession);
             }
-
-            LobbySession joinedLobbySession = lobbySession;
 
             return joinedLobbySession;
         }
@@ -65,10 +72,62 @@ namespace Backgammon.Server.SupportServices
                 throw new ArgumentNullException(nameof(lobbySession));
             }
 
+            LobbySession storedLobbySession = GetLobbySession(lobbySession.RoomData.RoomId);
+
+            lock (storedLobbySession.Queue)
+            {
+                ClearGuestIfMatches(storedLobbySession, guestPlayerId);
+            }
+        }
+
+        public static LobbySession LeaveRoomAsGuest(PlayerSession playerSession, string roomId)
+        {
+            if (playerSession == null)
+            {
+                throw new ArgumentNullException(nameof(playerSession));
+            }
+
+            LobbySession lobbySession = GetLobbySession(roomId);
+
             lock (lobbySession.Queue)
             {
-                ClearGuestIfMatches(lobbySession, guestPlayerId);
+                ValidateGuestCanLeave(lobbySession, playerSession);
+
+                ClearGuestIfMatches(lobbySession, playerSession.PlayerId);
+
+                LobbySession lobbyUpdate = CreateLobbySessionCopy(lobbySession);
+
+                return lobbyUpdate;
             }
+        }
+
+        public static bool IsGuestInRoom(int playerId, string roomId)
+        {
+            LobbySession lobbySession = GetLobbySession(roomId);
+            bool isGuest;
+
+            lock (lobbySession.Queue)
+            {
+                if (playerId == 0)
+                {
+                    throw new UnauthorizedAccessException(PlayerNotMemberMessage);
+                }
+
+                if (lobbySession.RoomData.HostPlayerId == playerId)
+                {
+                    isGuest = false;
+                }
+                else if (lobbySession.RoomData.GuestPlayerId == playerId)
+                {
+                    isGuest = true;
+                }
+                else
+                {
+                    throw new UnauthorizedAccessException(PlayerNotMemberMessage);
+                }
+            }
+
+            return isGuest;
         }
 
         public static List<ChatMessage> JoinChat(PlayerSession playerSession, string roomId, IChatCallback chatCallback)
@@ -221,7 +280,46 @@ namespace Backgammon.Server.SupportServices
             lobbySession.RoomData.GuestUsername = string.Empty;
             lobbySession.GuestCallback = null;
             lobbySession.GuestChatCallback = null;
+            lobbySession.ChatMessages.Clear();
         }
 
+        private static void ValidateGuestCanLeave(LobbySession lobbySession, PlayerSession playerSession)
+        {
+            int playerId = playerSession.PlayerId;
+
+            if (lobbySession.RoomData.HostPlayerId == playerId)
+            {
+                throw new InvalidOperationException(HostCannotLeaveMessage);
+            }
+
+            bool occupiesGuestPosition = playerId != 0 && lobbySession.RoomData.GuestPlayerId == playerId;
+
+            if (!occupiesGuestPosition)
+            {
+                throw new UnauthorizedAccessException(PlayerNotGuestMessage);
+            }
+        }
+
+        private static LobbySession CreateLobbySessionCopy(LobbySession lobbySession)
+        {
+            var lobbyCopy = new Lobby
+            {
+                RoomId = lobbySession.RoomData.RoomId,
+                HostPlayerId = lobbySession.RoomData.HostPlayerId,
+                HostUsername = lobbySession.RoomData.HostUsername,
+                GuestPlayerId = lobbySession.RoomData.GuestPlayerId,
+                GuestUsername = lobbySession.RoomData.GuestUsername
+            };
+
+            LobbySession lobbySessionCopy = new LobbySession
+            {
+                RoomData = lobbyCopy,
+                HostCallback = lobbySession.HostCallback,
+                GuestCallback = lobbySession.GuestCallback,
+                GuestChatCallback = lobbySession.GuestChatCallback
+            };
+
+            return lobbySessionCopy;
+        }
     }
 }

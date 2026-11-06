@@ -602,7 +602,7 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_RoomCodeLabel" xml:space="preserve">
     <value>Room code</value>
   </data>
-    <data name="Button_SendMessage" xml:space="preserve">
+  <data name="Button_SendMessage" xml:space="preserve">
     <value>Send</value>
   </data>
   <data name="TextBlock_VerificationErrorTitle" xml:space="preserve">
@@ -625,5 +625,11 @@ c) Move four checkers 6 points each.
   </data>
   <data name="TextBlock_VerificationUnavailableMessage" xml:space="preserve">
     <value>Verification could not be completed. Please try again later.</value>
+  </data>
+  <data name="TextBlock_LeaveLobbyErrorTitle" xml:space="preserve">
+    <value>Error leaving the lobby</value>
+  </data>
+  <data name="TextBlock_LeaveLobbyErrorMessage" xml:space="preserve">
+    <value>Could not leave the lobby. Please try again.</value>
   </data>
 </root>

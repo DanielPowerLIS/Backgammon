@@ -72,6 +72,7 @@
     <Compile Include="Comunication\ChatClient.cs" />
     <Compile Include="Comunication\GuestAccessClient.cs" />
     <Compile Include="Comunication\LeaderboardClient.cs" />
+    <Compile Include="Comunication\LobbyClient.cs" />
     <Compile Include="Comunication\PreinitiationClient.cs" />
     <Compile Include="Comunication\LogOutClient.cs" />
     <Compile Include="Comunication\ProfileClient.cs" />
@@ -88,6 +89,11 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\LeaderboardReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\LobbyReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -447,6 +453,16 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\LeaderboardReference\LeaderboardService.wsdl" />
+    <None Include="Connected Services\LobbyReference\LobbyService.wsdl" />
+    <None Include="Connected Services\LobbyReference\LobbyService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LobbyReference\LobbyService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\LobbyReference\LobbyService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\PreinitiationReference\Backgammon.Client.PreinitiationReference.Lobby.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -558,6 +574,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\LobbyReference\LobbyService.disco" />
+    <None Include="Connected Services\LobbyReference\configuration91.svcinfo" />
+    <None Include="Connected Services\LobbyReference\configuration.svcinfo" />
+    <None Include="Connected Services\LobbyReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -580,6 +603,7 @@
     <WCFMetadataStorage Include="Connected Services\AuthenticationReference\" />
     <WCFMetadataStorage Include="Connected Services\GuestAccessReference\" />
     <WCFMetadataStorage Include="Connected Services\LeaderboardReference\" />
+    <WCFMetadataStorage Include="Connected Services\LobbyReference\" />
     <WCFMetadataStorage Include="Connected Services\PreinitiationReference\" />
     <WCFMetadataStorage Include="Connected Services\LogOutReference\" />
     <WCFMetadataStorage Include="Connected Services\ProfileReference\" />

@@ -602,7 +602,7 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_RoomCodeLabel" xml:space="preserve">
     <value>Código de sala</value>
   </data>
-    <data name="Button_SendMessage" xml:space="preserve">
+  <data name="Button_SendMessage" xml:space="preserve">
     <value>Enviar</value>
   </data>
   <data name="TextBlock_VerificationErrorTitle" xml:space="preserve">
@@ -625,5 +625,11 @@ c) Mover cuatro fichas 6 casillas cada una.
   </data>
   <data name="TextBlock_VerificationUnavailableMessage" xml:space="preserve">
     <value>No fue posible completar la verificación. Inténtalo nuevamente más tarde.</value>
+  </data>
+  <data name="TextBlock_LeaveLobbyErrorTitle" xml:space="preserve">
+    <value>Error al salir de la sala</value>
+  </data>
+  <data name="TextBlock_LeaveLobbyErrorMessage" xml:space="preserve">
+    <value>No fue posible salir de la sala. Inténtalo nuevamente.</value>
   </data>
 </root>
