@@ -8,5 +8,8 @@ namespace Backgammon.Server.Services.Contracts
     {
         [OperationContract(IsOneWay = true)]
         void OnLobbyUpdated(Lobby lobby);
+
+        [OperationContract(IsOneWay = true)]
+        void OnCloseLobby(bool wasKicked);
     }
 }

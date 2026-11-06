@@ -191,6 +191,9 @@ namespace Backgammon.Client.PreinitiationReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreinitiationService/OnLobbyUpdated")]
         void OnLobbyUpdated(Backgammon.Client.PreinitiationReference.Lobby lobby);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreinitiationService/OnCloseLobby")]
+        void OnCloseLobby(bool wasKicked);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

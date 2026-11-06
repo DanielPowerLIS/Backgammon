@@ -844,6 +844,42 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to El anfitrión salió de la sala. Se te ha redirigido al menú principal..
+        /// </summary>
+        public static string TextBlock_LobbyClosedMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_LobbyClosedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sala cerrada.
+        /// </summary>
+        public static string TextBlock_LobbyClosedTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_LobbyClosedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to El anfitrión te expulsó de la sala..
+        /// </summary>
+        public static string TextBlock_LobbyKickedMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_LobbyKickedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expulsión de la sala.
+        /// </summary>
+        public static string TextBlock_LobbyKickedTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_LobbyKickedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No se puedo iniciar la sala. Intente más tarde..
         /// </summary>
         public static string TextBlock_LobbyStartErrorMessage {

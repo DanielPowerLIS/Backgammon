@@ -23,6 +23,9 @@ namespace Backgammon.Server.SupportServices
 
         private static readonly string PlayerNotMemberMessage = "The player does not belong to this lobby.";
 
+        private static readonly string PlayerNotHostMessage =
+            "The player does not occupy the host position in this lobby.";
+
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(LobbyManager));
 
@@ -57,6 +60,8 @@ namespace Backgammon.Server.SupportServices
 
             lock (lobbySession.Queue)
             {
+                ValidateLobbyIsActive(lobbySession);
+
                 ValidateGuestCanJoin(lobbySession, guestPlayer);
                 AddGuestToLobby(lobbySession, guestPlayer, guestCallback);
                 joinedLobbySession = CreateLobbySessionCopy(lobbySession);
@@ -99,6 +104,38 @@ namespace Backgammon.Server.SupportServices
 
                 return lobbyUpdate;
             }
+        }
+
+        public static LobbySession LeaveRoomAsHost(PlayerSession playerSession, string roomId)
+        {
+            if (playerSession == null)
+            {
+                throw new ArgumentNullException(nameof(playerSession));
+            }
+
+            LobbySession lobbySession = GetLobbySession(roomId);
+            LobbySession closedLobbySession;
+
+            lock (lobbySession.Queue)
+            {
+                ValidateLobbyIsActive(lobbySession);
+
+                if (lobbySession.RoomData.HostPlayerId != playerSession.PlayerId)
+                {
+                    throw new UnauthorizedAccessException(PlayerNotHostMessage);
+                }
+
+                closedLobbySession = CreateLobbySessionCopy(lobbySession);
+
+                bool roomRemoved = RemoveStoredRoom(roomId);
+
+                if (!roomRemoved)
+                {
+                    throw new InvalidOperationException(CodeLobbyDoesNotExistMessage);
+                }
+            }
+
+            return closedLobbySession;
         }
 
         public static bool IsGuestInRoom(int playerId, string roomId)
@@ -320,6 +357,26 @@ namespace Backgammon.Server.SupportServices
             };
 
             return lobbySessionCopy;
+        }
+
+        private static bool RemoveStoredRoom(string roomId)
+        {
+            bool roomRemoved = ActiveRooms.TryRemove(roomId, out LobbySession removedSession);
+
+            return roomRemoved;
+        }
+
+        private static void ValidateLobbyIsActive(LobbySession lobbySession)
+        {
+            string roomId = lobbySession.RoomData.RoomId;
+            LobbySession storedLobbySession = GetLobbySession(roomId);
+
+            bool sameLobbySession = ReferenceEquals(storedLobbySession, lobbySession);
+
+            if (!sameLobbySession)
+            {
+                throw new InvalidOperationException(CodeLobbyDoesNotExistMessage);
+            }
         }
     }
 }

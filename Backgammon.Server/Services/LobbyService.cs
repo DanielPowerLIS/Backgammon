@@ -34,11 +34,9 @@ namespace Backgammon.Server.Services
                 throw CreateLobbyFault(LeaveLobbyErrorCode);
             }
 
-            LobbySession lobbySession = LeaveRoom(playerSession, roomId);
+            LeaveRoom(playerSession, roomId);
 
             ApplicationLogger.LogInformation("Player {0} left room {1}.", playerSession.PlayerId, roomId);
-
-            UpdateHost(lobbySession);
         }
 
         private PlayerSession GetPlayerSession(string sessionId)
@@ -60,20 +58,24 @@ namespace Backgammon.Server.Services
             }
         }
 
-        private LobbySession LeaveRoom(PlayerSession playerSession, string roomId)
+        private void LeaveRoom(PlayerSession playerSession, string roomId)
         {
             try
             {
                 bool isGuest = LobbyManager.IsGuestInRoom(playerSession.PlayerId, roomId);
 
-                if (!isGuest)
+                if (isGuest)
                 {
-                    //TODO
+                    LobbySession lobbySession = LobbyManager.LeaveRoomAsGuest(playerSession, roomId);
+
+                    UpdateHost(lobbySession);
                 }
+                else
+                {
+                    LobbySession closedLobbySession = LobbyManager.LeaveRoomAsHost(playerSession, roomId);
 
-                LobbySession lobbySession = LobbyManager.LeaveRoomAsGuest(playerSession, roomId);
-
-                return lobbySession;
+                    CloseGuestLobby(closedLobbySession);
+                }
             }
             catch (UnauthorizedAccessException accessException)
             {
@@ -122,6 +124,42 @@ namespace Backgammon.Server.Services
                     "The departure callback to the host of room {0} could not " +
                     "be completed because the channel was disposed.",
                     lobby.RoomId);
+            }
+        }
+
+        private void CloseGuestLobby(LobbySession lobbySession)
+        {
+            if (lobbySession.GuestCallback == null)
+            {
+                return;
+            }
+
+            string roomId = lobbySession.RoomData.RoomId;
+
+            try
+            {
+                lobbySession.GuestCallback.OnCloseLobby(false);
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(communicationException,
+                    "A communication failure prevented the guest of room {0} " +
+                    "from receiving the lobby closure.",
+                    roomId);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(timeoutException,
+                    "The closure callback to the guest of room {0} " +
+                    "exceeded the time limit.",
+                    roomId);
+            }
+            catch (ObjectDisposedException disposedException)
+            {
+                ApplicationLogger.LogError(disposedException,
+                    "The closure callback to the guest of room {0} " +
+                    "could not be completed because the channel was disposed.",
+                    roomId);
             }
         }
 

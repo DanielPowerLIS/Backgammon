@@ -17,6 +17,9 @@ namespace Backgammon.Client.Views.Pages
     {
         private readonly LobbyController _lobbyController;
 
+        private bool _isLobbyClosed;
+        private Chat _chatWindow;
+
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(Lobby));
 
@@ -35,6 +38,9 @@ namespace Backgammon.Client.Views.Pages
             _lobbyController.LobbyUpdated -= OnLobbyUpdated;
             _lobbyController.LobbyUpdated += OnLobbyUpdated;
 
+            _lobbyController.LobbyClosed -= OnLobbyClosed;
+            _lobbyController.LobbyClosed += OnLobbyClosed;
+
             _lobbyController.StartListening();
 
             RefreshPlayers();
@@ -45,6 +51,7 @@ namespace Backgammon.Client.Views.Pages
             _lobbyController.StopListening();
 
             _lobbyController.LobbyUpdated -= OnLobbyUpdated;
+            _lobbyController.LobbyClosed -= OnLobbyClosed;
         }
 
         private void OnLobbyUpdated()
@@ -63,7 +70,7 @@ namespace Backgammon.Client.Views.Pages
 
         private void RefreshPlayers()
         {
-            if (!IsLoaded)
+            if (!IsLoaded || _isLobbyClosed)
             {
                 return;
             }
@@ -124,6 +131,78 @@ namespace Backgammon.Client.Views.Pages
             }
         }
 
+        private void OnLobbyClosed(bool wasKicked)
+        {
+            bool hasThreadAccess = Dispatcher.CheckAccess();
+
+            if (!hasThreadAccess)
+            {
+                var closeAction = new Action<bool>(HandleLobbyClosed);
+                Dispatcher.BeginInvoke(closeAction, wasKicked);
+                return;
+            }
+
+            HandleLobbyClosed(wasKicked);
+        }
+
+        private void HandleLobbyClosed(bool wasKicked)
+        {
+            if (_isLobbyClosed || !IsLoaded)
+            {
+                return;
+            }
+
+            _isLobbyClosed = true;
+
+            Window owner = Window.GetWindow(this);
+
+            _lobbyController.StopListening();
+
+            CloseOpenChat();
+
+            _lobbyController.ClearLobby();
+
+            IsEnabled = true;
+            NavigationService.Navigate(new MainMenu());
+
+            ShowLobbyClosedMessage(wasKicked, owner);
+        }
+
+        private void CloseOpenChat()
+        {
+            if (_chatWindow == null)
+            {
+                return;
+            }
+
+            if (_chatWindow.IsVisible)
+            {
+                _chatWindow.Close();
+            }
+        }
+
+        private void ShowLobbyClosedMessage(bool wasKicked, Window owner)
+        {
+            string title = Properties.Resources.TextBlock_LobbyClosedTitle;
+            string message = Properties.Resources.TextBlock_LobbyClosedMessage;
+
+            if (wasKicked)
+            {
+                title = Properties.Resources.TextBlock_LobbyKickedTitle;
+                message = Properties.Resources.TextBlock_LobbyKickedMessage;
+            }
+
+            var alertDialog = new AlertDialog(
+                title,
+                message,
+                AlertType.Normal)
+            {
+                Owner = owner
+            };
+
+            alertDialog.ShowDialog();
+        }
+
         private void OnKickPlayer(object sender, RoutedEventArgs e)
         {
 
@@ -131,12 +210,14 @@ namespace Backgammon.Client.Views.Pages
 
         private void OnOpenChat(object sender, RoutedEventArgs e)
         {
-            var chatWindow = new Chat
+            _chatWindow = new Chat
             {
                 Owner = Window.GetWindow(this)
             };
 
-            chatWindow.ShowDialog();
+            _chatWindow.ShowDialog();
+
+            _chatWindow = null;
         }
 
         private void ShowLeaveLobbyError()
