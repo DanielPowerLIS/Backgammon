@@ -1,5 +1,5 @@
-﻿using Backgammon.Server.SupportServices;
-using Backgammon.Server.Services.Contracts;
+﻿using Backgammon.Server.Services.Contracts;
+using Backgammon.Server.Services.Manager;
 
 namespace Backgammon.Server.Services
 {

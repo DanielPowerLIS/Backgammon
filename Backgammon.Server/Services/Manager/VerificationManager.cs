@@ -2,10 +2,11 @@
 using System.Collections.Concurrent;
 using System.ServiceModel;
 
-using Backgammon.Server.SupportServices.Logging;
 using Backgammon.Server.Services.Data;
+using Backgammon.Server.SupportServices;
+using Backgammon.Server.SupportServices.Logging;
 
-namespace Backgammon.Server.SupportServices
+namespace Backgammon.Server.Services.Manager
 {
     internal class VerificationManager
     {

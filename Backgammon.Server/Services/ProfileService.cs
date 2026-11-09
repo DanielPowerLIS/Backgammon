@@ -10,7 +10,7 @@ using System.Data.Entity.Validation;
 using Backgammon.Server.Persistence.Repositories;
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
-using Backgammon.Server.SupportServices;
+using Backgammon.Server.Services.Manager;
 using Backgammon.Server.SupportServices.Logging;
 using Backgammon.Server.Persistence.Repositories.InterfacesRepositories;
 using AccountEntity = Backgammon.Server.Persistence.Data.Account;

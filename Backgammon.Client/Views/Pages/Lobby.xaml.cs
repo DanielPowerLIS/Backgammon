@@ -86,6 +86,7 @@ namespace Backgammon.Client.Views.Pages
 
         private void OnPlay(object sender, RoutedEventArgs e)
         {
+
             NavigationService.Navigate(new GamePage());
         }
 
