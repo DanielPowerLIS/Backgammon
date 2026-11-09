@@ -3,6 +3,7 @@ using System.ServiceModel;
 
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
+using Backgammon.Server.Services.Manager;
 using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;
 

@@ -98,8 +98,7 @@ namespace Backgammon.Client.Views.Pages
                 return;
             }
 
-            string displayedMessage =
-                message.SenderUsername + ": " + message.Message;
+            string displayedMessage = message.SenderUsername + " [" + message.SendAtUtc + "]: " + message.Message;
 
             listBoxMessages.Items.Add(displayedMessage);
             listBoxMessages.ScrollIntoView(displayedMessage);
