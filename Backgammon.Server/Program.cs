@@ -56,6 +56,7 @@ namespace Backgammon.Server
             var preinitiationServiceHost = new PreinitiationServiceHost(); 
             var chatServiceHost = new ChatServiceHost();
             var lobbyServiceHost = new LobbyServiceHost();
+            var matchServiceHost = new MatchServiceHost();
 
             try
             {
@@ -66,6 +67,7 @@ namespace Backgammon.Server
                 preinitiationServiceHost.Open();
                 chatServiceHost.Open();
                 lobbyServiceHost.Open();
+                matchServiceHost.Open();
 
                 RunRegistrationService();
             }
@@ -80,6 +82,7 @@ namespace Backgammon.Server
                     logOutServiceHost.Close,
                     authenticationServiceHost.Close,
                     leaderboardServiceHost.Close,
+                    matchServiceHost.Close
                 });
             }
         }

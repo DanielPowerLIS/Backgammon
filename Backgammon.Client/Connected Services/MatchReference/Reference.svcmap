@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="7b1e5197-fa55-41ec-b301-bb4a41b31d91" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://26.186.19.19:9002/MatchService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MatchService.xsd" MetadataType="Schema" ID="1d9910ba-ead1-47c1-93ff-8dbc917917ed" SourceId="1" SourceUrl="http://26.186.19.19:9002/MatchService?xsd=xsd1" />
+    <MetadataFile FileName="MatchService1.xsd" MetadataType="Schema" ID="642358d8-9bfd-4bd3-b3c8-908a3c6a8b9c" SourceId="1" SourceUrl="http://26.186.19.19:9002/MatchService?xsd=xsd2" />
+    <MetadataFile FileName="MatchService.wsdl" MetadataType="Wsdl" ID="3a0844c1-e141-42da-8807-d10a7fa0feb3" SourceId="1" SourceUrl="http://26.186.19.19:9002/MatchService?wsdl" />
+    <MetadataFile FileName="MatchService.disco" MetadataType="Disco" ID="c4004323-4e82-4ebc-9b36-88fe44104812" SourceId="1" SourceUrl="http://26.186.19.19:9002/MatchService?disco" />
+    <MetadataFile FileName="MatchService2.xsd" MetadataType="Schema" ID="e35f42d8-824c-4afb-b6a5-7dc0430a8ebc" SourceId="1" SourceUrl="http://26.186.19.19:9002/MatchService?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

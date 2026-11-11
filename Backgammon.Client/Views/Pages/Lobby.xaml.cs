@@ -5,19 +5,24 @@ using System.Windows.Navigation;
 using System.ServiceModel;
 
 using Backgammon.Client.LobbyReference;
+using Backgammon.Client.MatchReference;
 using Backgammon.Client.Settings.Logging;
 using Backgammon.Client.Views.Dialog;
 using Backgammon.Client.Views.Models;
 using Backgammon.Client.Views.Game;
 using Backgammon.Client.Controllers.Lobby;
+using Backgammon.Client.Controllers.Match;
+using System.Threading.Tasks;
 
 namespace Backgammon.Client.Views.Pages
 {
     public partial class Lobby : Page
     {
         private readonly LobbyController _lobbyController;
+        private readonly MatchController _matchController;
 
         private bool _isLobbyClosed;
+        private bool _isStartingMatch;
         private Chat _chatWindow;
 
         private static readonly IApplicationLogger ApplicationLogger =
@@ -28,12 +33,13 @@ namespace Backgammon.Client.Views.Pages
             InitializeComponent();
 
             _lobbyController = new LobbyController();
+            _matchController = new MatchController();
 
             Loaded += OnPageLoaded;
             Unloaded += OnPageUnloaded;
         }
 
-        private void OnPageLoaded(object sender, RoutedEventArgs e)
+        private async void OnPageLoaded(object sender, RoutedEventArgs e)
         {
             _lobbyController.LobbyUpdated -= OnLobbyUpdated;
             _lobbyController.LobbyUpdated += OnLobbyUpdated;
@@ -44,6 +50,7 @@ namespace Backgammon.Client.Views.Pages
             _lobbyController.StartListening();
 
             RefreshPlayers();
+            await JoinPendingMatchAsync();
         }
 
         private void OnPageUnloaded(object sender, RoutedEventArgs e)
@@ -54,18 +61,19 @@ namespace Backgammon.Client.Views.Pages
             _lobbyController.LobbyClosed -= OnLobbyClosed;
         }
 
-        private void OnLobbyUpdated()
+        private async void OnLobbyUpdated()
         {
             bool hasThreadAccess = Dispatcher.CheckAccess();
 
             if (!hasThreadAccess)
             {
-                var refreshAction = new Action(RefreshPlayers);
-                Dispatcher.BeginInvoke(refreshAction);
+                var refreshAction = new Action(OnLobbyUpdated);
+                _ = Dispatcher.BeginInvoke(refreshAction);
                 return;
             }
 
             RefreshPlayers();
+            await JoinPendingMatchAsync();
         }
 
         private void RefreshPlayers()
@@ -82,12 +90,149 @@ namespace Backgammon.Client.Views.Pages
             textBlockHostUsername.Text = hostUsername;
             textBlockGuestUsername.Text = guestUsername;
             textBlockRoomCode.Text = roomCode;
+
+            bool isLobbyHost = _matchController.IsLobbyHost();
+
+            buttonPlay.Visibility = Visibility.Collapsed;
+
+            if (isLobbyHost)
+            {
+                buttonPlay.Visibility = Visibility.Visible;
+            }
+
+            buttonPlay.IsEnabled = _matchController.CanStartMatch() && !_isStartingMatch;
         }
 
-        private void OnPlay(object sender, RoutedEventArgs e)
+        private async Task JoinPendingMatchAsync()
         {
+            if (!IsLoaded || _isLobbyClosed || _isStartingMatch || _matchController.IsLobbyHost())
+            {
+                return;
+            }
 
-            NavigationService.Navigate(new GamePage());
+            string roomId = _lobbyController.GetRoomCode();
+
+            if (!LobbyContext.TryTakeMatchNotice(roomId, out string matchId))
+            {
+                return;
+            }
+
+            _isStartingMatch = true;
+            IsEnabled = false;
+
+            try
+            {
+                await OpenGuestMatchAsync(roomId, matchId);
+            }
+            finally
+            {
+                _isStartingMatch = false;
+                IsEnabled = true;
+            }
+        }
+
+        private async Task OpenGuestMatchAsync(string roomId, string matchId)
+        {
+            try
+            {
+                MatchSession matchSession = await _matchController.JoinMatchAsync(roomId, matchId);
+
+                if (!IsLoaded || _isLobbyClosed || _lobbyController.GetRoomCode() != roomId)
+                {
+                    return;
+                }
+
+                CloseOpenChat();
+                IsEnabled = true;
+                NavigationService.Navigate(new GamePage(matchSession));
+            }
+            catch (FaultException<MatchFault> exception)
+            {
+                ApplicationLogger.LogWarning(
+                    "The server rejected the match join request. Code: {0}", exception.Detail.ErrorCode);
+
+                ShowStartMatchError();
+            }
+            catch (CommunicationException exception)
+            {
+                ApplicationLogger.LogError(exception, "The request to join the match failed.");
+                ShowStartMatchError();
+            }
+            catch (TimeoutException exception)
+            {
+                ApplicationLogger.LogError(exception, "Joining the match timed out.");
+                ShowStartMatchError();
+            }
+            catch (InvalidOperationException exception)
+            {
+                ApplicationLogger.LogError(exception, "The player session or lobby is unavailable.");
+                ShowStartMatchError();
+            }
+        }
+
+        private async void OnPlay(object sender, RoutedEventArgs e)
+        {
+            if (_isStartingMatch || _isLobbyClosed || !buttonPlay.IsEnabled)
+            {
+                return;
+            }
+
+            _isStartingMatch = true;
+            IsEnabled = false;
+
+            try
+            {
+                MatchSession matchSession = await _matchController.InitializeMatchAsync();
+                if ( _isLobbyClosed || !IsLoaded)
+                {
+                    return;
+                }
+
+                CloseOpenChat();
+                IsEnabled = true;
+                NavigationService.Navigate(new GamePage(matchSession));
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(
+                    communicationException, "The request to initialize the match failed.");
+
+                ShowStartMatchError();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(
+                    timeoutException, "Initializing the match exceeded the time limit.");
+
+                ShowStartMatchError();
+            }
+            catch (InvalidOperationException contextException)
+            {
+                ApplicationLogger.LogError(
+                    contextException, "The player session or lobby is unavailable for starting a match.");
+
+                ShowStartMatchError();
+            }
+            finally
+            {
+                _isStartingMatch = false;
+                IsEnabled = true;
+                RefreshPlayers();
+            }
+
+        }
+
+        private void ShowStartMatchError()
+        {
+            var alertDialog = new AlertDialog(
+                Properties.Resources.TextBlock_LobbyStartErrorTitle,
+                Properties.Resources.TextBlock_LobbyStartErrorMessage,
+                AlertType.Error)
+            {
+                Owner = Window.GetWindow(this)
+            };
+
+            alertDialog.ShowDialog();
         }
 
         private async void OnLeaveLobby(object sender, RoutedEventArgs e)

@@ -194,6 +194,10 @@ namespace Backgammon.Client.PreinitiationReference {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IPreinitiationService/OnCloseLobby")]
         void OnCloseLobby(bool wasKicked);
+
+        [System.ServiceModel.OperationContractAttribute(
+            IsOneWay=true, Action="http://tempuri.org/IPreinitiationService/OnMatchStarted")]
+        void OnMatchStarted(string roomId, string matchId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

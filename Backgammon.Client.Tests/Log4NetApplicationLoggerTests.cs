@@ -5,7 +5,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using log4net;
 using log4net.Appender;
 using log4net.Core;
-
 using Backgammon.Client.Settings.Logging;
 
 namespace Backgammon.Client.Tests

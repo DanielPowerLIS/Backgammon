@@ -97,9 +97,11 @@ namespace Backgammon.Server.Services.Manager
 
             lock (lobbySession.Queue)
             {
+                ValidateLobbyIsActive(lobbySession);
                 ValidateGuestCanLeave(lobbySession, playerSession);
 
                 ClearGuestIfMatches(lobbySession, playerSession.PlayerId);
+                MatchManager.RemoveMatch(roomId);
 
                 LobbySession lobbyUpdate = CreateLobbySessionCopy(lobbySession);
 
@@ -128,6 +130,7 @@ namespace Backgammon.Server.Services.Manager
 
                 closedLobbySession = CreateLobbySessionCopy(lobbySession);
 
+                MatchManager.RemoveMatch(roomId);
                 bool roomRemoved = RemoveStoredRoom(roomId);
 
                 if (!roomRemoved)
@@ -171,10 +174,7 @@ namespace Backgammon.Server.Services.Manager
         public static List<ChatMessage> JoinChat(PlayerSession playerSession, string roomId, IChatCallback chatCallback)
         {
             LobbySession lobbySession = GetLobbySession(roomId);
-            List<ChatMessage> chatMessages = ChatManager.JoinChat(
-                lobbySession,
-                playerSession,
-                chatCallback);
+            List<ChatMessage> chatMessages = ChatManager.JoinChat(lobbySession, playerSession, chatCallback);
 
             return chatMessages;
         }
@@ -208,6 +208,16 @@ namespace Backgammon.Server.Services.Manager
             }
 
             ChatManager.LeaveChat(lobbySession, playerSession);
+        }
+
+        internal static void ValidateHostMatch(int requestPlayerId, LobbySession lobbySession)
+        {
+            ValidateLobbyIsActive(lobbySession);
+
+            if (lobbySession.RoomData.HostPlayerId != requestPlayerId)
+            {
+                throw new UnauthorizedAccessException(PlayerNotHostMessage);
+            }
         }
 
         private static void ValidateCreateRoomArguments(PlayerSession hostPlayer, IPreinitiationCallback hostCallback)
@@ -269,7 +279,7 @@ namespace Backgammon.Server.Services.Manager
             }
         }
 
-        private static LobbySession GetLobbySession(string roomId)
+        public static LobbySession GetLobbySession(string roomId)
         {
             if (roomId == null)
             {
@@ -367,7 +377,7 @@ namespace Backgammon.Server.Services.Manager
             return roomRemoved;
         }
 
-        private static void ValidateLobbyIsActive(LobbySession lobbySession)
+        internal static void ValidateLobbyIsActive(LobbySession lobbySession)
         {
             string roomId = lobbySession.RoomData.RoomId;
             LobbySession storedLobbySession = GetLobbySession(roomId);
@@ -379,5 +389,7 @@ namespace Backgammon.Server.Services.Manager
                 throw new InvalidOperationException(CodeLobbyDoesNotExistMessage);
             }
         }
+
+
     }
 }
