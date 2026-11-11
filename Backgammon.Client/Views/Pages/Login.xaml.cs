@@ -33,11 +33,16 @@ namespace Backgammon.Client.Views.Pages
         private void OnPasswordChanged(object sender, RoutedEventArgs e)
         {
             PasswordBox passwordBox = (PasswordBox)sender;
+            bool isPasswordEmpty = string.IsNullOrEmpty(passwordBox.Password);
 
-            textBlockPasswordPlaceholder.Visibility =
-                string.IsNullOrEmpty(passwordBox.Password)
-                    ? Visibility.Visible
-                    : Visibility.Collapsed;
+            if (isPasswordEmpty)
+            {
+                textBlockPasswordPlaceholder.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                textBlockPasswordPlaceholder.Visibility = Visibility.Collapsed;
+            }
         }
 
         private async void OnSignInClick(object sender, RoutedEventArgs e)
@@ -67,10 +72,19 @@ namespace Backgammon.Client.Views.Pages
                     Properties.Resources.TextBlock_RequiredFieldsTitle,
                     Properties.Resources.TextBlock_RequiredFieldsMessage);
 
-                Control targetControl =
-                    validationResult.FieldName == nameof(Credentials.Password)
-                        ? (Control)passwordBoxPassword : textBoxUsernameOrEmail;
+                Control targetControl;
+
+                if (validationResult.FieldName == nameof(Credentials.Password))
+                {
+                    targetControl = (Control)passwordBoxPassword;
+                }
+                else
+                {
+                    targetControl = textBoxUsernameOrEmail;
+                }
+
                 targetControl.Focus();
+
                 return;
             }
 

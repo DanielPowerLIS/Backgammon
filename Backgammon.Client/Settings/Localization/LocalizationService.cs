@@ -89,9 +89,14 @@ namespace Backgammon.Client.Settings.Localization
                 LanguageOptions.SpanishCultureName,
                 StringComparison.OrdinalIgnoreCase);
 
-            return isSpanishCulture
-                ? LanguageOptions.SpanishCultureName
-                : LanguageOptions.EnglishCultureName;
+            if (isSpanishCulture)
+            {
+                return LanguageOptions.SpanishCultureName;
+            }
+            else
+            {
+                return LanguageOptions.EnglishCultureName;
+            }
         }
     }
 }

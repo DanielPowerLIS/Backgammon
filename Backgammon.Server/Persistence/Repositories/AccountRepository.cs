@@ -22,12 +22,22 @@ namespace Backgammon.Server.Persistence.Repositories
 
             using (var databaseContext = new BackgammonEntities())
             {
-                List<Account> matchingAccounts = await databaseContext.Accounts
+                IQueryable<Account> accountsQuery = databaseContext.Accounts
                     .AsNoTracking()
-                    .Include(playerAccount => playerAccount.Profile)
-                    .Where(playerAccount => isEmailIdentifier
-                        ? playerAccount.Email == accountIdentifier
-                        : playerAccount.Profile.Username == accountIdentifier)
+                    .Include(playerAccount => playerAccount.Profile);
+
+                if (isEmailIdentifier)
+                {
+                    accountsQuery = accountsQuery.Where(
+                        playerAccount => playerAccount.Email == accountIdentifier);
+                }
+                else
+                {
+                    accountsQuery = accountsQuery.Where(
+                        playerAccount => playerAccount.Profile.Username == accountIdentifier);
+                }
+
+                List<Account> matchingAccounts = await accountsQuery
                     .ToListAsync()
                     .ConfigureAwait(false);
 

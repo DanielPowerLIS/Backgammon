@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace Backgammon.Client.Views.Pages
 {
-    /// <summary>
-    /// Interaction logic for ChangePassword.xaml
-    /// </summary>
+
     public partial class ChangePassword : Page
     {
         public ChangePassword()
@@ -46,14 +44,18 @@ namespace Backgammon.Client.Views.Pages
                 textBlockConfirmPasswordPlaceholder);
         }
 
-        private void UpdatePasswordPlaceholder(
-            PasswordBox passwordBox,
-            TextBlock placeholder)
+        private void UpdatePasswordPlaceholder(PasswordBox passwordBox, TextBlock placeholder)
         {
-            placeholder.Visibility =
-                string.IsNullOrEmpty(passwordBox.Password)
-                    ? Visibility.Visible
-                    : Visibility.Collapsed;
+            bool isPasswordEmpty = string.IsNullOrEmpty(passwordBox.Password);
+
+            if (isPasswordEmpty)
+            {
+                placeholder.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                placeholder.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
