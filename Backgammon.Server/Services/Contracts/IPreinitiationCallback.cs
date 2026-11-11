@@ -11,5 +11,8 @@ namespace Backgammon.Server.Services.Contracts
 
         [OperationContract(IsOneWay = true)]
         void OnCloseLobby(bool wasKicked);
+
+        [OperationContract(IsOneWay = true)]
+        void OnMatchStarted(string roomId, string matchId);
     }
 }

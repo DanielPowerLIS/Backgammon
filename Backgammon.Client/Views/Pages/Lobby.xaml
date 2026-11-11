@@ -160,6 +160,9 @@
                 Height="35"
                 Margin="0,10,0,0" Click="OnOpenChat" />
             <Button
+                x:Name="buttonPlay"
+                IsEnabled="False"
+                Visibility="Collapsed"
                 Grid.Row="2"
                 Grid.Column="1"
                 Content="{x:Static properties:Resources.Button_StartGame}"

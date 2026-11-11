@@ -15,5 +15,10 @@ namespace Backgammon.Client.Controllers.Callbacks
         {
             LobbyContext.CloseLobby(wasKicked);
         }
+
+        public void OnMatchStarted(string roomId, string matchId)
+        {
+            LobbyContext.NotifyMatchStarted(roomId, matchId);
+        }
     }
 }

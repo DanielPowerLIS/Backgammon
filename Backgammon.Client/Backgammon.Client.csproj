@@ -73,6 +73,7 @@
     <Compile Include="Comunication\GuestAccessClient.cs" />
     <Compile Include="Comunication\LeaderboardClient.cs" />
     <Compile Include="Comunication\LobbyClient.cs" />
+    <Compile Include="Comunication\MatchClient.cs" />
     <Compile Include="Comunication\PreinitiationClient.cs" />
     <Compile Include="Comunication\LogOutClient.cs" />
     <Compile Include="Comunication\ProfileClient.cs" />
@@ -94,6 +95,11 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Connected Services\LobbyReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\MatchReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -131,6 +137,7 @@
     <Compile Include="Controllers\Leaderboard\LeaderboardController.cs" />
     <Compile Include="Controllers\Lobby\LobbyContext.cs" />
     <Compile Include="Controllers\Lobby\LobbyController.cs" />
+    <Compile Include="Controllers\Match\MatchController.cs" />
     <Compile Include="Controllers\Preinitiation\PreinitiationController.cs" />
     <Compile Include="Controllers\Profile\ProfileController.cs" />
     <Compile Include="Controllers\Registration\RegistrationController.cs" />
@@ -463,6 +470,19 @@
     <None Include="Connected Services\LobbyReference\LobbyService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\MatchReference\Backgammon.Client.MatchReference.MatchSession.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MatchReference\MatchService.wsdl" />
+    <None Include="Connected Services\MatchReference\MatchService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MatchReference\MatchService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MatchReference\MatchService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\PreinitiationReference\Backgammon.Client.PreinitiationReference.Lobby.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -581,6 +601,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\MatchReference\MatchService.disco" />
+    <None Include="Connected Services\MatchReference\configuration91.svcinfo" />
+    <None Include="Connected Services\MatchReference\configuration.svcinfo" />
+    <None Include="Connected Services\MatchReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -604,6 +631,7 @@
     <WCFMetadataStorage Include="Connected Services\GuestAccessReference\" />
     <WCFMetadataStorage Include="Connected Services\LeaderboardReference\" />
     <WCFMetadataStorage Include="Connected Services\LobbyReference\" />
+    <WCFMetadataStorage Include="Connected Services\MatchReference\" />
     <WCFMetadataStorage Include="Connected Services\PreinitiationReference\" />
     <WCFMetadataStorage Include="Connected Services\LogOutReference\" />
     <WCFMetadataStorage Include="Connected Services\ProfileReference\" />
