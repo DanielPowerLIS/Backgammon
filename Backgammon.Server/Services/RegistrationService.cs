@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data.Entity.Core;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
@@ -12,6 +12,7 @@ using Backgammon.Server.Persistence.Repositories;
 using Backgammon.Server.Persistence.Repositories.InterfacesRepositories;
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
+using Backgammon.Server.Services.ExceptionCode;
 using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;
 using AccountEntity = Backgammon.Server.Persistence.Data.Account;
@@ -23,10 +24,8 @@ namespace Backgammon.Server.Services
     {
         private readonly IAccountRepository _accountRepository;
         private readonly PasswordHashService _passwordHashService;
-        private static readonly string InvalidInputErrorCode = "InvalidInput";
         private static readonly string EmailAlreadyRegisteredErrorCode = "EmailAlreadyRegistered";
         private static readonly string UsernameAlreadyTakenErrorCode = "UsernameAlreadyTaken";
-        private static readonly string ServiceUnavailableErrorCode = "ServiceUnavailable";
         private static readonly int DuplicateIndexErrorNumber = 2601;
         private static readonly int DuplicateConstraintErrorNumber = 2627;
         private static readonly int MaximumTextFieldLength = 100;
@@ -55,42 +54,42 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogError(entityException,
                     "An Entity Framework failure prevented account registration.");
 
-                throw CreateRegistrationFault(ServiceUnavailableErrorCode);
+                throw CreateRegistrationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SqlException databaseException)
             {
                 ApplicationLogger.LogError(databaseException,
                     "A SQL Server failure prevented account registration.");
 
-                throw CreateRegistrationFault(ServiceUnavailableErrorCode);
+                throw CreateRegistrationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (DbUpdateException updateException)
             {
                 ApplicationLogger.LogError(updateException,
                     "The account and profile could not be saved to the database.");
 
-                throw CreateRegistrationFault(ServiceUnavailableErrorCode);
+                throw CreateRegistrationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (DbEntityValidationException validationException)
             {
                 ApplicationLogger.LogError(validationException,
                     "Entity validation failed while saving the account and profile.");
 
-                throw CreateRegistrationFault(ServiceUnavailableErrorCode);
+                throw CreateRegistrationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (CryptographicException cryptographicException)
             {
                 ApplicationLogger.LogError(cryptographicException,
                     "A cryptographic failure prevented account registration.");
 
-                throw CreateRegistrationFault(ServiceUnavailableErrorCode);
+                throw CreateRegistrationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (InvalidOperationException operationException)
             {
                 ApplicationLogger.LogError(operationException,
                     "An invalid operation prevented account registration.");
 
-                throw CreateRegistrationFault(ServiceUnavailableErrorCode);
+                throw CreateRegistrationFault(ErrorCodes.ServiceUnavailable);
             }
         }
 
@@ -137,7 +136,7 @@ namespace Backgammon.Server.Services
 
             if (!HasValidEmailFormat(emailAddress))
             {
-                throw CreateRegistrationFault(InvalidInputErrorCode);
+                throw CreateRegistrationFault(ErrorCodes.InvalidInput);
             }
 
             ValidatePasswordFormat(accountInformation.Password);
@@ -147,7 +146,7 @@ namespace Backgammon.Server.Services
         {
             if (playerUsername.Contains("@"))
             {
-                throw CreateRegistrationFault(InvalidInputErrorCode);
+                throw CreateRegistrationFault(ErrorCodes.InvalidInput);
             }
         }
 
@@ -183,7 +182,7 @@ namespace Backgammon.Server.Services
                 string.IsNullOrWhiteSpace(accountInformation.PaternalSurname) ||
                 string.IsNullOrWhiteSpace(accountInformation.MaternalSurname))
             {
-                throw CreateRegistrationFault(InvalidInputErrorCode);
+                throw CreateRegistrationFault(ErrorCodes.InvalidInput);
             }
         }
 
@@ -202,7 +201,7 @@ namespace Backgammon.Server.Services
             {
                 if (registrationField.Trim().Length > MaximumTextFieldLength)
                 {
-                    throw CreateRegistrationFault(InvalidInputErrorCode);
+                    throw CreateRegistrationFault(ErrorCodes.InvalidInput);
                 }
             }
         }
@@ -250,7 +249,7 @@ namespace Backgammon.Server.Services
 
             if (!hasMinimumLength || !hasSpecialCharacter)
             {
-                throw CreateRegistrationFault(InvalidInputErrorCode);
+                throw CreateRegistrationFault(ErrorCodes.InvalidInput);
             }
         }
 
@@ -317,7 +316,7 @@ namespace Backgammon.Server.Services
 
                 ValidateAvailability(accountInformation);
 
-                throw CreateRegistrationFault(ServiceUnavailableErrorCode);
+                throw CreateRegistrationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SqlException databaseException)
             {
@@ -333,7 +332,7 @@ namespace Backgammon.Server.Services
 
                 ValidateAvailability(accountInformation);
 
-                throw CreateRegistrationFault(ServiceUnavailableErrorCode);
+                throw CreateRegistrationFault(ErrorCodes.ServiceUnavailable);
             }
         }
     }

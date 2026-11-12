@@ -1,48 +1,34 @@
-﻿
+using System;
+using System.Collections.Generic;
+using System.ServiceModel;
 
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
+using Backgammon.Server.Services.ExceptionCode;
 using Backgammon.Server.Services.Manager;
 using Backgammon.Server.SupportServices.Logging;
-using System;
-using System.ServiceModel;
 
 namespace Backgammon.Server.Services
 {
     internal class MatchService : IMatchService
     {
-        private const string InvalidRequestCode = "InvalidRequest";
-        private const string SessionExpiredCode = "SessionExpired";
-        private const string AccessDeniedCode = "AccessDenied";
-        private const string MatchUnavailableCode = "MatchUnavailable";
-        private const string ServiceUnavailableCode = "ServiceUnavailable";
+        private static readonly IApplicationLogger ApplicationLogger =
+            new Log4NetApplicationLogger(typeof(MatchService));
 
-        private static readonly IApplicationLogger ApplicationLogger = new Log4NetApplicationLogger(typeof(MatchService));
-        private readonly PlayerSessionManager _playerSessionManager = new PlayerSessionManager();
+        private readonly PlayerSessionManager _playerSessionManager =
+            new PlayerSessionManager();
 
         public MatchSession InitializeMatch(string sessionId, string roomId)
         {
             ValidateMatchRequest(sessionId, roomId);
 
-            try
-            {
-                PlayerSession playerSession = GetPlayerSessionForMatch(sessionId);
-                MatchSession matchSession = CreateMatch(
-                    playerSession.PlayerId, roomId, out IPreinitiationCallback guestCallback);
+            PlayerSession playerSession = GetPlayerSession(sessionId);
+            MatchSession matchSession = CreateMatch(
+                playerSession.PlayerId, roomId, out IPreinitiationCallback guestCallback);
 
-                NotifyGuest(guestCallback, matchSession);
+            NotifyGuest(guestCallback, matchSession);
 
-                return matchSession;
-            }
-            catch (FaultException<MatchFault>)
-            {
-                throw;
-            }
-            catch (Exception exception)
-            {
-                ApplicationLogger.LogError(exception, "An unexpected error prevented match initialization.");
-                throw CreateMatchFault(ServiceUnavailableCode);
-            }
+            return matchSession;
         }
 
         private void ValidateMatchRequest(string sessionId, string roomId)
@@ -51,11 +37,11 @@ namespace Backgammon.Server.Services
             {
                 ApplicationLogger.LogWarning(
                     "Match initialization was rejected because a required identifier is missing.");
-                throw CreateMatchFault(InvalidRequestCode);
+                throw CreateMatchFault(ErrorCodes.InvalidRequest);
             }
         }
 
-        private PlayerSession GetPlayerSessionForMatch(string sessionId)
+        private PlayerSession GetPlayerSession(string sessionId)
         {
             try
             {
@@ -63,11 +49,13 @@ namespace Backgammon.Server.Services
 
                 return playerSession;
             }
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException sessionException)
             {
                 ApplicationLogger.LogWarning(
-                    "Match initialization was rejected because the session is invalid or expired.");
-                throw CreateMatchFault(SessionExpiredCode);
+                    "Match initialization was rejected because the session is invalid. Reason: {0}",
+                    sessionException.Message);
+
+                throw CreateMatchFault(ErrorCodes.SessionExpired);
             }
         }
 
@@ -76,21 +64,36 @@ namespace Backgammon.Server.Services
         {
             try
             {
-                MatchSession matchSession = MatchManager.InitializeMatch(playerId, roomId, out guestCallback);
+                MatchSession matchSession =
+                    MatchManager.InitializeMatch(playerId, roomId, out guestCallback);
 
                 return matchSession;
             }
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException accessException)
             {
                 ApplicationLogger.LogWarning(
-                    "Match initialization was rejected because the player is not the lobby host.");
-                throw CreateMatchFault(AccessDeniedCode);
+                    "Match initialization was rejected because the player is not the lobby host. " +
+                    "Reason: {0}",
+                    accessException.Message);
+
+                throw CreateMatchFault(ErrorCodes.AccessDenied);
             }
-            catch (InvalidOperationException)
+            catch (KeyNotFoundException matchException)
             {
                 ApplicationLogger.LogWarning(
-                    "Match initialization was rejected because the match is unavailable.");
-                throw CreateMatchFault(MatchUnavailableCode);
+                    "Match initialization was rejected because the lobby or guest is unavailable. " +
+                    "Reason: {0}",
+                    matchException.Message);
+
+                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
+            }
+            catch (ArgumentException matchException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Match initialization was rejected because a match is already active. Reason: {0}",
+                    matchException.Message);
+
+                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
             }
         }
 
@@ -129,25 +132,29 @@ namespace Backgammon.Server.Services
 
                 return matchSession;
             }
-            catch (ArgumentException)
+            catch (UnauthorizedAccessException accessException)
             {
-                throw CreateMatchFault("InvalidRequest");
-            }
-            catch (UnauthorizedAccessException)
-            {
-                throw CreateMatchFault("AccessDenied");
-            }
-            catch (InvalidOperationException)
-            {
-                throw CreateMatchFault("MatchUnavailable");
-            }
-            catch (Exception exception)
-            {
-                ApplicationLogger.LogError(
-                    exception,
-                    "An unexpected error prevented the player from joining the match.");
+                ApplicationLogger.LogWarning(
+                    "The player was denied access to the requested match. Reason: {0}",
+                    accessException.Message);
 
-                throw CreateMatchFault("ServiceUnavailable");
+                throw CreateMatchFault(ErrorCodes.AccessDenied);
+            }
+            catch (KeyNotFoundException matchException)
+            {
+                ApplicationLogger.LogWarning(
+                    "The requested match is unavailable. Reason: {0}",
+                    matchException.Message);
+
+                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
+            }
+            catch (ArgumentException requestException)
+            {
+                ApplicationLogger.LogWarning(
+                    "The match join request was invalid. Reason: {0}",
+                    requestException.Message);
+
+                throw CreateMatchFault(ErrorCodes.InvalidRequest);
             }
         }
 

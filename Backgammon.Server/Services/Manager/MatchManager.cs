@@ -1,4 +1,4 @@
-﻿
+
 
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
@@ -6,6 +6,7 @@ using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace Backgammon.Server.Services.Manager
 {
@@ -19,12 +20,15 @@ namespace Backgammon.Server.Services.Manager
 
         private const string GuestRequired = "A guest is required to start the match.";
         private const string MatchAlreadyActive = "The lobby already has an active match.";
+        private const string MatchIdentifiersRequired = "Room and match identifiers are required.";
+        private const string MatchUnavailable = "The requested match is unavailable.";
+        private const string PlayerNotInMatch = "The player does not belong to this match.";
 
 
         public static MatchSession InitializeMatch(
             int requestPlayerId, string roomId, out IPreinitiationCallback guestCallback)
         {
-            LobbySession lobbySession = LobbyManager.GetLobbySession(roomId);
+            LobbySession lobbySession = LobbyManager.GetExistingLobbySession(roomId);
             MatchSession matchCopy;
 
             lock (lobbySession.Queue)
@@ -35,7 +39,7 @@ namespace Backgammon.Server.Services.Manager
 
                 if (!lobby.IsFull)
                 {
-                    throw new InvalidOperationException(GuestRequired);
+                    throw new KeyNotFoundException(GuestRequired);
                 }
 
                 guestCallback = lobbySession.GuestCallback;
@@ -44,7 +48,7 @@ namespace Backgammon.Server.Services.Manager
                 {
                     if (activeMatch.PlayerHostId != lobby.HostPlayerId || activeMatch.PlayerGuestId != lobby.GuestPlayerId)
                     {
-                        throw new InvalidOperationException(MatchAlreadyActive);
+                        throw new ArgumentException(MatchAlreadyActive);
                     }
 
                     MatchSession activeMatchCopy = CopyMatch(activeMatch);
@@ -65,7 +69,7 @@ namespace Backgammon.Server.Services.Manager
 
                 if (!matchAdded)
                 {
-                    throw new InvalidOperationException(MatchAlreadyActive);
+                    throw new ArgumentException(MatchAlreadyActive);
                 }
             }
 
@@ -95,21 +99,21 @@ namespace Backgammon.Server.Services.Manager
         {
             if (string.IsNullOrWhiteSpace(roomId) || string.IsNullOrWhiteSpace(matchId))
             {
-                throw new ArgumentException("Room and match identifiers are required.");
+                throw new ArgumentException(MatchIdentifiersRequired);
             }
 
-            LobbySession lobbySession = LobbyManager.GetLobbySession(roomId);
+            LobbySession lobbySession = LobbyManager.GetExistingLobbySession(roomId);
             MatchSession matchCopy;
 
             lock (lobbySession.Queue)
             {
-                LobbyManager.ValidateLobbyIsActive(lobbySession);
+                LobbyManager.ValidateLobbyForMatch(lobbySession);
 
                 bool matchFound = ActiveMatches.TryGetValue(roomId, out MatchSession matchSession);
 
                 if (!matchFound || matchSession.MatchId != matchId)
                 {
-                    throw new InvalidOperationException("The requested match is unavailable.");
+                    throw new KeyNotFoundException(MatchUnavailable);
                 }
 
                 bool isHost = matchSession.PlayerHostId == requestPlayerId;
@@ -117,7 +121,7 @@ namespace Backgammon.Server.Services.Manager
 
                 if (!isHost && !isGuest)
                 {
-                    throw new UnauthorizedAccessException("The player does not belong to this match.");
+                    throw new UnauthorizedAccessException(PlayerNotInMatch);
                 }
 
                 matchCopy = CopyMatch(matchSession);

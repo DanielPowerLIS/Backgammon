@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Security.Cryptography;
 using System.ServiceModel;
 using System.Threading;
 
 using Backgammon.Server.Services.Data;
+using Backgammon.Server.Services.ExceptionCode;
 using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;
 
@@ -15,7 +16,6 @@ namespace Backgammon.Server.Services.Manager
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(PlayerSessionManager));
 
-        private static readonly string SessionExpiredErrorCode = "SessionExpired";
 
         private static readonly TimeSpan SessionInactivityTimeout =
             TimeSpan.FromMinutes(30);
@@ -119,7 +119,7 @@ namespace Backgammon.Server.Services.Manager
                     "The profile operation was rejected because the session is invalid or expired. Reason: {0}",
                     sessionException.Message);
 
-                throw CreatePlayerSessionFault(SessionExpiredErrorCode);
+                throw CreatePlayerSessionFault(ErrorCodes.SessionExpired);
             }
         }
 

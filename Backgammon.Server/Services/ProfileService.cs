@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
 using System.Data.SqlClient;
@@ -10,6 +10,7 @@ using System.Data.Entity.Validation;
 using Backgammon.Server.Persistence.Repositories;
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
+using Backgammon.Server.Services.ExceptionCode;
 using Backgammon.Server.Services.Manager;
 using Backgammon.Server.SupportServices.Logging;
 using Backgammon.Server.Persistence.Repositories.InterfacesRepositories;
@@ -27,7 +28,6 @@ namespace Backgammon.Server.Services
         private readonly IProfileRepository _profileRepository;
         private readonly PlayerSessionManager _playerSessionManager;
 
-        private static readonly string ServiceUnavailableErrorCode = "ServiceUnavailable";
         private static readonly string ProfileNotFoundErrorCode = "ProfileNotFound";
 
         private static readonly int FacebookTypeId = 1;
@@ -143,14 +143,14 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogError(entityException,
                     "An Entity Framework failure prevented the player profile from loading.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SqlException databaseException)
             {
                 ApplicationLogger.LogError(databaseException,
                     "A SQL Server failure prevented the player profile from loading.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
         }
 
@@ -170,14 +170,14 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogError(entityException,
                     "An Entity Framework failure prevented the available avatars from loading.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SqlException databaseException)
             {
                 ApplicationLogger.LogError(databaseException,
                     "A SQL Server failure prevented the available avatars from loading.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
         }
 
@@ -195,28 +195,28 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogError(entityException,
                     "An Entity Framework failure prevented the avatar from being changed.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SqlException databaseException)
             {
                 ApplicationLogger.LogError(databaseException,
                     "A SQL Server failure prevented the avatar from being changed.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (DbUpdateException updateException)
             {
                 ApplicationLogger.LogError(updateException,
                     "The avatar change could not be saved to the database.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (DbEntityValidationException validationException)
             {
                 ApplicationLogger.LogError(validationException,
                     "Entity validation failed while saving the avatar change.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
         }
 
@@ -235,7 +235,7 @@ namespace Backgammon.Server.Services
                     entityException,
                     "An Entity Framework failure prevented the profile description from being updated.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SqlException databaseException)
             {
@@ -243,7 +243,7 @@ namespace Backgammon.Server.Services
                     databaseException,
                     "A SQL Server failure prevented the profile description from being updated.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (DbUpdateException updateException)
             {
@@ -251,7 +251,7 @@ namespace Backgammon.Server.Services
                     updateException,
                     "The profile description could not be saved to the database.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (DbEntityValidationException validationException)
             {
@@ -259,7 +259,7 @@ namespace Backgammon.Server.Services
                     validationException,
                     "Entity validation failed while saving the profile description.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
         }
 
@@ -279,14 +279,14 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogError(entityException,
                     "An Entity Framework failure prevented the social media types from loading.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SqlException databaseException)
             {
                 ApplicationLogger.LogError(databaseException,
                     "A SQL Server failure prevented the social media types from loading.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
         }
 
@@ -307,28 +307,28 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogError(entityException,
                     "An Entity Framework failure prevented the social media link from being added.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SqlException databaseException)
             {
                 ApplicationLogger.LogError(databaseException,
                     "A SQL Server failure prevented the social media link from being added.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (DbUpdateException updateException)
             {
                 ApplicationLogger.LogError(updateException,
                     "The new social media link could not be saved to the database.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (DbEntityValidationException validationException)
             {
                 ApplicationLogger.LogError(validationException,
                     "Entity validation failed while saving the new social media link.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
         }
 
@@ -346,21 +346,21 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogError(entityException,
                     "An Entity Framework failure prevented the social media link from being removed.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SqlException databaseException)
             {
                 ApplicationLogger.LogError(databaseException,
                     "A SQL Server failure prevented the social media link from being removed.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (DbUpdateException updateException)
             {
                 ApplicationLogger.LogError(updateException,
                     "The social media link deletion could not be saved to the database.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
         }
 
@@ -381,28 +381,28 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogError(entityException,
                     "An Entity Framework failure prevented the social media link from being updated.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SqlException databaseException)
             {
                 ApplicationLogger.LogError(databaseException,
                     "A SQL Server failure prevented the social media link from being updated.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (DbUpdateException updateException)
             {
                 ApplicationLogger.LogError(updateException,
                     "The social media link changes could not be saved to the database.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
             catch (DbEntityValidationException validationException)
             {
                 ApplicationLogger.LogError(validationException,
                     "Entity validation failed while saving the social media link changes.");
 
-                throw CreatePlayerProfileFault(ServiceUnavailableErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ServiceUnavailable);
             }
         }
 

@@ -4,6 +4,7 @@ using System.ServiceModel;
 
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
+using Backgammon.Server.Services.ExceptionCode;
 using Backgammon.Server.Services.Manager;
 using Backgammon.Server.SupportServices.Logging;
 
@@ -12,8 +13,6 @@ namespace Backgammon.Server.Services
     public class GuestAccessService : IGuestAccessService
     {
         private readonly PlayerSessionManager _playerSessionManager;
-
-        private static readonly string ServiceUnavailableErrorCode = "ServiceUnavailable";
 
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(GuestAccessService));
@@ -38,7 +37,7 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogError(cryptographicException,
                     "A cryptographic failure prevented guest access from completing.");
 
-                throw CreateGuestAccessFault(ServiceUnavailableErrorCode);
+                throw CreateGuestAccessFault(ErrorCodes.ServiceUnavailable);
             }
         }
 

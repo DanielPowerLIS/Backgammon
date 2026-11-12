@@ -16,7 +16,6 @@ namespace Backgammon.Server.Services.Manager
         private static readonly string CodeLobbyDoesNotExistMessage = "The lobby code does not exist.";
         private static readonly string LobbyFullMessage = "The lobby is already full.";
         private static readonly string HostCannotJoinMessage = "The host cannot join their own lobby.";
-
         private static readonly string HostCannotLeaveMessage = "Host departure is not available yet.";
 
         private static readonly string PlayerNotGuestMessage = 
@@ -93,11 +92,11 @@ namespace Backgammon.Server.Services.Manager
                 throw new ArgumentNullException(nameof(playerSession));
             }
 
-            LobbySession lobbySession = GetLobbySession(roomId);
+            LobbySession lobbySession = GetExistingLobbySession(roomId);
 
             lock (lobbySession.Queue)
             {
-                ValidateLobbyIsActive(lobbySession);
+                ValidateLobbyForDeparture(lobbySession);
                 ValidateGuestCanLeave(lobbySession, playerSession);
 
                 ClearGuestIfMatches(lobbySession, playerSession.PlayerId);
@@ -116,12 +115,12 @@ namespace Backgammon.Server.Services.Manager
                 throw new ArgumentNullException(nameof(playerSession));
             }
 
-            LobbySession lobbySession = GetLobbySession(roomId);
+            LobbySession lobbySession = GetExistingLobbySession(roomId);
             LobbySession closedLobbySession;
 
             lock (lobbySession.Queue)
             {
-                ValidateLobbyIsActive(lobbySession);
+                ValidateLobbyForDeparture(lobbySession);
 
                 if (lobbySession.RoomData.HostPlayerId != playerSession.PlayerId)
                 {
@@ -135,7 +134,7 @@ namespace Backgammon.Server.Services.Manager
 
                 if (!roomRemoved)
                 {
-                    throw new InvalidOperationException(CodeLobbyDoesNotExistMessage);
+                    throw new KeyNotFoundException(CodeLobbyDoesNotExistMessage);
                 }
             }
 
@@ -144,7 +143,7 @@ namespace Backgammon.Server.Services.Manager
 
         public static bool IsGuestInRoom(int playerId, string roomId)
         {
-            LobbySession lobbySession = GetLobbySession(roomId);
+            LobbySession lobbySession = GetExistingLobbySession(roomId);
             bool isGuest;
 
             lock (lobbySession.Queue)
@@ -173,7 +172,7 @@ namespace Backgammon.Server.Services.Manager
 
         public static List<ChatMessage> JoinChat(PlayerSession playerSession, string roomId, IChatCallback chatCallback)
         {
-            LobbySession lobbySession = GetLobbySession(roomId);
+            LobbySession lobbySession = GetExistingLobbySession(roomId);
             List<ChatMessage> chatMessages = ChatManager.JoinChat(lobbySession, playerSession, chatCallback);
 
             return chatMessages;
@@ -181,7 +180,7 @@ namespace Backgammon.Server.Services.Manager
 
         public static ChatMessage SendMessage(PlayerSession sender, string roomId, string message)
         {
-            LobbySession lobbySession = GetLobbySession(roomId);
+            LobbySession lobbySession = GetExistingLobbySession(roomId);
             ChatMessage sentMessage = ChatManager.SendMessage(
                 lobbySession,
                 sender,
@@ -196,9 +195,9 @@ namespace Backgammon.Server.Services.Manager
 
             try
             {
-                lobbySession = GetLobbySession(roomId);
+                lobbySession = GetExistingLobbySession(roomId);
             }
-            catch (InvalidOperationException lobbyException)
+            catch (KeyNotFoundException lobbyException)
             {
                 ApplicationLogger.LogWarning(
                     "Chat departure was skipped because the lobby no longer exists. Reason: {0}",
@@ -212,7 +211,7 @@ namespace Backgammon.Server.Services.Manager
 
         internal static void ValidateHostMatch(int requestPlayerId, LobbySession lobbySession)
         {
-            ValidateLobbyIsActive(lobbySession);
+            ValidateLobbyForMatch(lobbySession);
 
             if (lobbySession.RoomData.HostPlayerId != requestPlayerId)
             {
@@ -281,31 +280,46 @@ namespace Backgammon.Server.Services.Manager
 
         public static LobbySession GetLobbySession(string roomId)
         {
+            if (!TryGetLobbySession(roomId, out LobbySession lobbySession))
+            {
+                throw new KeyNotFoundException(CodeLobbyDoesNotExistMessage);
+            }
+
+            return lobbySession;
+        }
+
+        internal static LobbySession GetExistingLobbySession(string roomId)
+        {
+            if (!TryGetLobbySession(roomId, out LobbySession lobbySession))
+            {
+                throw new KeyNotFoundException(CodeLobbyDoesNotExistMessage);
+            }
+
+            return lobbySession;
+        }
+
+        private static bool TryGetLobbySession(string roomId, out LobbySession lobbySession)
+        {
             if (roomId == null)
             {
                 throw new ArgumentNullException(nameof(roomId));
             }
 
-            bool lobbyFound = ActiveRooms.TryGetValue(roomId, out LobbySession lobbySession);
+            bool lobbyFound = ActiveRooms.TryGetValue(roomId, out lobbySession) && lobbySession != null;
 
-            if (!lobbyFound || lobbySession == null)
-            {
-                throw new InvalidOperationException(CodeLobbyDoesNotExistMessage);
-            }
-
-            return lobbySession;
+            return lobbyFound;
         }
 
         private static void ValidateGuestCanJoin(LobbySession lobbySession, PlayerSession guestPlayer)
         {
             if (lobbySession.RoomData.HostPlayerId == guestPlayer.PlayerId)
             {
-                throw new InvalidOperationException(HostCannotJoinMessage);
+                throw new UnauthorizedAccessException(HostCannotJoinMessage);
             }
 
             if (lobbySession.RoomData.IsFull)
             {
-                throw new InvalidOperationException(LobbyFullMessage);
+                throw new ArgumentException(LobbyFullMessage);
             }
         }
 
@@ -337,7 +351,7 @@ namespace Backgammon.Server.Services.Manager
 
             if (lobbySession.RoomData.HostPlayerId == playerId)
             {
-                throw new InvalidOperationException(HostCannotLeaveMessage);
+                throw new UnauthorizedAccessException(HostCannotLeaveMessage);
             }
 
             bool occupiesGuestPosition = playerId != 0 && lobbySession.RoomData.GuestPlayerId == playerId;
@@ -377,6 +391,31 @@ namespace Backgammon.Server.Services.Manager
             return roomRemoved;
         }
 
+
+        private static bool IsLobbyActive(LobbySession lobbySession)
+        {
+            string roomId = lobbySession.RoomData.RoomId;
+            bool lobbyFound = TryGetLobbySession(roomId, out LobbySession storedSession);
+            bool sameSession = lobbyFound && ReferenceEquals(storedSession, lobbySession);
+
+            return sameSession;
+        }
+
+        private static void ValidateLobbyForDeparture(LobbySession lobbySession)
+        {
+            if (!IsLobbyActive(lobbySession))
+            {
+                throw new KeyNotFoundException(CodeLobbyDoesNotExistMessage);
+            }
+        }
+        internal static void ValidateLobbyForMatch(LobbySession lobbySession)
+        {
+            if (!IsLobbyActive(lobbySession))
+            {
+                throw new KeyNotFoundException(CodeLobbyDoesNotExistMessage);
+            }
+        }
+
         internal static void ValidateLobbyIsActive(LobbySession lobbySession)
         {
             string roomId = lobbySession.RoomData.RoomId;
@@ -386,7 +425,7 @@ namespace Backgammon.Server.Services.Manager
 
             if (!sameLobbySession)
             {
-                throw new InvalidOperationException(CodeLobbyDoesNotExistMessage);
+                throw new KeyNotFoundException(CodeLobbyDoesNotExistMessage);
             }
         }
 

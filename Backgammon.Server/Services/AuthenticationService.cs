@@ -17,6 +17,7 @@ using Backgammon.Server.Persistence.Repositories;
 using Backgammon.Server.Persistence.Repositories.InterfacesRepositories;
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
+using Backgammon.Server.Services.ExceptionCode;
 using Backgammon.Server.Services.Manager;
 using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;
@@ -32,9 +33,7 @@ namespace Backgammon.Server.Services
         private readonly CodeGenerator _codeGenerator;
         private readonly VerificationManager _verificationManager;
 
-        private static readonly string InvalidInputErrorCode = "InvalidInput";
         private static readonly string InvalidCredentialsErrorCode = "InvalidCredentials";
-        private static readonly string ServiceUnavailableErrorCode = "ServiceUnavailable";
 
         private static readonly int VerificationCodeLength = 6;
 
@@ -69,21 +68,21 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogError(entityException,
                     "An Entity Framework failure prevented sign-in from completing.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SqlException databaseException)
             {
                 ApplicationLogger.LogError(databaseException,
                     "A SQL Server failure prevented sign-in from completing.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (CryptographicException cryptographicException)
             {
                 ApplicationLogger.LogError(cryptographicException,
                     "A cryptographic failure prevented sign-in from completing.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
         }
 
@@ -105,21 +104,21 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogError(entityException,
                     "An Entity Framework failure prevented verified sign-in from completing.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SqlException databaseException)
             {
                 ApplicationLogger.LogError(databaseException,
                     "A SQL Server failure prevented verified sign-in from completing.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (CryptographicException cryptographicException)
             {
                 ApplicationLogger.LogError(cryptographicException,
                     "A cryptographic failure prevented verified sign-in from completing.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (KeyNotFoundException accountException)
             {
@@ -200,7 +199,7 @@ namespace Backgammon.Server.Services
                 string.IsNullOrWhiteSpace(playerCredentials.Identifier) ||
                 string.IsNullOrWhiteSpace(playerCredentials.Password))
             {
-                throw CreateAuthenticationFault(InvalidInputErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.InvalidInput);
             }
         }
 
@@ -230,70 +229,70 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogError(configurationException,
                     "The email configuration prevented the verification message from being sent.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (ParseException addressException)
             {
                 ApplicationLogger.LogError(addressException,
                     "The recipient address could not be parsed.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SocketException socketException)
             {
                 ApplicationLogger.LogError(socketException,
                     "A network failure prevented connection to the email server.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SslHandshakeException handshakeException)
             {
                 ApplicationLogger.LogError(handshakeException,
                     "TLS negotiation with the email server failed.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SaslException saslException)
             {
                 ApplicationLogger.LogError(saslException,
                     "A SASL failure prevented authentication with the email server.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (MailKit.Security.AuthenticationException authenticationException)
             {
                 ApplicationLogger.LogError(authenticationException,
                     "The email server rejected the sender credentials.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SmtpCommandException commandException)
             {
                 ApplicationLogger.LogError(commandException,
                     "An SMTP command failed while sending the verification message.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SmtpProtocolException protocolException)
             {
                 ApplicationLogger.LogError(protocolException,
                     "An SMTP protocol failure prevented the verification message from being sent.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (IOException communicationException)
             {
                 ApplicationLogger.LogError(communicationException,
                     "An input/output failure occurred while communicating with the email server.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (NotSupportedException securityException)
             {
                 ApplicationLogger.LogError(securityException,
                     "The email server does not support the required STARTTLS connection.");
 
-                throw CreateAuthenticationFault(ServiceUnavailableErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.ServiceUnavailable);
             }
         }
 
