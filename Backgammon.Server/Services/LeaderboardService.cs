@@ -11,14 +11,13 @@ using Backgammon.Server.Persistence.Repositories;
 using Backgammon.Server.Services.Data;
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.SupportServices.Logging;
+using Backgammon.Server.Services.ExceptionCode;
 
 namespace Backgammon.Server.Services
 {
     public class LeaderboardService : ILeaderboardService
     {
         private readonly IProfileRepository _profileRepository;
-
-        private static readonly string ServiceUnavailableErrorCode = "ServiceUnavailable";
 
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(LeaderboardService));
@@ -51,14 +50,14 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogError(entityException,
                     "An Entity Framework failure prevented the leaderboard from loading.");
 
-                throw CreateLeaderboardFault(ServiceUnavailableErrorCode);
+                throw CreateLeaderboardFault(ErrorCodes.ServiceUnavailable);
             }
             catch (SqlException databaseException)
             {
                 ApplicationLogger.LogError(databaseException,
                     "A SQL Server failure prevented the leaderboard from loading.");
 
-                throw CreateLeaderboardFault(ServiceUnavailableErrorCode);
+                throw CreateLeaderboardFault(ErrorCodes.ServiceUnavailable);
             }
         }
 

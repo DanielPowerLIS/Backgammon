@@ -1,8 +1,10 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
+using Backgammon.Server.Services.ExceptionCode;
 using Backgammon.Server.Services.Manager;
 using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;
@@ -17,11 +19,7 @@ namespace Backgammon.Server.Services
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(LobbyService));
 
-        private static readonly string SessionExpiredErrorCode = "SessionExpired";
-
         private static readonly string LeaveLobbyErrorCode = "LobbyLeaveFailed";
-
-        private static readonly string AccessDeniedErrorCode = "AccessDenied";
 
         public void LeaveLobby(string sessionId, string roomId)
         {
@@ -55,7 +53,7 @@ namespace Backgammon.Server.Services
                     "Lobby departure was rejected because the session is invalid or expired. Reason: {0}",
                     sessionException.Message);
 
-                throw CreateLobbyFault(SessionExpiredErrorCode);
+                throw CreateLobbyFault(ErrorCodes.SessionExpired);
             }
         }
 
@@ -84,9 +82,9 @@ namespace Backgammon.Server.Services
                     "Player {0} cannot leave room {1}. Reason: {2}",
                     playerSession.PlayerId, roomId, accessException.Message);
 
-                throw CreateLobbyFault(AccessDeniedErrorCode);
+                throw CreateLobbyFault(ErrorCodes.AccessDenied);
             }
-            catch (InvalidOperationException lobbyException)
+            catch (KeyNotFoundException lobbyException)
             {
                 ApplicationLogger.LogWarning(
                     "Departure from room {0} could not be completed. Reason: {1}",
@@ -108,23 +106,19 @@ namespace Backgammon.Server.Services
             {
                 ApplicationLogger.LogError(
                     communicationException,
-                    "A communication failure prevented the host of room {0} from receiving the departure update.",
-                    lobby.RoomId);
+                    "A communication failure prevented the host from receiving the departure update.");
             }
             catch (TimeoutException timeoutException)
             {
                 ApplicationLogger.LogError(
                     timeoutException,
-                    "The departure callback to the host of room {0} exceeded the time limit.",
-                    lobby.RoomId);
+                    "The departure callback to the host exceeded the time limit.");
             }
             catch (ObjectDisposedException disposedException)
             {
                 ApplicationLogger.LogError(
                     disposedException,
-                    "The departure callback to the host of room {0} could not " +
-                    "be completed because the channel was disposed.",
-                    lobby.RoomId);
+                    "The host channel was disposed before the departure update could be sent.");
             }
         }
 
@@ -135,32 +129,27 @@ namespace Backgammon.Server.Services
                 return;
             }
 
-            string roomId = lobbySession.RoomData.RoomId;
-
             try
             {
                 lobbySession.GuestCallback.OnCloseLobby(false);
             }
             catch (CommunicationException communicationException)
             {
-                ApplicationLogger.LogError(communicationException,
-                    "A communication failure prevented the guest of room {0} " +
-                    "from receiving the lobby closure.",
-                    roomId);
+                ApplicationLogger.LogError(
+                    communicationException,
+                    "A communication failure prevented the guest from receiving the lobby closure.");
             }
             catch (TimeoutException timeoutException)
             {
-                ApplicationLogger.LogError(timeoutException,
-                    "The closure callback to the guest of room {0} " +
-                    "exceeded the time limit.",
-                    roomId);
+                ApplicationLogger.LogError(
+                    timeoutException,
+                    "The closure callback to the guest exceeded the time limit.");
             }
             catch (ObjectDisposedException disposedException)
             {
-                ApplicationLogger.LogError(disposedException,
-                    "The closure callback to the guest of room {0} " +
-                    "could not be completed because the channel was disposed.",
-                    roomId);
+                ApplicationLogger.LogError(
+                    disposedException,
+                    "The guest channel was disposed before the lobby closure could be sent.");
             }
         }
 

@@ -1,10 +1,12 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 
 using System.Text.RegularExpressions;
 
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
+using Backgammon.Server.Services.ExceptionCode;
 using Backgammon.Server.Services.Manager;
 using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;
@@ -21,9 +23,7 @@ namespace Backgammon.Server.Services
             new Log4NetApplicationLogger(typeof(PreinitiationService));
 
         private static readonly string JoinLobbyErrorCode = "LobbyJoinFailed";
-        private static readonly string SessionExpiredErrorCode = "SessionExpired";
         private static readonly string InvalidRoomCodeErrorCode = "InvalidRoomCode";
-        private static readonly string ServiceUnavailableErrorCode = "ServiceUnavailable";
 
         private static readonly string RoomCodePattern = @"\A[A-Z0-9]{6}\z";
 
@@ -59,9 +59,26 @@ namespace Backgammon.Server.Services
 
                 return lobby;
             }
-            catch (InvalidOperationException lobbyException)
+            catch (KeyNotFoundException lobbyException)
             {
-                ApplicationLogger.LogWarning("The player could not join the lobby. Reason: {0}",
+                ApplicationLogger.LogWarning(
+                    "The player could not join the lobby because it no longer exists. Reason: {0}",
+                    lobbyException.Message);
+
+                throw CreatePreinitiationFault(JoinLobbyErrorCode);
+            }
+            catch (UnauthorizedAccessException lobbyException)
+            {
+                ApplicationLogger.LogWarning(
+                    "The player was not allowed to join the lobby. Reason: {0}",
+                    lobbyException.Message);
+
+                throw CreatePreinitiationFault(JoinLobbyErrorCode);
+            }
+            catch (ArgumentException lobbyException)
+            {
+                ApplicationLogger.LogWarning(
+                    "The lobby could not accept the player. Reason: {0}",
                     lobbyException.Message);
 
                 throw CreatePreinitiationFault(JoinLobbyErrorCode);
@@ -82,7 +99,7 @@ namespace Backgammon.Server.Services
                     "The lobby operation was rejected because the session is invalid or expired. Reason: {0}",
                     sessionException.Message);
 
-                throw CreatePreinitiationFault(SessionExpiredErrorCode);
+                throw CreatePreinitiationFault(ErrorCodes.SessionExpired);
             }
         }
 
@@ -102,7 +119,7 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogError(validationException,
                     "Room code validation exceeded the execution time limit.");
 
-                throw CreatePreinitiationFault(ServiceUnavailableErrorCode);
+                throw CreatePreinitiationFault(ErrorCodes.ServiceUnavailable);
             }
         }
 
@@ -122,7 +139,7 @@ namespace Backgammon.Server.Services
 
                 LobbyManager.CancelJoin(lobbySession, guestPlayerId);
 
-                throw CreatePreinitiationFault(ServiceUnavailableErrorCode);
+                throw CreatePreinitiationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (TimeoutException timeoutException)
             {
@@ -132,7 +149,7 @@ namespace Backgammon.Server.Services
 
                 LobbyManager.CancelJoin(lobbySession, guestPlayerId);
 
-                throw CreatePreinitiationFault(ServiceUnavailableErrorCode);
+                throw CreatePreinitiationFault(ErrorCodes.ServiceUnavailable);
             }
             catch (ObjectDisposedException disposedException)
             {
@@ -142,7 +159,7 @@ namespace Backgammon.Server.Services
 
                 LobbyManager.CancelJoin(lobbySession, guestPlayerId);
 
-                throw CreatePreinitiationFault(ServiceUnavailableErrorCode);
+                throw CreatePreinitiationFault(ErrorCodes.ServiceUnavailable);
             }
         }
 
