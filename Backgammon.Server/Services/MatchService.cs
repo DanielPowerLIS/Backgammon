@@ -11,37 +11,86 @@ namespace Backgammon.Server.Services
 {
     internal class MatchService : IMatchService
     {
+        private const string InvalidRequestCode = "InvalidRequest";
+        private const string SessionExpiredCode = "SessionExpired";
+        private const string AccessDeniedCode = "AccessDenied";
+        private const string MatchUnavailableCode = "MatchUnavailable";
+        private const string ServiceUnavailableCode = "ServiceUnavailable";
+
         private static readonly IApplicationLogger ApplicationLogger = new Log4NetApplicationLogger(typeof(MatchService));
         private readonly PlayerSessionManager _playerSessionManager = new PlayerSessionManager();
+
         public MatchSession InitializeMatch(string sessionId, string roomId)
         {
+            ValidateMatchRequest(sessionId, roomId);
+
             try
             {
-                if (string.IsNullOrWhiteSpace(sessionId))
-                {
-                    throw new ArgumentException("Session ID cannot be null or empty.", nameof(sessionId));
-                }
-
-                if (string.IsNullOrWhiteSpace(roomId))
-                {
-                    throw new ArgumentException("Room ID cannot be null or empty.", nameof(roomId));
-                }
-
-                PlayerSession playerSession = _playerSessionManager.GetSession(sessionId, true);
-                int requestPlayerId = playerSession.PlayerId;
-                MatchSession matchSession = MatchManager.InitializeMatch(
-                    requestPlayerId, roomId, out IPreinitiationCallback guestCallback);
+                PlayerSession playerSession = GetPlayerSessionForMatch(sessionId);
+                MatchSession matchSession = CreateMatch(
+                    playerSession.PlayerId, roomId, out IPreinitiationCallback guestCallback);
 
                 NotifyGuest(guestCallback, matchSession);
 
                 return matchSession;
             }
+            catch (FaultException<MatchFault>)
+            {
+                throw;
+            }
             catch (Exception exception)
             {
-                // TODO: Quitar el log de error y manejar la excepción de manera más específica según el tipo de error.
-                ApplicationLogger.LogError(exception,"The request to initialize a match failed.");
+                ApplicationLogger.LogError(exception, "An unexpected error prevented match initialization.");
+                throw CreateMatchFault(ServiceUnavailableCode);
+            }
+        }
 
-                throw;
+        private void ValidateMatchRequest(string sessionId, string roomId)
+        {
+            if (string.IsNullOrWhiteSpace(sessionId) || string.IsNullOrWhiteSpace(roomId))
+            {
+                ApplicationLogger.LogWarning(
+                    "Match initialization was rejected because a required identifier is missing.");
+                throw CreateMatchFault(InvalidRequestCode);
+            }
+        }
+
+        private PlayerSession GetPlayerSessionForMatch(string sessionId)
+        {
+            try
+            {
+                PlayerSession playerSession = _playerSessionManager.GetSession(sessionId, true);
+
+                return playerSession;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Match initialization was rejected because the session is invalid or expired.");
+                throw CreateMatchFault(SessionExpiredCode);
+            }
+        }
+
+        private MatchSession CreateMatch(
+            int playerId, string roomId, out IPreinitiationCallback guestCallback)
+        {
+            try
+            {
+                MatchSession matchSession = MatchManager.InitializeMatch(playerId, roomId, out guestCallback);
+
+                return matchSession;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Match initialization was rejected because the player is not the lobby host.");
+                throw CreateMatchFault(AccessDeniedCode);
+            }
+            catch (InvalidOperationException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Match initialization was rejected because the match is unavailable.");
+                throw CreateMatchFault(MatchUnavailableCode);
             }
         }
 
