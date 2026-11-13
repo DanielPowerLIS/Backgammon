@@ -4,9 +4,7 @@ namespace Backgammon.Server.SupportServices
 {
     internal class CodeGenerator
     {
-
-        private static readonly string AllowedCharacters =
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        private static readonly string AllowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
         public string Generate(int codeLength)
         {

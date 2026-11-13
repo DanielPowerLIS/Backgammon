@@ -36,8 +36,7 @@ namespace Backgammon.Server.Tests.Services.Manager
 
             try 
             {
-                var storedSession = sessionManager.GetSession(playerSession.SessionId,
-                    false);
+                var storedSession = sessionManager.GetSession(playerSession.SessionId, false);
 
                 Assert.IsNotNull(storedSession);
                 Assert.AreEqual(playerSession.PlayerId, storedSession.PlayerId);

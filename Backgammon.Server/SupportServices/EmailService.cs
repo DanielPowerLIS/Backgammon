@@ -37,8 +37,7 @@ namespace Backgammon.Server.SupportServices
             }
         }
 
-        private MimeMessage CreateMessage(
-            string recipient, string subject, string body)
+        private MimeMessage CreateMessage(string recipient, string subject, string body)
         {
             var message = new MimeMessage();
             var sender = new MailboxAddress(_senderName, _address);
@@ -61,8 +60,7 @@ namespace Backgammon.Server.SupportServices
 
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ConfigurationErrorsException(
-                    "A required email setting is missing: " + key);
+                throw new ConfigurationErrorsException("A required email setting is missing: " + key);
             }
 
             return value;
@@ -75,8 +73,7 @@ namespace Backgammon.Server.SupportServices
 
             if (!validPort || port <= 0 || port > ushort.MaxValue)
             {
-                throw new ConfigurationErrorsException(
-                    "The email port configuration is invalid.");
+                throw new ConfigurationErrorsException("The email port configuration is invalid.");
             }
 
             return port;
