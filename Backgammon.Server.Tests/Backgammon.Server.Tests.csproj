@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Log4NetApplicationLoggerTests.cs" />
+    <Compile Include="Services\Manager\PlayerSessionManagerTests.cs" />
+    <Compile Include="SupportServices\GuestUsernameGeneratorTests.cs" />
     <Compile Include="TestAssemblySetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
