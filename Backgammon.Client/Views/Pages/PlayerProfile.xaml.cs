@@ -42,7 +42,7 @@ namespace Backgammon.Client.Views.Pages
 
                 PopulateProfile(profileData);
             }
-            catch (InvalidOperationException sessionException)
+            catch (NullReferenceException sessionException)
             {
                 ApplicationLogger.LogError(
                     sessionException,

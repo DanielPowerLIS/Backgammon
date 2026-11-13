@@ -153,6 +153,11 @@ namespace Backgammon.Client.Views.Pages
 
                 ShowStartMatchError();
             }
+            catch (NullReferenceException exception)
+            {
+                ApplicationLogger.LogError(exception, "The player session or lobby is unavailable.");
+                ShowStartMatchError();
+            }
             catch (CommunicationException exception)
             {
                 ApplicationLogger.LogError(exception, "The request to join the match failed.");
@@ -161,11 +166,6 @@ namespace Backgammon.Client.Views.Pages
             catch (TimeoutException exception)
             {
                 ApplicationLogger.LogError(exception, "Joining the match timed out.");
-                ShowStartMatchError();
-            }
-            catch (InvalidOperationException exception)
-            {
-                ApplicationLogger.LogError(exception, "The player session or lobby is unavailable.");
                 ShowStartMatchError();
             }
         }
@@ -192,6 +192,12 @@ namespace Backgammon.Client.Views.Pages
                 IsEnabled = true;
                 NavigationService.Navigate(new GamePage(matchSession));
             }
+            catch (NullReferenceException nullReferenceException)
+            {
+                ApplicationLogger.LogError(
+                    nullReferenceException, "The player session or lobby is unavailable for starting a match.");
+                ShowStartMatchError();
+            }
             catch (CommunicationException communicationException)
             {
                 ApplicationLogger.LogError(
@@ -203,13 +209,6 @@ namespace Backgammon.Client.Views.Pages
             {
                 ApplicationLogger.LogError(
                     timeoutException, "Initializing the match exceeded the time limit.");
-
-                ShowStartMatchError();
-            }
-            catch (InvalidOperationException contextException)
-            {
-                ApplicationLogger.LogError(
-                    contextException, "The player session or lobby is unavailable for starting a match.");
 
                 ShowStartMatchError();
             }

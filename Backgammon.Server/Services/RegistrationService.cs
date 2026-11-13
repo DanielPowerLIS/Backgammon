@@ -17,6 +17,7 @@ using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;
 using AccountEntity = Backgammon.Server.Persistence.Data.Account;
 using ProfileEntity = Backgammon.Server.Persistence.Data.Profile;
+using Backgammon.Server.SupportServices.Exceptions;
 
 namespace Backgammon.Server.Services
 {
@@ -84,10 +85,10 @@ namespace Backgammon.Server.Services
 
                 throw CreateRegistrationFault(ErrorCodes.ServiceUnavailable);
             }
-            catch (InvalidOperationException operationException)
+            catch (AccountCodeUnvailableException accountCodeException)
             {
-                ApplicationLogger.LogError(operationException,
-                    "An invalid operation prevented account registration.");
+                ApplicationLogger.LogError(accountCodeException,
+                    "Could not generate an available account code.");
 
                 throw CreateRegistrationFault(ErrorCodes.ServiceUnavailable);
             }
