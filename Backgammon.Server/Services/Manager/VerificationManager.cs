@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.ServiceModel;
 
 using Backgammon.Server.Services.Data;
+using Backgammon.Server.Services.ExceptionCode;
 using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;
 

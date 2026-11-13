@@ -23,8 +23,7 @@ namespace Backgammon.Server.Persistence.Repositories
 
             using (var databaseContext = new BackgammonEntities())
             {
-                IQueryable<Account> accountsQuery = databaseContext.Accounts
-                    .AsNoTracking()
+                IQueryable<Account> accountsQuery = databaseContext.Accounts.AsNoTracking()
                     .Include(playerAccount => playerAccount.Profile);
 
                 if (isEmailIdentifier)
@@ -73,9 +72,7 @@ namespace Backgammon.Server.Persistence.Repositories
         {
             using (var databaseContext = new BackgammonEntities())
             {
-                playerAccount.AccountCode =
-                    await GenerateAvailableCodeAsync(databaseContext)
-                    .ConfigureAwait(false);
+                playerAccount.AccountCode = await GenerateAvailableCodeAsync(databaseContext).ConfigureAwait(false);
 
                 databaseContext.Accounts.Add(playerAccount);
 
@@ -110,11 +107,9 @@ namespace Backgammon.Server.Persistence.Repositories
         {
             using (var databaseContext = new BackgammonEntities())
             {
-                Account account = await databaseContext.Accounts
-                    .AsNoTracking()
+                Account account = await databaseContext.Accounts.AsNoTracking()
                     .Include(playerAccount => playerAccount.Profile)
-                    .SingleOrDefaultAsync(
-                        playerAccount => playerAccount.IdAccountPK == accountId)
+                    .SingleOrDefaultAsync(playerAccount => playerAccount.IdAccountPK == accountId)
                     .ConfigureAwait(false);
 
                 if (account == null)

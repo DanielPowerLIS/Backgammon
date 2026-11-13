@@ -13,9 +13,7 @@ namespace Backgammon.Server.Persistence.Repositories
         {
             using (var databaseContext = new BackgammonEntities())
             {
-                List<Profile> allProfiles = await databaseContext.Profiles
-                    .AsNoTracking()
-                    .ToListAsync()
+                List<Profile> allProfiles = await databaseContext.Profiles.AsNoTracking().ToListAsync()
                     .ConfigureAwait(false);
 
                 return allProfiles;
@@ -56,8 +54,7 @@ namespace Backgammon.Server.Persistence.Repositories
             using (var databaseContext = new BackgammonEntities())
             {
                 Profile targetProfile = await databaseContext.Profiles
-                    .FirstOrDefaultAsync(profile => profile.IdProfilePK == profileId)
-                    .ConfigureAwait(false);
+                    .FirstOrDefaultAsync(profile => profile.IdProfilePK == profileId).ConfigureAwait(false);
 
                 if (targetProfile != null)
                 {
