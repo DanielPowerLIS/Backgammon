@@ -223,6 +223,7 @@
     <Compile Include="Services\Manager\ChatManager.cs" />
     <Compile Include="SupportServices\EmailService.cs" />
     <Compile Include="SupportServices\Entrance.cs" />
+    <Compile Include="SupportServices\Exceptions\AccountCodeUnvailableException.cs" />
     <Compile Include="SupportServices\GuestUsernameGenerator.cs" />
     <Compile Include="SupportServices\HashService.cs" />
     <Compile Include="Services\Manager\LobbyManager.cs" />

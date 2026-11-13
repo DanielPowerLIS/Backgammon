@@ -184,9 +184,9 @@ namespace Backgammon.Client.Controllers.Chat
                 playerSession = PlayerSessionContext.GetSession();
                 lobby = LobbyContext.GetLobby();
             }
-            catch (InvalidOperationException contextException)
+            catch (NullReferenceException nullReferenceException)
             {
-                ApplicationLogger.LogError(contextException, "The player session or lobby is unavailable for chat.");
+                ApplicationLogger.LogError(nullReferenceException, "The player session or lobby is unavailable for chat.");
 
                 return false;
             }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Backgammon.Server.Persistence.Data;
 using Backgammon.Server.Persistence.Repositories.InterfacesRepositories;
 using Backgammon.Server.SupportServices;
+using Backgammon.Server.SupportServices.Exceptions;
 
 namespace Backgammon.Server.Persistence.Repositories
 {
@@ -102,7 +103,7 @@ namespace Backgammon.Server.Persistence.Repositories
                 }
             }
 
-            throw new InvalidOperationException("Could not generate an available account code.");
+            throw new AccountCodeUnvailableException("Could not generate an available account code.");
         }
 
         public async Task<Account> GetAccountByIdAsync(int accountId)
