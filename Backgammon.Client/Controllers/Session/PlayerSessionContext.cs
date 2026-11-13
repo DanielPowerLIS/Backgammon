@@ -22,8 +22,7 @@ namespace Backgammon.Client.Controllers.Session
         {
             if (_currentSession == null)
             {
-                throw new NullReferenceException(
-                    "No player session has been stored.");
+                throw new NullReferenceException("No player session has been stored.");
             }
 
             return _currentSession;

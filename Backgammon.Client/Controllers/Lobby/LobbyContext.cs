@@ -32,8 +32,7 @@ namespace Backgammon.Client.Controllers.Lobby
         {
             if (_currentLobby == null)
             {
-                throw new NullReferenceException(
-                    "No Lobby has been stored.");
+                throw new NullReferenceException("No Lobby has been stored.");
             }
 
             return _currentLobby;

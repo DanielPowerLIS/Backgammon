@@ -25,8 +25,7 @@ namespace Backgammon.Client.Views.Dialog
 
         public int SelectedNetworkId { get; private set; }
 
-        public string SelectedNetworkName { get; private set; }
-            = string.Empty;
+        public string SelectedNetworkName { get; private set; } = string.Empty;
 
         public bool ShowFor(Window owner)
         {

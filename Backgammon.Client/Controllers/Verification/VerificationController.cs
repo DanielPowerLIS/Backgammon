@@ -13,11 +13,9 @@ namespace Backgammon.Client.Controllers.Verification
 
         private static readonly int CodeLength = 6;
 
-        private static readonly string AllowedCharacters =
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        private static readonly string AllowedCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-        private static readonly string InvalidCodeFormatErrorCode =
-            "InvalidCodeFormat";
+        private static readonly string InvalidCodeFormatErrorCode = "InvalidCodeFormat";
 
         public VerificationController()
         {

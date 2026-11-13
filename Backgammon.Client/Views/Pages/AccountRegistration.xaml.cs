@@ -112,16 +112,14 @@ namespace Backgammon.Client.Views.Pages
             }
             catch (CommunicationException communicationException)
             {
-                ApplicationLogger.LogError(
-                    communicationException,
+                ApplicationLogger.LogError(communicationException,
                     "A communication failure prevented account registration from completing.");
 
                 ShowConnectionError();
             }
             catch (TimeoutException timeoutException)
             {
-                ApplicationLogger.LogError(
-                    timeoutException,
+                ApplicationLogger.LogError(timeoutException,
                     "The account registration request exceeded the time limit.");
 
                 ShowConnectionError();
@@ -157,14 +155,11 @@ namespace Backgammon.Client.Views.Pages
             }
             else if (errorCode == InvalidFieldLengthErrorCode)
             {
-                string errorTitle =
-                    Properties.Resources.TextBlock_InvalidFieldLengthTitle;
+                string errorTitle = Properties.Resources.TextBlock_InvalidFieldLengthTitle;
 
-                string messageTemplate =
-                    Properties.Resources.TextBlock_InvalidFieldLengthMessage;
+                string messageTemplate = Properties.Resources.TextBlock_InvalidFieldLengthMessage;
 
-                string errorMessage = string.Format(
-                    messageTemplate, RegistrationLimits.TextFieldMaximumLength);
+                string errorMessage = string.Format(messageTemplate, RegistrationLimits.TextFieldMaximumLength);
 
                 ShowRegistrationError(errorTitle, errorMessage);
             }
@@ -178,11 +173,9 @@ namespace Backgammon.Client.Views.Pages
 
         private void ShowLocalFormatError(string errorCode)
         {
-            string errorTitle =
-                Properties.Resources.TextBlock_RegistrationInvalidInputTitle;
+            string errorTitle = Properties.Resources.TextBlock_RegistrationInvalidInputTitle;
 
-            string errorMessage =
-                Properties.Resources.TextBlock_RegistrationInvalidInputMessage;
+            string errorMessage = Properties.Resources.TextBlock_RegistrationInvalidInputMessage;
 
             if (errorCode == InvalidEmailErrorCode)
             {

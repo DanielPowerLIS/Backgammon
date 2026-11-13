@@ -7,7 +7,6 @@ namespace Backgammon.Client.Views.Models
 {
     public sealed class AvatarOption
     {
-
         public AvatarOption(int id, byte[] imageData)
         {
             if (id <= 0)
@@ -27,9 +26,7 @@ namespace Backgammon.Client.Views.Models
         {
             if (imageData == null || imageData.Length == 0)
             {
-                throw new ArgumentException(
-                    "Avatar image data cannot be empty.",
-                    nameof(imageData));
+                throw new ArgumentException("Avatar image data cannot be empty.", nameof(imageData));
             }
 
             using (MemoryStream imageStream = new MemoryStream(imageData))

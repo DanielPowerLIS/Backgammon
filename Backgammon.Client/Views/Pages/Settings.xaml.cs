@@ -32,8 +32,7 @@ namespace Backgammon.Client.Views.Pages
                 return;
             }
 
-            bool accountFeaturesEnabled =
-                !PlayerSessionContext.GetSession().IsGuest;
+            bool accountFeaturesEnabled = !PlayerSessionContext.GetSession().IsGuest;
 
             buttonAccount.IsEnabled = accountFeaturesEnabled;
             buttonChangePassword.IsEnabled = accountFeaturesEnabled;

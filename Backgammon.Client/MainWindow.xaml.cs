@@ -20,8 +20,7 @@ namespace Backgammon.Client
             object eventSender,
             NavigatingCancelEventArgs navigationArguments)
         {
-            if (MainFrame.Content is Page activePage &&
-                !activePage.IsEnabled)
+            if (MainFrame.Content is Page activePage && !activePage.IsEnabled)
             {
                 navigationArguments.Cancel = true;
             }

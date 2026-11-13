@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 
 using Backgammon.Client.Comunication;
 using Backgammon.Client.Controllers.Session;
-
 using CurrentLobby = Backgammon.Client.PreinitiationReference.Lobby;
 
 namespace Backgammon.Client.Controllers.Lobby

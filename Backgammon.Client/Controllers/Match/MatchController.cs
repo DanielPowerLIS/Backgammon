@@ -49,8 +49,7 @@ namespace Backgammon.Client.Controllers.Match
         public async Task<MatchSession> JoinMatchAsync(string roomId, string matchId)
         {
             string sessionId = PlayerSessionContext.GetSession().SessionId;
-            MatchSession matchSession =
-                await _matchClient.JoinMatchAsync(sessionId, roomId, matchId);
+            MatchSession matchSession = await _matchClient.JoinMatchAsync(sessionId, roomId, matchId);
 
             return matchSession;
         }

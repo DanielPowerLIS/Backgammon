@@ -18,8 +18,7 @@ namespace Backgammon.Client.Controllers.Preinitiation
 
         private static readonly int RoomCodeLength = 6;
 
-        private static readonly string AllowedRoomCodeCharacters =
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        private static readonly string AllowedRoomCodeCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
         private static readonly string InvalidRoomCodeErrorCode = "InvalidRoomCode";
 

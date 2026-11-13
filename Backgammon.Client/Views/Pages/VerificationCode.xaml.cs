@@ -190,8 +190,7 @@ namespace Backgammon.Client.Views.Pages
 
             if (!validationResult.IsValid)
             {
-                ShowVerificationMessage(
-                    Properties.Resources.TextBlock_VerificationInvalidFormatMessage);
+                ShowVerificationMessage(Properties.Resources.TextBlock_VerificationInvalidFormatMessage);
 
                 textBoxDigit1.Focus();
                 return;
@@ -240,11 +239,9 @@ namespace Backgammon.Client.Views.Pages
 
             if (errorCode == InvalidCredentialsErrorCode)
             {
-                ApplicationLogger.LogWarning("Verified sign-in was rejected. Code: {0}",
-                    errorCode);
+                ApplicationLogger.LogWarning("Verified sign-in was rejected. Code: {0}", errorCode);
 
-                ShowVerificationMessage(
-                    Properties.Resources.TextBlock_LoginInvalidCredentialsMessage);
+                ShowVerificationMessage(Properties.Resources.TextBlock_LoginInvalidCredentialsMessage);
 
                 NavigationService.Navigate(new Login());
                 return;

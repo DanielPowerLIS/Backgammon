@@ -64,8 +64,7 @@ namespace Backgammon.Client.Views.Pages
 
             try
             {
-                bool messageWasSent =
-                    await _chatController.SendMessageAsync(message);
+                bool messageWasSent = await _chatController.SendMessageAsync(message);
 
                 if (messageWasSent)
                 {

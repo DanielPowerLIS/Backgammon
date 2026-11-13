@@ -6,21 +6,16 @@ namespace Backgammon.Client.Views.Dialog
     public partial class AddSocialLinkDialog : Window
     {
 
-        public AddSocialLinkDialog(
-            string socialNetworkName, string exampleLink)
+        public AddSocialLinkDialog(string socialNetworkName, string exampleLink)
         {
             if (string.IsNullOrWhiteSpace(socialNetworkName))
             {
-                throw new ArgumentException(
-                    "A social network name is required.",
-                    nameof(socialNetworkName));
+                throw new ArgumentException("A social network name is required.", nameof(socialNetworkName));
             }
 
             if (string.IsNullOrWhiteSpace(exampleLink))
             {
-                throw new ArgumentException(
-                    "An example link is required.",
-                    nameof(exampleLink));
+                throw new ArgumentException("An example link is required.", nameof(exampleLink));
             }
 
             InitializeComponent();
@@ -41,14 +36,11 @@ namespace Backgammon.Client.Views.Dialog
         private void SetDialogText(
             string socialNetworkName, string exampleLink)
         {
-            Title = string.Format(
-                Properties.Resources.TextBlock_AddSocialLinkTitleFormat,
-                socialNetworkName);
+            Title = string.Format(Properties.Resources.TextBlock_AddSocialLinkTitleFormat, socialNetworkName);
 
             textBlockTitle.Text = Title;
 
-            textBlockLinkLabel.Text = string.Format(
-                Properties.Resources.TextBlock_SocialLinkLabelFormat,
+            textBlockLinkLabel.Text = string.Format(Properties.Resources.TextBlock_SocialLinkLabelFormat,
                 socialNetworkName);
 
             textBoxLink.Tag = exampleLink;

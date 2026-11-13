@@ -20,8 +20,11 @@ namespace Backgammon.Client.Controllers.Chat
         private readonly ChatCallback _chatCallback;
 
         private ChatClient _chatClient;
+
         private string _sessionId;
+
         private string _roomId;
+
         private bool _isJoined;
 
         public event Action<ChatMessage> MessageReceived;
@@ -115,8 +118,7 @@ namespace Backgammon.Client.Controllers.Chat
             }
             catch (FaultException<ChatFault> chatFault)
             {
-                ApplicationLogger.LogWarning(
-                    "Sending the chat message was rejected with code {0}.",
+                ApplicationLogger.LogWarning("Sending the chat message was rejected with code {0}.",
                     chatFault.Detail.ErrorCode);
 
                 AbortServiceClient();
@@ -155,8 +157,7 @@ namespace Backgammon.Client.Controllers.Chat
             }
             catch (FaultException<ChatFault> chatFault)
             {
-                ApplicationLogger.LogWarning(
-                    "Leaving the chat was rejected with code {0}.",
+                ApplicationLogger.LogWarning("Leaving the chat was rejected with code {0}.",
                     chatFault.Detail.ErrorCode);
             }
             catch (CommunicationException communicationException)

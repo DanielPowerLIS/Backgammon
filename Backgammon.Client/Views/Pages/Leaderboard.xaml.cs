@@ -42,8 +42,7 @@ namespace Backgammon.Client.Views.Pages
             }
             catch (FaultException<LeaderboardFault> leaderboardException)
             {
-                ApplicationLogger.LogError(
-                    leaderboardException,
+                ApplicationLogger.LogError(leaderboardException,
                     "The server could not load the leaderboard. Code: {0}",
                     leaderboardException.Detail.ErrorCode);
 
@@ -51,16 +50,14 @@ namespace Backgammon.Client.Views.Pages
             }
             catch (CommunicationException communicationException)
             {
-                ApplicationLogger.LogError(
-                    communicationException,
+                ApplicationLogger.LogError(communicationException,
                     "A communication failure prevented the leaderboard from loading.");
 
                 ShowLeaderboardError();
             }
             catch (TimeoutException timeoutException)
             {
-                ApplicationLogger.LogError(
-                    timeoutException,
+                ApplicationLogger.LogError(timeoutException,
                     "The leaderboard request exceeded the time limit.");
 
                 ShowLeaderboardError();

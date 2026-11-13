@@ -57,8 +57,7 @@ namespace Backgammon.Client.Views.Pages
             }
             catch (FaultException<GuestAccessFault> guestException)
             {
-                ApplicationLogger.LogError(guestException,
-                    "The server could not complete guest access. Code: {0}",
+                ApplicationLogger.LogError(guestException, "The server could not complete guest access. Code: {0}",
                     guestException.Detail.ErrorCode);
 
                 ShowGuestAccessError();
@@ -72,8 +71,7 @@ namespace Backgammon.Client.Views.Pages
             }
             catch (TimeoutException timeoutException)
             {
-                ApplicationLogger.LogError(timeoutException,
-                    "The guest access request exceeded the time limit.");
+                ApplicationLogger.LogError(timeoutException, "The guest access request exceeded the time limit.");
 
                 ShowGuestAccessError();
             }

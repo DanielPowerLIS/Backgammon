@@ -28,15 +28,13 @@ namespace Backgammon.Client.Controllers.Profile
             }
             catch (CommunicationException communicationException)
             {
-                ApplicationLogger.LogError(communicationException,
-                    "The player profile request failed.");
+                ApplicationLogger.LogError(communicationException, "The player profile request failed.");
 
                 return null;
             }
             catch (TimeoutException timeoutException)
             {
-                ApplicationLogger.LogError(timeoutException,
-                    "The player profile request exceeded the time limit.");
+                ApplicationLogger.LogError(timeoutException, "The player profile request exceeded the time limit.");
 
                 return null;
             }
@@ -50,15 +48,13 @@ namespace Backgammon.Client.Controllers.Profile
             }
             catch (CommunicationException communicationException)
             {
-                ApplicationLogger.LogError(communicationException,
-                    "The available avatars request failed.");
+                ApplicationLogger.LogError(communicationException, "The available avatars request failed.");
 
                 return null;
             }
             catch (TimeoutException timeoutException)
             {
-                ApplicationLogger.LogError(timeoutException,
-                    "The available avatars request exceeded the time limit.");
+                ApplicationLogger.LogError(timeoutException, "The available avatars request exceeded the time limit.");
 
                 return null;
             }
@@ -74,15 +70,13 @@ namespace Backgammon.Client.Controllers.Profile
             }
             catch (CommunicationException communicationException)
             {
-                ApplicationLogger.LogError(communicationException,
-                    "The avatar change request failed.");
+                ApplicationLogger.LogError(communicationException, "The avatar change request failed.");
 
                 return false;
             }
             catch (TimeoutException timeoutException)
             {
-                ApplicationLogger.LogError(timeoutException,
-                    "The avatar change request exceeded the time limit.");
+                ApplicationLogger.LogError(timeoutException, "The avatar change request exceeded the time limit.");
 
                 return false;
             }
@@ -98,8 +92,7 @@ namespace Backgammon.Client.Controllers.Profile
             }
             catch (CommunicationException communicationException)
             {
-                ApplicationLogger.LogError(communicationException,
-                    "The profile description update request failed.");
+                ApplicationLogger.LogError(communicationException, "The profile description update request failed.");
 
                 return false;
             }
@@ -120,15 +113,13 @@ namespace Backgammon.Client.Controllers.Profile
             }
             catch (CommunicationException communicationException)
             {
-                ApplicationLogger.LogError(communicationException,
-                    "The social media types request failed.");
+                ApplicationLogger.LogError(communicationException, "The social media types request failed.");
 
                 return null;
             }
             catch (TimeoutException timeoutException)
             {
-                ApplicationLogger.LogError(timeoutException,
-                    "The social media types request exceeded the time limit.");
+                ApplicationLogger.LogError(timeoutException, "The social media types request exceeded the time limit.");
 
                 return null;
             }
@@ -142,8 +133,7 @@ namespace Backgammon.Client.Controllers.Profile
             }
             catch (CommunicationException communicationException)
             {
-                ApplicationLogger.LogError(communicationException,
-                    "The request to add a social media link failed.");
+                ApplicationLogger.LogError(communicationException, "The request to add a social media link failed.");
 
                 return null;
             }
@@ -165,8 +155,7 @@ namespace Backgammon.Client.Controllers.Profile
             }
             catch (CommunicationException communicationException)
             {
-                ApplicationLogger.LogError(communicationException,
-                    "The request to remove a social media link failed.");
+                ApplicationLogger.LogError(communicationException, "The request to remove a social media link failed.");
 
                 return false;
             }

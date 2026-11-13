@@ -5,9 +5,6 @@ using Backgammon.Client.Settings.Localization;
 
 namespace Backgammon.Client.Views.Pages
 {
-    /// <summary>
-    /// Lógica de interacción para Language.xaml
-    /// </summary>
     public partial class Language : Page
     {
         public Language()
