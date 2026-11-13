@@ -16,8 +16,7 @@ namespace Backgammon.Client.Controllers.Leaderboard
 
         public Task<PlayerStanding[]> GetLeaderboardAsync()
         {
-            Task<PlayerStanding[]> leaderboardTask =
-                _leaderboardClient.GetLeaderboardAsync();
+            Task<PlayerStanding[]> leaderboardTask = _leaderboardClient.GetLeaderboardAsync();
 
             return leaderboardTask;
         }

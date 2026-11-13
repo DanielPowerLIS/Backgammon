@@ -18,8 +18,7 @@ namespace Backgammon.Client.Controllers.GuestAccess
 
         public async Task AccessAsGuestAsync()
         {
-            GuestPlayerSession guestSession =
-                await _guestAccessClient.AccessAsGuestAsync();
+            GuestPlayerSession guestSession = await _guestAccessClient.AccessAsGuestAsync();
 
             PlayerSession playerSession = CreatePlayerSession(guestSession);
 

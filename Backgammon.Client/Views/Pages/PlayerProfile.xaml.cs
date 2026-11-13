@@ -37,8 +37,7 @@ namespace Backgammon.Client.Views.Pages
                 PlayerSession currentSession = PlayerSessionContext.GetSession();
                 DisplaySessionData(currentSession);
 
-                WcfPlayerProfile profileData =
-                    await _profileController.GetPlayerProfileAsync(currentSession.SessionId);
+                WcfPlayerProfile profileData = await _profileController.GetPlayerProfileAsync(currentSession.SessionId);
 
                 PopulateProfile(profileData);
             }

@@ -10,8 +10,6 @@ namespace Backgammon.Client.Controllers.Authentication
     {
         private readonly AuthenticationClient _authenticationClient;
 
-        private static readonly string RequiredFieldsErrorCode = "RequiredFields";
-
         public AuthenticationController()
         {
             _authenticationClient = new AuthenticationClient();
@@ -67,7 +65,7 @@ namespace Backgammon.Client.Controllers.Authentication
             var validationResult = new InputValidationResult
             {
                 IsValid = false,
-                ErrorCode = RequiredFieldsErrorCode,
+                ErrorCode = "RequiredFields",
                 FieldName = fieldName
             };
 

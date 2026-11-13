@@ -7,8 +7,7 @@ namespace Backgammon.Client.Views.Dialog
     public partial class FriendProfileDialog : Window
     {
         
-        public FriendProfileDialog(
-            int accountId, string username, ImageSource avatarImage)
+        public FriendProfileDialog(int accountId, string username, ImageSource avatarImage)
         {
             ValidatePlayer(accountId, username, avatarImage);
 
@@ -32,8 +31,7 @@ namespace Backgammon.Client.Views.Dialog
             return ShowDialog() == true;
         }
 
-        private void ValidatePlayer(
-            int accountId, string username, ImageSource avatarImage)
+        private void ValidatePlayer(int accountId, string username, ImageSource avatarImage)
         {
             if (accountId <= 0)
             {
@@ -42,9 +40,7 @@ namespace Backgammon.Client.Views.Dialog
 
             if (string.IsNullOrWhiteSpace(username))
             {
-                throw new ArgumentException(
-                    "A username is required.",
-                    nameof(username));
+                throw new ArgumentException("A username is required.", nameof(username));
             }
 
             if (avatarImage == null)

@@ -15,8 +15,7 @@ namespace Backgammon.Client
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(App));
 
-        private static readonly string LoggingConfigurationFileName =
-            "log4net.config";
+        private static readonly string LoggingConfigurationFileName = "log4net.config";
 
         protected override void OnStartup(StartupEventArgs e)
         {

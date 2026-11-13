@@ -23,8 +23,7 @@ namespace Backgammon.Client.Views.Dialog
 
         private void SetErrorStyle()
         {
-            SolidColorBrush redBrush =
-                new SolidColorBrush(Color.FromRgb(255, 59, 79));
+            SolidColorBrush redBrush = new SolidColorBrush(Color.FromRgb(255, 59, 79));
 
             textBlockTitle.Foreground = redBrush;
             buttonAccept.Foreground = redBrush;

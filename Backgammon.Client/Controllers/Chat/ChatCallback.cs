@@ -2,7 +2,6 @@
 
 using Backgammon.Client.ChatReference;
 
-
 namespace Backgammon.Client.Controllers.Chat
 {
     internal class ChatCallback : IChatServiceCallback
@@ -10,6 +9,7 @@ namespace Backgammon.Client.Controllers.Chat
         public event Action<ChatMessage> MessageReceived;
 
         public event Action LobbyChatClosed;
+
         public void OnLobbyChatClosed()
         {
             Action lobbyChatClosedHandler = LobbyChatClosed;

@@ -14,9 +14,7 @@ namespace Backgammon.Client.Views.Models
 
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentException(
-                    "A social network name is required.",
-                    nameof(name));
+                throw new ArgumentException("A social network name is required.", nameof(name));
             }
 
             Id = id;
