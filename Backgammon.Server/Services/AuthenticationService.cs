@@ -33,8 +33,6 @@ namespace Backgammon.Server.Services
         private readonly CodeGenerator _codeGenerator;
         private readonly VerificationManager _verificationManager;
 
-        private static readonly string InvalidCredentialsErrorCode = "InvalidCredentials";
-
         private static readonly int VerificationCodeLength = 6;
 
         private static readonly string VerificationEmailSubject = "Backgammon verification code";
@@ -126,7 +124,7 @@ namespace Backgammon.Server.Services
                     "Verified sign-in was rejected because the account no longer exists. Reason: {0}",
                     accountException.Message);
 
-                throw CreateAuthenticationFault(InvalidCredentialsErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.InvalidCredentials);
             }
         }
 
@@ -140,7 +138,7 @@ namespace Backgammon.Server.Services
                     "Verified sign-in was rejected because account {0} has no player profile.",
                     accountId);
 
-                throw CreateAuthenticationFault(InvalidCredentialsErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.InvalidCredentials);
             }
 
             PlayerSession playerSession = _playerSessionManager.CreateSession(account.Profile.IdProfilePK,
@@ -185,7 +183,7 @@ namespace Backgammon.Server.Services
             {
                 ApplicationLogger.LogWarning("Sign-in rejected. Invalid credentials.");
 
-                throw CreateAuthenticationFault(InvalidCredentialsErrorCode);
+                throw CreateAuthenticationFault(ErrorCodes.InvalidCredentials);
             }
 
             Account authenticatedAccount = authenticatedAccounts[0];

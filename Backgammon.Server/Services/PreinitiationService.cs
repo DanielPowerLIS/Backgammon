@@ -22,9 +22,6 @@ namespace Backgammon.Server.Services
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(PreinitiationService));
 
-        private static readonly string JoinLobbyErrorCode = "LobbyJoinFailed";
-        private static readonly string InvalidRoomCodeErrorCode = "InvalidRoomCode";
-
         private static readonly string RoomCodePattern = @"\A[A-Z0-9]{6}\z";
 
         private static readonly TimeSpan RoomCodeValidationTimeout = TimeSpan.FromSeconds(1);
@@ -65,7 +62,7 @@ namespace Backgammon.Server.Services
                     "The player could not join the lobby because it no longer exists. Reason: {0}",
                     lobbyException.Message);
 
-                throw CreatePreinitiationFault(JoinLobbyErrorCode);
+                throw CreatePreinitiationFault(ErrorCodes.LobbyJoinFailed);
             }
             catch (UnauthorizedAccessException lobbyException)
             {
@@ -73,7 +70,7 @@ namespace Backgammon.Server.Services
                     "The player was not allowed to join the lobby. Reason: {0}",
                     lobbyException.Message);
 
-                throw CreatePreinitiationFault(JoinLobbyErrorCode);
+                throw CreatePreinitiationFault(ErrorCodes.LobbyJoinFailed);
             }
             catch (ArgumentException lobbyException)
             {
@@ -81,7 +78,7 @@ namespace Backgammon.Server.Services
                     "The lobby could not accept the player. Reason: {0}",
                     lobbyException.Message);
 
-                throw CreatePreinitiationFault(JoinLobbyErrorCode);
+                throw CreatePreinitiationFault(ErrorCodes.LobbyJoinFailed);
             }
         }
 
@@ -111,7 +108,7 @@ namespace Backgammon.Server.Services
 
                 if (!validateRoomCode)
                 {
-                    throw CreatePreinitiationFault(InvalidRoomCodeErrorCode);
+                    throw CreatePreinitiationFault(ErrorCodes.InvalidRoomCode);
                 }
             }
             catch (RegexMatchTimeoutException validationException)

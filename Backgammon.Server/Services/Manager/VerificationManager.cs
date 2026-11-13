@@ -17,11 +17,6 @@ namespace Backgammon.Server.Services.Manager
         private static readonly IApplicationLogger ApplicationLogger = 
             new Log4NetApplicationLogger(typeof(VerificationManager));
 
-        private static readonly string RequestNotFoundErrorCode = "RequestNotFound";
-        private static readonly string RequestExpiredErrorCode = "RequestExpired";
-        private static readonly string InvalidCodeErrorCode = "InvalidCode";
-        private static readonly string AttemptsExhaustedErrorCode = "AttemptsExhausted";
-
         private static readonly ConcurrentDictionary<string, VerificationRequest> PendingRequests = 
             new ConcurrentDictionary<string, VerificationRequest>();
 
@@ -52,7 +47,7 @@ namespace Backgammon.Server.Services.Manager
                     ApplicationLogger.LogWarning(
                         "Verification could not be completed because the request is no longer available.");
 
-                    throw CreateVerificationFault(RequestNotFoundErrorCode);
+                    throw CreateVerificationFault(ErrorCodes.RequestNotFound);
                 }
 
                 return accountId;
@@ -68,7 +63,7 @@ namespace Backgammon.Server.Services.Manager
                 ApplicationLogger.LogWarning(
                     "The verification request was rejected because it has expired.");
 
-                throw CreateVerificationFault(RequestExpiredErrorCode);
+                throw CreateVerificationFault(ErrorCodes.RequestExpired);
             }
         }
 
@@ -91,13 +86,13 @@ namespace Backgammon.Server.Services.Manager
         {
             request.RemainingAttempts--;
 
-            string errorCode = InvalidCodeErrorCode;
+            string errorCode = ErrorCodes.InvalidCode;
 
             if (request.RemainingAttempts <= 0)
             {
                 RemoveRequest(request.RequestId);
 
-                errorCode = AttemptsExhaustedErrorCode;
+                errorCode = ErrorCodes.AttemptsExhausted;
             }
 
             ApplicationLogger.LogWarning(
@@ -165,7 +160,7 @@ namespace Backgammon.Server.Services.Manager
                 ApplicationLogger.LogWarning(
                     "The verification request was rejected because its identifier is missing.");
 
-                throw CreateVerificationFault(RequestNotFoundErrorCode);
+                throw CreateVerificationFault(ErrorCodes.RequestNotFound);
             }
 
             bool requestFound = PendingRequests.TryGetValue(requestId, out VerificationRequest request);
@@ -175,7 +170,7 @@ namespace Backgammon.Server.Services.Manager
                 ApplicationLogger.LogWarning(
                     "The verification request was not found or has already been removed.");
 
-                throw CreateVerificationFault(RequestNotFoundErrorCode);
+                throw CreateVerificationFault(ErrorCodes.RequestNotFound);
             }
 
             return request;

@@ -28,8 +28,6 @@ namespace Backgammon.Server.Services
         private readonly IProfileRepository _profileRepository;
         private readonly PlayerSessionManager _playerSessionManager;
 
-        private static readonly string ProfileNotFoundErrorCode = "ProfileNotFound";
-
         private static readonly int FacebookTypeId = 1;
         private static readonly int InstagramTypeId = 2;
         private static readonly int TikTokTypeId = 3;
@@ -51,7 +49,7 @@ namespace Backgammon.Server.Services
             if (dbProfile == null)
             {
                 ApplicationLogger.LogWarning("Profile ID {0} not found.", profileId);
-                throw CreatePlayerProfileFault(ProfileNotFoundErrorCode);
+                throw CreatePlayerProfileFault(ErrorCodes.ProfileNotFound);
             } 
 
             PlayerProfile playerProfile = MapToPlayerProfile(dbProfile);

@@ -13,7 +13,6 @@ namespace Backgammon.Server.Services
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
     public class ChatService : IChatService
     {
-        private const string LobbyUnavailableCode = "LobbyUnavailable";
         private const string ChatOperationErrorMessage = "The chat operation could not be completed.";
 
         private static readonly IApplicationLogger ApplicationLogger =
@@ -25,7 +24,7 @@ namespace Backgammon.Server.Services
         {
             try
             {
-                PlayerSession playerSession = _playerSessionManager.GetSession(sessionId, true);
+                PlayerSession playerSession = GetChatPlayerSession(sessionId);
                 IChatCallback chatCallback =
                     OperationContext.Current.GetCallbackChannel<IChatCallback>();
                 List<ChatMessage> chatMessages =
@@ -55,7 +54,7 @@ namespace Backgammon.Server.Services
                     "The lobby was not found when joining the chat. Reason: {0}",
                     lobbyException.Message);
 
-                throw CreateChatFault(LobbyUnavailableCode);
+                throw CreateChatFault(ErrorCodes.LobbyUnavailable);
             }
         }
 
@@ -63,7 +62,7 @@ namespace Backgammon.Server.Services
         {
             try
             {
-                PlayerSession playerSession = _playerSessionManager.GetSession(sessionId, true);
+                PlayerSession playerSession = GetChatPlayerSession(sessionId);
                 LobbyManager.SendMessage(playerSession, roomId, message);
             }
             catch (ArgumentException validationException)
@@ -88,7 +87,7 @@ namespace Backgammon.Server.Services
                     "The lobby was not found when sending a chat message. Reason: {0}",
                     lobbyException.Message);
 
-                throw CreateChatFault(LobbyUnavailableCode);
+                throw CreateChatFault(ErrorCodes.LobbyUnavailable);
             }
         }
 
@@ -96,7 +95,7 @@ namespace Backgammon.Server.Services
         {
             try
             {
-                PlayerSession playerSession = _playerSessionManager.GetSession(sessionId, true);
+                PlayerSession playerSession = GetChatPlayerSession(sessionId);
                 LobbyManager.LeaveChat(playerSession, roomId);
             }
             catch (ArgumentException validationException)
@@ -107,13 +106,24 @@ namespace Backgammon.Server.Services
 
                 throw CreateChatFault(ErrorCodes.InvalidRequest);
             }
-            catch (UnauthorizedAccessException accessException)
+        }
+
+        private PlayerSession GetChatPlayerSession(string sessionId)
+        {
+            try
+            {
+                PlayerSession playerSession =
+                    _playerSessionManager.GetSession(sessionId, true);
+
+                return playerSession;
+            }
+            catch (UnauthorizedAccessException sessionException)
             {
                 ApplicationLogger.LogWarning(
-                    "The player was denied permission to leave the lobby chat. Reason: {0}",
-                    accessException.Message);
+                    "The chat request was rejected because the session is invalid. Reason: {0}",
+                    sessionException.Message);
 
-                throw CreateChatFault(ErrorCodes.AccessDenied);
+                throw CreateChatFault(ErrorCodes.SessionExpired);
             }
         }
 

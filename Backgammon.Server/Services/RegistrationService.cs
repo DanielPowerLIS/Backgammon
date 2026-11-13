@@ -25,8 +25,6 @@ namespace Backgammon.Server.Services
     {
         private readonly IAccountRepository _accountRepository;
         private readonly PasswordHashService _passwordHashService;
-        private static readonly string EmailAlreadyRegisteredErrorCode = "EmailAlreadyRegistered";
-        private static readonly string UsernameAlreadyTakenErrorCode = "UsernameAlreadyTaken";
         private static readonly int DuplicateIndexErrorNumber = 2601;
         private static readonly int DuplicateConstraintErrorNumber = 2627;
         private static readonly int MaximumTextFieldLength = 100;
@@ -161,7 +159,7 @@ namespace Backgammon.Server.Services
 
             if (emailRegistered)
             {
-                throw CreateRegistrationFault(EmailAlreadyRegisteredErrorCode);
+                throw CreateRegistrationFault(ErrorCodes.EmailAlreadyRegistered);
             }
 
             bool usernameRegistered = _accountRepository
@@ -169,7 +167,7 @@ namespace Backgammon.Server.Services
 
             if (usernameRegistered)
             {
-                throw CreateRegistrationFault(UsernameAlreadyTakenErrorCode);
+                throw CreateRegistrationFault(ErrorCodes.UsernameAlreadyTaken);
             }
         }
 
