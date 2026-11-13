@@ -19,8 +19,6 @@ namespace Backgammon.Server.Services
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(LobbyService));
 
-        private static readonly string LeaveLobbyErrorCode = "LobbyLeaveFailed";
-
         public void LeaveLobby(string sessionId, string roomId)
         {
             PlayerSession playerSession = GetPlayerSession(sessionId);
@@ -30,7 +28,7 @@ namespace Backgammon.Server.Services
                 ApplicationLogger.LogWarning(
                     "Lobby departure was rejected because the room code is missing.");
 
-                throw CreateLobbyFault(LeaveLobbyErrorCode);
+                throw CreateLobbyFault(ErrorCodes.LobbyLeaveFailed);
             }
 
             LeaveRoom(playerSession, roomId);
@@ -90,7 +88,7 @@ namespace Backgammon.Server.Services
                     "Departure from room {0} could not be completed. Reason: {1}",
                     roomId, lobbyException.Message);
 
-                throw CreateLobbyFault(LeaveLobbyErrorCode);
+                throw CreateLobbyFault(ErrorCodes.LobbyLeaveFailed);
             }
         }
 
