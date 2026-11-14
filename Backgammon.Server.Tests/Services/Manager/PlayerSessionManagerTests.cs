@@ -1,8 +1,8 @@
-﻿
+﻿using System;
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Backgammon.Server.Services.Manager;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace Backgammon.Server.Tests.Services.Manager
 {
@@ -34,20 +34,15 @@ namespace Backgammon.Server.Tests.Services.Manager
             var sessionManager = new PlayerSessionManager();
             var playerSession = sessionManager.CreateSession(1, "TestUser");
 
-            try 
-            {
-                var storedSession = sessionManager.GetSession(playerSession.SessionId, false);
+            var storedSession = sessionManager.GetSession(playerSession.SessionId, false);
 
-                Assert.IsNotNull(storedSession);
-                Assert.AreEqual(playerSession.PlayerId, storedSession.PlayerId);
-                Assert.AreEqual(playerSession.Username, storedSession.Username);
-                Assert.AreEqual(playerSession.SessionId, storedSession.SessionId);
-            }
-            finally
-            {
-                sessionManager.RemoveSession(playerSession.SessionId);
-            }
+            Assert.IsNotNull(storedSession);
+            Assert.AreEqual(playerSession.PlayerId, storedSession.PlayerId);
+            Assert.AreEqual(playerSession.Username, storedSession.Username);
+            Assert.AreEqual(playerSession.SessionId, storedSession.SessionId);
 
+            sessionManager.RemoveSession(playerSession.SessionId);
+           
         }
 
         [TestMethod]
@@ -56,7 +51,6 @@ namespace Backgammon.Server.Tests.Services.Manager
             var sessionManager = new PlayerSessionManager();
             var createdSession = sessionManager.CreateSession(1, "TestUser");
             bool wasDeleted = false;
-
 
             try
             {

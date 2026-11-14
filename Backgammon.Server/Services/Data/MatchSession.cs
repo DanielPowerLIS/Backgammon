@@ -1,6 +1,4 @@
-﻿
-
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace Backgammon.Server.Services.Data
 {
@@ -18,7 +16,5 @@ namespace Backgammon.Server.Services.Data
 
         [DataMember]
         public int PlayerGuestId { get; set; }
-
-
     }
 }

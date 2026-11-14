@@ -15,8 +15,7 @@ namespace Backgammon.Server.Services
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(MatchService));
 
-        private readonly PlayerSessionManager _playerSessionManager =
-            new PlayerSessionManager();
+        private readonly PlayerSessionManager _playerSessionManager = new PlayerSessionManager();
 
         public MatchSession InitializeMatch(string sessionId, string roomId)
         {
@@ -37,6 +36,7 @@ namespace Backgammon.Server.Services
             {
                 ApplicationLogger.LogWarning(
                     "Match initialization was rejected because a required identifier is missing.");
+
                 throw CreateMatchFault(ErrorCodes.InvalidRequest);
             }
         }
@@ -64,8 +64,7 @@ namespace Backgammon.Server.Services
         {
             try
             {
-                MatchSession matchSession =
-                    MatchManager.InitializeMatch(playerId, roomId, out guestCallback);
+                MatchSession matchSession = MatchManager.InitializeMatch(playerId, roomId, out guestCallback);
 
                 return matchSession;
             }
@@ -127,8 +126,7 @@ namespace Backgammon.Server.Services
             try
             {
                 PlayerSession playerSession = _playerSessionManager.GetSession(sessionId, true);
-                MatchSession matchSession =
-                    MatchManager.JoinMatch(playerSession.PlayerId, roomId, matchId);
+                MatchSession matchSession = MatchManager.JoinMatch(playerSession.PlayerId, roomId, matchId);
 
                 return matchSession;
             }
@@ -174,7 +172,7 @@ namespace Backgammon.Server.Services
 
         public void MoveChecker(int fromPosition, int toPosition)
         {
-            // Implementation for moving a checker
+            //TODO: Implementation for moving a checker
         }
     }
 }

@@ -40,8 +40,7 @@ namespace Backgammon.Server.Services
         {
             try
             {
-                PlayerSession playerSession =
-                    _playerSessionManager.GetSession(sessionId, true);
+                PlayerSession playerSession = _playerSessionManager.GetSession(sessionId, true);
 
                 return playerSession;
             }

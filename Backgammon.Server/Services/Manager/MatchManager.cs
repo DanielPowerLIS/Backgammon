@@ -1,12 +1,11 @@
-
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
 using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 
 namespace Backgammon.Server.Services.Manager
 {

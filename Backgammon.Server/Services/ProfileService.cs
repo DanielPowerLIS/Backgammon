@@ -61,9 +61,7 @@ namespace Backgammon.Server.Services
         {
             List<AvatarEntity> dbAvatars = FetchAvatarsFromDatabase();
 
-            List<Avatar> mappedAvatars = dbAvatars
-                .Select(MapToAvatarData)
-                .ToList();
+            List<Avatar> mappedAvatars = dbAvatars.Select(MapToAvatarData).ToList();
 
             return mappedAvatars;
         }
@@ -86,9 +84,7 @@ namespace Backgammon.Server.Services
         {
             List<SocialMediaTypeEntity> dbTypes = FetchSocialMediaTypes();
 
-            List<SocialMediaType> mappedTypes = dbTypes
-                .Select(MapToSocialMediaTypeData)
-                .ToList();
+            List<SocialMediaType> mappedTypes = dbTypes.Select(MapToSocialMediaTypeData).ToList();
 
             return mappedTypes;
         }
@@ -97,8 +93,7 @@ namespace Backgammon.Server.Services
         {
             int profileId = _playerSessionManager.GetProfileId(sessionId);
 
-            SocialMediaLinkEntity dbLink =
-                ExecuteAddSocialMediaLink(profileId, socialMediaTypeId, url);
+            SocialMediaLinkEntity dbLink = ExecuteAddSocialMediaLink(profileId, socialMediaTypeId, url);
 
             SocialMediaLink addedLink = MapToSocialMediaLinkData(dbLink);
 
@@ -117,8 +112,7 @@ namespace Backgammon.Server.Services
         {
             int profileId = _playerSessionManager.GetProfileId(sessionId);
 
-            SocialMediaLinkEntity updatedDbLink =
-                ExecuteUpdateSocialMediaLink(profileId, socialMediaLinkId, url);
+            SocialMediaLinkEntity updatedDbLink = ExecuteUpdateSocialMediaLink(profileId, socialMediaLinkId, url);
 
             SocialMediaLink mappedLink = MapToSocialMediaLinkData(updatedDbLink);
 
@@ -222,10 +216,7 @@ namespace Backgammon.Server.Services
         {
             try
             {
-                _profileRepository
-                    .UpdateDescriptionAsync(profileId, description)
-                    .GetAwaiter()
-                    .GetResult();
+                _profileRepository.UpdateDescriptionAsync(profileId, description).GetAwaiter().GetResult();
             }
             catch (EntityException entityException)
             {
@@ -288,8 +279,7 @@ namespace Backgammon.Server.Services
             }
         }
 
-        private SocialMediaLinkEntity ExecuteAddSocialMediaLink(
-            int profileId, int typeId, string url)
+        private SocialMediaLinkEntity ExecuteAddSocialMediaLink(int profileId, int typeId, string url)
         {
             try
             {
@@ -334,10 +324,7 @@ namespace Backgammon.Server.Services
         {
             try
             {
-                _profileRepository
-                    .RemoveSocialMediaLinkAsync(profileId, linkId)
-                    .GetAwaiter()
-                    .GetResult();
+                _profileRepository.RemoveSocialMediaLinkAsync(profileId, linkId).GetAwaiter().GetResult();
             }
             catch (EntityException entityException)
             {
@@ -362,8 +349,7 @@ namespace Backgammon.Server.Services
             }
         }
 
-        private SocialMediaLinkEntity ExecuteUpdateSocialMediaLink(
-            int profileId, int linkId, string url)
+        private SocialMediaLinkEntity ExecuteUpdateSocialMediaLink(int profileId, int linkId, string url)
         {
             try
             {
@@ -501,16 +487,14 @@ namespace Backgammon.Server.Services
             return dataLink;
         }
 
-        private FaultException<PlayerProfileFault> CreatePlayerProfileFault(
-            string errorCode)
+        private FaultException<PlayerProfileFault> CreatePlayerProfileFault(string errorCode)
         {
             var profileFault = new PlayerProfileFault
             {
                 ErrorCode = errorCode
             };
 
-            var faultException =
-                new FaultException<PlayerProfileFault>(profileFault);
+            var faultException = new FaultException<PlayerProfileFault>(profileFault);
 
             return faultException;
         }

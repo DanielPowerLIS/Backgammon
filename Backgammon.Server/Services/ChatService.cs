@@ -25,10 +25,8 @@ namespace Backgammon.Server.Services
             try
             {
                 PlayerSession playerSession = GetChatPlayerSession(sessionId);
-                IChatCallback chatCallback =
-                    OperationContext.Current.GetCallbackChannel<IChatCallback>();
-                List<ChatMessage> chatMessages =
-                    LobbyManager.JoinChat(playerSession, roomId, chatCallback);
+                IChatCallback chatCallback = OperationContext.Current.GetCallbackChannel<IChatCallback>();
+                List<ChatMessage> chatMessages = LobbyManager.JoinChat(playerSession, roomId, chatCallback);
 
                 return chatMessages;
             }
@@ -112,8 +110,7 @@ namespace Backgammon.Server.Services
         {
             try
             {
-                PlayerSession playerSession =
-                    _playerSessionManager.GetSession(sessionId, true);
+                PlayerSession playerSession = _playerSessionManager.GetSession(sessionId, true);
 
                 return playerSession;
             }
