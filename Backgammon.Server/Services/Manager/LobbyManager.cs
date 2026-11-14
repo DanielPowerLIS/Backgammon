@@ -391,7 +391,6 @@ namespace Backgammon.Server.Services.Manager
             return roomRemoved;
         }
 
-
         private static bool IsLobbyActive(LobbySession lobbySession)
         {
             string roomId = lobbySession.RoomData.RoomId;

@@ -61,8 +61,7 @@ namespace Backgammon.Server.Services.Manager
             {
                 RemoveRequest(request.RequestId);
 
-                ApplicationLogger.LogWarning(
-                    "The verification request was rejected because it has expired.");
+                ApplicationLogger.LogWarning("The verification request was rejected because it has expired.");
 
                 throw CreateVerificationFault(ErrorCodes.RequestExpired);
             }
@@ -96,8 +95,7 @@ namespace Backgammon.Server.Services.Manager
                 errorCode = ErrorCodes.AttemptsExhausted;
             }
 
-            ApplicationLogger.LogWarning(
-                "The verification code was rejected. Remaining attempts: {0}",
+            ApplicationLogger.LogWarning("The verification code was rejected. Remaining attempts: {0}",
                 request.RemainingAttempts);
 
             throw CreateVerificationFault(errorCode);

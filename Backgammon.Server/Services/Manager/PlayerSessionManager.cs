@@ -16,9 +16,7 @@ namespace Backgammon.Server.Services.Manager
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(PlayerSessionManager));
 
-
-        private static readonly TimeSpan SessionInactivityTimeout =
-            TimeSpan.FromMinutes(30);
+        private static readonly TimeSpan SessionInactivityTimeout = TimeSpan.FromMinutes(30);
 
         private static readonly ConcurrentDictionary<string, PlayerSession> ActiveSessions =
             new ConcurrentDictionary<string, PlayerSession>();
@@ -151,8 +149,7 @@ namespace Backgammon.Server.Services.Manager
             playerSession.SessionId = storedSession.SessionId;
         }
 
-        private PlayerSession CreatePlayerSession(
-            int playerId, string playerUsername, bool isGuest)
+        private PlayerSession CreatePlayerSession(int playerId, string playerUsername, bool isGuest)
         {
             RemoveExpiredSessions();
 

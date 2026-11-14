@@ -239,8 +239,7 @@ namespace Backgammon.Server.Services
 
         private void ValidatePasswordFormat(string suppliedPassword)
         {
-            bool hasMinimumLength =
-                suppliedPassword.Length >= MinimumPasswordLength;
+            bool hasMinimumLength = suppliedPassword.Length >= MinimumPasswordLength;
 
             bool hasSpecialCharacter = suppliedPassword.Any(
                 passwordCharacter => char.IsPunctuation(passwordCharacter) ||
@@ -260,8 +259,7 @@ namespace Backgammon.Server.Services
                 ErrorCode = errorCode
             };
 
-            var faultException =
-                new FaultException<RegistrationFault>(registrationFault);
+            var faultException = new FaultException<RegistrationFault>(registrationFault);
 
             return faultException;
         }
@@ -274,8 +272,7 @@ namespace Backgammon.Server.Services
             {
                 if (currentException is SqlException databaseException)
                 {
-                    bool duplicateDetected = databaseException.Errors
-                        .Cast<SqlError>()
+                    bool duplicateDetected = databaseException.Errors.Cast<SqlError>()
                         .Any(databaseError =>
                             databaseError.Number == DuplicateIndexErrorNumber ||
                             databaseError.Number == DuplicateConstraintErrorNumber);
@@ -298,8 +295,7 @@ namespace Backgammon.Server.Services
 
             try
             {
-                _accountRepository.CreateAccountAsync(playerAccount)
-                    .GetAwaiter().GetResult();
+                _accountRepository.CreateAccountAsync(playerAccount).GetAwaiter().GetResult();
             }
             catch (DbUpdateException updateException)
             {

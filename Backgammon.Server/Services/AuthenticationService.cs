@@ -130,7 +130,7 @@ namespace Backgammon.Server.Services
 
         private PlayerSession CreateAuthenticatedSession(int accountId)
         {
-            Account account = _accountRepository .GetAccountByIdAsync(accountId).GetAwaiter().GetResult();
+            Account account = _accountRepository.GetAccountByIdAsync(accountId).GetAwaiter().GetResult();
 
             if (account.Profile == null)
             {
