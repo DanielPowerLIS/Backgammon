@@ -60,8 +60,9 @@ namespace Backgammon.Client.Controllers.Registration
             {
                 return validationResult;
             }
+            validationResult = ValidateFieldFormats(accountInformation);
 
-            return ValidateFieldFormats(accountInformation);
+            return validationResult;
         }
 
         private InputValidationResult ValidateFieldFormats(Account accountInformation)
@@ -79,8 +80,9 @@ namespace Backgammon.Client.Controllers.Registration
             {
                 return validationResult;
             }
+            validationResult = ValidatePasswordFormat(accountInformation.Password);
 
-            return ValidatePasswordFormat(accountInformation.Password);
+            return validationResult;
         }
 
         private KeyValuePair<string, string>[] GetRequiredFields(Account accountInformation)
@@ -100,22 +102,25 @@ namespace Backgammon.Client.Controllers.Registration
 
         private InputValidationResult ValidateRequiredFields(Account accountInformation)
         {
+            InputValidationResult validationResult;
             if (accountInformation == null)
             {
-                return CreateValidationError(RequiredFieldsErrorCode, string.Empty);
+                validationResult = CreateValidationError(RequiredFieldsErrorCode, string.Empty);
+                return validationResult;
             }
 
             foreach (KeyValuePair<string, string> requiredField in GetRequiredFields(accountInformation))
             {
                 if (string.IsNullOrWhiteSpace(requiredField.Value))
                 {
-                    return CreateValidationError(RequiredFieldsErrorCode, requiredField.Key);
+                    validationResult = CreateValidationError(RequiredFieldsErrorCode, requiredField.Key);
+                    return validationResult;
                 }
             }
 
-            var validationResult = new InputValidationResult 
-            { 
-                IsValid = true 
+            validationResult = new InputValidationResult
+            {
+                IsValid = true
             };
 
             return validationResult;
@@ -135,16 +140,18 @@ namespace Backgammon.Client.Controllers.Registration
 
         private InputValidationResult ValidateFieldLengths(Account accountInformation)
         {
+            InputValidationResult validationResult;
             foreach (KeyValuePair<string, string> registrationField in GetRequiredFields(accountInformation))
             {
                 if (registrationField.Key != nameof(Account.Password) && registrationField.Value.Trim().Length >
                         RegistrationLimits.TextFieldMaximumLength)
                 {
-                    return CreateValidationError(InvalidFieldLengthErrorCode, registrationField.Key);
+                    validationResult = CreateValidationError(InvalidFieldLengthErrorCode, registrationField.Key);
+                    return validationResult;
                 }
             }
 
-            var validationResult = new InputValidationResult 
+            validationResult = new InputValidationResult
             {
                 IsValid = true 
             };
@@ -154,14 +161,16 @@ namespace Backgammon.Client.Controllers.Registration
 
         private InputValidationResult ValidateUsernameFormat(string playerUsername)
         {
+            InputValidationResult validationResult;
             if (playerUsername.Contains("@"))
             {
-                return CreateValidationError(InvalidUsernameErrorCode, nameof(Account.Username));
+                validationResult = CreateValidationError(InvalidUsernameErrorCode, nameof(Account.Username));
+                return validationResult;
             }
 
-            var validationResult = new InputValidationResult 
-            { 
-                IsValid = true 
+            validationResult = new InputValidationResult
+            {
+                IsValid = true
             };
 
             return validationResult;
@@ -169,16 +178,26 @@ namespace Backgammon.Client.Controllers.Registration
 
         private InputValidationResult ValidatePasswordFormat(string suppliedPassword)
         {
+            InputValidationResult validationResult;
             bool hasMinimumLength = suppliedPassword.Length >= MinimumPasswordLength;
-            bool hasSpecialCharacter = suppliedPassword.Any(
-                passwordCharacter => char.IsPunctuation(passwordCharacter) || char.IsSymbol(passwordCharacter));
+            bool hasSpecialCharacter = false;
+
+            foreach (char passwordCharacter in suppliedPassword)
+            {
+                if (char.IsPunctuation(passwordCharacter) || char.IsSymbol(passwordCharacter))
+                {
+                    hasSpecialCharacter = true;
+                    break;
+                }
+            }
 
             if (!hasMinimumLength || !hasSpecialCharacter)
             {
-                return CreateValidationError(InvalidPasswordErrorCode, nameof(Account.Password));
+                validationResult = CreateValidationError(InvalidPasswordErrorCode, nameof(Account.Password));
+                return validationResult;
             }
 
-            var validationResult = new InputValidationResult
+            validationResult = new InputValidationResult
             {
                 IsValid = true
             };
@@ -188,12 +207,14 @@ namespace Backgammon.Client.Controllers.Registration
 
         private InputValidationResult ValidateEmailFormat(string emailAddress)
         {
+            InputValidationResult validationResult;
             if (!HasValidEmailFormat(emailAddress.Trim()))
             {
-                return CreateValidationError(InvalidEmailErrorCode, nameof(Account.Email));
+                validationResult = CreateValidationError(InvalidEmailErrorCode, nameof(Account.Email));
+                return validationResult;
             }
 
-            var validationResult = new InputValidationResult
+            validationResult = new InputValidationResult
             {
                 IsValid = true
             };
