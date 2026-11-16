@@ -5,12 +5,14 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.ServiceModel;
 
 using Backgammon.Client.AuthenticationReference;
 using Backgammon.Client.Controllers.Profile;
 using Backgammon.Client.Controllers.Session;
 using Backgammon.Client.Settings.Logging;
 
+using ProfileFault = Backgammon.Client.ProfileReference.PlayerProfileFault;
 using WcfPlayerProfile = Backgammon.Client.ProfileReference.PlayerProfile;
 
 namespace Backgammon.Client.Views.Pages
@@ -47,12 +49,41 @@ namespace Backgammon.Client.Views.Pages
                     sessionException,
                     "Invalid session state while attempting to load the player profile.");
 
-                MessageBox.Show(
-                    Properties.Resources.Message_ProfileLoadError,
-                    Properties.Resources.Title_SessionError,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                ShowProfileLoadError(Properties.Resources.Title_SessionError);
             }
+            catch (FaultException<ProfileFault> profileFault)
+            {
+                ApplicationLogger.LogWarning(
+                    "The profile request was rejected with code {0}.",
+                    profileFault.Detail.ErrorCode);
+
+                ShowProfileLoadError(Properties.Resources.Title_ConnectionError);
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(
+                    communicationException,
+                    "The player profile request failed.");
+
+                ShowProfileLoadError(Properties.Resources.Title_ConnectionError);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(
+                    timeoutException,
+                    "The player profile request exceeded the time limit.");
+
+                ShowProfileLoadError(Properties.Resources.Title_ConnectionError);
+            }
+        }
+
+        private void ShowProfileLoadError(string title)
+        {
+            MessageBox.Show(
+                Properties.Resources.Message_ProfileLoadError,
+                title,
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
         }
 
         private void DisplaySessionData(PlayerSession currentSession)
@@ -70,15 +101,17 @@ namespace Backgammon.Client.Views.Pages
                     Properties.Resources.Title_ConnectionError,
                     MessageBoxButton.OK,
                     MessageBoxImage.Warning);
-                return;
             }
+            else
+            {
+                textBlockPoints.Text = profileData.Points.ToString();
+                textBlockWins.Text = profileData.Wins.ToString();
+                textBlockRegistrationDate.Text =
+                    profileData.RegistrationDate.ToShortDateString();
 
-            textBlockPoints.Text = profileData.Points.ToString();
-            textBlockWins.Text = profileData.Wins.ToString();
-            textBlockRegistrationDate.Text = profileData.RegistrationDate.ToShortDateString();
-
-            AssignProfileDescription(profileData.Description);
-            AssignProfileAvatar(profileData.Avatar);
+                AssignProfileDescription(profileData.Description);
+                AssignProfileAvatar(profileData.Avatar);
+            }
         }
 
         private void AssignProfileAvatar(ProfileReference.Avatar avatar)
@@ -86,31 +119,33 @@ namespace Backgammon.Client.Views.Pages
             if (avatar == null || avatar.ImageBytes == null || avatar.ImageBytes.Length == 0)
             {
                 SetDefaultAvatarAppearance();
-                return;
             }
-
-            try
+            else
             {
-                BitmapImage imageSource = new BitmapImage();
-
-                using (MemoryStream memoryStream = new MemoryStream(avatar.ImageBytes))
+                try
                 {
-                    imageSource.BeginInit();
-                    imageSource.CacheOption = BitmapCacheOption.OnLoad;
-                    imageSource.StreamSource = memoryStream;
-                    imageSource.EndInit();
+                    BitmapImage imageSource = new BitmapImage();
+
+                    using (MemoryStream memoryStream = new MemoryStream(avatar.ImageBytes))
+                    {
+                        imageSource.BeginInit();
+                        imageSource.CacheOption = BitmapCacheOption.OnLoad;
+                        imageSource.StreamSource = memoryStream;
+                        imageSource.EndInit();
+                    }
+
+                    imageSource.Freeze();
+                    ellipseAvatar.Fill = new ImageBrush(imageSource);
+                }
+                catch (NotSupportedException decodingException)
+                {
+                    ApplicationLogger.LogWarning(
+                        "The avatar image bytes could not be decoded. Using default avatar. Details: {0}",
+                        decodingException.Message);
+
+                    SetDefaultAvatarAppearance();
                 }
 
-                imageSource.Freeze();
-                ellipseAvatar.Fill = new ImageBrush(imageSource);
-            }
-            catch (NotSupportedException decodingException)
-            {
-                ApplicationLogger.LogWarning(
-                    "The avatar image bytes could not be decoded. Using default avatar. Details: {0}",
-                    decodingException.Message);
-
-                SetDefaultAvatarAppearance();
             }
         }
 
@@ -123,10 +158,11 @@ namespace Backgammon.Client.Views.Pages
             if (string.IsNullOrWhiteSpace(description))
             {
                 textBlockDescription.Text = Properties.Resources.TextBlock_NoDescription;
-                return;
             }
-
-            textBlockDescription.Text = description;
+            else
+            {
+                textBlockDescription.Text = description;
+            }
         }
 
         private void OnBackClick(object sender, RoutedEventArgs e)
