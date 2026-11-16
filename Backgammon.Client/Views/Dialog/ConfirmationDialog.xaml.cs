@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace Backgammon.Client.Views.Dialog
 {
@@ -12,21 +13,16 @@ namespace Backgammon.Client.Views.Dialog
 
         public bool ShowOver(Window owner)
         {
-            FrameworkElement ownerContent = (FrameworkElement)owner.Content;
-
-            Point screenOrigin = ownerContent.PointToScreen(new Point(0, 0));
-
-            PresentationSource presentationSource = PresentationSource.FromVisual(ownerContent);
-
-            Point dialogOrigin = presentationSource.CompositionTarget.TransformFromDevice.Transform(screenOrigin);
+            if (owner == null)
+            {
+                throw new ArgumentNullException(nameof(owner));
+            }
 
             Owner = owner;
-            Left = dialogOrigin.X;
-            Top = dialogOrigin.Y;
-            Width = ownerContent.ActualWidth;
-            Height = ownerContent.ActualHeight;
 
-            return ShowDialog() == true;
+            bool confirmed = ShowDialog() == true;
+
+            return confirmed;
         }
 
         private void OnConfirmClick(object sender, RoutedEventArgs e)

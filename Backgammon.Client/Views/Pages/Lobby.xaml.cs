@@ -48,7 +48,7 @@ namespace Backgammon.Client.Views.Pages
         }
 
 
-        private async void OnPageLoaded(object sender, RoutedEventArgs e)
+        private async void OnPageLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
             _lobbyController.LobbyUpdated -= OnLobbyUpdated;
             _lobbyController.LobbyUpdated += OnLobbyUpdated;
@@ -62,7 +62,7 @@ namespace Backgammon.Client.Views.Pages
             await JoinPendingMatchAsync();
         }
 
-        private void OnPageUnloaded(object sender, RoutedEventArgs e)
+        private void OnPageUnloaded(object sender, RoutedEventArgs routedEventArgs)
         {
             _lobbyController.StopListening();
 
@@ -77,7 +77,8 @@ namespace Backgammon.Client.Views.Pages
             if (!hasThreadAccess)
             {
                 var refreshAction = new Action(OnLobbyUpdated);
-                _ = Dispatcher.BeginInvoke(refreshAction);
+
+                await Dispatcher.BeginInvoke(refreshAction);
                 return;
             }
 
@@ -171,7 +172,7 @@ namespace Backgammon.Client.Views.Pages
                     return;
                 }
 
-                CloseOpenChat();
+                CloseChatWindow();
                 IsEnabled = true;
                 NavigationService.Navigate(new GamePage(matchSession));
             }
@@ -199,7 +200,7 @@ namespace Backgammon.Client.Views.Pages
             }
         }
 
-        private async void OnPlay(object sender, RoutedEventArgs e)
+        private async void OnPlay(object sender, RoutedEventArgs routedEventArgs)
         {
             if (_isStartingMatch || _isLobbyClosed || !buttonPlay.IsEnabled)
             {
@@ -217,7 +218,7 @@ namespace Backgammon.Client.Views.Pages
                     return;
                 }
 
-                CloseOpenChat();
+                CloseChatWindow();
                 IsEnabled = true;
                 NavigationService.Navigate(new GamePage(matchSession));
             }
@@ -263,7 +264,7 @@ namespace Backgammon.Client.Views.Pages
             alertDialog.ShowDialog();
         }
 
-        private async void OnLeaveLobby(object sender, RoutedEventArgs e)
+        private async void OnLeaveLobby(object sender, RoutedEventArgs routedEventArgs)
         {
             IsEnabled = false;
 
@@ -274,7 +275,7 @@ namespace Backgammon.Client.Views.Pages
                 _isLobbyClosed = true;
                 _lobbyController.StopListening();
 
-                CloseOpenChat();
+                CloseChatWindow();
 
                 await ClosePreinitiationConnectionAsync();
 
@@ -344,7 +345,7 @@ namespace Backgammon.Client.Views.Pages
 
             _lobbyController.StopListening();
 
-            CloseOpenChat();
+            CloseChatWindow();
 
             _lobbyController.ClearLobby();
 
@@ -356,7 +357,7 @@ namespace Backgammon.Client.Views.Pages
             ShowLobbyClosedMessage(wasKicked, owner);
         }
 
-        private void CloseOpenChat()
+        private void CloseChatWindow()
         {
             if (_chatWindow == null)
             {
@@ -391,12 +392,12 @@ namespace Backgammon.Client.Views.Pages
             alertDialog.ShowDialog();
         }
 
-        private void OnKickPlayer(object sender, RoutedEventArgs e)
+        private void OnKickPlayer(object sender, RoutedEventArgs routedEventArgs)
         {
 
         }
 
-        private void OnOpenChat(object sender, RoutedEventArgs e)
+        private void OnOpenChat(object sender, RoutedEventArgs routedEventArgs)
         {
             _chatWindow = new Chat
             {

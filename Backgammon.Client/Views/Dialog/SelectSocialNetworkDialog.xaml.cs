@@ -19,13 +19,15 @@ namespace Backgammon.Client.Views.Dialog
                 throw new ArgumentNullException(nameof(options));
             }
 
+            SelectedNetworkName = string.Empty;
+
             InitializeComponent();
             itemsControlNetworks.ItemsSource = options.ToList();
         }
 
         public int SelectedNetworkId { get; private set; }
 
-        public string SelectedNetworkName { get; private set; } = string.Empty;
+        public string SelectedNetworkName { get; private set; }
 
         public bool ShowFor(Window owner)
         {

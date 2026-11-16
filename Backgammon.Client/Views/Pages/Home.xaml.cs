@@ -26,12 +26,12 @@ namespace Backgammon.Client.Views.Pages
             _guestAccessController = new GuestAccessController();
         }
 
-        private void OnButtonSignIn(object sender, RoutedEventArgs e)
+        private void OnButtonSignIn(object sender, RoutedEventArgs routedEventArgs)
         {
             NavigationService.Navigate(new Login());
         }
 
-        private async void OnGuestClick(object sender, RoutedEventArgs e)
+        private async void OnGuestClick(object sender, RoutedEventArgs routedEventArgs)
         {
             IsEnabled = false;
 

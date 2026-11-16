@@ -19,7 +19,9 @@ namespace Backgammon.Client.Views.Pages
     {
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(AccountRegistration));
+
         private readonly RegistrationController _registrationController;
+
         private static readonly string InvalidInputErrorCode = "InvalidInput";
         private static readonly string EmailAlreadyRegisteredErrorCode = "EmailAlreadyRegistered";
         private static readonly string UsernameAlreadyTakenErrorCode = "UsernameAlreadyTaken";
@@ -53,19 +55,34 @@ namespace Backgammon.Client.Views.Pages
 
         private void FocusRegistrationField(string fieldName)
         {
-            var registrationControls = new Dictionary<string, Control>
+            switch (fieldName)
             {
-                { nameof(RegistrationAccount.Email), textBoxEmail },
-                { nameof(RegistrationAccount.Name), textBoxFirstName },
-                { nameof(RegistrationAccount.PaternalSurname), textBoxPaternalLastName },
-                { nameof(RegistrationAccount.MaternalSurname), textBoxMaternalLastName },
-                { nameof(RegistrationAccount.Username), textBoxUsername },
-                { nameof(RegistrationAccount.Password), passwordBoxPassword }
-            };
+                case nameof(RegistrationAccount.Email):
+                    textBoxEmail.Focus();
+                    break;
 
-            if (registrationControls.TryGetValue(fieldName, out Control targetControl))
-            {
-                targetControl.Focus();
+                case nameof(RegistrationAccount.Name):
+                    textBoxFirstName.Focus();
+                    break;
+
+                case nameof(RegistrationAccount.PaternalSurname):
+                    textBoxPaternalLastName.Focus();
+                    break;
+
+                case nameof(RegistrationAccount.MaternalSurname):
+                    textBoxMaternalLastName.Focus();
+                    break;
+
+                case nameof(RegistrationAccount.Username):
+                    textBoxUsername.Focus();
+                    break;
+
+                case nameof(RegistrationAccount.Password):
+                    passwordBoxPassword.Focus();
+                    break;
+
+                default:
+                    return;
             }
         }
 

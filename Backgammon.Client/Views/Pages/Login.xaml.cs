@@ -72,18 +72,14 @@ namespace Backgammon.Client.Views.Pages
                     Properties.Resources.TextBlock_RequiredFieldsTitle,
                     Properties.Resources.TextBlock_RequiredFieldsMessage);
 
-                Control targetControl;
-
                 if (validationResult.FieldName == nameof(Credentials.Password))
                 {
-                    targetControl = (Control)passwordBoxPassword;
+                    passwordBoxPassword.Focus();
                 }
                 else
                 {
-                    targetControl = textBoxUsernameOrEmail;
+                    textBoxUsernameOrEmail.Focus();
                 }
-
-                targetControl.Focus();
 
                 return;
             }

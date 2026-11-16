@@ -25,7 +25,7 @@ namespace Backgammon.Client.Views.Pages
             Closed += OnChatClosed;
         }
 
-        private void OnChatLoaded(object sender, RoutedEventArgs e)
+        private void OnChatLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
             ChatMessage[] previousMessages = _chatController.JoinChat();
 
@@ -35,19 +35,19 @@ namespace Backgammon.Client.Views.Pages
             }
         }
 
-        private async void OnSendMessage(object sender, RoutedEventArgs e)
+        private async void OnSendMessage(object sender, RoutedEventArgs routedEventArgs)
         {
             await SendCurrentMessageAsync();
         }
 
-        private async void OnMessageKeyDown(object sender, KeyEventArgs e)
+        private async void OnMessageKeyDown(object sender, KeyEventArgs keyEventArgs)
         {
-            if (e.Key != Key.Enter)
+            if (keyEventArgs.Key != Key.Enter)
             {
                 return;
             }
 
-            e.Handled = true;
+            keyEventArgs.Handled = true;
             await SendCurrentMessageAsync();
         }
 
@@ -115,14 +115,14 @@ namespace Backgammon.Client.Views.Pages
             Close();
         }
 
-        private void OnChatClosed(object sender, EventArgs e)
+        private void OnChatClosed(object sender, EventArgs eventArgs)
         {
             _chatController.MessageReceived -= OnMessageReceived;
             _chatController.LobbyChatClosed -= OnLobbyChatClosed;
             _chatController.LeaveChat();
         }
 
-        private void OnBackToLobby(object sender, RoutedEventArgs e)
+        private void OnBackToLobby(object sender, RoutedEventArgs routedEventArgs)
         {
             Close();
         }
