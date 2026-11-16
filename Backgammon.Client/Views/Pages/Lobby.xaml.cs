@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using System.ServiceModel;
+using System.Threading.Tasks;
 
 using Backgammon.Client.LobbyReference;
 using Backgammon.Client.MatchReference;
@@ -12,7 +13,7 @@ using Backgammon.Client.Views.Models;
 using Backgammon.Client.Views.Game;
 using Backgammon.Client.Controllers.Lobby;
 using Backgammon.Client.Controllers.Match;
-using System.Threading.Tasks;
+using Backgammon.Client.Controllers.Preinitiation;
 
 namespace Backgammon.Client.Views.Pages
 {
@@ -20,6 +21,7 @@ namespace Backgammon.Client.Views.Pages
     {
         private readonly LobbyController _lobbyController;
         private readonly MatchController _matchController;
+        private readonly PreinitiationController _preinitiationController;
 
         private bool _isLobbyClosed;
         private bool _isStartingMatch;
@@ -28,16 +30,23 @@ namespace Backgammon.Client.Views.Pages
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(Lobby));
 
-        public Lobby()
+        internal Lobby(PreinitiationController preinitiationController)
         {
+            if (preinitiationController == null)
+            {
+                throw new ArgumentNullException(nameof(preinitiationController));
+            }
+
             InitializeComponent();
 
+            _preinitiationController = preinitiationController;
             _lobbyController = new LobbyController();
             _matchController = new MatchController();
 
             Loaded += OnPageLoaded;
             Unloaded += OnPageUnloaded;
         }
+
 
         private async void OnPageLoaded(object sender, RoutedEventArgs e)
         {
@@ -101,6 +110,24 @@ namespace Backgammon.Client.Views.Pages
             }
 
             buttonPlay.IsEnabled = _matchController.CanStartMatch() && !_isStartingMatch;
+        }
+
+        private async Task ClosePreinitiationConnectionAsync()
+        {
+            try
+            {
+                await Task.Run(_preinitiationController.CloseConnection);
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(communicationException,
+                    "The lobby callback connection could not close normally.");
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(timeoutException,
+                    "Closing the lobby callback connection exceeded the time limit.");
+            }
         }
 
         private async Task JoinPendingMatchAsync()
@@ -244,8 +271,14 @@ namespace Backgammon.Client.Views.Pages
             {
                 await _lobbyController.LeaveLobbyAsync();
 
-                IsEnabled = true;
+                _isLobbyClosed = true;
+                _lobbyController.StopListening();
 
+                CloseOpenChat();
+
+                await ClosePreinitiationConnectionAsync();
+
+                IsEnabled = true;
                 NavigationService.Navigate(new MainMenu());
             }
             catch (FaultException<LobbyFault> lobbyException)
@@ -278,21 +311,26 @@ namespace Backgammon.Client.Views.Pages
             }
         }
 
-        private void OnLobbyClosed(bool wasKicked)
+        private async void OnLobbyClosed(bool wasKicked)
         {
-            bool hasThreadAccess = Dispatcher.CheckAccess();
-
-            if (!hasThreadAccess)
+            if (!Dispatcher.CheckAccess())
             {
-                var closeAction = new Action<bool>(HandleLobbyClosed);
-                Dispatcher.BeginInvoke(closeAction, wasKicked);
+                var closeAction = new Func<bool, Task>(HandleLobbyClosedAsync);
+
+                var closeOperation = Dispatcher.BeginInvoke(closeAction, wasKicked);
+
+                await closeOperation;
+
+                Task closeTask = (Task)closeOperation.Result;
+
+                await closeTask;
                 return;
             }
 
-            HandleLobbyClosed(wasKicked);
+            await HandleLobbyClosedAsync(wasKicked);
         }
 
-        private void HandleLobbyClosed(bool wasKicked)
+        private async Task HandleLobbyClosedAsync(bool wasKicked)
         {
             if (_isLobbyClosed || !IsLoaded)
             {
@@ -300,6 +338,7 @@ namespace Backgammon.Client.Views.Pages
             }
 
             _isLobbyClosed = true;
+            IsEnabled = false;
 
             Window owner = Window.GetWindow(this);
 
@@ -308,6 +347,8 @@ namespace Backgammon.Client.Views.Pages
             CloseOpenChat();
 
             _lobbyController.ClearLobby();
+
+            await ClosePreinitiationConnectionAsync();
 
             IsEnabled = true;
             NavigationService.Navigate(new MainMenu());

@@ -35,7 +35,7 @@ namespace Backgammon.Client.Views.Pages
         {
             if (_preinitiationController.CreateLobby())
             {
-                NavigationService.Navigate(new Lobby());
+                NavigationService.Navigate(new Lobby(_preinitiationController));
             }
         }
 
@@ -121,7 +121,7 @@ namespace Backgammon.Client.Views.Pages
             }
 
             IsEnabled = true;
-            NavigationService.Navigate(new Lobby());
+            NavigationService.Navigate(new Lobby(_preinitiationController));
         }
 
         private void ShowJoinMessage(string message)

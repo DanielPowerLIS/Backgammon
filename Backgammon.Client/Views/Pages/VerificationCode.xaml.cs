@@ -229,7 +229,7 @@ namespace Backgammon.Client.Views.Pages
                 ApplicationLogger.LogError(timeoutException,
                     "The verification request exceeded the time limit.");
 
-                ShowVerificationMessage(  Properties.Resources.TextBlock_VerificationUnavailableMessage);
+                ShowVerificationMessage(Properties.Resources.TextBlock_VerificationUnavailableMessage);
             }
         }
 
@@ -251,7 +251,7 @@ namespace Backgammon.Client.Views.Pages
                 "The server could not complete verified sign-in. Code: {0}",
                 errorCode);
 
-            ShowVerificationMessage( Properties.Resources.TextBlock_VerificationUnavailableMessage);
+            ShowVerificationMessage(Properties.Resources.TextBlock_VerificationUnavailableMessage);
         }
 
         private void ShowVerificationError(string errorCode)
