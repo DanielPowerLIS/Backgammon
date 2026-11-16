@@ -162,9 +162,9 @@ namespace Backgammon.Client.Views.Game.Controls
         {
             switch (dieColor)
             {
-                case PlayerColor.White:
+                case PlayerColor.Blue:
                     return "#00C9F2";
-                case PlayerColor.Black:
+                case PlayerColor.Pink:
                     return "#E795EC";
                 default:
                     return "#FFFFFF";

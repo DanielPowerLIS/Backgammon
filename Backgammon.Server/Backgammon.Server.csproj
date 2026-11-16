@@ -105,6 +105,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\ActiveMatch.cs" />
+    <Compile Include="Domain\MatchBoardFactory.cs" />
+    <Compile Include="Domain\MatchStateFactory.cs" />
     <Compile Include="Persistence\Data\Account.cs">
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
@@ -190,13 +193,18 @@
     <Compile Include="Services\Data\Avatar.cs" />
     <Compile Include="Services\Data\ChatMessage.cs" />
     <Compile Include="Services\Data\ChatFault.cs" />
+    <Compile Include="Services\Data\CheckerColor.cs" />
     <Compile Include="Services\Data\Credentials.cs" />
     <Compile Include="Services\Data\GuestAccessFault.cs" />
     <Compile Include="Services\Data\LeaderboardFault.cs" />
     <Compile Include="Services\Data\Lobby.cs" />
     <Compile Include="Services\Data\LobbyFault.cs" />
+    <Compile Include="Services\Data\MatchBoardState.cs" />
     <Compile Include="Services\Data\MatchFault.cs" />
+    <Compile Include="Services\Data\MatchPhase.cs" />
+    <Compile Include="Services\Data\MatchPointState.cs" />
     <Compile Include="Services\Data\MatchSession.cs" />
+    <Compile Include="Services\Data\MatchState.cs" />
     <Compile Include="Services\Data\PlayerSessionFault.cs" />
     <Compile Include="Services\Data\PreinitiationFault.cs" />
     <Compile Include="Services\Data\VerificationFault.cs" />
@@ -239,7 +247,6 @@
     <None Include="DBSecrets.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Domain\.gitkeep" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

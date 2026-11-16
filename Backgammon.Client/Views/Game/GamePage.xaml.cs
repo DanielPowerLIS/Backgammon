@@ -23,7 +23,7 @@ namespace Backgammon.Client.Views.Game
 
         private void OnRollDiceButtonClick(object sender, RoutedEventArgs e)
         {
-            var diceDialog = new DiceRollDialog(PlayerColor.White);
+            var diceDialog = new DiceRollDialog(PlayerColor.Blue);
             diceDialog.Owner = Window.GetWindow(this);
             diceDialog.ShowDialog();
 
