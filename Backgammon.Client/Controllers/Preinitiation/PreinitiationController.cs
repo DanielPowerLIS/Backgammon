@@ -70,6 +70,11 @@ namespace Backgammon.Client.Controllers.Preinitiation
             return validationResult;
         }
 
+        public void CloseConnection()
+        {
+            _preinitiationClient.Close();
+        }
+
         private InputValidationResult ValidateRoomCode(string roomId)
         {
             bool hasValidLength = roomId != null && roomId.Length == RoomCodeLength;
