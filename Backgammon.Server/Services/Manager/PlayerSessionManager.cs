@@ -5,7 +5,7 @@ using System.ServiceModel;
 using System.Threading;
 
 using Backgammon.Server.Services.Data;
-using Backgammon.Server.Services.ExceptionCode;
+using Backgammon.Server.SupportServices.ExceptionCode;
 using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;
 

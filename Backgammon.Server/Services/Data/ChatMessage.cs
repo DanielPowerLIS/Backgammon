@@ -1,6 +1,5 @@
 ﻿
 
-using System;
 using System.Runtime.Serialization;
 
 namespace Backgammon.Server.Services.Data
@@ -17,7 +16,5 @@ namespace Backgammon.Server.Services.Data
         [DataMember]
         public string Message { get; set; }
 
-        [DataMember]
-        public DateTime SendAtUtc { get; set; } 
     }
 }
