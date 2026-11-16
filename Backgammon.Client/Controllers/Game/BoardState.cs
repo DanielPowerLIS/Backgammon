@@ -6,15 +6,15 @@ namespace Backgammon.Client.Controllers.Game
     {
         private static readonly int TotalPoints = 24;
 
-        private static readonly int WhiteBackPoint = 24;
-        private static readonly int WhiteMidPoint = 13;
-        private static readonly int WhiteOuterPoint = 8;
-        private static readonly int WhiteHomePoint = 6;
+        private static readonly int BlueBackPoint = 24;
+        private static readonly int BlueMidPoint = 13;
+        private static readonly int BlueOuterPoint = 8;
+        private static readonly int BlueHomePoint = 6;
 
-        private static readonly int BlackBackPoint = 1;
-        private static readonly int BlackMidPoint = 12;
-        private static readonly int BlackOuterPoint = 17;
-        private static readonly int BlackHomePoint = 19;
+        private static readonly int PinkBackPoint = 1;
+        private static readonly int PinkMidPoint = 12;
+        private static readonly int PinkOuterPoint = 17;
+        private static readonly int PinkHomePoint = 19;
 
         private static readonly int BackCheckerCount = 2;
         private static readonly int MidCheckerCount = 5;
@@ -32,23 +32,23 @@ namespace Backgammon.Client.Controllers.Game
             }
         }
 
-        public int WhiteOnBar { get; set; }
-        public int BlackOnBar { get; set; }
-        public int WhiteBorneOff { get; set; }
-        public int BlackBorneOff { get; set; }
+        public int BlueOnBar { get; set; }
+        public int PinkOnBar { get; set; }
+        public int BlueBorneOff { get; set; }
+        public int PinkBorneOff { get; set; }
 
         public static BoardState CreateInitial() 
         {
             var initialState = new BoardState();
-            initialState.PlaceCheckers(WhiteBackPoint, PlayerColor.White, BackCheckerCount);
-            initialState.PlaceCheckers(WhiteMidPoint, PlayerColor.White, MidCheckerCount);
-            initialState.PlaceCheckers(WhiteOuterPoint, PlayerColor.White, OuterCheckerCount);
-            initialState.PlaceCheckers(WhiteHomePoint, PlayerColor.White, HomeCheckerCount);
+            initialState.PlaceCheckers(BlueBackPoint, PlayerColor.Blue, BackCheckerCount);
+            initialState.PlaceCheckers(BlueMidPoint, PlayerColor.Blue, MidCheckerCount);
+            initialState.PlaceCheckers(BlueOuterPoint, PlayerColor.Blue, OuterCheckerCount);
+            initialState.PlaceCheckers(BlueHomePoint, PlayerColor.Blue, HomeCheckerCount);
 
-            initialState.PlaceCheckers(BlackBackPoint, PlayerColor.Black, BackCheckerCount);
-            initialState.PlaceCheckers(BlackMidPoint, PlayerColor.Black, MidCheckerCount);
-            initialState.PlaceCheckers(BlackOuterPoint, PlayerColor.Black, OuterCheckerCount);
-            initialState.PlaceCheckers(BlackHomePoint, PlayerColor.Black, HomeCheckerCount);
+            initialState.PlaceCheckers(PinkBackPoint, PlayerColor.Pink, BackCheckerCount);
+            initialState.PlaceCheckers(PinkMidPoint, PlayerColor.Pink, MidCheckerCount);
+            initialState.PlaceCheckers(PinkOuterPoint, PlayerColor.Pink, OuterCheckerCount);
+            initialState.PlaceCheckers(PinkHomePoint, PlayerColor.Pink, HomeCheckerCount);
 
             return initialState;
         }

@@ -11,11 +11,11 @@ namespace Backgammon.Client.Views.Game.Controls
         public static readonly DependencyProperty CheckerColorProperty =
             DependencyProperty.Register(nameof(CheckerColor), typeof(PlayerColor),
                 typeof(CheckerControl), new PropertyMetadata(PlayerColor.None, OnCheckerColorChanged));
-        private static readonly string WhiteCheckerHex = "#00C9F2";
-        private static readonly string BlackCheckerHex = "#E795EC";
+        private static readonly string BlueCheckerHex = "#00C9F2";
+        private static readonly string PinkCheckerHex = "#E795EC";
         private static readonly string NoneCheckerHex = "#4A5366";
-        private static readonly string WhiteCheckerStrokeHex = "#E795EC";
-        private static readonly string BlackCheckerStrokeHex = "#00C9F2";
+        private static readonly string BlueCheckerStrokeHex = "#E795EC";
+        private static readonly string PinkCheckerStrokeHex = "#00C9F2";
         private static readonly string NoneCheckerStrokeHex = "#00C9F2";
 
         public CheckerControl()
@@ -55,10 +55,10 @@ namespace Backgammon.Client.Views.Game.Controls
         {
             switch (checkerColor)
             {
-                case PlayerColor.White:
-                    return WhiteCheckerHex;
-                case PlayerColor.Black:
-                    return BlackCheckerHex;
+                case PlayerColor.Blue:
+                    return BlueCheckerHex;
+                case PlayerColor.Pink:
+                    return PinkCheckerHex;
                 default:
                     return NoneCheckerHex;
             }
@@ -68,10 +68,10 @@ namespace Backgammon.Client.Views.Game.Controls
         {
             switch (checkerColor)
             {
-                case PlayerColor.White:
-                    return WhiteCheckerStrokeHex;
-                case PlayerColor.Black:
-                    return BlackCheckerStrokeHex;
+                case PlayerColor.Blue:
+                    return BlueCheckerStrokeHex;
+                case PlayerColor.Pink:
+                    return PinkCheckerStrokeHex;
                 default:
                     return NoneCheckerStrokeHex;
             }

@@ -3,7 +3,7 @@
     public enum PlayerColor
     {
         None,
-        White,
-        Black
+        Blue,
+        Pink
     }
 }
