@@ -200,9 +200,6 @@
     <Compile Include="Views\Game\GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\Account.xaml.cs">
-      <DependentUpon>Account.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Pages\AccountRegistration.xaml.cs">
       <DependentUpon>AccountRegistration.xaml</DependentUpon>
     </Compile>
@@ -295,10 +292,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Game\GamePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Pages\Account.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
