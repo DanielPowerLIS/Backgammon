@@ -13,7 +13,8 @@ using Backgammon.Client.Controllers.Session;
 using Backgammon.Client.Settings.Logging;
 
 using ProfileFault = Backgammon.Client.ProfileReference.PlayerProfileFault;
-using WcfPlayerProfile = Backgammon.Client.ProfileReference.PlayerProfile;
+using PlayerProfileData = Backgammon.Client.ProfileReference.PlayerProfile;
+using Backgammon.Client.ProfileReference;
 
 namespace Backgammon.Client.Views.Pages
 {
@@ -39,7 +40,7 @@ namespace Backgammon.Client.Views.Pages
                 PlayerSession currentSession = PlayerSessionContext.GetSession();
                 DisplaySessionData(currentSession);
 
-                WcfPlayerProfile profileData = await _profileController.GetPlayerProfileAsync(currentSession.SessionId);
+                PlayerProfileData profileData = await _profileController.GetPlayerProfileAsync(currentSession.SessionId);
 
                 PopulateProfile(profileData);
             }
@@ -92,7 +93,7 @@ namespace Backgammon.Client.Views.Pages
             textBlockUsername.Text = currentSession.Username;
         }
 
-        private void PopulateProfile(WcfPlayerProfile profileData)
+        private void PopulateProfile(PlayerProfileData profileData)
         {
             if (profileData == null)
             {
@@ -106,15 +107,14 @@ namespace Backgammon.Client.Views.Pages
             {
                 textBlockPoints.Text = profileData.Points.ToString();
                 textBlockWins.Text = profileData.Wins.ToString();
-                textBlockRegistrationDate.Text =
-                    profileData.RegistrationDate.ToShortDateString();
+                textBlockRegistrationDate.Text = profileData.RegistrationDate.ToShortDateString();
 
                 AssignProfileDescription(profileData.Description);
                 AssignProfileAvatar(profileData.Avatar);
             }
         }
 
-        private void AssignProfileAvatar(ProfileReference.Avatar avatar)
+        private void AssignProfileAvatar(Avatar avatar)
         {
             if (avatar == null || avatar.ImageBytes == null || avatar.ImageBytes.Length == 0)
             {
