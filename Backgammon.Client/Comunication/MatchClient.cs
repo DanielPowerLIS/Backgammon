@@ -10,14 +10,14 @@ namespace Backgammon.Client.Comunication
     {
         private const string EndpointConfigurationName = "NetTcpBinding_IMatchService";
 
-        public async Task<MatchSession> InitializeMatchAsync(string sessionId, string roomId)
+        public async Task<MatchSession> StartMatchAsync(string sessionId, string roomId)
         { 
             var serviceClient = new MatchServiceClient(EndpointConfigurationName);
             ICommunicationObject communicationObject = serviceClient;
 
             try
             {
-                MatchSession matchSession = await serviceClient.InitializeMatchAsync(sessionId, roomId);
+                MatchSession matchSession = await serviceClient.StartMatchAsync(sessionId, roomId);
 
                 await ServiceChannelCloser.CloseAfterResponseAsync(communicationObject);
 

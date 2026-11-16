@@ -45,7 +45,7 @@ namespace Backgammon.Client.Controllers.Preinitiation
 
             CurrentLobby newLobby = _preinitiationClient.CreateLobby(sessionId);
 
-            LobbyContext.StoreLobby(newLobby);
+            LobbyContext.SaveLobby(newLobby);
 
             lobbyCreated = true;
 
@@ -65,7 +65,7 @@ namespace Backgammon.Client.Controllers.Preinitiation
 
             CurrentLobby joinedLobby = await _preinitiationClient.JoinLobbyAsync(sessionId, roomId);
 
-            LobbyContext.StoreLobby(joinedLobby);
+            LobbyContext.SaveLobby(joinedLobby);
 
             return validationResult;
         }

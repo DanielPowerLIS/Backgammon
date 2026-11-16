@@ -17,108 +17,19 @@ namespace Backgammon.Server.Services
 
         private readonly PlayerSessionManager _playerSessionManager = new PlayerSessionManager();
 
-        public MatchSession InitializeMatch(string sessionId, string roomId)
+        public MatchSession StartMatch(string sessionId, string roomId)
         {
             ValidateMatchRequest(sessionId, roomId);
 
             PlayerSession playerSession = GetPlayerSession(sessionId);
-            MatchSession matchSession = CreateMatch(
-                playerSession.PlayerId, roomId, out IPreinitiationCallback guestCallback);
 
-            NotifyGuest(guestCallback, matchSession);
+            MatchSession matchSession = CreateMatch(playerSession.PlayerId, roomId);
+
+            IPreinitiationCallback guestCallback = GetGuestCallback(matchSession);
+
+            UpdateGuest(guestCallback, matchSession);
 
             return matchSession;
-        }
-
-        private void ValidateMatchRequest(string sessionId, string roomId)
-        {
-            if (string.IsNullOrWhiteSpace(sessionId) || string.IsNullOrWhiteSpace(roomId))
-            {
-                ApplicationLogger.LogWarning(
-                    "Match initialization was rejected because a required identifier is missing.");
-
-                throw CreateMatchFault(ErrorCodes.InvalidRequest);
-            }
-        }
-
-        private PlayerSession GetPlayerSession(string sessionId)
-        {
-            try
-            {
-                PlayerSession playerSession = _playerSessionManager.GetSession(sessionId, true);
-
-                return playerSession;
-            }
-            catch (UnauthorizedAccessException sessionException)
-            {
-                ApplicationLogger.LogWarning(
-                    "Match initialization was rejected because the session is invalid. Reason: {0}",
-                    sessionException.Message);
-
-                throw CreateMatchFault(ErrorCodes.SessionExpired);
-            }
-        }
-
-        private MatchSession CreateMatch(
-            int playerId, string roomId, out IPreinitiationCallback guestCallback)
-        {
-            try
-            {
-                MatchSession matchSession = MatchManager.InitializeMatch(playerId, roomId, out guestCallback);
-
-                return matchSession;
-            }
-            catch (UnauthorizedAccessException accessException)
-            {
-                ApplicationLogger.LogWarning(
-                    "Match initialization was rejected because the player is not the lobby host. " +
-                    "Reason: {0}",
-                    accessException.Message);
-
-                throw CreateMatchFault(ErrorCodes.AccessDenied);
-            }
-            catch (KeyNotFoundException matchException)
-            {
-                ApplicationLogger.LogWarning(
-                    "Match initialization was rejected because the lobby or guest is unavailable. " +
-                    "Reason: {0}",
-                    matchException.Message);
-
-                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
-            }
-            catch (ArgumentException matchException)
-            {
-                ApplicationLogger.LogWarning(
-                    "Match initialization was rejected because a match is already active. Reason: {0}",
-                    matchException.Message);
-
-                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
-            }
-        }
-
-        private void NotifyGuest(IPreinitiationCallback guestCallback, MatchSession matchSession)
-        {
-            if (guestCallback == null)
-            {
-                return;
-            }
-
-            try
-            {
-                guestCallback.OnMatchStarted(matchSession.RoomId, matchSession.MatchId);
-            }
-            catch (CommunicationException exception)
-            {
-                ApplicationLogger.LogError(exception, "The guest could not receive the match notification.");
-            }
-            catch (TimeoutException exception)
-            {
-                ApplicationLogger.LogError(exception, "The match notification timed out.");
-            }
-            catch (ObjectDisposedException exception)
-            {
-                ApplicationLogger.LogError(exception, "The guest callback was closed.");
-            }
         }
 
         public MatchSession JoinMatch(string sessionId, string roomId, string matchId)
@@ -156,6 +67,119 @@ namespace Backgammon.Server.Services
             }
         }
 
+        public void MoveChecker(int fromPosition, int toPosition)
+        {
+            //TODO: Implementation for moving a checker
+        }
+
+        private void ValidateMatchRequest(string sessionId, string roomId)
+        {
+            if (string.IsNullOrWhiteSpace(sessionId) || string.IsNullOrWhiteSpace(roomId))
+            {
+                ApplicationLogger.LogWarning(
+                    "Match initialization was rejected because a required identifier is missing.");
+
+                throw CreateMatchFault(ErrorCodes.InvalidRequest);
+            }
+        }
+
+        private PlayerSession GetPlayerSession(string sessionId)
+        {
+            try
+            {
+                PlayerSession playerSession = _playerSessionManager.GetSession(sessionId, true);
+
+                return playerSession;
+            }
+            catch (UnauthorizedAccessException sessionException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Match initialization was rejected because the session is invalid. Reason: {0}",
+                    sessionException.Message);
+
+                throw CreateMatchFault(ErrorCodes.SessionExpired);
+            }
+        }
+
+        private IPreinitiationCallback GetGuestCallback(MatchSession matchSession)
+        {
+            try
+            {
+                IPreinitiationCallback guestCallback = MatchManager.GetGuestCallback(matchSession);
+
+                return guestCallback;
+            }
+            catch (KeyNotFoundException matchException)
+            {
+                ApplicationLogger.LogWarning(
+                    "The guest callback for room {0} could not be retrieved. Reason: {1}",
+                    matchSession.RoomId, matchException.Message);
+
+                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
+            }
+        }
+
+        private MatchSession CreateMatch(int playerId, string roomId)
+        {
+            try
+            {
+                MatchSession matchSession = MatchManager.CreateMatch(playerId, roomId);
+
+                return matchSession;
+            }
+            catch (UnauthorizedAccessException accessException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Match initialization was rejected because the player is not the lobby host. " +
+                    "Reason: {0}",
+                    accessException.Message);
+
+                throw CreateMatchFault(ErrorCodes.AccessDenied);
+            }
+            catch (KeyNotFoundException matchException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Match initialization was rejected because the lobby or guest is unavailable. " +
+                    "Reason: {0}",
+                    matchException.Message);
+
+                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
+            }
+            catch (ArgumentException matchException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Match initialization was rejected because a match is already active. Reason: {0}",
+                    matchException.Message);
+
+                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
+            }
+        }
+
+        private void UpdateGuest(IPreinitiationCallback guestCallback, MatchSession matchSession)
+        {
+            if (guestCallback == null)
+            {
+                return;
+            }
+
+            try
+            {
+                guestCallback.OnMatchStarted(matchSession.RoomId, matchSession.MatchId);
+            }
+            catch (CommunicationException exception)
+            {
+                ApplicationLogger.LogError(exception, "The guest could not receive the match notification.");
+            }
+            catch (TimeoutException exception)
+            {
+                ApplicationLogger.LogError(exception, "The match notification timed out.");
+            }
+            catch (ObjectDisposedException exception)
+            {
+                ApplicationLogger.LogError(exception, "The guest callback was closed.");
+            }
+        }
+
         private FaultException<MatchFault> CreateMatchFault(string errorCode)
         {
             var matchFault = new MatchFault
@@ -168,11 +192,6 @@ namespace Backgammon.Server.Services
                 "The match operation could not be completed.");
 
             return faultException;
-        }
-
-        public void MoveChecker(int fromPosition, int toPosition)
-        {
-            //TODO: Implementation for moving a checker
         }
     }
 }

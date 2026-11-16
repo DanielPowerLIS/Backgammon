@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
 
 using CurrentLobby = Backgammon.Client.PreinitiationReference.Lobby;
 
@@ -7,8 +6,10 @@ namespace Backgammon.Client.Controllers.Lobby
 {
     internal static class LobbyContext
     {
-        private static readonly ConcurrentDictionary<string, string> PendingMatchIds =
-            new ConcurrentDictionary<string, string>();
+        private static string _pendingRoomId = string.Empty;
+        private static string _pendingMatchId = string.Empty;
+
+        private static readonly Entrance _queue = new Entrance();
 
         private static CurrentLobby _currentLobby;
 
@@ -50,32 +51,45 @@ namespace Backgammon.Client.Controllers.Lobby
 
         public static void RegisterMatchStarted(string roomId, string matchId)
         {
-            PendingMatchIds[roomId] = matchId;
+            lock (_queue)
+            {
+                _pendingRoomId = roomId;
+                _pendingMatchId = matchId;
+            }
+
             LobbyChanged();
         }
 
-        public static bool ConsumePendingMatchId(string roomId, out string matchId)
+        public static string ConsumePendingMatchId(string roomId)
         {
-            bool noticeFound = PendingMatchIds.TryRemove(roomId, out matchId);
-
-            if (!noticeFound)
+            lock (_queue)
             {
-                matchId = string.Empty;
-            }
+                bool sameRoom = string.Equals(_pendingRoomId, roomId, StringComparison.Ordinal);
 
-            return noticeFound;
+                bool hasPendingMatch = !string.IsNullOrWhiteSpace(_pendingMatchId);
+
+                if (!sameRoom || !hasPendingMatch)
+                {
+                    return string.Empty;
+                }
+
+                string matchId = _pendingMatchId;
+
+                _pendingRoomId = string.Empty;
+                _pendingMatchId = string.Empty;
+
+                return matchId;
+            }
         }
 
         public static void ClearLobby()
         {
-            CurrentLobby lobby = _currentLobby;
-
-            if (lobby != null)
+            lock (_queue)
             {
-                PendingMatchIds.TryRemove(lobby.RoomId, out _);
+                _pendingRoomId = string.Empty;
+                _pendingMatchId = string.Empty;
+                _currentLobby = null;
             }
-
-            _currentLobby = null;
         }
 
         private static void LobbyChanged()

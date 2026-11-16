@@ -24,8 +24,7 @@ namespace Backgammon.Server.Services.Manager
         private const string PlayerNotInMatch = "The player does not belong to this match.";
 
 
-        public static MatchSession InitializeMatch(
-            int requestPlayerId, string roomId, out IPreinitiationCallback guestCallback)
+        public static MatchSession CreateMatch(int requestPlayerId, string roomId)
         {
             LobbySession lobbySession = LobbyManager.FindSavedLobbySession(roomId);
             MatchSession matchCopy;
@@ -33,65 +32,64 @@ namespace Backgammon.Server.Services.Manager
             lock (lobbySession.Queue)
             {
                 LobbyManager.ValidateHostMatch(requestPlayerId, lobbySession);
-
                 Lobby lobby = lobbySession.RoomData;
 
                 if (!lobby.IsFull)
                 {
                     throw new KeyNotFoundException(GuestRequired);
                 }
+                MatchSession matchSession;
 
-                guestCallback = lobbySession.GuestCallback;
-
-                if (ActiveMatches.TryGetValue(lobby.RoomId, out MatchSession activeMatch))
+                try
                 {
-                    if (activeMatch.PlayerHostId != lobby.HostPlayerId || activeMatch.PlayerGuestId != lobby.GuestPlayerId)
-                    {
-                        throw new ArgumentException(MatchAlreadyActive);
-                    }
-
-                    MatchSession activeMatchCopy = CopyMatch(activeMatch);
-                    return activeMatchCopy;
+                    matchSession = FindSavedMatch(roomId);
                 }
-
-                var matchSession = new MatchSession
+                catch (KeyNotFoundException matchException)
                 {
-                    MatchId = Guid.NewGuid().ToString(),
-                    RoomId = roomId,
-                    PlayerHostId = lobby.HostPlayerId,
-                    PlayerGuestId = lobby.GuestPlayerId
-                };
+                    ApplicationLogger.LogDebug("No saved match was found for room {0}. " +
+                        "A new match will be created. Reason: {1}", roomId, matchException.Message);
 
+                    matchSession = BuildMatchSession(lobby);
+                    SaveMatch(matchSession);
+                }
+                ValidateMatchPlayers(matchSession, lobby);
                 matchCopy = CopyMatch(matchSession);
-
-                bool matchAdded = ActiveMatches.TryAdd(lobby.RoomId, matchSession);
-
-                if (!matchAdded)
-                {
-                    throw new ArgumentException(MatchAlreadyActive);
-                }
             }
 
             return matchCopy;
         }
 
-        internal static void RemoveMatch(string roomId)
-        { 
-            ActiveMatches.TryRemove(roomId, out _);
-        }
-
-
-        private static MatchSession CopyMatch(MatchSession matchSession) 
+        public static IPreinitiationCallback GetGuestCallback(MatchSession matchSession)
         {
-            var matchCopy = new MatchSession
+            if (matchSession == null)
             {
-                MatchId = matchSession.MatchId,
-                RoomId = matchSession.RoomId,
-                PlayerHostId = matchSession.PlayerHostId,
-                PlayerGuestId = matchSession.PlayerGuestId
-            };
+                throw new ArgumentNullException(nameof(matchSession));
+            }
 
-            return matchCopy;
+            LobbySession lobbySession = LobbyManager.FindSavedLobbySession(matchSession.RoomId);
+
+            lock (lobbySession.Queue)
+            {
+                LobbyManager.ValidateLobbyForMatch(lobbySession);
+
+                MatchSession savedMatch = FindSavedMatch(matchSession.RoomId);
+
+                if (savedMatch.MatchId != matchSession.MatchId)
+                {
+                    throw new KeyNotFoundException(MatchUnavailable);
+                }
+
+                ValidateMatchPlayers(savedMatch, lobbySession.RoomData);
+
+                IPreinitiationCallback guestCallback = lobbySession.GuestCallback;
+
+                if (guestCallback == null)
+                {
+                    throw new KeyNotFoundException("The guest callback is unavailable.");
+                }
+
+                return guestCallback;
+            }
         }
 
         public static MatchSession JoinMatch(int requestPlayerId, string roomId, string matchId)
@@ -108,9 +106,9 @@ namespace Backgammon.Server.Services.Manager
             {
                 LobbyManager.ValidateLobbyForMatch(lobbySession);
 
-                bool matchFound = ActiveMatches.TryGetValue(roomId, out MatchSession matchSession);
+                MatchSession matchSession = FindSavedMatch(roomId);
 
-                if (!matchFound || matchSession.MatchId != matchId)
+                if (matchSession.MatchId != matchId)
                 {
                     throw new KeyNotFoundException(MatchUnavailable);
                 }
@@ -127,6 +125,87 @@ namespace Backgammon.Server.Services.Manager
             }
 
             return matchCopy;
+        }
+
+        internal static bool RemoveMatch(string roomId)
+        {
+            bool removedMatch= ActiveMatches.TryRemove(roomId, out _);
+
+            return removedMatch;
+        }
+
+        private static MatchSession BuildMatchSession(Lobby lobby)
+        {
+            var matchSession = new MatchSession
+            {
+                MatchId = Guid.NewGuid().ToString(),
+                RoomId = lobby.RoomId,
+                PlayerHostId = lobby.HostPlayerId,
+                PlayerGuestId = lobby.GuestPlayerId
+            };
+
+            return matchSession;
+        }
+
+        private static void ValidateMatchPlayers(MatchSession matchSession, Lobby lobby)
+        {
+            bool sameHost = matchSession.PlayerHostId == lobby.HostPlayerId;
+            bool sameGuest = matchSession.PlayerGuestId == lobby.GuestPlayerId;
+
+            if (!sameHost || !sameGuest)
+            {
+                throw new ArgumentException(MatchAlreadyActive);
+            }
+        }
+
+        private static MatchSession CopyMatch(MatchSession matchSession)
+        {
+            var matchCopy = new MatchSession
+            {
+                MatchId = matchSession.MatchId,
+                RoomId = matchSession.RoomId,
+                PlayerHostId = matchSession.PlayerHostId,
+                PlayerGuestId = matchSession.PlayerGuestId
+            };
+
+            return matchCopy;
+        }
+
+        private static MatchSession FindSavedMatch(string roomId)
+        {
+            if (string.IsNullOrWhiteSpace(roomId))
+            {
+                throw new ArgumentException(MatchIdentifiersRequired, nameof(roomId));
+            }
+
+            bool matchFound = ActiveMatches.TryGetValue(roomId, out MatchSession savedMatch);
+
+            if (!matchFound || savedMatch == null)
+            {
+                throw new KeyNotFoundException(MatchUnavailable);
+            }
+
+            return savedMatch;
+        }
+
+        private static void SaveMatch(MatchSession matchSession)
+        {
+            if (matchSession == null)
+            {
+                throw new ArgumentNullException(nameof(matchSession));
+            }
+
+            if (string.IsNullOrWhiteSpace(matchSession.RoomId))
+            {
+                throw new ArgumentException(MatchIdentifiersRequired, nameof(matchSession));
+            }
+
+            bool matchAdded = ActiveMatches.TryAdd(matchSession.RoomId, matchSession);
+
+            if (!matchAdded)
+            {
+                throw new ArgumentException(MatchAlreadyActive);
+            }
         }
     }
 }
