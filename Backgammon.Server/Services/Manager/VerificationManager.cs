@@ -30,11 +30,11 @@ namespace Backgammon.Server.Services.Manager
 
         public int VerifyRequest(string requestId, string code)
         {
-            VerificationRequest request = GetStoredRequest(requestId);
+            VerificationRequest request = GetSavedRequest(requestId);
 
             lock (request.Queue)
             {
-                GetStoredRequest(requestId);
+                GetSavedRequest(requestId);
 
                 ValidateExpiration(request);
                 ValidateCode(request, code);
@@ -117,12 +117,12 @@ namespace Backgammon.Server.Services.Manager
 
             VerificationRequest request = BuildRequest(accountId, code);
 
-            StoreRequest(request);
+            SaveRequest(request);
 
             return request;
         }
 
-        private void StoreRequest(VerificationRequest request)
+        private void SaveRequest(VerificationRequest request)
         {
             bool requestStored = PendingRequests.TryAdd(request.RequestId, request);
 
@@ -152,7 +152,7 @@ namespace Backgammon.Server.Services.Manager
             return request;
         }
 
-        private VerificationRequest GetStoredRequest(string requestId)
+        private VerificationRequest GetSavedRequest(string requestId)
         {
             if (string.IsNullOrWhiteSpace(requestId))
             {
@@ -164,7 +164,7 @@ namespace Backgammon.Server.Services.Manager
 
             bool requestFound = PendingRequests.TryGetValue(requestId, out VerificationRequest request);
 
-            if (!requestFound)
+            if (!requestFound || request == null)
             {
                 ApplicationLogger.LogWarning(
                     "The verification request was not found or has already been removed.");
