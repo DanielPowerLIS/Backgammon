@@ -10,18 +10,18 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://26.186.19.19:9002/MatchService?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://26.186.19.19:9002/MatchService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" />
-      <xsd:import schemaLocation="http://26.186.19.19:9002/MatchService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:9002/MatchService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:9002/MatchService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" />
+      <xsd:import schemaLocation="http://localhost:9002/MatchService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IMatchService_InitializeMatch_InputMessage">
-    <wsdl:part name="parameters" element="tns:InitializeMatch" />
+  <wsdl:message name="IMatchService_StartMatch_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartMatch" />
   </wsdl:message>
-  <wsdl:message name="IMatchService_InitializeMatch_OutputMessage">
-    <wsdl:part name="parameters" element="tns:InitializeMatchResponse" />
+  <wsdl:message name="IMatchService_StartMatch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartMatchResponse" />
   </wsdl:message>
-  <wsdl:message name="IMatchService_InitializeMatch_MatchFaultFault_FaultMessage">
+  <wsdl:message name="IMatchService_StartMatch_MatchFaultFault_FaultMessage">
     <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q1:MatchFault" />
   </wsdl:message>
   <wsdl:message name="IMatchService_JoinMatch_InputMessage">
@@ -40,10 +40,10 @@
     <wsdl:part name="parameters" element="tns:MoveCheckerResponse" />
   </wsdl:message>
   <wsdl:portType name="IMatchService">
-    <wsdl:operation name="InitializeMatch">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/InitializeMatch" message="tns:IMatchService_InitializeMatch_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/InitializeMatchResponse" message="tns:IMatchService_InitializeMatch_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IMatchService/InitializeMatchMatchFaultFault" name="MatchFaultFault" message="tns:IMatchService_InitializeMatch_MatchFaultFault_FaultMessage" />
+    <wsdl:operation name="StartMatch">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/StartMatch" message="tns:IMatchService_StartMatch_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMatchService/StartMatchResponse" message="tns:IMatchService_StartMatch_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IMatchService/StartMatchMatchFaultFault" name="MatchFaultFault" message="tns:IMatchService_StartMatch_MatchFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="JoinMatch">
       <wsdl:input wsaw:Action="http://tempuri.org/IMatchService/JoinMatch" message="tns:IMatchService_JoinMatch_InputMessage" />
@@ -58,8 +58,8 @@
   <wsdl:binding name="NetTcpBinding_IMatchService" type="tns:IMatchService">
     <wsp:PolicyReference URI="#NetTcpBinding_IMatchService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="InitializeMatch">
-      <soap12:operation soapAction="http://tempuri.org/IMatchService/InitializeMatch" style="document" />
+    <wsdl:operation name="StartMatch">
+      <soap12:operation soapAction="http://tempuri.org/IMatchService/StartMatch" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -94,9 +94,9 @@
   </wsdl:binding>
   <wsdl:service name="MatchService">
     <wsdl:port name="NetTcpBinding_IMatchService" binding="tns:NetTcpBinding_IMatchService">
-      <soap12:address location="net.tcp://26.186.19.19:9001/MatchService" />
+      <soap12:address location="net.tcp://localhost:9001/MatchService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://26.186.19.19:9001/MatchService</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost:9001/MatchService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

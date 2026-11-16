@@ -112,7 +112,9 @@ namespace Backgammon.Client.Views.Pages
 
             string roomId = _lobbyController.GetRoomCode();
 
-            if (!LobbyContext.TryTakeMatchNotice(roomId, out string matchId))
+            string matchId = LobbyContext.ConsumePendingMatchId(roomId);
+
+            if (string.IsNullOrWhiteSpace(matchId))
             {
                 return;
             }
@@ -182,7 +184,7 @@ namespace Backgammon.Client.Views.Pages
 
             try
             {
-                MatchSession matchSession = await _matchController.InitializeMatchAsync();
+                MatchSession matchSession = await _matchController.StartMatchAsync();
                 if ( _isLobbyClosed || !IsLoaded)
                 {
                     return;

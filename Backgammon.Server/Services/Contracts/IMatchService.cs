@@ -10,7 +10,7 @@ namespace Backgammon.Server.Services.Contracts
     {
         [OperationContract]
         [FaultContract(typeof(MatchFault))]
-        MatchSession InitializeMatch(string sessionId, string roomId);
+        MatchSession StartMatch(string sessionId, string roomId);
 
         [OperationContract]
         [FaultContract(typeof(MatchFault))]

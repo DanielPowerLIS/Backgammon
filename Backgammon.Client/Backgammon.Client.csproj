@@ -135,6 +135,7 @@
     <Compile Include="Controllers\Chat\ChatController.cs" />
     <Compile Include="Controllers\GuestAccess\GuestAccessController.cs" />
     <Compile Include="Controllers\Leaderboard\LeaderboardController.cs" />
+    <Compile Include="Controllers\Lobby\Entrance.cs" />
     <Compile Include="Controllers\Lobby\LobbyContext.cs" />
     <Compile Include="Controllers\Lobby\LobbyController.cs" />
     <Compile Include="Controllers\Match\MatchController.cs" />

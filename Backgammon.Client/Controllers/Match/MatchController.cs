@@ -14,13 +14,13 @@ namespace Backgammon.Client.Controllers.Match
         {
             _matchClient = new MatchClient();
         }
-        public async Task<MatchSession> InitializeMatchAsync()
+        public async Task<MatchSession> StartMatchAsync()
         {
             string sessionId = PlayerSessionContext.GetSession().SessionId;
             string roomId = LobbyContext.GetLobby().RoomId;
 
 
-            MatchSession matchSession = await _matchClient.InitializeMatchAsync(sessionId, roomId);
+            MatchSession matchSession = await _matchClient.StartMatchAsync(sessionId, roomId);
 
             return matchSession;
         }
