@@ -161,8 +161,7 @@ namespace Backgammon.Server.Services.Manager
             {
                 SenderPlayerId = sender.PlayerId,
                 SenderUsername = senderUsername,
-                Message = message,
-                SendAtUtc = DateTime.UtcNow
+                Message = message
             };
 
             ChatMessage createdChatMessage = chatMessage;

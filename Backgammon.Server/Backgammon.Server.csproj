@@ -201,7 +201,7 @@
     <Compile Include="Services\Data\PreinitiationFault.cs" />
     <Compile Include="Services\Data\VerificationFault.cs" />
     <Compile Include="Services\Data\VerificationRequest.cs" />
-    <Compile Include="Services\ExceptionCode\ErrorCodes.cs" />
+    <Compile Include="SupportServices\ExceptionCode\ErrorCodes.cs" />
     <Compile Include="Services\LobbyService.cs" />
     <Compile Include="Services\Manager\MatchManager.cs" />
     <Compile Include="Services\MatchService.cs" />

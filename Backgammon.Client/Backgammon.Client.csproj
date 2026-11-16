@@ -428,6 +428,9 @@
     <None Include="Connected Services\AuthenticationReference\Backgammon.Client.AuthenticationReference.VerificationRequest.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ChatReference\Backgammon.Client.ChatReference.ChatMessage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\GuestAccessReference\Backgammon.Client.GuestAccessReference.PlayerSession.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -602,6 +605,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\ChatReference\ChatService.disco" />
+    <None Include="Connected Services\ChatReference\configuration91.svcinfo" />
+    <None Include="Connected Services\ChatReference\configuration.svcinfo" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

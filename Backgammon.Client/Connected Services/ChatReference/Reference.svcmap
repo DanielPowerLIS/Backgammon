@@ -22,10 +22,14 @@
     <MetadataSource Address="http://localhost:9002/ChatService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="tempuri.org.wsdl" MetadataType="Wsdl" ID="c4ec7856-3bb0-4383-91e4-c61564c505ae" SourceId="1" SourceUrl="http://localhost:9002/ChatService?wsdl" />
+    <MetadataFile FileName="ChatService.disco" MetadataType="Disco" ID="03c190b3-1b2d-43c9-bb1c-c4995e494039" SourceId="1" SourceUrl="http://localhost:9002/ChatService?disco" />
     <MetadataFile FileName="tempuri.org.xsd" MetadataType="Schema" ID="1a2eaaab-914f-4645-bbfb-2a8bb05fbfe2" SourceId="1" SourceUrl="http://localhost:9002/ChatService?xsd=xsd0" />
     <MetadataFile FileName="schemas.microsoft.com.2003.10.Serialization.xsd" MetadataType="Schema" ID="345a88aa-e1ca-4a51-9fc0-096227ee0298" SourceId="1" SourceUrl="http://localhost:9002/ChatService?xsd=xsd1" />
+    <MetadataFile FileName="tempuri.org.wsdl" MetadataType="Wsdl" ID="c4ec7856-3bb0-4383-91e4-c61564c505ae" SourceId="1" SourceUrl="http://localhost:9002/ChatService?wsdl" />
     <MetadataFile FileName="Backgammon.Server.Services.Data.xsd" MetadataType="Schema" ID="b0be0505-9bd3-47e2-9d3a-70d101eef799" SourceId="1" SourceUrl="http://localhost:9002/ChatService?xsd=xsd2" />
   </Metadata>
-  <Extensions />
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
 </ReferenceGroup>
