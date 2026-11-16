@@ -211,11 +211,11 @@ namespace Backgammon.Server.Services.Manager
         {
             foreach (IChatCallback callback in callbacks)
             {
-                TrySendMessage(lobbySession, callback, chatMessage);
+                SendMessageToCallback(lobbySession, callback, chatMessage);
             }
         }
 
-        private static void TrySendMessage(LobbySession lobbySession, IChatCallback chatCallback,
+        private static void SendMessageToCallback(LobbySession lobbySession, IChatCallback chatCallback,
             ChatMessage chatMessage)
         {
             try
@@ -224,34 +224,32 @@ namespace Backgammon.Server.Services.Manager
             }
             catch (CommunicationException communicationException)
             {
-                HandleCallbackFailure(
-                    lobbySession,
-                    chatCallback,
-                    communicationException);
+                ApplicationLogger.LogError(
+                    communicationException,
+                    "A chat message could not be delivered to a lobby participant.");
+
+                RemoveFailedCallback(lobbySession, chatCallback);
             }
             catch (TimeoutException timeoutException)
             {
-                HandleCallbackFailure(
-                    lobbySession,
-                    chatCallback,
-                    timeoutException);
+                ApplicationLogger.LogError(
+                    timeoutException,
+                    "A chat message delivery timed out.");
+
+                RemoveFailedCallback(lobbySession, chatCallback);
             }
             catch (ObjectDisposedException disposedException)
             {
-                HandleCallbackFailure(
-                    lobbySession,
-                    chatCallback,
-                    disposedException);
+                ApplicationLogger.LogError(
+                    disposedException,
+                    "A chat message could not be delivered because the callback was closed.");
+
+                RemoveFailedCallback(lobbySession, chatCallback);
             }
         }
 
-        private static void HandleCallbackFailure(LobbySession lobbySession, IChatCallback chatCallback,
-            Exception callbackException)
+        private static void RemoveFailedCallback(LobbySession lobbySession, IChatCallback chatCallback)
         {
-            ApplicationLogger.LogError(
-                callbackException,
-                "A chat message could not be delivered to a lobby participant.");
-
             lock (lobbySession.Queue)
             {
                 RemoveChatCallback(lobbySession, chatCallback);
@@ -264,7 +262,7 @@ namespace Backgammon.Server.Services.Manager
             {
                 lobbySession.HostChatCallback = null;
             }
-            else if (ReferenceEquals(lobbySession.GuestChatCallback,chatCallback))
+            else if (ReferenceEquals(lobbySession.GuestChatCallback, chatCallback))
             {
                 lobbySession.GuestChatCallback = null;
             }
