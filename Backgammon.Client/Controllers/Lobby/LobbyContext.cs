@@ -16,7 +16,7 @@ namespace Backgammon.Client.Controllers.Lobby
 
         public static event Action<bool> LobbyClosed;
 
-        public static void StoreLobby(CurrentLobby lobby)
+        public static void SaveLobby(CurrentLobby lobby)
         {
             if (lobby == null)
             {
@@ -48,13 +48,13 @@ namespace Backgammon.Client.Controllers.Lobby
             }
         }
 
-        public static void NotifyMatchStarted(string roomId, string matchId)
+        public static void RegisterMatchStarted(string roomId, string matchId)
         {
             PendingMatchIds[roomId] = matchId;
             LobbyChanged();
         }
 
-        public static bool TryTakeMatchNotice(string roomId, out string matchId)
+        public static bool ConsumePendingMatchId(string roomId, out string matchId)
         {
             bool noticeFound = PendingMatchIds.TryRemove(roomId, out matchId);
 

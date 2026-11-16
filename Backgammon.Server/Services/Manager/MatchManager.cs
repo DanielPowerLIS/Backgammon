@@ -27,7 +27,7 @@ namespace Backgammon.Server.Services.Manager
         public static MatchSession InitializeMatch(
             int requestPlayerId, string roomId, out IPreinitiationCallback guestCallback)
         {
-            LobbySession lobbySession = LobbyManager.GetExistingLobbySession(roomId);
+            LobbySession lobbySession = LobbyManager.FindSavedLobbySession(roomId);
             MatchSession matchCopy;
 
             lock (lobbySession.Queue)
@@ -101,7 +101,7 @@ namespace Backgammon.Server.Services.Manager
                 throw new ArgumentException(MatchIdentifiersRequired);
             }
 
-            LobbySession lobbySession = LobbyManager.GetExistingLobbySession(roomId);
+            LobbySession lobbySession = LobbyManager.FindSavedLobbySession(roomId);
             MatchSession matchCopy;
 
             lock (lobbySession.Queue)

@@ -8,7 +8,7 @@ namespace Backgammon.Client.Controllers.Callbacks
     {
         public void OnLobbyUpdated(CurrentLobby lobby)
         {
-            LobbyContext.StoreLobby(lobby);
+            LobbyContext.SaveLobby(lobby);
         }
 
         public void OnCloseLobby(bool wasKicked)
@@ -18,7 +18,7 @@ namespace Backgammon.Client.Controllers.Callbacks
 
         public void OnMatchStarted(string roomId, string matchId)
         {
-            LobbyContext.NotifyMatchStarted(roomId, matchId);
+            LobbyContext.RegisterMatchStarted(roomId, matchId);
         }
     }
 }

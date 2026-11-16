@@ -56,7 +56,7 @@ namespace Backgammon.Server.Services.Manager
 
             try
             {
-                storedSession = FindStoredSession(sessionId);
+                storedSession = FindSavedSession(sessionId);
             }
             catch (UnauthorizedAccessException sessionException)
             {
@@ -69,7 +69,7 @@ namespace Backgammon.Server.Services.Manager
 
             lock (storedSession.Queue)
             {
-                RemoveStoredSession(sessionId);
+                RemoveSavedSession(sessionId);
             }
         }
 
@@ -80,11 +80,11 @@ namespace Backgammon.Server.Services.Manager
                 throw new UnauthorizedAccessException();
             }
 
-            PlayerSession storedSession = FindStoredSession(sessionId);
+            PlayerSession storedSession = FindSavedSession(sessionId);
 
             lock (storedSession.Queue)
             {
-                FindStoredSession(sessionId);
+                FindSavedSession(sessionId);
 
                 DateTime currentTimeUtc = DateTime.UtcNow;
 
@@ -121,7 +121,7 @@ namespace Backgammon.Server.Services.Manager
             }
         }
 
-        private PlayerSession FindStoredSession(string sessionId)
+        private PlayerSession FindSavedSession(string sessionId)
         {
             bool sessionFound = ActiveSessions.TryGetValue(sessionId, out PlayerSession storedSession);
 
@@ -133,7 +133,7 @@ namespace Backgammon.Server.Services.Manager
             return storedSession;
         }
 
-        private void StoreSession(PlayerSession playerSession)
+        private void SaveSession(PlayerSession playerSession)
         {
             PlayerSession storedSession = CopySession(playerSession);
 
@@ -163,12 +163,12 @@ namespace Backgammon.Server.Services.Manager
                 IsPlaying = false
             };
 
-            StoreSession(playerSession);
+            SaveSession(playerSession);
 
             return playerSession;
         }
 
-        private bool RemoveStoredSession(string sessionId)
+        private bool RemoveSavedSession(string sessionId)
         {
             bool sessionRemoved = ActiveSessions.TryRemove(sessionId, out _);
 
@@ -185,7 +185,7 @@ namespace Backgammon.Server.Services.Manager
 
                     if (storedSession.ExpiresAtUtc <= currentTimeUtc)
                     {
-                        RemoveStoredSession(storedSession.SessionId);
+                        RemoveSavedSession(storedSession.SessionId);
                     }
                 }
             }
@@ -195,7 +195,7 @@ namespace Backgammon.Server.Services.Manager
         {
             if (storedSession.ExpiresAtUtc <= currentTimeUtc)
             {
-                RemoveStoredSession(storedSession.SessionId);
+                RemoveSavedSession(storedSession.SessionId);
 
                 throw new UnauthorizedAccessException();
             }
