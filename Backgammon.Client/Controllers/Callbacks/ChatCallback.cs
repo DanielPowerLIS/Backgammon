@@ -2,7 +2,7 @@
 
 using Backgammon.Client.ChatReference;
 
-namespace Backgammon.Client.Controllers.Chat
+namespace Backgammon.Client.Controllers.Callbacks
 {
     internal class ChatCallback : IChatServiceCallback
     {

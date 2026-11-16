@@ -9,6 +9,7 @@ using Backgammon.Client.Controllers.Session;
 using Backgammon.Client.Settings.Logging;
 using CurrentLobby = Backgammon.Client.PreinitiationReference.Lobby;
 using CurrentPlayerSession = Backgammon.Client.AuthenticationReference.PlayerSession;
+using Backgammon.Client.Controllers.Callbacks;
 
 namespace Backgammon.Client.Controllers.Chat
 {
@@ -49,7 +50,7 @@ namespace Backgammon.Client.Controllers.Chat
                 return previousMessages;
             }
 
-            bool hasLobbyConnectionData = StoreChatConnection();
+            bool hasLobbyConnectionData = SaveChatConnection();
 
             if (!hasLobbyConnectionData)
             {
@@ -175,7 +176,7 @@ namespace Backgammon.Client.Controllers.Chat
             }
         }
 
-        private bool StoreChatConnection()
+        private bool SaveChatConnection()
         {
             CurrentPlayerSession playerSession;
             CurrentLobby lobby;

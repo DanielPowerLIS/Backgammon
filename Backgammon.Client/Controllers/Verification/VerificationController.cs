@@ -33,7 +33,7 @@ namespace Backgammon.Client.Controllers.Verification
 
             PlayerSession playerSession = await _authenticationClient.ConfirmVerificationAsync(requestId, code);
 
-            PlayerSessionContext.StoreSession(playerSession);
+            PlayerSessionContext.SaveSession(playerSession);
 
             return validationResult;
         }

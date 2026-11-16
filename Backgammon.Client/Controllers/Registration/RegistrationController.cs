@@ -15,6 +15,8 @@ namespace Backgammon.Client.Controllers.Registration
     {
         private readonly RegistrationClient _registrationClient;
 
+                private static readonly int MaximumTextFieldLength = 100;
+
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(RegistrationController));
 

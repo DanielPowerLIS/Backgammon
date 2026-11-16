@@ -22,7 +22,7 @@ namespace Backgammon.Client.Controllers.GuestAccess
 
             PlayerSession playerSession = CreatePlayerSession(guestSession);
 
-            PlayerSessionContext.StoreSession(playerSession);
+            PlayerSessionContext.SaveSession(playerSession);
         }
 
         private PlayerSession CreatePlayerSession(GuestPlayerSession guestSession)
