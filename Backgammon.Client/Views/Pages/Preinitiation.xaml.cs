@@ -35,7 +35,7 @@ namespace Backgammon.Client.Views.Pages
 
                 if (lobbyCreated)
                 {
-                    NavigationService.Navigate(new Lobby());
+                    NavigationService.Navigate(new Lobby(_preinitiationController));
                 }
             }
             catch (FaultException<PreinitiationFault> lobbyFault)
