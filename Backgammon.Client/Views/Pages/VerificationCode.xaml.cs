@@ -19,12 +19,6 @@ namespace Backgammon.Client.Views.Pages
         private readonly TextBox[] _codeTextBoxes;
         private readonly VerificationController _verificationController;
 
-        private static readonly string InvalidCodeErrorCode = "InvalidCode";
-        private static readonly string RequestExpiredErrorCode = "RequestExpired";
-        private static readonly string AttemptsExhaustedErrorCode = "AttemptsExhausted";
-        private static readonly string RequestNotFoundErrorCode = "RequestNotFound";
-        private static readonly string InvalidCredentialsErrorCode = "InvalidCredentials";
-
         private static readonly IApplicationLogger ApplicationLogger =
             new Log4NetApplicationLogger(typeof(VerificationCode));
 
@@ -190,13 +184,13 @@ namespace Backgammon.Client.Views.Pages
 
             if (!validationResult.IsValid)
             {
-                ShowVerificationMessage(Properties.Resources.TextBlock_VerificationInvalidFormatMessage);
-
-                textBoxDigit1.Focus();
-                return;
+                ShowInvalidFormatMessage();
+                FocusCodeInput(0);
             }
-
-            ShowSuccessfulVerification();
+            else
+            {
+                ShowSuccessfulVerification();
+            }
         }
 
         private async Task VerifyWithFeedbackAsync()
@@ -207,122 +201,56 @@ namespace Backgammon.Client.Views.Pages
             }
             catch (FaultException<VerificationFault> verificationException)
             {
-                string errorCode = verificationException.Detail.ErrorCode;
+                ApplicationLogger.LogWarning("Verification was rejected. Code: {0}",
+                    verificationException.Detail.ErrorCode);
 
-                ApplicationLogger.LogWarning("Verification was rejected. Code: {0}", errorCode);
-
-                ShowVerificationError(errorCode);
+                ShowVerificationUnavailableMessage();
             }
             catch (FaultException<AuthenticationFault> authenticationException)
             {
-                ShowAuthenticationError(authenticationException);
+                ApplicationLogger.LogWarning("Authentication was rejected. Code: {0}",
+                    authenticationException.Detail.ErrorCode);
+
+                ShowVerificationUnavailableMessage();
             }
             catch (CommunicationException communicationException)
             {
                 ApplicationLogger.LogError(communicationException,
                     "A communication failure prevented verification from completing.");
 
-                ShowVerificationMessage(Properties.Resources.TextBlock_VerificationUnavailableMessage);
+                ShowVerificationUnavailableMessage();
             }
             catch (TimeoutException timeoutException)
             {
                 ApplicationLogger.LogError(timeoutException,
                     "The verification request exceeded the time limit.");
 
-                ShowVerificationMessage(  Properties.Resources.TextBlock_VerificationUnavailableMessage);
+                ShowVerificationUnavailableMessage();
             }
         }
 
-        private void ShowAuthenticationError(FaultException<AuthenticationFault> authenticationException)
+        private void ShowInvalidFormatMessage()
         {
-            string errorCode = authenticationException.Detail.ErrorCode;
-
-            if (errorCode == InvalidCredentialsErrorCode)
-            {
-                ApplicationLogger.LogWarning("Verified sign-in was rejected. Code: {0}", errorCode);
-
-                ShowVerificationMessage(Properties.Resources.TextBlock_LoginInvalidCredentialsMessage);
-
-                NavigationService.Navigate(new Login());
-                return;
-            }
-
-            ApplicationLogger.LogError(authenticationException,
-                "The server could not complete verified sign-in. Code: {0}",
-                errorCode);
-
-            ShowVerificationMessage( Properties.Resources.TextBlock_VerificationUnavailableMessage);
-        }
-
-        private void ShowVerificationError(string errorCode)
-        {
-            string message = GetVerificationMessage(errorCode);
-
-            ShowVerificationMessage(message);
-
-            bool requiresNewRequest = errorCode == RequestExpiredErrorCode ||
-                errorCode == AttemptsExhaustedErrorCode ||
-                errorCode == RequestNotFoundErrorCode;
-
-            if (requiresNewRequest)
-            {
-                NavigationService.Navigate(new Login());
-            }
-        }
-
-        private string GetVerificationMessage(string errorCode)
-        {
-            if (errorCode == InvalidCodeErrorCode)
-            {
-                string invalidCodeMessage = Properties.Resources.TextBlock_VerificationInvalidCodeMessage;
-
-                return invalidCodeMessage;
-            }
-
-            string requestMessage = GetRequestErrorMessage(errorCode);
-
-            return requestMessage;
-        }
-
-        private string GetRequestErrorMessage(string errorCode)
-        {
-            string message = Properties.Resources.TextBlock_VerificationUnavailableMessage;
-
-            if (errorCode == RequestExpiredErrorCode)
-            {
-                message = Properties.Resources.TextBlock_VerificationExpiredMessage;
-            }
-            else if (errorCode == AttemptsExhaustedErrorCode)
-            {
-                message =
-                    Properties.Resources.TextBlock_VerificationAttemptsExhaustedMessage;
-            }
-            else if (errorCode == RequestNotFoundErrorCode)
-            {
-                message =
-                    Properties.Resources.TextBlock_VerificationRequestNotFoundMessage;
-            }
-
-            return message;
-        }
-
-        private void ShowVerificationMessage(string message)
-        {
-            IsEnabled = true;
-
             var dialog = new AccountDialog(
                 Properties.Resources.TextBlock_VerificationErrorTitle,
-                message);
+                Properties.Resources.TextBlock_VerificationInvalidFormatMessage);
 
             Window owner = Window.GetWindow(this);
+            dialog.ShowOver(owner);
+        }
 
+        private void ShowVerificationUnavailableMessage()
+        {
+            var dialog = new AccountDialog(
+                Properties.Resources.TextBlock_VerificationErrorTitle,
+                Properties.Resources.TextBlock_VerificationUnavailableMessage);
+
+            Window owner = Window.GetWindow(this);
             dialog.ShowOver(owner);
         }
 
         private void ShowSuccessfulVerification()
         {
-            IsEnabled = true;
-
             var dialog = new AccountDialog(
                 Properties.Resources.TextBlock_LoginSuccessTitle,
                 Properties.Resources.TextBlock_LoginSuccessMessage);
