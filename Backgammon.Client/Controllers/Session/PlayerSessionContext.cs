@@ -8,7 +8,7 @@ namespace Backgammon.Client.Controllers.Session
     {
         private static PlayerSession _currentSession;
 
-        public static void StoreSession(PlayerSession playerSession)
+        public static void SaveSession(PlayerSession playerSession)
         {
             if (playerSession == null)
             {

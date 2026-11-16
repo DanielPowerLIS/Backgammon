@@ -131,7 +131,7 @@
     </Compile>
     <Compile Include="Controllers\Authentication\AuthenticationController.cs" />
     <Compile Include="Controllers\Callbacks\PreinitiationCallback.cs" />
-    <Compile Include="Controllers\Chat\ChatCallback.cs" />
+    <Compile Include="Controllers\Callbacks\ChatCallback.cs" />
     <Compile Include="Controllers\Chat\ChatController.cs" />
     <Compile Include="Controllers\GuestAccess\GuestAccessController.cs" />
     <Compile Include="Controllers\Leaderboard\LeaderboardController.cs" />

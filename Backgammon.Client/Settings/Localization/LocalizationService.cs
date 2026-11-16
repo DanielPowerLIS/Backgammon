@@ -36,7 +36,14 @@ namespace Backgammon.Client.Settings.Localization
         {
             get
             {
-                return Properties.Resources.ResourceManager.GetString(resourceKey, _currentCulture) ?? resourceKey;
+                string localizedText = Properties.Resources.ResourceManager.GetString(resourceKey, _currentCulture);
+
+                if (localizedText == null)
+                {
+                    localizedText = resourceKey;
+                }
+
+                return localizedText;
             }
         }
 
@@ -69,9 +76,22 @@ namespace Backgammon.Client.Settings.Localization
 
             Properties.Resources.Culture = _currentCulture;
 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(Binding.IndexerName));
+            PropertyChangedEventHandler propertyChangedHandler = PropertyChanged;
 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CultureName)));
+            if (propertyChangedHandler != null)
+            {
+                propertyChangedHandler.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(Binding.IndexerName));
+            }
+
+            propertyChangedHandler = PropertyChanged;
+
+            if (propertyChangedHandler != null)
+            {
+                propertyChangedHandler.Invoke(
+                    this, new PropertyChangedEventArgs(nameof(CultureName)));
+            }
         }
 
         private string GetSupportedCultureName(string cultureName)
