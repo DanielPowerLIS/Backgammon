@@ -49,7 +49,7 @@ namespace Backgammon.Client.Controllers.Chat
                 return previousMessages;
             }
 
-            bool hasLobbyConnectionData = StoreLobbyConnectionData();
+            bool hasLobbyConnectionData = StoreChatConnection();
 
             if (!hasLobbyConnectionData)
             {
@@ -175,7 +175,7 @@ namespace Backgammon.Client.Controllers.Chat
             }
         }
 
-        private bool StoreLobbyConnectionData()
+        private bool StoreChatConnection()
         {
             CurrentPlayerSession playerSession;
             CurrentLobby lobby;

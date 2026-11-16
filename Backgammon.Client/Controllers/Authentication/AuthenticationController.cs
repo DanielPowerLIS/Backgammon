@@ -42,19 +42,24 @@ namespace Backgammon.Client.Controllers.Authentication
 
         private InputValidationResult ValidateRequiredCredentials(string accountIdentifier, string suppliedPassword)
         {
+            InputValidationResult validationResult;
             if (string.IsNullOrWhiteSpace(accountIdentifier))
             {
-                return CreateRequiredFieldError(nameof(Credentials.Identifier));
+                validationResult = CreateRequiredFieldError(nameof(Credentials.Identifier));
+                return validationResult;
             }
 
             if (string.IsNullOrWhiteSpace(suppliedPassword))
             {
-                return CreateRequiredFieldError(nameof(Credentials.Password));
+                validationResult = CreateRequiredFieldError(nameof(Credentials.Password));
+                return validationResult;
             }
 
-            var validationResult = new InputValidationResult
+            validationResult = new InputValidationResult
             {
-                IsValid = true
+                IsValid = true,
+                ErrorCode = null,
+                FieldName = null
             };
 
             return validationResult;
