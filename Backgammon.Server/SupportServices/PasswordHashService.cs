@@ -31,47 +31,58 @@ namespace Backgammon.Server.SupportServices
 
                 string encodedSalt = Convert.ToBase64String(salt);
                 string encodedHash = Convert.ToBase64String(hash);
+                string passwordHash = $"PBKDF2-SHA256${IterationCount}${encodedSalt}${encodedHash}";
 
-                return $"PBKDF2-SHA256${IterationCount}${encodedSalt}${encodedHash}";
+                return passwordHash;
             }
         }
 
         public bool VerifyPassword(string password, string storedHash)
         {
-            if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(storedHash))
+            bool passwordVerified = false;
+
+            if (!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(storedHash))
             {
-                return false;
+                string[] parts = storedHash.Split('$');
+
+                try
+                {
+                    bool validHashFormat = HasValidHashFormat(parts);
+
+                    if (validHashFormat)
+                    {
+                        passwordVerified = VerifyParsedHash(password, parts);
+                    }
+                }
+                catch (FormatException formatException)
+                {
+                    ApplicationLogger.LogError(
+                        formatException,
+                        "Password verification failed because the stored password hash has an invalid format.");
+                }
+                catch (OverflowException overflowException)
+                {
+                    ApplicationLogger.LogError(
+                        overflowException,
+                        "Password verification failed because the stored iteration count is out of range.");
+                }
             }
 
-            string[] parts = storedHash.Split('$');
-            if (!HasValidHashFormat(parts))
-            {
-                return false;
-            }
-
-            try
-            {
-                return VerifyParsedHash(password, parts);
-            }
-            catch (FormatException formatException)
-            {
-                ApplicationLogger.LogError(formatException,
-                    "Password verification failed because the stored password hash has an invalid format.");
-
-                return false;
-            }
+            return passwordVerified;
         }
 
         private bool HasValidHashFormat(string[] parts)
         {
-            if (parts.Length != 4 || parts[0] != "PBKDF2-SHA256")
+            bool validHashFormat = false;
+
+            if (parts.Length == 4 && parts[0] == "PBKDF2-SHA256")
             {
-                return false;
+                int iterations = int.Parse(parts[1]);
+
+                validHashFormat = iterations > 0 && iterations <= MaximumVerificationIterations;
             }
 
-            return int.TryParse(parts[1], out int iterations) &&
-                iterations > 0 &&
-                iterations <= MaximumVerificationIterations;
+            return validHashFormat;
         }
 
         private bool VerifyParsedHash(string password, string[] parts)
@@ -79,17 +90,23 @@ namespace Backgammon.Server.SupportServices
             byte[] salt = Convert.FromBase64String(parts[2]);
             byte[] expectedHash = Convert.FromBase64String(parts[3]);
 
-            if (salt.Length != SaltLength || expectedHash.Length != HashLength)
+            Rfc2898DeriveBytes derivation = new Rfc2898DeriveBytes(password, salt, 
+                int.Parse(parts[1]), HashAlgorithmName.SHA256);
+
+            byte[] actualHash;
+
+            try
             {
-                return false;
+                actualHash = derivation.GetBytes(HashLength);
+            }
+            finally
+            {
+                derivation.Dispose();
             }
 
-            using (Rfc2898DeriveBytes derivation = new Rfc2898DeriveBytes(
-                password, salt, int.Parse(parts[1]), HashAlgorithmName.SHA256))
-            {
-                byte[] actualHash = derivation.GetBytes(HashLength);
-                return HashesMatch(actualHash, expectedHash);
-            }
+            bool passwordVerified = HashesMatch(actualHash, expectedHash);
+
+            return passwordVerified;
         }
 
         private bool HashesMatch(byte[] actualHash, byte[] expectedHash)
@@ -101,7 +118,9 @@ namespace Backgammon.Server.SupportServices
                 difference |= actualHash[index] ^ expectedHash[index];
             }
 
-            return difference == 0;
+            bool hashesMatch = difference == 0;
+
+            return hashesMatch;
         }
 
     }

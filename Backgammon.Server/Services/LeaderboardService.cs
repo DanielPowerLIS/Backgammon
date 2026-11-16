@@ -11,7 +11,7 @@ using Backgammon.Server.Persistence.Repositories;
 using Backgammon.Server.Services.Data;
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.SupportServices.Logging;
-using Backgammon.Server.Services.ExceptionCode;
+using Backgammon.Server.SupportServices.ExceptionCode;
 
 namespace Backgammon.Server.Services
 {

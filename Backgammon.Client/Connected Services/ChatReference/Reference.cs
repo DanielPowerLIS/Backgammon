@@ -8,274 +8,218 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Backgammon.Client.ChatReference
-{
+namespace Backgammon.Client.ChatReference {
     using System.Runtime.Serialization;
+    using System;
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(
-        Name="ChatMessage",
-        Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
-    public partial class ChatMessage : object, System.Runtime.Serialization.IExtensibleDataObject
-    {
+    [System.Runtime.Serialization.DataContractAttribute(Name="ChatMessage", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class ChatMessage : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
+        [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MessageField;
         
-        private System.DateTime SendAtUtcField;
-        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int SenderPlayerIdField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string SenderUsernameField;
         
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
                 return this.extensionDataField;
             }
-            set
-            {
+            set {
                 this.extensionDataField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Message
-        {
-            get
-            {
+        public string Message {
+            get {
                 return this.MessageField;
             }
-            set
-            {
-                this.MessageField = value;
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime SendAtUtc
-        {
-            get
-            {
-                return this.SendAtUtcField;
-            }
-            set
-            {
-                this.SendAtUtcField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SenderPlayerId
-        {
-            get
-            {
+        public int SenderPlayerId {
+            get {
                 return this.SenderPlayerIdField;
             }
-            set
-            {
-                this.SenderPlayerIdField = value;
+            set {
+                if ((this.SenderPlayerIdField.Equals(value) != true)) {
+                    this.SenderPlayerIdField = value;
+                    this.RaisePropertyChanged("SenderPlayerId");
+                }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string SenderUsername
-        {
-            get
-            {
+        public string SenderUsername {
+            get {
                 return this.SenderUsernameField;
             }
-            set
-            {
-                this.SenderUsernameField = value;
+            set {
+                if ((object.ReferenceEquals(this.SenderUsernameField, value) != true)) {
+                    this.SenderUsernameField = value;
+                    this.RaisePropertyChanged("SenderUsername");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
-
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(
-        Name="ChatFault",
-        Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
-    public partial class ChatFault : object, System.Runtime.Serialization.IExtensibleDataObject
-    {
+    [System.Runtime.Serialization.DataContractAttribute(Name="ChatFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class ChatFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ErrorCodeField;
-
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
                 return this.extensionDataField;
             }
-            set
-            {
+            set {
                 this.extensionDataField = value;
             }
         }
-
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ErrorCode
-        {
-            get
-            {
+        public string ErrorCode {
+            get {
                 return this.ErrorCodeField;
             }
-            set
-            {
-                this.ErrorCodeField = value;
+            set {
+                if ((object.ReferenceEquals(this.ErrorCodeField, value) != true)) {
+                    this.ErrorCodeField = value;
+                    this.RaisePropertyChanged("ErrorCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(
-        ConfigurationName="Backgammon.Client.ChatReference.IChatService",
-        CallbackContract=typeof(Backgammon.Client.ChatReference.IChatServiceCallback))]
-    public interface IChatService
-    {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ChatReference.IChatService", CallbackContract=typeof(Backgammon.Client.ChatReference.IChatServiceCallback))]
+    public interface IChatService {
         
-        [System.ServiceModel.OperationContractAttribute(
-            Action="http://tempuri.org/IChatService/JoinLobbyChat",
-            ReplyAction="http://tempuri.org/IChatService/JoinLobbyChatResponse")]
-        [System.ServiceModel.FaultContractAttribute(
-            typeof(Backgammon.Client.ChatReference.ChatFault),
-            Action="http://tempuri.org/IChatService/JoinLobbyChatChatFaultFault",
-            Name="ChatFault",
-            Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/JoinLobbyChat", ReplyAction="http://tempuri.org/IChatService/JoinLobbyChatResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.ChatReference.ChatFault), Action="http://tempuri.org/IChatService/JoinLobbyChatChatFaultFault", Name="ChatFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
         Backgammon.Client.ChatReference.ChatMessage[] JoinLobbyChat(string sessionId, string roomId);
         
-        [System.ServiceModel.OperationContractAttribute(
-            Action="http://tempuri.org/IChatService/JoinLobbyChat",
-            ReplyAction="http://tempuri.org/IChatService/JoinLobbyChatResponse")]
-        System.Threading.Tasks.Task<Backgammon.Client.ChatReference.ChatMessage[]>
-            JoinLobbyChatAsync(string sessionId, string roomId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/JoinLobbyChat", ReplyAction="http://tempuri.org/IChatService/JoinLobbyChatResponse")]
+        System.Threading.Tasks.Task<Backgammon.Client.ChatReference.ChatMessage[]> JoinLobbyChatAsync(string sessionId, string roomId);
         
-        [System.ServiceModel.OperationContractAttribute(
-            Action="http://tempuri.org/IChatService/SendMessage",
-            ReplyAction="http://tempuri.org/IChatService/SendMessageResponse")]
-        [System.ServiceModel.FaultContractAttribute(
-            typeof(Backgammon.Client.ChatReference.ChatFault),
-            Action="http://tempuri.org/IChatService/SendMessageChatFaultFault",
-            Name="ChatFault",
-            Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/SendMessage", ReplyAction="http://tempuri.org/IChatService/SendMessageResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.ChatReference.ChatFault), Action="http://tempuri.org/IChatService/SendMessageChatFaultFault", Name="ChatFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
         void SendMessage(string sessionId, string roomId, string message);
         
-        [System.ServiceModel.OperationContractAttribute(
-            Action="http://tempuri.org/IChatService/SendMessage",
-            ReplyAction="http://tempuri.org/IChatService/SendMessageResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/SendMessage", ReplyAction="http://tempuri.org/IChatService/SendMessageResponse")]
         System.Threading.Tasks.Task SendMessageAsync(string sessionId, string roomId, string message);
         
-        [System.ServiceModel.OperationContractAttribute(
-            Action="http://tempuri.org/IChatService/LeaveLobbyChat",
-            ReplyAction="http://tempuri.org/IChatService/LeaveLobbyChatResponse")]
-        [System.ServiceModel.FaultContractAttribute(
-            typeof(Backgammon.Client.ChatReference.ChatFault),
-            Action="http://tempuri.org/IChatService/LeaveLobbyChatChatFaultFault",
-            Name="ChatFault",
-            Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/LeaveLobbyChat", ReplyAction="http://tempuri.org/IChatService/LeaveLobbyChatResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.ChatReference.ChatFault), Action="http://tempuri.org/IChatService/LeaveLobbyChatChatFaultFault", Name="ChatFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
         void LeaveLobbyChat(string sessionId, string roomId);
         
-        [System.ServiceModel.OperationContractAttribute(
-            Action="http://tempuri.org/IChatService/LeaveLobbyChat",
-            ReplyAction="http://tempuri.org/IChatService/LeaveLobbyChatResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IChatService/LeaveLobbyChat", ReplyAction="http://tempuri.org/IChatService/LeaveLobbyChatResponse")]
         System.Threading.Tasks.Task LeaveLobbyChatAsync(string sessionId, string roomId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IChatServiceCallback
-    {
+    public interface IChatServiceCallback {
         
-        [System.ServiceModel.OperationContractAttribute(
-            IsOneWay=true,
-            Action="http://tempuri.org/IChatService/OnMessageReceived")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/OnMessageReceived")]
         void OnMessageReceived(Backgammon.Client.ChatReference.ChatMessage message);
         
-        [System.ServiceModel.OperationContractAttribute(
-            IsOneWay=true,
-            Action="http://tempuri.org/IChatService/OnLobbyChatClosed")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/OnLobbyChatClosed")]
         void OnLobbyChatClosed();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IChatServiceChannel : Backgammon.Client.ChatReference.IChatService, System.ServiceModel.IClientChannel
-    {
+    public interface IChatServiceChannel : Backgammon.Client.ChatReference.IChatService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ChatServiceClient :
-        System.ServiceModel.DuplexClientBase<Backgammon.Client.ChatReference.IChatService>,
-        Backgammon.Client.ChatReference.IChatService
-    {
+    public partial class ChatServiceClient : System.ServiceModel.DuplexClientBase<Backgammon.Client.ChatReference.IChatService>, Backgammon.Client.ChatReference.IChatService {
         
         public ChatServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance)
-        {
+                base(callbackInstance) {
         }
         
         public ChatServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName)
-        {
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public ChatServiceClient(
-            System.ServiceModel.InstanceContext callbackInstance,
-            string endpointConfigurationName,
-            string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress)
-        {
+        public ChatServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public ChatServiceClient(
-            System.ServiceModel.InstanceContext callbackInstance,
-            string endpointConfigurationName,
-            System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress)
-        {
+        public ChatServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public ChatServiceClient(
-            System.ServiceModel.InstanceContext callbackInstance,
-            System.ServiceModel.Channels.Binding binding,
-            System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress)
-        {
+        public ChatServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
         }
         
-        public Backgammon.Client.ChatReference.ChatMessage[] JoinLobbyChat(string sessionId, string roomId)
-        {
+        public Backgammon.Client.ChatReference.ChatMessage[] JoinLobbyChat(string sessionId, string roomId) {
             return base.Channel.JoinLobbyChat(sessionId, roomId);
         }
         
-        public System.Threading.Tasks.Task<Backgammon.Client.ChatReference.ChatMessage[]>
-            JoinLobbyChatAsync(string sessionId, string roomId)
-        {
+        public System.Threading.Tasks.Task<Backgammon.Client.ChatReference.ChatMessage[]> JoinLobbyChatAsync(string sessionId, string roomId) {
             return base.Channel.JoinLobbyChatAsync(sessionId, roomId);
         }
         
-        public void SendMessage(string sessionId, string roomId, string message)
-        {
+        public void SendMessage(string sessionId, string roomId, string message) {
             base.Channel.SendMessage(sessionId, roomId, message);
         }
         
-        public System.Threading.Tasks.Task SendMessageAsync(string sessionId, string roomId, string message)
-        {
+        public System.Threading.Tasks.Task SendMessageAsync(string sessionId, string roomId, string message) {
             return base.Channel.SendMessageAsync(sessionId, roomId, message);
         }
         
-        public void LeaveLobbyChat(string sessionId, string roomId)
-        {
+        public void LeaveLobbyChat(string sessionId, string roomId) {
             base.Channel.LeaveLobbyChat(sessionId, roomId);
         }
         
-        public System.Threading.Tasks.Task LeaveLobbyChatAsync(string sessionId, string roomId)
-        {
+        public System.Threading.Tasks.Task LeaveLobbyChatAsync(string sessionId, string roomId) {
             return base.Channel.LeaveLobbyChatAsync(sessionId, roomId);
         }
     }

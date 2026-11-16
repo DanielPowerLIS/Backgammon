@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
-using Backgammon.Server.Services.ExceptionCode;
+using Backgammon.Server.SupportServices.ExceptionCode;
 using Backgammon.Server.Services.Manager;
 using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;

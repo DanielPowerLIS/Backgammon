@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Backgammon.Server.Services.ExceptionCode
+namespace Backgammon.Server.SupportServices.ExceptionCode
 {
     internal static class ErrorCodes
     {
