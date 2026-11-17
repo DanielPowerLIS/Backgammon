@@ -653,7 +653,6 @@ c) Move four checkers 6 points each.
   <data name="Message_GameLoadError" xml:space="preserve">
     <value>The match could not be loaded. Please try again.</value>
   </data>
-</root>
   <data name="Message_InvalidSocialLink" xml:space="preserve">
     <value>Enter a valid link for this social network.</value>
   </data>
