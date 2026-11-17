@@ -107,6 +107,7 @@
   <ItemGroup>
     <Compile Include="Domain\ActiveMatch.cs" />
     <Compile Include="Domain\MatchBoardFactory.cs" />
+    <Compile Include="Domain\MatchPlayer.cs" />
     <Compile Include="Domain\MatchStateFactory.cs" />
     <Compile Include="Persistence\Data\Account.cs">
       <DependentUpon>Backgammon_Model.tt</DependentUpon>

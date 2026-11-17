@@ -40,7 +40,9 @@ namespace Backgammon.Server.Domain
                 RoomId = matchState.RoomId,
                 Phase = matchState.Phase,
                 Board = CopyBoard(matchState.Board),
-                Version = matchState.Version
+                Version = matchState.Version,
+                CountdownEndsAtUtc = matchState.CountdownEndsAtUtc,
+                ServerTimeUtc = DateTime.UtcNow,
             };
 
             return stateCopy;

@@ -10,5 +10,9 @@ namespace Backgammon.Server.Services.Contracts
         [OperationContract]
         [FaultContract(typeof(MatchFault))]
         MatchState GetMatchState(string sessionId, string roomId, string matchId);
+
+        [OperationContract]
+        [FaultContract(typeof(MatchFault))]
+        MatchState RegisterPlayerReady(string sessionId, string roomId, string matchId);
     }
 }
