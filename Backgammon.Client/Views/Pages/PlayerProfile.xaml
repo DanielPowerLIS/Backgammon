@@ -117,7 +117,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
@@ -263,7 +263,8 @@
                                        Foreground="{StaticResource PinkAccentBrush}"
                                        TextWrapping="Wrap"/>
 
-                            <Button Grid.Column="2"
+                            <Button x:Name="buttonAddFacebook"
+                                    Grid.Column="2"
                                     Content="{x:Static properties:Resources.Button_AddLink}"
                                     Style="{StaticResource ProfileButtonStyle}"
                                     Margin="8,0,0,0"
@@ -288,7 +289,8 @@
                                        Foreground="{StaticResource PinkAccentBrush}"
                                        TextWrapping="Wrap"/>
 
-                            <Button Grid.Column="2"
+                            <Button x:Name="buttonAddInstagram"
+                                    Grid.Column="2"
                                     Content="{x:Static properties:Resources.Button_AddLink}"
                                     Style="{StaticResource ProfileButtonStyle}"
                                     Margin="8,0,0,0"
@@ -312,7 +314,8 @@
                                        FontSize="18"
                                        Foreground="{StaticResource PinkAccentBrush}"/>
 
-                            <Button Grid.Column="2"
+                            <Button x:Name="buttonAddTikTok"
+                                    Grid.Column="2"
                                     Content="{x:Static properties:Resources.Button_AddLink}"
                                     Style="{StaticResource ProfileButtonStyle}"
                                     Margin="8,0,0,0"

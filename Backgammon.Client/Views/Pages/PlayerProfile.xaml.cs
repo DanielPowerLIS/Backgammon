@@ -1,20 +1,21 @@
-﻿using System;
+﻿using Backgammon.Client.AuthenticationReference;
+using Backgammon.Client.Controllers.Profile;
+using Backgammon.Client.Controllers.Session;
+using Backgammon.Client.ProfileReference;
+using Backgammon.Client.Settings.Logging;
+using Backgammon.Client.Views.Dialog;
+
+using System;
 using System.IO;
+using System.ServiceModel;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.ServiceModel;
-
-using Backgammon.Client.AuthenticationReference;
-using Backgammon.Client.Controllers.Profile;
-using Backgammon.Client.Controllers.Session;
-using Backgammon.Client.Settings.Logging;
-
-using ProfileFault = Backgammon.Client.ProfileReference.PlayerProfileFault;
 using PlayerProfileData = Backgammon.Client.ProfileReference.PlayerProfile;
-using Backgammon.Client.ProfileReference;
+using ProfileFault = Backgammon.Client.ProfileReference.PlayerProfileFault;
 
 namespace Backgammon.Client.Views.Pages
 {
@@ -41,7 +42,8 @@ namespace Backgammon.Client.Views.Pages
                 PlayerSession currentSession = PlayerSessionContext.GetSession();
                 DisplaySessionData(currentSession);
 
-                PlayerProfileData profileData = await _profileController.GetPlayerProfileAsync(currentSession.SessionId);
+                PlayerProfileData profileData = await _profileController.GetPlayerProfileAsync(
+                    currentSession.SessionId);
 
                 PopulateProfile(profileData);
             }
@@ -157,20 +159,21 @@ namespace Backgammon.Client.Views.Pages
             SetDescriptionEditMode(false);
         }
 
-       private void OnAddFacebookClick(object sender, RoutedEventArgs routedEventArgs)
+        private async void OnAddFacebookClick(object sender, RoutedEventArgs routedEventArgs)
         {
-            // TODO: Display dialog to add or edit Facebook social media link.
+            await ManageSocialLinkAsync("Facebook", "https://www.facebook.com/", buttonAddFacebook);
         }
 
-        private void OnAddInstagramClick(object sender, RoutedEventArgs routedEventArgs)
+        private async void OnAddInstagramClick(object sender, RoutedEventArgs routedEventArgs)
         {
-            // TODO: Display dialog to add or edit Instagram social media link.
+            await ManageSocialLinkAsync("Instagram", "https://www.instagram.com/", buttonAddInstagram);
         }
 
-        private void OnAddTikTokClick(object sender, RoutedEventArgs routedEventArgs)
+        private async void OnAddTikTokClick(object sender, RoutedEventArgs routedEventArgs)
         {
-            // TODO: Display dialog to add or edit TikTok social media link.
+            await ManageSocialLinkAsync("TikTok", "https://www.tiktok.com/", buttonAddTikTok);
         }
+
         private void SetDescriptionEditMode(bool isEditing)
         {
             if (isEditing)
@@ -235,6 +238,27 @@ namespace Backgammon.Client.Views.Pages
 
                 AssignProfileDescription(profileData.Description);
                 AssignProfileAvatar(profileData.Avatar);
+
+                var facebookLink = new SocialMediaLink
+                {
+                    IdSocialMedia = profileData.FacebookLinkId,
+                    Url = profileData.FacebookLink
+                };
+                AssignSocialLink(textBlockFacebook, buttonAddFacebook, facebookLink);
+
+                var instagramLink = new SocialMediaLink
+                {
+                    IdSocialMedia = profileData.InstagramLinkId,
+                    Url = profileData.InstagramLink
+                };
+                AssignSocialLink(textBlockInstagram, buttonAddInstagram, instagramLink);
+
+                var tikTokLink = new SocialMediaLink
+                {
+                    IdSocialMedia = profileData.TikTokLinkId,
+                    Url = profileData.TikTokLink
+                };
+                AssignSocialLink(textBlockTikTok, buttonAddTikTok, tikTokLink);
             }
         }
 
@@ -246,17 +270,16 @@ namespace Backgammon.Client.Views.Pages
             }
             else
             {
+                MemoryStream memoryStream = new MemoryStream(avatar.ImageBytes);
+
                 try
                 {
                     BitmapImage imageSource = new BitmapImage();
 
-                    using (MemoryStream memoryStream = new MemoryStream(avatar.ImageBytes))
-                    {
-                        imageSource.BeginInit();
-                        imageSource.CacheOption = BitmapCacheOption.OnLoad;
-                        imageSource.StreamSource = memoryStream;
-                        imageSource.EndInit();
-                    }
+                    imageSource.BeginInit();
+                    imageSource.CacheOption = BitmapCacheOption.OnLoad;
+                    imageSource.StreamSource = memoryStream;
+                    imageSource.EndInit();
 
                     imageSource.Freeze();
                     ellipseAvatar.Fill = new ImageBrush(imageSource);
@@ -269,7 +292,10 @@ namespace Backgammon.Client.Views.Pages
 
                     SetDefaultAvatarAppearance();
                 }
-
+                finally
+                {
+                    memoryStream.Dispose();
+                }
             }
         }
 
@@ -277,6 +303,7 @@ namespace Backgammon.Client.Views.Pages
         {
             ellipseAvatar.Fill = (Brush)FindResource("CyanAccentBrush");
         }
+
         private void AssignProfileDescription(string description)
         {
             if (string.IsNullOrWhiteSpace(description))
@@ -290,5 +317,296 @@ namespace Backgammon.Client.Views.Pages
                 textBlockDescription.Text = description;
             }
         }
+
+        private async Task ManageSocialLinkAsync(string networkName, string exampleLink, Button linkButton)
+        {
+            try
+            {
+                TextBlock linkText = GetSocialLinkText(networkName);
+
+                if (string.IsNullOrWhiteSpace(linkText.Text))
+                {
+                    await AddSocialLinkWithFeedbackAsync(
+                        networkName,
+                        exampleLink,
+                        linkButton);
+                }
+                else
+                {
+                    await RemoveSocialLinkAsync(linkText, linkButton);
+                }
+            }
+            catch (ArgumentException argumentException)
+            {
+                ApplicationLogger.LogError(argumentException,
+                    "The social media action could not be completed because the network is unsupported.");
+
+                ShowSocialLinkError();
+            }
+        }
+
+        private TextBlock GetSocialLinkText(string networkName)
+        {
+            if (networkName == "Facebook")
+            {
+                TextBlock linkText = textBlockFacebook;
+                return linkText;
+            }
+
+            if (networkName == "Instagram")
+            {
+                TextBlock linkText = textBlockInstagram;
+                return linkText;
+            }
+
+            if (networkName == "TikTok")
+            {
+                TextBlock linkText = textBlockTikTok;
+                return linkText;
+            }
+
+            throw new ArgumentException(nameof(networkName));
+        }
+
+        private async Task AddSocialLinkWithFeedbackAsync(string networkName, string exampleLink, Button linkButton)
+        {
+            linkButton.IsEnabled = false;
+
+            try
+            {
+                await SaveSocialLinkAsync(networkName, exampleLink, linkButton);
+            }
+            catch (NullReferenceException sessionException)
+            {
+                ApplicationLogger.LogError(
+                    sessionException,
+                    "The social media link could not be added because the session is unavailable.");
+
+                ShowSocialLinkError();
+            }
+            catch (FaultException<ProfileFault> profileFault)
+            {
+                ApplicationLogger.LogWarning(
+                    "The social media link request was rejected with code {0}.",
+                    profileFault.Detail.ErrorCode);
+
+                ShowSocialLinkError();
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(
+                    communicationException,
+                    "The social media link could not be added.");
+
+                ShowSocialLinkError();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(
+                    timeoutException,
+                    "The social media link request exceeded the time limit.");
+
+                ShowSocialLinkError();
+            }
+            finally
+            {
+                linkButton.IsEnabled = true;
+            }
+        }
+
+        private async Task SaveSocialLinkAsync(string networkName, string exampleLink, Button linkButton)
+        {
+            TextBlock linkText = GetSocialLinkText(networkName);
+
+            if (!string.IsNullOrWhiteSpace(linkText.Text))
+            {
+                return;
+            }
+
+            PlayerSession currentSession = PlayerSessionContext.GetSession();
+            SocialMediaType[] socialTypes = await _profileController.GetSocialMediaTypesAsync(currentSession.SessionId);
+            int typeId = GetSocialMediaTypeId(socialTypes, networkName);
+
+            if (typeId <= 0)
+            {
+                ShowSocialLinkError();
+                return;
+            }
+
+            var dialog = new AddSocialLinkDialog(networkName, exampleLink);
+            Window owner = Window.GetWindow(this);
+            bool confirmed = dialog.ShowFor(owner);
+
+            if (!confirmed)
+            {
+                return;
+            }
+
+            SocialMediaLink addedLink = await _profileController.AddSocialMediaLinkAsync(currentSession.SessionId,
+                typeId,
+                dialog.Link);
+
+            if (addedLink == null || string.IsNullOrWhiteSpace(addedLink.Url))
+            {
+                ShowSocialLinkError();
+                return;
+            }
+
+            AssignSocialLink(linkText, linkButton, addedLink);
+        }
+
+        private async Task RemoveSocialLinkAsync(TextBlock linkText, Button linkButton)
+        {
+            bool confirmed = ConfirmSocialLinkRemoval();
+
+            if (!confirmed)
+            {
+                return;
+            }
+
+            int linkId = GetSocialLinkId(linkButton);
+
+            if (linkId <= 0)
+            {
+                ApplicationLogger.LogWarning(
+                    "The social media link could not be removed because its ID is unavailable.");
+
+                ShowSocialLinkError();
+                return;
+            }
+
+            linkButton.IsEnabled = false;
+            await RemoveSocialLinkWithFeedbackAsync(linkText, linkButton, linkId);
+        }
+
+        private async Task RemoveSocialLinkWithFeedbackAsync(TextBlock linkText, Button linkButton, int linkId)
+        {
+            try
+            {
+                await DeleteSocialLinkAsync(linkText, linkButton, linkId);
+            }
+            catch (NullReferenceException sessionException)
+            {
+                ApplicationLogger.LogError(
+                    sessionException,
+                    "The social media link could not be removed because the session is unavailable.");
+
+                ShowSocialLinkError();
+            }
+            catch (FaultException<ProfileFault> profileFault)
+            {
+                ApplicationLogger.LogWarning(
+                    "The social media link removal was rejected with code {0}.",
+                    profileFault.Detail.ErrorCode);
+
+                ShowSocialLinkError();
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(
+                    communicationException,
+                    "The social media link could not be removed.");
+
+                ShowSocialLinkError();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(
+                    timeoutException,
+                    "The social media link removal exceeded the time limit.");
+
+                ShowSocialLinkError();
+            }
+            finally
+            {
+                linkButton.IsEnabled = true;
+            }
+        }
+
+        private async Task DeleteSocialLinkAsync(TextBlock linkText, Button linkButton, int linkId)
+        {
+            PlayerSession currentSession = PlayerSessionContext.GetSession();
+            bool removalCompleted = await _profileController.RemoveSocialMediaLinkAsync(currentSession.SessionId,
+                linkId);
+
+            if (removalCompleted)
+            {
+                var emptyLink = new SocialMediaLink();
+                AssignSocialLink(linkText, linkButton, emptyLink);
+            }
+        }
+
+        private bool ConfirmSocialLinkRemoval()
+        {
+            MessageBoxResult answer = MessageBox.Show(
+                Properties.Resources.Message_ConfirmSocialLinkRemoval,
+                Properties.Resources.Title_SocialLinkRemoval,
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            bool confirmed = answer == MessageBoxResult.Yes;
+
+            return confirmed;
+        }
+
+        private int GetSocialLinkId(Button linkButton)
+        {
+            int linkId = 0;
+
+            if (linkButton.Tag is int storedLinkId)
+            {
+                linkId = storedLinkId;
+            }
+
+            return linkId;
+        }
+
+        private void ShowSocialLinkError()
+        {
+            MessageBox.Show(
+                Properties.Resources.Message_SocialLinkUpdateError,
+                Properties.Resources.Title_ConnectionError,
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
+
+        private int GetSocialMediaTypeId(SocialMediaType[] socialTypes, string networkName)
+        {
+            int typeId = 0;
+
+            if (socialTypes != null)
+            {
+                foreach (SocialMediaType socialType in socialTypes)
+                {
+                    if (socialType != null && string.Equals(socialType.Type, networkName,
+                            StringComparison.OrdinalIgnoreCase))
+                    {
+                        typeId = socialType.IdType;
+                        break;
+                    }
+                }
+            }
+
+            return typeId;
+        }
+
+        private void AssignSocialLink(TextBlock linkText, Button linkButton, SocialMediaLink socialLink)
+        {
+            if (string.IsNullOrWhiteSpace(socialLink.Url))
+            {
+                linkText.Text = string.Empty;
+                linkButton.Tag = 0;
+                linkButton.Content = Properties.Resources.Button_AddLink;
+                linkButton.IsEnabled = true;
+            }
+            else
+            {
+                linkText.Text = socialLink.Url;
+                linkButton.Tag = socialLink.IdSocialMedia;
+                linkButton.Content = Properties.Resources.Button_Remove;
+                linkButton.IsEnabled = socialLink.IdSocialMedia > 0;
+            }
+        }
+
     }
 }

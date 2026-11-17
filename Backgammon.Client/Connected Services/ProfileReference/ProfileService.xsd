@@ -5,10 +5,13 @@
       <xs:element minOccurs="0" name="Avatar" nillable="true" type="tns:Avatar" />
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FacebookLink" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FacebookLinkId" type="xs:int" />
       <xs:element minOccurs="0" name="InstagramLink" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InstagramLinkId" type="xs:int" />
       <xs:element minOccurs="0" name="Points" type="xs:int" />
       <xs:element minOccurs="0" name="RegistrationDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="TikTokLink" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TikTokLinkId" type="xs:int" />
       <xs:element minOccurs="0" name="Wins" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
