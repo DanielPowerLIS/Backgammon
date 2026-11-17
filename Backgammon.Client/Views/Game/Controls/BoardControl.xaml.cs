@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 
 using Backgammon.Client.Controllers.Game;
+using Backgammon.Client.GameReference;
 
 namespace Backgammon.Client.Views.Game.Controls
 {
@@ -106,7 +107,7 @@ namespace Backgammon.Client.Views.Game.Controls
             return BoardBottom - CheckerMarginFromEdge - CheckerSize - stackIndex * checkerSpacing;
         }
 
-        private void AddCheckerToCanvas(PlayerColor checkerColor, double checkerLeft, double checkerTop) 
+        private void AddCheckerToCanvas(CheckerColor checkerColor, double checkerLeft, double checkerTop) 
         {
             var newChecker = new CheckerControl { CheckerColor = checkerColor};
 

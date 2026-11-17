@@ -650,6 +650,10 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Message_ProfileUpdateError" xml:space="preserve">
     <value>No se pudo actualizar la descripción del perfil. Inténtalo nuevamente.</value>
   </data>
+  <data name="Message_GameLoadError" xml:space="preserve">
+    <value>No fue posible cargar la partida. Inténtalo nuevamente.</value>
+  </data>
+</root>
   <data name="Message_InvalidSocialLink" xml:space="preserve">
     <value>Escribe un enlace válido para esta red social.</value>
   </data>

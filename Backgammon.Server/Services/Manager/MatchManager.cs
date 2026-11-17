@@ -1,21 +1,25 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading;
 
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
 using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;
+using Backgammon.Server.Domain;
 
 namespace Backgammon.Server.Services.Manager
 {
     internal static class MatchManager
     {
 
-        private static readonly ConcurrentDictionary<string, MatchSession> ActiveMatches =
-            new ConcurrentDictionary<string, MatchSession>();
+        private static readonly ConcurrentDictionary<string, ActiveMatch> ActiveMatches =
+            new ConcurrentDictionary<string, ActiveMatch>();
         private static readonly IApplicationLogger ApplicationLogger = 
             new Log4NetApplicationLogger(typeof(MatchManager));
+
+        private const int CountdownDurationSeconds = 3;
 
         private const string GuestRequired = "A guest is required to start the match.";
         private const string MatchAlreadyActive = "The lobby already has an active match.";
@@ -127,9 +131,201 @@ namespace Backgammon.Server.Services.Manager
             return matchCopy;
         }
 
+        public static MatchState GetMatchState(int PlayerId, string roomId, string matchId)
+        {
+            if (string.IsNullOrWhiteSpace(roomId) || string.IsNullOrWhiteSpace(matchId))
+            {
+                throw new ArgumentException(MatchIdentifiersRequired);
+            }
+
+            ActiveMatch activeMatch = FindSavedActiveMatch(roomId);
+            MatchState stateCopy;
+
+            lock (activeMatch.Queue)
+            {
+                MatchSession matchSession = activeMatch.Session;
+
+                if (matchSession.MatchId != matchId)
+                {
+                    throw new KeyNotFoundException(MatchUnavailable);
+                }
+
+                bool isHost = matchSession.PlayerHostId == PlayerId;
+
+                bool isGuest = matchSession.PlayerGuestId == PlayerId;
+
+                if (!isHost && !isGuest)
+                {
+                    throw new UnauthorizedAccessException(PlayerNotInMatch);
+                }
+
+                stateCopy = MatchStateFactory.Copy(activeMatch.State);
+            }
+
+            return stateCopy;
+        }
+
+        public static MatchState RegisterPlayerReady(MatchPlayer request, IGameCallback playerCallback)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+            ActiveMatch activeMatch = FindSavedActiveMatch(request.RoomId);
+            MatchState stateCopy;
+
+            lock (activeMatch.Queue)
+            {
+                if (activeMatch.Session.MatchId != request.MatchId)
+                {
+                    throw new KeyNotFoundException(MatchUnavailable);
+                }
+                bool hostWasReady = activeMatch.HostReady;
+                bool guestWasReady = activeMatch.GuestReady;
+
+                RegisterReadyPlayer(activeMatch, request.PlayerId, playerCallback);
+
+                bool readinessChanged = hostWasReady != activeMatch.HostReady ||
+                    guestWasReady != activeMatch.GuestReady;
+
+                bool shouldStartCountdown = activeMatch.HostReady && activeMatch.GuestReady &&
+                    activeMatch.State.Phase == MatchPhase.WaitingForPlayers;
+
+                if (shouldStartCountdown)
+                {
+                    activeMatch.State.Phase = MatchPhase.StartingCountdown;
+
+                    activeMatch.State.CountdownEndsAtUtc = DateTime.UtcNow.AddSeconds(CountdownDurationSeconds);
+                }
+
+                if (readinessChanged || shouldStartCountdown)
+                {
+                    activeMatch.State.Version++;
+                }
+                stateCopy = MatchStateFactory.Copy(activeMatch.State);
+            }
+            return stateCopy;
+        }
+
+        public static IGameCallback[] GetGameCallbacks(MatchPlayer request)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            ActiveMatch activeMatch = FindSavedActiveMatch(request.RoomId);
+
+            var callbacks = new List<IGameCallback>();
+
+            lock (activeMatch.Queue)
+            {
+                MatchSession matchSession = activeMatch.Session;
+
+                if (matchSession.MatchId != request.MatchId)
+                {
+                    throw new KeyNotFoundException(MatchUnavailable);
+                }
+
+                bool isHost = matchSession.PlayerHostId == request.PlayerId;
+
+                bool isGuest = matchSession.PlayerGuestId == request.PlayerId;
+
+                if (!isHost && !isGuest)
+                {
+                    throw new UnauthorizedAccessException(PlayerNotInMatch);
+                }
+
+                if (activeMatch.HostCallback != null)
+                {
+                    callbacks.Add(activeMatch.HostCallback);
+                }
+
+                if (activeMatch.GuestCallback != null)
+                {
+                    callbacks.Add(activeMatch.GuestCallback);
+                }
+            }
+            return callbacks.ToArray();
+        }
+
+        public static void StartCountdown(MatchPlayer request, TimerCallback countdownCallback)
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            if (countdownCallback == null)
+            {
+                throw new ArgumentNullException(nameof(countdownCallback));
+            }
+            ActiveMatch activeMatch = FindSavedActiveMatch(request.RoomId);
+
+            lock (activeMatch.Queue)
+            {
+                ActiveMatch savedMatch = FindSavedActiveMatch(request.RoomId);
+
+                if (!ReferenceEquals(savedMatch, activeMatch) || activeMatch.Session.MatchId != request.MatchId)
+                {
+                    throw new KeyNotFoundException(MatchUnavailable);
+                }
+
+                if (activeMatch.State.Phase != MatchPhase.StartingCountdown || activeMatch.CountdownTimer != null)
+                {
+                    return;
+                }
+                TimeSpan remainingTime = activeMatch.State.CountdownEndsAtUtc - DateTime.UtcNow;
+
+                if (remainingTime < TimeSpan.Zero)
+                {
+                    remainingTime = TimeSpan.Zero;
+                }
+
+                activeMatch.CountdownTimer = new Timer(countdownCallback, activeMatch, remainingTime,
+                    Timeout.InfiniteTimeSpan);
+            }
+        }
+
+        public static MatchState CompleteCountdown(ActiveMatch activeMatch)
+        {
+            if (activeMatch == null)
+            {
+                throw new ArgumentNullException(nameof(activeMatch));
+            }
+
+            MatchState stateCopy;
+
+            lock (activeMatch.Queue)
+            {
+                ActiveMatch savedMatch = FindSavedActiveMatch(activeMatch.Session.RoomId);
+
+                if (!ReferenceEquals(savedMatch, activeMatch))
+                {
+                    throw new KeyNotFoundException(MatchUnavailable);
+                }
+
+                if (activeMatch.State.Phase == MatchPhase.StartingCountdown)
+                {
+                    activeMatch.State.Phase = MatchPhase.OpeningRoll;
+                    activeMatch.State.CountdownEndsAtUtc = DateTime.MinValue;
+                    activeMatch.State.Version++;
+                }
+
+                stateCopy = MatchStateFactory.Copy(activeMatch.State);
+            }
+
+            return stateCopy;
+        }
+
         internal static bool RemoveMatch(string roomId)
         {
-            bool removedMatch= ActiveMatches.TryRemove(roomId, out _);
+            bool removedMatch = ActiveMatches.TryRemove(roomId, out ActiveMatch activeMatch);
+
+            if (removedMatch)
+            {
+                activeMatch.StopCountdown();
+            }
 
             return removedMatch;
         }
@@ -145,6 +341,50 @@ namespace Backgammon.Server.Services.Manager
             };
 
             return matchSession;
+        }
+
+        private static void RegisterReadyPlayer(ActiveMatch activeMatch, int playerId,
+            IGameCallback playerCallback)
+        {
+            if (playerCallback == null)
+            {
+                throw new ArgumentNullException(nameof(playerCallback));
+            }
+
+            MatchSession matchSession = activeMatch.Session;
+
+            if (matchSession.PlayerHostId == playerId)
+            {
+                activeMatch.HostCallback = playerCallback;
+                activeMatch.HostReady = true;
+                return;
+            }
+
+            if (matchSession.PlayerGuestId == playerId)
+            {
+                activeMatch.GuestCallback = playerCallback;
+                activeMatch.GuestReady = true;
+                return;
+            }
+
+            throw new UnauthorizedAccessException(PlayerNotInMatch);
+        }
+
+        private static ActiveMatch FindSavedActiveMatch(string roomId)
+        {
+            if (string.IsNullOrWhiteSpace(roomId))
+            {
+                throw new ArgumentException(MatchIdentifiersRequired, nameof(roomId));
+            }
+
+            bool matchFound = ActiveMatches.TryGetValue(roomId, out ActiveMatch activeMatch);
+
+            if (!matchFound || activeMatch == null)
+            {
+                throw new KeyNotFoundException(MatchUnavailable);
+            }
+
+            return activeMatch;
         }
 
         private static void ValidateMatchPlayers(MatchSession matchSession, Lobby lobby)
@@ -173,19 +413,9 @@ namespace Backgammon.Server.Services.Manager
 
         private static MatchSession FindSavedMatch(string roomId)
         {
-            if (string.IsNullOrWhiteSpace(roomId))
-            {
-                throw new ArgumentException(MatchIdentifiersRequired, nameof(roomId));
-            }
+            ActiveMatch activeMatch = FindSavedActiveMatch(roomId);
 
-            bool matchFound = ActiveMatches.TryGetValue(roomId, out MatchSession savedMatch);
-
-            if (!matchFound || savedMatch == null)
-            {
-                throw new KeyNotFoundException(MatchUnavailable);
-            }
-
-            return savedMatch;
+            return activeMatch.Session;
         }
 
         private static void SaveMatch(MatchSession matchSession)
@@ -200,7 +430,9 @@ namespace Backgammon.Server.Services.Manager
                 throw new ArgumentException(MatchIdentifiersRequired, nameof(matchSession));
             }
 
-            bool matchAdded = ActiveMatches.TryAdd(matchSession.RoomId, matchSession);
+            var activeMatch = new ActiveMatch(matchSession);
+
+            bool matchAdded = ActiveMatches.TryAdd(matchSession.RoomId, activeMatch);
 
             if (!matchAdded)
             {
