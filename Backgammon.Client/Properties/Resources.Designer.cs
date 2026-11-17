@@ -340,6 +340,16 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a ¿Quieres eliminar este enlace de tu perfil?.
+        /// </summary>
+        public static string Message_ConfirmSocialLinkRemoval {
+            get {
+                return ResourceManager.GetString("Message_ConfirmSocialLinkRemoval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No fue posible cargar la partida. Inténtalo nuevamente..
         ///   Looks up a localized string similar to No fue posible cargar la partida. Inténtalo nuevamente..
         /// </summary>
         public static string Message_GameLoadError {
@@ -349,6 +359,16 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Escribe un enlace válido para esta red social..
+        /// </summary>
+        public static string Message_InvalidSocialLink {
+            get {
+                return ResourceManager.GetString("Message_InvalidSocialLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo cargar la información del perfil. Verifica tu conexión..
         ///   Looks up a localized string similar to La partida comenzará en.
         /// </summary>
         public static string Message_MatchStarting {
@@ -385,6 +405,16 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo actualizar el enlace de la red social. Inténtalo nuevamente..
+        /// </summary>
+        public static string Message_SocialLinkUpdateError {
+            get {
+                return ResourceManager.GetString("Message_SocialLinkUpdateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Confirmar contraseña.
         ///   Looks up a localized string similar to Confirmar contraseña.
         /// </summary>
         public static string PasswordBox_ConfirmPassword {
@@ -1652,6 +1682,15 @@ namespace Backgammon.Client.Properties {
         public static string Title_SessionError {
             get {
                 return ResourceManager.GetString("Title_SessionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Eliminar enlace.
+        /// </summary>
+        public static string Title_SocialLinkRemoval {
+            get {
+                return ResourceManager.GetString("Title_SocialLinkRemoval", resourceCulture);
             }
         }
     }

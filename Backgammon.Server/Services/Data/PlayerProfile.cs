@@ -28,6 +28,15 @@ namespace Backgammon.Server.Services.Data
         public string TikTokLink { get; set; }
 
         [DataMember]
+        public int FacebookLinkId { get; set; }
+
+        [DataMember]
+        public int InstagramLinkId { get; set; }
+
+        [DataMember]
+        public int TikTokLinkId { get; set; }
+
+        [DataMember]
         public Avatar Avatar { get; set; }
     }
 }

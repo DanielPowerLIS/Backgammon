@@ -422,14 +422,17 @@ namespace Backgammon.Server.Services
             {
                 if (social.IdTypeSocialMediaFK == FacebookTypeId)
                 {
+                    playerProfile.FacebookLinkId = social.IdSocialMediaPK;
                     playerProfile.FacebookLink = social.Link;
                 }
                 else if (social.IdTypeSocialMediaFK == InstagramTypeId)
                 {
+                    playerProfile.InstagramLinkId = social.IdSocialMediaPK;
                     playerProfile.InstagramLink = social.Link;
                 }
                 else if (social.IdTypeSocialMediaFK == TikTokTypeId)
                 {
+                    playerProfile.TikTokLinkId = social.IdSocialMediaPK;
                     playerProfile.TikTokLink = social.Link;
                 }
             }
