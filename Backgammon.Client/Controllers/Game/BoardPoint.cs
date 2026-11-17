@@ -1,16 +1,18 @@
-﻿namespace Backgammon.Client.Controllers.Game
+﻿using Backgammon.Client.GameReference;
+
+namespace Backgammon.Client.Controllers.Game
 {
     public class BoardPoint
     {
         public BoardPoint(int pointNumber)
         {
             Number = pointNumber;
-            Owner = PlayerColor.None;
+            Owner = CheckerColor.None;
         }
 
         public int Number { get; set; }
 
-        public PlayerColor Owner { get; set; }
+        public CheckerColor Owner { get; set; }
 
         public int Count { get; set; }
     }

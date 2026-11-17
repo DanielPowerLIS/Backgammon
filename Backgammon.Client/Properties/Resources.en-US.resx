@@ -644,4 +644,7 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_LobbyKickedMessage" xml:space="preserve">
     <value>The host removed you from the room.</value>
   </data>
+  <data name="Message_GameLoadError" xml:space="preserve">
+    <value>The match could not be loaded. Please try again.</value>
+  </data>
 </root>

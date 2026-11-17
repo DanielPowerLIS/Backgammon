@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Threading;
 
 using Backgammon.Client.Controllers.Game;
+using Backgammon.Client.GameReference;
 
 namespace Backgammon.Client.Views.Dialog
 {
@@ -14,9 +15,10 @@ namespace Backgammon.Client.Views.Dialog
         private static readonly int AnimationDurationMilliseconds = 1000;
         private readonly Random _random = new Random();
         private readonly DispatcherTimer _animationTimer = new DispatcherTimer();
-        private readonly PlayerColor _currentPlayerColor;
+        private readonly CheckerColor _currentPlayerColor;
         private int _elapsedMilliseconds;
-        public DiceRollDialog(PlayerColor currentPlayerColor)
+
+        public DiceRollDialog(CheckerColor currentPlayerColor)
         {
             InitializeComponent();
             _currentPlayerColor = currentPlayerColor;

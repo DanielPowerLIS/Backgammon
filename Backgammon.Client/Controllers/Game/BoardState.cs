@@ -1,5 +1,7 @@
 ﻿using System;
 
+using Backgammon.Client.GameReference;
+
 namespace Backgammon.Client.Controllers.Game
 {
     public class BoardState
@@ -40,15 +42,15 @@ namespace Backgammon.Client.Controllers.Game
         public static BoardState CreateInitial() 
         {
             var initialState = new BoardState();
-            initialState.PlaceCheckers(BlueBackPoint, PlayerColor.Blue, BackCheckerCount);
-            initialState.PlaceCheckers(BlueMidPoint, PlayerColor.Blue, MidCheckerCount);
-            initialState.PlaceCheckers(BlueOuterPoint, PlayerColor.Blue, OuterCheckerCount);
-            initialState.PlaceCheckers(BlueHomePoint, PlayerColor.Blue, HomeCheckerCount);
+            initialState.PlaceCheckers(BlueBackPoint, CheckerColor.Blue, BackCheckerCount);
+            initialState.PlaceCheckers(BlueMidPoint, CheckerColor.Blue, MidCheckerCount);
+            initialState.PlaceCheckers(BlueOuterPoint, CheckerColor.Blue, OuterCheckerCount);
+            initialState.PlaceCheckers(BlueHomePoint, CheckerColor.Blue, HomeCheckerCount);
 
-            initialState.PlaceCheckers(PinkBackPoint, PlayerColor.Pink, BackCheckerCount);
-            initialState.PlaceCheckers(PinkMidPoint, PlayerColor.Pink, MidCheckerCount);
-            initialState.PlaceCheckers(PinkOuterPoint, PlayerColor.Pink, OuterCheckerCount);
-            initialState.PlaceCheckers(PinkHomePoint, PlayerColor.Pink, HomeCheckerCount);
+            initialState.PlaceCheckers(PinkBackPoint, CheckerColor.Pink, BackCheckerCount);
+            initialState.PlaceCheckers(PinkMidPoint, CheckerColor.Pink, MidCheckerCount);
+            initialState.PlaceCheckers(PinkOuterPoint, CheckerColor.Pink, OuterCheckerCount);
+            initialState.PlaceCheckers(PinkHomePoint, CheckerColor.Pink, HomeCheckerCount);
 
             return initialState;
         }
@@ -62,7 +64,43 @@ namespace Backgammon.Client.Controllers.Game
             return _points[pointNumber - 1];
         }
 
-        private void PlaceCheckers(int pointNumber, PlayerColor checkerColor, int checkerCount)
+        public static BoardState CreateFromMatchBoard(MatchBoardState matchBoard)
+        {
+            if (matchBoard == null)
+            {
+                throw new ArgumentNullException(nameof(matchBoard));
+            }
+
+            if (matchBoard.Points == null || matchBoard.Points.Length != TotalPoints)
+            {
+                throw new ArgumentException("The board must contain all 24 points.", nameof(matchBoard));
+            }
+
+            var boardState = new BoardState
+            {
+                BlueOnBar = matchBoard.BlueOnBar,
+                PinkOnBar = matchBoard.PinkOnBar,
+                BlueBorneOff = matchBoard.BlueBorneOff,
+                PinkBorneOff = matchBoard.PinkBorneOff
+            };
+
+            foreach (MatchPointState sourcePoint in matchBoard.Points)
+            {
+                if (sourcePoint == null)
+                {
+                    throw new ArgumentException("The board contains an unavailable point.", nameof(matchBoard));
+                }
+
+                BoardPoint targetPoint = boardState.GetPoint(sourcePoint.Number);
+
+                targetPoint.Owner = sourcePoint.Owner;
+                targetPoint.Count = sourcePoint.Count;
+            }
+
+            return boardState;
+        }
+
+        private void PlaceCheckers(int pointNumber, CheckerColor checkerColor, int checkerCount)
         {
             BoardPoint targetPoint = GetPoint(pointNumber);
             targetPoint.Owner = checkerColor;

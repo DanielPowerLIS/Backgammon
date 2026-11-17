@@ -6,14 +6,15 @@ using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
 using Backgammon.Server.SupportServices;
 using Backgammon.Server.SupportServices.Logging;
+using Backgammon.Server.Domain;
 
 namespace Backgammon.Server.Services.Manager
 {
     internal static class MatchManager
     {
 
-        private static readonly ConcurrentDictionary<string, MatchSession> ActiveMatches =
-            new ConcurrentDictionary<string, MatchSession>();
+        private static readonly ConcurrentDictionary<string, ActiveMatch> ActiveMatches =
+            new ConcurrentDictionary<string, ActiveMatch>();
         private static readonly IApplicationLogger ApplicationLogger = 
             new Log4NetApplicationLogger(typeof(MatchManager));
 
@@ -127,6 +128,40 @@ namespace Backgammon.Server.Services.Manager
             return matchCopy;
         }
 
+        public static MatchState GetMatchState(int PlayerId, string roomId, string matchId)
+        {
+            if (string.IsNullOrWhiteSpace(roomId) || string.IsNullOrWhiteSpace(matchId))
+            {
+                throw new ArgumentException(MatchIdentifiersRequired);
+            }
+
+            ActiveMatch activeMatch = FindSavedActiveMatch(roomId);
+            MatchState stateCopy;
+
+            lock (activeMatch.Queue)
+            {
+                MatchSession matchSession = activeMatch.Session;
+
+                if (matchSession.MatchId != matchId)
+                {
+                    throw new KeyNotFoundException(MatchUnavailable);
+                }
+
+                bool isHost = matchSession.PlayerHostId == PlayerId;
+
+                bool isGuest = matchSession.PlayerGuestId == PlayerId;
+
+                if (!isHost && !isGuest)
+                {
+                    throw new UnauthorizedAccessException(PlayerNotInMatch);
+                }
+
+                stateCopy = MatchStateFactory.Copy(activeMatch.State);
+            }
+
+            return stateCopy;
+        }
+
         internal static bool RemoveMatch(string roomId)
         {
             bool removedMatch= ActiveMatches.TryRemove(roomId, out _);
@@ -145,6 +180,23 @@ namespace Backgammon.Server.Services.Manager
             };
 
             return matchSession;
+        }
+
+        private static ActiveMatch FindSavedActiveMatch(string roomId)
+        {
+            if (string.IsNullOrWhiteSpace(roomId))
+            {
+                throw new ArgumentException(MatchIdentifiersRequired, nameof(roomId));
+            }
+
+            bool matchFound = ActiveMatches.TryGetValue(roomId, out ActiveMatch activeMatch);
+
+            if (!matchFound || activeMatch == null)
+            {
+                throw new KeyNotFoundException(MatchUnavailable);
+            }
+
+            return activeMatch;
         }
 
         private static void ValidateMatchPlayers(MatchSession matchSession, Lobby lobby)
@@ -173,19 +225,9 @@ namespace Backgammon.Server.Services.Manager
 
         private static MatchSession FindSavedMatch(string roomId)
         {
-            if (string.IsNullOrWhiteSpace(roomId))
-            {
-                throw new ArgumentException(MatchIdentifiersRequired, nameof(roomId));
-            }
+            ActiveMatch activeMatch = FindSavedActiveMatch(roomId);
 
-            bool matchFound = ActiveMatches.TryGetValue(roomId, out MatchSession savedMatch);
-
-            if (!matchFound || savedMatch == null)
-            {
-                throw new KeyNotFoundException(MatchUnavailable);
-            }
-
-            return savedMatch;
+            return activeMatch.Session;
         }
 
         private static void SaveMatch(MatchSession matchSession)
@@ -200,7 +242,9 @@ namespace Backgammon.Server.Services.Manager
                 throw new ArgumentException(MatchIdentifiersRequired, nameof(matchSession));
             }
 
-            bool matchAdded = ActiveMatches.TryAdd(matchSession.RoomId, matchSession);
+            var activeMatch = new ActiveMatch(matchSession);
+
+            bool matchAdded = ActiveMatches.TryAdd(matchSession.RoomId, activeMatch);
 
             if (!matchAdded)
             {

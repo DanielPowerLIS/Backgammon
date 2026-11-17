@@ -331,6 +331,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No fue posible cargar la partida. Inténtalo nuevamente..
+        /// </summary>
+        public static string Message_GameLoadError {
+            get {
+                return ResourceManager.GetString("Message_GameLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No se pudo cargar la información del perfil. Verifica tu conexión..
         /// </summary>
         public static string Message_ProfileLoadError {
