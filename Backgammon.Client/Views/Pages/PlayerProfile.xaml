@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Backgammon.Client.Views.Pages"
       xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d"
-      d:DesignHeight="450"
+      d:DesignHeight="500"
       d:DesignWidth="800"
       Title="{x:Static properties:Resources.TextBlock_Button_Profile}">
 
@@ -61,7 +61,6 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
-
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -88,7 +87,6 @@
 
                     <Grid Grid.Row="2"
                           Margin="40,20">
-
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
@@ -107,7 +105,6 @@
                                    Margin="10,0,0,0"
                                    VerticalAlignment="Center"/>
                     </Grid>
-
                 </Grid>
 
                 <Border Grid.Column="1"
@@ -116,7 +113,6 @@
 
                 <Grid Grid.Column="2"
                       Margin="30,20,30,20">
-
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -127,7 +123,6 @@
 
                     <Grid Grid.Row="0"
                           Height="50">
-
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="100"/>
@@ -162,12 +157,10 @@
                                    Foreground="{StaticResource PinkAccentBrush}"
                                    VerticalAlignment="Center"
                                    Margin="10,0,0,0"/>
-
                     </Grid>
 
                     <Grid Grid.Row="1"
                           Height="50">
-
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
@@ -186,7 +179,6 @@
                                    Foreground="{StaticResource PinkAccentBrush}"
                                    VerticalAlignment="Center"
                                    Margin="15,0,0,0"/>
-
                     </Grid>
 
                     <StackPanel Grid.Row="2"
@@ -201,25 +193,59 @@
                                 BorderThickness="2"
                                 Background="{StaticResource ControlBackgroundBrush}"
                                 Padding="8">
+                            <Grid>
+                                <TextBlock x:Name="textBlockDescription"
+                                           Foreground="{StaticResource PinkAccentBrush}"
+                                           FontSize="16"
+                                           TextWrapping="Wrap"/>
 
-                            <TextBlock x:Name="textBlockDescription"
-                                       Foreground="{StaticResource PinkAccentBrush}"
-                                       FontSize="16"
-                                       TextWrapping="Wrap"/>
-
+                                <TextBox x:Name="textBoxDescription"
+                                         Visibility="Collapsed"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         Foreground="{StaticResource PinkAccentBrush}"
+                                         CaretBrush="{StaticResource PinkAccentBrush}"
+                                         FontSize="16"
+                                         TextWrapping="Wrap"
+                                         AcceptsReturn="True"
+                                         VerticalScrollBarVisibility="Auto"
+                                         MaxLength="255"
+                                         Height="70"/>
+                            </Grid>
                         </Border>
 
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Right"
+                                    Margin="0,6,0,0">
+
+                            <Button x:Name="buttonEditDescription"
+                                    Content="{x:Static properties:Resources.Button_Edit}"
+                                    Style="{StaticResource ProfileButtonStyle}"
+                                    IsEnabled="False"
+                                    Click="OnEditDescriptionClick"/>
+
+                            <Button x:Name="buttonSaveDescription"
+                                    Content="{x:Static properties:Resources.Button_Save}"
+                                    Style="{StaticResource ProfileButtonStyle}"
+                                    Margin="0,0,6,0"
+                                    Visibility="Collapsed"
+                                    Click="OnSaveDescriptionClick"/>
+
+                            <Button x:Name="buttonCancelDescription"
+                                    Content="{x:Static properties:Resources.Button_Cancel}"
+                                    Style="{StaticResource ProfileButtonStyle}"
+                                    Visibility="Collapsed"
+                                    Click="OnCancelDescriptionClick"/>
+                        </StackPanel>
                     </StackPanel>
 
                     <StackPanel Grid.Row="3">
-
                         <TextBlock Text="{x:Static properties:Resources.TextBlock_SocialMedia}"
                                    FontSize="20"
                                    Foreground="{StaticResource CyanAccentBrush}"
                                    Margin="0,0,0,5"/>
 
                         <Grid Margin="0,3">
-
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="110"/>
                                 <ColumnDefinition Width="*"/>
@@ -245,7 +271,6 @@
                         </Grid>
 
                         <Grid Margin="0,3">
-
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="110"/>
                                 <ColumnDefinition Width="*"/>
@@ -271,7 +296,6 @@
                         </Grid>
 
                         <Grid Margin="0,3">
-
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="110"/>
                                 <ColumnDefinition Width="*"/>
@@ -288,14 +312,12 @@
                                        FontSize="18"
                                        Foreground="{StaticResource PinkAccentBrush}"/>
 
-                           
                             <Button Grid.Column="2"
                                     Content="{x:Static properties:Resources.Button_AddLink}"
                                     Style="{StaticResource ProfileButtonStyle}"
                                     Margin="8,0,0,0"
                                     Click="OnAddTikTokClick"/>
                         </Grid>
-
                     </StackPanel>
 
                     <Button Grid.Row="4"
@@ -307,7 +329,6 @@
                             Margin="0,15,0,0"
                             Click="OnBackClick"/>
                 </Grid>
-
             </Grid>
         </Viewbox>
     </Grid>

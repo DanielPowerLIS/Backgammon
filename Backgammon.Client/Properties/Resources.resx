@@ -644,6 +644,12 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_LobbyKickedMessage" xml:space="preserve">
     <value>El anfitrión te expulsó de la sala.</value>
   </data>
+  <data name="Button_Edit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="Message_ProfileUpdateError" xml:space="preserve">
+    <value>No se pudo actualizar la descripción del perfil. Inténtalo nuevamente.</value>
+  </data>
   <data name="Message_GameLoadError" xml:space="preserve">
     <value>No fue posible cargar la partida. Inténtalo nuevamente.</value>
   </data>
