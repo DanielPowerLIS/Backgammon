@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-using Backgammon.Client.Controllers.Game;
+using Backgammon.Client.GameReference;
 
 namespace Backgammon.Client.Views.Game.Controls
 {
@@ -20,9 +20,9 @@ namespace Backgammon.Client.Views.Game.Controls
         public static readonly DependencyProperty DieColorProperty =
             DependencyProperty.Register(
             nameof(DieColor),
-            typeof(PlayerColor),
+            typeof(CheckerColor),
             typeof(DieControl),
-            new PropertyMetadata(PlayerColor.None, OnDieColorChanged));
+            new PropertyMetadata(CheckerColor.None, OnDieColorChanged));
 
         private static readonly double DotSize = 14;
         private static readonly double DotMargin = 4;
@@ -58,11 +58,11 @@ namespace Backgammon.Client.Views.Game.Controls
             }
         }
 
-        public PlayerColor DieColor
+        public CheckerColor DieColor
         {
             get
             {
-                return (PlayerColor)GetValue(DieColorProperty);
+                return (CheckerColor)GetValue(DieColorProperty);
             }
             set
             {
@@ -79,7 +79,7 @@ namespace Backgammon.Client.Views.Game.Controls
         private static void OnDieColorChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             DieControl changedDie = (DieControl)sender;
-            changedDie.ApplyDieColor((PlayerColor)e.NewValue);
+            changedDie.ApplyDieColor((CheckerColor)e.NewValue);
         }
 
         private void SetupDotGrid()
@@ -143,7 +143,7 @@ namespace Backgammon.Client.Views.Game.Controls
             return (Ellipse)GridDots.Children[dotIndex];
         }
 
-        private void ApplyDieColor(PlayerColor dieColor)
+        private void ApplyDieColor(CheckerColor dieColor)
         {
             string colorHex = GetColorHex(dieColor);
             _currentDotBrush = (Brush)new BrushConverter().ConvertFromString(colorHex);
@@ -158,13 +158,13 @@ namespace Backgammon.Client.Views.Game.Controls
             DrawDots(DieValue);
         }
 
-        private static string GetColorHex(PlayerColor dieColor)
+        private static string GetColorHex(CheckerColor dieColor)
         {
             switch (dieColor)
             {
-                case PlayerColor.Blue:
+                case CheckerColor.Blue:
                     return "#00C9F2";
-                case PlayerColor.Pink:
+                case CheckerColor.Pink:
                     return "#E795EC";
                 default:
                     return "#FFFFFF";

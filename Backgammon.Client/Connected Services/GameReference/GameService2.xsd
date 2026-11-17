@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="MatchState">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Board" nillable="true" type="tns:MatchBoardState" />
+      <xs:element minOccurs="0" name="MatchId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phase" type="tns:MatchPhase" />
+      <xs:element minOccurs="0" name="RoomId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Version" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchState" nillable="true" type="tns:MatchState" />
+  <xs:complexType name="MatchBoardState">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BlueBorneOff" type="xs:int" />
+      <xs:element minOccurs="0" name="BlueOnBar" type="xs:int" />
+      <xs:element minOccurs="0" name="PinkBorneOff" type="xs:int" />
+      <xs:element minOccurs="0" name="PinkOnBar" type="xs:int" />
+      <xs:element minOccurs="0" name="Points" nillable="true" type="tns:ArrayOfMatchPointState" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchBoardState" nillable="true" type="tns:MatchBoardState" />
+  <xs:complexType name="ArrayOfMatchPointState">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MatchPointState" nillable="true" type="tns:MatchPointState" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMatchPointState" nillable="true" type="tns:ArrayOfMatchPointState" />
+  <xs:complexType name="MatchPointState">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Count" type="xs:int" />
+      <xs:element minOccurs="0" name="Number" type="xs:int" />
+      <xs:element minOccurs="0" name="Owner" type="tns:CheckerColor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchPointState" nillable="true" type="tns:MatchPointState" />
+  <xs:simpleType name="CheckerColor">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Blue" />
+      <xs:enumeration value="Pink" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CheckerColor" nillable="true" type="tns:CheckerColor" />
+  <xs:simpleType name="MatchPhase">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="WaitingForPlayers" />
+      <xs:enumeration value="StartingCountdown" />
+      <xs:enumeration value="OpeningRoll" />
+      <xs:enumeration value="WaitingForRoll" />
+      <xs:enumeration value="MovingCheckers" />
+      <xs:enumeration value="Finished" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MatchPhase" nillable="true" type="tns:MatchPhase" />
+  <xs:complexType name="MatchFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchFault" nillable="true" type="tns:MatchFault" />
+</xs:schema>

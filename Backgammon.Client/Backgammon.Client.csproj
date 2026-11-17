@@ -70,6 +70,7 @@
     </ApplicationDefinition>
     <Compile Include="Comunication\AuthenticationClient.cs" />
     <Compile Include="Comunication\ChatClient.cs" />
+    <Compile Include="Comunication\GameClient.cs" />
     <Compile Include="Comunication\GuestAccessClient.cs" />
     <Compile Include="Comunication\LeaderboardClient.cs" />
     <Compile Include="Comunication\LobbyClient.cs" />
@@ -80,6 +81,11 @@
     <Compile Include="Comunication\RegistrationClient.cs" />
     <Compile Include="Comunication\ServiceChannelCloser.cs" />
     <Compile Include="Connected Services\AuthenticationReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\GameReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -130,12 +136,14 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\Authentication\AuthenticationController.cs" />
+    <Compile Include="Controllers\Callbacks\GameCallback.cs" />
     <Compile Include="Controllers\Callbacks\PreinitiationCallback.cs" />
     <Compile Include="Controllers\Callbacks\ChatCallback.cs" />
     <Compile Include="Controllers\Chat\ChatController.cs" />
+    <Compile Include="Controllers\Game\GameController.cs" />
     <Compile Include="Controllers\GuestAccess\GuestAccessController.cs" />
     <Compile Include="Controllers\Leaderboard\LeaderboardController.cs" />
-    <Compile Include="Controllers\Lobby\Entrance.cs" />
+    <Compile Include="Controllers\Entrance.cs" />
     <Compile Include="Controllers\Lobby\LobbyContext.cs" />
     <Compile Include="Controllers\Lobby\LobbyController.cs" />
     <Compile Include="Controllers\Match\MatchController.cs" />
@@ -191,7 +199,6 @@
       <DependentUpon>DieControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controllers\Game\DiceResult.cs" />
-    <Compile Include="Controllers\Game\PlayerColor.cs" />
     <Compile Include="Views\Game\Controls\BoardControl.xaml.cs">
       <DependentUpon>BoardControl.xaml</DependentUpon>
     </Compile>
@@ -431,6 +438,19 @@
     <None Include="Connected Services\ChatReference\Backgammon.Client.ChatReference.ChatMessage.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\GameReference\Backgammon.Client.GameReference.MatchState.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\GameReference\GameService.wsdl" />
+    <None Include="Connected Services\GameReference\GameService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameReference\GameService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\GameReference\GameService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\GuestAccessReference\Backgammon.Client.GuestAccessReference.PlayerSession.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -608,6 +628,13 @@
     <None Include="Connected Services\ChatReference\ChatService.disco" />
     <None Include="Connected Services\ChatReference\configuration91.svcinfo" />
     <None Include="Connected Services\ChatReference\configuration.svcinfo" />
+    <None Include="Connected Services\GameReference\GameService.disco" />
+    <None Include="Connected Services\GameReference\configuration91.svcinfo" />
+    <None Include="Connected Services\GameReference\configuration.svcinfo" />
+    <None Include="Connected Services\GameReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -628,6 +655,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AuthenticationReference\" />
+    <WCFMetadataStorage Include="Connected Services\GameReference\" />
     <WCFMetadataStorage Include="Connected Services\GuestAccessReference\" />
     <WCFMetadataStorage Include="Connected Services\LeaderboardReference\" />
     <WCFMetadataStorage Include="Connected Services\LobbyReference\" />
