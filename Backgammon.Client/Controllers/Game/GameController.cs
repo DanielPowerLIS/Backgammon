@@ -74,6 +74,15 @@ namespace Backgammon.Client.Controllers.Game
             ApplyMatchState(matchState);
         }
 
+        public async Task RegisterPlayerReadyAsync()
+        {
+            string sessionId = PlayerSessionContext.GetSession().SessionId;
+
+            MatchState matchState = await _gameClient.RegisterPlayerReadyAsync(sessionId, _roomId, _matchId);
+
+            ApplyMatchState(matchState);
+        }
+
         public void CloseConnection()
         {
             lock (_queue)

@@ -653,4 +653,10 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Message_GameLoadError" xml:space="preserve">
     <value>No fue posible cargar la partida. Inténtalo nuevamente.</value>
   </data>
+  <data name="Message_MatchWaitingForPlayers" xml:space="preserve">
+    <value>Esperando al otro jugador…</value>
+  </data>
+  <data name="Message_MatchStarting" xml:space="preserve">
+    <value>La partida comenzará en</value>
+  </data>
 </root>

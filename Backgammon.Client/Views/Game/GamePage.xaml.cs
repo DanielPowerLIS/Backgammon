@@ -66,6 +66,8 @@ namespace Backgammon.Client.Views.Game
 
                 _isStateLoaded = true;
                 RefreshBoard();
+
+                await gameController.RegisterPlayerReadyAsync();
             }
             catch (FaultException<GameMatchFault> matchException)
             {
