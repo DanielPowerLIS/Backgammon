@@ -26,6 +26,9 @@ namespace Backgammon.Client.GameReference {
         private Backgammon.Client.GameReference.MatchBoardState BoardField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime CountdownEndsAtUtcField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MatchIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -33,6 +36,9 @@ namespace Backgammon.Client.GameReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RoomIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime ServerTimeUtcField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long VersionField;
@@ -56,6 +62,19 @@ namespace Backgammon.Client.GameReference {
                 if ((object.ReferenceEquals(this.BoardField, value) != true)) {
                     this.BoardField = value;
                     this.RaisePropertyChanged("Board");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime CountdownEndsAtUtc {
+            get {
+                return this.CountdownEndsAtUtcField;
+            }
+            set {
+                if ((this.CountdownEndsAtUtcField.Equals(value) != true)) {
+                    this.CountdownEndsAtUtcField = value;
+                    this.RaisePropertyChanged("CountdownEndsAtUtc");
                 }
             }
         }
@@ -95,6 +114,19 @@ namespace Backgammon.Client.GameReference {
                 if ((object.ReferenceEquals(this.RoomIdField, value) != true)) {
                     this.RoomIdField = value;
                     this.RaisePropertyChanged("RoomId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime ServerTimeUtc {
+            get {
+                return this.ServerTimeUtcField;
+            }
+            set {
+                if ((this.ServerTimeUtcField.Equals(value) != true)) {
+                    this.ServerTimeUtcField = value;
+                    this.RaisePropertyChanged("ServerTimeUtc");
                 }
             }
         }
@@ -400,6 +432,13 @@ namespace Backgammon.Client.GameReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetMatchState", ReplyAction="http://tempuri.org/IGameService/GetMatchStateResponse")]
         System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> GetMatchStateAsync(string sessionId, string roomId, string matchId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RegisterPlayerReady", ReplyAction="http://tempuri.org/IGameService/RegisterPlayerReadyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/RegisterPlayerReadyMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        Backgammon.Client.GameReference.MatchState RegisterPlayerReady(string sessionId, string roomId, string matchId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RegisterPlayerReady", ReplyAction="http://tempuri.org/IGameService/RegisterPlayerReadyResponse")]
+        System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> RegisterPlayerReadyAsync(string sessionId, string roomId, string matchId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -443,6 +482,14 @@ namespace Backgammon.Client.GameReference {
         
         public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> GetMatchStateAsync(string sessionId, string roomId, string matchId) {
             return base.Channel.GetMatchStateAsync(sessionId, roomId, matchId);
+        }
+        
+        public Backgammon.Client.GameReference.MatchState RegisterPlayerReady(string sessionId, string roomId, string matchId) {
+            return base.Channel.RegisterPlayerReady(sessionId, roomId, matchId);
+        }
+        
+        public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> RegisterPlayerReadyAsync(string sessionId, string roomId, string matchId) {
+            return base.Channel.RegisterPlayerReadyAsync(sessionId, roomId, matchId);
         }
     }
 }

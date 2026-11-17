@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 namespace Backgammon.Server.Services.Data
 {
@@ -11,6 +12,8 @@ namespace Backgammon.Server.Services.Data
             RoomId = string.Empty;
             Phase = MatchPhase.WaitingForPlayers;
             Board = new MatchBoardState();
+            CountdownEndsAtUtc = DateTime.MinValue;
+            ServerTimeUtc = DateTime.UtcNow;
         }
 
         [DataMember]
@@ -27,5 +30,11 @@ namespace Backgammon.Server.Services.Data
 
         [DataMember]
         public long Version { get; set; }
+
+        [DataMember]
+        public DateTime CountdownEndsAtUtc { get; set; }
+
+        [DataMember]
+        public DateTime ServerTimeUtc { get; set; }
     }
 }
