@@ -160,11 +160,19 @@
     <Compile Include="Controllers\Session\LogOutController.cs" />
     <Compile Include="Controllers\Session\PlayerSessionContext.cs" />
     <Compile Include="Controllers\Verification\VerificationController.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Settings\Localization\LanguageOptions.cs" />
     <Compile Include="Settings\Localization\LocalizationService.cs" />
     <Compile Include="Settings\Localization\LocalizedText.cs" />
     <Compile Include="Views\Dialog\JoinLobbyDialog.xaml.cs">
       <DependentUpon>JoinLobbyDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Game\Controls\MatchStartControl.xaml.cs">
+      <DependentUpon>MatchStartControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Models\AvatarOption.cs" />
     <Compile Include="Controllers\Registration\RegistrationLimits.cs" />
@@ -306,6 +314,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Game\Controls\MatchStartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Game\GamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -407,11 +419,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -423,8 +430,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Connected Services\AuthenticationReference\AuthenticationService.wsdl" />
     <None Include="Connected Services\AuthenticationReference\AuthenticationService.xsd">
