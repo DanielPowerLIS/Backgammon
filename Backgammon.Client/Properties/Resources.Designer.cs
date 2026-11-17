@@ -340,7 +340,7 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a ¿Quieres eliminar este enlace de tu perfil?.
+        ///   Looks up a localized string similar to ¿Quieres eliminar este enlace de tu perfil?.
         /// </summary>
         public static string Message_ConfirmSocialLinkRemoval {
             get {
@@ -349,7 +349,6 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No fue posible cargar la partida. Inténtalo nuevamente..
         ///   Looks up a localized string similar to No fue posible cargar la partida. Inténtalo nuevamente..
         /// </summary>
         public static string Message_GameLoadError {
@@ -359,7 +358,7 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Escribe un enlace válido para esta red social..
+        ///   Looks up a localized string similar to Escribe un enlace válido para esta red social..
         /// </summary>
         public static string Message_InvalidSocialLink {
             get {
@@ -368,7 +367,6 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No se pudo cargar la información del perfil. Verifica tu conexión..
         ///   Looks up a localized string similar to La partida comenzará en.
         /// </summary>
         public static string Message_MatchStarting {
@@ -405,7 +403,7 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No se pudo actualizar el enlace de la red social. Inténtalo nuevamente..
+        ///   Looks up a localized string similar to No se pudo actualizar el enlace de la red social. Inténtalo nuevamente..
         /// </summary>
         public static string Message_SocialLinkUpdateError {
             get {
@@ -414,7 +412,6 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Confirmar contraseña.
         ///   Looks up a localized string similar to Confirmar contraseña.
         /// </summary>
         public static string PasswordBox_ConfirmPassword {
@@ -1686,7 +1683,7 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Eliminar enlace.
+        ///   Looks up a localized string similar to Eliminar enlace.
         /// </summary>
         public static string Title_SocialLinkRemoval {
             get {

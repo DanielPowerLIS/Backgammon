@@ -9,6 +9,7 @@ using Backgammon.Client.GameReference;
 using Backgammon.Client.MatchReference;
 using Backgammon.Client.Views.Dialog;
 using Backgammon.Client.Settings.Logging;
+using Backgammon.Client.Views.Game.Controls;
 
 using GameMatchFault = Backgammon.Client.GameReference.MatchFault;
 
@@ -22,6 +23,8 @@ namespace Backgammon.Client.Views.Game
         private GameController _gameController;
         private bool _isStateLoaded;
         private long _renderedVersion;
+
+        private MatchStartControl _matchStartControl;
 
         public MatchSession CurrentMatch { get; }
 
@@ -94,6 +97,8 @@ namespace Backgammon.Client.Views.Game
 
         private async void OnPageUnloaded(object sender, RoutedEventArgs routedEventArgs)
         {
+            RemoveMatchStartControl();
+
             GameController gameController = _gameController;
 
             _gameController = null;
@@ -162,7 +167,59 @@ namespace Backgammon.Client.Views.Game
 
             boardControlGame.RenderBoard(boardState);
 
+            UpdateMatchAnnouncement(matchState);
+
             _renderedVersion = matchState.Version;
+        }
+
+        private void UpdateMatchAnnouncement(MatchState matchState)
+        {
+            if (matchState.Phase == MatchPhase.WaitingForPlayers)
+            {
+                MatchStartControl startControl = GetMatchStartControl();
+
+                startControl.ShowWaiting(Properties.Resources.Message_MatchWaitingForPlayers);
+
+                return;
+            }
+
+            if (matchState.Phase == MatchPhase.StartingCountdown)
+            {
+                MatchStartControl startControl = GetMatchStartControl();
+
+                TimeSpan duration = matchState.CountdownEndsAtUtc - matchState.ServerTimeUtc;
+
+                startControl.StartCountdown(Properties.Resources.Message_MatchStarting, duration);
+
+                return;
+            }
+
+            RemoveMatchStartControl();
+        }
+
+        private MatchStartControl GetMatchStartControl()
+        {
+            if (_matchStartControl == null)
+            {
+                _matchStartControl = new MatchStartControl();
+
+                contentControlMatchStart.Content = _matchStartControl;
+            }
+
+            return _matchStartControl;
+        }
+
+        private void RemoveMatchStartControl()
+        {
+            if (_matchStartControl == null)
+            {
+                return;
+            }
+
+            _matchStartControl.StopCountdown();
+
+            contentControlMatchStart.Content = null;
+            _matchStartControl = null;
         }
 
         private void ShowGameLoadError(GameController gameController)
