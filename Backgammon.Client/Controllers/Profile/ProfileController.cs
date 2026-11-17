@@ -16,8 +16,7 @@ namespace Backgammon.Client.Controllers.Profile
 
         public async Task<PlayerProfile> GetPlayerProfileAsync(string sessionId)
         {
-            PlayerProfile playerProfile =
-                await _profileClient.GetPlayerProfileAsync(sessionId);
+            PlayerProfile playerProfile = await _profileClient.GetPlayerProfileAsync(sessionId);
 
             return playerProfile;
         }
@@ -55,41 +54,27 @@ namespace Backgammon.Client.Controllers.Profile
             return socialMediaTypes;
         }
 
-        public async Task<SocialMediaLink> AddSocialMediaLinkAsync(
-            string sessionId,
-            int socialMediaTypeId,
-            string url)
+        public async Task<SocialMediaLink> AddSocialMediaLinkAsync(string sessionId, int socialMediaTypeId, string url)
         {
-            SocialMediaLink socialMediaLink =
-                await _profileClient.AddSocialMediaLinkAsync(
-                    sessionId,
-                    socialMediaTypeId,
+            SocialMediaLink socialMediaLink = await _profileClient.AddSocialMediaLinkAsync(sessionId, socialMediaTypeId,
                     url);
 
             return socialMediaLink;
         }
 
-        public async Task<bool> RemoveSocialMediaLinkAsync(
-            string sessionId,
-            int socialMediaLinkId)
+        public async Task<bool> RemoveSocialMediaLinkAsync(string sessionId, int socialMediaLinkId)
         {
-            await _profileClient.RemoveSocialMediaLinkAsync(
-                sessionId,
-                socialMediaLinkId);
+            await _profileClient.RemoveSocialMediaLinkAsync(sessionId, socialMediaLinkId);
 
             bool removalCompleted = true;
 
             return removalCompleted;
         }
 
-        public async Task<SocialMediaLink> UpdateSocialMediaLinkAsync(
-            string sessionId,
-            int socialMediaLinkId,
+        public async Task<SocialMediaLink> UpdateSocialMediaLinkAsync(string sessionId, int socialMediaLinkId,
             string url)
         {
-            SocialMediaLink socialMediaLink =
-                await _profileClient.UpdateSocialMediaLinkAsync(
-                    sessionId,
+            SocialMediaLink socialMediaLink = await _profileClient.UpdateSocialMediaLinkAsync(sessionId, 
                     socialMediaLinkId,
                     url);
 

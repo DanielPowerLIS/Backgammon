@@ -24,13 +24,14 @@ namespace Backgammon.Client.Views.Pages
             new Log4NetApplicationLogger(typeof(PlayerProfile));
 
         private readonly ProfileController _profileController;
+        private string _description = string.Empty;
 
         public PlayerProfile()
         {
             InitializeComponent();
             _profileController = new ProfileController();
 
-            this.Loaded += OnPageLoaded;
+            Loaded += OnPageLoaded;
         }
 
         private async void OnPageLoaded(object sender, RoutedEventArgs e)
@@ -50,7 +51,7 @@ namespace Backgammon.Client.Views.Pages
                     sessionException,
                     "Invalid session state while attempting to load the player profile.");
 
-                ShowProfileLoadError(Properties.Resources.Title_SessionError);
+                ShowProfileLoadError();
             }
             catch (FaultException<ProfileFault> profileFault)
             {
@@ -58,7 +59,7 @@ namespace Backgammon.Client.Views.Pages
                     "The profile request was rejected with code {0}.",
                     profileFault.Detail.ErrorCode);
 
-                ShowProfileLoadError(Properties.Resources.Title_ConnectionError);
+                ShowProfileLoadError();
             }
             catch (CommunicationException communicationException)
             {
@@ -66,7 +67,7 @@ namespace Backgammon.Client.Views.Pages
                     communicationException,
                     "The player profile request failed.");
 
-                ShowProfileLoadError(Properties.Resources.Title_ConnectionError);
+                ShowProfileLoadError();
             }
             catch (TimeoutException timeoutException)
             {
@@ -74,15 +75,137 @@ namespace Backgammon.Client.Views.Pages
                     timeoutException,
                     "The player profile request exceeded the time limit.");
 
-                ShowProfileLoadError(Properties.Resources.Title_ConnectionError);
+                ShowProfileLoadError();
             }
         }
 
-        private void ShowProfileLoadError(string title)
+        private void OnBackClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (NavigationService != null && NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
+        }
+
+        private void OnEditDescriptionClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            textBoxDescription.Text = _description;
+            SetDescriptionEditMode(true);
+            textBoxDescription.Focus();
+        }
+
+        private async void OnSaveDescriptionClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            string description = textBoxDescription.Text.Trim();
+            buttonSaveDescription.IsEnabled = false;
+
+            try
+            {
+                PlayerSession currentSession = PlayerSessionContext.GetSession();
+
+                bool updateCompleted = await _profileController.UpdateDescriptionAsync(
+                    currentSession.SessionId,
+                    description);
+
+                if (updateCompleted)
+                {
+                    AssignProfileDescription(description);
+                    SetDescriptionEditMode(false);
+                }
+            }
+            catch (NullReferenceException sessionException)
+            {
+                ApplicationLogger.LogError(
+                    sessionException,
+                    "The profile description could not be updated because the session is unavailable.");
+
+                ShowProfileUpdateError();
+            }
+            catch (FaultException<ProfileFault> profileFault)
+            {
+                ApplicationLogger.LogWarning(
+                    "The profile update was rejected with code {0}.",
+                    profileFault.Detail.ErrorCode);
+
+                ShowProfileUpdateError();
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(
+                    communicationException,
+                    "The profile description could not be updated.");
+
+                ShowProfileUpdateError();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(
+                    timeoutException,
+                    "The profile description update exceeded the time limit.");
+
+                ShowProfileUpdateError();
+            }
+            finally
+            {
+                buttonSaveDescription.IsEnabled = true;
+            }
+        }
+
+        private void OnCancelDescriptionClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            textBoxDescription.Text = _description;
+            SetDescriptionEditMode(false);
+        }
+
+       private void OnAddFacebookClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            // TODO: Display dialog to add or edit Facebook social media link.
+        }
+
+        private void OnAddInstagramClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            // TODO: Display dialog to add or edit Instagram social media link.
+        }
+
+        private void OnAddTikTokClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            // TODO: Display dialog to add or edit TikTok social media link.
+        }
+        private void SetDescriptionEditMode(bool isEditing)
+        {
+            if (isEditing)
+            {
+                textBlockDescription.Visibility = Visibility.Collapsed;
+                textBoxDescription.Visibility = Visibility.Visible;
+                buttonEditDescription.Visibility = Visibility.Collapsed;
+                buttonSaveDescription.Visibility = Visibility.Visible;
+                buttonCancelDescription.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                textBlockDescription.Visibility = Visibility.Visible;
+                textBoxDescription.Visibility = Visibility.Collapsed;
+                buttonEditDescription.Visibility = Visibility.Visible;
+                buttonSaveDescription.Visibility = Visibility.Collapsed;
+                buttonCancelDescription.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void ShowProfileUpdateError()
+        {
+            MessageBox.Show(
+                Properties.Resources.Message_ProfileUpdateError,
+                Properties.Resources.Title_ConnectionError,
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
+
+
+        private void ShowProfileLoadError()
         {
             MessageBox.Show(
                 Properties.Resources.Message_ProfileLoadError,
-                title,
+                Properties.Resources.Title_ConnectionError,
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
         }
@@ -105,6 +228,7 @@ namespace Backgammon.Client.Views.Pages
             }
             else
             {
+                buttonEditDescription.IsEnabled = true;
                 textBlockPoints.Text = profileData.Points.ToString();
                 textBlockWins.Text = profileData.Wins.ToString();
                 textBlockRegistrationDate.Text = profileData.RegistrationDate.ToShortDateString();
@@ -157,35 +281,14 @@ namespace Backgammon.Client.Views.Pages
         {
             if (string.IsNullOrWhiteSpace(description))
             {
+                _description = string.Empty;
                 textBlockDescription.Text = Properties.Resources.TextBlock_NoDescription;
             }
             else
             {
+                _description = description;
                 textBlockDescription.Text = description;
             }
-        }
-
-        private void OnBackClick(object sender, RoutedEventArgs e)
-        {
-            if (NavigationService != null && NavigationService.CanGoBack)
-            {
-                NavigationService.GoBack();
-            }
-        }
-
-        private void OnAddFacebookClick(object sender, RoutedEventArgs e)
-        {
-            // TODO: Display dialog to add or edit Facebook social media link.
-        }
-
-        private void OnAddInstagramClick(object sender, RoutedEventArgs e)
-        {
-            // TODO: Display dialog to add or edit Instagram social media link.
-        }
-
-        private void OnAddTikTokClick(object sender, RoutedEventArgs e)
-        {
-            // TODO: Display dialog to add or edit TikTok social media link.
         }
     }
 }

@@ -259,6 +259,7 @@ namespace Backgammon.Client.Views.Pages
 
             dialog.ShowOver(owner);
 
+            IsEnabled = true;
             NavigationService.Navigate(new MainMenu());
         }
     }
