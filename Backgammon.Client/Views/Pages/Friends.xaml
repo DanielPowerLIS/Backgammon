@@ -65,7 +65,7 @@
                     Style="{StaticResource FriendButtonStyle}" 
                     MinWidth="130" 
                     MinHeight="35" 
-                    Margin="0,0,10,0" >
+                    Margin="0,0,10,0" Click="OnFriendRequest" >
                     <TextBlock Text="{x:Static properties:Resources.TextBlock_FriendRequests}"
                     TextWrapping="Wrap"
                     TextAlignment="Center"/>
@@ -74,7 +74,7 @@
                     Style="{StaticResource FriendButtonStyle}" 
                     MinWidth="130" 
                     MinHeight="35" 
-                    Margin="0,0,0,0">
+                    Margin="0,0,0,0" Click="OnAddFriend">
                     <TextBlock 
                         Text="{x:Static properties:Resources.TextBlock_Button_AddFriend}"
                         TextWrapping="Wrap"
