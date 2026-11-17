@@ -666,3 +666,10 @@ c) Move four checkers 6 points each.
     <value>The social media link could not be updated. Please try again.</value>
   </data>
 </root>
+  <data name="Message_MatchWaitingForPlayers" xml:space="preserve">
+    <value>Waiting for the other player…</value>
+  </data>
+  <data name="Message_MatchStarting" xml:space="preserve">
+    <value>The match will start in</value>
+  </data>
+</root>

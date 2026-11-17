@@ -36,6 +36,20 @@ namespace Backgammon.Client.Comunication
             }
         }
 
+        public async Task<MatchState> RegisterPlayerReadyAsync(string sessionId, string roomId, string matchId)
+        {
+            try
+            {
+                MatchState matchState = await _serviceClient.RegisterPlayerReadyAsync(sessionId, roomId, matchId);
+
+                return matchState;
+            }
+            finally
+            {
+                AbortFaultedChannel();
+            }
+        }
+
         public void Close()
         {
             try

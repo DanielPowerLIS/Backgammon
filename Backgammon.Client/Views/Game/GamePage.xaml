@@ -74,11 +74,13 @@
                 <Button Content="Deshacer" 
                         Width="120" 
                         Height="45" 
-                        Margin="5"/>
+                        Margin="5"
+                        IsEnabled="False"/>
                 <Button Content="Confirmar" 
                         Width="120" 
                         Height="45" 
-                        Margin="5"/>
+                        Margin="5"
+                        IsEnabled="False"/>
             </StackPanel>
             <Button
                 Grid.Row="4"
@@ -88,8 +90,44 @@
                 Margin="0,0,0,15"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
-                Click="OnRollDiceButtonClick"/>
+                Click="OnRollDiceButtonClick"
+                IsEnabled="False"/>
         </Grid>
+        <Grid
+            x:Name="gridMatchAnnouncement"
+            Grid.ColumnSpan="2"
+            Panel.ZIndex="10"
+            Background="Transparent"
+            Visibility="Collapsed">
 
+            <Border
+                Padding="35,25"
+                Background="#050914"
+                BorderBrush="#00C9F2"
+                BorderThickness="2"
+                CornerRadius="15"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                MaxWidth="650">
+
+                <StackPanel>
+                    <TextBlock
+                        x:Name="textBlockMatchAnnouncement"
+                        Foreground="#00C9F2"
+                        FontSize="36"
+                        FontWeight="Bold"
+                        TextAlignment="Center"
+                        TextWrapping="Wrap"/>
+
+                    <TextBlock
+                        x:Name="textBlockMatchCountdown"
+                        Margin="0,15,0,0"
+                        Foreground="#E795EC"
+                        FontSize="64"
+                        FontWeight="Bold"
+                        TextAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Page>
