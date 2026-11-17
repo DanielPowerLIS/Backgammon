@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="29d69999-dddb-4bf8-972b-5440e94f256e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:9002/FriendService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="FriendService.wsdl" MetadataType="Wsdl" ID="080c18f4-00b7-4d37-92f2-20d1981d5f8a" SourceId="1" SourceUrl="http://localhost:9002/FriendService?wsdl" />
+    <MetadataFile FileName="FriendService.xsd" MetadataType="Schema" ID="bae43088-ab8d-4617-b75f-918c1bef5369" SourceId="1" SourceUrl="http://localhost:9002/FriendService?xsd=xsd2" />
+    <MetadataFile FileName="FriendService1.xsd" MetadataType="Schema" ID="d25727b3-ed4e-48f8-93bd-cc7ca8b2bd0c" SourceId="1" SourceUrl="http://localhost:9002/FriendService?xsd=xsd1" />
+    <MetadataFile FileName="FriendService2.xsd" MetadataType="Schema" ID="e631f9db-fd41-4420-82bd-f97324265ae6" SourceId="1" SourceUrl="http://localhost:9002/FriendService?xsd=xsd0" />
+    <MetadataFile FileName="FriendService.disco" MetadataType="Disco" ID="10a2ab24-2354-4472-9034-e6e1ea195622" SourceId="1" SourceUrl="http://localhost:9002/FriendService?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

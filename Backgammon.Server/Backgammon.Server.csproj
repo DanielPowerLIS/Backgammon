@@ -161,7 +161,9 @@
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Persistence\Repositories\AccountRepository.cs" />
+    <Compile Include="Persistence\Repositories\FriendRepository.cs" />
     <Compile Include="Persistence\Repositories\InterfacesRepositories\IAccountRepository.cs" />
+    <Compile Include="Persistence\Repositories\InterfacesRepositories\IFriendRepository.cs" />
     <Compile Include="Persistence\Repositories\InterfacesRepositories\IProfileRepository.cs" />
     <Compile Include="Persistence\Repositories\ProfileRepository.cs" />
     <Compile Include="Program.cs" />
@@ -169,6 +171,7 @@
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\ChatService.cs" />
     <Compile Include="Services\Comunication\ChatServiceHost.cs" />
+    <Compile Include="Services\Comunication\FriendServiceHost.cs" />
     <Compile Include="Services\Comunication\GameServiceHost.cs" />
     <Compile Include="Services\Comunication\GuestAccessServiceHost.cs" />
     <Compile Include="Services\Comunication\LobbyServiceHost.cs" />
@@ -182,6 +185,7 @@
     <Compile Include="Services\Contracts\IAuthenticationService.cs" />
     <Compile Include="Services\Contracts\IChatCallback.cs" />
     <Compile Include="Services\Contracts\IChatService.cs" />
+    <Compile Include="Services\Contracts\IFriendService.cs" />
     <Compile Include="Services\Contracts\IGameCallback.cs" />
     <Compile Include="Services\Contracts\IGameService.cs" />
     <Compile Include="Services\Contracts\IGuestAccessService.cs" />
@@ -199,6 +203,8 @@
     <Compile Include="Services\Data\ChatFault.cs" />
     <Compile Include="Services\Data\CheckerColor.cs" />
     <Compile Include="Services\Data\Credentials.cs" />
+    <Compile Include="Services\Data\Friend.cs" />
+    <Compile Include="Services\Data\FriendFault.cs" />
     <Compile Include="Services\Data\GuestAccessFault.cs" />
     <Compile Include="Services\Data\LeaderboardFault.cs" />
     <Compile Include="Services\Data\Lobby.cs" />
@@ -213,6 +219,7 @@
     <Compile Include="Services\Data\PreinitiationFault.cs" />
     <Compile Include="Services\Data\VerificationFault.cs" />
     <Compile Include="Services\Data\VerificationRequest.cs" />
+    <Compile Include="Services\FriendService.cs" />
     <Compile Include="Services\GameService.cs" />
     <Compile Include="SupportServices\ExceptionCode\ErrorCodes.cs" />
     <Compile Include="Services\LobbyService.cs" />

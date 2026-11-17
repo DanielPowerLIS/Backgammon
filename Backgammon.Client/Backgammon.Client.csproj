@@ -70,6 +70,7 @@
     </ApplicationDefinition>
     <Compile Include="Comunication\AuthenticationClient.cs" />
     <Compile Include="Comunication\ChatClient.cs" />
+    <Compile Include="Comunication\FriendClient.cs" />
     <Compile Include="Comunication\GameClient.cs" />
     <Compile Include="Comunication\GuestAccessClient.cs" />
     <Compile Include="Comunication\LeaderboardClient.cs" />
@@ -81,6 +82,11 @@
     <Compile Include="Comunication\RegistrationClient.cs" />
     <Compile Include="Comunication\ServiceChannelCloser.cs" />
     <Compile Include="Connected Services\AuthenticationReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\FriendReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -140,6 +146,7 @@
     <Compile Include="Controllers\Callbacks\PreinitiationCallback.cs" />
     <Compile Include="Controllers\Callbacks\ChatCallback.cs" />
     <Compile Include="Controllers\Chat\ChatController.cs" />
+    <Compile Include="Controllers\Friends\FriendController.cs" />
     <Compile Include="Controllers\Game\GameController.cs" />
     <Compile Include="Controllers\GuestAccess\GuestAccessController.cs" />
     <Compile Include="Controllers\Leaderboard\LeaderboardController.cs" />
@@ -445,6 +452,19 @@
     <None Include="Connected Services\ChatReference\Backgammon.Client.ChatReference.ChatMessage.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\FriendReference\Backgammon.Client.FriendReference.Friend.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\FriendReference\FriendService.wsdl" />
+    <None Include="Connected Services\FriendReference\FriendService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FriendReference\FriendService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\FriendReference\FriendService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\GameReference\Backgammon.Client.GameReference.MatchState.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -642,6 +662,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\FriendReference\FriendService.disco" />
+    <None Include="Connected Services\FriendReference\configuration91.svcinfo" />
+    <None Include="Connected Services\FriendReference\configuration.svcinfo" />
+    <None Include="Connected Services\FriendReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -662,6 +689,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\AuthenticationReference\" />
+    <WCFMetadataStorage Include="Connected Services\FriendReference\" />
     <WCFMetadataStorage Include="Connected Services\GameReference\" />
     <WCFMetadataStorage Include="Connected Services\GuestAccessReference\" />
     <WCFMetadataStorage Include="Connected Services\LeaderboardReference\" />
