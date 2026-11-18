@@ -216,9 +216,9 @@ namespace Backgammon.Server.Services.Manager
                 throw new ArgumentNullException(nameof(roomId));
             }
 
-            bool lobbyFound = ActiveRooms.TryGetValue(roomId, out LobbySession storedLobbySession);
+            LobbySession storedLobbySession = ActiveRooms[roomId];
 
-            if (!lobbyFound || storedLobbySession == null)
+            if (storedLobbySession == null)
             {
                 throw new KeyNotFoundException(CodeLobbyDoesNotExistMessage);
             }
@@ -371,7 +371,9 @@ namespace Backgammon.Server.Services.Manager
 
         private static bool RemoveSavedRoom(string roomId)
         {
-            bool roomRemoved = ActiveRooms.TryRemove(roomId, out _);
+            IDictionary<string, LobbySession> rooms = ActiveRooms;
+
+            bool roomRemoved = rooms.Remove(roomId);
 
             return roomRemoved;
         }
