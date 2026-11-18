@@ -10,6 +10,7 @@ using Backgammon.Client.MatchReference;
 using Backgammon.Client.Views.Dialog;
 using Backgammon.Client.Settings.Logging;
 using Backgammon.Client.Views.Game.Controls;
+using Backgammon.Client.Controllers.Session;
 
 using GameMatchFault = Backgammon.Client.GameReference.MatchFault;
 
@@ -25,6 +26,9 @@ namespace Backgammon.Client.Views.Game
         private long _renderedVersion;
 
         private MatchStartControl _matchStartControl;
+
+        private DiceRollDialog _openingRollDialog;
+        private bool _isPlayerReady;
 
         public MatchSession CurrentMatch { get; }
 
@@ -51,6 +55,7 @@ namespace Backgammon.Client.Views.Game
             }
 
             _isStateLoaded = false;
+            _isPlayerReady = false;
             _renderedVersion = 0;
 
             var gameController = new GameController(CurrentMatch);
@@ -60,17 +65,7 @@ namespace Backgammon.Client.Views.Game
 
             try
             {
-                await gameController.LoadMatchStateAsync();
-
-                if (!IsLoaded || !ReferenceEquals(_gameController, gameController))
-                {
-                    return;
-                }
-
-                _isStateLoaded = true;
-                RefreshBoard();
-
-                await gameController.RegisterPlayerReadyAsync();
+                await LoadGameAsync(gameController);
             }
             catch (FaultException<GameMatchFault> matchException)
             {
@@ -95,9 +90,35 @@ namespace Backgammon.Client.Views.Game
             }
         }
 
+        private async Task LoadGameAsync(GameController gameController)
+        {
+            await gameController.LoadMatchStateAsync();
+
+            if (!IsLoaded || !ReferenceEquals(_gameController, gameController))
+            {
+                return;
+            }
+
+            _isStateLoaded = true;
+            RefreshBoard();
+
+            await gameController.RegisterPlayerReadyAsync();
+
+            if (!IsLoaded || !ReferenceEquals(_gameController, gameController))
+            {
+                return;
+            }
+
+            _isPlayerReady = true;
+            UpdateOpeningRollDialog(gameController.CurrentState);
+        }
+
         private async void OnPageUnloaded(object sender, RoutedEventArgs routedEventArgs)
         {
+            _isPlayerReady = false;
+
             RemoveMatchStartControl();
+            CloseOpeningRollDialog();
 
             GameController gameController = _gameController;
 
@@ -167,9 +188,10 @@ namespace Backgammon.Client.Views.Game
 
             boardControlGame.RenderBoard(boardState);
 
-            UpdateMatchAnnouncement(matchState);
-
             _renderedVersion = matchState.Version;
+
+            UpdateMatchAnnouncement(matchState);
+            UpdateOpeningRollDialog(matchState);
         }
 
         private void UpdateMatchAnnouncement(MatchState matchState)
@@ -222,6 +244,109 @@ namespace Backgammon.Client.Views.Game
             _matchStartControl = null;
         }
 
+        private void UpdateOpeningRollDialog(MatchState matchState)
+        {
+            if (_openingRollDialog != null)
+            {
+                _openingRollDialog.ApplyMatchState(matchState);
+                return;
+            }
+
+            if (!_isPlayerReady || matchState.Phase != MatchPhase.OpeningRoll)
+            {
+                return;
+            }
+
+            ShowOpeningRollDialog(matchState);
+        }
+
+        private void ShowOpeningRollDialog(MatchState matchState)
+        {
+            int playerId = PlayerSessionContext.GetSession().PlayerId;
+            bool isHost = CurrentMatch.PlayerHostId == playerId;
+
+            var diceDialog = new DiceRollDialog(isHost);
+            _openingRollDialog = diceDialog;
+
+            diceDialog.Owner = Window.GetWindow(this);
+            diceDialog.RollSelected += OnOpeningRollSelected;
+            diceDialog.ApplyMatchState(matchState);
+
+            try
+            {
+                diceDialog.ShowDialog();
+            }
+            finally
+            {
+                diceDialog.RollSelected -= OnOpeningRollSelected;
+
+                if (ReferenceEquals(_openingRollDialog, diceDialog))
+                {
+                    _openingRollDialog = null;
+                }
+            }
+        }
+
+        private async void OnOpeningRollSelected(int roundNumber)
+        {
+            GameController gameController = _gameController;
+            DiceRollDialog diceDialog = _openingRollDialog;
+
+            if (gameController == null || diceDialog == null)
+            {
+                return;
+            }
+
+            try
+            {
+                await gameController.RollOpeningDieAsync(roundNumber);
+
+                if (ReferenceEquals(_openingRollDialog, diceDialog))
+                {
+                    diceDialog.CompleteRoll();
+                }
+            }
+            catch (FaultException<GameMatchFault> matchException)
+            {
+                ApplicationLogger.LogWarning("The opening roll was rejected. Code: {0}",
+                    matchException.Detail.ErrorCode);
+                ShowOpeningRollError(diceDialog);
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(communicationException, "The opening roll could not be completed.");
+                ShowOpeningRollError(diceDialog);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(timeoutException, "The opening roll exceeded the time limit.");
+                ShowOpeningRollError(diceDialog);
+            }
+        }
+
+        private void ShowOpeningRollError(DiceRollDialog diceDialog)
+        {
+            if (IsLoaded && ReferenceEquals(_openingRollDialog, diceDialog))
+            {
+                diceDialog.ShowRollError();
+            }
+        }
+
+        private void CloseOpeningRollDialog()
+        {
+            DiceRollDialog diceDialog = _openingRollDialog;
+
+            if (diceDialog == null)
+            {
+                return;
+            }
+
+            _openingRollDialog = null;
+
+            diceDialog.RollSelected -= OnOpeningRollSelected;
+            diceDialog.CloseForNavigation();
+        }
+
         private void ShowGameLoadError(GameController gameController)
         {
             if (!IsLoaded || !ReferenceEquals(_gameController, gameController))
@@ -234,15 +359,6 @@ namespace Backgammon.Client.Views.Game
                 Properties.Resources.Message_GameLoadError);
 
             dialog.ShowOver(Window.GetWindow(this));
-        }
-
-        private void OnRollDiceButtonClick(object sender, RoutedEventArgs e)
-        {
-            var diceDialog = new DiceRollDialog(CheckerColor.Blue);
-            diceDialog.Owner = Window.GetWindow(this);
-            diceDialog.ShowDialog();
-
-            DiceResult result = diceDialog.Result;
         }
     }
 }
