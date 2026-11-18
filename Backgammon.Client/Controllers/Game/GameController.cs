@@ -83,6 +83,22 @@ namespace Backgammon.Client.Controllers.Game
             ApplyMatchState(matchState);
         }
 
+        public async Task RollOpeningDieAsync(int roundNumber)
+        {
+            string sessionId = PlayerSessionContext.GetSession().SessionId;
+
+            var playerRoll = new PlayerOpeningRoll
+            {
+                RoomId = _roomId,
+                MatchId = _matchId,
+                RoundNumber = roundNumber
+            };
+
+            MatchState matchState = await _gameClient.RollOpeningDieAsync(sessionId, playerRoll);
+
+            ApplyMatchState(matchState);
+        }
+
         public void CloseConnection()
         {
             lock (_queue)

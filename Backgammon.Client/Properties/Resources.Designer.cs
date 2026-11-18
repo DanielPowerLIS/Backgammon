@@ -133,6 +133,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Continuar.
+        /// </summary>
+        public static string Button_Continue {
+            get {
+                return ResourceManager.GetString("Button_Continue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crear cuenta.
         /// </summary>
         public static string Button_CreateAccount {
@@ -250,6 +259,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tirar dado.
+        /// </summary>
+        public static string Button_RollDie {
+            get {
+                return ResourceManager.GetString("Button_RollDie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Guardar.
         /// </summary>
         public static string Button_Save {
@@ -340,6 +358,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invitado.
+        /// </summary>
+        public static string Label_OpeningRollGuest {
+            get {
+                return ResourceManager.GetString("Label_OpeningRollGuest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Anfitrión.
+        /// </summary>
+        public static string Label_OpeningRollHost {
+            get {
+                return ResourceManager.GetString("Label_OpeningRollHost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ¿Quieres eliminar este enlace de tu perfil?.
         /// </summary>
         public static string Message_ConfirmSocialLinkRemoval {
@@ -381,6 +417,69 @@ namespace Backgammon.Client.Properties {
         public static string Message_MatchWaitingForPlayers {
             get {
                 return ResourceManager.GetString("Message_MatchWaitingForPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se pudo completar la tirada. Intenta nuevamente..
+        /// </summary>
+        public static string Message_OpeningRollError {
+            get {
+                return ResourceManager.GetString("Message_OpeningRollError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comienza el otro jugador..
+        /// </summary>
+        public static string Message_OpeningRollOpponentStarts {
+            get {
+                return ResourceManager.GetString("Message_OpeningRollOpponentStarts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cada jugador debe tirar un dado..
+        /// </summary>
+        public static string Message_OpeningRollReady {
+            get {
+                return ResourceManager.GetString("Message_OpeningRollReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tirando dado….
+        /// </summary>
+        public static string Message_OpeningRollRolling {
+            get {
+                return ResourceManager.GetString("Message_OpeningRollRolling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empate. Ambos deben volver a tirar..
+        /// </summary>
+        public static string Message_OpeningRollTie {
+            get {
+                return ResourceManager.GetString("Message_OpeningRollTie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Esperando la tirada del otro jugador….
+        /// </summary>
+        public static string Message_OpeningRollWaiting {
+            get {
+                return ResourceManager.GetString("Message_OpeningRollWaiting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comienzas tú..
+        /// </summary>
+        public static string Message_OpeningRollYouStart {
+            get {
+                return ResourceManager.GetString("Message_OpeningRollYouStart", resourceCulture);
             }
         }
         
@@ -1670,6 +1769,15 @@ namespace Backgammon.Client.Properties {
         public static string Title_ConnectionError {
             get {
                 return ResourceManager.GetString("Title_ConnectionError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tirada inicial.
+        /// </summary>
+        public static string Title_OpeningRoll {
+            get {
+                return ResourceManager.GetString("Title_OpeningRoll", resourceCulture);
             }
         }
         

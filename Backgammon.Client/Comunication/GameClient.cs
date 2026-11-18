@@ -50,6 +50,20 @@ namespace Backgammon.Client.Comunication
             }
         }
 
+        public async Task<MatchState> RollOpeningDieAsync(string sessionId, PlayerOpeningRoll playerRoll)
+        {
+            try
+            {
+                MatchState matchState = await _serviceClient.RollOpeningDieAsync(sessionId, playerRoll);
+
+                return matchState;
+            }
+            finally
+            {
+                AbortFaultedChannel();
+            }
+        }
+
         public void Close()
         {
             try
