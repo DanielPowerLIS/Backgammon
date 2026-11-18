@@ -21,11 +21,14 @@ namespace Backgammon.Server.Services.Manager
 
         private const int CountdownDurationSeconds = 3;
 
-        private const string GuestRequired = "A guest is required to start the match.";
-        private const string MatchAlreadyActive = "The lobby already has an active match.";
-        private const string MatchIdentifiersRequired = "Room and match identifiers are required.";
-        private const string MatchUnavailable = "The requested match is unavailable.";
-        private const string PlayerNotInMatch = "The player does not belong to this match.";
+        private static readonly string GuestRequired = "A guest is required to start the match.";
+        private static readonly string MatchAlreadyActive = "The lobby already has an active match.";
+        private static readonly string MatchIdentifiersRequired = "Room and match identifiers are required.";
+        private static readonly string MatchUnavailable = "The requested match is unavailable.";
+        private static readonly string PlayerNotInMatch = "The player does not belong to this match.";
+        private static readonly string OpeningRollUnavailable = "The match is not in the opening roll phase.";
+        private static readonly string OpeningRollRoundUnavailable = "The opening roll round is unavailable.";
+        private static readonly string OpeningDieAlreadyRolled = "The player has already rolled in this round.";
 
 
         public static MatchSession CreateMatch(int requestPlayerId, string roomId)
@@ -318,6 +321,36 @@ namespace Backgammon.Server.Services.Manager
             return stateCopy;
         }
 
+        public static MatchState RollOpeningDie(MatchPlayer player, int roundNumber)
+        {
+            if (player == null)
+            {
+                throw new ArgumentNullException(nameof(player));
+            }
+
+            ActiveMatch activeMatch = FindSavedActiveMatch(player.RoomId);
+            MatchState stateCopy;
+
+            lock (activeMatch.Queue)
+            {
+                ValidateMatchPlayer(activeMatch, player);
+                ValidateOpeningRollPhase(activeMatch.State);
+
+                MatchOpeningRollState openingRollState = GetOpeningRoll(activeMatch.State.OpeningRoll, roundNumber);
+
+                RollPlayerDie(activeMatch.Session, openingRollState, player.PlayerId);
+
+                activeMatch.State.OpeningRoll = openingRollState;
+
+                CompleteOpeningRoll(activeMatch);
+                activeMatch.State.Version++;
+
+                stateCopy = MatchStateFactory.Copy(activeMatch.State);
+            }
+
+            return stateCopy;
+        }
+
         internal static bool RemoveMatch(string roomId)
         {
             bool removedMatch = ActiveMatches.TryRemove(roomId, out ActiveMatch activeMatch);
@@ -438,6 +471,109 @@ namespace Backgammon.Server.Services.Manager
             {
                 throw new ArgumentException(MatchAlreadyActive);
             }
+        }
+
+        private static void ValidateMatchPlayer(ActiveMatch activeMatch, MatchPlayer player)
+        {
+            ActiveMatch savedMatch = FindSavedActiveMatch(player.RoomId);
+
+            if (!ReferenceEquals(savedMatch, activeMatch) ||
+                activeMatch.Session.MatchId != player.MatchId)
+            {
+                throw new KeyNotFoundException(MatchUnavailable);
+            }
+
+            bool isHost = activeMatch.Session.PlayerHostId == player.PlayerId;
+
+            bool isGuest = activeMatch.Session.PlayerGuestId == player.PlayerId;
+
+            if (!isHost && !isGuest)
+            {
+                throw new UnauthorizedAccessException(PlayerNotInMatch);
+            }
+        }
+
+        private static void ValidateOpeningRollPhase(MatchState matchState)
+        {
+            if (matchState.Phase != MatchPhase.OpeningRoll)
+            {
+                throw new ArgumentException(OpeningRollUnavailable);
+            }
+        }
+
+        private static MatchOpeningRollState GetOpeningRoll(MatchOpeningRollState openingRollState, int roundNumber)
+        {
+            if (roundNumber <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(roundNumber));
+            }
+
+            if (roundNumber == openingRollState.RoundNumber)
+            {
+                return openingRollState;
+            }
+
+            bool bothPlayersRolled = openingRollState.HostDieValue > 0 && openingRollState.GuestDieValue > 0;
+
+            bool isTie = bothPlayersRolled && openingRollState.HostDieValue == openingRollState.GuestDieValue;
+
+            bool isNextRound = roundNumber == openingRollState.RoundNumber + 1;
+
+            if (!isTie || !isNextRound)
+            {
+                throw new ArgumentException(OpeningRollRoundUnavailable, nameof(roundNumber));
+            }
+
+            var nextOpeningRoll = new MatchOpeningRollState
+            {
+                RoundNumber = roundNumber
+            };
+
+            return nextOpeningRoll;
+        }
+
+        private static void RollPlayerDie(MatchSession matchSession, MatchOpeningRollState openingRollState,
+            int playerId)
+        {
+            if (matchSession.PlayerHostId == playerId)
+            {
+                if (openingRollState.HostDieValue != 0)
+                {
+                    throw new ArgumentException(OpeningDieAlreadyRolled);
+                }
+
+                openingRollState.HostDieValue = Die.Roll();
+                return;
+            }
+
+            if (openingRollState.GuestDieValue != 0)
+            {
+                throw new ArgumentException(OpeningDieAlreadyRolled);
+            }
+
+            openingRollState.GuestDieValue = Die.Roll();
+        }
+
+        private static void CompleteOpeningRoll(ActiveMatch activeMatch)
+        {
+            MatchOpeningRollState openingRollState = activeMatch.State.OpeningRoll;
+
+            bool bothPlayersRolled = openingRollState.HostDieValue > 0 && openingRollState.GuestDieValue > 0;
+
+            if (!bothPlayersRolled || openingRollState.HostDieValue == openingRollState.GuestDieValue)
+            {
+                return;
+            }
+
+            int currentPlayerId = activeMatch.Session.PlayerGuestId;
+
+            if (openingRollState.HostDieValue > openingRollState.GuestDieValue)
+            {
+                currentPlayerId = activeMatch.Session.PlayerHostId;
+            }
+
+            activeMatch.State.CurrentPlayerId = currentPlayerId;
+            activeMatch.State.Phase = MatchPhase.WaitingForRoll;
         }
     }
 }

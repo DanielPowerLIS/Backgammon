@@ -14,6 +14,8 @@ namespace Backgammon.Server.Services.Data
             Board = new MatchBoardState();
             CountdownEndsAtUtc = DateTime.MinValue;
             ServerTimeUtc = DateTime.UtcNow;
+            OpeningRoll = new MatchOpeningRollState();
+            CurrentPlayerId = 0;
         }
 
         [DataMember]
@@ -36,5 +38,11 @@ namespace Backgammon.Server.Services.Data
 
         [DataMember]
         public DateTime ServerTimeUtc { get; set; }
+
+        [DataMember]
+        public MatchOpeningRollState OpeningRoll { get; set; }
+
+        [DataMember]
+        public int CurrentPlayerId { get; set; }
     }
 }
