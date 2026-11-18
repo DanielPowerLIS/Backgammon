@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using System.Security.Cryptography;
 
 using Backgammon.Server.Services.Contracts;
 using Backgammon.Server.Services.Data;
@@ -100,6 +101,43 @@ namespace Backgammon.Server.Services
             }
         }
 
+        public MatchState RollOpeningDie(string sessionId, PlayerOpeningRoll playerRoll)
+        {
+            PlayerSession playerSession = GetPlayerSession(sessionId);
+
+            try
+            {
+                MatchState matchState = RollPlayerOpeningDie(playerSession, playerRoll);
+
+                return matchState;
+            }
+            catch (UnauthorizedAccessException accessException)
+            {
+                ApplicationLogger.LogWarning("The opening roll was denied. Reason: {0}", accessException.Message);
+
+                throw CreateMatchFault(ErrorCodes.AccessDenied);
+            }
+            catch (KeyNotFoundException matchException)
+            {
+                ApplicationLogger.LogWarning("The opening roll match is unavailable. Reason: {0}",
+                    matchException.Message);
+
+                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
+            }
+            catch (ArgumentException rollException)
+            {
+                ApplicationLogger.LogWarning("The opening roll was invalid. Reason: {0}", rollException.Message);
+
+                throw CreateMatchFault(ErrorCodes.InvalidInput);
+            }
+            catch (CryptographicException generationException)
+            {
+                ApplicationLogger.LogError(generationException, "The opening die could not be generated.");
+
+                throw CreateMatchFault(ErrorCodes.ServiceUnavailable);
+            }
+        }
+
         private PlayerSession GetPlayerSession(string sessionId)
         {
             try
@@ -182,6 +220,25 @@ namespace Backgammon.Server.Services
             {
                 activeMatch.StopCountdown();
             }
+        }
+
+        private MatchState RollPlayerOpeningDie(PlayerSession playerSession, PlayerOpeningRoll playerRoll)
+        {
+            if (playerRoll == null)
+            {
+                throw new ArgumentNullException(nameof(playerRoll));
+            }
+
+            var player = new MatchPlayer(
+                playerSession.PlayerId,
+                playerRoll.RoomId,
+                playerRoll.MatchId);
+
+            MatchState matchState = MatchManager.RollOpeningDie(player, playerRoll.RoundNumber);
+
+            UpdatePlayers(player, matchState);
+
+            return matchState;
         }
 
         private FaultException<MatchFault> CreateMatchFault(string errorCode)
