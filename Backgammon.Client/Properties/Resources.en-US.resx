@@ -671,4 +671,40 @@ c) Move four checkers 6 points each.
   <data name="Message_MatchStarting" xml:space="preserve">
     <value>The match will start in</value>
   </data>
+  <data name="Title_OpeningRoll" xml:space="preserve">
+    <value>Opening roll</value>
+  </data>
+  <data name="Label_OpeningRollHost" xml:space="preserve">
+    <value>Host</value>
+  </data>
+  <data name="Label_OpeningRollGuest" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+  <data name="Button_RollDie" xml:space="preserve">
+    <value>Roll die</value>
+  </data>
+  <data name="Button_Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Message_OpeningRollReady" xml:space="preserve">
+    <value>Each player must roll one die.</value>
+  </data>
+  <data name="Message_OpeningRollRolling" xml:space="preserve">
+    <value>Rolling die…</value>
+  </data>
+  <data name="Message_OpeningRollWaiting" xml:space="preserve">
+    <value>Waiting for the other player to roll…</value>
+  </data>
+  <data name="Message_OpeningRollTie" xml:space="preserve">
+    <value>Tie. Both players must roll again.</value>
+  </data>
+  <data name="Message_OpeningRollYouStart" xml:space="preserve">
+    <value>You go first.</value>
+  </data>
+  <data name="Message_OpeningRollOpponentStarts" xml:space="preserve">
+    <value>The other player goes first.</value>
+  </data>
+  <data name="Message_OpeningRollError" xml:space="preserve">
+    <value>The roll could not be completed. Please try again.</value>
+  </data>
 </root>

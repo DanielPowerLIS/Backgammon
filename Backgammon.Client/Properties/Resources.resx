@@ -665,10 +665,46 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Message_SocialLinkUpdateError" xml:space="preserve">
     <value>No se pudo actualizar el enlace de la red social. Inténtalo nuevamente.</value>
   </data>
-    <data name="Message_MatchWaitingForPlayers" xml:space="preserve">
+  <data name="Message_MatchWaitingForPlayers" xml:space="preserve">
     <value>Esperando al otro jugador…</value>
   </data>
-    <data name="Message_MatchStarting" xml:space="preserve">
+  <data name="Message_MatchStarting" xml:space="preserve">
     <value>La partida comenzará en</value>
+  </data>
+  <data name="Title_OpeningRoll" xml:space="preserve">
+    <value>Tirada inicial</value>
+  </data>
+  <data name="Label_OpeningRollHost" xml:space="preserve">
+    <value>Anfitrión</value>
+  </data>
+  <data name="Label_OpeningRollGuest" xml:space="preserve">
+    <value>Invitado</value>
+  </data>
+  <data name="Button_RollDie" xml:space="preserve">
+    <value>Tirar dado</value>
+  </data>
+  <data name="Button_Continue" xml:space="preserve">
+    <value>Continuar</value>
+  </data>
+  <data name="Message_OpeningRollReady" xml:space="preserve">
+    <value>Cada jugador debe tirar un dado.</value>
+  </data>
+  <data name="Message_OpeningRollRolling" xml:space="preserve">
+    <value>Tirando dado…</value>
+  </data>
+  <data name="Message_OpeningRollWaiting" xml:space="preserve">
+    <value>Esperando la tirada del otro jugador…</value>
+  </data>
+  <data name="Message_OpeningRollTie" xml:space="preserve">
+    <value>Empate. Ambos deben volver a tirar.</value>
+  </data>
+  <data name="Message_OpeningRollYouStart" xml:space="preserve">
+    <value>Comienzas tú.</value>
+  </data>
+  <data name="Message_OpeningRollOpponentStarts" xml:space="preserve">
+    <value>Comienza el otro jugador.</value>
+  </data>
+  <data name="Message_OpeningRollError" xml:space="preserve">
+    <value>No se pudo completar la tirada. Intenta nuevamente.</value>
   </data>
 </root>
