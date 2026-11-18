@@ -1,13 +1,13 @@
+using Backgammon.Server.Services.Data;
+using Backgammon.Server.SupportServices;
+using Backgammon.Server.SupportServices.ExceptionCode;
+using Backgammon.Server.SupportServices.Logging;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.ServiceModel;
 using System.Threading;
-
-using Backgammon.Server.Services.Data;
-using Backgammon.Server.SupportServices.ExceptionCode;
-using Backgammon.Server.SupportServices;
-using Backgammon.Server.SupportServices.Logging;
 
 namespace Backgammon.Server.Services.Manager
 {
@@ -123,14 +123,23 @@ namespace Backgammon.Server.Services.Manager
 
         private PlayerSession FindSavedSession(string sessionId)
         {
-            bool sessionFound = ActiveSessions.TryGetValue(sessionId, out PlayerSession storedSession);
-
-            if (!sessionFound || storedSession == null)
+            try
             {
-                throw new UnauthorizedAccessException();
-            }
+                PlayerSession storedSession = ActiveSessions[sessionId];
 
-            return storedSession;
+                if (storedSession == null)
+                {
+                    throw new UnauthorizedAccessException();
+                }
+
+                return storedSession;
+            }
+            catch (KeyNotFoundException sessionException)
+            {
+                ApplicationLogger.LogWarning("The session is unavailable. Reason: {0}", sessionException.Message);
+
+                throw new UnauthorizedAccessException("The session is unavailable.", sessionException);
+            }
         }
 
         private void SaveSession(PlayerSession playerSession)
@@ -170,7 +179,9 @@ namespace Backgammon.Server.Services.Manager
 
         private bool RemoveSavedSession(string sessionId)
         {
-            bool sessionRemoved = ActiveSessions.TryRemove(sessionId, out _);
+            IDictionary<string, PlayerSession> sessions = ActiveSessions;
+
+            bool sessionRemoved = sessions.Remove(sessionId);
 
             return sessionRemoved;
         }
@@ -220,8 +231,7 @@ namespace Backgammon.Server.Services.Manager
         {
             byte[] sessionToken = new byte[SessionTokenLength];
 
-            using (RandomNumberGenerator tokenGenerator =
-                RandomNumberGenerator.Create())
+            using (RandomNumberGenerator tokenGenerator = RandomNumberGenerator.Create())
             {
                 tokenGenerator.GetBytes(sessionToken);
             }
@@ -239,8 +249,7 @@ namespace Backgammon.Server.Services.Manager
                 ErrorCode = errorCode
             };
 
-            var faultException =
-                new FaultException<PlayerProfileFault>(profileFault);
+            var faultException = new FaultException<PlayerProfileFault>(profileFault);
 
             return faultException;
         }

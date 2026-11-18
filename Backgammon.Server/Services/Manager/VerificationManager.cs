@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.ServiceModel;
 
 using Backgammon.Server.Services.Data;
-using Backgammon.Server.SupportServices.ExceptionCode;
 using Backgammon.Server.SupportServices;
+using Backgammon.Server.SupportServices.ExceptionCode;
 using Backgammon.Server.SupportServices.Logging;
 
 namespace Backgammon.Server.Services.Manager
@@ -103,7 +104,9 @@ namespace Backgammon.Server.Services.Manager
 
         private bool RemoveRequest(string requestId)
         {
-            bool requestRemoved = PendingRequests.TryRemove(requestId, out _);
+            IDictionary<string, VerificationRequest> requests = PendingRequests;
+
+            bool requestRemoved = requests.Remove(requestId);
 
             return requestRemoved;
         }
@@ -162,17 +165,26 @@ namespace Backgammon.Server.Services.Manager
                 throw CreateVerificationFault(ErrorCodes.RequestNotFound);
             }
 
-            bool requestFound = PendingRequests.TryGetValue(requestId, out VerificationRequest request);
-
-            if (!requestFound || request == null)
+            try
             {
-                ApplicationLogger.LogWarning(
-                    "The verification request was not found or has already been removed.");
+                VerificationRequest request = PendingRequests[requestId];
+
+                if (request == null)
+                {
+                    ApplicationLogger.LogWarning("The verification request is unavailable.");
+
+                    throw CreateVerificationFault(ErrorCodes.RequestNotFound);
+                }
+
+                return request;
+            }
+            catch (KeyNotFoundException verificationException)
+            {
+                ApplicationLogger.LogWarning("The verification request was not found. Reason: {0}",
+                    verificationException.Message);
 
                 throw CreateVerificationFault(ErrorCodes.RequestNotFound);
             }
-
-            return request;
         }
 
         private FaultException<VerificationFault> CreateVerificationFault(string errorCode)

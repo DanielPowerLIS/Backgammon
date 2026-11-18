@@ -353,11 +353,33 @@ namespace Backgammon.Server.Services.Manager
 
         internal static bool RemoveMatch(string roomId)
         {
-            bool removedMatch = ActiveMatches.TryRemove(roomId, out ActiveMatch activeMatch);
+            bool removedMatch = false;
 
-            if (removedMatch)
+            try
             {
-                activeMatch.StopCountdown();
+                ActiveMatch activeMatch = ActiveMatches[roomId];
+
+                lock (activeMatch.Queue)
+                {
+                    ActiveMatch savedMatch = ActiveMatches[roomId];
+
+                    if (ReferenceEquals(savedMatch, activeMatch))
+                    {
+                        IDictionary<string, ActiveMatch> matches = ActiveMatches;
+
+                        removedMatch = matches.Remove(roomId);
+                    }
+                }
+
+                if (removedMatch)
+                {
+                    activeMatch.StopCountdown();
+                }
+            }
+            catch (KeyNotFoundException matchException)
+            {
+                ApplicationLogger.LogWarning("The match was unavailable during removal. Reason: {0}",
+                    matchException.Message);
             }
 
             return removedMatch;
@@ -410,9 +432,9 @@ namespace Backgammon.Server.Services.Manager
                 throw new ArgumentException(MatchIdentifiersRequired, nameof(roomId));
             }
 
-            bool matchFound = ActiveMatches.TryGetValue(roomId, out ActiveMatch activeMatch);
+            ActiveMatch activeMatch = ActiveMatches[roomId];
 
-            if (!matchFound || activeMatch == null)
+            if (activeMatch == null)
             {
                 throw new KeyNotFoundException(MatchUnavailable);
             }
