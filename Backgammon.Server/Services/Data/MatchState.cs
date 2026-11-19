@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Backgammon.Server.Domain;
+using System;
 using System.Runtime.Serialization;
 
 namespace Backgammon.Server.Services.Data
@@ -16,6 +17,7 @@ namespace Backgammon.Server.Services.Data
             ServerTimeUtc = DateTime.UtcNow;
             OpeningRoll = new MatchOpeningRollState();
             CurrentPlayerId = 0;
+            Dice = new MatchDiceState();
         }
 
         [DataMember]
@@ -44,5 +46,8 @@ namespace Backgammon.Server.Services.Data
 
         [DataMember]
         public int CurrentPlayerId { get; set; }
+
+        [DataMember]
+        public MatchDiceState Dice { get; set; }
     }
 }

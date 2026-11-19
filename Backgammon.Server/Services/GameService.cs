@@ -138,6 +138,42 @@ namespace Backgammon.Server.Services
             }
         }
 
+        public MatchState RollDice(string sessionId, PlayerDiceRoll playerRoll)
+        {
+            PlayerSession playerSession = GetPlayerSession(sessionId);
+
+            try
+            {
+                MatchState matchState = RollPlayerDice(playerSession, playerRoll);
+
+                return matchState;
+            }
+            catch (UnauthorizedAccessException accessException)
+            {
+                ApplicationLogger.LogWarning("The turn roll was denied. Reason: {0}", accessException.Message);
+
+                throw CreateMatchFault(ErrorCodes.AccessDenied);
+            }
+            catch (KeyNotFoundException matchException)
+            {
+                ApplicationLogger.LogWarning("The turn roll match is unavailable. Reason: {0}", matchException.Message);
+
+                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
+            }
+            catch (ArgumentException rollException)
+            {
+                ApplicationLogger.LogWarning("The turn roll was invalid. Reason: {0}", rollException.Message);
+
+                throw CreateMatchFault(ErrorCodes.InvalidInput);
+            }
+            catch (CryptographicException generationException)
+            {
+                ApplicationLogger.LogError(generationException, "The turn dice could not be generated.");
+
+                throw CreateMatchFault(ErrorCodes.ServiceUnavailable);
+            }
+        }
+
         private PlayerSession GetPlayerSession(string sessionId)
         {
             try
@@ -235,6 +271,25 @@ namespace Backgammon.Server.Services
                 playerRoll.MatchId);
 
             MatchState matchState = MatchManager.RollOpeningDie(player, playerRoll.RoundNumber);
+
+            UpdatePlayers(player, matchState);
+
+            return matchState;
+        }
+
+        private MatchState RollPlayerDice(PlayerSession playerSession, PlayerDiceRoll playerRoll)
+        {
+            if (playerRoll == null)
+            {
+                throw new ArgumentNullException(nameof(playerRoll));
+            }
+
+            var player = new MatchPlayer(
+                playerSession.PlayerId,
+                playerRoll.RoomId,
+                playerRoll.MatchId);
+
+            MatchState matchState = MatchManager.RollDice(player, playerRoll.ExpectedVersion);
 
             UpdatePlayers(player, matchState);
 

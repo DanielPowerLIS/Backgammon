@@ -42,6 +42,15 @@
   <wsdl:message name="IGameService_RollOpeningDie_MatchFaultFault_FaultMessage">
     <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q3:MatchFault" />
   </wsdl:message>
+  <wsdl:message name="IGameService_RollDice_InputMessage">
+    <wsdl:part name="parameters" element="tns:RollDice" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_RollDice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RollDiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_RollDice_MatchFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q4:MatchFault" />
+  </wsdl:message>
   <wsdl:message name="IGameService_OnMatchStateUpdated_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnMatchStateUpdated" />
   </wsdl:message>
@@ -60,6 +69,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/RollOpeningDie" message="tns:IGameService_RollOpeningDie_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/RollOpeningDieResponse" message="tns:IGameService_RollOpeningDie_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/RollOpeningDieMatchFaultFault" name="MatchFaultFault" message="tns:IGameService_RollOpeningDie_MatchFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RollDice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/RollDice" message="tns:IGameService_RollDice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/RollDiceResponse" message="tns:IGameService_RollDice_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/RollDiceMatchFaultFault" name="MatchFaultFault" message="tns:IGameService_RollDice_MatchFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="OnMatchStateUpdated">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/OnMatchStateUpdated" message="tns:IGameService_OnMatchStateUpdated_OutputCallbackMessage" />
@@ -94,6 +108,18 @@
     </wsdl:operation>
     <wsdl:operation name="RollOpeningDie">
       <soap12:operation soapAction="http://tempuri.org/IGameService/RollOpeningDie" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="MatchFaultFault">
+        <soap12:fault use="literal" name="MatchFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RollDice">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/RollDice" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

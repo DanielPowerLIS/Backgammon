@@ -31,14 +31,14 @@ namespace Backgammon.Server.Services.Manager
         private static readonly string OpeningDieAlreadyRolled = "The player has already rolled in this round.";
 
 
-        public static MatchSession CreateMatch(int requestPlayerId, string roomId)
+        public static MatchSession CreateMatch(int PlayerId, string roomId)
         {
             LobbySession lobbySession = LobbyManager.FindSavedLobbySession(roomId);
             MatchSession matchCopy;
 
             lock (lobbySession.Queue)
             {
-                LobbyManager.ValidateHostMatch(requestPlayerId, lobbySession);
+                LobbyManager.ValidateHostMatch(PlayerId, lobbySession);
                 Lobby lobby = lobbySession.RoomData;
 
                 if (!lobby.IsFull)
@@ -351,6 +351,30 @@ namespace Backgammon.Server.Services.Manager
             return stateCopy;
         }
 
+        public static MatchState RollDice(MatchPlayer player, long expectedVersion)
+        {
+            if (player == null)
+            {
+                throw new ArgumentNullException(nameof(player));
+            }
+
+            ActiveMatch activeMatch = FindSavedActiveMatch(player.RoomId);
+
+            lock (activeMatch.Queue)
+            {
+                ValidateMatchPlayer(activeMatch, player);
+                ValidateMatchVersion(activeMatch.State, expectedVersion);
+
+                MatchTurn.RollDice(activeMatch.State, player.PlayerId);
+
+                activeMatch.State.Version++;
+
+                MatchState stateCopy = MatchStateFactory.Copy(activeMatch.State);
+
+                return stateCopy;
+            }
+        }
+
         internal static bool RemoveMatch(string roomId)
         {
             bool removedMatch = false;
@@ -596,6 +620,14 @@ namespace Backgammon.Server.Services.Manager
 
             activeMatch.State.CurrentPlayerId = currentPlayerId;
             activeMatch.State.Phase = MatchPhase.WaitingForRoll;
+        }
+
+        private static void ValidateMatchVersion(MatchState matchState, long expectedVersion)
+        {
+            if (matchState.Version != expectedVersion)
+            {
+                throw new ArgumentException("The match state is outdated.", nameof(expectedVersion));
+            }
         }
     }
 }

@@ -99,6 +99,24 @@ namespace Backgammon.Client.Controllers.Game
             ApplyMatchState(matchState);
         }
 
+        public async Task RollDiceAsync()
+        {
+            string sessionId = PlayerSessionContext.GetSession().SessionId;
+
+            MatchState currentState = CurrentState;
+
+            var playerRoll = new PlayerDiceRoll
+            {
+                RoomId = _roomId,
+                MatchId = _matchId,
+                ExpectedVersion = currentState.Version
+            };
+
+            MatchState matchState = await _gameClient.RollDiceAsync(sessionId, playerRoll);
+
+            ApplyMatchState(matchState);
+        }
+
         public void CloseConnection()
         {
             lock (_queue)

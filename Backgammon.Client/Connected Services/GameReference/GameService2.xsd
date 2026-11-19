@@ -5,6 +5,7 @@
       <xs:element minOccurs="0" name="Board" nillable="true" type="tns:MatchBoardState" />
       <xs:element minOccurs="0" name="CountdownEndsAtUtc" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CurrentPlayerId" type="xs:int" />
+      <xs:element minOccurs="0" name="Dice" nillable="true" type="tns:MatchDiceState" />
       <xs:element minOccurs="0" name="MatchId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OpeningRoll" nillable="true" type="tns:MatchOpeningRollState" />
       <xs:element minOccurs="0" name="Phase" type="tns:MatchPhase" />
@@ -46,6 +47,15 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="CheckerColor" nillable="true" type="tns:CheckerColor" />
+  <xs:complexType name="MatchDiceState">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FirstDieRemainingUses" type="xs:int" />
+      <xs:element minOccurs="0" name="FirstDieValue" type="xs:int" />
+      <xs:element minOccurs="0" name="SecondDieRemainingUses" type="xs:int" />
+      <xs:element minOccurs="0" name="SecondDieValue" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchDiceState" nillable="true" type="tns:MatchDiceState" />
   <xs:complexType name="MatchOpeningRollState">
     <xs:sequence>
       <xs:element minOccurs="0" name="GuestDieValue" type="xs:int" />
@@ -79,4 +89,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerOpeningRoll" nillable="true" type="tns:PlayerOpeningRoll" />
+  <xs:complexType name="PlayerDiceRoll">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExpectedVersion" type="xs:long" />
+      <xs:element minOccurs="0" name="MatchId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RoomId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerDiceRoll" nillable="true" type="tns:PlayerDiceRoll" />
 </xs:schema>

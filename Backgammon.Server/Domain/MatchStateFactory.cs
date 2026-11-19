@@ -44,7 +44,8 @@ namespace Backgammon.Server.Domain
                 Version = matchState.Version,
                 CountdownEndsAtUtc = matchState.CountdownEndsAtUtc,
                 ServerTimeUtc = DateTime.UtcNow,
-                CurrentPlayerId = matchState.CurrentPlayerId
+                CurrentPlayerId = matchState.CurrentPlayerId,
+                Dice = CopyDice(matchState.Dice)
             };
 
             return stateCopy;
@@ -95,6 +96,24 @@ namespace Backgammon.Server.Domain
             };
 
             return openingRollCopy;
+        }
+
+        private static MatchDiceState CopyDice(MatchDiceState diceState)
+        {
+            if (diceState == null)
+            {
+                throw new ArgumentNullException(nameof(diceState));
+            }
+
+            var diceCopy = new MatchDiceState
+            {
+                FirstDieValue = diceState.FirstDieValue,
+                SecondDieValue = diceState.SecondDieValue,
+                FirstDieRemainingUses = diceState.FirstDieRemainingUses,
+                SecondDieRemainingUses = diceState.SecondDieRemainingUses
+            };
+
+            return diceCopy;
         }
     }
 }
