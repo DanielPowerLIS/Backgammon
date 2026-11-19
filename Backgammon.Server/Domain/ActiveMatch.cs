@@ -9,21 +9,11 @@ namespace Backgammon.Server.Domain
 {
     internal class ActiveMatch
     {
-        public ActiveMatch(MatchSession matchSession)
-        {
-            if (matchSession == null)
-            {
-                throw new ArgumentNullException(nameof(matchSession));
-            }
-
-            Session = matchSession;
-            State = MatchStateFactory.CreateInitial(matchSession);
-            Queue = new Entrance();
-        }
-
         public MatchSession Session { get; }
 
         public MatchState State { get; }
+
+        public MatchPreparation Preparation { get; }
 
         public Entrance Queue { get; }
 
@@ -36,6 +26,19 @@ namespace Backgammon.Server.Domain
         public IGameCallback GuestCallback { get; set; }
 
         public Timer CountdownTimer { get; set; }
+
+        public ActiveMatch(MatchSession matchSession)
+        {
+            if (matchSession == null)
+            {
+                throw new ArgumentNullException(nameof(matchSession));
+            }
+
+            Session = matchSession;
+            State = MatchStateFactory.CreateInitial(matchSession);
+            Preparation = MatchPreparationFactory.CreateInitial(matchSession);
+            Queue = new Entrance();
+        }
 
         public void StopCountdown()
         {

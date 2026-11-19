@@ -35,6 +35,10 @@ namespace Backgammon.Client.Views.Game
         private static readonly int SecondDieIndex = 2;
         private static readonly int NoDieUses = 0;
         private static readonly int NoPointSelected = -1;
+        private const long UnrenderedVersion = 0;
+
+        private bool _isPreparationLoaded;
+        private long _renderedPreparationVersion;
 
         private int _selectedSourcePointNumber;
         private bool _isMovingChecker;
@@ -61,6 +65,8 @@ namespace Backgammon.Client.Views.Game
 
             _isMovingChecker = false;
             _renderedState = null;
+            _isPreparationLoaded = false;
+            _renderedPreparationVersion = UnrenderedVersion;
         }
 
         private async void OnPageLoaded(object sender, RoutedEventArgs routedEventArgs)
@@ -76,11 +82,14 @@ namespace Backgammon.Client.Views.Game
             SetMovingChecker(false);
             turnDiceControlGame.IsEnabled = false;
             turnDiceControlGame.SetRolling(false);
+            _isPreparationLoaded = false;
+            _renderedPreparationVersion = UnrenderedVersion;
 
             var gameController = new GameController(CurrentMatch);
             _gameController = gameController;
 
             gameController.MatchStateUpdated += OnMatchStateUpdated;
+            gameController.MatchPreparationUpdated += OnMatchPreparationUpdated;
 
             try
             {
@@ -121,6 +130,16 @@ namespace Backgammon.Client.Views.Game
             _isStateLoaded = true;
             RefreshBoard();
 
+            await gameController.LoadMatchPreparationAsync();
+
+            if (!IsLoaded || !ReferenceEquals(_gameController, gameController))
+            {
+                return;
+            }
+
+            _isPreparationLoaded = true;
+            RefreshPreparation();
+
             await gameController.RegisterPlayerReadyAsync();
 
             if (!IsLoaded || !ReferenceEquals(_gameController, gameController))
@@ -129,7 +148,7 @@ namespace Backgammon.Client.Views.Game
             }
 
             _isPlayerReady = true;
-            UpdateOpeningRollDialog(gameController.CurrentState);
+            RefreshPreparation();
         }
 
         private async void OnPageUnloaded(object sender, RoutedEventArgs routedEventArgs)
@@ -141,6 +160,7 @@ namespace Backgammon.Client.Views.Game
 
             GameController gameController = _gameController;
 
+            _isPreparationLoaded = false;
             _gameController = null;
             _isStateLoaded = false;
             _renderedState = null;
@@ -154,6 +174,7 @@ namespace Backgammon.Client.Views.Game
             }
 
             gameController.MatchStateUpdated -= OnMatchStateUpdated;
+            gameController.MatchPreparationUpdated -= OnMatchPreparationUpdated;
 
             try
             {
@@ -169,6 +190,47 @@ namespace Backgammon.Client.Views.Game
                 ApplicationLogger.LogError(timeoutException,
                     "Closing the game connection exceeded the time limit.");
             }
+        }
+
+        private async void OnMatchPreparationUpdated()
+        {
+            if (!Dispatcher.CheckAccess())
+            {
+                var refreshAction = new Action(RefreshPreparation);
+
+                try
+                {
+                    await Dispatcher.InvokeAsync(refreshAction);
+                }
+                catch (TaskCanceledException canceledException)
+                {
+                    ApplicationLogger.LogDebug("The preparation display update was canceled. Reason: {0}",
+                        canceledException.Message);
+                }
+
+                return;
+            }
+
+            RefreshPreparation();
+        }
+
+        private void RefreshPreparation()
+        {
+            if (!IsLoaded || !_isPreparationLoaded || _gameController == null)
+            {
+                return;
+            }
+
+            MatchPreparation preparation = _gameController.CurrentPreparation;
+
+            if (preparation.Version > _renderedPreparationVersion)
+            {
+                _renderedPreparationVersion = preparation.Version;
+
+                UpdateMatchAnnouncement(preparation);
+            }
+
+            UpdateOpeningRollDialog(preparation);
         }
 
         private async void OnMatchStateUpdated()
@@ -218,13 +280,11 @@ namespace Backgammon.Client.Views.Game
 
             UpdateTurnDice(matchState);
             UpdateCheckerHighlights();
-            UpdateMatchAnnouncement(matchState);
-            UpdateOpeningRollDialog(matchState);
         }
 
-        private void UpdateMatchAnnouncement(MatchState matchState)
+        private void UpdateMatchAnnouncement(MatchPreparation preparation)
         {
-            if (matchState.Phase == MatchPhase.WaitingForPlayers)
+            if (preparation.Phase == MatchPhase.WaitingForPlayers)
             {
                 MatchStartControl startControl = GetMatchStartControl();
 
@@ -233,11 +293,11 @@ namespace Backgammon.Client.Views.Game
                 return;
             }
 
-            if (matchState.Phase == MatchPhase.StartingCountdown)
+            if (preparation.Phase == MatchPhase.StartingCountdown)
             {
                 MatchStartControl startControl = GetMatchStartControl();
 
-                TimeSpan duration = matchState.CountdownEndsAtUtc - matchState.ServerTimeUtc;
+                TimeSpan duration = preparation.CountdownEndsAtUtc - preparation.ServerTimeUtc;
 
                 startControl.StartCountdown(Properties.Resources.Message_MatchStarting, duration);
 
@@ -272,23 +332,24 @@ namespace Backgammon.Client.Views.Game
             _matchStartControl = null;
         }
 
-        private void UpdateOpeningRollDialog(MatchState matchState)
+        private void UpdateOpeningRollDialog(MatchPreparation preparation)
         {
             if (_openingRollDialog != null)
             {
-                _openingRollDialog.ApplyMatchState(matchState);
+                _openingRollDialog.ApplyMatchPreparation(preparation);
+
                 return;
             }
 
-            if (!_isPlayerReady || matchState.Phase != MatchPhase.OpeningRoll)
+            if (!_isPlayerReady || preparation.Phase != MatchPhase.OpeningRoll)
             {
                 return;
             }
 
-            ShowOpeningRollDialog(matchState);
+            ShowOpeningRollDialog(preparation);
         }
 
-        private void ShowOpeningRollDialog(MatchState matchState)
+        private void ShowOpeningRollDialog(MatchPreparation preparation)
         {
             int playerId = PlayerSessionContext.GetSession().PlayerId;
             bool isHost = CurrentMatch.PlayerHostId == playerId;
@@ -298,7 +359,7 @@ namespace Backgammon.Client.Views.Game
 
             diceDialog.Owner = Window.GetWindow(this);
             diceDialog.RollSelected += OnOpeningRollSelected;
-            diceDialog.ApplyMatchState(matchState);
+            diceDialog.ApplyMatchPreparation(preparation);
 
             try
             {

@@ -60,8 +60,20 @@
   <wsdl:message name="IGameService_MoveChecker_MatchFaultFault_FaultMessage">
     <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q5:MatchFault" />
   </wsdl:message>
+  <wsdl:message name="IGameService_GetMatchPreparation_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMatchPreparation" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_GetMatchPreparation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMatchPreparationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_GetMatchPreparation_MatchFaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q6:MatchFault" />
+  </wsdl:message>
   <wsdl:message name="IGameService_OnMatchStateUpdated_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnMatchStateUpdated" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_OnMatchPreparationUpdated_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:OnMatchPreparationUpdated" />
   </wsdl:message>
   <wsdl:portType name="IGameService">
     <wsdl:operation name="GetMatchState">
@@ -89,8 +101,16 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/MoveCheckerResponse" message="tns:IGameService_MoveChecker_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/MoveCheckerMatchFaultFault" name="MatchFaultFault" message="tns:IGameService_MoveChecker_MatchFaultFault_FaultMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetMatchPreparation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/GetMatchPreparation" message="tns:IGameService_GetMatchPreparation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/GetMatchPreparationResponse" message="tns:IGameService_GetMatchPreparation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/GetMatchPreparationMatchFaultFault" name="MatchFaultFault" message="tns:IGameService_GetMatchPreparation_MatchFaultFault_FaultMessage" />
+    </wsdl:operation>
     <wsdl:operation name="OnMatchStateUpdated">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/OnMatchStateUpdated" message="tns:IGameService_OnMatchStateUpdated_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="OnMatchPreparationUpdated">
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/OnMatchPreparationUpdated" message="tns:IGameService_OnMatchPreparationUpdated_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IGameService" type="tns:IGameService">
@@ -156,8 +176,26 @@
         <soap12:fault use="literal" name="MatchFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="GetMatchPreparation">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/GetMatchPreparation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="MatchFaultFault">
+        <soap12:fault use="literal" name="MatchFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="OnMatchStateUpdated">
       <soap12:operation soapAction="http://tempuri.org/IGameService/OnMatchStateUpdated" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OnMatchPreparationUpdated">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/OnMatchPreparationUpdated" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

@@ -1,5 +1,4 @@
-﻿using Backgammon.Server.Domain;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace Backgammon.Server.Services.Data
@@ -7,19 +6,7 @@ namespace Backgammon.Server.Services.Data
     [DataContract]
     public class MatchState
     {
-        public MatchState()
-        {
-            MatchId = string.Empty;
-            RoomId = string.Empty;
-            Phase = MatchPhase.WaitingForPlayers;
-            Board = new MatchBoardState();
-            CountdownEndsAtUtc = DateTime.MinValue;
-            ServerTimeUtc = DateTime.UtcNow;
-            OpeningRoll = new MatchOpeningRollState();
-            CurrentPlayerId = 0;
-            Dice = new MatchDiceState();
-            AvailableMoves = new CheckerMove[0];
-        }
+        private const int UnassignedPlayerId = 0;
 
         [DataMember]
         public string MatchId { get; set; }
@@ -37,15 +24,6 @@ namespace Backgammon.Server.Services.Data
         public long Version { get; set; }
 
         [DataMember]
-        public DateTime CountdownEndsAtUtc { get; set; }
-
-        [DataMember]
-        public DateTime ServerTimeUtc { get; set; }
-
-        [DataMember]
-        public MatchOpeningRollState OpeningRoll { get; set; }
-
-        [DataMember]
         public int CurrentPlayerId { get; set; }
 
         [DataMember]
@@ -53,5 +31,16 @@ namespace Backgammon.Server.Services.Data
 
         [DataMember]
         public CheckerMove[] AvailableMoves { get; set; }
+
+        public MatchState()
+        {
+            MatchId = string.Empty;
+            RoomId = string.Empty;
+            Phase = MatchPhase.WaitingForPlayers;
+            Board = new MatchBoardState();
+            CurrentPlayerId = UnassignedPlayerId;
+            Dice = new MatchDiceState();
+            AvailableMoves = Array.Empty<CheckerMove>();
+        }
     }
 }

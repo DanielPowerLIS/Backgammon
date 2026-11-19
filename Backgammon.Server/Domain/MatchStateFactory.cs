@@ -40,10 +40,7 @@ namespace Backgammon.Server.Domain
                 RoomId = matchState.RoomId,
                 Phase = matchState.Phase,
                 Board = CopyBoard(matchState.Board),
-                OpeningRoll = CopyOpeningRoll(matchState.OpeningRoll),
                 Version = matchState.Version,
-                CountdownEndsAtUtc = matchState.CountdownEndsAtUtc,
-                ServerTimeUtc = DateTime.UtcNow,
                 CurrentPlayerId = matchState.CurrentPlayerId,
                 Dice = CopyDice(matchState.Dice),
                 AvailableMoves = CopyMoves(matchState.AvailableMoves)
@@ -80,23 +77,6 @@ namespace Backgammon.Server.Domain
             }
 
             return boardCopy;
-        }
-
-        private static MatchOpeningRollState CopyOpeningRoll(MatchOpeningRollState openingRollState)
-        {
-            if (openingRollState == null)
-            {
-                throw new ArgumentNullException(nameof(openingRollState));
-            }
-
-            var openingRollCopy = new MatchOpeningRollState
-            {
-                RoundNumber = openingRollState.RoundNumber,
-                HostDieValue = openingRollState.HostDieValue,
-                GuestDieValue = openingRollState.GuestDieValue
-            };
-
-            return openingRollCopy;
         }
 
         private static MatchDiceState CopyDice(MatchDiceState diceState)

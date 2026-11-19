@@ -57,30 +57,54 @@ namespace Backgammon.Server.Services
             }
         }
 
-        public MatchState RegisterPlayerReady(string sessionId, string roomId, string matchId)
+        public MatchPreparation GetMatchPreparation( string sessionId, string roomId, string matchId)
         {
             PlayerSession playerSession = GetPlayerSession(sessionId);
 
             try
             {
-                IGameCallback playerCallback = OperationContext.Current.GetCallbackChannel<IGameCallback>();
+                var player = new MatchPlayer(playerSession.PlayerId, roomId, matchId);
 
-                var request = new MatchPlayer(playerSession.PlayerId, roomId, matchId);
+                MatchPreparation preparation = MatchManager.GetMatchPreparation(player);
 
-                MatchState matchState = MatchManager.RegisterPlayerReady(request, playerCallback);
-
-                if (matchState.Phase == MatchPhase.StartingCountdown)
-                {
-                    MatchManager.StartCountdown(request, OnCountdownElapsed);
-                }
-
-                UpdatePlayers(request, matchState);
-
-                return matchState;
+                return preparation;
             }
             catch (UnauthorizedAccessException accessException)
             {
-                ApplicationLogger.LogWarning("The player was denied permission to register as ready. Reason: {0}",
+                ApplicationLogger.LogWarning("Access to the match preparation was denied. Reason: {0}",
+                    accessException.Message);
+
+                throw CreateMatchFault(ErrorCodes.AccessDenied);
+            }
+            catch (KeyNotFoundException matchException)
+            {
+                ApplicationLogger.LogWarning("The match preparation is unavailable. Reason: {0}",
+                    matchException.Message);
+
+                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
+            }
+            catch (ArgumentException preparationException)
+            {
+                ApplicationLogger.LogWarning("The match preparation query was invalid. Reason: {0}",
+                    preparationException.Message);
+
+                throw CreateMatchFault(ErrorCodes.InvalidRequest);
+            }
+        }
+
+        public MatchPreparation RegisterPlayerReady(string sessionId, string roomId, string matchId)
+        {
+            PlayerSession playerSession = GetPlayerSession(sessionId);
+
+            try
+            {
+                MatchPreparation preparation = RegisterReadyPlayer(playerSession, roomId, matchId);
+
+                return preparation;
+            }
+            catch (UnauthorizedAccessException accessException)
+            {
+                ApplicationLogger.LogWarning("The player readiness registration was denied. Reason: {0}",
                     accessException.Message);
 
                 throw CreateMatchFault(ErrorCodes.AccessDenied);
@@ -92,24 +116,24 @@ namespace Backgammon.Server.Services
 
                 throw CreateMatchFault(ErrorCodes.MatchUnavailable);
             }
-            catch (ArgumentException requestException)
+            catch (ArgumentException preparationException)
             {
-                ApplicationLogger.LogWarning("The player readiness request was invalid. Reason: {0}",
-                    requestException.Message);
+                ApplicationLogger.LogWarning("The player readiness registration was invalid. Reason: {0}",
+                    preparationException.Message);
 
                 throw CreateMatchFault(ErrorCodes.InvalidRequest);
             }
         }
 
-        public MatchState RollOpeningDie(string sessionId, PlayerOpeningRoll playerRoll)
+        public MatchPreparation RollOpeningDie(string sessionId, PlayerOpeningRoll playerRoll)
         {
             PlayerSession playerSession = GetPlayerSession(sessionId);
 
             try
             {
-                MatchState matchState = RollPlayerOpeningDie(playerSession, playerRoll);
+                MatchPreparation preparation = RollPlayerOpeningDie(playerSession, playerRoll);
 
-                return matchState;
+                return preparation;
             }
             catch (UnauthorizedAccessException accessException)
             {
@@ -233,6 +257,16 @@ namespace Backgammon.Server.Services
             }
         }
 
+        private void UpdatePlayers( MatchPlayer player, MatchPreparation preparation)
+        {
+            IGameCallback[] callbacks = MatchManager.GetGameCallbacks(player);
+
+            foreach (IGameCallback playerCallback in callbacks)
+            {
+                UpdatePlayer(playerCallback, preparation);
+            }
+        }
+
         private void UpdatePlayer(IGameCallback playerCallback, MatchState matchState)
         {
             try
@@ -256,32 +290,71 @@ namespace Backgammon.Server.Services
             }
         }
 
+        private void UpdatePlayer(IGameCallback playerCallback, MatchPreparation preparation)
+        {
+            try
+            {
+                playerCallback.OnMatchPreparationUpdated(preparation);
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(communicationException,
+                    "The match preparation could not be sent to a player.");
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(timeoutException,
+                    "Sending the match preparation exceeded the time limit.");
+            }
+            catch (ObjectDisposedException disposedException)
+            {
+                ApplicationLogger.LogError(disposedException,
+                    "The player's preparation callback is already disposed.");
+            }
+        }
+
+        private MatchPreparation RegisterReadyPlayer(PlayerSession playerSession, string roomId, string matchId)
+        {
+            IGameCallback playerCallback = OperationContext.Current.GetCallbackChannel<IGameCallback>();
+
+            var player = new MatchPlayer(playerSession.PlayerId, roomId, matchId);
+
+            MatchPreparation preparation = MatchManager.RegisterPlayerReady(player, playerCallback);
+
+            if (preparation.Phase == MatchPhase.StartingCountdown)
+            {
+                MatchManager.StartCountdown(player, OnCountdownElapsed);
+            }
+
+            UpdatePlayers(player, preparation);
+
+            return preparation;
+        }
+
         private void OnCountdownElapsed(object timerState)
         {
             var activeMatch = (ActiveMatch)timerState;
 
             try
             {
-                MatchState matchState = MatchManager.CompleteCountdown(activeMatch);
+                MatchPreparation preparation = MatchManager.CompleteCountdown(activeMatch);
 
-                var request = new MatchPlayer(
+                var player = new MatchPlayer(
                     activeMatch.Session.PlayerHostId,
                     activeMatch.Session.RoomId,
                     activeMatch.Session.MatchId);
 
-                UpdatePlayers(request, matchState);
+                UpdatePlayers(player, preparation);
             }
             catch (KeyNotFoundException matchException)
             {
-                ApplicationLogger.LogDebug("The countdown ended after the match became unavailable. " +
-                    "Reason: {0}",
+                ApplicationLogger.LogDebug("The countdown match is no longer available. Reason: {0}",
                     matchException.Message);
             }
             catch (Exception countdownException)
             {
                 ApplicationLogger.LogError(countdownException,
-                    "An unexpected failure prevented the countdown " +
-                    "from completing.");
+                    "An unexpected failure prevented the countdown from completing.");
             }
             finally
             {
@@ -289,23 +362,30 @@ namespace Backgammon.Server.Services
             }
         }
 
-        private MatchState RollPlayerOpeningDie(PlayerSession playerSession, PlayerOpeningRoll playerRoll)
+        private MatchPreparation RollPlayerOpeningDie(PlayerSession playerSession, PlayerOpeningRoll playerRoll)
         {
             if (playerRoll == null)
             {
                 throw new ArgumentNullException(nameof(playerRoll));
             }
 
-            var player = new MatchPlayer(
-                playerSession.PlayerId,
-                playerRoll.RoomId,
-                playerRoll.MatchId);
+            var player = new MatchPlayer(playerSession.PlayerId, playerRoll.RoomId, playerRoll.MatchId);
 
-            MatchState matchState = MatchManager.RollOpeningDie(player, playerRoll.RoundNumber);
+            MatchPreparation preparation = MatchManager.RollOpeningDie(player, playerRoll.RoundNumber);
 
-            UpdatePlayers(player, matchState);
+            UpdatePlayers(player, preparation);
 
-            return matchState;
+            if (preparation.Phase == MatchPhase.WaitingForRoll)
+            {
+                MatchState matchState = MatchManager.GetMatchState(
+                    playerSession.PlayerId,
+                    player.RoomId,
+                    player.MatchId);
+
+                UpdatePlayers(player, matchState);
+            }
+
+            return preparation;
         }
 
         private MatchState RollPlayerDice(PlayerSession playerSession, PlayerDiceRoll playerRoll)

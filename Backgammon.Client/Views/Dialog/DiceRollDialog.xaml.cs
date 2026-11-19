@@ -15,6 +15,7 @@ namespace Backgammon.Client.Views.Dialog
         private const int MaxDieValue = 6;
         private readonly int AnimationIntervalMilliseconds = 100;
         private readonly int AnimationDurationMilliseconds = 1000;
+        private const int UnrolledDieValue = 0;
         private readonly string PendingDieText = "—";
 
         private readonly bool _isHost;
@@ -52,26 +53,29 @@ namespace Backgammon.Client.Views.Dialog
 
         public event Action<int> RollSelected;
 
-        public void ApplyMatchState(MatchState matchState)
+        public void ApplyMatchPreparation(MatchPreparation preparation)
         {
-            if (matchState == null || matchState.OpeningRoll == null)
+            if (preparation == null || preparation.OpeningRoll == null)
             {
-                throw new ArgumentException("The opening roll state is required.", nameof(matchState));
+                throw new ArgumentException("The opening roll preparation is required.", nameof(preparation));
             }
 
-            if (matchState.Version <= _renderedVersion)
+            if (preparation.Version <= _renderedVersion)
             {
                 return;
             }
 
-            _renderedVersion = matchState.Version;
-            _isOpeningRoll = matchState.Phase == MatchPhase.OpeningRoll;
+            _renderedVersion = preparation.Version;
+            _isOpeningRoll = preparation.Phase == MatchPhase.OpeningRoll;
 
-            UpdateDiceValues(matchState.OpeningRoll);
+            UpdateDiceValues(preparation.OpeningRoll);
 
-            _isTie = _isOpeningRoll && _hostDieValue > 0 && _hostDieValue == _guestDieValue;
+            bool bothPlayersRolled = _hostDieValue > UnrolledDieValue && _guestDieValue > UnrolledDieValue;
 
-            _isComplete = !_isOpeningRoll && _hostDieValue > 0 && _guestDieValue > 0 && _hostDieValue != _guestDieValue;
+            _isTie = _isOpeningRoll && bothPlayersRolled && _hostDieValue == _guestDieValue;
+
+            _isComplete = preparation.Phase == MatchPhase.WaitingForRoll && bothPlayersRolled &&
+                _hostDieValue != _guestDieValue;
 
             UpdateDice();
             UpdateControls();

@@ -4,14 +4,11 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="AvailableMoves" nillable="true" type="tns:ArrayOfCheckerMove" />
       <xs:element minOccurs="0" name="Board" nillable="true" type="tns:MatchBoardState" />
-      <xs:element minOccurs="0" name="CountdownEndsAtUtc" type="xs:dateTime" />
       <xs:element minOccurs="0" name="CurrentPlayerId" type="xs:int" />
       <xs:element minOccurs="0" name="Dice" nillable="true" type="tns:MatchDiceState" />
       <xs:element minOccurs="0" name="MatchId" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="OpeningRoll" nillable="true" type="tns:MatchOpeningRollState" />
       <xs:element minOccurs="0" name="Phase" type="tns:MatchPhase" />
       <xs:element minOccurs="0" name="RoomId" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ServerTimeUtc" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Version" type="xs:long" />
     </xs:sequence>
   </xs:complexType>
@@ -72,14 +69,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MatchDiceState" nillable="true" type="tns:MatchDiceState" />
-  <xs:complexType name="MatchOpeningRollState">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="GuestDieValue" type="xs:int" />
-      <xs:element minOccurs="0" name="HostDieValue" type="xs:int" />
-      <xs:element minOccurs="0" name="RoundNumber" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="MatchOpeningRollState" nillable="true" type="tns:MatchOpeningRollState" />
   <xs:simpleType name="MatchPhase">
     <xs:restriction base="xs:string">
       <xs:enumeration value="WaitingForPlayers" />
@@ -97,6 +86,26 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MatchFault" nillable="true" type="tns:MatchFault" />
+  <xs:complexType name="MatchPreparation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CountdownEndsAtUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="MatchId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OpeningRoll" nillable="true" type="tns:MatchOpeningRollState" />
+      <xs:element minOccurs="0" name="Phase" type="tns:MatchPhase" />
+      <xs:element minOccurs="0" name="RoomId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ServerTimeUtc" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Version" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchPreparation" nillable="true" type="tns:MatchPreparation" />
+  <xs:complexType name="MatchOpeningRollState">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GuestDieValue" type="xs:int" />
+      <xs:element minOccurs="0" name="HostDieValue" type="xs:int" />
+      <xs:element minOccurs="0" name="RoundNumber" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchOpeningRollState" nillable="true" type="tns:MatchOpeningRollState" />
   <xs:complexType name="PlayerOpeningRoll">
     <xs:sequence>
       <xs:element minOccurs="0" name="MatchId" nillable="true" type="xs:string" />
