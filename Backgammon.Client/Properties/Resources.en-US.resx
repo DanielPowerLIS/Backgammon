@@ -707,4 +707,28 @@ c) Move four checkers 6 points each.
   <data name="Message_OpeningRollError" xml:space="preserve">
     <value>The roll could not be completed. Please try again.</value>
   </data>
+  <data name="Button_RollDice" xml:space="preserve">
+    <value>Roll dice</value>
+  </data>
+  <data name="Label_FirstDie" xml:space="preserve">
+    <value>First die</value>
+  </data>
+  <data name="Label_SecondDie" xml:space="preserve">
+    <value>Second die</value>
+  </data>
+  <data name="Label_DieUsesFormat" xml:space="preserve">
+    <value>x{0}</value>
+  </data>
+  <data name="Message_Doubles" xml:space="preserve">
+    <value>DOUBLES!</value>
+  </data>
+  <data name="Message_YourTurn" xml:space="preserve">
+    <value>Your turn</value>
+  </data>
+  <data name="Message_OpponentTurn" xml:space="preserve">
+    <value>Opponent's turn</value>
+  </data>
+  <data name="Message_TurnRollError" xml:space="preserve">
+    <value>The dice roll could not be completed.</value>
+  </data>
 </root>

@@ -707,4 +707,28 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Message_OpeningRollError" xml:space="preserve">
     <value>No se pudo completar la tirada. Intenta nuevamente.</value>
   </data>
+  <data name="Button_RollDice" xml:space="preserve">
+    <value>Tirar dados</value>
+  </data>
+  <data name="Label_FirstDie" xml:space="preserve">
+    <value>Primer dado</value>
+  </data>
+  <data name="Label_SecondDie" xml:space="preserve">
+    <value>Segundo dado</value>
+  </data>
+  <data name="Label_DieUsesFormat" xml:space="preserve">
+    <value>x{0}</value>
+  </data>
+  <data name="Message_Doubles" xml:space="preserve">
+    <value>¡PAR!</value>
+  </data>
+  <data name="Message_YourTurn" xml:space="preserve">
+    <value>Es tu turno</value>
+  </data>
+  <data name="Message_OpponentTurn" xml:space="preserve">
+    <value>Turno del rival</value>
+  </data>
+  <data name="Message_TurnRollError" xml:space="preserve">
+    <value>No se pudo completar la tirada de dados.</value>
+  </data>
 </root>

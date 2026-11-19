@@ -32,6 +32,9 @@ namespace Backgammon.Client.GameReference {
         private int CurrentPlayerIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Backgammon.Client.GameReference.MatchDiceState DiceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MatchIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -94,6 +97,19 @@ namespace Backgammon.Client.GameReference {
                 if ((this.CurrentPlayerIdField.Equals(value) != true)) {
                     this.CurrentPlayerIdField = value;
                     this.RaisePropertyChanged("CurrentPlayerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Backgammon.Client.GameReference.MatchDiceState Dice {
+            get {
+                return this.DiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DiceField, value) != true)) {
+                    this.DiceField = value;
+                    this.RaisePropertyChanged("Dice");
                 }
             }
         }
@@ -281,6 +297,99 @@ namespace Backgammon.Client.GameReference {
                 if ((object.ReferenceEquals(this.PointsField, value) != true)) {
                     this.PointsField = value;
                     this.RaisePropertyChanged("Points");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MatchDiceState", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class MatchDiceState : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FirstDieRemainingUsesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FirstDieValueField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SecondDieRemainingUsesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SecondDieValueField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FirstDieRemainingUses {
+            get {
+                return this.FirstDieRemainingUsesField;
+            }
+            set {
+                if ((this.FirstDieRemainingUsesField.Equals(value) != true)) {
+                    this.FirstDieRemainingUsesField = value;
+                    this.RaisePropertyChanged("FirstDieRemainingUses");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FirstDieValue {
+            get {
+                return this.FirstDieValueField;
+            }
+            set {
+                if ((this.FirstDieValueField.Equals(value) != true)) {
+                    this.FirstDieValueField = value;
+                    this.RaisePropertyChanged("FirstDieValue");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SecondDieRemainingUses {
+            get {
+                return this.SecondDieRemainingUsesField;
+            }
+            set {
+                if ((this.SecondDieRemainingUsesField.Equals(value) != true)) {
+                    this.SecondDieRemainingUsesField = value;
+                    this.RaisePropertyChanged("SecondDieRemainingUses");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SecondDieValue {
+            get {
+                return this.SecondDieValueField;
+            }
+            set {
+                if ((this.SecondDieValueField.Equals(value) != true)) {
+                    this.SecondDieValueField = value;
+                    this.RaisePropertyChanged("SecondDieValue");
                 }
             }
         }
@@ -608,6 +717,83 @@ namespace Backgammon.Client.GameReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerDiceRoll", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class PlayerDiceRoll : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long ExpectedVersionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MatchIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RoomIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ExpectedVersion {
+            get {
+                return this.ExpectedVersionField;
+            }
+            set {
+                if ((this.ExpectedVersionField.Equals(value) != true)) {
+                    this.ExpectedVersionField = value;
+                    this.RaisePropertyChanged("ExpectedVersion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string MatchId {
+            get {
+                return this.MatchIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MatchIdField, value) != true)) {
+                    this.MatchIdField = value;
+                    this.RaisePropertyChanged("MatchId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RoomId {
+            get {
+                return this.RoomIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RoomIdField, value) != true)) {
+                    this.RoomIdField = value;
+                    this.RaisePropertyChanged("RoomId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameReference.IGameService", CallbackContract=typeof(Backgammon.Client.GameReference.IGameServiceCallback))]
     public interface IGameService {
@@ -632,6 +818,13 @@ namespace Backgammon.Client.GameReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RollOpeningDie", ReplyAction="http://tempuri.org/IGameService/RollOpeningDieResponse")]
         System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> RollOpeningDieAsync(string sessionId, Backgammon.Client.GameReference.PlayerOpeningRoll playerRoll);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RollDice", ReplyAction="http://tempuri.org/IGameService/RollDiceResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/RollDiceMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        Backgammon.Client.GameReference.MatchState RollDice(string sessionId, Backgammon.Client.GameReference.PlayerDiceRoll playerRoll);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RollDice", ReplyAction="http://tempuri.org/IGameService/RollDiceResponse")]
+        System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> RollDiceAsync(string sessionId, Backgammon.Client.GameReference.PlayerDiceRoll playerRoll);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -691,6 +884,14 @@ namespace Backgammon.Client.GameReference {
         
         public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> RollOpeningDieAsync(string sessionId, Backgammon.Client.GameReference.PlayerOpeningRoll playerRoll) {
             return base.Channel.RollOpeningDieAsync(sessionId, playerRoll);
+        }
+        
+        public Backgammon.Client.GameReference.MatchState RollDice(string sessionId, Backgammon.Client.GameReference.PlayerDiceRoll playerRoll) {
+            return base.Channel.RollDice(sessionId, playerRoll);
+        }
+        
+        public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> RollDiceAsync(string sessionId, Backgammon.Client.GameReference.PlayerDiceRoll playerRoll) {
+            return base.Channel.RollDiceAsync(sessionId, playerRoll);
         }
     }
 }

@@ -259,6 +259,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tirar dados.
+        /// </summary>
+        public static string Button_RollDice {
+            get {
+                return ResourceManager.GetString("Button_RollDice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tirar dado.
         /// </summary>
         public static string Button_RollDie {
@@ -358,6 +367,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to x{0}.
+        /// </summary>
+        public static string Label_DieUsesFormat {
+            get {
+                return ResourceManager.GetString("Label_DieUsesFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Primer dado.
+        /// </summary>
+        public static string Label_FirstDie {
+            get {
+                return ResourceManager.GetString("Label_FirstDie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invitado.
         /// </summary>
         public static string Label_OpeningRollGuest {
@@ -376,11 +403,29 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Segundo dado.
+        /// </summary>
+        public static string Label_SecondDie {
+            get {
+                return ResourceManager.GetString("Label_SecondDie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ¿Quieres eliminar este enlace de tu perfil?.
         /// </summary>
         public static string Message_ConfirmSocialLinkRemoval {
             get {
                 return ResourceManager.GetString("Message_ConfirmSocialLinkRemoval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ¡PAR!.
+        /// </summary>
+        public static string Message_Doubles {
+            get {
+                return ResourceManager.GetString("Message_Doubles", resourceCulture);
             }
         }
         
@@ -484,6 +529,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Turno del rival.
+        /// </summary>
+        public static string Message_OpponentTurn {
+            get {
+                return ResourceManager.GetString("Message_OpponentTurn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No se pudo cargar la información del perfil. Verifica tu conexión..
         /// </summary>
         public static string Message_ProfileLoadError {
@@ -507,6 +561,24 @@ namespace Backgammon.Client.Properties {
         public static string Message_SocialLinkUpdateError {
             get {
                 return ResourceManager.GetString("Message_SocialLinkUpdateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se pudo completar la tirada de dados..
+        /// </summary>
+        public static string Message_TurnRollError {
+            get {
+                return ResourceManager.GetString("Message_TurnRollError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Es tu turno.
+        /// </summary>
+        public static string Message_YourTurn {
+            get {
+                return ResourceManager.GetString("Message_YourTurn", resourceCulture);
             }
         }
         

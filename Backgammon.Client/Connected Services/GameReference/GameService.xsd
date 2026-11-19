@@ -48,10 +48,25 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RollDice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="playerRoll" nillable="true" type="q5:PlayerDiceRoll" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RollDiceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="RollDiceResult" nillable="true" type="q6:MatchState" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="OnMatchStateUpdated">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="matchState" nillable="true" type="q5:MatchState" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="matchState" nillable="true" type="q7:MatchState" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

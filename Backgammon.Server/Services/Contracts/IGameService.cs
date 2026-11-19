@@ -18,5 +18,9 @@ namespace Backgammon.Server.Services.Contracts
         [OperationContract]
         [FaultContract(typeof(MatchFault))]
         MatchState RollOpeningDie(string sessionId, PlayerOpeningRoll playerRoll);
+
+        [OperationContract]
+        [FaultContract(typeof(MatchFault))]
+        MatchState RollDice(string sessionId, PlayerDiceRoll playerRoll);
     }
 }
