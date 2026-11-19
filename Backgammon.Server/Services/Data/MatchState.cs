@@ -18,6 +18,7 @@ namespace Backgammon.Server.Services.Data
             OpeningRoll = new MatchOpeningRollState();
             CurrentPlayerId = 0;
             Dice = new MatchDiceState();
+            AvailableMoves = new CheckerMove[0];
         }
 
         [DataMember]
@@ -49,5 +50,8 @@ namespace Backgammon.Server.Services.Data
 
         [DataMember]
         public MatchDiceState Dice { get; set; }
+
+        [DataMember]
+        public CheckerMove[] AvailableMoves { get; set; }
     }
 }

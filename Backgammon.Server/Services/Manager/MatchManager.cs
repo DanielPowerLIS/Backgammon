@@ -365,7 +365,8 @@ namespace Backgammon.Server.Services.Manager
                 ValidateMatchPlayer(activeMatch, player);
                 ValidateMatchVersion(activeMatch.State, expectedVersion);
 
-                MatchTurn.RollDice(activeMatch.State, player.PlayerId);
+                CheckerColor playerColor = GetPlayerColor(activeMatch.Session, player.PlayerId);
+                MatchTurn.RollDice(activeMatch.State, player.PlayerId, playerColor);
 
                 activeMatch.State.Version++;
 
@@ -628,6 +629,26 @@ namespace Backgammon.Server.Services.Manager
             {
                 throw new ArgumentException("The match state is outdated.", nameof(expectedVersion));
             }
+        }
+
+        private static CheckerColor GetPlayerColor(MatchSession matchSession, int playerId)
+        {
+            CheckerColor playerColor = CheckerColor.None;
+
+            if (matchSession.PlayerHostId == playerId)
+            {
+                playerColor = CheckerColor.Blue;
+            }
+            else if (matchSession.PlayerGuestId == playerId)
+            {
+                playerColor = CheckerColor.Pink;
+            }
+            else
+            {
+                throw new UnauthorizedAccessException(PlayerNotInMatch);
+            }
+
+            return playerColor;
         }
     }
 }

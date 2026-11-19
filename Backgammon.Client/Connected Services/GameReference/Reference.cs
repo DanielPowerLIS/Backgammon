@@ -23,6 +23,9 @@ namespace Backgammon.Client.GameReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Backgammon.Client.GameReference.CheckerMove[] AvailableMovesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Backgammon.Client.GameReference.MatchBoardState BoardField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -59,6 +62,19 @@ namespace Backgammon.Client.GameReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Backgammon.Client.GameReference.CheckerMove[] AvailableMoves {
+            get {
+                return this.AvailableMovesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AvailableMovesField, value) != true)) {
+                    this.AvailableMovesField = value;
+                    this.RaisePropertyChanged("AvailableMoves");
+                }
             }
         }
         
@@ -467,6 +483,99 @@ namespace Backgammon.Client.GameReference {
                 if ((this.RoundNumberField.Equals(value) != true)) {
                     this.RoundNumberField = value;
                     this.RaisePropertyChanged("RoundNumber");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CheckerMove", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class CheckerMove : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int DestinationPointNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int FirstDieUsesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SecondDieUsesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SourcePointNumberField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int DestinationPointNumber {
+            get {
+                return this.DestinationPointNumberField;
+            }
+            set {
+                if ((this.DestinationPointNumberField.Equals(value) != true)) {
+                    this.DestinationPointNumberField = value;
+                    this.RaisePropertyChanged("DestinationPointNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int FirstDieUses {
+            get {
+                return this.FirstDieUsesField;
+            }
+            set {
+                if ((this.FirstDieUsesField.Equals(value) != true)) {
+                    this.FirstDieUsesField = value;
+                    this.RaisePropertyChanged("FirstDieUses");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SecondDieUses {
+            get {
+                return this.SecondDieUsesField;
+            }
+            set {
+                if ((this.SecondDieUsesField.Equals(value) != true)) {
+                    this.SecondDieUsesField = value;
+                    this.RaisePropertyChanged("SecondDieUses");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SourcePointNumber {
+            get {
+                return this.SourcePointNumberField;
+            }
+            set {
+                if ((this.SourcePointNumberField.Equals(value) != true)) {
+                    this.SourcePointNumberField = value;
+                    this.RaisePropertyChanged("SourcePointNumber");
                 }
             }
         }
