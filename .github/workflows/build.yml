@@ -30,6 +30,12 @@ jobs:
 
           nuget restore Backgammon.Server\packages.config -PackagesDirectory packages
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+          nuget restore Backgammon.Client.Tests\packages.config -PackagesDirectory packages
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+          nuget restore Backgammon.Server.Tests\packages.config -PackagesDirectory packages
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Create server configuration placeholders
         shell: powershell
         run: |
@@ -44,6 +50,13 @@ jobs:
           if (-not (Test-Path -LiteralPath $emailConfigurationPath)) {
             Set-Content -LiteralPath $emailConfigurationPath -Value '<appSettings />' -Encoding UTF8
           }
+      - name: Install coverage tool
+        shell: powershell
+        run: |
+          $coverageToolPath = Join-Path $env:RUNNER_TEMP "coverage-tool"
+
+          dotnet tool install dotnet-coverage --tool-path $coverageToolPath
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Cache SonarQube Cloud packages
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
@@ -69,8 +82,11 @@ jobs:
         shell: powershell
         run: |
           $scannerPath = Join-Path $env:RUNNER_TEMP "scanner\dotnet-sonarscanner.exe"
+          $coveragePath = Join-Path $env:RUNNER_TEMP "coverage-tool\dotnet-coverage.exe"
 
-          & $scannerPath begin /k:"DanielPowerLIS_Backgammon" /o:"danielpowerlis" "/d:sonar.token=$env:SONAR_TOKEN"
+          & $scannerPath begin /k:"DanielPowerLIS_Backgammon" /o:"danielpowerlis" `
+            "/d:sonar.token=$env:SONAR_TOKEN" `
+            "/d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
           msbuild Backgammon.Client\Backgammon.Client.csproj /t:Rebuild /p:Configuration=Debug
@@ -78,6 +94,23 @@ jobs:
 
           msbuild Backgammon.Server\Backgammon.Server.csproj /t:Rebuild /p:Configuration=Debug
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+          msbuild Backgammon.Client.Tests\Backgammon.Client.Tests.csproj /t:Rebuild /p:Configuration=Debug
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+          msbuild Backgammon.Server.Tests\Backgammon.Server.Tests.csproj /t:Rebuild /p:Configuration=Debug
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+          $testCommand = "dotnet vstest " +
+            "Backgammon.Client.Tests\bin\Debug\Backgammon.Client.Tests.dll " +
+            "Backgammon.Server.Tests\bin\Debug\Backgammon.Server.Tests.dll"
+
+          & $coveragePath collect $testCommand -f xml -o coverage.xml
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+          if (-not (Test-Path -LiteralPath "coverage.xml")) {
+            throw "The coverage report was not generated."
+          }
 
           & $scannerPath end "/d:sonar.token=$env:SONAR_TOKEN"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
