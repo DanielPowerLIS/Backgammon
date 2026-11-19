@@ -78,6 +78,20 @@ namespace Backgammon.Client.Comunication
             }
         }
 
+        public async Task<MatchState> MoveCheckerAsync(string sessionId, PlayerCheckerMove playerMove)
+        {
+            try
+            {
+                MatchState matchState = await _serviceClient.MoveCheckerAsync(sessionId, playerMove);
+
+                return matchState;
+            }
+            finally
+            {
+                AbortFaultedChannel();
+            }
+        }
+
         public void Close()
         {
             try

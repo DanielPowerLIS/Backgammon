@@ -17,11 +17,13 @@ namespace Backgammon.Server.Domain
         private static readonly int NoCheckers = 0;
         private static readonly int NoRemainingUses = 0;
         private static readonly int SingleDieUse = 1;
+        private static readonly int SingleCheckerCount = 1;
 
         private readonly MatchBoardState _boardState;
         private readonly MatchDiceState _diceState;
         private readonly CheckerColor _playerColor;
         private readonly int _direction;
+  
 
         public MatchMovement(MatchBoardState boardState, MatchDiceState diceState, CheckerColor playerColor)
         {
@@ -81,6 +83,52 @@ namespace Backgammon.Server.Domain
             CheckerMove[] moves = availableMoves.ToArray();
 
             return moves;
+        }
+
+        public CheckerMove GetAvailableMove(CheckerMove selectedMove)
+        {
+            if (selectedMove == null)
+            {
+                throw new ArgumentNullException(nameof(selectedMove));
+            }
+
+            CheckerMove[] availableMoves = GetAvailableMoves();
+
+            foreach (CheckerMove availableMove in availableMoves)
+            {
+                if (MatchesMove(availableMove, selectedMove))
+                {
+                    return availableMove;
+                }
+            }
+
+            throw new ArgumentException("The selected move is not available.", nameof(selectedMove));
+        }
+
+        public void MoveChecker(CheckerMove selectedMove)
+        {
+            CheckerMove availableMove = GetAvailableMove(selectedMove);
+
+            MatchPointState sourcePoint =
+                _boardState.Points[availableMove.SourcePointNumber - MinimumPointNumber];
+
+            MatchPointState destinationPoint =
+                _boardState.Points[availableMove.DestinationPointNumber - MinimumPointNumber];
+
+            CaptureChecker(destinationPoint);
+
+            sourcePoint.Count--;
+
+            if (sourcePoint.Count == NoCheckers)
+            {
+                sourcePoint.Owner = CheckerColor.None;
+            }
+
+            destinationPoint.Owner = _playerColor;
+            destinationPoint.Count++;
+
+            _diceState.FirstDieRemainingUses -= availableMove.FirstDieUses;
+            _diceState.SecondDieRemainingUses -= availableMove.SecondDieUses;
         }
 
         private bool HasCapturedCheckers()
@@ -157,6 +205,40 @@ namespace Backgammon.Server.Domain
             }
 
             return move;
+        }
+
+        private static bool MatchesMove(CheckerMove availableMove, CheckerMove selectedMove)
+        {
+            bool matchesMove =
+                availableMove.SourcePointNumber == selectedMove.SourcePointNumber &&
+                availableMove.DestinationPointNumber == selectedMove.DestinationPointNumber &&
+                availableMove.FirstDieUses == selectedMove.FirstDieUses &&
+                availableMove.SecondDieUses == selectedMove.SecondDieUses;
+
+            return matchesMove;
+        }
+
+        private void CaptureChecker(MatchPointState destinationPoint)
+        {
+            bool containsOpponentChecker = destinationPoint.Count == SingleCheckerCount &&
+                destinationPoint.Owner != _playerColor;
+
+            if (!containsOpponentChecker)
+            {
+                return;
+            }
+
+            if (destinationPoint.Owner == CheckerColor.Blue)
+            {
+                _boardState.BlueOnBar++;
+            }
+            else
+            {
+                _boardState.PinkOnBar++;
+            }
+
+            destinationPoint.Count = NoCheckers;
+            destinationPoint.Owner = CheckerColor.None;
         }
     }
 }

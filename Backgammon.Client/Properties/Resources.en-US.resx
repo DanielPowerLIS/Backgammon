@@ -737,4 +737,10 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_FriendRequestErrorMessage" xml:space="preserve">
     <value>Friend requests could not be loaded. Please try again later.</value>
   </data>
+  <data name="TextBlock_CheckerMoveErrorTitle" xml:space="preserve">
+    <value>Checker movement</value>
+  </data>
+  <data name="TextBlock_CheckerMoveErrorMessage" xml:space="preserve">
+    <value>The move could not be confirmed. Please try again.</value>
+  </data>
 </root>

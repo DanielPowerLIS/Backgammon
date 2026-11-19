@@ -117,6 +117,28 @@ namespace Backgammon.Client.Controllers.Game
             ApplyMatchState(matchState);
         }
 
+        public async Task MoveCheckerAsync(CheckerMove selectedMove, long expectedVersion)
+        {
+            if (selectedMove == null)
+            {
+                throw new ArgumentNullException(nameof(selectedMove));
+            }
+
+            string sessionId = PlayerSessionContext.GetSession().SessionId;
+
+            var playerMove = new PlayerCheckerMove
+            {
+                RoomId = _roomId,
+                MatchId = _matchId,
+                ExpectedVersion = expectedVersion,
+                Move = selectedMove
+            };
+
+            MatchState matchState = await _gameClient.MoveCheckerAsync(sessionId, playerMove);
+
+            ApplyMatchState(matchState);
+        }
+
         public void CloseConnection()
         {
             lock (_queue)

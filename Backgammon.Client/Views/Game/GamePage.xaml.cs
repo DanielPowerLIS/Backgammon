@@ -575,5 +575,41 @@ namespace Backgammon.Client.Views.Game
 
             boardControlGame.HighlightDestinations(destinationPoints);
         }
+
+        private CheckerMove GetSelectedMove(int destinationPointNumber)
+        {
+            MatchState matchState = _renderedState;
+
+            int selectedDieIndex = turnDiceControlGame.SelectedDieIndex;
+
+            foreach (CheckerMove move in matchState.AvailableMoves)
+            {
+                bool sameSource = move.SourcePointNumber == _selectedSourcePointNumber;
+
+                bool sameDestination = move.DestinationPointNumber == destinationPointNumber;
+
+                if (sameSource && sameDestination && UsesSelectedDie(move, selectedDieIndex))
+                {
+                    return move;
+                }
+            }
+
+            throw new ArgumentException("The selected destination has no available move.",
+                nameof(destinationPointNumber));
+        }
+
+        private void ShowCheckerMoveError(GameController gameController)
+        {
+            if (!IsLoaded || !ReferenceEquals(_gameController, gameController))
+            {
+                return;
+            }
+
+            var dialog = new AccountDialog(
+                Properties.Resources.TextBlock_CheckerMoveErrorTitle,
+                Properties.Resources.TextBlock_CheckerMoveErrorMessage);
+
+            dialog.ShowOver(Window.GetWindow(this));
+        }
     }
 }

@@ -174,6 +174,37 @@ namespace Backgammon.Server.Services
             }
         }
 
+        public MatchState MoveChecker(string sessionId, PlayerCheckerMove playerMove)
+        {
+            PlayerSession playerSession = GetPlayerSession(sessionId);
+
+            try
+            {
+                MatchState matchState = MovePlayerChecker(playerSession, playerMove);
+
+                return matchState;
+            }
+            catch (UnauthorizedAccessException accessException)
+            {
+                ApplicationLogger.LogWarning("The checker movement was denied. Reason: {0}", accessException.Message);
+
+                throw CreateMatchFault(ErrorCodes.AccessDenied);
+            }
+            catch (KeyNotFoundException matchException)
+            {
+                ApplicationLogger.LogWarning("The checker movement match is unavailable. Reason: {0}",
+                    matchException.Message);
+
+                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
+            }
+            catch (ArgumentException moveException)
+            {
+                ApplicationLogger.LogWarning("The checker movement was invalid. Reason: {0}", moveException.Message);
+
+                throw CreateMatchFault(ErrorCodes.InvalidInput);
+            }
+        }
+
         private PlayerSession GetPlayerSession(string sessionId)
         {
             try
@@ -290,6 +321,22 @@ namespace Backgammon.Server.Services
                 playerRoll.MatchId);
 
             MatchState matchState = MatchManager.RollDice(player, playerRoll.ExpectedVersion);
+
+            UpdatePlayers(player, matchState);
+
+            return matchState;
+        }
+
+        private MatchState MovePlayerChecker(PlayerSession playerSession, PlayerCheckerMove playerMove)
+        {
+            if (playerMove == null)
+            {
+                throw new ArgumentNullException(nameof(playerMove));
+            }
+
+            var player = new MatchPlayer(playerSession.PlayerId, playerMove.RoomId, playerMove.MatchId);
+
+            MatchState matchState = MatchManager.MoveChecker(player, playerMove.Move, playerMove.ExpectedVersion);
 
             UpdatePlayers(player, matchState);
 

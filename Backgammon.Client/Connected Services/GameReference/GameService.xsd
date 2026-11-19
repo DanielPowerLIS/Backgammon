@@ -63,10 +63,25 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="MoveChecker">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="playerMove" nillable="true" type="q7:PlayerCheckerMove" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MoveCheckerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="MoveCheckerResult" nillable="true" type="q8:MatchState" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="OnMatchStateUpdated">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="matchState" nillable="true" type="q7:MatchState" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="matchState" nillable="true" type="q9:MatchState" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
