@@ -48,11 +48,13 @@
             </Border>
             <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock
-                    Text="Es tu turno"
+                    x:Name="textBlockTurnStatus"
+                    Visibility="Collapsed"
                     Foreground="White"
                     FontSize="32"
                     FontWeight="Bold"
-                    HorizontalAlignment="Center"/>
+                    TextAlignment="Center"
+                    TextWrapping="Wrap"/>
                 <TextBlock Text="00:07" 
                            Foreground="White" 
                            FontSize="26" 
@@ -82,15 +84,12 @@
                         Margin="5"
                         IsEnabled="False"/>
             </StackPanel>
-            <Button
+            <controls:TurnDiceControl
+                x:Name="turnDiceControlGame"
                 Grid.Row="4"
-                Content="Tirar dados"
-                Width="140"
-                Height="45"
                 Margin="0,0,0,15"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Bottom"
-                IsEnabled="False"/>
+                IsEnabled="False"
+                RollSelected="OnTurnRollSelected"/>
         </Grid>
         <ContentControl
             x:Name="contentControlMatchStart"
