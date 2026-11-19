@@ -108,6 +108,7 @@
     <Compile Include="Domain\ActiveMatch.cs" />
     <Compile Include="Domain\Die.cs" />
     <Compile Include="Domain\MatchBoardFactory.cs" />
+    <Compile Include="Domain\MatchMovement.cs" />
     <Compile Include="Domain\MatchPlayer.cs" />
     <Compile Include="Domain\MatchStateFactory.cs" />
     <Compile Include="Domain\MatchTurn.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Services\Data\ChatMessage.cs" />
     <Compile Include="Services\Data\ChatFault.cs" />
     <Compile Include="Services\Data\CheckerColor.cs" />
+    <Compile Include="Services\Data\CheckerMove.cs" />
     <Compile Include="Services\Data\Credentials.cs" />
     <Compile Include="Services\Data\Friend.cs" />
     <Compile Include="Services\Data\FriendFault.cs" />

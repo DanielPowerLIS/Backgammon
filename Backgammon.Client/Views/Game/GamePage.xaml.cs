@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System;
 using System.ServiceModel;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 using Backgammon.Client.Controllers.Game;
 using Backgammon.Client.GameReference;
@@ -30,6 +31,15 @@ namespace Backgammon.Client.Views.Game
         private DiceRollDialog _openingRollDialog;
         private bool _isPlayerReady;
 
+        private static readonly int FirstDieIndex = 1;
+        private static readonly int SecondDieIndex = 2;
+        private static readonly int NoDieUses = 0;
+        private static readonly int NoPointSelected = -1;
+
+        private int _selectedSourcePointNumber;
+
+        private MatchState _renderedState;
+
         public MatchSession CurrentMatch { get; }
 
         public GamePage(MatchSession matchSession)
@@ -41,10 +51,14 @@ namespace Backgammon.Client.Views.Game
 
             InitializeComponent();
 
+            _selectedSourcePointNumber = NoPointSelected;
+
             CurrentMatch = matchSession;
 
             Loaded += OnPageLoaded;
             Unloaded += OnPageUnloaded;
+
+            _renderedState = null;
         }
 
         private async void OnPageLoaded(object sender, RoutedEventArgs routedEventArgs)
@@ -126,6 +140,10 @@ namespace Backgammon.Client.Views.Game
 
             _gameController = null;
             _isStateLoaded = false;
+            _renderedState = null;
+            _selectedSourcePointNumber = NoPointSelected;
+
+            UpdateCheckerHighlights();
 
             if (gameController == null)
             {
@@ -190,9 +208,13 @@ namespace Backgammon.Client.Views.Game
 
             boardControlGame.RenderBoard(boardState);
 
+            _renderedState = matchState;
             _renderedVersion = matchState.Version;
 
+            _selectedSourcePointNumber = NoPointSelected;
+
             UpdateTurnDice(matchState);
+            UpdateCheckerHighlights();
             UpdateMatchAnnouncement(matchState);
             UpdateOpeningRollDialog(matchState);
         }
@@ -453,6 +475,105 @@ namespace Backgammon.Client.Views.Game
                 Properties.Resources.Message_GameLoadError);
 
             dialog.ShowOver(Window.GetWindow(this));
+        }
+
+        private void OnSelectedDieChanged(object sender, EventArgs eventArgs)
+        {
+            _selectedSourcePointNumber = NoPointSelected;
+
+            UpdateCheckerHighlights();
+        }
+
+        private void UpdateCheckerHighlights()
+        {
+            boardControlGame.HighlightCheckers(Array.Empty<int>());
+            boardControlGame.HighlightDestinations(Array.Empty<int>());
+
+            if (!CanSelectMovement())
+            {
+                return;
+            }
+
+            MatchState matchState = _renderedState;
+
+            int selectedDieIndex = turnDiceControlGame.SelectedDieIndex;
+
+            var sourcePoints = new HashSet<int>();
+
+            foreach (CheckerMove move in matchState.AvailableMoves)
+            {
+                if (UsesSelectedDie(move, selectedDieIndex))
+                {
+                    sourcePoints.Add(move.SourcePointNumber);
+                }
+            }
+
+            boardControlGame.HighlightCheckers(sourcePoints);
+        }
+
+        private static bool UsesSelectedDie(CheckerMove move, int selectedDieIndex)
+        {
+            bool usesSelectedDie = false;
+
+            if (selectedDieIndex == FirstDieIndex)
+            {
+                usesSelectedDie = move.FirstDieUses > NoDieUses;
+            }
+            else if (selectedDieIndex == SecondDieIndex)
+            {
+                usesSelectedDie = move.SecondDieUses > NoDieUses;
+            }
+
+            return usesSelectedDie;
+        }
+
+        private bool CanSelectMovement()
+        {
+            bool canSelectMovement = false;
+
+            if (IsLoaded && _isStateLoaded && _renderedState != null)
+            {
+                int playerId = PlayerSessionContext.GetSession().PlayerId;
+
+                canSelectMovement = _renderedState.Phase == MatchPhase.MovingCheckers &&
+                    _renderedState.CurrentPlayerId == playerId &&
+                    _renderedState.AvailableMoves != null;
+            }
+
+            return canSelectMovement;
+        }
+
+        private void OnCheckerSelected(object sender, BoardPointSelection selection)
+        {
+            _selectedSourcePointNumber = selection.PointNumber;
+
+            UpdateDestinationHighlights();
+        }
+
+        private void UpdateDestinationHighlights()
+        {
+            boardControlGame.HighlightDestinations(Array.Empty<int>());
+
+            if (!CanSelectMovement())
+            {
+                return;
+            }
+
+            MatchState matchState = _renderedState;
+
+            int selectedDieIndex = turnDiceControlGame.SelectedDieIndex;
+
+            var destinationPoints = new HashSet<int>();
+
+            foreach (CheckerMove move in matchState.AvailableMoves)
+            {
+                if (move.SourcePointNumber == _selectedSourcePointNumber && UsesSelectedDie(move, selectedDieIndex))
+                {
+                    destinationPoints.Add(move.DestinationPointNumber);
+                }
+            }
+
+            boardControlGame.HighlightDestinations(destinationPoints);
         }
     }
 }

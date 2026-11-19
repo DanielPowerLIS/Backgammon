@@ -171,6 +171,7 @@
     <Compile Include="Views\Dialog\JoinLobbyDialog.xaml.cs">
       <DependentUpon>JoinLobbyDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Game\Controls\BoardPointSelection.cs" />
     <Compile Include="Views\Game\Controls\MatchStartControl.xaml.cs">
       <DependentUpon>MatchStartControl.xaml</DependentUpon>
     </Compile>

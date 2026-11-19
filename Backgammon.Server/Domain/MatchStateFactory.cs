@@ -45,7 +45,8 @@ namespace Backgammon.Server.Domain
                 CountdownEndsAtUtc = matchState.CountdownEndsAtUtc,
                 ServerTimeUtc = DateTime.UtcNow,
                 CurrentPlayerId = matchState.CurrentPlayerId,
-                Dice = CopyDice(matchState.Dice)
+                Dice = CopyDice(matchState.Dice),
+                AvailableMoves = CopyMoves(matchState.AvailableMoves)
             };
 
             return stateCopy;
@@ -114,6 +115,37 @@ namespace Backgammon.Server.Domain
             };
 
             return diceCopy;
+        }
+
+        private static CheckerMove[] CopyMoves(CheckerMove[] availableMoves)
+        {
+            if (availableMoves == null)
+            {
+                throw new ArgumentNullException(nameof(availableMoves));
+            }
+
+            CheckerMove[] movesCopy = new CheckerMove[availableMoves.Length];
+
+            for (int moveIndex = 0; moveIndex < availableMoves.Length; moveIndex++)
+            {
+                CheckerMove sourceMove = availableMoves[moveIndex];
+
+                if (sourceMove == null)
+                {
+                    throw new ArgumentException("The available moves contain an unavailable move.",
+                        nameof(availableMoves));
+                }
+
+                movesCopy[moveIndex] = new CheckerMove
+                {
+                    SourcePointNumber = sourceMove.SourcePointNumber,
+                    DestinationPointNumber = sourceMove.DestinationPointNumber,
+                    FirstDieUses = sourceMove.FirstDieUses,
+                    SecondDieUses = sourceMove.SecondDieUses
+                };
+            }
+
+            return movesCopy;
         }
     }
 }

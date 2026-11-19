@@ -32,6 +32,8 @@ namespace Backgammon.Client.Views.Game.Controls
         private bool _canSelect;
         private bool _isRolling;
 
+        private int _previousDieIndex;
+
         public TurnDiceControl()
         {
             InitializeComponent();
@@ -50,6 +52,11 @@ namespace Backgammon.Client.Views.Game.Controls
             _animationTimer.Tick += OnAnimationTimerTick;
             buttonRollDice.Click += OnRollDiceClick;
             Unloaded += OnControlUnloaded;
+
+            _previousDieIndex = NoDieSelected;
+
+            radioButtonFirstDie.Checked += OnDieSelectionChanged;
+            radioButtonSecondDie.Checked += OnDieSelectionChanged;
         }
 
         public int SelectedDieIndex
@@ -72,6 +79,8 @@ namespace Backgammon.Client.Views.Game.Controls
         }
 
         public event EventHandler RollSelected;
+
+        public event EventHandler SelectedDieChanged;
 
         public void ApplyMatchState(MatchState matchState, bool isLocalTurn, CheckerColor playerColor)
         {
@@ -168,14 +177,15 @@ namespace Backgammon.Client.Views.Game.Controls
 
             bool secondSelected = radioButtonSecondDie.IsChecked == true && radioButtonSecondDie.IsEnabled;
 
-            if (firstSelected || secondSelected)
+            if (!firstSelected && !secondSelected)
             {
-                return;
+                radioButtonFirstDie.IsChecked = radioButtonFirstDie.IsEnabled;
+
+                radioButtonSecondDie.IsChecked = !radioButtonFirstDie.IsEnabled &&
+                    radioButtonSecondDie.IsEnabled;
             }
 
-            radioButtonFirstDie.IsChecked = radioButtonFirstDie.IsEnabled;
-
-            radioButtonSecondDie.IsChecked = !radioButtonFirstDie.IsEnabled && radioButtonSecondDie.IsEnabled;
+            ApplyDieSelection();
         }
 
         private void OnRollDiceClick(object sender, RoutedEventArgs routedEventArgs)
@@ -252,6 +262,30 @@ namespace Backgammon.Client.Views.Game.Controls
         private void OnControlUnloaded(object sender, RoutedEventArgs routedEventArgs)
         {
             CancelAnimation();
+        }
+
+        private void OnDieSelectionChanged(object sender, RoutedEventArgs routedEventArgs)
+        {
+            ApplyDieSelection();
+        }
+
+        private void ApplyDieSelection()
+        {
+            int selectedDieIndex = SelectedDieIndex;
+
+            if (selectedDieIndex == _previousDieIndex)
+            {
+                return;
+            }
+
+            _previousDieIndex = selectedDieIndex;
+
+            EventHandler selectionHandler = SelectedDieChanged;
+
+            if (selectionHandler != null)
+            {
+                selectionHandler.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 }

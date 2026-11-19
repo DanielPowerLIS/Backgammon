@@ -9,7 +9,7 @@ namespace Backgammon.Server.Domain
         private static readonly int SingleDieUses = 1;
         private static readonly int DoubleDieUses = 2;
 
-        public static void RollDice(MatchState matchState, int playerId)
+        public static void RollDice(MatchState matchState, int playerId, CheckerColor playerColor)
         {
             if (matchState == null)
             {
@@ -20,7 +20,11 @@ namespace Backgammon.Server.Domain
 
             MatchDiceState diceState = CreateDice();
 
+            var movement = new MatchMovement(matchState.Board, diceState, playerColor);
+            CheckerMove[] availableMoves = movement.GetAvailableMoves();
+
             matchState.Dice = diceState;
+            matchState.AvailableMoves = availableMoves;
             matchState.Phase = MatchPhase.MovingCheckers;
         }
 

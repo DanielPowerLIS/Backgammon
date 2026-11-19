@@ -18,10 +18,21 @@ namespace Backgammon.Client.Views.Game.Controls
         private static readonly string PinkCheckerStrokeHex = "#00C9F2";
         private static readonly string NoneCheckerStrokeHex = "#00C9F2";
 
+        private static readonly int UnassignedPointNumber = 0;
+        private static readonly double NormalStrokeThickness = 2;
+        private static readonly double HighlightedStrokeThickness = 4;
+
         public CheckerControl()
         {
             InitializeComponent();
+
+            PointNumber = UnassignedPointNumber;
+            IsHighlighted = false;
         }
+
+        public int PointNumber { get; set; }
+
+        public bool IsHighlighted { get; private set; }
 
         public CheckerColor CheckerColor
         {
@@ -35,6 +46,26 @@ namespace Backgammon.Client.Views.Game.Controls
             }
         }
 
+        public void SetHighlighted(bool isHighlighted)
+        {
+            IsHighlighted = isHighlighted;
+
+            string strokeHex = GetStrokeHex(CheckerColor);
+
+            Brush strokeBrush = (Brush)new BrushConverter().ConvertFromString(strokeHex);
+
+            double strokeThickness = NormalStrokeThickness;
+
+            if (isHighlighted)
+            {
+                strokeBrush = Brushes.White;
+                strokeThickness = HighlightedStrokeThickness;
+            }
+
+            ellipseChecker.Stroke = strokeBrush;
+            ellipseChecker.StrokeThickness = strokeThickness;
+        }
+
         private static void OnCheckerColorChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             CheckerControl changedChecker = (CheckerControl)sender;
@@ -45,10 +76,10 @@ namespace Backgammon.Client.Views.Game.Controls
         private void ApplyCheckerColor(CheckerColor checkerColor)
         {
             string fillHex = GetFillHex(checkerColor);
-            string strokeHex = GetStrokeHex(checkerColor);
 
             ellipseChecker.Fill = (Brush)new BrushConverter().ConvertFromString(fillHex);
-            ellipseChecker.Stroke = (Brush)new BrushConverter().ConvertFromString(strokeHex);
+
+            SetHighlighted(IsHighlighted);
         }
 
         private static string GetFillHex(CheckerColor checkerColor)
