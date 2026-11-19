@@ -24,11 +24,25 @@
   <wsdl:message name="IFriendService_GetFriends_FriendFaultFault_FaultMessage">
     <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q1:FriendFault" />
   </wsdl:message>
+  <wsdl:message name="IFriendService_GetFriendRequests_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendRequests" />
+  </wsdl:message>
+  <wsdl:message name="IFriendService_GetFriendRequests_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFriendRequestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFriendService_GetFriendRequests_FriendFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q2:FriendFault" />
+  </wsdl:message>
   <wsdl:portType name="IFriendService">
     <wsdl:operation name="GetFriends">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendService/GetFriends" message="tns:IFriendService_GetFriends_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendService/GetFriendsResponse" message="tns:IFriendService_GetFriends_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IFriendService/GetFriendsFriendFaultFault" name="FriendFaultFault" message="tns:IFriendService_GetFriends_FriendFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFriendRequests">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendService/GetFriendRequests" message="tns:IFriendService_GetFriendRequests_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendService/GetFriendRequestsResponse" message="tns:IFriendService_GetFriendRequests_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IFriendService/GetFriendRequestsFriendFaultFault" name="FriendFaultFault" message="tns:IFriendService_GetFriendRequests_FriendFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IFriendService" type="tns:IFriendService">
@@ -36,6 +50,18 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="GetFriends">
       <soap12:operation soapAction="http://tempuri.org/IFriendService/GetFriends" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FriendFaultFault">
+        <soap12:fault use="literal" name="FriendFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetFriendRequests">
+      <soap12:operation soapAction="http://tempuri.org/IFriendService/GetFriendRequests" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

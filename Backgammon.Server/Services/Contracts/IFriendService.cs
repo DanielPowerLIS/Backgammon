@@ -13,6 +13,10 @@ namespace Backgammon.Server.Services.Contracts
     {
         [OperationContract]
         [FaultContract(typeof(FriendFault))]
-        List<Friend> GetFriends(string userId);
+        List<Friend> GetFriends(string sessionId);
+
+        [OperationContract]
+        [FaultContract(typeof(FriendFault))]
+        List<FriendRequestPending> GetFriendRequests(string sessionId);
     }
 }

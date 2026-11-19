@@ -731,6 +731,12 @@ c) Move four checkers 6 points each.
   <data name="Message_TurnRollError" xml:space="preserve">
     <value>The dice roll could not be completed.</value>
   </data>
+  <data name="TextBlock_FriendRequestErrorTitle" xml:space="preserve">
+    <value>Friend requests unavailable</value>
+  </data>
+  <data name="TextBlock_FriendRequestErrorMessage" xml:space="preserve">
+    <value>Friend requests could not be loaded. Please try again later.</value>
+  </data>
   <data name="TextBlock_CheckerMoveErrorTitle" xml:space="preserve">
     <value>Checker movement</value>
   </data>

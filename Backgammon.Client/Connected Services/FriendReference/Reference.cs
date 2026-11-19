@@ -119,16 +119,84 @@ namespace Backgammon.Client.FriendReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FriendRequestPending", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class FriendRequestPending : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int RequestIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SenderUsernameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int RequestId {
+            get {
+                return this.RequestIdField;
+            }
+            set {
+                if ((this.RequestIdField.Equals(value) != true)) {
+                    this.RequestIdField = value;
+                    this.RaisePropertyChanged("RequestId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SenderUsername {
+            get {
+                return this.SenderUsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SenderUsernameField, value) != true)) {
+                    this.SenderUsernameField = value;
+                    this.RaisePropertyChanged("SenderUsername");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FriendReference.IFriendService")]
     public interface IFriendService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/GetFriends", ReplyAction="http://tempuri.org/IFriendService/GetFriendsResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.FriendReference.FriendFault), Action="http://tempuri.org/IFriendService/GetFriendsFriendFaultFault", Name="FriendFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
-        Backgammon.Client.FriendReference.Friend[] GetFriends(string userId);
+        Backgammon.Client.FriendReference.Friend[] GetFriends(string sessionId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/GetFriends", ReplyAction="http://tempuri.org/IFriendService/GetFriendsResponse")]
-        System.Threading.Tasks.Task<Backgammon.Client.FriendReference.Friend[]> GetFriendsAsync(string userId);
+        System.Threading.Tasks.Task<Backgammon.Client.FriendReference.Friend[]> GetFriendsAsync(string sessionId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/GetFriendRequests", ReplyAction="http://tempuri.org/IFriendService/GetFriendRequestsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.FriendReference.FriendFault), Action="http://tempuri.org/IFriendService/GetFriendRequestsFriendFaultFault", Name="FriendFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        Backgammon.Client.FriendReference.FriendRequestPending[] GetFriendRequests(string sessionId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/GetFriendRequests", ReplyAction="http://tempuri.org/IFriendService/GetFriendRequestsResponse")]
+        System.Threading.Tasks.Task<Backgammon.Client.FriendReference.FriendRequestPending[]> GetFriendRequestsAsync(string sessionId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -158,12 +226,20 @@ namespace Backgammon.Client.FriendReference {
                 base(binding, remoteAddress) {
         }
         
-        public Backgammon.Client.FriendReference.Friend[] GetFriends(string userId) {
-            return base.Channel.GetFriends(userId);
+        public Backgammon.Client.FriendReference.Friend[] GetFriends(string sessionId) {
+            return base.Channel.GetFriends(sessionId);
         }
         
-        public System.Threading.Tasks.Task<Backgammon.Client.FriendReference.Friend[]> GetFriendsAsync(string userId) {
-            return base.Channel.GetFriendsAsync(userId);
+        public System.Threading.Tasks.Task<Backgammon.Client.FriendReference.Friend[]> GetFriendsAsync(string sessionId) {
+            return base.Channel.GetFriendsAsync(sessionId);
+        }
+        
+        public Backgammon.Client.FriendReference.FriendRequestPending[] GetFriendRequests(string sessionId) {
+            return base.Channel.GetFriendRequests(sessionId);
+        }
+        
+        public System.Threading.Tasks.Task<Backgammon.Client.FriendReference.FriendRequestPending[]> GetFriendRequestsAsync(string sessionId) {
+            return base.Channel.GetFriendRequestsAsync(sessionId);
         }
     }
 }

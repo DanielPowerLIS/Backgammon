@@ -19,4 +19,17 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="FriendFault" nillable="true" type="tns:FriendFault" />
+  <xs:complexType name="ArrayOfFriendRequestPending">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FriendRequestPending" nillable="true" type="tns:FriendRequestPending" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFriendRequestPending" nillable="true" type="tns:ArrayOfFriendRequestPending" />
+  <xs:complexType name="FriendRequestPending">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RequestId" type="xs:int" />
+      <xs:element minOccurs="0" name="SenderUsername" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FriendRequestPending" nillable="true" type="tns:FriendRequestPending" />
 </xs:schema>

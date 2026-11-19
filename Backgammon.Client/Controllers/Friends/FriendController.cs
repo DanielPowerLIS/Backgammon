@@ -22,5 +22,15 @@ namespace Backgammon.Client.Controllers.Friends
 
             return friends;
         }
+
+        public async Task<FriendRequestPending[]> GetFriendRequestsAsync()
+        {
+            string sessionId = PlayerSessionContext.GetSession().SessionId;
+            FriendRequestPending[] friendRequests = await _friendClient.GetFriendRequestsAsync(sessionId);
+            
+            return friendRequests;
+        }
+
+
     }
 }

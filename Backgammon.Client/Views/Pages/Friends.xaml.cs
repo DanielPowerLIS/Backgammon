@@ -33,7 +33,9 @@ namespace Backgammon.Client.Views.Pages
 
         private void OnFriendRequest(object sender, RoutedEventArgs routedEventArgs)
         {
+            FriendRequests friendRequestPage = new FriendRequests();
 
+            NavigationService.Navigate(friendRequestPage);
         }
 
         private void OnAddFriend(object sender, RoutedEventArgs routedEventArgs)

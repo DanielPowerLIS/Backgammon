@@ -54,5 +54,37 @@ namespace Backgammon.Server.Persistence.Repositories
 
             return friendAccounts;
         }
+
+        public async Task<List<FriendRequest>> GetIncomingRequestsAsync(int profileId)
+        {
+            List<FriendRequest> friendRequests = new List<FriendRequest>();
+
+            using (var databaseContext = new BackgammonEntities())
+            {
+                int accountId = await(
+                    from account in databaseContext.Accounts
+                    where account.IdProfileFK == profileId
+                    select account.IdAccountPK)
+                    .FirstOrDefaultAsync()
+                    .ConfigureAwait(false);
+
+                if (accountId > 0)
+                {
+                    IQueryable<FriendRequest> requestQuery =
+                        from request in databaseContext.FriendRequests
+                        where request.ReceivingAccountFK == accountId
+                        select request;
+
+                    friendRequests = await requestQuery
+                        .Include("Account.Profile")
+                        .AsNoTracking()
+                        .OrderBy(request => request.IdFriendRequestPK)
+                        .ToListAsync()
+                        .ConfigureAwait(false);
+                }
+            }
+
+            return friendRequests;
+        }
     }
 }
