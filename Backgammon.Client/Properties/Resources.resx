@@ -731,4 +731,10 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Message_TurnRollError" xml:space="preserve">
     <value>No se pudo completar la tirada de dados.</value>
   </data>
+  <data name="TextBlock_FriendRequestErrorTitle" xml:space="preserve">
+    <value>No se pueden recuperar las solicitudes.</value>
+  </data>
+  <data name="TextBlock_FriendRequestErrorMessage" xml:space="preserve">
+    <value>No se pudieron cargar las solicitudes de amistad. Intenta más tarde.</value>
+  </data>
 </root>

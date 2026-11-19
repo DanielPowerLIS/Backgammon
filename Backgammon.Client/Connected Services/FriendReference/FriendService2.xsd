@@ -4,7 +4,7 @@
   <xs:element name="GetFriends">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="userId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -12,6 +12,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="GetFriendsResult" nillable="true" type="q1:ArrayOfFriend" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFriendRequests">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFriendRequestsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="GetFriendRequestsResult" nillable="true" type="q2:ArrayOfFriendRequestPending" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

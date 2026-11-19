@@ -51,6 +51,29 @@ namespace Backgammon.Server.Services
             return friends;
         }
 
+        public List<FriendRequestPending> GetFriendRequests(string sessionId)
+        {
+            int profileId;
+
+            try
+            {
+                profileId = _playerSessionManager.GetProfileId(sessionId);
+            }
+            catch (FaultException<PlayerProfileFault> sessionFault)
+            {
+                ApplicationLogger.LogWarning("Friend request retrieval was rejected. Code: {0}", sessionFault.Detail.ErrorCode);
+
+                FaultException<FriendFault> friendFault = CreateFriendFault(ErrorCodes.SessionExpired);
+
+                throw friendFault;
+            }
+
+            List<FriendRequest> requests = FetchFriendRequests(profileId);
+            List<FriendRequestPending> pendingRequests = MapFriendRequests(requests);
+
+            return pendingRequests;
+        }
+
         private List<AccountDB> FetchFriends(int profileId)
         {
             try
@@ -115,6 +138,53 @@ namespace Backgammon.Server.Services
             var friendFault = new FaultException<FriendFault>(friendFaultDetail);
 
             return friendFault;
+        }
+
+        private List<FriendRequest> FetchFriendRequests(int profileId)
+        {
+            try
+            {
+                List<FriendRequest> requests = _friendRepository.GetIncomingRequestsAsync(profileId).GetAwaiter().GetResult();
+
+                return requests;
+            }
+            catch (EntityException entityException)
+            {
+                ApplicationLogger.LogError(entityException, "An Entity Framework failure prevented friend requests from loading.");
+
+                FaultException<FriendFault> friendFault = CreateFriendFault(ErrorCodes.ServiceUnavailable);
+
+                throw friendFault;
+            }
+            catch (SqlException databaseException)
+            {
+                ApplicationLogger.LogError(databaseException, "A SQL Server failure prevented friend requests from loading.");
+
+                FaultException<FriendFault> friendFault = CreateFriendFault(ErrorCodes.ServiceUnavailable);
+
+                throw friendFault;
+            }
+        }
+
+        private List<FriendRequestPending> MapFriendRequests(List<FriendRequest> requests)
+        {
+            List<FriendRequestPending> pendingRequests = new List<FriendRequestPending>();
+
+            foreach (FriendRequest request in requests)
+            {
+                if (request.Account != null && request.Account.Profile != null)
+                {
+                    FriendRequestPending pendingRequest = new FriendRequestPending
+                    {
+                        RequestId = request.IdFriendRequestPK,
+                        SenderUsername = request.Account.Profile.Username
+                    };
+
+                    pendingRequests.Add(pendingRequest);
+                }
+            }
+
+            return pendingRequests;
         }
     }
 }

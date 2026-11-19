@@ -209,6 +209,7 @@
     <Compile Include="Services\Data\Credentials.cs" />
     <Compile Include="Services\Data\Friend.cs" />
     <Compile Include="Services\Data\FriendFault.cs" />
+    <Compile Include="Services\Data\FriendRequestPending.cs" />
     <Compile Include="Services\Data\GuestAccessFault.cs" />
     <Compile Include="Services\Data\LeaderboardFault.cs" />
     <Compile Include="Services\Data\Lobby.cs" />
