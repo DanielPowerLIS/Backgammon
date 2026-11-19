@@ -21,8 +21,9 @@
             Margin="20"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            CheckerSelected="OnCheckerSelected"/>
-        
+            CheckerSelected="OnCheckerSelected"
+            DestinationSelected="OnDestinationSelected"/>
+
         <Grid Grid.Column="1" Margin="30">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
