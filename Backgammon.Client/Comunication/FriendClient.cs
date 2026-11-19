@@ -30,5 +30,28 @@ namespace Backgammon.Client.Comunication
                 }
             }
         }
+
+        public async Task<FriendRequestPending[]> GetFriendRequestsAsync(string sessionId)
+        {
+            var serviceClient = new FriendServiceClient(EndpointConfigurationName);
+            ICommunicationObject communicationChannel = serviceClient;
+
+            try
+            {
+                FriendRequestPending[] friendRequests = await serviceClient.GetFriendRequestsAsync(sessionId);
+
+                await ServiceChannelCloser.CloseAfterResponseAsync(communicationChannel);
+
+                return friendRequests;
+            }
+            finally
+            {
+                if (communicationChannel.State != CommunicationState.Closed)
+                {
+                    communicationChannel.Abort();
+                }
+            }
+        }
+
     }
 }

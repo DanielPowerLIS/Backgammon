@@ -11,5 +11,7 @@ namespace Backgammon.Server.Persistence.Repositories.InterfacesRepositories
     public interface IFriendRepository
     {
         Task<List<Account>> GetFriendsAsync(int userId);
+
+        Task<List<FriendRequest>> GetIncomingRequestsAsync(int profileId);
     }
 }

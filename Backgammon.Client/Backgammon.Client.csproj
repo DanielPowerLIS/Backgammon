@@ -462,6 +462,9 @@
     <None Include="Connected Services\FriendReference\Backgammon.Client.FriendReference.Friend.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\FriendReference\Backgammon.Client.FriendReference.FriendRequestPending.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\FriendReference\FriendService.wsdl" />
     <None Include="Connected Services\FriendReference\FriendService.xsd">
       <SubType>Designer</SubType>

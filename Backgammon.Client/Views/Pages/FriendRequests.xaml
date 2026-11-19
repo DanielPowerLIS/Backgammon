@@ -88,7 +88,7 @@
                                     VerticalAlignment="Center"/>
                                 <TextBlock 
                                     Grid.Column="1" 
-                                    Text="Something" 
+                                    Text="{Binding SenderUsername}" 
                                     VerticalAlignment="Center" 
                                     FontSize="18" 
                                     Foreground="{StaticResource CyanAccentBrush}"/>
@@ -121,7 +121,7 @@
                 Width="100" 
                 Height="35" 
                 HorizontalAlignment="Right"  
-                Margin="0,15,20,10"/>
+                Margin="0,15,20,10" Click="OnBackClick"/>
         </Grid>
     </Grid>
 </Page>
