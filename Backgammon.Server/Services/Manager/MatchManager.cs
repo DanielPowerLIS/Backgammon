@@ -20,6 +20,7 @@ namespace Backgammon.Server.Services.Manager
             new Log4NetApplicationLogger(typeof(MatchManager));
 
         private const int CountdownDurationSeconds = 3;
+        private const int NoDieValue = 0;
 
         private static readonly string GuestRequired = "A guest is required to start the match.";
         private static readonly string MatchAlreadyActive = "The lobby already has an active match.";
@@ -168,46 +169,66 @@ namespace Backgammon.Server.Services.Manager
             return stateCopy;
         }
 
-        public static MatchState RegisterPlayerReady(MatchPlayer request, IGameCallback playerCallback)
+        public static MatchPreparation GetMatchPreparation(MatchPlayer player)
         {
-            if (request == null)
+            if (player == null)
             {
-                throw new ArgumentNullException(nameof(request));
+                throw new ArgumentNullException(nameof(player));
             }
-            ActiveMatch activeMatch = FindSavedActiveMatch(request.RoomId);
-            MatchState stateCopy;
+
+            ActiveMatch activeMatch = FindSavedActiveMatch(player.RoomId);
 
             lock (activeMatch.Queue)
             {
-                if (activeMatch.Session.MatchId != request.MatchId)
-                {
-                    throw new KeyNotFoundException(MatchUnavailable);
-                }
+                ValidateMatchPlayer(activeMatch, player);
+
+                MatchPreparation preparationCopy = MatchPreparationFactory.Copy(activeMatch.Preparation);
+
+                return preparationCopy;
+            }
+        }
+
+        public static MatchPreparation RegisterPlayerReady(MatchPlayer player, IGameCallback playerCallback)
+        {
+            if (player == null)
+            {
+                throw new ArgumentNullException(nameof(player));
+            }
+
+            ActiveMatch activeMatch = FindSavedActiveMatch(player.RoomId);
+
+            lock (activeMatch.Queue)
+            {
+                ValidateMatchPlayer(activeMatch, player);
+
                 bool hostWasReady = activeMatch.HostReady;
                 bool guestWasReady = activeMatch.GuestReady;
 
-                RegisterReadyPlayer(activeMatch, request.PlayerId, playerCallback);
+                RegisterReadyPlayer(activeMatch, player.PlayerId, playerCallback);
+
+                MatchPreparation preparation = activeMatch.Preparation;
 
                 bool readinessChanged = hostWasReady != activeMatch.HostReady ||
                     guestWasReady != activeMatch.GuestReady;
 
                 bool shouldStartCountdown = activeMatch.HostReady && activeMatch.GuestReady &&
-                    activeMatch.State.Phase == MatchPhase.WaitingForPlayers;
+                    preparation.Phase == MatchPhase.WaitingForPlayers;
 
                 if (shouldStartCountdown)
                 {
-                    activeMatch.State.Phase = MatchPhase.StartingCountdown;
-
-                    activeMatch.State.CountdownEndsAtUtc = DateTime.UtcNow.AddSeconds(CountdownDurationSeconds);
+                    preparation.Phase = MatchPhase.StartingCountdown;
+                    preparation.CountdownEndsAtUtc = DateTime.UtcNow.AddSeconds(CountdownDurationSeconds);
                 }
 
                 if (readinessChanged || shouldStartCountdown)
                 {
-                    activeMatch.State.Version++;
+                    preparation.Version++;
                 }
-                stateCopy = MatchStateFactory.Copy(activeMatch.State);
+
+                MatchPreparation preparationCopy = MatchPreparationFactory.Copy(preparation);
+
+                return preparationCopy;
             }
-            return stateCopy;
         }
 
         public static IGameCallback[] GetGameCallbacks(MatchPlayer request)
@@ -252,52 +273,52 @@ namespace Backgammon.Server.Services.Manager
             return callbacks.ToArray();
         }
 
-        public static void StartCountdown(MatchPlayer request, TimerCallback countdownCallback)
+        public static void StartCountdown(MatchPlayer player, TimerCallback countdownCallback)
         {
-            if (request == null)
+            if (player == null)
             {
-                throw new ArgumentNullException(nameof(request));
+                throw new ArgumentNullException(nameof(player));
             }
 
             if (countdownCallback == null)
             {
                 throw new ArgumentNullException(nameof(countdownCallback));
             }
-            ActiveMatch activeMatch = FindSavedActiveMatch(request.RoomId);
+
+            ActiveMatch activeMatch = FindSavedActiveMatch(player.RoomId);
 
             lock (activeMatch.Queue)
             {
-                ActiveMatch savedMatch = FindSavedActiveMatch(request.RoomId);
+                ValidateMatchPlayer(activeMatch, player);
 
-                if (!ReferenceEquals(savedMatch, activeMatch) || activeMatch.Session.MatchId != request.MatchId)
-                {
-                    throw new KeyNotFoundException(MatchUnavailable);
-                }
+                MatchPreparation preparation = activeMatch.Preparation;
 
-                if (activeMatch.State.Phase != MatchPhase.StartingCountdown || activeMatch.CountdownTimer != null)
+                if (preparation.Phase != MatchPhase.StartingCountdown || activeMatch.CountdownTimer != null)
                 {
                     return;
                 }
-                TimeSpan remainingTime = activeMatch.State.CountdownEndsAtUtc - DateTime.UtcNow;
+
+                TimeSpan remainingTime = preparation.CountdownEndsAtUtc - DateTime.UtcNow;
 
                 if (remainingTime < TimeSpan.Zero)
                 {
                     remainingTime = TimeSpan.Zero;
                 }
 
-                activeMatch.CountdownTimer = new Timer(countdownCallback, activeMatch, remainingTime,
+                activeMatch.CountdownTimer = new Timer(
+                    countdownCallback,
+                    activeMatch,
+                    remainingTime,
                     Timeout.InfiniteTimeSpan);
             }
         }
 
-        public static MatchState CompleteCountdown(ActiveMatch activeMatch)
+        public static MatchPreparation CompleteCountdown(ActiveMatch activeMatch)
         {
             if (activeMatch == null)
             {
                 throw new ArgumentNullException(nameof(activeMatch));
             }
-
-            MatchState stateCopy;
 
             lock (activeMatch.Queue)
             {
@@ -308,20 +329,22 @@ namespace Backgammon.Server.Services.Manager
                     throw new KeyNotFoundException(MatchUnavailable);
                 }
 
-                if (activeMatch.State.Phase == MatchPhase.StartingCountdown)
+                MatchPreparation preparation = activeMatch.Preparation;
+
+                if (preparation.Phase == MatchPhase.StartingCountdown)
                 {
-                    activeMatch.State.Phase = MatchPhase.OpeningRoll;
-                    activeMatch.State.CountdownEndsAtUtc = DateTime.MinValue;
-                    activeMatch.State.Version++;
+                    preparation.Phase = MatchPhase.OpeningRoll;
+                    preparation.CountdownEndsAtUtc = DateTime.MinValue;
+                    preparation.Version++;
                 }
 
-                stateCopy = MatchStateFactory.Copy(activeMatch.State);
-            }
+                MatchPreparation preparationCopy = MatchPreparationFactory.Copy(preparation);
 
-            return stateCopy;
+                return preparationCopy;
+            }
         }
 
-        public static MatchState RollOpeningDie(MatchPlayer player, int roundNumber)
+        public static MatchPreparation RollOpeningDie(MatchPlayer player, int roundNumber)
         {
             if (player == null)
             {
@@ -329,26 +352,29 @@ namespace Backgammon.Server.Services.Manager
             }
 
             ActiveMatch activeMatch = FindSavedActiveMatch(player.RoomId);
-            MatchState stateCopy;
 
             lock (activeMatch.Queue)
             {
                 ValidateMatchPlayer(activeMatch, player);
-                ValidateOpeningRollPhase(activeMatch.State);
 
-                MatchOpeningRollState openingRollState = GetOpeningRoll(activeMatch.State.OpeningRoll, roundNumber);
+                MatchPreparation preparation = activeMatch.Preparation;
 
-                RollPlayerDie(activeMatch.Session, openingRollState, player.PlayerId);
+                ValidateOpeningRollPhase(preparation);
 
-                activeMatch.State.OpeningRoll = openingRollState;
+                MatchOpeningRollState openingRoll = GetOpeningRoll(preparation.OpeningRoll, roundNumber);
+
+                RollPlayerDie(activeMatch.Session, openingRoll, player.PlayerId);
+
+                preparation.OpeningRoll = openingRoll;
 
                 CompleteOpeningRoll(activeMatch);
-                activeMatch.State.Version++;
 
-                stateCopy = MatchStateFactory.Copy(activeMatch.State);
+                preparation.Version++;
+
+                MatchPreparation preparationCopy = MatchPreparationFactory.Copy(preparation);
+
+                return preparationCopy;
             }
-
-            return stateCopy;
         }
 
         public static MatchState RollDice(MatchPlayer player, long expectedVersion)
@@ -451,8 +477,7 @@ namespace Backgammon.Server.Services.Manager
             return matchSession;
         }
 
-        private static void RegisterReadyPlayer(ActiveMatch activeMatch, int playerId,
-            IGameCallback playerCallback)
+        private static void RegisterReadyPlayer(ActiveMatch activeMatch, int playerId, IGameCallback playerCallback)
         {
             if (playerCallback == null)
             {
@@ -568,9 +593,9 @@ namespace Backgammon.Server.Services.Manager
             }
         }
 
-        private static void ValidateOpeningRollPhase(MatchState matchState)
+        private static void ValidateOpeningRollPhase(MatchPreparation preparation)
         {
-            if (matchState.Phase != MatchPhase.OpeningRoll)
+            if (preparation.Phase != MatchPhase.OpeningRoll)
             {
                 throw new ArgumentException(OpeningRollUnavailable);
             }
@@ -631,24 +656,28 @@ namespace Backgammon.Server.Services.Manager
 
         private static void CompleteOpeningRoll(ActiveMatch activeMatch)
         {
-            MatchOpeningRollState openingRollState = activeMatch.State.OpeningRoll;
+            MatchPreparation preparation = activeMatch.Preparation;
+            MatchOpeningRollState openingRoll = preparation.OpeningRoll;
 
-            bool bothPlayersRolled = openingRollState.HostDieValue > 0 && openingRollState.GuestDieValue > 0;
+            bool bothPlayersRolled = openingRoll.HostDieValue > NoDieValue && openingRoll.GuestDieValue > NoDieValue;
 
-            if (!bothPlayersRolled || openingRollState.HostDieValue == openingRollState.GuestDieValue)
+            if (!bothPlayersRolled || openingRoll.HostDieValue == openingRoll.GuestDieValue)
             {
                 return;
             }
 
             int currentPlayerId = activeMatch.Session.PlayerGuestId;
 
-            if (openingRollState.HostDieValue > openingRollState.GuestDieValue)
+            if (openingRoll.HostDieValue > openingRoll.GuestDieValue)
             {
                 currentPlayerId = activeMatch.Session.PlayerHostId;
             }
 
+            preparation.Phase = MatchPhase.WaitingForRoll;
+
             activeMatch.State.CurrentPlayerId = currentPlayerId;
             activeMatch.State.Phase = MatchPhase.WaitingForRoll;
+            activeMatch.State.Version++;
         }
 
         private static void ValidateMatchVersion(MatchState matchState, long expectedVersion)

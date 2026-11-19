@@ -36,13 +36,16 @@ namespace Backgammon.Client.Comunication
             }
         }
 
-        public async Task<MatchState> RegisterPlayerReadyAsync(string sessionId, string roomId, string matchId)
+        public async Task<MatchPreparation> GetMatchPreparationAsync(string sessionId, string roomId, string matchId)
         {
             try
             {
-                MatchState matchState = await _serviceClient.RegisterPlayerReadyAsync(sessionId, roomId, matchId);
+                MatchPreparation preparation = await _serviceClient.GetMatchPreparationAsync(
+                        sessionId,
+                        roomId,
+                        matchId);
 
-                return matchState;
+                return preparation;
             }
             finally
             {
@@ -50,13 +53,32 @@ namespace Backgammon.Client.Comunication
             }
         }
 
-        public async Task<MatchState> RollOpeningDieAsync(string sessionId, PlayerOpeningRoll playerRoll)
+        public async Task<MatchPreparation> RegisterPlayerReadyAsync(string sessionId, string roomId, string matchId)
         {
             try
             {
-                MatchState matchState = await _serviceClient.RollOpeningDieAsync(sessionId, playerRoll);
+                MatchPreparation preparation = await _serviceClient.RegisterPlayerReadyAsync(
+                        sessionId,
+                        roomId,
+                        matchId);
 
-                return matchState;
+                return preparation;
+            }
+            finally
+            {
+                AbortFaultedChannel();
+            }
+        }
+
+        public async Task<MatchPreparation> RollOpeningDieAsync(string sessionId, PlayerOpeningRoll playerRoll)
+        {
+            try
+            {
+                MatchPreparation preparation = await _serviceClient.RollOpeningDieAsync(
+                        sessionId,
+                        playerRoll);
+
+                return preparation;
             }
             finally
             {

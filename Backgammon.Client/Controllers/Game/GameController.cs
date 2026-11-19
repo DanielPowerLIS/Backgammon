@@ -20,7 +20,7 @@ namespace Backgammon.Client.Controllers.Game
         private readonly string _roomId;
         private readonly string _matchId;
         private readonly Entrance _queue;
-
+        private MatchPreparation _currentPreparation;
         private MatchState _currentState;
         private bool _isClosed;
 
@@ -40,14 +40,19 @@ namespace Backgammon.Client.Controllers.Game
             _matchId = matchSession.MatchId;
             _queue = new Entrance();
 
+            _currentPreparation = null;
+
             _gameCallback = new GameCallback();
             _gameCallback.MatchStateUpdated += ApplyMatchState;
+            _gameCallback.MatchPreparationUpdated += ApplyMatchPreparation;
 
             var callbackContext = new InstanceContext(_gameCallback);
             _gameClient = new GameClient(callbackContext);
         }
 
         public event Action MatchStateUpdated;
+
+        public event Action MatchPreparationUpdated;
 
         public MatchState CurrentState
         {
@@ -65,6 +70,25 @@ namespace Backgammon.Client.Controllers.Game
             }
         }
 
+        public MatchPreparation CurrentPreparation
+        {
+            get
+            {
+                lock (_queue)
+                {
+                    if (_currentPreparation == null)
+                    {
+                        throw new KeyNotFoundException(
+                            "The match preparation has not been loaded.");
+                    }
+
+                    MatchPreparation preparation = _currentPreparation;
+
+                    return preparation;
+                }
+            }
+        }
+
         public async Task LoadMatchStateAsync()
         {
             string sessionId = PlayerSessionContext.GetSession().SessionId;
@@ -74,13 +98,22 @@ namespace Backgammon.Client.Controllers.Game
             ApplyMatchState(matchState);
         }
 
+        public async Task LoadMatchPreparationAsync()
+        {
+            string sessionId = PlayerSessionContext.GetSession().SessionId;
+
+            MatchPreparation preparation = await _gameClient.GetMatchPreparationAsync(sessionId, _roomId, _matchId);
+
+            ApplyMatchPreparation(preparation);
+        }
+
         public async Task RegisterPlayerReadyAsync()
         {
             string sessionId = PlayerSessionContext.GetSession().SessionId;
 
-            MatchState matchState = await _gameClient.RegisterPlayerReadyAsync(sessionId, _roomId, _matchId);
+            MatchPreparation preparation = await _gameClient.RegisterPlayerReadyAsync(sessionId, _roomId, _matchId);
 
-            ApplyMatchState(matchState);
+            ApplyMatchPreparation(preparation);
         }
 
         public async Task RollOpeningDieAsync(int roundNumber)
@@ -94,9 +127,9 @@ namespace Backgammon.Client.Controllers.Game
                 RoundNumber = roundNumber
             };
 
-            MatchState matchState = await _gameClient.RollOpeningDieAsync(sessionId, playerRoll);
+            MatchPreparation preparation = await _gameClient.RollOpeningDieAsync(sessionId, playerRoll);
 
-            ApplyMatchState(matchState);
+            ApplyMatchPreparation(preparation);
         }
 
         public async Task RollDiceAsync()
@@ -152,6 +185,7 @@ namespace Backgammon.Client.Controllers.Game
             }
 
             _gameCallback.MatchStateUpdated -= ApplyMatchState;
+            _gameCallback.MatchPreparationUpdated -= ApplyMatchPreparation;
             _gameClient.Close();
         }
 
@@ -191,6 +225,46 @@ namespace Backgammon.Client.Controllers.Game
             if (stateUpdatedHandler != null)
             {
                 stateUpdatedHandler.Invoke();
+            }
+        }
+
+        private void ApplyMatchPreparation(MatchPreparation preparation)
+        {
+            if (preparation == null)
+            {
+                return;
+            }
+
+            bool sameRoom = string.Equals(preparation.RoomId, _roomId, StringComparison.Ordinal);
+
+            bool sameMatch = string.Equals(preparation.MatchId, _matchId, StringComparison.Ordinal);
+
+            if (!sameRoom || !sameMatch)
+            {
+                return;
+            }
+
+            lock (_queue)
+            {
+                if (_isClosed)
+                {
+                    return;
+                }
+
+                if (_currentPreparation != null &&
+                    preparation.Version <= _currentPreparation.Version)
+                {
+                    return;
+                }
+
+                _currentPreparation = preparation;
+            }
+
+            Action preparationUpdatedHandler = MatchPreparationUpdated;
+
+            if (preparationUpdatedHandler != null)
+            {
+                preparationUpdatedHandler.Invoke();
             }
         }
     }

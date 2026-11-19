@@ -8,5 +8,8 @@ namespace Backgammon.Server.Services.Contracts
     {
         [OperationContract(IsOneWay = true)]
         void OnMatchStateUpdated(MatchState matchState);
+
+        [OperationContract(IsOneWay = true)]
+        void OnMatchPreparationUpdated(MatchPreparation preparation);
     }
 }

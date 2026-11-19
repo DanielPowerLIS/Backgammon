@@ -9,6 +9,7 @@ namespace Backgammon.Client.Controllers.Callbacks
     internal class GameCallback : IGameServiceCallback
     {
         public event Action<MatchState> MatchStateUpdated;
+        public event Action<MatchPreparation> MatchPreparationUpdated;
 
         public void OnMatchStateUpdated(MatchState matchState)
         {
@@ -17,6 +18,16 @@ namespace Backgammon.Client.Controllers.Callbacks
             if (stateUpdatedHandler != null)
             {
                 stateUpdatedHandler.Invoke(matchState);
+            }
+        }
+
+        public void OnMatchPreparationUpdated(MatchPreparation preparation)
+        {
+            Action<MatchPreparation> preparationUpdatedHandler = MatchPreparationUpdated;
+
+            if (preparationUpdatedHandler != null)
+            {
+                preparationUpdatedHandler.Invoke(preparation);
             }
         }
     }
