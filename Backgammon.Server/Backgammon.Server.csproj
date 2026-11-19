@@ -221,6 +221,7 @@
     <Compile Include="Services\Data\MatchPointState.cs" />
     <Compile Include="Services\Data\MatchSession.cs" />
     <Compile Include="Services\Data\MatchState.cs" />
+    <Compile Include="Services\Data\PlayerCheckerMove.cs" />
     <Compile Include="Services\Data\PlayerDiceRoll.cs" />
     <Compile Include="Services\Data\PlayerOpeningRoll.cs" />
     <Compile Include="Services\Data\PlayerSessionFault.cs" />

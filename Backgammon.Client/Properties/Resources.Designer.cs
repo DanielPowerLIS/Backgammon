@@ -745,6 +745,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No se pudo confirmar el movimiento. Inténtalo nuevamente..
+        /// </summary>
+        public static string TextBlock_CheckerMoveErrorMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_CheckerMoveErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Movimiento de ficha.
+        /// </summary>
+        public static string TextBlock_CheckerMoveErrorTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_CheckerMoveErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crear una cuenta.
         /// </summary>
         public static string TextBlock_CreateAnAccount {

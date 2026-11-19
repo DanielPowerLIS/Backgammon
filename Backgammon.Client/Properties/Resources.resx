@@ -731,4 +731,10 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Message_TurnRollError" xml:space="preserve">
     <value>No se pudo completar la tirada de dados.</value>
   </data>
+  <data name="TextBlock_CheckerMoveErrorTitle" xml:space="preserve">
+    <value>Movimiento de ficha</value>
+  </data>
+  <data name="TextBlock_CheckerMoveErrorMessage" xml:space="preserve">
+    <value>No se pudo confirmar el movimiento. Inténtalo nuevamente.</value>
+  </data>
 </root>

@@ -376,6 +376,34 @@ namespace Backgammon.Server.Services.Manager
             }
         }
 
+        public static MatchState MoveChecker(MatchPlayer player, CheckerMove selectedMove, long expectedVersion)
+        {
+            if (player == null)
+            {
+                throw new ArgumentNullException(nameof(player));
+            }
+
+            ActiveMatch activeMatch = FindSavedActiveMatch(player.RoomId);
+
+            lock (activeMatch.Queue)
+            {
+                ValidateMatchPlayer(activeMatch, player);
+                ValidateMatchVersion(activeMatch.State, expectedVersion);
+
+                MatchTurn.ValidatePlayerTurn(activeMatch.State, player.PlayerId);
+
+                CheckerColor playerColor = GetPlayerColor(activeMatch.Session, player.PlayerId);
+                
+                MatchTurn.MoveChecker(activeMatch.State, playerColor, selectedMove);
+
+                activeMatch.State.Version++;
+
+                MatchState stateCopy = MatchStateFactory.Copy(activeMatch.State);
+
+                return stateCopy;
+            }
+        }
+
         internal static bool RemoveMatch(string roomId)
         {
             bool removedMatch = false;

@@ -113,4 +113,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerDiceRoll" nillable="true" type="tns:PlayerDiceRoll" />
+  <xs:complexType name="PlayerCheckerMove">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExpectedVersion" type="xs:long" />
+      <xs:element minOccurs="0" name="MatchId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Move" nillable="true" type="tns:CheckerMove" />
+      <xs:element minOccurs="0" name="RoomId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PlayerCheckerMove" nillable="true" type="tns:PlayerCheckerMove" />
 </xs:schema>
