@@ -57,6 +57,8 @@ namespace Backgammon.Client.Views.Game
             _isStateLoaded = false;
             _isPlayerReady = false;
             _renderedVersion = 0;
+            turnDiceControlGame.IsEnabled = false;
+            turnDiceControlGame.SetRolling(false);
 
             var gameController = new GameController(CurrentMatch);
             _gameController = gameController;
@@ -190,6 +192,7 @@ namespace Backgammon.Client.Views.Game
 
             _renderedVersion = matchState.Version;
 
+            UpdateTurnDice(matchState);
             UpdateMatchAnnouncement(matchState);
             UpdateOpeningRollDialog(matchState);
         }
@@ -345,6 +348,97 @@ namespace Backgammon.Client.Views.Game
 
             diceDialog.RollSelected -= OnOpeningRollSelected;
             diceDialog.CloseForNavigation();
+        }
+
+        private void UpdateTurnDice(MatchState matchState)
+        {
+            int playerId = PlayerSessionContext.GetSession().PlayerId;
+
+            bool isLocalTurn = matchState.CurrentPlayerId == playerId;
+
+            CheckerColor playerColor = CheckerColor.None;
+
+            if (matchState.CurrentPlayerId == CurrentMatch.PlayerHostId)
+            {
+                playerColor = CheckerColor.Blue;
+            }
+            else if (matchState.CurrentPlayerId == CurrentMatch.PlayerGuestId)
+            {
+                playerColor = CheckerColor.Pink;
+            }
+
+            turnDiceControlGame.ApplyMatchState(matchState, isLocalTurn, playerColor);
+            turnDiceControlGame.IsEnabled = true;
+
+            textBlockTurnStatus.Visibility = Visibility.Collapsed;
+
+            if (matchState.Phase == MatchPhase.WaitingForRoll || matchState.Phase == MatchPhase.MovingCheckers)
+            {
+                string turnMessage = Properties.Resources.Message_OpponentTurn;
+
+                if (isLocalTurn)
+                {
+                    turnMessage = Properties.Resources.Message_YourTurn;
+                }
+
+                textBlockTurnStatus.Text = turnMessage;
+                textBlockTurnStatus.Visibility = Visibility.Visible;
+            }
+        }
+
+        private async void OnTurnRollSelected(object sender, EventArgs eventArgs)
+        {
+            GameController gameController = _gameController;
+
+            if (!IsLoaded || !_isStateLoaded || gameController == null)
+            {
+                return;
+            }
+
+            turnDiceControlGame.SetRolling(true);
+
+            try
+            {
+                await gameController.RollDiceAsync();
+            }
+            catch (FaultException<GameMatchFault> matchException)
+            {
+                ApplicationLogger.LogWarning("The turn roll was rejected. Code: {0}", matchException.Detail.ErrorCode);
+
+                ShowTurnRollError(gameController);
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(communicationException, "The turn roll could not be completed.");
+
+                ShowTurnRollError(gameController);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(timeoutException, "The turn roll exceeded the time limit.");
+
+                ShowTurnRollError(gameController);
+            }
+            finally
+            {
+                if (IsLoaded && ReferenceEquals(_gameController, gameController))
+                {
+                    turnDiceControlGame.SetRolling(false);
+                }
+            }
+        }
+
+        private void ShowTurnRollError(GameController gameController)
+        {
+            if (!IsLoaded || !ReferenceEquals(_gameController, gameController))
+            {
+                return;
+            }
+
+            var dialog = new AccountDialog( Properties.Resources.Button_RollDice,
+                Properties.Resources.Message_TurnRollError);
+
+            dialog.ShowOver(Window.GetWindow(this));
         }
 
         private void ShowGameLoadError(GameController gameController)
