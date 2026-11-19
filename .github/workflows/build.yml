@@ -30,13 +30,19 @@ jobs:
 
           nuget restore Backgammon.Server\packages.config -PackagesDirectory packages
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-      - name: Create server configuration placeholder
+      - name: Create server configuration placeholders
         shell: powershell
         run: |
           $serverConfigurationPath = "Backgammon.Server\DBSecrets.config"
 
           if (-not (Test-Path -LiteralPath $serverConfigurationPath)) {
             Set-Content -LiteralPath $serverConfigurationPath -Value '<connectionStrings />' -Encoding UTF8
+          }
+
+          $emailConfigurationPath = "Backgammon.Server\EmailSettings.config"
+
+          if (-not (Test-Path -LiteralPath $emailConfigurationPath)) {
+            Set-Content -LiteralPath $emailConfigurationPath -Value '<appSettings />' -Encoding UTF8
           }
       - name: Cache SonarQube Cloud packages
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
