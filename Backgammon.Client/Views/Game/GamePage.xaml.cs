@@ -37,6 +37,7 @@ namespace Backgammon.Client.Views.Game
         private static readonly int NoPointSelected = -1;
 
         private int _selectedSourcePointNumber;
+        private bool _isMovingChecker;
 
         private MatchState _renderedState;
 
@@ -58,6 +59,7 @@ namespace Backgammon.Client.Views.Game
             Loaded += OnPageLoaded;
             Unloaded += OnPageUnloaded;
 
+            _isMovingChecker = false;
             _renderedState = null;
         }
 
@@ -71,6 +73,7 @@ namespace Backgammon.Client.Views.Game
             _isStateLoaded = false;
             _isPlayerReady = false;
             _renderedVersion = 0;
+            SetMovingChecker(false);
             turnDiceControlGame.IsEnabled = false;
             turnDiceControlGame.SetRolling(false);
 
@@ -390,7 +393,7 @@ namespace Backgammon.Client.Views.Game
             }
 
             turnDiceControlGame.ApplyMatchState(matchState, isLocalTurn, playerColor);
-            turnDiceControlGame.IsEnabled = true;
+            turnDiceControlGame.IsEnabled = !_isMovingChecker;
 
             textBlockTurnStatus.Visibility = Visibility.Collapsed;
 
@@ -531,7 +534,7 @@ namespace Backgammon.Client.Views.Game
         {
             bool canSelectMovement = false;
 
-            if (IsLoaded && _isStateLoaded && _renderedState != null)
+            if (IsLoaded && _isStateLoaded && !_isMovingChecker && _renderedState != null)
             {
                 int playerId = PlayerSessionContext.GetSession().PlayerId;
 
@@ -610,6 +613,87 @@ namespace Backgammon.Client.Views.Game
                 Properties.Resources.TextBlock_CheckerMoveErrorMessage);
 
             dialog.ShowOver(Window.GetWindow(this));
+        }
+
+        private void SetMovingChecker(bool isMoving)
+        {
+            _isMovingChecker = isMoving;
+
+            boardControlGame.IsEnabled = !isMoving;
+            turnDiceControlGame.IsEnabled = !isMoving;
+
+            _selectedSourcePointNumber = NoPointSelected;
+
+            if (!isMoving && _isStateLoaded && _renderedState != null)
+            {
+                UpdateTurnDice(_renderedState);
+            }
+
+            UpdateCheckerHighlights();
+        }
+
+        private async void OnDestinationSelected(object sender, BoardPointSelection selection)
+        {
+            GameController gameController = _gameController;
+
+            if (gameController == null || !CanSelectMovement())
+            {
+                return;
+            }
+
+            try
+            {
+                CheckerMove selectedMove = GetSelectedMove(selection.PointNumber);
+                long expectedVersion = _renderedVersion;
+
+                SetMovingChecker(true);
+
+                await SendCheckerMoveAsync(gameController, selectedMove, expectedVersion);
+            }
+            catch (ArgumentException selectionException)
+            {
+                ApplicationLogger.LogWarning("The checker movement selection was invalid. Reason: {0}",
+                    selectionException.Message);
+
+                ShowCheckerMoveError(gameController);
+            }
+            finally
+            {
+                if (IsLoaded && ReferenceEquals(_gameController, gameController))
+                {
+                    SetMovingChecker(false);
+                }
+            }
+        }
+
+        private async Task SendCheckerMoveAsync(GameController gameController, CheckerMove selectedMove,
+            long expectedVersion)
+        {
+            try
+            {
+                await gameController.MoveCheckerAsync(selectedMove, expectedVersion);
+            }
+            catch (FaultException<GameMatchFault> matchException)
+            {
+                ApplicationLogger.LogWarning("The checker movement was rejected. Code: {0}",
+                    matchException.Detail.ErrorCode);
+
+                ShowCheckerMoveError(gameController);
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(communicationException,
+                    "The checker movement could not be completed.");
+
+                ShowCheckerMoveError(gameController);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(timeoutException,
+                    "The checker movement exceeded the time limit.");
+
+                ShowCheckerMoveError(gameController);
+            }
         }
     }
 }
