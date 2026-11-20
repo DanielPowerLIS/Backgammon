@@ -67,11 +67,6 @@ namespace Backgammon.Server.Services
             }
         }
 
-        public void MoveChecker(int fromPosition, int toPosition)
-        {
-            //TODO: Implementation for moving a checker
-        }
-
         private void ValidateMatchRequest(string sessionId, string roomId)
         {
             if (string.IsNullOrWhiteSpace(sessionId) || string.IsNullOrWhiteSpace(roomId))

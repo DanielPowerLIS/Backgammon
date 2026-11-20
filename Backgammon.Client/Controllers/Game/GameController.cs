@@ -251,8 +251,7 @@ namespace Backgammon.Client.Controllers.Game
                     return;
                 }
 
-                if (_currentPreparation != null &&
-                    preparation.Version <= _currentPreparation.Version)
+                if (_currentPreparation != null && preparation.Version <= _currentPreparation.Version)
                 {
                     return;
                 }
