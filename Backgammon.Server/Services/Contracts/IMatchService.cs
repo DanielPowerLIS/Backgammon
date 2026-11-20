@@ -16,10 +16,5 @@ namespace Backgammon.Server.Services.Contracts
         [FaultContract(typeof(MatchFault))]
         MatchSession JoinMatch(string sessionId, string roomId, string matchId);
 
-
-        [OperationContract]
-        void MoveChecker(int fromPosition, int toPosition);
-
-
     }
 }
