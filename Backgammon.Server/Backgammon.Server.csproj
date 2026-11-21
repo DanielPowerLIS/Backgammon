@@ -113,6 +113,8 @@
     <Compile Include="Domain\MatchPreparationFactory.cs" />
     <Compile Include="Domain\MatchStateFactory.cs" />
     <Compile Include="Domain\MatchTurn.cs" />
+    <Compile Include="Domain\MatchTurnHistory.cs" />
+    <Compile Include="Domain\TurnSnapshot.cs" />
     <Compile Include="Persistence\Data\Account.cs">
       <DependentUpon>Backgammon_Model.tt</DependentUpon>
     </Compile>
@@ -226,8 +228,8 @@
     <Compile Include="Services\Data\MatchState.cs" />
     <Compile Include="Services\Data\MatchTurnState.cs" />
     <Compile Include="Services\Data\PlayerCheckerMove.cs" />
-    <Compile Include="Services\Data\PlayerDiceRoll.cs" />
     <Compile Include="Services\Data\PlayerOpeningRoll.cs" />
+    <Compile Include="Services\Data\PlayerTurn.cs" />
     <Compile Include="Services\Data\PlayerSessionFault.cs" />
     <Compile Include="Services\Data\PreinitiationFault.cs" />
     <Compile Include="Services\Data\VerificationFault.cs" />

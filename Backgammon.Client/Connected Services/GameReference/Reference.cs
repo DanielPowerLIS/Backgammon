@@ -292,6 +292,9 @@ namespace Backgammon.Client.GameReference {
         private Backgammon.Client.GameReference.CheckerMove[] AvailableMovesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool CanUndoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int CurrentPlayerIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -316,6 +319,19 @@ namespace Backgammon.Client.GameReference {
                 if ((object.ReferenceEquals(this.AvailableMovesField, value) != true)) {
                     this.AvailableMovesField = value;
                     this.RaisePropertyChanged("AvailableMoves");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanUndo {
+            get {
+                return this.CanUndoField;
+            }
+            set {
+                if ((this.CanUndoField.Equals(value) != true)) {
+                    this.CanUndoField = value;
+                    this.RaisePropertyChanged("CanUndo");
                 }
             }
         }
@@ -998,9 +1014,9 @@ namespace Backgammon.Client.GameReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerDiceRoll", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerTurn", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
     [System.SerializableAttribute()]
-    public partial class PlayerDiceRoll : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class PlayerTurn : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -1193,10 +1209,10 @@ namespace Backgammon.Client.GameReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RollDice", ReplyAction="http://tempuri.org/IGameService/RollDiceResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/RollDiceMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
-        Backgammon.Client.GameReference.MatchState RollDice(string sessionId, Backgammon.Client.GameReference.PlayerDiceRoll playerRoll);
+        Backgammon.Client.GameReference.MatchState RollDice(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerRoll);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RollDice", ReplyAction="http://tempuri.org/IGameService/RollDiceResponse")]
-        System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> RollDiceAsync(string sessionId, Backgammon.Client.GameReference.PlayerDiceRoll playerRoll);
+        System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> RollDiceAsync(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerRoll);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/MoveChecker", ReplyAction="http://tempuri.org/IGameService/MoveCheckerResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/MoveCheckerMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
@@ -1211,6 +1227,13 @@ namespace Backgammon.Client.GameReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetMatchPreparation", ReplyAction="http://tempuri.org/IGameService/GetMatchPreparationResponse")]
         System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchPreparation> GetMatchPreparationAsync(string sessionId, string roomId, string matchId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/UndoCheckerMove", ReplyAction="http://tempuri.org/IGameService/UndoCheckerMoveResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/UndoCheckerMoveMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        Backgammon.Client.GameReference.MatchState UndoCheckerMove(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/UndoCheckerMove", ReplyAction="http://tempuri.org/IGameService/UndoCheckerMoveResponse")]
+        System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> UndoCheckerMoveAsync(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1275,11 +1298,11 @@ namespace Backgammon.Client.GameReference {
             return base.Channel.RollOpeningDieAsync(sessionId, playerRoll);
         }
         
-        public Backgammon.Client.GameReference.MatchState RollDice(string sessionId, Backgammon.Client.GameReference.PlayerDiceRoll playerRoll) {
+        public Backgammon.Client.GameReference.MatchState RollDice(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerRoll) {
             return base.Channel.RollDice(sessionId, playerRoll);
         }
         
-        public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> RollDiceAsync(string sessionId, Backgammon.Client.GameReference.PlayerDiceRoll playerRoll) {
+        public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> RollDiceAsync(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerRoll) {
             return base.Channel.RollDiceAsync(sessionId, playerRoll);
         }
         
@@ -1297,6 +1320,14 @@ namespace Backgammon.Client.GameReference {
         
         public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchPreparation> GetMatchPreparationAsync(string sessionId, string roomId, string matchId) {
             return base.Channel.GetMatchPreparationAsync(sessionId, roomId, matchId);
+        }
+        
+        public Backgammon.Client.GameReference.MatchState UndoCheckerMove(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn) {
+            return base.Channel.UndoCheckerMove(sessionId, playerTurn);
+        }
+        
+        public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> UndoCheckerMoveAsync(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn) {
+            return base.Channel.UndoCheckerMoveAsync(sessionId, playerTurn);
         }
     }
 }

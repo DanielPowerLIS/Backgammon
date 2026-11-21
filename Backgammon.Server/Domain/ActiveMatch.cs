@@ -27,6 +27,8 @@ namespace Backgammon.Server.Domain
 
         public Timer CountdownTimer { get; set; }
 
+        public MatchTurnHistory TurnHistory { get; }
+
         public ActiveMatch(MatchSession matchSession)
         {
             if (matchSession == null)
@@ -37,6 +39,7 @@ namespace Backgammon.Server.Domain
             Session = matchSession;
             State = MatchStateFactory.CreateInitial(matchSession);
             Preparation = MatchPreparationFactory.CreateInitial(matchSession);
+            TurnHistory = new MatchTurnHistory();
             Queue = new Entrance();
         }
 

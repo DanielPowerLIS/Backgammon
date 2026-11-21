@@ -3,9 +3,9 @@
 namespace Backgammon.Server.Services.Data
 {
     [DataContract]
-    public class PlayerDiceRoll
+    public class PlayerTurn
     {
-        public PlayerDiceRoll()
+        public PlayerTurn()
         {
             RoomId = string.Empty;
             MatchId = string.Empty;

@@ -72,6 +72,35 @@ namespace Backgammon.Server.Domain
             matchState.Turn.AvailableMoves = availableMoves;
         }
 
+        public static void UndoCheckerMove(MatchState matchState, TurnSnapshot snapshot, CheckerColor playerColor)
+        {
+            if (matchState == null)
+            {
+                throw new ArgumentNullException(nameof(matchState));
+            }
+
+            if (snapshot == null)
+            {
+                throw new ArgumentNullException(nameof(snapshot));
+            }
+
+            if (matchState.Phase != MatchPhase.MovingCheckers)
+            {
+                throw new ArgumentException("The match is not accepting movement undo.");
+            }
+
+            var movement = new MatchMovement(
+                snapshot.Board,
+                snapshot.Dice,
+                playerColor);
+
+            CheckerMove[] availableMoves = movement.GetAvailableMoves();
+
+            MatchStateFactory.RestoreTurnSnapshot(matchState, snapshot);
+
+            matchState.Turn.AvailableMoves = availableMoves;
+        }
+
         private static void ValidateRoll(MatchState matchState, int playerId)
         {
             ValidatePlayerTurn(matchState, playerId);

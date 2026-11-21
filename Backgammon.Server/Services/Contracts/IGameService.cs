@@ -21,7 +21,7 @@ namespace Backgammon.Server.Services.Contracts
 
         [OperationContract]
         [FaultContract(typeof(MatchFault))]
-        MatchState RollDice(string sessionId, PlayerDiceRoll playerRoll);
+        MatchState RollDice(string sessionId, PlayerTurn playerRoll);
 
         [OperationContract]
         [FaultContract(typeof(MatchFault))]
@@ -30,5 +30,9 @@ namespace Backgammon.Server.Services.Contracts
         [OperationContract]
         [FaultContract(typeof(MatchFault))]
         MatchPreparation GetMatchPreparation( string sessionId, string roomId, string matchId);
+
+        [OperationContract]
+        [FaultContract(typeof(MatchFault))]
+        MatchState UndoCheckerMove(string sessionId, PlayerTurn playerTurn);
     }
 }

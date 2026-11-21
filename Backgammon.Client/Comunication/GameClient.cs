@@ -86,7 +86,7 @@ namespace Backgammon.Client.Comunication
             }
         }
 
-        public async Task<MatchState> RollDiceAsync(string sessionId, PlayerDiceRoll playerRoll)
+        public async Task<MatchState> RollDiceAsync(string sessionId, PlayerTurn playerRoll)
         {
             try
             {
@@ -105,6 +105,20 @@ namespace Backgammon.Client.Comunication
             try
             {
                 MatchState matchState = await _serviceClient.MoveCheckerAsync(sessionId, playerMove);
+
+                return matchState;
+            }
+            finally
+            {
+                AbortFaultedChannel();
+            }
+        }
+
+        public async Task<MatchState> UndoCheckerMoveAsync(string sessionId, PlayerTurn playerTurn)
+        {
+            try
+            {
+                MatchState matchState = await _serviceClient.UndoCheckerMoveAsync(sessionId, playerTurn);
 
                 return matchState;
             }
