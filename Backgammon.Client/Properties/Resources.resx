@@ -755,4 +755,7 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Message_UndoMoveError" xml:space="preserve">
     <value>No se pudo deshacer el último movimiento. Inténtalo nuevamente.</value>
   </data>
+  <data name="Message_ConfirmTurnError" xml:space="preserve">
+    <value>No se pudo confirmar el turno. Inténtalo nuevamente.</value>
+  </data>
 </root>

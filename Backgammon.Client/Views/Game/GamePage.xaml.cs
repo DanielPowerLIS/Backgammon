@@ -168,6 +168,7 @@ namespace Backgammon.Client.Views.Game
             _selectedSourcePointNumber = NoPointSelected;
 
             UpdateCheckerHighlights();
+            UpdateTurnButtons();
 
             if (gameController == null)
             {
@@ -282,6 +283,7 @@ namespace Backgammon.Client.Views.Game
 
             UpdateTurnDice(matchState);
             UpdateCheckerHighlights();
+            UpdateTurnButtons();
 
             textBlockSharedPot.Text = matchState.SharedPot.ToString();
         }
@@ -695,6 +697,7 @@ namespace Backgammon.Client.Views.Game
             }
 
             UpdateCheckerHighlights();
+            UpdateTurnButtons();
         }
 
         private async void OnDestinationSelected(object sender, BoardPointSelection selection)
@@ -801,6 +804,153 @@ namespace Backgammon.Client.Views.Game
             {
                 RemoveCaptureNotice();
             }
+        }
+
+        private void UpdateTurnButtons()
+        {
+            bool canInteract = CanSelectMovement();
+
+            buttonUndoMove.IsEnabled = canInteract && _renderedState.Turn.CanUndo;
+
+            buttonConfirmTurn.IsEnabled = canInteract && _renderedState.Turn.CanConfirm;
+        }
+
+        private async void OnUndoMoveClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            GameController gameController = _gameController;
+
+            if (gameController == null || !CanSelectMovement() || !_renderedState.Turn.CanUndo)
+            {
+                return;
+            }
+
+            long expectedVersion = _renderedVersion;
+
+            try
+            {
+                SetMovingChecker(true);
+
+                await SendUndoMoveAsync(gameController, expectedVersion);
+            }
+            finally
+            {
+                if (IsLoaded && ReferenceEquals(_gameController, gameController))
+                {
+                    SetMovingChecker(false);
+                }
+            }
+        }
+
+        private async Task SendUndoMoveAsync(GameController gameController, long expectedVersion)
+        {
+            try
+            {
+                await gameController.UndoCheckerMoveAsync(expectedVersion);
+            }
+            catch (FaultException<GameMatchFault> matchException)
+            {
+                ApplicationLogger.LogWarning("The checker movement undo was rejected. Code: {0}",
+                    matchException.Detail.ErrorCode);
+
+                ShowUndoMoveError(gameController);
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(communicationException,
+                    "The checker movement undo could not be completed.");
+
+                ShowUndoMoveError(gameController);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(timeoutException,
+                    "The checker movement undo exceeded the time limit.");
+
+                ShowUndoMoveError(gameController);
+            }
+        }
+
+        private async void OnConfirmTurnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            GameController gameController = _gameController;
+
+            if (gameController == null || !CanSelectMovement() || !_renderedState.Turn.CanConfirm)
+            {
+                return;
+            }
+
+            long expectedVersion = _renderedVersion;
+
+            try
+            {
+                SetMovingChecker(true);
+
+                await SendConfirmTurnAsync(gameController, expectedVersion);
+            }
+            finally
+            {
+                if (IsLoaded && ReferenceEquals(_gameController, gameController))
+                {
+                    SetMovingChecker(false);
+                }
+            }
+        }
+
+        private async Task SendConfirmTurnAsync(GameController gameController, long expectedVersion)
+        {
+            try
+            {
+                await gameController.ConfirmTurnAsync(expectedVersion);
+            }
+            catch (FaultException<GameMatchFault> matchException)
+            {
+                ApplicationLogger.LogWarning("The turn confirmation was rejected. Code: {0}",
+                    matchException.Detail.ErrorCode);
+
+                ShowConfirmTurnError(gameController);
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(communicationException,
+                    "The turn confirmation could not be completed.");
+
+                ShowConfirmTurnError(gameController);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(timeoutException,
+                    "The turn confirmation exceeded the time limit.");
+
+                ShowConfirmTurnError(gameController);
+            }
+        }
+
+        private void ShowUndoMoveError(GameController gameController)
+        {
+            if (!IsLoaded || !ReferenceEquals(_gameController, gameController))
+            {
+                return;
+            }
+
+            var dialog = new AccountDialog(
+                Properties.Resources.Button_UndoMove,
+                Properties.Resources.Message_UndoMoveError);
+
+            dialog.ShowOver(Window.GetWindow(this));
+        }
+
+        private void ShowConfirmTurnError(GameController gameController)
+        {
+            if (!IsLoaded || !ReferenceEquals(_gameController, gameController))
+            {
+                return;
+            }
+
+            var dialog = new AccountDialog(
+                Properties.Resources.Button_Confirm,
+                Properties.Resources.Message_ConfirmTurnError);
+
+            dialog.ShowOver(Window.GetWindow(this));
         }
     }
 }

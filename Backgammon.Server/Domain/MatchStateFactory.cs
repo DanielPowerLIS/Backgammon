@@ -188,7 +188,8 @@ namespace Backgammon.Server.Domain
                 CurrentPlayerId = turnState.CurrentPlayerId,
                 Dice = CopyDice(turnState.Dice),
                 AvailableMoves = CopyMoves(turnState.AvailableMoves),
-                CanUndo = turnState.CanUndo
+                CanUndo = turnState.CanUndo,
+                CanConfirm = turnState.CanConfirm
             };
 
             return turnCopy;

@@ -292,6 +292,9 @@ namespace Backgammon.Client.GameReference {
         private Backgammon.Client.GameReference.CheckerMove[] AvailableMovesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool CanConfirmField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool CanUndoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -319,6 +322,19 @@ namespace Backgammon.Client.GameReference {
                 if ((object.ReferenceEquals(this.AvailableMovesField, value) != true)) {
                     this.AvailableMovesField = value;
                     this.RaisePropertyChanged("AvailableMoves");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanConfirm {
+            get {
+                return this.CanConfirmField;
+            }
+            set {
+                if ((this.CanConfirmField.Equals(value) != true)) {
+                    this.CanConfirmField = value;
+                    this.RaisePropertyChanged("CanConfirm");
                 }
             }
         }
@@ -1193,6 +1209,13 @@ namespace Backgammon.Client.GameReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetMatchState", ReplyAction="http://tempuri.org/IGameService/GetMatchStateResponse")]
         System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> GetMatchStateAsync(string sessionId, string roomId, string matchId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetMatchPreparation", ReplyAction="http://tempuri.org/IGameService/GetMatchPreparationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/GetMatchPreparationMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        Backgammon.Client.GameReference.MatchPreparation GetMatchPreparation(string sessionId, string roomId, string matchId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetMatchPreparation", ReplyAction="http://tempuri.org/IGameService/GetMatchPreparationResponse")]
+        System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchPreparation> GetMatchPreparationAsync(string sessionId, string roomId, string matchId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RegisterPlayerReady", ReplyAction="http://tempuri.org/IGameService/RegisterPlayerReadyResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/RegisterPlayerReadyMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
         Backgammon.Client.GameReference.MatchPreparation RegisterPlayerReady(string sessionId, string roomId, string matchId);
@@ -1221,19 +1244,19 @@ namespace Backgammon.Client.GameReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/MoveChecker", ReplyAction="http://tempuri.org/IGameService/MoveCheckerResponse")]
         System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> MoveCheckerAsync(string sessionId, Backgammon.Client.GameReference.PlayerCheckerMove playerMove);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetMatchPreparation", ReplyAction="http://tempuri.org/IGameService/GetMatchPreparationResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/GetMatchPreparationMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
-        Backgammon.Client.GameReference.MatchPreparation GetMatchPreparation(string sessionId, string roomId, string matchId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetMatchPreparation", ReplyAction="http://tempuri.org/IGameService/GetMatchPreparationResponse")]
-        System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchPreparation> GetMatchPreparationAsync(string sessionId, string roomId, string matchId);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/UndoCheckerMove", ReplyAction="http://tempuri.org/IGameService/UndoCheckerMoveResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/UndoCheckerMoveMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
         Backgammon.Client.GameReference.MatchState UndoCheckerMove(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/UndoCheckerMove", ReplyAction="http://tempuri.org/IGameService/UndoCheckerMoveResponse")]
         System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> UndoCheckerMoveAsync(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ConfirmTurn", ReplyAction="http://tempuri.org/IGameService/ConfirmTurnResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/ConfirmTurnMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        Backgammon.Client.GameReference.MatchState ConfirmTurn(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ConfirmTurn", ReplyAction="http://tempuri.org/IGameService/ConfirmTurnResponse")]
+        System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> ConfirmTurnAsync(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1282,6 +1305,14 @@ namespace Backgammon.Client.GameReference {
             return base.Channel.GetMatchStateAsync(sessionId, roomId, matchId);
         }
         
+        public Backgammon.Client.GameReference.MatchPreparation GetMatchPreparation(string sessionId, string roomId, string matchId) {
+            return base.Channel.GetMatchPreparation(sessionId, roomId, matchId);
+        }
+        
+        public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchPreparation> GetMatchPreparationAsync(string sessionId, string roomId, string matchId) {
+            return base.Channel.GetMatchPreparationAsync(sessionId, roomId, matchId);
+        }
+        
         public Backgammon.Client.GameReference.MatchPreparation RegisterPlayerReady(string sessionId, string roomId, string matchId) {
             return base.Channel.RegisterPlayerReady(sessionId, roomId, matchId);
         }
@@ -1314,20 +1345,20 @@ namespace Backgammon.Client.GameReference {
             return base.Channel.MoveCheckerAsync(sessionId, playerMove);
         }
         
-        public Backgammon.Client.GameReference.MatchPreparation GetMatchPreparation(string sessionId, string roomId, string matchId) {
-            return base.Channel.GetMatchPreparation(sessionId, roomId, matchId);
-        }
-        
-        public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchPreparation> GetMatchPreparationAsync(string sessionId, string roomId, string matchId) {
-            return base.Channel.GetMatchPreparationAsync(sessionId, roomId, matchId);
-        }
-        
         public Backgammon.Client.GameReference.MatchState UndoCheckerMove(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn) {
             return base.Channel.UndoCheckerMove(sessionId, playerTurn);
         }
         
         public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> UndoCheckerMoveAsync(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn) {
             return base.Channel.UndoCheckerMoveAsync(sessionId, playerTurn);
+        }
+        
+        public Backgammon.Client.GameReference.MatchState ConfirmTurn(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn) {
+            return base.Channel.ConfirmTurn(sessionId, playerTurn);
+        }
+        
+        public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> ConfirmTurnAsync(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn) {
+            return base.Channel.ConfirmTurnAsync(sessionId, playerTurn);
         }
     }
 }

@@ -483,6 +483,40 @@ namespace Backgammon.Server.Services.Manager
             }
         }
 
+        public static MatchState ConfirmTurn(MatchPlayer player, long expectedVersion)
+        {
+            if (player == null)
+            {
+                throw new ArgumentNullException(nameof(player));
+            }
+
+            ActiveMatch activeMatch = FindSavedActiveMatch(player.RoomId);
+
+            lock (activeMatch.Queue)
+            {
+                ValidateMatchPlayer(activeMatch, player);
+                ValidateMatchVersion(activeMatch.State, expectedVersion);
+
+                MatchTurn.ValidatePlayerTurn(activeMatch.State, player.PlayerId);
+
+                CheckerColor playerColor = GetPlayerColor(
+                    activeMatch.Session,
+                    player.PlayerId);
+
+                int nextPlayerId = GetOpponentPlayerId(activeMatch.Session, player.PlayerId);
+
+                MatchTurn.ConfirmTurn(activeMatch.State, playerColor, nextPlayerId);
+
+                activeMatch.TurnHistory.Clear();
+
+                activeMatch.State.Version++;
+
+                MatchState stateCopy = MatchStateFactory.Copy(activeMatch.State);
+
+                return stateCopy;
+            }
+        }
+
         internal static bool RemoveMatch(string roomId)
         {
             bool removedMatch = false;
@@ -759,6 +793,26 @@ namespace Backgammon.Server.Services.Manager
             }
 
             return playerColor;
+        }
+
+        private static int GetOpponentPlayerId(MatchSession matchSession, int playerId)
+        {
+            int opponentPlayerId;
+
+            if (matchSession.PlayerHostId == playerId)
+            {
+                opponentPlayerId = matchSession.PlayerGuestId;
+            }
+            else if (matchSession.PlayerGuestId == playerId)
+            {
+                opponentPlayerId = matchSession.PlayerHostId;
+            }
+            else
+            {
+                throw new UnauthorizedAccessException(PlayerNotInMatch);
+            }
+
+            return opponentPlayerId;
         }
     }
 }

@@ -20,12 +20,16 @@ namespace Backgammon.Server.Services.Data
         [DataMember]
         public bool CanUndo { get; set; }
 
+        [DataMember]
+        public bool CanConfirm { get; set; }
+
         public MatchTurnState()
         {
             CurrentPlayerId = UnassignedPlayerId;
             Dice = new MatchDiceState();
             AvailableMoves = Array.Empty<CheckerMove>();
             CanUndo = false;
+            CanConfirm = false;
         }
     }
 }

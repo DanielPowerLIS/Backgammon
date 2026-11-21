@@ -24,6 +24,15 @@
   <wsdl:message name="IGameService_GetMatchState_MatchFaultFault_FaultMessage">
     <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q1:MatchFault" />
   </wsdl:message>
+  <wsdl:message name="IGameService_GetMatchPreparation_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMatchPreparation" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_GetMatchPreparation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMatchPreparationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_GetMatchPreparation_MatchFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q2:MatchFault" />
+  </wsdl:message>
   <wsdl:message name="IGameService_RegisterPlayerReady_InputMessage">
     <wsdl:part name="parameters" element="tns:RegisterPlayerReady" />
   </wsdl:message>
@@ -31,7 +40,7 @@
     <wsdl:part name="parameters" element="tns:RegisterPlayerReadyResponse" />
   </wsdl:message>
   <wsdl:message name="IGameService_RegisterPlayerReady_MatchFaultFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q2:MatchFault" />
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q3:MatchFault" />
   </wsdl:message>
   <wsdl:message name="IGameService_RollOpeningDie_InputMessage">
     <wsdl:part name="parameters" element="tns:RollOpeningDie" />
@@ -40,7 +49,7 @@
     <wsdl:part name="parameters" element="tns:RollOpeningDieResponse" />
   </wsdl:message>
   <wsdl:message name="IGameService_RollOpeningDie_MatchFaultFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q3:MatchFault" />
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q4:MatchFault" />
   </wsdl:message>
   <wsdl:message name="IGameService_RollDice_InputMessage">
     <wsdl:part name="parameters" element="tns:RollDice" />
@@ -49,7 +58,7 @@
     <wsdl:part name="parameters" element="tns:RollDiceResponse" />
   </wsdl:message>
   <wsdl:message name="IGameService_RollDice_MatchFaultFault_FaultMessage">
-    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q4:MatchFault" />
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q5:MatchFault" />
   </wsdl:message>
   <wsdl:message name="IGameService_MoveChecker_InputMessage">
     <wsdl:part name="parameters" element="tns:MoveChecker" />
@@ -58,15 +67,6 @@
     <wsdl:part name="parameters" element="tns:MoveCheckerResponse" />
   </wsdl:message>
   <wsdl:message name="IGameService_MoveChecker_MatchFaultFault_FaultMessage">
-    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q5:MatchFault" />
-  </wsdl:message>
-  <wsdl:message name="IGameService_GetMatchPreparation_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetMatchPreparation" />
-  </wsdl:message>
-  <wsdl:message name="IGameService_GetMatchPreparation_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetMatchPreparationResponse" />
-  </wsdl:message>
-  <wsdl:message name="IGameService_GetMatchPreparation_MatchFaultFault_FaultMessage">
     <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q6:MatchFault" />
   </wsdl:message>
   <wsdl:message name="IGameService_UndoCheckerMove_InputMessage">
@@ -77,6 +77,15 @@
   </wsdl:message>
   <wsdl:message name="IGameService_UndoCheckerMove_MatchFaultFault_FaultMessage">
     <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q7:MatchFault" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_ConfirmTurn_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConfirmTurn" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_ConfirmTurn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConfirmTurnResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGameService_ConfirmTurn_MatchFaultFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q8:MatchFault" />
   </wsdl:message>
   <wsdl:message name="IGameService_OnMatchStateUpdated_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:OnMatchStateUpdated" />
@@ -89,6 +98,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/GetMatchState" message="tns:IGameService_GetMatchState_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/GetMatchStateResponse" message="tns:IGameService_GetMatchState_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/GetMatchStateMatchFaultFault" name="MatchFaultFault" message="tns:IGameService_GetMatchState_MatchFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMatchPreparation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/GetMatchPreparation" message="tns:IGameService_GetMatchPreparation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/GetMatchPreparationResponse" message="tns:IGameService_GetMatchPreparation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/GetMatchPreparationMatchFaultFault" name="MatchFaultFault" message="tns:IGameService_GetMatchPreparation_MatchFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="RegisterPlayerReady">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/RegisterPlayerReady" message="tns:IGameService_RegisterPlayerReady_InputMessage" />
@@ -110,15 +124,15 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/MoveCheckerResponse" message="tns:IGameService_MoveChecker_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/MoveCheckerMatchFaultFault" name="MatchFaultFault" message="tns:IGameService_MoveChecker_MatchFaultFault_FaultMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetMatchPreparation">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/GetMatchPreparation" message="tns:IGameService_GetMatchPreparation_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/GetMatchPreparationResponse" message="tns:IGameService_GetMatchPreparation_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/GetMatchPreparationMatchFaultFault" name="MatchFaultFault" message="tns:IGameService_GetMatchPreparation_MatchFaultFault_FaultMessage" />
-    </wsdl:operation>
     <wsdl:operation name="UndoCheckerMove">
       <wsdl:input wsaw:Action="http://tempuri.org/IGameService/UndoCheckerMove" message="tns:IGameService_UndoCheckerMove_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/UndoCheckerMoveResponse" message="tns:IGameService_UndoCheckerMove_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/UndoCheckerMoveMatchFaultFault" name="MatchFaultFault" message="tns:IGameService_UndoCheckerMove_MatchFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmTurn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGameService/ConfirmTurn" message="tns:IGameService_ConfirmTurn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGameService/ConfirmTurnResponse" message="tns:IGameService_ConfirmTurn_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IGameService/ConfirmTurnMatchFaultFault" name="MatchFaultFault" message="tns:IGameService_ConfirmTurn_MatchFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="OnMatchStateUpdated">
       <wsdl:output wsaw:Action="http://tempuri.org/IGameService/OnMatchStateUpdated" message="tns:IGameService_OnMatchStateUpdated_OutputCallbackMessage" />
@@ -132,6 +146,18 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
     <wsdl:operation name="GetMatchState">
       <soap12:operation soapAction="http://tempuri.org/IGameService/GetMatchState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="MatchFaultFault">
+        <soap12:fault use="literal" name="MatchFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetMatchPreparation">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/GetMatchPreparation" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -190,8 +216,8 @@
         <soap12:fault use="literal" name="MatchFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="GetMatchPreparation">
-      <soap12:operation soapAction="http://tempuri.org/IGameService/GetMatchPreparation" style="document" />
+    <wsdl:operation name="UndoCheckerMove">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/UndoCheckerMove" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -202,8 +228,8 @@
         <soap12:fault use="literal" name="MatchFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="UndoCheckerMove">
-      <soap12:operation soapAction="http://tempuri.org/IGameService/UndoCheckerMove" style="document" />
+    <wsdl:operation name="ConfirmTurn">
+      <soap12:operation soapAction="http://tempuri.org/IGameService/ConfirmTurn" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
