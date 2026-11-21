@@ -743,4 +743,10 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_CheckerMoveErrorMessage" xml:space="preserve">
     <value>The move could not be confirmed. Please try again.</value>
   </data>
+  <data name="TextBlock_SharedPotLabel" xml:space="preserve">
+    <value>Shared pot</value>
+  </data>
+  <data name="TextBlock_CheckerCapturedMessage" xml:space="preserve">
+    <value>CHECKER CAPTURED!</value>
+  </data>
 </root>

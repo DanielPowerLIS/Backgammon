@@ -40,6 +40,8 @@ namespace Backgammon.Server.Domain
                 RoomId = matchState.RoomId,
                 Phase = matchState.Phase,
                 Board = CopyBoard(matchState.Board),
+                SharedPot = matchState.SharedPot,
+                CaptureNumber = matchState.CaptureNumber,
                 Version = matchState.Version,
                 Turn = CopyTurn(matchState.Turn)
             };

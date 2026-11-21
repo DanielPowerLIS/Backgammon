@@ -172,6 +172,9 @@
       <DependentUpon>JoinLobbyDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Game\Controls\BoardPointSelection.cs" />
+    <Compile Include="Views\Game\Controls\CaptureNoticeControl.xaml.cs">
+      <DependentUpon>CaptureNoticeControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Game\Controls\MatchStartControl.xaml.cs">
       <DependentUpon>MatchStartControl.xaml</DependentUpon>
     </Compile>
@@ -307,6 +310,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Game\Controls\BoardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Game\Controls\CaptureNoticeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

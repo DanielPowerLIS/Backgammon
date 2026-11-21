@@ -5,6 +5,9 @@ namespace Backgammon.Server.Services.Data
     [DataContract]
     public class MatchState
     {
+        private static readonly int InitialSharedPot = 0;
+        private const long InitialCaptureNumber = 0;
+
         [DataMember]
         public string MatchId { get; set; }
 
@@ -23,6 +26,12 @@ namespace Backgammon.Server.Services.Data
         [DataMember]
         public MatchTurnState Turn { get; set; }
 
+        [DataMember]
+        public int SharedPot { get; set; }
+
+        [DataMember]
+        public long CaptureNumber { get; set; }
+
         public MatchState()
         {
             MatchId = string.Empty;
@@ -30,6 +39,8 @@ namespace Backgammon.Server.Services.Data
             Phase = MatchPhase.WaitingForPlayers;
             Board = new MatchBoardState();
             Turn = new MatchTurnState();
+            SharedPot = InitialSharedPot;
+            CaptureNumber = InitialCaptureNumber;
         }
     }
 }
