@@ -743,6 +743,11 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_CheckerMoveErrorMessage" xml:space="preserve">
     <value>The move could not be confirmed. Please try again.</value>
   </data>
+  <data name="TextBlock_FriendRequestUpdateErrorTitle" xml:space="preserve">
+    <value>Friend request</value>
+  </data>
+  <data name="TextBlock_FriendRequestUpdateErrorMessage" xml:space="preserve">
+    <value>The friend request could not be processed. Please try again.</value>
   <data name="TextBlock_SharedPotLabel" xml:space="preserve">
     <value>Shared pot</value>
   </data>

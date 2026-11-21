@@ -197,6 +197,20 @@ namespace Backgammon.Client.FriendReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/GetFriendRequests", ReplyAction="http://tempuri.org/IFriendService/GetFriendRequestsResponse")]
         System.Threading.Tasks.Task<Backgammon.Client.FriendReference.FriendRequestPending[]> GetFriendRequestsAsync(string sessionId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/AcceptFriendRequest", ReplyAction="http://tempuri.org/IFriendService/AcceptFriendRequestResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.FriendReference.FriendFault), Action="http://tempuri.org/IFriendService/AcceptFriendRequestFriendFaultFault", Name="FriendFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        void AcceptFriendRequest(string sessionId, int requestId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/AcceptFriendRequest", ReplyAction="http://tempuri.org/IFriendService/AcceptFriendRequestResponse")]
+        System.Threading.Tasks.Task AcceptFriendRequestAsync(string sessionId, int requestId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/RejectFriendRequest", ReplyAction="http://tempuri.org/IFriendService/RejectFriendRequestResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.FriendReference.FriendFault), Action="http://tempuri.org/IFriendService/RejectFriendRequestFriendFaultFault", Name="FriendFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        void RejectFriendRequest(string sessionId, int requestId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/RejectFriendRequest", ReplyAction="http://tempuri.org/IFriendService/RejectFriendRequestResponse")]
+        System.Threading.Tasks.Task RejectFriendRequestAsync(string sessionId, int requestId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -240,6 +254,22 @@ namespace Backgammon.Client.FriendReference {
         
         public System.Threading.Tasks.Task<Backgammon.Client.FriendReference.FriendRequestPending[]> GetFriendRequestsAsync(string sessionId) {
             return base.Channel.GetFriendRequestsAsync(sessionId);
+        }
+        
+        public void AcceptFriendRequest(string sessionId, int requestId) {
+            base.Channel.AcceptFriendRequest(sessionId, requestId);
+        }
+        
+        public System.Threading.Tasks.Task AcceptFriendRequestAsync(string sessionId, int requestId) {
+            return base.Channel.AcceptFriendRequestAsync(sessionId, requestId);
+        }
+        
+        public void RejectFriendRequest(string sessionId, int requestId) {
+            base.Channel.RejectFriendRequest(sessionId, requestId);
+        }
+        
+        public System.Threading.Tasks.Task RejectFriendRequestAsync(string sessionId, int requestId) {
+            return base.Channel.RejectFriendRequestAsync(sessionId, requestId);
         }
     }
 }

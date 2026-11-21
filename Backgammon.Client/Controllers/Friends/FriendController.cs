@@ -31,6 +31,16 @@ namespace Backgammon.Client.Controllers.Friends
             return friendRequests;
         }
 
+        public async Task AcceptFriendRequestAsync(int requestId)
+        {
+            string sessionId = PlayerSessionContext.GetSession().SessionId;
+            await _friendClient.AcceptFriendRequestAsync(sessionId, requestId);
+        }
 
+        public async Task RejectFriendRequestAsync(int requestId)
+        {
+            string sessionId = PlayerSessionContext.GetSession().SessionId;
+            await _friendClient.RejectFriendRequestAsync(sessionId, requestId);
+        }
     }
 }

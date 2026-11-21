@@ -743,6 +743,11 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_CheckerMoveErrorMessage" xml:space="preserve">
     <value>No se pudo confirmar el movimiento. Inténtalo nuevamente.</value>
   </data>
+  <data name="TextBlock_FriendRequestUpdateErrorTitle" xml:space="preserve">
+    <value>Solicitud de amistad</value>
+  </data>
+  <data name="TextBlock_FriendRequestUpdateErrorMessage" xml:space="preserve">
+    <value>No se pudo procesar la solicitud de amistad. Inténtalo nuevamente.</value>
   <data name="TextBlock_SharedPotLabel" xml:space="preserve">
     <value>Pozo compartido</value>
   </data>

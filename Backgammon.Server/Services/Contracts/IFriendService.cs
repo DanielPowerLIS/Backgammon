@@ -18,5 +18,13 @@ namespace Backgammon.Server.Services.Contracts
         [OperationContract]
         [FaultContract(typeof(FriendFault))]
         List<FriendRequestPending> GetFriendRequests(string sessionId);
+
+        [OperationContract]
+        [FaultContract(typeof(FriendFault))]
+        void AcceptFriendRequest(string sessionId, int requestId);
+
+        [OperationContract]
+        [FaultContract(typeof(FriendFault))]
+        void RejectFriendRequest(string sessionId, int requestId);
     }
 }

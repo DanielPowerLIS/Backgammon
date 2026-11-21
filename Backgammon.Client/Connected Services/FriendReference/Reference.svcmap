@@ -22,11 +22,11 @@
     <MetadataSource Address="http://localhost:9002/FriendService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="FriendService.wsdl" MetadataType="Wsdl" ID="080c18f4-00b7-4d37-92f2-20d1981d5f8a" SourceId="1" SourceUrl="http://localhost:9002/FriendService?wsdl" />
-    <MetadataFile FileName="FriendService.xsd" MetadataType="Schema" ID="bae43088-ab8d-4617-b75f-918c1bef5369" SourceId="1" SourceUrl="http://localhost:9002/FriendService?xsd=xsd2" />
-    <MetadataFile FileName="FriendService1.xsd" MetadataType="Schema" ID="d25727b3-ed4e-48f8-93bd-cc7ca8b2bd0c" SourceId="1" SourceUrl="http://localhost:9002/FriendService?xsd=xsd1" />
-    <MetadataFile FileName="FriendService2.xsd" MetadataType="Schema" ID="e631f9db-fd41-4420-82bd-f97324265ae6" SourceId="1" SourceUrl="http://localhost:9002/FriendService?xsd=xsd0" />
-    <MetadataFile FileName="FriendService.disco" MetadataType="Disco" ID="10a2ab24-2354-4472-9034-e6e1ea195622" SourceId="1" SourceUrl="http://localhost:9002/FriendService?disco" />
+    <MetadataFile FileName="FriendService3.xsd" MetadataType="Schema" ID="80b34368-be30-4518-988e-4f1ae20c3fc0" SourceId="1" SourceUrl="http://26.186.19.19:9002/FriendService?xsd=xsd2" />
+    <MetadataFile FileName="FriendService31.xsd" MetadataType="Schema" ID="07be5f73-d4a4-44bc-8cf0-d7447226119d" SourceId="1" SourceUrl="http://26.186.19.19:9002/FriendService?xsd=xsd0" />
+    <MetadataFile FileName="FriendService1.disco" MetadataType="Disco" ID="c0a359ac-aea8-45fa-99c1-e316678a3ab3" SourceId="1" SourceUrl="http://26.186.19.19:9002/FriendService?disco" />
+    <MetadataFile FileName="FriendService1.wsdl" MetadataType="Wsdl" ID="0f954bc2-8bcc-4be9-8225-35e4ebe39e88" SourceId="1" SourceUrl="http://26.186.19.19:9002/FriendService?wsdl" />
+    <MetadataFile FileName="FriendService32.xsd" MetadataType="Schema" ID="50ed71ac-8dc0-44cc-bf47-f47f80db0cc5" SourceId="1" SourceUrl="http://26.186.19.19:9002/FriendService?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
