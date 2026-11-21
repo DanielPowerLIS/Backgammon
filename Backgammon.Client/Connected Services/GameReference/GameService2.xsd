@@ -2,32 +2,15 @@
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:complexType name="MatchState">
     <xs:sequence>
-      <xs:element minOccurs="0" name="AvailableMoves" nillable="true" type="tns:ArrayOfCheckerMove" />
       <xs:element minOccurs="0" name="Board" nillable="true" type="tns:MatchBoardState" />
-      <xs:element minOccurs="0" name="CurrentPlayerId" type="xs:int" />
-      <xs:element minOccurs="0" name="Dice" nillable="true" type="tns:MatchDiceState" />
       <xs:element minOccurs="0" name="MatchId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Phase" type="tns:MatchPhase" />
       <xs:element minOccurs="0" name="RoomId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Turn" nillable="true" type="tns:MatchTurnState" />
       <xs:element minOccurs="0" name="Version" type="xs:long" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MatchState" nillable="true" type="tns:MatchState" />
-  <xs:complexType name="ArrayOfCheckerMove">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="CheckerMove" nillable="true" type="tns:CheckerMove" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfCheckerMove" nillable="true" type="tns:ArrayOfCheckerMove" />
-  <xs:complexType name="CheckerMove">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="DestinationPointNumber" type="xs:int" />
-      <xs:element minOccurs="0" name="FirstDieUses" type="xs:int" />
-      <xs:element minOccurs="0" name="SecondDieUses" type="xs:int" />
-      <xs:element minOccurs="0" name="SourcePointNumber" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="CheckerMove" nillable="true" type="tns:CheckerMove" />
   <xs:complexType name="MatchBoardState">
     <xs:sequence>
       <xs:element minOccurs="0" name="BlueBorneOff" type="xs:int" />
@@ -60,15 +43,6 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="CheckerColor" nillable="true" type="tns:CheckerColor" />
-  <xs:complexType name="MatchDiceState">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="FirstDieRemainingUses" type="xs:int" />
-      <xs:element minOccurs="0" name="FirstDieValue" type="xs:int" />
-      <xs:element minOccurs="0" name="SecondDieRemainingUses" type="xs:int" />
-      <xs:element minOccurs="0" name="SecondDieValue" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="MatchDiceState" nillable="true" type="tns:MatchDiceState" />
   <xs:simpleType name="MatchPhase">
     <xs:restriction base="xs:string">
       <xs:enumeration value="WaitingForPlayers" />
@@ -80,6 +54,38 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="MatchPhase" nillable="true" type="tns:MatchPhase" />
+  <xs:complexType name="MatchTurnState">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AvailableMoves" nillable="true" type="tns:ArrayOfCheckerMove" />
+      <xs:element minOccurs="0" name="CurrentPlayerId" type="xs:int" />
+      <xs:element minOccurs="0" name="Dice" nillable="true" type="tns:MatchDiceState" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchTurnState" nillable="true" type="tns:MatchTurnState" />
+  <xs:complexType name="ArrayOfCheckerMove">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CheckerMove" nillable="true" type="tns:CheckerMove" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCheckerMove" nillable="true" type="tns:ArrayOfCheckerMove" />
+  <xs:complexType name="CheckerMove">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DestinationPointNumber" type="xs:int" />
+      <xs:element minOccurs="0" name="FirstDieUses" type="xs:int" />
+      <xs:element minOccurs="0" name="SecondDieUses" type="xs:int" />
+      <xs:element minOccurs="0" name="SourcePointNumber" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CheckerMove" nillable="true" type="tns:CheckerMove" />
+  <xs:complexType name="MatchDiceState">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FirstDieRemainingUses" type="xs:int" />
+      <xs:element minOccurs="0" name="FirstDieValue" type="xs:int" />
+      <xs:element minOccurs="0" name="SecondDieRemainingUses" type="xs:int" />
+      <xs:element minOccurs="0" name="SecondDieValue" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchDiceState" nillable="true" type="tns:MatchDiceState" />
   <xs:complexType name="MatchFault">
     <xs:sequence>
       <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />

@@ -440,15 +440,15 @@ namespace Backgammon.Client.Views.Game
         {
             int playerId = PlayerSessionContext.GetSession().PlayerId;
 
-            bool isLocalTurn = matchState.CurrentPlayerId == playerId;
+            bool isLocalTurn = matchState.Turn.CurrentPlayerId == playerId;
 
             CheckerColor playerColor = CheckerColor.None;
 
-            if (matchState.CurrentPlayerId == CurrentMatch.PlayerHostId)
+            if (matchState.Turn.CurrentPlayerId == CurrentMatch.PlayerHostId)
             {
                 playerColor = CheckerColor.Blue;
             }
-            else if (matchState.CurrentPlayerId == CurrentMatch.PlayerGuestId)
+            else if (matchState.Turn.CurrentPlayerId == CurrentMatch.PlayerGuestId)
             {
                 playerColor = CheckerColor.Pink;
             }
@@ -564,7 +564,7 @@ namespace Backgammon.Client.Views.Game
 
             var sourcePoints = new HashSet<int>();
 
-            foreach (CheckerMove move in matchState.AvailableMoves)
+            foreach (CheckerMove move in matchState.Turn.AvailableMoves)
             {
                 if (UsesSelectedDie(move, selectedDieIndex))
                 {
@@ -600,8 +600,8 @@ namespace Backgammon.Client.Views.Game
                 int playerId = PlayerSessionContext.GetSession().PlayerId;
 
                 canSelectMovement = _renderedState.Phase == MatchPhase.MovingCheckers &&
-                    _renderedState.CurrentPlayerId == playerId &&
-                    _renderedState.AvailableMoves != null;
+                    _renderedState.Turn.CurrentPlayerId == playerId &&
+                    _renderedState.Turn.AvailableMoves != null;
             }
 
             return canSelectMovement;
@@ -629,7 +629,7 @@ namespace Backgammon.Client.Views.Game
 
             var destinationPoints = new HashSet<int>();
 
-            foreach (CheckerMove move in matchState.AvailableMoves)
+            foreach (CheckerMove move in matchState.Turn.AvailableMoves)
             {
                 if (move.SourcePointNumber == _selectedSourcePointNumber && UsesSelectedDie(move, selectedDieIndex))
                 {
@@ -646,7 +646,7 @@ namespace Backgammon.Client.Views.Game
 
             int selectedDieIndex = turnDiceControlGame.SelectedDieIndex;
 
-            foreach (CheckerMove move in matchState.AvailableMoves)
+            foreach (CheckerMove move in matchState.Turn.AvailableMoves)
             {
                 bool sameSource = move.SourcePointNumber == _selectedSourcePointNumber;
 

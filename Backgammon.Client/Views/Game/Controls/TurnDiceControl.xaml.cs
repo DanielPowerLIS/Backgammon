@@ -84,19 +84,16 @@ namespace Backgammon.Client.Views.Game.Controls
 
         public void ApplyMatchState(MatchState matchState, bool isLocalTurn, CheckerColor playerColor)
         {
-            if (matchState == null)
+            if (matchState.Turn == null || matchState.Turn.Dice == null)
             {
-                throw new ArgumentNullException(nameof(matchState));
-            }
-
-            if (matchState.Dice == null)
-            {
-                throw new ArgumentException("The match dice state is required.", nameof(matchState));
+                throw new ArgumentException(
+                    "The match turn and dice state are required.",
+                    nameof(matchState));
             }
 
             bool hadDice = _hasDice;
 
-            _diceState = matchState.Dice;
+            _diceState = matchState.Turn.Dice;
             _playerColor = playerColor;
 
             _hasDice = matchState.Phase == MatchPhase.MovingCheckers &&
