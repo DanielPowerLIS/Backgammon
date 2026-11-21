@@ -8,6 +8,9 @@ namespace Backgammon.Server.Domain
     {
         private static readonly int SingleDieUses = 1;
         private static readonly int DoubleDieUses = 2;
+        private static readonly int CapturePoints = 10;
+        private const int NoAvailableMoves = 0;
+        private const int UnassignedPlayerId = 0;
 
         public static void RollDice(MatchState matchState, int playerId, CheckerColor playerColor)
         {
@@ -23,8 +26,9 @@ namespace Backgammon.Server.Domain
             var movement = new MatchMovement(matchState.Board, diceState, playerColor);
             CheckerMove[] availableMoves = movement.GetAvailableMoves();
 
-            matchState.Dice = diceState;
-            matchState.AvailableMoves = availableMoves;
+            matchState.Turn.Dice = diceState;
+            matchState.Turn.AvailableMoves = availableMoves;
+            matchState.Turn.CanConfirm = availableMoves.Length == NoAvailableMoves;
             matchState.Phase = MatchPhase.MovingCheckers;
         }
 
@@ -35,7 +39,7 @@ namespace Backgammon.Server.Domain
                 throw new ArgumentNullException(nameof(matchState));
             }
 
-            if (matchState.CurrentPlayerId != playerId)
+            if (matchState.Turn.CurrentPlayerId != playerId)
             {
                 throw new UnauthorizedAccessException("The player cannot act outside their turn.");
             }
@@ -53,13 +57,91 @@ namespace Backgammon.Server.Domain
                 throw new ArgumentException("The match is not accepting checker movements.");
             }
 
-            var movement = new MatchMovement(matchState.Board, matchState.Dice, playerColor);
+            var movement = new MatchMovement(
+                matchState.Board,
+                matchState.Turn.Dice,
+                playerColor);
 
-            movement.MoveChecker(selectedMove);
+            bool checkerCaptured = movement.MoveChecker(selectedMove);
+
+            if (checkerCaptured)
+            {
+                matchState.SharedPot += CapturePoints;
+                matchState.CaptureNumber++;
+            }
 
             CheckerMove[] availableMoves = movement.GetAvailableMoves();
 
-            matchState.AvailableMoves = availableMoves;
+            matchState.Turn.AvailableMoves = availableMoves;
+            matchState.Turn.CanConfirm = availableMoves.Length == NoAvailableMoves;
+        }
+
+        public static void UndoCheckerMove(MatchState matchState, TurnSnapshot snapshot, CheckerColor playerColor)
+        {
+            if (matchState == null)
+            {
+                throw new ArgumentNullException(nameof(matchState));
+            }
+
+            if (snapshot == null)
+            {
+                throw new ArgumentNullException(nameof(snapshot));
+            }
+
+            if (matchState.Phase != MatchPhase.MovingCheckers)
+            {
+                throw new ArgumentException("The match is not accepting movement undo.");
+            }
+
+            var movement = new MatchMovement(
+                snapshot.Board,
+                snapshot.Dice,
+                playerColor);
+
+            CheckerMove[] availableMoves = movement.GetAvailableMoves();
+
+            MatchStateFactory.RestoreTurnSnapshot(matchState, snapshot);
+
+            matchState.Turn.AvailableMoves = availableMoves;
+            matchState.Turn.CanConfirm = availableMoves.Length == NoAvailableMoves;
+        }
+
+        public static void ConfirmTurn(MatchState matchState, CheckerColor playerColor, int nextPlayerId)
+        {
+            if (matchState == null)
+            {
+                throw new ArgumentNullException(nameof(matchState));
+            }
+
+            if (matchState.Phase != MatchPhase.MovingCheckers)
+            {
+                throw new ArgumentException("The match is not accepting turn confirmation.");
+            }
+
+            if (nextPlayerId == UnassignedPlayerId || nextPlayerId == matchState.Turn.CurrentPlayerId)
+            {
+                throw new ArgumentException("The next player is invalid.", nameof(nextPlayerId));
+            }
+
+            var movement = new MatchMovement(
+                matchState.Board,
+                matchState.Turn.Dice,
+                playerColor);
+
+            CheckerMove[] availableMoves = movement.GetAvailableMoves();
+
+            if (availableMoves.Length != NoAvailableMoves)
+            {
+                throw new ArgumentException("The player still has available checker movements.");
+            }
+
+            var nextTurn = new MatchTurnState
+            {
+                CurrentPlayerId = nextPlayerId
+            };
+
+            matchState.Turn = nextTurn;
+            matchState.Phase = MatchPhase.WaitingForRoll;
         }
 
         private static void ValidateRoll(MatchState matchState, int playerId)

@@ -394,6 +394,10 @@ namespace Backgammon.Server.Services.Manager
                 CheckerColor playerColor = GetPlayerColor(activeMatch.Session, player.PlayerId);
                 MatchTurn.RollDice(activeMatch.State, player.PlayerId, playerColor);
 
+                activeMatch.TurnHistory.Clear();
+
+                activeMatch.State.Turn.CanUndo = activeMatch.TurnHistory.HasSnapshots;
+
                 activeMatch.State.Version++;
 
                 MatchState stateCopy = MatchStateFactory.Copy(activeMatch.State);
@@ -418,9 +422,92 @@ namespace Backgammon.Server.Services.Manager
 
                 MatchTurn.ValidatePlayerTurn(activeMatch.State, player.PlayerId);
 
-                CheckerColor playerColor = GetPlayerColor(activeMatch.Session, player.PlayerId);
-                
+                CheckerColor playerColor = GetPlayerColor(
+                    activeMatch.Session,
+                    player.PlayerId);
+
+                TurnSnapshot snapshot = MatchStateFactory.CreateTurnSnapshot(activeMatch.State);
+
                 MatchTurn.MoveChecker(activeMatch.State, playerColor, selectedMove);
+
+                activeMatch.TurnHistory.Save(snapshot);
+
+                activeMatch.State.Turn.CanUndo = activeMatch.TurnHistory.HasSnapshots;
+
+                activeMatch.State.Version++;
+
+                MatchState stateCopy = MatchStateFactory.Copy(activeMatch.State);
+
+                return stateCopy;
+            }
+        }
+
+        public static MatchState UndoCheckerMove(MatchPlayer player, long expectedVersion)
+        {
+            if (player == null)
+            {
+                throw new ArgumentNullException(nameof(player));
+            }
+
+            ActiveMatch activeMatch = FindSavedActiveMatch(player.RoomId);
+
+            lock (activeMatch.Queue)
+            {
+                ValidateMatchPlayer(activeMatch, player);
+                ValidateMatchVersion(activeMatch.State, expectedVersion);
+
+                MatchTurn.ValidatePlayerTurn(activeMatch.State, player.PlayerId);
+
+                if (!activeMatch.TurnHistory.HasSnapshots)
+                {
+                    throw new ArgumentException("There are no checker movements to undo.");
+                }
+
+                CheckerColor playerColor = GetPlayerColor(
+                    activeMatch.Session,
+                    player.PlayerId);
+
+                TurnSnapshot snapshot = activeMatch.TurnHistory.GetLastSnapshot();
+
+                MatchTurn.UndoCheckerMove(activeMatch.State, snapshot, playerColor);
+
+                activeMatch.TurnHistory.TakeLastSnapshot();
+
+                activeMatch.State.Turn.CanUndo = activeMatch.TurnHistory.HasSnapshots;
+
+                activeMatch.State.Version++;
+
+                MatchState stateCopy = MatchStateFactory.Copy(activeMatch.State);
+
+                return stateCopy;
+            }
+        }
+
+        public static MatchState ConfirmTurn(MatchPlayer player, long expectedVersion)
+        {
+            if (player == null)
+            {
+                throw new ArgumentNullException(nameof(player));
+            }
+
+            ActiveMatch activeMatch = FindSavedActiveMatch(player.RoomId);
+
+            lock (activeMatch.Queue)
+            {
+                ValidateMatchPlayer(activeMatch, player);
+                ValidateMatchVersion(activeMatch.State, expectedVersion);
+
+                MatchTurn.ValidatePlayerTurn(activeMatch.State, player.PlayerId);
+
+                CheckerColor playerColor = GetPlayerColor(
+                    activeMatch.Session,
+                    player.PlayerId);
+
+                int nextPlayerId = GetOpponentPlayerId(activeMatch.Session, player.PlayerId);
+
+                MatchTurn.ConfirmTurn(activeMatch.State, playerColor, nextPlayerId);
+
+                activeMatch.TurnHistory.Clear();
 
                 activeMatch.State.Version++;
 
@@ -675,7 +762,7 @@ namespace Backgammon.Server.Services.Manager
 
             preparation.Phase = MatchPhase.WaitingForRoll;
 
-            activeMatch.State.CurrentPlayerId = currentPlayerId;
+            activeMatch.State.Turn.CurrentPlayerId = currentPlayerId;
             activeMatch.State.Phase = MatchPhase.WaitingForRoll;
             activeMatch.State.Version++;
         }
@@ -706,6 +793,26 @@ namespace Backgammon.Server.Services.Manager
             }
 
             return playerColor;
+        }
+
+        private static int GetOpponentPlayerId(MatchSession matchSession, int playerId)
+        {
+            int opponentPlayerId;
+
+            if (matchSession.PlayerHostId == playerId)
+            {
+                opponentPlayerId = matchSession.PlayerGuestId;
+            }
+            else if (matchSession.PlayerGuestId == playerId)
+            {
+                opponentPlayerId = matchSession.PlayerHostId;
+            }
+            else
+            {
+                throw new UnauthorizedAccessException(PlayerNotInMatch);
+            }
+
+            return opponentPlayerId;
         }
     }
 }

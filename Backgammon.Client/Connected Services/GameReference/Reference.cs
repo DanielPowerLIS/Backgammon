@@ -23,16 +23,10 @@ namespace Backgammon.Client.GameReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Backgammon.Client.GameReference.CheckerMove[] AvailableMovesField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Backgammon.Client.GameReference.MatchBoardState BoardField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int CurrentPlayerIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Backgammon.Client.GameReference.MatchDiceState DiceField;
+        private long CaptureNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MatchIdField;
@@ -44,6 +38,12 @@ namespace Backgammon.Client.GameReference {
         private string RoomIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SharedPotField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Backgammon.Client.GameReference.MatchTurnState TurnField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long VersionField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -53,19 +53,6 @@ namespace Backgammon.Client.GameReference {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Backgammon.Client.GameReference.CheckerMove[] AvailableMoves {
-            get {
-                return this.AvailableMovesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AvailableMovesField, value) != true)) {
-                    this.AvailableMovesField = value;
-                    this.RaisePropertyChanged("AvailableMoves");
-                }
             }
         }
         
@@ -83,27 +70,14 @@ namespace Backgammon.Client.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CurrentPlayerId {
+        public long CaptureNumber {
             get {
-                return this.CurrentPlayerIdField;
+                return this.CaptureNumberField;
             }
             set {
-                if ((this.CurrentPlayerIdField.Equals(value) != true)) {
-                    this.CurrentPlayerIdField = value;
-                    this.RaisePropertyChanged("CurrentPlayerId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Backgammon.Client.GameReference.MatchDiceState Dice {
-            get {
-                return this.DiceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DiceField, value) != true)) {
-                    this.DiceField = value;
-                    this.RaisePropertyChanged("Dice");
+                if ((this.CaptureNumberField.Equals(value) != true)) {
+                    this.CaptureNumberField = value;
+                    this.RaisePropertyChanged("CaptureNumber");
                 }
             }
         }
@@ -143,6 +117,32 @@ namespace Backgammon.Client.GameReference {
                 if ((object.ReferenceEquals(this.RoomIdField, value) != true)) {
                     this.RoomIdField = value;
                     this.RaisePropertyChanged("RoomId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SharedPot {
+            get {
+                return this.SharedPotField;
+            }
+            set {
+                if ((this.SharedPotField.Equals(value) != true)) {
+                    this.SharedPotField = value;
+                    this.RaisePropertyChanged("SharedPot");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Backgammon.Client.GameReference.MatchTurnState Turn {
+            get {
+                return this.TurnField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TurnField, value) != true)) {
+                    this.TurnField = value;
+                    this.RaisePropertyChanged("Turn");
                 }
             }
         }
@@ -277,6 +277,229 @@ namespace Backgammon.Client.GameReference {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MatchTurnState", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class MatchTurnState : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Backgammon.Client.GameReference.CheckerMove[] AvailableMovesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool CanConfirmField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool CanUndoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CurrentPlayerIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Backgammon.Client.GameReference.MatchDiceState DiceField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Backgammon.Client.GameReference.CheckerMove[] AvailableMoves {
+            get {
+                return this.AvailableMovesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AvailableMovesField, value) != true)) {
+                    this.AvailableMovesField = value;
+                    this.RaisePropertyChanged("AvailableMoves");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanConfirm {
+            get {
+                return this.CanConfirmField;
+            }
+            set {
+                if ((this.CanConfirmField.Equals(value) != true)) {
+                    this.CanConfirmField = value;
+                    this.RaisePropertyChanged("CanConfirm");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool CanUndo {
+            get {
+                return this.CanUndoField;
+            }
+            set {
+                if ((this.CanUndoField.Equals(value) != true)) {
+                    this.CanUndoField = value;
+                    this.RaisePropertyChanged("CanUndo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CurrentPlayerId {
+            get {
+                return this.CurrentPlayerIdField;
+            }
+            set {
+                if ((this.CurrentPlayerIdField.Equals(value) != true)) {
+                    this.CurrentPlayerIdField = value;
+                    this.RaisePropertyChanged("CurrentPlayerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Backgammon.Client.GameReference.MatchDiceState Dice {
+            get {
+                return this.DiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DiceField, value) != true)) {
+                    this.DiceField = value;
+                    this.RaisePropertyChanged("Dice");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MatchPhase", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    public enum MatchPhase : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        WaitingForPlayers = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        StartingCountdown = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OpeningRoll = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        WaitingForRoll = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        MovingCheckers = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Finished = 5,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MatchPointState", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class MatchPointState : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Backgammon.Client.GameReference.CheckerColor OwnerField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Count {
+            get {
+                return this.CountField;
+            }
+            set {
+                if ((this.CountField.Equals(value) != true)) {
+                    this.CountField = value;
+                    this.RaisePropertyChanged("Count");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Number {
+            get {
+                return this.NumberField;
+            }
+            set {
+                if ((this.NumberField.Equals(value) != true)) {
+                    this.NumberField = value;
+                    this.RaisePropertyChanged("Number");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Backgammon.Client.GameReference.CheckerColor Owner {
+            get {
+                return this.OwnerField;
+            }
+            set {
+                if ((this.OwnerField.Equals(value) != true)) {
+                    this.OwnerField = value;
+                    this.RaisePropertyChanged("Owner");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CheckerColor", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    public enum CheckerColor : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Blue = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Pink = 2,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -463,120 +686,6 @@ namespace Backgammon.Client.GameReference {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MatchPhase", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
-    public enum MatchPhase : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        WaitingForPlayers = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        StartingCountdown = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        OpeningRoll = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        WaitingForRoll = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        MovingCheckers = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Finished = 5,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MatchPointState", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
-    [System.SerializableAttribute()]
-    public partial class MatchPointState : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int CountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int NumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Backgammon.Client.GameReference.CheckerColor OwnerField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Count {
-            get {
-                return this.CountField;
-            }
-            set {
-                if ((this.CountField.Equals(value) != true)) {
-                    this.CountField = value;
-                    this.RaisePropertyChanged("Count");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Number {
-            get {
-                return this.NumberField;
-            }
-            set {
-                if ((this.NumberField.Equals(value) != true)) {
-                    this.NumberField = value;
-                    this.RaisePropertyChanged("Number");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Backgammon.Client.GameReference.CheckerColor Owner {
-            get {
-                return this.OwnerField;
-            }
-            set {
-                if ((this.OwnerField.Equals(value) != true)) {
-                    this.OwnerField = value;
-                    this.RaisePropertyChanged("Owner");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CheckerColor", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
-    public enum CheckerColor : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        None = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Blue = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Pink = 2,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -921,9 +1030,9 @@ namespace Backgammon.Client.GameReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerDiceRoll", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PlayerTurn", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
     [System.SerializableAttribute()]
-    public partial class PlayerDiceRoll : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class PlayerTurn : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -1100,6 +1209,13 @@ namespace Backgammon.Client.GameReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetMatchState", ReplyAction="http://tempuri.org/IGameService/GetMatchStateResponse")]
         System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> GetMatchStateAsync(string sessionId, string roomId, string matchId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetMatchPreparation", ReplyAction="http://tempuri.org/IGameService/GetMatchPreparationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/GetMatchPreparationMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        Backgammon.Client.GameReference.MatchPreparation GetMatchPreparation(string sessionId, string roomId, string matchId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetMatchPreparation", ReplyAction="http://tempuri.org/IGameService/GetMatchPreparationResponse")]
+        System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchPreparation> GetMatchPreparationAsync(string sessionId, string roomId, string matchId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RegisterPlayerReady", ReplyAction="http://tempuri.org/IGameService/RegisterPlayerReadyResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/RegisterPlayerReadyMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
         Backgammon.Client.GameReference.MatchPreparation RegisterPlayerReady(string sessionId, string roomId, string matchId);
@@ -1116,10 +1232,10 @@ namespace Backgammon.Client.GameReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RollDice", ReplyAction="http://tempuri.org/IGameService/RollDiceResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/RollDiceMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
-        Backgammon.Client.GameReference.MatchState RollDice(string sessionId, Backgammon.Client.GameReference.PlayerDiceRoll playerRoll);
+        Backgammon.Client.GameReference.MatchState RollDice(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerRoll);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/RollDice", ReplyAction="http://tempuri.org/IGameService/RollDiceResponse")]
-        System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> RollDiceAsync(string sessionId, Backgammon.Client.GameReference.PlayerDiceRoll playerRoll);
+        System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> RollDiceAsync(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerRoll);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/MoveChecker", ReplyAction="http://tempuri.org/IGameService/MoveCheckerResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/MoveCheckerMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
@@ -1128,12 +1244,19 @@ namespace Backgammon.Client.GameReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/MoveChecker", ReplyAction="http://tempuri.org/IGameService/MoveCheckerResponse")]
         System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> MoveCheckerAsync(string sessionId, Backgammon.Client.GameReference.PlayerCheckerMove playerMove);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetMatchPreparation", ReplyAction="http://tempuri.org/IGameService/GetMatchPreparationResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/GetMatchPreparationMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
-        Backgammon.Client.GameReference.MatchPreparation GetMatchPreparation(string sessionId, string roomId, string matchId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/UndoCheckerMove", ReplyAction="http://tempuri.org/IGameService/UndoCheckerMoveResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/UndoCheckerMoveMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        Backgammon.Client.GameReference.MatchState UndoCheckerMove(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/GetMatchPreparation", ReplyAction="http://tempuri.org/IGameService/GetMatchPreparationResponse")]
-        System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchPreparation> GetMatchPreparationAsync(string sessionId, string roomId, string matchId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/UndoCheckerMove", ReplyAction="http://tempuri.org/IGameService/UndoCheckerMoveResponse")]
+        System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> UndoCheckerMoveAsync(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ConfirmTurn", ReplyAction="http://tempuri.org/IGameService/ConfirmTurnResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.GameReference.MatchFault), Action="http://tempuri.org/IGameService/ConfirmTurnMatchFaultFault", Name="MatchFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        Backgammon.Client.GameReference.MatchState ConfirmTurn(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGameService/ConfirmTurn", ReplyAction="http://tempuri.org/IGameService/ConfirmTurnResponse")]
+        System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> ConfirmTurnAsync(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1182,6 +1305,14 @@ namespace Backgammon.Client.GameReference {
             return base.Channel.GetMatchStateAsync(sessionId, roomId, matchId);
         }
         
+        public Backgammon.Client.GameReference.MatchPreparation GetMatchPreparation(string sessionId, string roomId, string matchId) {
+            return base.Channel.GetMatchPreparation(sessionId, roomId, matchId);
+        }
+        
+        public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchPreparation> GetMatchPreparationAsync(string sessionId, string roomId, string matchId) {
+            return base.Channel.GetMatchPreparationAsync(sessionId, roomId, matchId);
+        }
+        
         public Backgammon.Client.GameReference.MatchPreparation RegisterPlayerReady(string sessionId, string roomId, string matchId) {
             return base.Channel.RegisterPlayerReady(sessionId, roomId, matchId);
         }
@@ -1198,11 +1329,11 @@ namespace Backgammon.Client.GameReference {
             return base.Channel.RollOpeningDieAsync(sessionId, playerRoll);
         }
         
-        public Backgammon.Client.GameReference.MatchState RollDice(string sessionId, Backgammon.Client.GameReference.PlayerDiceRoll playerRoll) {
+        public Backgammon.Client.GameReference.MatchState RollDice(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerRoll) {
             return base.Channel.RollDice(sessionId, playerRoll);
         }
         
-        public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> RollDiceAsync(string sessionId, Backgammon.Client.GameReference.PlayerDiceRoll playerRoll) {
+        public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> RollDiceAsync(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerRoll) {
             return base.Channel.RollDiceAsync(sessionId, playerRoll);
         }
         
@@ -1214,12 +1345,20 @@ namespace Backgammon.Client.GameReference {
             return base.Channel.MoveCheckerAsync(sessionId, playerMove);
         }
         
-        public Backgammon.Client.GameReference.MatchPreparation GetMatchPreparation(string sessionId, string roomId, string matchId) {
-            return base.Channel.GetMatchPreparation(sessionId, roomId, matchId);
+        public Backgammon.Client.GameReference.MatchState UndoCheckerMove(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn) {
+            return base.Channel.UndoCheckerMove(sessionId, playerTurn);
         }
         
-        public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchPreparation> GetMatchPreparationAsync(string sessionId, string roomId, string matchId) {
-            return base.Channel.GetMatchPreparationAsync(sessionId, roomId, matchId);
+        public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> UndoCheckerMoveAsync(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn) {
+            return base.Channel.UndoCheckerMoveAsync(sessionId, playerTurn);
+        }
+        
+        public Backgammon.Client.GameReference.MatchState ConfirmTurn(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn) {
+            return base.Channel.ConfirmTurn(sessionId, playerTurn);
+        }
+        
+        public System.Threading.Tasks.Task<Backgammon.Client.GameReference.MatchState> ConfirmTurnAsync(string sessionId, Backgammon.Client.GameReference.PlayerTurn playerTurn) {
+            return base.Channel.ConfirmTurnAsync(sessionId, playerTurn);
         }
     }
 }

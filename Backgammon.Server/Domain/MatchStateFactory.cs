@@ -40,13 +40,61 @@ namespace Backgammon.Server.Domain
                 RoomId = matchState.RoomId,
                 Phase = matchState.Phase,
                 Board = CopyBoard(matchState.Board),
+                SharedPot = matchState.SharedPot,
+                CaptureNumber = matchState.CaptureNumber,
                 Version = matchState.Version,
-                CurrentPlayerId = matchState.CurrentPlayerId,
-                Dice = CopyDice(matchState.Dice),
-                AvailableMoves = CopyMoves(matchState.AvailableMoves)
+                Turn = CopyTurn(matchState.Turn)
             };
 
             return stateCopy;
+        }
+
+        public static TurnSnapshot CreateTurnSnapshot(MatchState matchState)
+        {
+            if (matchState == null)
+            {
+                throw new ArgumentNullException(nameof(matchState));
+            }
+
+            if (matchState.Turn == null)
+            {
+                throw new ArgumentException("The match turn is required.", nameof(matchState));
+            }
+
+            MatchBoardState boardCopy = CopyBoard(matchState.Board);
+            MatchDiceState diceCopy = CopyDice(matchState.Turn.Dice);
+
+            var snapshot = new TurnSnapshot(
+                boardCopy,
+                diceCopy,
+                matchState.SharedPot);
+
+            return snapshot;
+        }
+
+        public static void RestoreTurnSnapshot(MatchState matchState, TurnSnapshot snapshot)
+        {
+            if (matchState == null)
+            {
+                throw new ArgumentNullException(nameof(matchState));
+            }
+
+            if (snapshot == null)
+            {
+                throw new ArgumentNullException(nameof(snapshot));
+            }
+
+            if (matchState.Turn == null)
+            {
+                throw new ArgumentException("The match turn is required.", nameof(matchState));
+            }
+
+            MatchBoardState boardCopy = CopyBoard(snapshot.Board);
+            MatchDiceState diceCopy = CopyDice(snapshot.Dice);
+
+            matchState.Board = boardCopy;
+            matchState.Turn.Dice = diceCopy;
+            matchState.SharedPot = snapshot.SharedPot;
         }
 
         private static MatchBoardState CopyBoard(MatchBoardState boardState)
@@ -126,6 +174,25 @@ namespace Backgammon.Server.Domain
             }
 
             return movesCopy;
+        }
+
+        private static MatchTurnState CopyTurn(MatchTurnState turnState)
+        {
+            if (turnState == null)
+            {
+                throw new ArgumentNullException(nameof(turnState));
+            }
+
+            var turnCopy = new MatchTurnState
+            {
+                CurrentPlayerId = turnState.CurrentPlayerId,
+                Dice = CopyDice(turnState.Dice),
+                AvailableMoves = CopyMoves(turnState.AvailableMoves),
+                CanUndo = turnState.CanUndo,
+                CanConfirm = turnState.CanConfirm
+            };
+
+            return turnCopy;
         }
     }
 }

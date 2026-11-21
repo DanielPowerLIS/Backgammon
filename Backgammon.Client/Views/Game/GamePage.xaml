@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Backgammon.Client.Views.Game"
+      xmlns:properties="clr-namespace:Backgammon.Client.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1250"
       xmlns:controls="clr-namespace:Backgammon.Client.Views.Game.Controls"
@@ -33,19 +34,29 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Border Grid.Row="0" Padding="20" CornerRadius="15" Background="#303B63">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Border
+                Grid.Row="0"
+                Padding="20"
+                CornerRadius="15"
+                Background="#303B63">
+
+                <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+
                     <TextBlock
-                        Text="AQUI VA POZO"
+                        Text="{x:Static properties:Resources.TextBlock_SharedPotLabel}"
                         Foreground="White"
                         FontSize="22"
                         FontWeight="Bold"
-                        VerticalAlignment="Center" />
-                    <TextBlock 
-                        Text="120" 
-                        Margin="20, 0, 0, 0" 
-                        Foreground="White" 
-                        FontSize="36"/>
+                        VerticalAlignment="Center"/>
+
+                    <TextBlock
+                        x:Name="textBlockSharedPot"
+                        Margin="20,0,0,0"
+                        Foreground="White"
+                        FontSize="36"
+                        VerticalAlignment="Center"/>
                 </StackPanel>
             </Border>
             <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -75,16 +86,22 @@
             </StackPanel>
 
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 10">
-                <Button Content="Deshacer" 
-                        Width="120" 
-                        Height="45" 
-                        Margin="5"
-                        IsEnabled="False"/>
-                <Button Content="Confirmar" 
-                        Width="120" 
-                        Height="45" 
-                        Margin="5"
-                        IsEnabled="False"/>
+                <Button
+                    x:Name="buttonUndoMove"
+                    Content="{x:Static properties:Resources.Button_UndoMove}"
+                    Width="120"
+                    Height="45"
+                    Margin="5"
+                    IsEnabled="False"
+                    Click="OnUndoMoveClick"/>
+                <Button
+                    x:Name="buttonConfirmTurn"
+                    Content="{x:Static properties:Resources.Button_Confirm}"
+                    Width="120"
+                    Height="45"
+                    Margin="5"
+                    IsEnabled="False"
+                    Click="OnConfirmTurnClick"/>
             </StackPanel>
             <controls:TurnDiceControl
                 x:Name="turnDiceControlGame"
@@ -100,5 +117,13 @@
             Panel.ZIndex="10"
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"/>
+        <ContentControl
+            x:Name="contentControlCaptureNotice"
+            Grid.ColumnSpan="2"
+            Panel.ZIndex="20"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            IsHitTestVisible="False"
+            Focusable="False"/>
     </Grid>
 </Page>

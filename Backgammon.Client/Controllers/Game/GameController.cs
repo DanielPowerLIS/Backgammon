@@ -138,7 +138,7 @@ namespace Backgammon.Client.Controllers.Game
 
             MatchState currentState = CurrentState;
 
-            var playerRoll = new PlayerDiceRoll
+            var playerRoll = new PlayerTurn
             {
                 RoomId = _roomId,
                 MatchId = _matchId,
@@ -168,6 +168,38 @@ namespace Backgammon.Client.Controllers.Game
             };
 
             MatchState matchState = await _gameClient.MoveCheckerAsync(sessionId, playerMove);
+
+            ApplyMatchState(matchState);
+        }
+
+        public async Task UndoCheckerMoveAsync(long expectedVersion)
+        {
+            string sessionId = PlayerSessionContext.GetSession().SessionId;
+
+            var playerTurn = new PlayerTurn
+            {
+                RoomId = _roomId,
+                MatchId = _matchId,
+                ExpectedVersion = expectedVersion
+            };
+
+            MatchState matchState = await _gameClient.UndoCheckerMoveAsync(sessionId, playerTurn);
+
+            ApplyMatchState(matchState);
+        }
+
+        public async Task ConfirmTurnAsync(long expectedVersion)
+        {
+            string sessionId = PlayerSessionContext.GetSession().SessionId;
+
+            var playerTurn = new PlayerTurn
+            {
+                RoomId = _roomId,
+                MatchId = _matchId,
+                ExpectedVersion = expectedVersion
+            };
+
+            MatchState matchState = await _gameClient.ConfirmTurnAsync(sessionId, playerTurn);
 
             ApplyMatchState(matchState);
         }

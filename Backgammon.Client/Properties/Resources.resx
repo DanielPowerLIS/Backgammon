@@ -748,5 +748,19 @@ c) Mover cuatro fichas 6 casillas cada una.
   </data>
   <data name="TextBlock_FriendRequestUpdateErrorMessage" xml:space="preserve">
     <value>No se pudo procesar la solicitud de amistad. Inténtalo nuevamente.</value>
+  <data name="TextBlock_SharedPotLabel" xml:space="preserve">
+    <value>Pozo compartido</value>
+  </data>
+  <data name="TextBlock_CheckerCapturedMessage" xml:space="preserve">
+    <value>¡FICHA CAPTURADA!</value>
+  </data>
+  <data name="Button_UndoMove" xml:space="preserve">
+    <value>Deshacer</value>
+  </data>
+  <data name="Message_UndoMoveError" xml:space="preserve">
+    <value>No se pudo deshacer el último movimiento. Inténtalo nuevamente.</value>
+  </data>
+  <data name="Message_ConfirmTurnError" xml:space="preserve">
+    <value>No se pudo confirmar el turno. Inténtalo nuevamente.</value>
   </data>
 </root>

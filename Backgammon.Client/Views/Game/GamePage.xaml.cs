@@ -156,6 +156,7 @@ namespace Backgammon.Client.Views.Game
             _isPlayerReady = false;
 
             RemoveMatchStartControl();
+            RemoveCaptureNotice();
             CloseOpeningRollDialog();
 
             GameController gameController = _gameController;
@@ -167,6 +168,7 @@ namespace Backgammon.Client.Views.Game
             _selectedSourcePointNumber = NoPointSelected;
 
             UpdateCheckerHighlights();
+            UpdateTurnButtons();
 
             if (gameController == null)
             {
@@ -273,13 +275,17 @@ namespace Backgammon.Client.Views.Game
 
             boardControlGame.RenderBoard(boardState);
 
+            UpdateCaptureNotice(matchState);
+
             _renderedState = matchState;
             _renderedVersion = matchState.Version;
-
             _selectedSourcePointNumber = NoPointSelected;
 
             UpdateTurnDice(matchState);
             UpdateCheckerHighlights();
+            UpdateTurnButtons();
+
+            textBlockSharedPot.Text = matchState.SharedPot.ToString();
         }
 
         private void UpdateMatchAnnouncement(MatchPreparation preparation)
@@ -440,15 +446,15 @@ namespace Backgammon.Client.Views.Game
         {
             int playerId = PlayerSessionContext.GetSession().PlayerId;
 
-            bool isLocalTurn = matchState.CurrentPlayerId == playerId;
+            bool isLocalTurn = matchState.Turn.CurrentPlayerId == playerId;
 
             CheckerColor playerColor = CheckerColor.None;
 
-            if (matchState.CurrentPlayerId == CurrentMatch.PlayerHostId)
+            if (matchState.Turn.CurrentPlayerId == CurrentMatch.PlayerHostId)
             {
                 playerColor = CheckerColor.Blue;
             }
-            else if (matchState.CurrentPlayerId == CurrentMatch.PlayerGuestId)
+            else if (matchState.Turn.CurrentPlayerId == CurrentMatch.PlayerGuestId)
             {
                 playerColor = CheckerColor.Pink;
             }
@@ -564,7 +570,7 @@ namespace Backgammon.Client.Views.Game
 
             var sourcePoints = new HashSet<int>();
 
-            foreach (CheckerMove move in matchState.AvailableMoves)
+            foreach (CheckerMove move in matchState.Turn.AvailableMoves)
             {
                 if (UsesSelectedDie(move, selectedDieIndex))
                 {
@@ -600,8 +606,8 @@ namespace Backgammon.Client.Views.Game
                 int playerId = PlayerSessionContext.GetSession().PlayerId;
 
                 canSelectMovement = _renderedState.Phase == MatchPhase.MovingCheckers &&
-                    _renderedState.CurrentPlayerId == playerId &&
-                    _renderedState.AvailableMoves != null;
+                    _renderedState.Turn.CurrentPlayerId == playerId &&
+                    _renderedState.Turn.AvailableMoves != null;
             }
 
             return canSelectMovement;
@@ -629,7 +635,7 @@ namespace Backgammon.Client.Views.Game
 
             var destinationPoints = new HashSet<int>();
 
-            foreach (CheckerMove move in matchState.AvailableMoves)
+            foreach (CheckerMove move in matchState.Turn.AvailableMoves)
             {
                 if (move.SourcePointNumber == _selectedSourcePointNumber && UsesSelectedDie(move, selectedDieIndex))
                 {
@@ -646,7 +652,7 @@ namespace Backgammon.Client.Views.Game
 
             int selectedDieIndex = turnDiceControlGame.SelectedDieIndex;
 
-            foreach (CheckerMove move in matchState.AvailableMoves)
+            foreach (CheckerMove move in matchState.Turn.AvailableMoves)
             {
                 bool sameSource = move.SourcePointNumber == _selectedSourcePointNumber;
 
@@ -691,6 +697,7 @@ namespace Backgammon.Client.Views.Game
             }
 
             UpdateCheckerHighlights();
+            UpdateTurnButtons();
         }
 
         private async void OnDestinationSelected(object sender, BoardPointSelection selection)
@@ -755,6 +762,195 @@ namespace Backgammon.Client.Views.Game
 
                 ShowCheckerMoveError(gameController);
             }
+        }
+
+        private void UpdateCaptureNotice(MatchState matchState)
+        {
+            if (_renderedState == null ||
+                matchState.CaptureNumber <= _renderedState.CaptureNumber)
+            {
+                return;
+            }
+
+            ShowCaptureNotice();
+        }
+
+        private void ShowCaptureNotice()
+        {
+            RemoveCaptureNotice();
+
+            var captureNotice = new CaptureNoticeControl();
+
+            captureNotice.DisplayFinished += OnCaptureNoticeDisplayFinished;
+            contentControlCaptureNotice.Content = captureNotice;
+
+            captureNotice.ShowMessage(Properties.Resources.TextBlock_CheckerCapturedMessage);
+        }
+
+        private void RemoveCaptureNotice()
+        {
+            if (contentControlCaptureNotice.Content is CaptureNoticeControl captureNotice)
+            {
+                captureNotice.DisplayFinished -= OnCaptureNoticeDisplayFinished;
+                captureNotice.StopNotice();
+            }
+
+            contentControlCaptureNotice.Content = null;
+        }
+
+        private void OnCaptureNoticeDisplayFinished(object sender, EventArgs eventArgs)
+        {
+            if (ReferenceEquals(contentControlCaptureNotice.Content, sender))
+            {
+                RemoveCaptureNotice();
+            }
+        }
+
+        private void UpdateTurnButtons()
+        {
+            bool canInteract = CanSelectMovement();
+
+            buttonUndoMove.IsEnabled = canInteract && _renderedState.Turn.CanUndo;
+
+            buttonConfirmTurn.IsEnabled = canInteract && _renderedState.Turn.CanConfirm;
+        }
+
+        private async void OnUndoMoveClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            GameController gameController = _gameController;
+
+            if (gameController == null || !CanSelectMovement() || !_renderedState.Turn.CanUndo)
+            {
+                return;
+            }
+
+            long expectedVersion = _renderedVersion;
+
+            try
+            {
+                SetMovingChecker(true);
+
+                await SendUndoMoveAsync(gameController, expectedVersion);
+            }
+            finally
+            {
+                if (IsLoaded && ReferenceEquals(_gameController, gameController))
+                {
+                    SetMovingChecker(false);
+                }
+            }
+        }
+
+        private async Task SendUndoMoveAsync(GameController gameController, long expectedVersion)
+        {
+            try
+            {
+                await gameController.UndoCheckerMoveAsync(expectedVersion);
+            }
+            catch (FaultException<GameMatchFault> matchException)
+            {
+                ApplicationLogger.LogWarning("The checker movement undo was rejected. Code: {0}",
+                    matchException.Detail.ErrorCode);
+
+                ShowUndoMoveError(gameController);
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(communicationException,
+                    "The checker movement undo could not be completed.");
+
+                ShowUndoMoveError(gameController);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(timeoutException,
+                    "The checker movement undo exceeded the time limit.");
+
+                ShowUndoMoveError(gameController);
+            }
+        }
+
+        private async void OnConfirmTurnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            GameController gameController = _gameController;
+
+            if (gameController == null || !CanSelectMovement() || !_renderedState.Turn.CanConfirm)
+            {
+                return;
+            }
+
+            long expectedVersion = _renderedVersion;
+
+            try
+            {
+                SetMovingChecker(true);
+
+                await SendConfirmTurnAsync(gameController, expectedVersion);
+            }
+            finally
+            {
+                if (IsLoaded && ReferenceEquals(_gameController, gameController))
+                {
+                    SetMovingChecker(false);
+                }
+            }
+        }
+
+        private async Task SendConfirmTurnAsync(GameController gameController, long expectedVersion)
+        {
+            try
+            {
+                await gameController.ConfirmTurnAsync(expectedVersion);
+            }
+            catch (FaultException<GameMatchFault> matchException)
+            {
+                ApplicationLogger.LogWarning("The turn confirmation was rejected. Code: {0}",
+                    matchException.Detail.ErrorCode);
+
+                ShowConfirmTurnError(gameController);
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(communicationException,
+                    "The turn confirmation could not be completed.");
+
+                ShowConfirmTurnError(gameController);
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(timeoutException,
+                    "The turn confirmation exceeded the time limit.");
+
+                ShowConfirmTurnError(gameController);
+            }
+        }
+
+        private void ShowUndoMoveError(GameController gameController)
+        {
+            if (!IsLoaded || !ReferenceEquals(_gameController, gameController))
+            {
+                return;
+            }
+
+            var dialog = new AccountDialog(
+                Properties.Resources.Button_UndoMove,
+                Properties.Resources.Message_UndoMoveError);
+
+            dialog.ShowOver(Window.GetWindow(this));
+        }
+
+        private void ShowConfirmTurnError(GameController gameController)
+        {
+            if (!IsLoaded || !ReferenceEquals(_gameController, gameController))
+            {
+                return;
+            }
+
+            var dialog = new AccountDialog(
+                Properties.Resources.Button_Confirm,
+                Properties.Resources.Message_ConfirmTurnError);
+
+            dialog.ShowOver(Window.GetWindow(this));
         }
     }
 }

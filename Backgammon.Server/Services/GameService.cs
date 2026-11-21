@@ -162,7 +162,7 @@ namespace Backgammon.Server.Services
             }
         }
 
-        public MatchState RollDice(string sessionId, PlayerDiceRoll playerRoll)
+        public MatchState RollDice(string sessionId, PlayerTurn playerRoll)
         {
             PlayerSession playerSession = GetPlayerSession(sessionId);
 
@@ -224,6 +224,72 @@ namespace Backgammon.Server.Services
             catch (ArgumentException moveException)
             {
                 ApplicationLogger.LogWarning("The checker movement was invalid. Reason: {0}", moveException.Message);
+
+                throw CreateMatchFault(ErrorCodes.InvalidInput);
+            }
+        }
+
+        public MatchState UndoCheckerMove(string sessionId, PlayerTurn playerTurn)
+        {
+            PlayerSession playerSession = GetPlayerSession(sessionId);
+
+            try
+            {
+                MatchState matchState = UndoPlayerCheckerMove(playerSession, playerTurn);
+
+                return matchState;
+            }
+            catch (UnauthorizedAccessException accessException)
+            {
+                ApplicationLogger.LogWarning("The checker movement undo was denied. Reason: {0}",
+                    accessException.Message);
+
+                throw CreateMatchFault(ErrorCodes.AccessDenied);
+            }
+            catch (KeyNotFoundException matchException)
+            {
+                ApplicationLogger.LogWarning("The match is unavailable for movement undo. Reason: {0}",
+                    matchException.Message);
+
+                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
+            }
+            catch (ArgumentException undoException)
+            {
+                ApplicationLogger.LogWarning("The checker movement undo was invalid. Reason: {0}",
+                    undoException.Message);
+
+                throw CreateMatchFault(ErrorCodes.InvalidInput);
+            }
+        }
+
+        public MatchState ConfirmTurn(string sessionId, PlayerTurn playerTurn)
+        {
+            PlayerSession playerSession = GetPlayerSession(sessionId);
+
+            try
+            {
+                MatchState matchState = ConfirmPlayerTurn(playerSession, playerTurn);
+
+                return matchState;
+            }
+            catch (UnauthorizedAccessException accessException)
+            {
+                ApplicationLogger.LogWarning("The turn confirmation was denied. Reason: {0}",
+                    accessException.Message);
+
+                throw CreateMatchFault(ErrorCodes.AccessDenied);
+            }
+            catch (KeyNotFoundException matchException)
+            {
+                ApplicationLogger.LogWarning("The match is unavailable for turn confirmation. Reason: {0}",
+                    matchException.Message);
+
+                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
+            }
+            catch (ArgumentException confirmationException)
+            {
+                ApplicationLogger.LogWarning("The turn confirmation was invalid. Reason: {0}",
+                    confirmationException.Message);
 
                 throw CreateMatchFault(ErrorCodes.InvalidInput);
             }
@@ -388,7 +454,7 @@ namespace Backgammon.Server.Services
             return preparation;
         }
 
-        private MatchState RollPlayerDice(PlayerSession playerSession, PlayerDiceRoll playerRoll)
+        private MatchState RollPlayerDice(PlayerSession playerSession, PlayerTurn playerRoll)
         {
             if (playerRoll == null)
             {
@@ -417,6 +483,44 @@ namespace Backgammon.Server.Services
             var player = new MatchPlayer(playerSession.PlayerId, playerMove.RoomId, playerMove.MatchId);
 
             MatchState matchState = MatchManager.MoveChecker(player, playerMove.Move, playerMove.ExpectedVersion);
+
+            UpdatePlayers(player, matchState);
+
+            return matchState;
+        }
+
+        private MatchState UndoPlayerCheckerMove(PlayerSession playerSession, PlayerTurn playerTurn)
+        {
+            if (playerTurn == null)
+            {
+                throw new ArgumentNullException(nameof(playerTurn));
+            }
+
+            var player = new MatchPlayer(
+                playerSession.PlayerId,
+                playerTurn.RoomId,
+                playerTurn.MatchId);
+
+            MatchState matchState = MatchManager.UndoCheckerMove(player, playerTurn.ExpectedVersion);
+
+            UpdatePlayers(player, matchState);
+
+            return matchState;
+        }
+
+        private MatchState ConfirmPlayerTurn(PlayerSession playerSession, PlayerTurn playerTurn)
+        {
+            if (playerTurn == null)
+            {
+                throw new ArgumentNullException(nameof(playerTurn));
+            }
+
+            var player = new MatchPlayer(
+                playerSession.PlayerId,
+                playerTurn.RoomId,
+                playerTurn.MatchId);
+
+            MatchState matchState = MatchManager.ConfirmTurn(player, playerTurn.ExpectedVersion);
 
             UpdatePlayers(player, matchState);
 
