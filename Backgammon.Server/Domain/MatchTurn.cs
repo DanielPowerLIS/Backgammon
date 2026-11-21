@@ -23,8 +23,8 @@ namespace Backgammon.Server.Domain
             var movement = new MatchMovement(matchState.Board, diceState, playerColor);
             CheckerMove[] availableMoves = movement.GetAvailableMoves();
 
-            matchState.Dice = diceState;
-            matchState.AvailableMoves = availableMoves;
+            matchState.Turn.Dice = diceState;
+            matchState.Turn.AvailableMoves = availableMoves;
             matchState.Phase = MatchPhase.MovingCheckers;
         }
 
@@ -35,7 +35,7 @@ namespace Backgammon.Server.Domain
                 throw new ArgumentNullException(nameof(matchState));
             }
 
-            if (matchState.CurrentPlayerId != playerId)
+            if (matchState.Turn.CurrentPlayerId != playerId)
             {
                 throw new UnauthorizedAccessException("The player cannot act outside their turn.");
             }
@@ -53,13 +53,13 @@ namespace Backgammon.Server.Domain
                 throw new ArgumentException("The match is not accepting checker movements.");
             }
 
-            var movement = new MatchMovement(matchState.Board, matchState.Dice, playerColor);
+            var movement = new MatchMovement(matchState.Board, matchState.Turn.Dice, playerColor);
 
             movement.MoveChecker(selectedMove);
 
             CheckerMove[] availableMoves = movement.GetAvailableMoves();
 
-            matchState.AvailableMoves = availableMoves;
+            matchState.Turn.AvailableMoves = availableMoves;
         }
 
         private static void ValidateRoll(MatchState matchState, int playerId)

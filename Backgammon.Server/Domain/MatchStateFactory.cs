@@ -41,9 +41,7 @@ namespace Backgammon.Server.Domain
                 Phase = matchState.Phase,
                 Board = CopyBoard(matchState.Board),
                 Version = matchState.Version,
-                CurrentPlayerId = matchState.CurrentPlayerId,
-                Dice = CopyDice(matchState.Dice),
-                AvailableMoves = CopyMoves(matchState.AvailableMoves)
+                Turn = CopyTurn(matchState.Turn)
             };
 
             return stateCopy;
@@ -126,6 +124,23 @@ namespace Backgammon.Server.Domain
             }
 
             return movesCopy;
+        }
+
+        private static MatchTurnState CopyTurn(MatchTurnState turnState)
+        {
+            if (turnState == null)
+            {
+                throw new ArgumentNullException(nameof(turnState));
+            }
+
+            var turnCopy = new MatchTurnState
+            {
+                CurrentPlayerId = turnState.CurrentPlayerId,
+                Dice = CopyDice(turnState.Dice),
+                AvailableMoves = CopyMoves(turnState.AvailableMoves)
+            };
+
+            return turnCopy;
         }
     }
 }

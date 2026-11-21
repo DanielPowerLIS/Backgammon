@@ -675,7 +675,7 @@ namespace Backgammon.Server.Services.Manager
 
             preparation.Phase = MatchPhase.WaitingForRoll;
 
-            activeMatch.State.CurrentPlayerId = currentPlayerId;
+            activeMatch.State.Turn.CurrentPlayerId = currentPlayerId;
             activeMatch.State.Phase = MatchPhase.WaitingForRoll;
             activeMatch.State.Version++;
         }

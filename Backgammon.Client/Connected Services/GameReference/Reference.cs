@@ -23,16 +23,7 @@ namespace Backgammon.Client.GameReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Backgammon.Client.GameReference.CheckerMove[] AvailableMovesField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Backgammon.Client.GameReference.MatchBoardState BoardField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int CurrentPlayerIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Backgammon.Client.GameReference.MatchDiceState DiceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MatchIdField;
@@ -42,6 +33,9 @@ namespace Backgammon.Client.GameReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RoomIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Backgammon.Client.GameReference.MatchTurnState TurnField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long VersionField;
@@ -57,19 +51,6 @@ namespace Backgammon.Client.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Backgammon.Client.GameReference.CheckerMove[] AvailableMoves {
-            get {
-                return this.AvailableMovesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AvailableMovesField, value) != true)) {
-                    this.AvailableMovesField = value;
-                    this.RaisePropertyChanged("AvailableMoves");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public Backgammon.Client.GameReference.MatchBoardState Board {
             get {
                 return this.BoardField;
@@ -78,32 +59,6 @@ namespace Backgammon.Client.GameReference {
                 if ((object.ReferenceEquals(this.BoardField, value) != true)) {
                     this.BoardField = value;
                     this.RaisePropertyChanged("Board");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int CurrentPlayerId {
-            get {
-                return this.CurrentPlayerIdField;
-            }
-            set {
-                if ((this.CurrentPlayerIdField.Equals(value) != true)) {
-                    this.CurrentPlayerIdField = value;
-                    this.RaisePropertyChanged("CurrentPlayerId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Backgammon.Client.GameReference.MatchDiceState Dice {
-            get {
-                return this.DiceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DiceField, value) != true)) {
-                    this.DiceField = value;
-                    this.RaisePropertyChanged("Dice");
                 }
             }
         }
@@ -143,6 +98,19 @@ namespace Backgammon.Client.GameReference {
                 if ((object.ReferenceEquals(this.RoomIdField, value) != true)) {
                     this.RoomIdField = value;
                     this.RaisePropertyChanged("RoomId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Backgammon.Client.GameReference.MatchTurnState Turn {
+            get {
+                return this.TurnField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TurnField, value) != true)) {
+                    this.TurnField = value;
+                    this.RaisePropertyChanged("Turn");
                 }
             }
         }
@@ -277,6 +245,197 @@ namespace Backgammon.Client.GameReference {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MatchTurnState", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class MatchTurnState : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Backgammon.Client.GameReference.CheckerMove[] AvailableMovesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CurrentPlayerIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Backgammon.Client.GameReference.MatchDiceState DiceField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Backgammon.Client.GameReference.CheckerMove[] AvailableMoves {
+            get {
+                return this.AvailableMovesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AvailableMovesField, value) != true)) {
+                    this.AvailableMovesField = value;
+                    this.RaisePropertyChanged("AvailableMoves");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int CurrentPlayerId {
+            get {
+                return this.CurrentPlayerIdField;
+            }
+            set {
+                if ((this.CurrentPlayerIdField.Equals(value) != true)) {
+                    this.CurrentPlayerIdField = value;
+                    this.RaisePropertyChanged("CurrentPlayerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Backgammon.Client.GameReference.MatchDiceState Dice {
+            get {
+                return this.DiceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DiceField, value) != true)) {
+                    this.DiceField = value;
+                    this.RaisePropertyChanged("Dice");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MatchPhase", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    public enum MatchPhase : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        WaitingForPlayers = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        StartingCountdown = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OpeningRoll = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        WaitingForRoll = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        MovingCheckers = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Finished = 5,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MatchPointState", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class MatchPointState : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Backgammon.Client.GameReference.CheckerColor OwnerField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Count {
+            get {
+                return this.CountField;
+            }
+            set {
+                if ((this.CountField.Equals(value) != true)) {
+                    this.CountField = value;
+                    this.RaisePropertyChanged("Count");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Number {
+            get {
+                return this.NumberField;
+            }
+            set {
+                if ((this.NumberField.Equals(value) != true)) {
+                    this.NumberField = value;
+                    this.RaisePropertyChanged("Number");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Backgammon.Client.GameReference.CheckerColor Owner {
+            get {
+                return this.OwnerField;
+            }
+            set {
+                if ((this.OwnerField.Equals(value) != true)) {
+                    this.OwnerField = value;
+                    this.RaisePropertyChanged("Owner");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CheckerColor", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    public enum CheckerColor : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Blue = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Pink = 2,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -463,120 +622,6 @@ namespace Backgammon.Client.GameReference {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MatchPhase", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
-    public enum MatchPhase : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        WaitingForPlayers = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        StartingCountdown = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        OpeningRoll = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        WaitingForRoll = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        MovingCheckers = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Finished = 5,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MatchPointState", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
-    [System.SerializableAttribute()]
-    public partial class MatchPointState : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int CountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int NumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Backgammon.Client.GameReference.CheckerColor OwnerField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Count {
-            get {
-                return this.CountField;
-            }
-            set {
-                if ((this.CountField.Equals(value) != true)) {
-                    this.CountField = value;
-                    this.RaisePropertyChanged("Count");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Number {
-            get {
-                return this.NumberField;
-            }
-            set {
-                if ((this.NumberField.Equals(value) != true)) {
-                    this.NumberField = value;
-                    this.RaisePropertyChanged("Number");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Backgammon.Client.GameReference.CheckerColor Owner {
-            get {
-                return this.OwnerField;
-            }
-            set {
-                if ((this.OwnerField.Equals(value) != true)) {
-                    this.OwnerField = value;
-                    this.RaisePropertyChanged("Owner");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CheckerColor", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
-    public enum CheckerColor : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        None = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Blue = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Pink = 2,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
