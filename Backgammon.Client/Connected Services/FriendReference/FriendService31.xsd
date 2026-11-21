@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:9002/FriendService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" />
+  <xs:import schemaLocation="http://26.186.19.19:9002/FriendService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" />
   <xs:element name="GetFriends">
     <xs:complexType>
       <xs:sequence>
@@ -27,6 +27,32 @@
       <xs:sequence>
         <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="GetFriendRequestsResult" nillable="true" type="q2:ArrayOfFriendRequestPending" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptFriendRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="requestId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcceptFriendRequestResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RejectFriendRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="requestId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RejectFriendRequestResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

@@ -745,8 +745,7 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Crear una cuenta.
-        ///   Looks up a localized string similar to No se pudo confirmar el movimiento. Inténtalo nuevamente..
+        ///   Busca una cadena traducida similar a No se pudo confirmar el movimiento. Inténtalo nuevamente..
         /// </summary>
         public static string TextBlock_CheckerMoveErrorMessage {
             get {
@@ -755,7 +754,7 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Movimiento de ficha.
+        ///   Busca una cadena traducida similar a Movimiento de ficha.
         /// </summary>
         public static string TextBlock_CheckerMoveErrorTitle {
             get {
@@ -764,7 +763,7 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Crear una cuenta.
+        ///   Busca una cadena traducida similar a Crear una cuenta.
         /// </summary>
         public static string TextBlock_CreateAnAccount {
             get {
@@ -850,6 +849,24 @@ namespace Backgammon.Client.Properties {
         public static string TextBlock_FriendRequests {
             get {
                 return ResourceManager.GetString("TextBlock_FriendRequests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo procesar la solicitud de amistad. Inténtalo nuevamente..
+        /// </summary>
+        public static string TextBlock_FriendRequestUpdateErrorMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_FriendRequestUpdateErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Solicitud de amistad.
+        /// </summary>
+        public static string TextBlock_FriendRequestUpdateErrorTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_FriendRequestUpdateErrorTitle", resourceCulture);
             }
         }
         

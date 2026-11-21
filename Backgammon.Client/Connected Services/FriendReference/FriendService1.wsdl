@@ -10,9 +10,9 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:9002/FriendService?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:9002/FriendService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" />
-      <xsd:import schemaLocation="http://localhost:9002/FriendService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://26.186.19.19:9002/FriendService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://26.186.19.19:9002/FriendService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" />
+      <xsd:import schemaLocation="http://26.186.19.19:9002/FriendService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IFriendService_GetFriends_InputMessage">
@@ -33,6 +33,24 @@
   <wsdl:message name="IFriendService_GetFriendRequests_FriendFaultFault_FaultMessage">
     <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q2:FriendFault" />
   </wsdl:message>
+  <wsdl:message name="IFriendService_AcceptFriendRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IFriendService_AcceptFriendRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AcceptFriendRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFriendService_AcceptFriendRequest_FriendFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q3:FriendFault" />
+  </wsdl:message>
+  <wsdl:message name="IFriendService_RejectFriendRequest_InputMessage">
+    <wsdl:part name="parameters" element="tns:RejectFriendRequest" />
+  </wsdl:message>
+  <wsdl:message name="IFriendService_RejectFriendRequest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RejectFriendRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IFriendService_RejectFriendRequest_FriendFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" name="detail" element="q4:FriendFault" />
+  </wsdl:message>
   <wsdl:portType name="IFriendService">
     <wsdl:operation name="GetFriends">
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendService/GetFriends" message="tns:IFriendService_GetFriends_InputMessage" />
@@ -43,6 +61,16 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IFriendService/GetFriendRequests" message="tns:IFriendService_GetFriendRequests_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IFriendService/GetFriendRequestsResponse" message="tns:IFriendService_GetFriendRequests_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IFriendService/GetFriendRequestsFriendFaultFault" name="FriendFaultFault" message="tns:IFriendService_GetFriendRequests_FriendFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AcceptFriendRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendService/AcceptFriendRequest" message="tns:IFriendService_AcceptFriendRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendService/AcceptFriendRequestResponse" message="tns:IFriendService_AcceptFriendRequest_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IFriendService/AcceptFriendRequestFriendFaultFault" name="FriendFaultFault" message="tns:IFriendService_AcceptFriendRequest_FriendFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RejectFriendRequest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFriendService/RejectFriendRequest" message="tns:IFriendService_RejectFriendRequest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFriendService/RejectFriendRequestResponse" message="tns:IFriendService_RejectFriendRequest_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IFriendService/RejectFriendRequestFriendFaultFault" name="FriendFaultFault" message="tns:IFriendService_RejectFriendRequest_FriendFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IFriendService" type="tns:IFriendService">
@@ -72,12 +100,36 @@
         <soap12:fault use="literal" name="FriendFaultFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="AcceptFriendRequest">
+      <soap12:operation soapAction="http://tempuri.org/IFriendService/AcceptFriendRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FriendFaultFault">
+        <soap12:fault use="literal" name="FriendFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RejectFriendRequest">
+      <soap12:operation soapAction="http://tempuri.org/IFriendService/RejectFriendRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="FriendFaultFault">
+        <soap12:fault use="literal" name="FriendFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="FriendService">
     <wsdl:port name="NetTcpBinding_IFriendService" binding="tns:NetTcpBinding_IFriendService">
-      <soap12:address location="net.tcp://localhost:9001/FriendService" />
+      <soap12:address location="net.tcp://26.186.19.19:9001/FriendService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:9001/FriendService</wsa10:Address>
+        <wsa10:Address>net.tcp://26.186.19.19:9001/FriendService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

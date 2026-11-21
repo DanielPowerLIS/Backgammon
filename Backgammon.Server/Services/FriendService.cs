@@ -1,17 +1,18 @@
-﻿using Backgammon.Server.Persistence.Repositories;
+﻿using Backgammon.Server.Persistence.Data;
+using Backgammon.Server.Persistence.Repositories;
 using Backgammon.Server.Persistence.Repositories.InterfacesRepositories;
 using Backgammon.Server.Services.Contracts;
-using Backgammon.Server.Persistence.Data;
+using Backgammon.Server.Services.Data;
 using Backgammon.Server.Services.Manager;
 using Backgammon.Server.SupportServices.ExceptionCode;
 using Backgammon.Server.SupportServices.Logging;
-
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.ServiceModel;
-using Backgammon.Server.Services.Data;
 using AccountDB = Backgammon.Server.Persistence.Data.Account;
 
 namespace Backgammon.Server.Services
@@ -72,6 +73,95 @@ namespace Backgammon.Server.Services
             List<FriendRequestPending> pendingRequests = MapFriendRequests(requests);
 
             return pendingRequests;
+        }
+
+        public void AcceptFriendRequest(string sessionId, int requestId)
+        {
+            int profileId = GetFriendProfileId(sessionId);
+
+            ProcessRequest(profileId, requestId, true);
+        }
+
+        public void RejectFriendRequest(string sessionId, int requestId)
+        {
+            int profileId = GetFriendProfileId(sessionId);
+
+            ProcessRequest(profileId, requestId, false);
+        }
+
+        private int GetFriendProfileId(string sessionId)
+        {
+            try
+            {
+                int profileId = _playerSessionManager.GetProfileId(sessionId);
+
+                return profileId;
+            }
+            catch (FaultException<PlayerProfileFault> sessionFault)
+            {
+                ApplicationLogger.LogWarning(
+                    "Friend request operation was rejected. Code: {0}",
+                    sessionFault.Detail.ErrorCode);
+
+                throw CreateFriendFault(ErrorCodes.SessionExpired);
+            }
+        }
+
+        private void ProcessRequest(int profileId, int requestId, bool accept)
+        {
+            try
+            {
+                if (accept)
+                {
+                    _friendRepository.AcceptFriendRequestAsync(profileId, requestId)
+                        .GetAwaiter().GetResult();
+                }
+                else
+                {
+                    _friendRepository.RejectFriendRequestAsync(profileId, requestId)
+                        .GetAwaiter().GetResult();
+                }
+            }
+            catch (KeyNotFoundException requestException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Friend request operation was rejected. Code: {0}. Reason: {1}",
+                    ErrorCodes.RequestNotFound, requestException.Message);
+
+                throw CreateFriendFault(ErrorCodes.RequestNotFound);
+            }
+            catch (ArgumentException requestException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Friend request operation was rejected. Code: {0}. Reason: {1}",
+                    ErrorCodes.InvalidRequest, requestException.Message);
+
+                throw CreateFriendFault(ErrorCodes.InvalidRequest);
+            }
+            catch (DbUpdateException updateException)
+            {
+                ApplicationLogger.LogError(updateException, "The friend request change could not be saved.");
+
+                throw CreateFriendFault(ErrorCodes.ServiceUnavailable);
+            }
+            catch (DbEntityValidationException validationException)
+            {
+                ApplicationLogger.LogError(validationException, "Friend request entity validation failed.");
+
+                throw CreateFriendFault(ErrorCodes.ServiceUnavailable);
+            }
+            catch (EntityException entityException)
+            {
+                ApplicationLogger.LogError(entityException, "An Entity Framework failure affected the friend request.");
+
+                throw CreateFriendFault(ErrorCodes.ServiceUnavailable);
+            }
+            catch (SqlException databaseException)
+            {
+                ApplicationLogger.LogError(databaseException, "A SQL failure affected the friend request.");
+
+                throw CreateFriendFault(ErrorCodes.ServiceUnavailable);
+            }
         }
 
         private List<AccountDB> FetchFriends(int profileId)
