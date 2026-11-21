@@ -18,6 +18,8 @@ namespace Backgammon.Server.Domain
         private static readonly int NoRemainingUses = 0;
         private static readonly int SingleDieUse = 1;
         private static readonly int SingleCheckerCount = 1;
+        private static readonly int PinkBarPointNumber = 0;
+        private static readonly int BlueBarPointNumber = 25;
 
         private readonly MatchBoardState _boardState;
         private readonly MatchDiceState _diceState;
@@ -61,23 +63,22 @@ namespace Backgammon.Server.Domain
 
         public CheckerMove[] GetAvailableMoves()
         {
-            if (HasCapturedCheckers())
-            {
-                CheckerMove[] emptyMoves = Array.Empty<CheckerMove>();
-
-                return emptyMoves;
-            }
-
             var availableMoves = new List<CheckerMove>();
 
             if (_diceState.FirstDieRemainingUses > NoRemainingUses)
             {
-                AddDieMoves(availableMoves, _diceState.FirstDieValue, FirstDieIndex);
+                AddAvailableDieMoves(availableMoves, _diceState.FirstDieValue, FirstDieIndex);
             }
 
             if (_diceState.SecondDieRemainingUses > NoRemainingUses)
             {
-                AddDieMoves(availableMoves, _diceState.SecondDieValue, SecondDieIndex);
+                AddAvailableDieMoves(availableMoves, _diceState.SecondDieValue, SecondDieIndex);
+            }
+
+            if (HasCapturedCheckers() && _diceState.FirstDieRemainingUses > NoRemainingUses &&
+                _diceState.SecondDieRemainingUses > NoRemainingUses)
+            {
+                AddCombinedBarMove(availableMoves);
             }
 
             CheckerMove[] moves = availableMoves.ToArray();
@@ -105,30 +106,24 @@ namespace Backgammon.Server.Domain
             throw new ArgumentException("The selected move is not available.", nameof(selectedMove));
         }
 
-        public void MoveChecker(CheckerMove selectedMove)
+        public bool MoveChecker(CheckerMove selectedMove)
         {
             CheckerMove availableMove = GetAvailableMove(selectedMove);
 
-            MatchPointState sourcePoint =
-                _boardState.Points[availableMove.SourcePointNumber - MinimumPointNumber];
+            MatchPointState destinationPoint = _boardState.Points[
+                    availableMove.DestinationPointNumber - MinimumPointNumber];
 
-            MatchPointState destinationPoint =
-                _boardState.Points[availableMove.DestinationPointNumber - MinimumPointNumber];
+            bool checkerCaptured = CaptureChecker(destinationPoint);
 
-            CaptureChecker(destinationPoint);
-
-            sourcePoint.Count--;
-
-            if (sourcePoint.Count == NoCheckers)
-            {
-                sourcePoint.Owner = CheckerColor.None;
-            }
+            RemoveSourceChecker(availableMove.SourcePointNumber);
 
             destinationPoint.Owner = _playerColor;
             destinationPoint.Count++;
 
             _diceState.FirstDieRemainingUses -= availableMove.FirstDieUses;
             _diceState.SecondDieRemainingUses -= availableMove.SecondDieUses;
+
+            return checkerCaptured;
         }
 
         private bool HasCapturedCheckers()
@@ -151,7 +146,7 @@ namespace Backgammon.Server.Domain
             {
                 if (CanMoveFrom(sourcePoint, dieValue))
                 {
-                    CheckerMove move = CreateMove(sourcePoint, dieValue, dieIndex);
+                    CheckerMove move = CreateMove(sourcePoint.Number, dieValue, dieIndex);
 
                     availableMoves.Add(move);
                 }
@@ -169,29 +164,18 @@ namespace Backgammon.Server.Domain
 
             int destinationNumber = sourcePoint.Number + _direction * dieValue;
 
-            bool insideBoard = destinationNumber >= MinimumPointNumber &&
-                destinationNumber <= MaximumPointNumber;
-
-            if (!insideBoard)
-            {
-                return insideBoard;
-            }
-
-            MatchPointState destinationPoint = _boardState.Points[destinationNumber - MinimumPointNumber];
-
-            bool destinationAvailable = destinationPoint.Owner == _playerColor ||
-                destinationPoint.Count < BlockedPointCount;
+            bool destinationAvailable = CanEnterPoint(destinationNumber);
 
             return destinationAvailable;
         }
 
-        private CheckerMove CreateMove(MatchPointState sourcePoint, int dieValue, int dieIndex)
+        private CheckerMove CreateMove(int sourcePointNumber, int dieValue, int dieIndex)
         {
-            int destinationNumber = sourcePoint.Number + _direction * dieValue;
+            int destinationNumber = sourcePointNumber + _direction * dieValue;
 
             var move = new CheckerMove
             {
-                SourcePointNumber = sourcePoint.Number,
+                SourcePointNumber = sourcePointNumber,
                 DestinationPointNumber = destinationNumber
             };
 
@@ -218,14 +202,14 @@ namespace Backgammon.Server.Domain
             return matchesMove;
         }
 
-        private void CaptureChecker(MatchPointState destinationPoint)
+        private bool CaptureChecker(MatchPointState destinationPoint)
         {
             bool containsOpponentChecker = destinationPoint.Count == SingleCheckerCount &&
                 destinationPoint.Owner != _playerColor;
 
             if (!containsOpponentChecker)
             {
-                return;
+                return containsOpponentChecker;
             }
 
             if (destinationPoint.Owner == CheckerColor.Blue)
@@ -239,6 +223,121 @@ namespace Backgammon.Server.Domain
 
             destinationPoint.Count = NoCheckers;
             destinationPoint.Owner = CheckerColor.None;
+
+            return containsOpponentChecker;
+        }
+
+        private int GetBarPointNumber()
+        {
+            int barPointNumber = PinkBarPointNumber;
+
+            if (_playerColor == CheckerColor.Blue)
+            {
+                barPointNumber = BlueBarPointNumber;
+            }
+
+            return barPointNumber;
+        }
+
+        private bool CanEnterPoint(int destinationNumber)
+        {
+            bool insideBoard = destinationNumber >= MinimumPointNumber && destinationNumber <= MaximumPointNumber;
+
+            if (!insideBoard)
+            {
+                return insideBoard;
+            }
+
+            MatchPointState destinationPoint = _boardState.Points[destinationNumber - MinimumPointNumber];
+
+            bool destinationAvailable = destinationPoint.Owner == _playerColor ||
+                destinationPoint.Count < BlockedPointCount;
+
+            return destinationAvailable;
+        }
+
+        private void RemoveSourceChecker(int sourcePointNumber)
+        {
+            if (sourcePointNumber == GetBarPointNumber())
+            {
+                RemoveBarChecker();
+
+                return;
+            }
+
+            MatchPointState sourcePoint = _boardState.Points[sourcePointNumber - MinimumPointNumber];
+
+            sourcePoint.Count--;
+
+            if (sourcePoint.Count == NoCheckers)
+            {
+                sourcePoint.Owner = CheckerColor.None;
+            }
+        }
+
+        private void RemoveBarChecker()
+        {
+            if (_playerColor == CheckerColor.Blue)
+            {
+                _boardState.BlueOnBar--;
+            }
+            else
+            {
+                _boardState.PinkOnBar--;
+            }
+        }
+
+        private void AddAvailableDieMoves(List<CheckerMove> availableMoves, int dieValue, int dieIndex)
+        {
+            if (HasCapturedCheckers())
+            {
+                AddBarMove(availableMoves, dieValue, dieIndex);
+            }
+            else
+            {
+                AddDieMoves(availableMoves, dieValue, dieIndex);
+            }
+        }
+
+        private void AddBarMove(List<CheckerMove> availableMoves, int dieValue, int dieIndex)
+        {
+            int sourcePointNumber = GetBarPointNumber();
+
+            int destinationNumber =
+                sourcePointNumber + _direction * dieValue;
+
+            if (!CanEnterPoint(destinationNumber))
+            {
+                return;
+            }
+
+            CheckerMove move = CreateMove(sourcePointNumber, dieValue, dieIndex);
+
+            availableMoves.Add(move);
+        }
+
+        private void AddCombinedBarMove(List<CheckerMove> availableMoves)
+        {
+            int sourcePointNumber = GetBarPointNumber();
+
+            int combinedValue = _diceState.FirstDieValue + _diceState.SecondDieValue;
+
+            int destinationNumber = sourcePointNumber + _direction * combinedValue;
+
+            if (!CanEnterPoint(destinationNumber))
+            {
+                return;
+            }
+
+            var move = new CheckerMove
+            {
+                SourcePointNumber = sourcePointNumber,
+                DestinationPointNumber = destinationNumber,
+                FirstDieUses = SingleDieUse,
+                SecondDieUses = SingleDieUse
+            };
+
+            availableMoves.Add(move);
         }
     }
 }

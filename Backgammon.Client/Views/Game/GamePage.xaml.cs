@@ -156,6 +156,7 @@ namespace Backgammon.Client.Views.Game
             _isPlayerReady = false;
 
             RemoveMatchStartControl();
+            RemoveCaptureNotice();
             CloseOpeningRollDialog();
 
             GameController gameController = _gameController;
@@ -273,13 +274,16 @@ namespace Backgammon.Client.Views.Game
 
             boardControlGame.RenderBoard(boardState);
 
+            UpdateCaptureNotice(matchState);
+
             _renderedState = matchState;
             _renderedVersion = matchState.Version;
-
             _selectedSourcePointNumber = NoPointSelected;
 
             UpdateTurnDice(matchState);
             UpdateCheckerHighlights();
+
+            textBlockSharedPot.Text = matchState.SharedPot.ToString();
         }
 
         private void UpdateMatchAnnouncement(MatchPreparation preparation)
@@ -754,6 +758,48 @@ namespace Backgammon.Client.Views.Game
                     "The checker movement exceeded the time limit.");
 
                 ShowCheckerMoveError(gameController);
+            }
+        }
+
+        private void UpdateCaptureNotice(MatchState matchState)
+        {
+            if (_renderedState == null ||
+                matchState.CaptureNumber <= _renderedState.CaptureNumber)
+            {
+                return;
+            }
+
+            ShowCaptureNotice();
+        }
+
+        private void ShowCaptureNotice()
+        {
+            RemoveCaptureNotice();
+
+            var captureNotice = new CaptureNoticeControl();
+
+            captureNotice.DisplayFinished += OnCaptureNoticeDisplayFinished;
+            contentControlCaptureNotice.Content = captureNotice;
+
+            captureNotice.ShowMessage(Properties.Resources.TextBlock_CheckerCapturedMessage);
+        }
+
+        private void RemoveCaptureNotice()
+        {
+            if (contentControlCaptureNotice.Content is CaptureNoticeControl captureNotice)
+            {
+                captureNotice.DisplayFinished -= OnCaptureNoticeDisplayFinished;
+                captureNotice.StopNotice();
+            }
+
+            contentControlCaptureNotice.Content = null;
+        }
+
+        private void OnCaptureNoticeDisplayFinished(object sender, EventArgs eventArgs)
+        {
+            if (ReferenceEquals(contentControlCaptureNotice.Content, sender))
+            {
+                RemoveCaptureNotice();
             }
         }
     }

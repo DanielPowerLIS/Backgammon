@@ -18,7 +18,7 @@ namespace Backgammon.Client.Views.Game.Controls
         private static readonly string PinkCheckerStrokeHex = "#00C9F2";
         private static readonly string NoneCheckerStrokeHex = "#00C9F2";
 
-        private static readonly int UnassignedPointNumber = 0;
+        private const int UnassignedPointNumber = -1;
         private static readonly double NormalStrokeThickness = 2;
         private static readonly double HighlightedStrokeThickness = 4;
 

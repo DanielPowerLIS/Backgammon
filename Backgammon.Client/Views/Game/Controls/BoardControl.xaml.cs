@@ -27,6 +27,13 @@ namespace Backgammon.Client.Views.Game.Controls
         private static readonly int TotalColumns = 12;
         private static readonly int ColumnsPerHalf = 6;
         private static readonly int FirstPointIndex = 0;
+
+        private static readonly int MinimumPointNumber = 1;
+        private static readonly int MaximumPointNumber = 24;
+        private static readonly int PinkBarPointNumber = 0;
+        private static readonly int BlueBarPointNumber = 25;
+        private static readonly int FirstCheckerIndex = 0;
+        private static readonly double CenteringDivisor = 2;
         private static readonly string DestinationHighlightHex = "#6600C9F2";
 
         private readonly List<Polygon> _pointPolygons;
@@ -53,15 +60,22 @@ namespace Backgammon.Client.Views.Game.Controls
 
         public event EventHandler<BoardPointSelection> DestinationSelected;
 
-        public void RenderBoard(BoardState boardState) 
+        public void RenderBoard(BoardState boardState)
         {
             HighlightDestinations(Array.Empty<int>());
 
             ClearRenderedCheckers();
-            for (int pointNumber = 1; pointNumber <= 24; pointNumber++)
+
+            for (int pointNumber = MinimumPointNumber;
+                pointNumber <= MaximumPointNumber;
+                pointNumber++)
             {
                 RenderPointCheckers(boardState.GetPoint(pointNumber));
             }
+
+            RenderBarCheckers(BlueBarPointNumber, CheckerColor.Blue, boardState.BlueOnBar);
+
+            RenderBarCheckers(PinkBarPointNumber, CheckerColor.Pink, boardState.PinkOnBar);
         }
 
         public void HighlightCheckers(IEnumerable<int> sourcePointNumbers)
@@ -181,20 +195,24 @@ namespace Backgammon.Client.Views.Game.Controls
 
         private void AddCheckerToCanvas(BoardPoint boardPoint, double checkerLeft, double checkerTop)
         {
-            var newChecker = new CheckerControl
+            var checker = new CheckerControl
             {
                 PointNumber = boardPoint.Number,
                 CheckerColor = boardPoint.Owner
             };
 
-            newChecker.MouseLeftButtonUp += OnCheckerMouseLeftButtonUp;
+            AddCheckerToCanvas(checker, checkerLeft, checkerTop);
+        }
 
-            Canvas.SetLeft(newChecker, checkerLeft);
-            Canvas.SetTop(newChecker, checkerTop);
+        private void AddCheckerToCanvas(CheckerControl checker, double checkerLeft, double checkerTop)
+        {
+            checker.MouseLeftButtonUp += OnCheckerMouseLeftButtonUp;
 
-            CanvasBoard.Children.Add(newChecker);
+            Canvas.SetLeft(checker, checkerLeft);
+            Canvas.SetTop(checker, checkerTop);
 
-            _renderedCheckers.Add(newChecker);
+            CanvasBoard.Children.Add(checker);
+            _renderedCheckers.Add(checker);
         }
 
         private void OnCheckerMouseLeftButtonUp(object sender, MouseButtonEventArgs mouseEventArgs)
@@ -288,6 +306,39 @@ namespace Backgammon.Client.Views.Game.Controls
             {
                 selectionHandler.Invoke(this, selection);
             }
+        }
+
+        private void RenderBarCheckers(int barPointNumber, CheckerColor checkerColor, int checkerCount)
+        {
+            double checkerSpacing = CalculateCheckerSpacing(checkerCount);
+            double checkerLeft = CalculateBarCheckerLeft();
+
+            for (int stackIndex = FirstCheckerIndex;
+                stackIndex < checkerCount;
+                stackIndex++)
+            {
+                double checkerTop = CalculateCheckerTop(
+                    barPointNumber,
+                    stackIndex,
+                    checkerSpacing);
+
+                var checker = new CheckerControl
+                {
+                    PointNumber = barPointNumber,
+                    CheckerColor = checkerColor
+                };
+
+                AddCheckerToCanvas(checker, checkerLeft, checkerTop);
+            }
+        }
+
+        private static double CalculateBarCheckerLeft()
+        {
+            double barLeft = PointBaseLeft + ColumnsPerHalf * PointWidth;
+
+            double checkerLeft = barLeft + (BarWidth - CheckerSize) / CenteringDivisor;
+
+            return checkerLeft;
         }
     }
 }

@@ -743,4 +743,10 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_CheckerMoveErrorMessage" xml:space="preserve">
     <value>No se pudo confirmar el movimiento. Inténtalo nuevamente.</value>
   </data>
+  <data name="TextBlock_SharedPotLabel" xml:space="preserve">
+    <value>Pozo compartido</value>
+  </data>
+  <data name="TextBlock_CheckerCapturedMessage" xml:space="preserve">
+    <value>¡FICHA CAPTURADA!</value>
+  </data>
 </root>

@@ -26,6 +26,9 @@ namespace Backgammon.Client.GameReference {
         private Backgammon.Client.GameReference.MatchBoardState BoardField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long CaptureNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MatchIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -33,6 +36,9 @@ namespace Backgammon.Client.GameReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RoomIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SharedPotField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Backgammon.Client.GameReference.MatchTurnState TurnField;
@@ -59,6 +65,19 @@ namespace Backgammon.Client.GameReference {
                 if ((object.ReferenceEquals(this.BoardField, value) != true)) {
                     this.BoardField = value;
                     this.RaisePropertyChanged("Board");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long CaptureNumber {
+            get {
+                return this.CaptureNumberField;
+            }
+            set {
+                if ((this.CaptureNumberField.Equals(value) != true)) {
+                    this.CaptureNumberField = value;
+                    this.RaisePropertyChanged("CaptureNumber");
                 }
             }
         }
@@ -98,6 +117,19 @@ namespace Backgammon.Client.GameReference {
                 if ((object.ReferenceEquals(this.RoomIdField, value) != true)) {
                     this.RoomIdField = value;
                     this.RaisePropertyChanged("RoomId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SharedPot {
+            get {
+                return this.SharedPotField;
+            }
+            set {
+                if ((this.SharedPotField.Equals(value) != true)) {
+                    this.SharedPotField = value;
+                    this.RaisePropertyChanged("SharedPot");
                 }
             }
         }

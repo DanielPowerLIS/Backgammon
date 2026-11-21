@@ -8,6 +8,7 @@ namespace Backgammon.Server.Domain
     {
         private static readonly int SingleDieUses = 1;
         private static readonly int DoubleDieUses = 2;
+        private static readonly int CapturePoints = 10;
 
         public static void RollDice(MatchState matchState, int playerId, CheckerColor playerColor)
         {
@@ -53,9 +54,18 @@ namespace Backgammon.Server.Domain
                 throw new ArgumentException("The match is not accepting checker movements.");
             }
 
-            var movement = new MatchMovement(matchState.Board, matchState.Turn.Dice, playerColor);
+            var movement = new MatchMovement(
+                matchState.Board,
+                matchState.Turn.Dice,
+                playerColor);
 
-            movement.MoveChecker(selectedMove);
+            bool checkerCaptured = movement.MoveChecker(selectedMove);
+
+            if (checkerCaptured)
+            {
+                matchState.SharedPot += CapturePoints;
+                matchState.CaptureNumber++;
+            }
 
             CheckerMove[] availableMoves = movement.GetAvailableMoves();
 
