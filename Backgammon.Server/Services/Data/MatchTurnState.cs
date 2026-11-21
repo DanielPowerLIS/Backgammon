@@ -17,11 +17,15 @@ namespace Backgammon.Server.Services.Data
         [DataMember]
         public CheckerMove[] AvailableMoves { get; set; }
 
+        [DataMember]
+        public bool CanUndo { get; set; }
+
         public MatchTurnState()
         {
             CurrentPlayerId = UnassignedPlayerId;
             Dice = new MatchDiceState();
             AvailableMoves = Array.Empty<CheckerMove>();
+            CanUndo = false;
         }
     }
 }

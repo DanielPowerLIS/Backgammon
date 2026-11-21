@@ -749,4 +749,10 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_CheckerCapturedMessage" xml:space="preserve">
     <value>CHECKER CAPTURED!</value>
   </data>
+  <data name="Button_UndoMove" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="Message_UndoMoveError" xml:space="preserve">
+    <value>The last move could not be undone. Please try again.</value>
+  </data>
 </root>

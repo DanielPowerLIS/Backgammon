@@ -59,6 +59,7 @@
   <xs:complexType name="MatchTurnState">
     <xs:sequence>
       <xs:element minOccurs="0" name="AvailableMoves" nillable="true" type="tns:ArrayOfCheckerMove" />
+      <xs:element minOccurs="0" name="CanUndo" type="xs:boolean" />
       <xs:element minOccurs="0" name="CurrentPlayerId" type="xs:int" />
       <xs:element minOccurs="0" name="Dice" nillable="true" type="tns:MatchDiceState" />
     </xs:sequence>
@@ -122,14 +123,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PlayerOpeningRoll" nillable="true" type="tns:PlayerOpeningRoll" />
-  <xs:complexType name="PlayerDiceRoll">
+  <xs:complexType name="PlayerTurn">
     <xs:sequence>
       <xs:element minOccurs="0" name="ExpectedVersion" type="xs:long" />
       <xs:element minOccurs="0" name="MatchId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RoomId" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="PlayerDiceRoll" nillable="true" type="tns:PlayerDiceRoll" />
+  <xs:element name="PlayerTurn" nillable="true" type="tns:PlayerTurn" />
   <xs:complexType name="PlayerCheckerMove">
     <xs:sequence>
       <xs:element minOccurs="0" name="ExpectedVersion" type="xs:long" />

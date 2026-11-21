@@ -749,4 +749,10 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_CheckerCapturedMessage" xml:space="preserve">
     <value>¡FICHA CAPTURADA!</value>
   </data>
+  <data name="Button_UndoMove" xml:space="preserve">
+    <value>Deshacer</value>
+  </data>
+  <data name="Message_UndoMoveError" xml:space="preserve">
+    <value>No se pudo deshacer el último movimiento. Inténtalo nuevamente.</value>
+  </data>
 </root>

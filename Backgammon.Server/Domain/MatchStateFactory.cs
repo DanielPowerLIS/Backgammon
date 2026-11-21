@@ -49,6 +49,54 @@ namespace Backgammon.Server.Domain
             return stateCopy;
         }
 
+        public static TurnSnapshot CreateTurnSnapshot(MatchState matchState)
+        {
+            if (matchState == null)
+            {
+                throw new ArgumentNullException(nameof(matchState));
+            }
+
+            if (matchState.Turn == null)
+            {
+                throw new ArgumentException("The match turn is required.", nameof(matchState));
+            }
+
+            MatchBoardState boardCopy = CopyBoard(matchState.Board);
+            MatchDiceState diceCopy = CopyDice(matchState.Turn.Dice);
+
+            var snapshot = new TurnSnapshot(
+                boardCopy,
+                diceCopy,
+                matchState.SharedPot);
+
+            return snapshot;
+        }
+
+        public static void RestoreTurnSnapshot(MatchState matchState, TurnSnapshot snapshot)
+        {
+            if (matchState == null)
+            {
+                throw new ArgumentNullException(nameof(matchState));
+            }
+
+            if (snapshot == null)
+            {
+                throw new ArgumentNullException(nameof(snapshot));
+            }
+
+            if (matchState.Turn == null)
+            {
+                throw new ArgumentException("The match turn is required.", nameof(matchState));
+            }
+
+            MatchBoardState boardCopy = CopyBoard(snapshot.Board);
+            MatchDiceState diceCopy = CopyDice(snapshot.Dice);
+
+            matchState.Board = boardCopy;
+            matchState.Turn.Dice = diceCopy;
+            matchState.SharedPot = snapshot.SharedPot;
+        }
+
         private static MatchBoardState CopyBoard(MatchBoardState boardState)
         {
             if (boardState == null)
@@ -139,7 +187,8 @@ namespace Backgammon.Server.Domain
             {
                 CurrentPlayerId = turnState.CurrentPlayerId,
                 Dice = CopyDice(turnState.Dice),
-                AvailableMoves = CopyMoves(turnState.AvailableMoves)
+                AvailableMoves = CopyMoves(turnState.AvailableMoves),
+                CanUndo = turnState.CanUndo
             };
 
             return turnCopy;

@@ -349,6 +349,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deshacer.
+        /// </summary>
+        public static string Button_UndoMove {
+            get {
+                return ResourceManager.GetString("Button_UndoMove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Verificar código.
         /// </summary>
         public static string Button_VerifyCode {
@@ -570,6 +579,15 @@ namespace Backgammon.Client.Properties {
         public static string Message_TurnRollError {
             get {
                 return ResourceManager.GetString("Message_TurnRollError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se pudo deshacer el último movimiento. Inténtalo nuevamente..
+        /// </summary>
+        public static string Message_UndoMoveError {
+            get {
+                return ResourceManager.GetString("Message_UndoMoveError", resourceCulture);
             }
         }
         

@@ -52,7 +52,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string" />
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="playerRoll" nillable="true" type="q5:PlayerDiceRoll" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="playerRoll" nillable="true" type="q5:PlayerTurn" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -94,17 +94,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="UndoCheckerMove">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="playerTurn" nillable="true" type="q10:PlayerTurn" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UndoCheckerMoveResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="UndoCheckerMoveResult" nillable="true" type="q11:MatchState" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="OnMatchStateUpdated">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="matchState" nillable="true" type="q10:MatchState" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="matchState" nillable="true" type="q12:MatchState" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="OnMatchPreparationUpdated">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="preparation" nillable="true" type="q11:MatchPreparation" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" minOccurs="0" name="preparation" nillable="true" type="q13:MatchPreparation" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
