@@ -188,6 +188,22 @@ namespace Backgammon.Client.Controllers.Game
             ApplyMatchState(matchState);
         }
 
+        public async Task ConfirmTurnAsync(long expectedVersion)
+        {
+            string sessionId = PlayerSessionContext.GetSession().SessionId;
+
+            var playerTurn = new PlayerTurn
+            {
+                RoomId = _roomId,
+                MatchId = _matchId,
+                ExpectedVersion = expectedVersion
+            };
+
+            MatchState matchState = await _gameClient.ConfirmTurnAsync(sessionId, playerTurn);
+
+            ApplyMatchState(matchState);
+        }
+
         public void CloseConnection()
         {
             lock (_queue)

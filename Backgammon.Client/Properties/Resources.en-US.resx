@@ -755,4 +755,7 @@ c) Move four checkers 6 points each.
   <data name="Message_UndoMoveError" xml:space="preserve">
     <value>The last move could not be undone. Please try again.</value>
   </data>
+  <data name="Message_ConfirmTurnError" xml:space="preserve">
+    <value>The turn could not be confirmed. Please try again.</value>
+  </data>
 </root>

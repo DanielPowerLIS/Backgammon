@@ -128,6 +128,20 @@ namespace Backgammon.Client.Comunication
             }
         }
 
+        public async Task<MatchState> ConfirmTurnAsync(string sessionId, PlayerTurn playerTurn)
+        {
+            try
+            {
+                MatchState matchState = await _serviceClient.ConfirmTurnAsync(sessionId, playerTurn);
+
+                return matchState;
+            }
+            finally
+            {
+                AbortFaultedChannel();
+            }
+        }
+
         public void Close()
         {
             try

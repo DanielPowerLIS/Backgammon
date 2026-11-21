@@ -59,6 +59,7 @@
   <xs:complexType name="MatchTurnState">
     <xs:sequence>
       <xs:element minOccurs="0" name="AvailableMoves" nillable="true" type="tns:ArrayOfCheckerMove" />
+      <xs:element minOccurs="0" name="CanConfirm" type="xs:boolean" />
       <xs:element minOccurs="0" name="CanUndo" type="xs:boolean" />
       <xs:element minOccurs="0" name="CurrentPlayerId" type="xs:int" />
       <xs:element minOccurs="0" name="Dice" nillable="true" type="tns:MatchDiceState" />

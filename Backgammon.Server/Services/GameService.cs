@@ -262,6 +262,39 @@ namespace Backgammon.Server.Services
             }
         }
 
+        public MatchState ConfirmTurn(string sessionId, PlayerTurn playerTurn)
+        {
+            PlayerSession playerSession = GetPlayerSession(sessionId);
+
+            try
+            {
+                MatchState matchState = ConfirmPlayerTurn(playerSession, playerTurn);
+
+                return matchState;
+            }
+            catch (UnauthorizedAccessException accessException)
+            {
+                ApplicationLogger.LogWarning("The turn confirmation was denied. Reason: {0}",
+                    accessException.Message);
+
+                throw CreateMatchFault(ErrorCodes.AccessDenied);
+            }
+            catch (KeyNotFoundException matchException)
+            {
+                ApplicationLogger.LogWarning("The match is unavailable for turn confirmation. Reason: {0}",
+                    matchException.Message);
+
+                throw CreateMatchFault(ErrorCodes.MatchUnavailable);
+            }
+            catch (ArgumentException confirmationException)
+            {
+                ApplicationLogger.LogWarning("The turn confirmation was invalid. Reason: {0}",
+                    confirmationException.Message);
+
+                throw CreateMatchFault(ErrorCodes.InvalidInput);
+            }
+        }
+
         private PlayerSession GetPlayerSession(string sessionId)
         {
             try
@@ -469,6 +502,25 @@ namespace Backgammon.Server.Services
                 playerTurn.MatchId);
 
             MatchState matchState = MatchManager.UndoCheckerMove(player, playerTurn.ExpectedVersion);
+
+            UpdatePlayers(player, matchState);
+
+            return matchState;
+        }
+
+        private MatchState ConfirmPlayerTurn(PlayerSession playerSession, PlayerTurn playerTurn)
+        {
+            if (playerTurn == null)
+            {
+                throw new ArgumentNullException(nameof(playerTurn));
+            }
+
+            var player = new MatchPlayer(
+                playerSession.PlayerId,
+                playerTurn.RoomId,
+                playerTurn.MatchId);
+
+            MatchState matchState = MatchManager.ConfirmTurn(player, playerTurn.ExpectedVersion);
 
             UpdatePlayers(player, matchState);
 

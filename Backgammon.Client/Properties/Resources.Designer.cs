@@ -430,6 +430,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No se pudo confirmar el turno. Inténtalo nuevamente..
+        /// </summary>
+        public static string Message_ConfirmTurnError {
+            get {
+                return ResourceManager.GetString("Message_ConfirmTurnError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ¡PAR!.
         /// </summary>
         public static string Message_Doubles {
