@@ -783,3 +783,28 @@ c) Mover cuatro fichas 6 casillas cada una.
     <value>La solicitud de amistad se envió correctamente.</value>
   </data>
 </root>
+  <data name="TextBlock_GraceTimeLabel" xml:space="preserve">
+    <value>Tiempo de gracia</value>
+  </data>
+  <data name="TextBlock_GlobalTimeLabel" xml:space="preserve">
+    <value>Tiempo global</value>
+  </data>
+  <data name="TextBlock_MatchWonTitle" xml:space="preserve">
+    <value>¡Ganaste la partida!</value>
+  </data>
+  <data name="TextBlock_MatchLostTitle" xml:space="preserve">
+    <value>Partida perdida</value>
+  </data>
+  <data name="Message_MatchWonByTimeout" xml:space="preserve">
+    <value>Tu rival agotó su tiempo global.</value>
+  </data>
+  <data name="Message_MatchLostByTimeout" xml:space="preserve">
+    <value>Se agotó tu tiempo global.</value>
+  </data>
+  <data name="Message_MatchWonByCheckers" xml:space="preserve">
+    <value>Retiraste todas tus fichas del tablero.</value>
+  </data>
+  <data name="Message_MatchLostByCheckers" xml:space="preserve">
+    <value>Tu rival retiró todas sus fichas del tablero.</value>
+  </data>
+</root>

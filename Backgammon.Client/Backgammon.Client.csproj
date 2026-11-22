@@ -175,6 +175,9 @@
     <Compile Include="Views\Game\Controls\CaptureNoticeControl.xaml.cs">
       <DependentUpon>CaptureNoticeControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Game\Controls\MatchClockControl.xaml.cs">
+      <DependentUpon>MatchClockControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Game\Controls\MatchStartControl.xaml.cs">
       <DependentUpon>MatchStartControl.xaml</DependentUpon>
     </Compile>
@@ -322,6 +325,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Game\Controls\DieControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Game\Controls\MatchClockControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
