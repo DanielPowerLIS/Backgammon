@@ -889,6 +889,42 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo enviar la solicitud. Verifica el correo o código e inténtalo nuevamente..
+        /// </summary>
+        public static string TextBlock_FriendRequestSendErrorMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_FriendRequestSendErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Solicitud de amistad.
+        /// </summary>
+        public static string TextBlock_FriendRequestSendErrorTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_FriendRequestSendErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a La solicitud de amistad se envió correctamente..
+        /// </summary>
+        public static string TextBlock_FriendRequestSentMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_FriendRequestSentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Solicitud enviada.
+        /// </summary>
+        public static string TextBlock_FriendRequestSentTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_FriendRequestSentTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a No se pudo procesar la solicitud de amistad. Inténtalo nuevamente..
         /// </summary>
         public static string TextBlock_FriendRequestUpdateErrorMessage {

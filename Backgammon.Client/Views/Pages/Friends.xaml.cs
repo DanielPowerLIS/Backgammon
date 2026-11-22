@@ -40,7 +40,21 @@ namespace Backgammon.Client.Views.Pages
 
         private void OnAddFriend(object sender, RoutedEventArgs routedEventArgs)
         {
+            Window owner = Window.GetWindow(this);
+            var dialog = new AddFriendDialog();
 
+            bool requestSent = dialog.ShowFor(owner);
+
+            if (requestSent)
+            {
+                var confirmation = new AlertDialog(
+                    Properties.Resources.TextBlock_FriendRequestSentTitle,
+                    Properties.Resources.TextBlock_FriendRequestSentMessage,
+                    AlertType.Normal);
+
+                confirmation.Owner = owner;
+                confirmation.ShowDialog();
+            }
         }
 
         private async void OnFriendsLoaded(object sender, RoutedEventArgs eventArgs)

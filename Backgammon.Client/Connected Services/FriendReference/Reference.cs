@@ -211,6 +211,13 @@ namespace Backgammon.Client.FriendReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/RejectFriendRequest", ReplyAction="http://tempuri.org/IFriendService/RejectFriendRequestResponse")]
         System.Threading.Tasks.Task RejectFriendRequestAsync(string sessionId, int requestId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/SendFriendRequest", ReplyAction="http://tempuri.org/IFriendService/SendFriendRequestResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.FriendReference.FriendFault), Action="http://tempuri.org/IFriendService/SendFriendRequestFriendFaultFault", Name="FriendFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        void SendFriendRequest(string sessionId, string identifier, bool byEmail);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/SendFriendRequest", ReplyAction="http://tempuri.org/IFriendService/SendFriendRequestResponse")]
+        System.Threading.Tasks.Task SendFriendRequestAsync(string sessionId, string identifier, bool byEmail);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -270,6 +277,14 @@ namespace Backgammon.Client.FriendReference {
         
         public System.Threading.Tasks.Task RejectFriendRequestAsync(string sessionId, int requestId) {
             return base.Channel.RejectFriendRequestAsync(sessionId, requestId);
+        }
+        
+        public void SendFriendRequest(string sessionId, string identifier, bool byEmail) {
+            base.Channel.SendFriendRequest(sessionId, identifier, byEmail);
+        }
+        
+        public System.Threading.Tasks.Task SendFriendRequestAsync(string sessionId, string identifier, bool byEmail) {
+            return base.Channel.SendFriendRequestAsync(sessionId, identifier, byEmail);
         }
     }
 }

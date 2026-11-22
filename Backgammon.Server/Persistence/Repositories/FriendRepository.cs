@@ -2,6 +2,7 @@
 using Backgammon.Server.Persistence.Repositories.InterfacesRepositories;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -154,6 +155,117 @@ namespace Backgammon.Server.Persistence.Repositories
             }
 
             return request;
+        }
+
+        public async Task SendFriendRequestAsync(int profileId, string identifier, bool byEmail)
+        {
+            string value = NormalizeIdentifier(identifier, byEmail);
+
+            using (var databaseContext = new BackgammonEntities())
+            using (var transaction = databaseContext.Database.BeginTransaction(IsolationLevel.Serializable))
+            {
+                Account sender = await databaseContext.Accounts
+                    .SingleOrDefaultAsync(account => account.IdProfileFK == profileId)
+                    .ConfigureAwait(false);
+
+                if (sender == null)
+                {
+                    throw new KeyNotFoundException("The requesting account was not found.");
+                }
+
+                Account recipient = await FindRecipientAsync(databaseContext, value, byEmail)
+                    .ConfigureAwait(false);
+
+                await ValidateRelationshipAsync(
+                    databaseContext, sender.IdAccountPK, recipient.IdAccountPK).ConfigureAwait(false);
+
+                var request = new FriendRequest
+                {
+                    IssuingAccountFK = sender.IdAccountPK,
+                    ReceivingAccountFK = recipient.IdAccountPK
+                };
+
+                databaseContext.FriendRequests.Add(request);
+                await databaseContext.SaveChangesAsync().ConfigureAwait(false);
+
+                transaction.Commit();
+            }
+        }
+
+        private string NormalizeIdentifier(string identifier, bool byEmail)
+        {
+            if (string.IsNullOrWhiteSpace(identifier))
+            {
+                throw new ArgumentException("An account identifier is required.", nameof(identifier));
+            }
+
+            string value = identifier.Trim();
+
+            if (byEmail && (value.Length > 100 || !value.Contains("@")))
+            {
+                throw new ArgumentException("The email identifier is invalid.", nameof(identifier));
+            }
+
+            if (!byEmail)
+            {
+                if (value.Length != 8)
+                {
+                    throw new ArgumentException("The account code is invalid.", nameof(identifier));
+                }
+
+                value = value.ToUpperInvariant();
+            }
+
+            return value;
+        }
+
+        private async Task<Account> FindRecipientAsync( 
+            BackgammonEntities databaseContext, string identifier, bool byEmail)
+        {
+            IQueryable<Account> accounts = databaseContext.Accounts;
+
+            if (byEmail)
+            {
+                accounts = accounts.Where(account => account.Email == identifier);
+            }
+            else
+            {
+                accounts = accounts.Where(account => account.AccountCode == identifier);
+            }
+
+            Account recipient = await accounts.FirstOrDefaultAsync().ConfigureAwait(false);
+
+            if (recipient == null)
+            {
+                throw new KeyNotFoundException("The recipient account was not found.");
+            }
+
+            return recipient;
+        }
+
+        private async Task ValidateRelationshipAsync(BackgammonEntities databaseContext, int senderId, int recipientId)
+        {
+            if (senderId == recipientId)
+            {
+                throw new ArgumentException("A player cannot send a request to their own account.", nameof(recipientId));
+            }
+
+            int firstId = Math.Min(senderId, recipientId);
+            int secondId = Math.Max(senderId, recipientId);
+
+            bool areFriends = await databaseContext.FriendShips.AnyAsync(friendship =>
+                friendship.AccountOneId == firstId &&
+                friendship.AccountTwoId == secondId).ConfigureAwait(false);
+
+            bool requestExists = await databaseContext.FriendRequests.AnyAsync(request =>
+                (request.IssuingAccountFK == senderId && request.ReceivingAccountFK == recipientId) ||
+                (request.IssuingAccountFK == recipientId && request.ReceivingAccountFK == senderId))
+                .ConfigureAwait(false);
+
+            if (areFriends || requestExists)
+            {
+                throw new ArgumentException("A friendship or request already exists.", nameof(recipientId));
+            }
         }
 
     }

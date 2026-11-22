@@ -746,9 +746,9 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_FriendRequestUpdateErrorTitle" xml:space="preserve">
     <value>Solicitud de amistad</value>
   </data>
-    <data name="TextBlock_FriendRequestUpdateErrorMessage" xml:space="preserve">
+  <data name="TextBlock_FriendRequestUpdateErrorMessage" xml:space="preserve">
     <value>No se pudo procesar la solicitud de amistad. Inténtalo nuevamente.</value>
-      </data>
+  </data>
   <data name="TextBlock_SharedPotLabel" xml:space="preserve">
     <value>Pozo compartido</value>
   </data>
@@ -763,5 +763,17 @@ c) Mover cuatro fichas 6 casillas cada una.
   </data>
   <data name="Message_ConfirmTurnError" xml:space="preserve">
     <value>No se pudo confirmar el turno. Inténtalo nuevamente.</value>
+  </data>
+  <data name="TextBlock_FriendRequestSendErrorTitle" xml:space="preserve">
+    <value>Solicitud de amistad</value>
+  </data>
+  <data name="TextBlock_FriendRequestSendErrorMessage" xml:space="preserve">
+    <value>No se pudo enviar la solicitud. Verifica el correo o código e inténtalo nuevamente.</value>
+  </data>
+  <data name="TextBlock_FriendRequestSentTitle" xml:space="preserve">
+    <value>Solicitud enviada</value>
+  </data>
+  <data name="TextBlock_FriendRequestSentMessage" xml:space="preserve">
+    <value>La solicitud de amistad se envió correctamente.</value>
   </data>
 </root>
