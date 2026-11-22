@@ -32,6 +32,12 @@ namespace Backgammon.Server.Services.Data
         [DataMember]
         public long CaptureNumber { get; set; }
 
+        [DataMember]
+        public MatchClockState Clock { get; set; }
+
+        [DataMember]
+        public MatchResult Result { get; set; }
+
         public MatchState()
         {
             MatchId = string.Empty;
@@ -41,6 +47,8 @@ namespace Backgammon.Server.Services.Data
             Turn = new MatchTurnState();
             SharedPot = InitialSharedPot;
             CaptureNumber = InitialCaptureNumber;
+            Clock = new MatchClockState();
+            Result = new MatchResult();
         }
     }
 }

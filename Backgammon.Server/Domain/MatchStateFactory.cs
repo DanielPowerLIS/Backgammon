@@ -43,7 +43,9 @@ namespace Backgammon.Server.Domain
                 SharedPot = matchState.SharedPot,
                 CaptureNumber = matchState.CaptureNumber,
                 Version = matchState.Version,
-                Turn = CopyTurn(matchState.Turn)
+                Turn = CopyTurn(matchState.Turn),
+                Clock = CopyClock(matchState.Clock),
+                Result = CopyResult(matchState.Result)
             };
 
             return stateCopy;
@@ -193,6 +195,42 @@ namespace Backgammon.Server.Domain
             };
 
             return turnCopy;
+        }
+
+        private static MatchClockState CopyClock(MatchClockState clockState)
+        {
+            if (clockState == null)
+            {
+                throw new ArgumentNullException(nameof(clockState));
+            }
+
+            var clockCopy = new MatchClockState
+            {
+                HostRemainingTime = clockState.HostRemainingTime,
+                GuestRemainingTime = clockState.GuestRemainingTime,
+                GraceRemainingTime = clockState.GraceRemainingTime,
+                ServerTimeUtc = clockState.ServerTimeUtc,
+                IsRunning = clockState.IsRunning
+            };
+
+            return clockCopy;
+        }
+
+        private static MatchResult CopyResult(MatchResult matchResult)
+        {
+            if (matchResult == null)
+            {
+                throw new ArgumentNullException(nameof(matchResult));
+            }
+
+            var resultCopy = new MatchResult
+            {
+                WinnerPlayerId = matchResult.WinnerPlayerId,
+                LoserPlayerId = matchResult.LoserPlayerId,
+                Reason = matchResult.Reason
+            };
+
+            return resultCopy;
         }
     }
 }

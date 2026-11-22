@@ -21,6 +21,7 @@ namespace Backgammon.Server.Services.Manager
 
         private const int CountdownDurationSeconds = 3;
         private const int NoDieValue = 0;
+        private const int MinimumTurnTimerMilliseconds = 1;
 
         private static readonly string GuestRequired = "A guest is required to start the match.";
         private static readonly string MatchAlreadyActive = "The lobby already has an active match.";
@@ -162,6 +163,11 @@ namespace Backgammon.Server.Services.Manager
                 {
                     throw new UnauthorizedAccessException(PlayerNotInMatch);
                 }
+                activeMatch.Clock.UpdateState();
+
+                CompleteExpiredMatch(activeMatch);
+
+                activeMatch.Clock.UpdateState();
 
                 stateCopy = MatchStateFactory.Copy(activeMatch.State);
             }
@@ -313,6 +319,42 @@ namespace Backgammon.Server.Services.Manager
             }
         }
 
+        public static void StartTurnTimer(MatchPlayer player, TimerCallback timeoutCallback)
+        {
+            if (player == null)
+            {
+                throw new ArgumentNullException(nameof(player));
+            }
+
+            if (timeoutCallback == null)
+            {
+                throw new ArgumentNullException(nameof(timeoutCallback));
+            }
+
+            ActiveMatch activeMatch = FindSavedActiveMatch(player.RoomId);
+
+            lock (activeMatch.Queue)
+            {
+                ValidateMatchPlayer(activeMatch, player);
+
+                if (!activeMatch.State.Clock.IsRunning)
+                {
+                    return;
+                }
+
+                TimeSpan dueTime = GetTurnTimerDelay(activeMatch.Clock);
+
+                if (activeMatch.TurnTimer == null)
+                {
+                    activeMatch.TurnTimer = new Timer(timeoutCallback, activeMatch, dueTime, Timeout.InfiniteTimeSpan);
+                }
+                else
+                {
+                    activeMatch.TurnTimer.Change(dueTime, Timeout.InfiniteTimeSpan);
+                }
+            }
+        }
+
         public static MatchPreparation CompleteCountdown(ActiveMatch activeMatch)
         {
             if (activeMatch == null)
@@ -389,6 +431,14 @@ namespace Backgammon.Server.Services.Manager
             lock (activeMatch.Queue)
             {
                 ValidateMatchPlayer(activeMatch, player);
+
+                if (CompleteExpiredMatch(activeMatch))
+                {
+                    MatchState finishedState = MatchStateFactory.Copy(activeMatch.State);
+
+                    return finishedState;
+                }
+
                 ValidateMatchVersion(activeMatch.State, expectedVersion);
 
                 CheckerColor playerColor = GetPlayerColor(activeMatch.Session, player.PlayerId);
@@ -399,6 +449,7 @@ namespace Backgammon.Server.Services.Manager
                 activeMatch.State.Turn.CanUndo = activeMatch.TurnHistory.HasSnapshots;
 
                 activeMatch.State.Version++;
+                activeMatch.Clock.UpdateState();
 
                 MatchState stateCopy = MatchStateFactory.Copy(activeMatch.State);
 
@@ -418,6 +469,14 @@ namespace Backgammon.Server.Services.Manager
             lock (activeMatch.Queue)
             {
                 ValidateMatchPlayer(activeMatch, player);
+
+                if (CompleteExpiredMatch(activeMatch))
+                {
+                    MatchState finishedState = MatchStateFactory.Copy(activeMatch.State);
+
+                    return finishedState;
+                }
+
                 ValidateMatchVersion(activeMatch.State, expectedVersion);
 
                 MatchTurn.ValidatePlayerTurn(activeMatch.State, player.PlayerId);
@@ -435,6 +494,7 @@ namespace Backgammon.Server.Services.Manager
                 activeMatch.State.Turn.CanUndo = activeMatch.TurnHistory.HasSnapshots;
 
                 activeMatch.State.Version++;
+                activeMatch.Clock.UpdateState();
 
                 MatchState stateCopy = MatchStateFactory.Copy(activeMatch.State);
 
@@ -454,6 +514,14 @@ namespace Backgammon.Server.Services.Manager
             lock (activeMatch.Queue)
             {
                 ValidateMatchPlayer(activeMatch, player);
+
+                if (CompleteExpiredMatch(activeMatch))
+                {
+                    MatchState finishedState = MatchStateFactory.Copy(activeMatch.State);
+
+                    return finishedState;
+                }
+
                 ValidateMatchVersion(activeMatch.State, expectedVersion);
 
                 MatchTurn.ValidatePlayerTurn(activeMatch.State, player.PlayerId);
@@ -476,6 +544,7 @@ namespace Backgammon.Server.Services.Manager
                 activeMatch.State.Turn.CanUndo = activeMatch.TurnHistory.HasSnapshots;
 
                 activeMatch.State.Version++;
+                activeMatch.Clock.UpdateState();
 
                 MatchState stateCopy = MatchStateFactory.Copy(activeMatch.State);
 
@@ -495,6 +564,14 @@ namespace Backgammon.Server.Services.Manager
             lock (activeMatch.Queue)
             {
                 ValidateMatchPlayer(activeMatch, player);
+
+                if (CompleteExpiredMatch(activeMatch))
+                {
+                    MatchState finishedState = MatchStateFactory.Copy(activeMatch.State);
+
+                    return finishedState;
+                }
+
                 ValidateMatchVersion(activeMatch.State, expectedVersion);
 
                 MatchTurn.ValidatePlayerTurn(activeMatch.State, player.PlayerId);
@@ -505,11 +582,43 @@ namespace Backgammon.Server.Services.Manager
 
                 int nextPlayerId = GetOpponentPlayerId(activeMatch.Session, player.PlayerId);
 
+                MatchTurnState previousTurn = activeMatch.State.Turn;
+
                 MatchTurn.ConfirmTurn(activeMatch.State, playerColor, nextPlayerId);
+
+                AdvanceTurnClock(activeMatch, previousTurn, nextPlayerId);
 
                 activeMatch.TurnHistory.Clear();
 
                 activeMatch.State.Version++;
+
+                activeMatch.Clock.UpdateState();
+
+                MatchState stateCopy = MatchStateFactory.Copy(activeMatch.State);
+
+                return stateCopy;
+            }
+        }
+
+        public static MatchState CompleteTimeout(ActiveMatch activeMatch)
+        {
+            if (activeMatch == null)
+            {
+                throw new ArgumentNullException(nameof(activeMatch));
+            }
+
+            lock (activeMatch.Queue)
+            {
+                ActiveMatch savedMatch = FindSavedActiveMatch(activeMatch.Session.RoomId);
+
+                if (!ReferenceEquals(savedMatch, activeMatch))
+                {
+                    throw new KeyNotFoundException(MatchUnavailable);
+                }
+
+                CompleteExpiredMatch(activeMatch);
+
+                activeMatch.Clock.UpdateState();
 
                 MatchState stateCopy = MatchStateFactory.Copy(activeMatch.State);
 
@@ -540,6 +649,7 @@ namespace Backgammon.Server.Services.Manager
                 if (removedMatch)
                 {
                     activeMatch.StopCountdown();
+                    activeMatch.StopTurnTimer();
                 }
             }
             catch (KeyNotFoundException matchException)
@@ -764,6 +874,11 @@ namespace Backgammon.Server.Services.Manager
 
             activeMatch.State.Turn.CurrentPlayerId = currentPlayerId;
             activeMatch.State.Phase = MatchPhase.WaitingForRoll;
+
+            bool isHostTurn = currentPlayerId == activeMatch.Session.PlayerHostId;
+
+            activeMatch.Clock.StartTurn(isHostTurn);
+
             activeMatch.State.Version++;
         }
 
@@ -813,6 +928,70 @@ namespace Backgammon.Server.Services.Manager
             }
 
             return opponentPlayerId;
+        }
+
+        private static bool CompleteExpiredMatch(ActiveMatch activeMatch)
+        {
+            bool finished = activeMatch.State.Phase == MatchPhase.Finished;
+
+            if (finished)
+            {
+                return finished;
+            }
+
+            if (!activeMatch.Clock.HasExpired)
+            {
+                return finished;
+            }
+
+            int loserPlayerId = activeMatch.State.Turn.CurrentPlayerId;
+
+            int winnerPlayerId = GetOpponentPlayerId(activeMatch.Session, loserPlayerId);
+
+            bool completed = MatchCompletion.Complete(activeMatch, winnerPlayerId, MatchEndReason.TimeExpired);
+
+            if (completed)
+            {
+                activeMatch.State.Version++;
+            }
+
+            finished = activeMatch.State.Phase == MatchPhase.Finished;
+
+            return finished;
+        }
+
+        private static TimeSpan GetTurnTimerDelay(MatchClock clock)
+        {
+            TimeSpan remainingTime = clock.RemainingTurnTime;
+
+            double milliseconds = Math.Ceiling(remainingTime.TotalMilliseconds);
+
+            if (milliseconds < MinimumTurnTimerMilliseconds)
+            {
+                milliseconds = MinimumTurnTimerMilliseconds;
+            }
+
+            TimeSpan dueTime = TimeSpan.FromMilliseconds(milliseconds);
+
+            return dueTime;
+        }
+
+        private static void AdvanceTurnClock(ActiveMatch activeMatch, MatchTurnState previousTurn, int nextPlayerId)
+        {
+            bool hasExpired = activeMatch.Clock.Stop();
+
+            if (hasExpired)
+            {
+                activeMatch.State.Turn = previousTurn;
+
+                MatchCompletion.Complete(activeMatch, nextPlayerId, MatchEndReason.TimeExpired);
+
+                return;
+            }
+
+            bool isHostTurn = nextPlayerId == activeMatch.Session.PlayerHostId;
+
+            activeMatch.Clock.StartTurn(isHostTurn);
         }
     }
 }
