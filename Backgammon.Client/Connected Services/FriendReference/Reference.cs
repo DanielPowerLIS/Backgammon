@@ -218,6 +218,13 @@ namespace Backgammon.Client.FriendReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/SendFriendRequest", ReplyAction="http://tempuri.org/IFriendService/SendFriendRequestResponse")]
         System.Threading.Tasks.Task SendFriendRequestAsync(string sessionId, string identifier, bool byEmail);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/RemoveFriend", ReplyAction="http://tempuri.org/IFriendService/RemoveFriendResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Backgammon.Client.FriendReference.FriendFault), Action="http://tempuri.org/IFriendService/RemoveFriendFriendFaultFault", Name="FriendFault", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+        void RemoveFriend(string sessionId, int friendAccountId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFriendService/RemoveFriend", ReplyAction="http://tempuri.org/IFriendService/RemoveFriendResponse")]
+        System.Threading.Tasks.Task RemoveFriendAsync(string sessionId, int friendAccountId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -285,6 +292,14 @@ namespace Backgammon.Client.FriendReference {
         
         public System.Threading.Tasks.Task SendFriendRequestAsync(string sessionId, string identifier, bool byEmail) {
             return base.Channel.SendFriendRequestAsync(sessionId, identifier, byEmail);
+        }
+        
+        public void RemoveFriend(string sessionId, int friendAccountId) {
+            base.Channel.RemoveFriend(sessionId, friendAccountId);
+        }
+        
+        public System.Threading.Tasks.Task RemoveFriendAsync(string sessionId, int friendAccountId) {
+            return base.Channel.RemoveFriendAsync(sessionId, friendAccountId);
         }
     }
 }

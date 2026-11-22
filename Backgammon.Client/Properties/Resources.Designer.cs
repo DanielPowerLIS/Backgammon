@@ -1616,6 +1616,24 @@ namespace Backgammon.Client.Properties {
                 return ResourceManager.GetString("TextBlock_RemoveFriendConfirmationMessage", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo eliminar esta amistad. Inténtalo nuevamente..
+        /// </summary>
+        public static string TextBlock_FriendRemovalErrorMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_FriendRemovalErrorMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Busca una cadena traducida similar a No se pudo eliminar al amigo.
+        /// </summary>
+        public static string TextBlock_FriendRemovalErrorTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_FriendRemovalErrorTitle", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Por favor no deje ningún campo marcado como obligatorio vacío..

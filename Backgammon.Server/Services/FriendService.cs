@@ -140,6 +140,58 @@ namespace Backgammon.Server.Services
             }
         }
 
+        public void RemoveFriend(string sessionId, int friendAccountId)
+        {
+            int profileId = GetFriendProfileId(sessionId);
+
+            try
+            {
+                _friendRepository.RemoveFriendAsync(profileId, friendAccountId)
+                    .GetAwaiter().GetResult();
+            }
+            catch (ArgumentException requestException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Friend removal was rejected. Code: {0}. Reason: {1}",
+                    ErrorCodes.InvalidRequest, requestException.Message);
+
+                throw CreateFriendFault(ErrorCodes.InvalidRequest);
+            }
+            catch (KeyNotFoundException friendshipException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Friend removal was rejected. Code: {0}. Reason: {1}",
+                    ErrorCodes.FriendshipNotFound, friendshipException.Message);
+
+                throw CreateFriendFault(ErrorCodes.FriendshipNotFound);
+            }
+            catch (DbUpdateException updateException)
+            {
+                ApplicationLogger.LogError(updateException, "The friendship removal could not be saved.");
+
+                throw CreateFriendFault(ErrorCodes.ServiceUnavailable);
+            }
+            catch (DbEntityValidationException validationException)
+            {
+                ApplicationLogger.LogError(validationException, "Friendship entity validation failed.");
+
+                throw CreateFriendFault(ErrorCodes.ServiceUnavailable);
+            }
+            catch (EntityException entityException)
+            {
+                ApplicationLogger.LogError(entityException,
+                    "An Entity Framework failure prevented friendship removal.");
+
+                throw CreateFriendFault(ErrorCodes.ServiceUnavailable);
+            }
+            catch (SqlException databaseException)
+            {
+                ApplicationLogger.LogError(databaseException, "A SQL failure prevented friendship removal.");
+
+                throw CreateFriendFault(ErrorCodes.ServiceUnavailable);
+            }
+        }
+
         private int GetFriendProfileId(string sessionId)
         {
             try

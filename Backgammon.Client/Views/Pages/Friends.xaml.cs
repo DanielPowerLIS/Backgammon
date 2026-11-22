@@ -91,6 +91,73 @@ namespace Backgammon.Client.Views.Pages
             }
         }
 
+        private async void OnRemoveFriendClick(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            Friend friend = (Friend)button.DataContext;
+
+            string message = string.Format(
+                Properties.Resources.TextBlock_RemoveFriendConfirmationMessage,
+                friend.Username);
+
+            Window owner = Window.GetWindow(this);
+            var confirmation = new ConfirmationDialog(message);
+            bool confirmed = confirmation.ShowOver(owner);
+
+            if (confirmed)
+            {
+                await RemoveFriendAsync(friend.AccountId);
+            }
+        }
+
+        private async Task RemoveFriendAsync(int friendAccountId)
+        {
+            listViewFriends.IsEnabled = false;
+
+            try
+            {
+                await _friendController.RemoveFriendAsync(friendAccountId);
+                await LoadFriendsAsync();
+            }
+            catch (FaultException<FriendFault> friendException)
+            {
+                ApplicationLogger.LogWarning(
+                    "Friend removal was rejected. Code: {0}",
+                    friendException.Detail.ErrorCode);
+
+                ShowFriendRemovalError();
+            }
+            catch (CommunicationException communicationException)
+            {
+                ApplicationLogger.LogError(
+                    communicationException, "A communication failure prevented friendship removal.");
+
+                ShowFriendRemovalError();
+            }
+            catch (TimeoutException timeoutException)
+            {
+                ApplicationLogger.LogError(
+                    timeoutException, "Friendship removal exceeded the time limit.");
+
+                ShowFriendRemovalError();
+            }
+            finally
+            {
+                listViewFriends.IsEnabled = true;
+            }
+        }
+
+        private void ShowFriendRemovalError()
+        {
+            var dialog = new AlertDialog(
+                Properties.Resources.TextBlock_FriendRemovalErrorTitle,
+                Properties.Resources.TextBlock_FriendRemovalErrorMessage,
+                AlertType.Error);
+
+            dialog.Owner = Window.GetWindow(this);
+            dialog.ShowDialog();
+        }
+
         private void ShowFriendsError()
         {
             var alertDialog = new AlertDialog(

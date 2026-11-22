@@ -135,6 +135,45 @@ namespace Backgammon.Server.Persistence.Repositories
             }
         }
 
+        public async Task RemoveFriendAsync(int profileId, int friendAccountId)
+        {
+            if (friendAccountId <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(friendAccountId));
+            }
+
+            using (var databaseContext = new BackgammonEntities())
+            {
+                int ownAccountId = await databaseContext.Accounts
+                    .Where(account => account.IdProfileFK == profileId)
+                    .Select(account => account.IdAccountPK)
+                    .FirstOrDefaultAsync()
+                    .ConfigureAwait(false);
+
+                if (ownAccountId <= 0)
+                {
+                    throw new KeyNotFoundException("The requesting account was not found.");
+                }
+
+                int firstId = Math.Min(ownAccountId, friendAccountId);
+                int secondId = Math.Max(ownAccountId, friendAccountId);
+
+                FriendShip friendship = await databaseContext.FriendShips
+                    .FirstOrDefaultAsync(item =>
+                        item.AccountOneId == firstId &&
+                        item.AccountTwoId == secondId)
+                    .ConfigureAwait(false);
+
+                if (friendship == null)
+                {
+                    throw new KeyNotFoundException("The friendship was not found.");
+                }
+
+                databaseContext.FriendShips.Remove(friendship);
+                await databaseContext.SaveChangesAsync().ConfigureAwait(false);
+            }
+        }
+
         private async Task<FriendRequest> FindIncomingRequestAsync(
             BackgammonEntities databaseContext, int profileId, int requestId)
         {

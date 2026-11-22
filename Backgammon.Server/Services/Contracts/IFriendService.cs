@@ -30,5 +30,9 @@ namespace Backgammon.Server.Services.Contracts
         [OperationContract]
         [FaultContract(typeof(FriendFault))]
         void SendFriendRequest(string sessionId, string identifier, bool byEmail);
+
+        [OperationContract]
+        [FaultContract(typeof(FriendFault))]
+        void RemoveFriend(string sessionId, int friendAccountId);
     }
 }

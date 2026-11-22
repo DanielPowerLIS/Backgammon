@@ -110,5 +110,24 @@ namespace Backgammon.Client.Comunication
             }
         }
 
+        public async Task RemoveFriendAsync(string sessionId, int friendAccountId)
+        {
+            var serviceClient = new FriendServiceClient(EndpointConfigurationName);
+            ICommunicationObject communicationChannel = serviceClient;
+
+            try
+            {
+                await serviceClient.RemoveFriendAsync(sessionId, friendAccountId);
+                await ServiceChannelCloser.CloseAfterResponseAsync(communicationChannel);
+            }
+            finally
+            {
+                if (communicationChannel.State != CommunicationState.Closed)
+                {
+                    communicationChannel.Abort();
+                }
+            }
+        }
+
     }
 }
