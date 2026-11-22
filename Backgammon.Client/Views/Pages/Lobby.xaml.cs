@@ -174,7 +174,7 @@ namespace Backgammon.Client.Views.Pages
 
                 CloseChatWindow();
                 IsEnabled = true;
-                NavigationService.Navigate(new GamePage(matchSession));
+                NavigationService.Navigate(new GamePage(matchSession, this));
             }
             catch (FaultException<MatchFault> exception)
             {
@@ -220,7 +220,7 @@ namespace Backgammon.Client.Views.Pages
 
                 CloseChatWindow();
                 IsEnabled = true;
-                NavigationService.Navigate(new GamePage(matchSession));
+                NavigationService.Navigate(new GamePage(matchSession, this));
             }
             catch (NullReferenceException nullReferenceException)
             {

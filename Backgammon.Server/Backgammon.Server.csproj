@@ -107,6 +107,7 @@
   <ItemGroup>
     <Compile Include="Domain\ActiveMatch.cs" />
     <Compile Include="Domain\Die.cs" />
+    <Compile Include="Domain\MatchBearingOff.cs" />
     <Compile Include="Domain\MatchBoardFactory.cs" />
     <Compile Include="Domain\MatchClock.cs" />
     <Compile Include="Domain\MatchCompletion.cs" />

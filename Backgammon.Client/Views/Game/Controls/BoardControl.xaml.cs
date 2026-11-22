@@ -76,6 +76,10 @@ namespace Backgammon.Client.Views.Game.Controls
             RenderBarCheckers(BlueBarPointNumber, CheckerColor.Blue, boardState.BlueOnBar);
 
             RenderBarCheckers(PinkBarPointNumber, CheckerColor.Pink, boardState.PinkOnBar);
+
+            pinkBorneOffArea.ApplyCheckers(boardState.PinkBorneOff, CheckerColor.Pink);
+
+            blueBorneOffArea.ApplyCheckers(boardState.BlueBorneOff, CheckerColor.Blue);
         }
 
         public void HighlightCheckers(IEnumerable<int> sourcePointNumbers)
@@ -96,6 +100,11 @@ namespace Backgammon.Client.Views.Game.Controls
         }
 
         public void HighlightDestinations(IEnumerable<int> destinationPointNumbers)
+        {
+            HighlightDestinations(destinationPointNumbers, CheckerColor.None);
+        }
+
+        public void HighlightDestinations(IEnumerable<int> destinationPointNumbers, CheckerColor playerColor)
         {
             if (destinationPointNumbers == null)
             {
@@ -120,6 +129,12 @@ namespace Backgammon.Client.Views.Game.Controls
 
                 pointPolygon.Fill = pointBrush;
             }
+
+            bool canBearOff = _destinationPoints.Contains(BoardPointSelection.BorneOffDestinationPointNumber);
+
+            pinkBorneOffArea.SetHighlighted(canBearOff && playerColor == CheckerColor.Pink);
+
+            blueBorneOffArea.SetHighlighted(canBearOff && playerColor == CheckerColor.Blue);
         }
 
         private void ClearRenderedCheckers()
@@ -339,6 +354,18 @@ namespace Backgammon.Client.Views.Game.Controls
             double checkerLeft = barLeft + (BarWidth - CheckerSize) / CenteringDivisor;
 
             return checkerLeft;
+        }
+
+        private void OnBorneOffAreaSelected(object sender, EventArgs eventArgs)
+        {
+            int destinationPointNumber = BoardPointSelection.BorneOffDestinationPointNumber;
+
+            if (!_destinationPoints.Contains(destinationPointNumber))
+            {
+                return;
+            }
+
+            SelectDestination(destinationPointNumber);
         }
     }
 }

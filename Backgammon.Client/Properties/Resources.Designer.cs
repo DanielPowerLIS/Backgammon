@@ -727,6 +727,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Azules retiradas: {0}.
+        /// </summary>
+        public static string TextBlock_BlueBorneOffCount {
+            get {
+                return ResourceManager.GetString("TextBlock_BlueBorneOffCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cuenta.
         /// </summary>
         public static string TextBlock_Button_Account {
@@ -898,6 +907,24 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No se pudo eliminar esta amistad. Inténtalo nuevamente..
+        /// </summary>
+        public static string TextBlock_FriendRemovalErrorMessage {
+            get {
+                return ResourceManager.GetString("TextBlock_FriendRemovalErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No se pudo eliminar al amigo.
+        /// </summary>
+        public static string TextBlock_FriendRemovalErrorTitle {
+            get {
+                return ResourceManager.GetString("TextBlock_FriendRemovalErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No se pudieron cargar las solicitudes de amistad. Intenta más tarde..
         /// </summary>
         public static string TextBlock_FriendRequestErrorMessage {
@@ -925,7 +952,7 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No se pudo enviar la solicitud. Verifica el correo o código e inténtalo nuevamente..
+        ///   Looks up a localized string similar to No se pudo enviar la solicitud. Verifica el correo o código e inténtalo nuevamente..
         /// </summary>
         public static string TextBlock_FriendRequestSendErrorMessage {
             get {
@@ -934,7 +961,7 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Solicitud de amistad.
+        ///   Looks up a localized string similar to Solicitud de amistad.
         /// </summary>
         public static string TextBlock_FriendRequestSendErrorTitle {
             get {
@@ -943,7 +970,7 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a La solicitud de amistad se envió correctamente..
+        ///   Looks up a localized string similar to La solicitud de amistad se envió correctamente..
         /// </summary>
         public static string TextBlock_FriendRequestSentMessage {
             get {
@@ -952,7 +979,7 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Solicitud enviada.
+        ///   Looks up a localized string similar to Solicitud enviada.
         /// </summary>
         public static string TextBlock_FriendRequestSentTitle {
             get {
@@ -961,7 +988,6 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a No se pudo procesar la solicitud de amistad. Inténtalo nuevamente..
         ///   Looks up a localized string similar to No se pudo procesar la solicitud de amistad. Inténtalo nuevamente..
         /// </summary>
         public static string TextBlock_FriendRequestUpdateErrorMessage {
@@ -1556,6 +1582,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rosas retiradas: {0}.
+        /// </summary>
+        public static string TextBlock_PinkBorneOffCount {
+            get {
+                return ResourceManager.GetString("TextBlock_PinkBorneOffCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Perfil del jugador.
         /// </summary>
         public static string TextBlock_PlayerProfileTitle {
@@ -1689,27 +1724,8 @@ namespace Backgammon.Client.Properties {
                 return ResourceManager.GetString("TextBlock_RemoveFriendConfirmationMessage", resourceCulture);
             }
         }
-
-        /// <summary>
-        ///   Busca una cadena traducida similar a No se pudo eliminar esta amistad. Inténtalo nuevamente..
-        /// </summary>
-        public static string TextBlock_FriendRemovalErrorMessage {
-            get {
-                return ResourceManager.GetString("TextBlock_FriendRemovalErrorMessage", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Busca una cadena traducida similar a No se pudo eliminar al amigo.
-        /// </summary>
-        public static string TextBlock_FriendRemovalErrorTitle {
-            get {
-                return ResourceManager.GetString("TextBlock_FriendRemovalErrorTitle", resourceCulture);
-            }
-        }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Por favor no deje ningún campo marcado como obligatorio vacío..
         ///   Looks up a localized string similar to Por favor no deje ningún campo marcado como obligatorio vacío..
         /// </summary>
         public static string TextBlock_RequiredFieldsMessage {

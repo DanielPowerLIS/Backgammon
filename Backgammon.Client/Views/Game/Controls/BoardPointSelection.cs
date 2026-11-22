@@ -8,6 +8,7 @@ namespace Backgammon.Client.Views.Game.Controls
         private const int MaximumPointNumber = 24;
         private const int PinkBarPointNumber = 0;
         private const int BlueBarPointNumber = 25;
+        public const int BorneOffDestinationPointNumber = 26;
 
         public int PointNumber { get; }
 
@@ -17,7 +18,9 @@ namespace Backgammon.Client.Views.Game.Controls
 
             bool isBar = pointNumber == PinkBarPointNumber || pointNumber == BlueBarPointNumber;
 
-            if (!isBoardPoint && !isBar)
+            bool isBorneOff = pointNumber == BorneOffDestinationPointNumber;
+
+            if (!isBoardPoint && !isBar && !isBorneOff)
             {
                 throw new ArgumentOutOfRangeException(nameof(pointNumber));
             }

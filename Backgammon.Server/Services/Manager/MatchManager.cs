@@ -51,7 +51,9 @@ namespace Backgammon.Server.Services.Manager
 
                 try
                 {
-                    matchSession = FindSavedMatch(roomId);
+                    ActiveMatch activeMatch = FindSavedActiveMatch(roomId);
+
+                    matchSession = PrepareMatchSession(activeMatch, lobby);
                 }
                 catch (KeyNotFoundException matchException)
                 {
@@ -493,7 +495,10 @@ namespace Backgammon.Server.Services.Manager
 
                 activeMatch.State.Turn.CanUndo = activeMatch.TurnHistory.HasSnapshots;
 
+                CompleteBearingOffMatch(activeMatch, player.PlayerId, playerColor);
+
                 activeMatch.State.Version++;
+
                 activeMatch.Clock.UpdateState();
 
                 MatchState stateCopy = MatchStateFactory.Copy(activeMatch.State);
@@ -992,6 +997,65 @@ namespace Backgammon.Server.Services.Manager
             bool isHostTurn = nextPlayerId == activeMatch.Session.PlayerHostId;
 
             activeMatch.Clock.StartTurn(isHostTurn);
+        }
+
+        private static MatchSession PrepareMatchSession(ActiveMatch activeMatch, Lobby lobby)
+        {
+            MatchSession matchSession;
+            bool matchReplaced = false;
+
+            lock (activeMatch.Queue)
+            {
+                matchSession = activeMatch.Session;
+
+                if (activeMatch.State.Phase == MatchPhase.Finished)
+                {
+                    matchSession = BuildMatchSession(lobby);
+
+                    var nextMatch = new ActiveMatch(matchSession);
+
+                    matchReplaced = ActiveMatches.TryUpdate(lobby.RoomId, nextMatch, activeMatch);
+
+                    if (!matchReplaced)
+                    {
+                        throw new KeyNotFoundException(MatchUnavailable);
+                    }
+                }
+            }
+
+            if (matchReplaced)
+            {
+                activeMatch.StopCountdown();
+                activeMatch.StopTurnTimer();
+            }
+
+            return matchSession;
+        }
+
+        private static void CompleteBearingOffMatch(ActiveMatch activeMatch, int playerId, CheckerColor playerColor)
+        {
+            var bearingOff = new MatchBearingOff(
+                activeMatch.State.Board,
+                playerColor);
+
+            if (!bearingOff.HasWon())
+            {
+                return;
+            }
+
+            bool hasExpired = activeMatch.Clock.Stop();
+
+            int winnerPlayerId = playerId;
+            MatchEndReason reason = MatchEndReason.AllCheckersBorneOff;
+
+            if (hasExpired)
+            {
+                winnerPlayerId = GetOpponentPlayerId(activeMatch.Session, playerId);
+
+                reason = MatchEndReason.TimeExpired;
+            }
+
+            MatchCompletion.Complete(activeMatch, winnerPlayerId, reason);
         }
     }
 }
