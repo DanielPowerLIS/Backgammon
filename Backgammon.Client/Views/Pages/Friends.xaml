@@ -105,16 +105,31 @@
                         </Style>
                     </ListView.ItemContainerStyle>
 
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
                                 <TextBlock
+                                    Grid.Column="0"
                                     Text="{Binding Username}"
                                     Foreground="{StaticResource CyanAccentBrush}"
                                     FontSize="16"
-                                    Margin="5"
                                     VerticalAlignment="Center"/>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
+
+                                <Button
+                                    Grid.Column="1"
+                                    Content="{x:Static properties:Resources.Button_Remove}"
+                                    Style="{StaticResource FriendButtonStyle}"
+                                    Width="100"
+                                    Height="30"
+                                    Click="OnRemoveFriendClick"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
 
 
                 </ListView>
