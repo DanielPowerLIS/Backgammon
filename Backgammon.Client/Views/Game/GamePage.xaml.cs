@@ -155,6 +155,7 @@ namespace Backgammon.Client.Views.Game
         {
             _isPlayerReady = false;
 
+            matchClockControlGame.StopDisplay();
             RemoveMatchStartControl();
             RemoveCaptureNotice();
             CloseOpeningRollDialog();
@@ -282,6 +283,7 @@ namespace Backgammon.Client.Views.Game
             _selectedSourcePointNumber = NoPointSelected;
 
             UpdateTurnDice(matchState);
+            UpdateMatchClock(matchState);
             UpdateCheckerHighlights();
             UpdateTurnButtons();
 
@@ -951,6 +953,16 @@ namespace Backgammon.Client.Views.Game
                 Properties.Resources.Message_ConfirmTurnError);
 
             dialog.ShowOver(Window.GetWindow(this));
+        }
+
+        private void UpdateMatchClock(MatchState matchState)
+        {
+            int playerId = PlayerSessionContext.GetSession().PlayerId;
+
+            bool isHost = CurrentMatch.PlayerHostId == playerId;
+            bool isLocalTurn = matchState.Turn.CurrentPlayerId == playerId;
+
+            matchClockControlGame.ApplyClock(matchState.Clock, isHost, isLocalTurn);
         }
     }
 }

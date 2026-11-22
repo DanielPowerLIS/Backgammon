@@ -746,9 +746,9 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_FriendRequestUpdateErrorTitle" xml:space="preserve">
     <value>Friend request</value>
   </data>
-    <data name="TextBlock_FriendRequestUpdateErrorMessage" xml:space="preserve">
+  <data name="TextBlock_FriendRequestUpdateErrorMessage" xml:space="preserve">
     <value>The friend request could not be processed. Please try again.</value>
-    </data>
+  </data>
   <data name="TextBlock_SharedPotLabel" xml:space="preserve">
     <value>Shared pot</value>
   </data>
@@ -763,5 +763,29 @@ c) Move four checkers 6 points each.
   </data>
   <data name="Message_ConfirmTurnError" xml:space="preserve">
     <value>The turn could not be confirmed. Please try again.</value>
+  </data>
+  <data name="TextBlock_GraceTimeLabel" xml:space="preserve">
+    <value>Grace period</value>
+  </data>
+  <data name="TextBlock_GlobalTimeLabel" xml:space="preserve">
+    <value>Global time</value>
+  </data>
+  <data name="TextBlock_MatchWonTitle" xml:space="preserve">
+    <value>You won the match!</value>
+  </data>
+  <data name="TextBlock_MatchLostTitle" xml:space="preserve">
+    <value>You lost the match</value>
+  </data>
+  <data name="Message_MatchWonByTimeout" xml:space="preserve">
+    <value>Your opponent ran out of global time.</value>
+  </data>
+  <data name="Message_MatchLostByTimeout" xml:space="preserve">
+    <value>You ran out of global time.</value>
+  </data>
+  <data name="Message_MatchWonByCheckers" xml:space="preserve">
+    <value>You removed all your checkers from the board.</value>
+  </data>
+  <data name="Message_MatchLostByCheckers" xml:space="preserve">
+    <value>Your opponent removed all their checkers from the board.</value>
   </data>
 </root>
