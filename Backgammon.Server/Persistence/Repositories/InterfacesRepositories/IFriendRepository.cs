@@ -13,9 +13,13 @@ namespace Backgammon.Server.Persistence.Repositories.InterfacesRepositories
         Task<List<Account>> GetFriendsAsync(int userId);
 
         Task<List<FriendRequest>> GetIncomingRequestsAsync(int profileId);
-        
+
         Task AcceptFriendRequestAsync(int profileId, int requestId);
 
         Task RejectFriendRequestAsync(int profileId, int requestId);
+
+        Task SendFriendRequestAsync(int profileId, string identifier, bool byEmail);
+
+        Task RemoveFriendAsync(int profileId, int friendAccountId);
     }
 }

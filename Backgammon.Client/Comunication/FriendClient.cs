@@ -91,5 +91,43 @@ namespace Backgammon.Client.Comunication
             }
         }
 
+        public async Task SendFriendRequestAsync(string sessionId, string identifier, bool byEmail)
+        {
+            var serviceClient = new FriendServiceClient(EndpointConfigurationName);
+            ICommunicationObject communicationChannel = serviceClient;
+
+            try
+            {
+                await serviceClient.SendFriendRequestAsync(sessionId, identifier, byEmail);
+                await ServiceChannelCloser.CloseAfterResponseAsync(communicationChannel);
+            }
+            finally
+            {
+                if (communicationChannel.State != CommunicationState.Closed)
+                {
+                    communicationChannel.Abort();
+                }
+            }
+        }
+
+        public async Task RemoveFriendAsync(string sessionId, int friendAccountId)
+        {
+            var serviceClient = new FriendServiceClient(EndpointConfigurationName);
+            ICommunicationObject communicationChannel = serviceClient;
+
+            try
+            {
+                await serviceClient.RemoveFriendAsync(sessionId, friendAccountId);
+                await ServiceChannelCloser.CloseAfterResponseAsync(communicationChannel);
+            }
+            finally
+            {
+                if (communicationChannel.State != CommunicationState.Closed)
+                {
+                    communicationChannel.Abort();
+                }
+            }
+        }
+
     }
 }

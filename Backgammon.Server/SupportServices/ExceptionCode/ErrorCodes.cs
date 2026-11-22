@@ -23,6 +23,7 @@ namespace Backgammon.Server.SupportServices.ExceptionCode
         internal const string InvalidRoomCode = "InvalidRoomCode";
         internal const string ProfileNotFound = "ProfileNotFound";
         internal const string RequestNotFound = "RequestNotFound";
+        internal const string FriendshipNotFound = "FriendshipNotFound";
         internal const string RequestExpired = "RequestExpired";
         internal const string InvalidCode = "InvalidCode";
         internal const string AttemptsExhausted = "AttemptsExhausted";
