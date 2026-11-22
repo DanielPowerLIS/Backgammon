@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:9002/GameService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="MatchState">
     <xs:sequence>
       <xs:element minOccurs="0" name="Board" nillable="true" type="tns:MatchBoardState" />
       <xs:element minOccurs="0" name="CaptureNumber" type="xs:long" />
+      <xs:element minOccurs="0" name="Clock" nillable="true" type="tns:MatchClockState" />
       <xs:element minOccurs="0" name="MatchId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Phase" type="tns:MatchPhase" />
+      <xs:element minOccurs="0" name="Result" nillable="true" type="tns:MatchResult" />
       <xs:element minOccurs="0" name="RoomId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SharedPot" type="xs:int" />
       <xs:element minOccurs="0" name="Turn" nillable="true" type="tns:MatchTurnState" />
@@ -45,6 +48,16 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="CheckerColor" nillable="true" type="tns:CheckerColor" />
+  <xs:complexType name="MatchClockState">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GraceRemainingTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="GuestRemainingTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="HostRemainingTime" type="ser:duration" />
+      <xs:element minOccurs="0" name="IsRunning" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ServerTimeUtc" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchClockState" nillable="true" type="tns:MatchClockState" />
   <xs:simpleType name="MatchPhase">
     <xs:restriction base="xs:string">
       <xs:enumeration value="WaitingForPlayers" />
@@ -56,6 +69,22 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="MatchPhase" nillable="true" type="tns:MatchPhase" />
+  <xs:complexType name="MatchResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LoserPlayerId" type="xs:int" />
+      <xs:element minOccurs="0" name="Reason" type="tns:MatchEndReason" />
+      <xs:element minOccurs="0" name="WinnerPlayerId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MatchResult" nillable="true" type="tns:MatchResult" />
+  <xs:simpleType name="MatchEndReason">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="TimeExpired" />
+      <xs:enumeration value="AllCheckersBorneOff" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MatchEndReason" nillable="true" type="tns:MatchEndReason" />
   <xs:complexType name="MatchTurnState">
     <xs:sequence>
       <xs:element minOccurs="0" name="AvailableMoves" nillable="true" type="tns:ArrayOfCheckerMove" />

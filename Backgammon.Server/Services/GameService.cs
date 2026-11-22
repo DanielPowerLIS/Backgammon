@@ -428,6 +428,42 @@ namespace Backgammon.Server.Services
             }
         }
 
+        private void OnTurnTimeElapsed(object timerState)
+        {
+            var activeMatch = (ActiveMatch)timerState;
+
+            try
+            {
+                MatchState matchState = MatchManager.CompleteTimeout(activeMatch);
+
+                var player = new MatchPlayer(
+                    activeMatch.Session.PlayerHostId,
+                    activeMatch.Session.RoomId,
+                    activeMatch.Session.MatchId);
+
+                if (matchState.Phase == MatchPhase.Finished)
+                {
+                    activeMatch.StopTurnTimer();
+                }
+                else
+                {
+                    MatchManager.StartTurnTimer(player, OnTurnTimeElapsed);
+                }
+
+                UpdatePlayers(player, matchState);
+            }
+            catch (KeyNotFoundException matchException)
+            {
+                ApplicationLogger.LogDebug("The timed match is no longer available. Reason: {0}",
+                    matchException.Message);
+            }
+            catch (Exception timerException)
+            {
+                ApplicationLogger.LogError(timerException,
+                    "An unexpected failure prevented turn timeout processing.");
+            }
+        }
+
         private MatchPreparation RollPlayerOpeningDie(PlayerSession playerSession, PlayerOpeningRoll playerRoll)
         {
             if (playerRoll == null)
@@ -438,6 +474,8 @@ namespace Backgammon.Server.Services
             var player = new MatchPlayer(playerSession.PlayerId, playerRoll.RoomId, playerRoll.MatchId);
 
             MatchPreparation preparation = MatchManager.RollOpeningDie(player, playerRoll.RoundNumber);
+
+            MatchManager.StartTurnTimer(player, OnTurnTimeElapsed);
 
             UpdatePlayers(player, preparation);
 
@@ -521,6 +559,8 @@ namespace Backgammon.Server.Services
                 playerTurn.MatchId);
 
             MatchState matchState = MatchManager.ConfirmTurn(player, playerTurn.ExpectedVersion);
+
+            MatchManager.StartTurnTimer(player, OnTurnTimeElapsed);
 
             UpdatePlayers(player, matchState);
 

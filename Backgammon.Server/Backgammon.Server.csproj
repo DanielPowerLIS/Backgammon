@@ -108,6 +108,8 @@
     <Compile Include="Domain\ActiveMatch.cs" />
     <Compile Include="Domain\Die.cs" />
     <Compile Include="Domain\MatchBoardFactory.cs" />
+    <Compile Include="Domain\MatchClock.cs" />
+    <Compile Include="Domain\MatchCompletion.cs" />
     <Compile Include="Domain\MatchMovement.cs" />
     <Compile Include="Domain\MatchPlayer.cs" />
     <Compile Include="Domain\MatchPreparationFactory.cs" />
@@ -218,12 +220,15 @@
     <Compile Include="Services\Data\Lobby.cs" />
     <Compile Include="Services\Data\LobbyFault.cs" />
     <Compile Include="Services\Data\MatchBoardState.cs" />
+    <Compile Include="Services\Data\MatchClockState.cs" />
     <Compile Include="Services\Data\MatchDiceState.cs" />
+    <Compile Include="Services\Data\MatchEndReason.cs" />
     <Compile Include="Services\Data\MatchFault.cs" />
     <Compile Include="Services\Data\MatchOpeningRollState.cs" />
     <Compile Include="Services\Data\MatchPhase.cs" />
     <Compile Include="Services\Data\MatchPointState.cs" />
     <Compile Include="Services\Data\MatchPreparation.cs" />
+    <Compile Include="Services\Data\MatchResult.cs" />
     <Compile Include="Services\Data\MatchSession.cs" />
     <Compile Include="Services\Data\MatchState.cs" />
     <Compile Include="Services\Data\MatchTurnState.cs" />

@@ -29,10 +29,16 @@ namespace Backgammon.Client.GameReference {
         private long CaptureNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Backgammon.Client.GameReference.MatchClockState ClockField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string MatchIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Backgammon.Client.GameReference.MatchPhase PhaseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Backgammon.Client.GameReference.MatchResult ResultField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string RoomIdField;
@@ -83,6 +89,19 @@ namespace Backgammon.Client.GameReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public Backgammon.Client.GameReference.MatchClockState Clock {
+            get {
+                return this.ClockField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ClockField, value) != true)) {
+                    this.ClockField = value;
+                    this.RaisePropertyChanged("Clock");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string MatchId {
             get {
                 return this.MatchIdField;
@@ -104,6 +123,19 @@ namespace Backgammon.Client.GameReference {
                 if ((this.PhaseField.Equals(value) != true)) {
                     this.PhaseField = value;
                     this.RaisePropertyChanged("Phase");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Backgammon.Client.GameReference.MatchResult Result {
+            get {
+                return this.ResultField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ResultField, value) != true)) {
+                    this.ResultField = value;
+                    this.RaisePropertyChanged("Result");
                 }
             }
         }
@@ -265,6 +297,192 @@ namespace Backgammon.Client.GameReference {
                 if ((object.ReferenceEquals(this.PointsField, value) != true)) {
                     this.PointsField = value;
                     this.RaisePropertyChanged("Points");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MatchClockState", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class MatchClockState : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.TimeSpan GraceRemainingTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.TimeSpan GuestRemainingTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.TimeSpan HostRemainingTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsRunningField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime ServerTimeUtcField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.TimeSpan GraceRemainingTime {
+            get {
+                return this.GraceRemainingTimeField;
+            }
+            set {
+                if ((this.GraceRemainingTimeField.Equals(value) != true)) {
+                    this.GraceRemainingTimeField = value;
+                    this.RaisePropertyChanged("GraceRemainingTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.TimeSpan GuestRemainingTime {
+            get {
+                return this.GuestRemainingTimeField;
+            }
+            set {
+                if ((this.GuestRemainingTimeField.Equals(value) != true)) {
+                    this.GuestRemainingTimeField = value;
+                    this.RaisePropertyChanged("GuestRemainingTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.TimeSpan HostRemainingTime {
+            get {
+                return this.HostRemainingTimeField;
+            }
+            set {
+                if ((this.HostRemainingTimeField.Equals(value) != true)) {
+                    this.HostRemainingTimeField = value;
+                    this.RaisePropertyChanged("HostRemainingTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsRunning {
+            get {
+                return this.IsRunningField;
+            }
+            set {
+                if ((this.IsRunningField.Equals(value) != true)) {
+                    this.IsRunningField = value;
+                    this.RaisePropertyChanged("IsRunning");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime ServerTimeUtc {
+            get {
+                return this.ServerTimeUtcField;
+            }
+            set {
+                if ((this.ServerTimeUtcField.Equals(value) != true)) {
+                    this.ServerTimeUtcField = value;
+                    this.RaisePropertyChanged("ServerTimeUtc");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MatchResult", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    [System.SerializableAttribute()]
+    public partial class MatchResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int LoserPlayerIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Backgammon.Client.GameReference.MatchEndReason ReasonField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int WinnerPlayerIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int LoserPlayerId {
+            get {
+                return this.LoserPlayerIdField;
+            }
+            set {
+                if ((this.LoserPlayerIdField.Equals(value) != true)) {
+                    this.LoserPlayerIdField = value;
+                    this.RaisePropertyChanged("LoserPlayerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Backgammon.Client.GameReference.MatchEndReason Reason {
+            get {
+                return this.ReasonField;
+            }
+            set {
+                if ((this.ReasonField.Equals(value) != true)) {
+                    this.ReasonField = value;
+                    this.RaisePropertyChanged("Reason");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int WinnerPlayerId {
+            get {
+                return this.WinnerPlayerIdField;
+            }
+            set {
+                if ((this.WinnerPlayerIdField.Equals(value) != true)) {
+                    this.WinnerPlayerIdField = value;
+                    this.RaisePropertyChanged("WinnerPlayerId");
                 }
             }
         }
@@ -500,6 +718,20 @@ namespace Backgammon.Client.GameReference {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Pink = 2,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MatchEndReason", Namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data")]
+    public enum MatchEndReason : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        None = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        TimeExpired = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AllCheckersBorneOff = 2,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
