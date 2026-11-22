@@ -81,6 +81,12 @@ namespace Backgammon.Server.Domain
                 AddCombinedBarMove(availableMoves);
             }
 
+            var bearingOff = new MatchBearingOff(_boardState, _playerColor);
+
+            CheckerMove[] borneOffMoves = bearingOff.GetAvailableMoves(_diceState);
+
+            availableMoves.AddRange(borneOffMoves);
+
             CheckerMove[] moves = availableMoves.ToArray();
 
             return moves;
@@ -110,15 +116,18 @@ namespace Backgammon.Server.Domain
         {
             CheckerMove availableMove = GetAvailableMove(selectedMove);
 
-            MatchPointState destinationPoint = _boardState.Points[
-                    availableMove.DestinationPointNumber - MinimumPointNumber];
+            bool checkerCaptured = false;
 
-            bool checkerCaptured = CaptureChecker(destinationPoint);
+            if (availableMove.DestinationPointNumber == MatchBearingOff.BorneOffDestinationPointNumber)
+            {
+                var bearingOff = new MatchBearingOff(_boardState, _playerColor);
 
-            RemoveSourceChecker(availableMove.SourcePointNumber);
-
-            destinationPoint.Owner = _playerColor;
-            destinationPoint.Count++;
+                bearingOff.RemoveChecker();
+            }
+            else
+            {
+                checkerCaptured = MoveCheckerOnBoard(availableMove);
+            }
 
             _diceState.FirstDieRemainingUses -= availableMove.FirstDieUses;
             _diceState.SecondDieRemainingUses -= availableMove.SecondDieUses;
@@ -338,6 +347,22 @@ namespace Backgammon.Server.Domain
             };
 
             availableMoves.Add(move);
+        }
+
+        private bool MoveCheckerOnBoard(CheckerMove availableMove)
+        {
+            int destinationIndex = availableMove.DestinationPointNumber - MinimumPointNumber;
+
+            MatchPointState destinationPoint = _boardState.Points[destinationIndex];
+
+            bool checkerCaptured = CaptureChecker(destinationPoint);
+
+            RemoveSourceChecker(availableMove.SourcePointNumber);
+
+            destinationPoint.Owner = _playerColor;
+            destinationPoint.Count++;
+
+            return checkerCaptured;
         }
     }
 }

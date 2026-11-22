@@ -9,17 +9,33 @@
              d:DesignWidth="820">
 
     <Viewbox Stretch="Uniform">
-        <Border BorderBrush="#00C9F2"
-        BorderThickness="2"
-        CornerRadius="8"
-        Padding="10"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-            <Canvas x:Name="CanvasBoard"
-            Width="780"
-            Height="450"
-            Background="#171C2B"
+            <controls:BorneOffAreaControl
+                x:Name="pinkBorneOffArea"
+                Grid.Row="0"
+                Margin="0,0,0,8"
+                Selected="OnBorneOffAreaSelected"/>
+
+            <Border
+                Grid.Row="1"
+                BorderBrush="#00C9F2"
+                BorderThickness="2"
+                CornerRadius="8"
+                Padding="10"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+                <Canvas 
+                    x:Name="CanvasBoard"
+                    Width="780"
+                    Height="450"
+                    Background="#171C2B"
                     ClipToBounds="True">
 
                 <Polygon Points="40,30 90,30 65,185"
@@ -126,7 +142,14 @@
                    Stroke="#00C9F2"
                    StrokeThickness="3"/>
 
-            </Canvas>
-        </Border>
+                </Canvas>
+            </Border>
+
+            <controls:BorneOffAreaControl
+                x:Name="blueBorneOffArea"
+                Grid.Row="2"
+                Margin="0,8,0,0"
+                Selected="OnBorneOffAreaSelected"/>
+        </Grid>
     </Viewbox>
 </UserControl>

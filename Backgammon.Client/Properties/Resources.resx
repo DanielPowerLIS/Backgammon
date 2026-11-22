@@ -782,7 +782,6 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="TextBlock_FriendRequestSentMessage" xml:space="preserve">
     <value>La solicitud de amistad se envió correctamente.</value>
   </data>
-</root>
   <data name="TextBlock_GraceTimeLabel" xml:space="preserve">
     <value>Tiempo de gracia</value>
   </data>
@@ -806,5 +805,11 @@ c) Mover cuatro fichas 6 casillas cada una.
   </data>
   <data name="Message_MatchLostByCheckers" xml:space="preserve">
     <value>Tu rival retiró todas sus fichas del tablero.</value>
+  </data>
+  <data name="TextBlock_BlueBorneOffCount" xml:space="preserve">
+    <value>Azules retiradas: {0}</value>
+  </data>
+  <data name="TextBlock_PinkBorneOffCount" xml:space="preserve">
+    <value>Rosas retiradas: {0}</value>
   </data>
 </root>

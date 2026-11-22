@@ -14,6 +14,7 @@ using Backgammon.Client.Views.Game.Controls;
 using Backgammon.Client.Controllers.Session;
 
 using GameMatchFault = Backgammon.Client.GameReference.MatchFault;
+using LobbyPage = Backgammon.Client.Views.Pages.Lobby;
 
 namespace Backgammon.Client.Views.Game
 {
@@ -43,18 +44,29 @@ namespace Backgammon.Client.Views.Game
         private int _selectedSourcePointNumber;
         private bool _isMovingChecker;
 
+        private bool _isResultShown;
+
         private MatchState _renderedState;
+
+        private readonly LobbyPage _lobbyPage;
 
         public MatchSession CurrentMatch { get; }
 
-        public GamePage(MatchSession matchSession)
+        public GamePage(MatchSession matchSession, LobbyPage lobbyPage)
         {
             if (matchSession == null)
             {
                 throw new ArgumentNullException(nameof(matchSession));
             }
 
+            if (lobbyPage == null)
+            {
+                throw new ArgumentNullException(nameof(lobbyPage));
+            }
+
             InitializeComponent();
+
+            _lobbyPage = lobbyPage;
 
             _selectedSourcePointNumber = NoPointSelected;
 
@@ -66,6 +78,7 @@ namespace Backgammon.Client.Views.Game
             _isMovingChecker = false;
             _renderedState = null;
             _isPreparationLoaded = false;
+            _isResultShown = false;
             _renderedPreparationVersion = UnrenderedVersion;
         }
 
@@ -288,6 +301,8 @@ namespace Backgammon.Client.Views.Game
             UpdateTurnButtons();
 
             textBlockSharedPot.Text = matchState.SharedPot.ToString();
+
+            ShowMatchResult(matchState);
         }
 
         private void UpdateMatchAnnouncement(MatchPreparation preparation)
@@ -645,7 +660,14 @@ namespace Backgammon.Client.Views.Game
                 }
             }
 
-            boardControlGame.HighlightDestinations(destinationPoints);
+            CheckerColor playerColor = CheckerColor.Pink;
+
+            if (matchState.Turn.CurrentPlayerId == CurrentMatch.PlayerHostId)
+            {
+                playerColor = CheckerColor.Blue;
+            }
+
+            boardControlGame.HighlightDestinations(destinationPoints, playerColor);
         }
 
         private CheckerMove GetSelectedMove(int destinationPointNumber)
@@ -963,6 +985,100 @@ namespace Backgammon.Client.Views.Game
             bool isLocalTurn = matchState.Turn.CurrentPlayerId == playerId;
 
             matchClockControlGame.ApplyClock(matchState.Clock, isHost, isLocalTurn);
+        }
+
+        private void ShowMatchResult(MatchState matchState)
+        {
+            if (matchState.Phase != MatchPhase.Finished || _isResultShown)
+            {
+                return;
+            }
+
+            MatchResult result = matchState.Result;
+
+            if (result == null)
+            {
+                ApplicationLogger.LogWarning("The finished match has no result. Match: {0}", matchState.MatchId);
+
+                return;
+            }
+
+            int playerId = PlayerSessionContext.GetSession().PlayerId;
+            bool hasWon = result.WinnerPlayerId == playerId;
+
+            if (!hasWon && result.LoserPlayerId != playerId)
+            {
+                ApplicationLogger.LogWarning("The match result does not include player {0}.", playerId);
+
+                return;
+            }
+
+            string heading = Properties.Resources.TextBlock_MatchLostTitle;
+
+            if (hasWon)
+            {
+                heading = Properties.Resources.TextBlock_MatchWonTitle;
+            }
+
+            string message = GetMatchResultMessage(result.Reason, hasWon);
+
+            var dialog = new AccountDialog(heading, message);
+
+            _isResultShown = true;
+
+            CloseOpeningRollDialog();
+
+            dialog.ShowOver(Window.GetWindow(this));
+
+            ReturnToLobby();
+        }
+
+        private static string GetMatchResultMessage(MatchEndReason reason, bool hasWon)
+        {
+            string message;
+
+            if (reason == MatchEndReason.TimeExpired)
+            {
+                message = Properties.Resources.Message_MatchLostByTimeout;
+
+                if (hasWon)
+                {
+                    message = Properties.Resources.Message_MatchWonByTimeout;
+                }
+            }
+            else if (reason == MatchEndReason.AllCheckersBorneOff)
+            {
+                message = Properties.Resources.Message_MatchLostByCheckers;
+
+                if (hasWon)
+                {
+                    message = Properties.Resources.Message_MatchWonByCheckers;
+                }
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException(nameof(reason));
+            }
+
+            return message;
+        }
+
+        private void ReturnToLobby()
+        {
+            if (!IsLoaded)
+            {
+                return;
+            }
+
+            if (NavigationService == null)
+            {
+                ApplicationLogger.LogWarning("The game page has no navigation service. Match: {0}",
+                    CurrentMatch.MatchId);
+
+                return;
+            }
+
+            NavigationService.Navigate(_lobbyPage);
         }
     }
 }

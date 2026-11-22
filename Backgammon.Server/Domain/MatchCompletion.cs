@@ -30,6 +30,7 @@ namespace Backgammon.Server.Domain
             MatchResult result = CreateResult(activeMatch.Session, winnerPlayerId, reason);
 
             activeMatch.Clock.Stop();
+            activeMatch.StopTurnTimer();
 
             matchState.Result = result;
             matchState.Phase = MatchPhase.Finished;
