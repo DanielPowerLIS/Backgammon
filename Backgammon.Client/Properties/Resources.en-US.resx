@@ -812,4 +812,10 @@ c) Move four checkers 6 points each.
   <data name="TextBlock_PinkBorneOffCount" xml:space="preserve">
     <value>Pink checkers removed: {0}</value>
   </data>
+  <data name="Title_AvatarUpdateError" xml:space="preserve">
+    <value>Avatar update error</value>
+  </data>
+  <data name="Message_AvatarUpdateError" xml:space="preserve">
+    <value>Could not change the avatar. Please try again.</value>
+  </data>
 </root>

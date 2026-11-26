@@ -76,7 +76,9 @@
                              HorizontalAlignment="Center"
                              Stroke="{StaticResource CyanAccentBrush}"
                              StrokeThickness="2"
-                             Fill="#3D7EA6"/>
+                             Fill="#3D7EA6"
+                             Cursor="Hand"
+                             MouseLeftButtonUp="OnAvatarClick"/>
 
                     <TextBlock Grid.Row="1"
                                x:Name="textBlockUsername"

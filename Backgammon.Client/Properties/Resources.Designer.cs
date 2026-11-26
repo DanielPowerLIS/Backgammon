@@ -592,6 +592,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No se pudo cambiar el avatar. Inténtalo nuevamente..
+        /// </summary>
+        public static string Message_AvatarUpdateError {
+            get {
+                return ResourceManager.GetString("Message_AvatarUpdateError", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to No se pudo cargar la información del perfil. Verifica tu conexión..
         /// </summary>
         public static string Message_ProfileLoadError {
@@ -2078,6 +2087,15 @@ namespace Backgammon.Client.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to Error al cambiar avatar.
+        /// </summary>
+        public static string Title_AvatarUpdateError {
+            get {
+                return ResourceManager.GetString("Title_AvatarUpdateError", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Error de conexión.
         /// </summary>

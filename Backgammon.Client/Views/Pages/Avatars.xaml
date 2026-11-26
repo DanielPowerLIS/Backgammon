@@ -190,6 +190,7 @@
                                     ElementName=PageAvatar}"
                                 SelectedValuePath="Id"
                                 SelectionMode="Single"
+                                SelectionChanged="OnAvatarSelected"
                                 ItemContainerStyle="{StaticResource AvatarItemStyle}"
                                 Background="Transparent"
                                 BorderThickness="0"
