@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 
+using Backgammon.Client.Views.Models;
+
 namespace Backgammon.Client.Views.Dialog
 {
     public partial class AddSocialLinkDialog : Window
@@ -56,7 +58,13 @@ namespace Backgammon.Client.Views.Dialog
 
             if (!HasValidLink(link))
             {
-                MessageBox.Show(Properties.Resources.Message_InvalidSocialLink);
+                var dialog = new AlertDialog(
+                    Properties.Resources.Title_InvalidSocialLink,
+                    Properties.Resources.Message_InvalidSocialLink,
+                    AlertType.Error);
+
+                dialog.Owner = this;
+                dialog.ShowDialog();
             }
             else
             {

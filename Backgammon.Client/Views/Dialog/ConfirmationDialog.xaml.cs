@@ -5,9 +5,11 @@ namespace Backgammon.Client.Views.Dialog
 {
     public partial class ConfirmationDialog : Window
     {
-        public ConfirmationDialog(string message)
+        public ConfirmationDialog(string title, string message)
         {
             InitializeComponent();
+
+            textBlockTitle.Text = title;
             textBlockMessage.Text = message;
         }
 

@@ -662,8 +662,14 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Message_InvalidSocialLink" xml:space="preserve">
     <value>Escribe un enlace válido para esta red social.</value>
   </data>
+  <data name="Title_InvalidSocialLink" xml:space="preserve">
+    <value>Enlace inválido</value>
+  </data>
   <data name="Title_SocialLinkRemoval" xml:space="preserve">
     <value>Eliminar enlace</value>
+  </data>
+  <data name="Title_FriendRemoval" xml:space="preserve">
+    <value>Eliminar amigo</value>
   </data>
   <data name="Message_ConfirmSocialLinkRemoval" xml:space="preserve">
     <value>¿Quieres eliminar este enlace de tu perfil?</value>

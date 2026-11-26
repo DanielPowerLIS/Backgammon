@@ -4,6 +4,7 @@ using Backgammon.Client.Controllers.Session;
 using Backgammon.Client.ProfileReference;
 using Backgammon.Client.Settings.Logging;
 using Backgammon.Client.Views.Dialog;
+using Backgammon.Client.Views.Models;
 
 using System;
 using System.IO;
@@ -204,21 +205,25 @@ namespace Backgammon.Client.Views.Pages
 
         private void ShowProfileUpdateError()
         {
-            MessageBox.Show(
-                Properties.Resources.Message_ProfileUpdateError,
+            var dialog = new AlertDialog(
                 Properties.Resources.Title_ConnectionError,
-                MessageBoxButton.OK,
-                MessageBoxImage.Error);
+                Properties.Resources.Message_ProfileUpdateError,
+                AlertType.Error);
+
+            dialog.Owner = Window.GetWindow(this);
+            dialog.ShowDialog();
         }
 
 
         private void ShowProfileLoadError()
         {
-            MessageBox.Show(
-                Properties.Resources.Message_ProfileLoadError,
+            var dialog = new AlertDialog(
                 Properties.Resources.Title_ConnectionError,
-                MessageBoxButton.OK,
-                MessageBoxImage.Error);
+                Properties.Resources.Message_ProfileLoadError,
+                AlertType.Error);
+
+            dialog.Owner = Window.GetWindow(this);
+            dialog.ShowDialog();
         }
 
         private void DisplaySessionData(PlayerSession currentSession)
@@ -231,11 +236,7 @@ namespace Backgammon.Client.Views.Pages
         {
             if (profileData == null)
             {
-                MessageBox.Show(
-                    Properties.Resources.Message_ProfileLoadError,
-                    Properties.Resources.Title_ConnectionError,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
+                ShowProfileLoadError();
             }
             else
             {
@@ -546,13 +547,12 @@ namespace Backgammon.Client.Views.Pages
 
         private bool ConfirmSocialLinkRemoval()
         {
-            MessageBoxResult answer = MessageBox.Show(
-                Properties.Resources.Message_ConfirmSocialLinkRemoval,
+            var dialog = new ConfirmationDialog(
                 Properties.Resources.Title_SocialLinkRemoval,
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Question);
+                Properties.Resources.Message_ConfirmSocialLinkRemoval);
 
-            bool confirmed = answer == MessageBoxResult.Yes;
+            Window owner = Window.GetWindow(this);
+            bool confirmed = dialog.ShowOver(owner);
 
             return confirmed;
         }
@@ -571,11 +571,13 @@ namespace Backgammon.Client.Views.Pages
 
         private void ShowSocialLinkError()
         {
-            MessageBox.Show(
-                Properties.Resources.Message_SocialLinkUpdateError,
+            var dialog = new AlertDialog(
                 Properties.Resources.Title_ConnectionError,
-                MessageBoxButton.OK,
-                MessageBoxImage.Error);
+                Properties.Resources.Message_SocialLinkUpdateError,
+                AlertType.Error);
+
+            dialog.Owner = Window.GetWindow(this);
+            dialog.ShowDialog();
         }
 
         private int GetSocialMediaTypeId(SocialMediaType[] socialTypes, string networkName)

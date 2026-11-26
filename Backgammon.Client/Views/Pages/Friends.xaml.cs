@@ -101,7 +101,9 @@ namespace Backgammon.Client.Views.Pages
                 friend.Username);
 
             Window owner = Window.GetWindow(this);
-            var confirmation = new ConfirmationDialog(message);
+            var confirmation = new ConfirmationDialog(
+                Properties.Resources.Title_FriendRemoval,
+                message);
             bool confirmed = confirmation.ShowOver(owner);
 
             if (confirmed)
