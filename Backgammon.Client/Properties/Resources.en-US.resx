@@ -662,8 +662,14 @@ c) Move four checkers 6 points each.
   <data name="Message_InvalidSocialLink" xml:space="preserve">
     <value>Enter a valid link for this social network.</value>
   </data>
+  <data name="Title_InvalidSocialLink" xml:space="preserve">
+    <value>Invalid link</value>
+  </data>
   <data name="Title_SocialLinkRemoval" xml:space="preserve">
     <value>Remove link</value>
+  </data>
+  <data name="Title_FriendRemoval" xml:space="preserve">
+    <value>Remove friend</value>
   </data>
   <data name="Message_ConfirmSocialLinkRemoval" xml:space="preserve">
     <value>Do you want to remove this link from your profile?</value>

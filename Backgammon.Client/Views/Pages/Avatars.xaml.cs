@@ -167,20 +167,24 @@ namespace Backgammon.Client.Views.Pages
 
         private void ShowAvatarUpdateError()
         {
-            MessageBox.Show(
-                Properties.Resources.Message_AvatarUpdateError,
+            var dialog = new AlertDialog(
                 Properties.Resources.Title_AvatarUpdateError,
-                MessageBoxButton.OK,
-                MessageBoxImage.Error);
+                Properties.Resources.Message_AvatarUpdateError,
+                AlertType.Error);
+
+            dialog.Owner = Window.GetWindow(this);
+            dialog.ShowDialog();
         }
 
         private void ShowAvatarLoadError()
         {
-            MessageBox.Show(
-                Properties.Resources.Message_ProfileLoadError,
+            var dialog = new AlertDialog(
                 Properties.Resources.Title_ConnectionError,
-                MessageBoxButton.OK,
-                MessageBoxImage.Error);
+                Properties.Resources.Message_ProfileLoadError,
+                AlertType.Error);
+
+            dialog.Owner = Window.GetWindow(this);
+            dialog.ShowDialog();
         }
 
         private void OnBackClick(object sender, RoutedEventArgs e)

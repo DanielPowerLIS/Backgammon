@@ -124,7 +124,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0"
-                          Height="50">
+                          Height="40">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="100"/>
@@ -162,7 +162,7 @@
                     </Grid>
 
                     <Grid Grid.Row="1"
-                          Height="50">
+                          Height="40">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
@@ -184,7 +184,7 @@
                     </Grid>
 
                     <StackPanel Grid.Row="2"
-                                Margin="0,5,0,10">
+                                Margin="0,5,0,5">
 
                         <TextBlock Text="{x:Static properties:Resources.TextBlock_Label_Description}"
                                    FontSize="20"
@@ -251,25 +251,30 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="110"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0"
                                        Text="Facebook:"
                                        FontSize="18"
-                                       Foreground="{StaticResource CyanAccentBrush}"/>
+                                       Foreground="{StaticResource CyanAccentBrush}"
+                                       VerticalAlignment="Center"/>
 
                             <TextBlock Grid.Column="1"
                                        x:Name="textBlockFacebook"
                                        FontSize="18"
                                        Foreground="{StaticResource PinkAccentBrush}"
-                                       TextWrapping="Wrap"/>
+                                       VerticalAlignment="Center"
+                                       TextTrimming="CharacterEllipsis"
+                                       ToolTip="{Binding Text, ElementName=textBlockFacebook}"/>
 
                             <Button x:Name="buttonAddFacebook"
                                     Grid.Column="2"
                                     Content="{x:Static properties:Resources.Button_AddLink}"
                                     Style="{StaticResource ProfileButtonStyle}"
-                                    Margin="8,0,0,0"
+                                    Width="112"
+                                    Height="32"
+                                    HorizontalAlignment="Right"
                                     Click="OnAddFacebookClick"/>
                         </Grid>
 
@@ -277,25 +282,30 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="110"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0"
                                        Text="Instagram:"
                                        FontSize="18"
-                                       Foreground="{StaticResource CyanAccentBrush}"/>
+                                       Foreground="{StaticResource CyanAccentBrush}"
+                                       VerticalAlignment="Center"/>
 
                             <TextBlock Grid.Column="1"
                                        x:Name="textBlockInstagram"
                                        FontSize="18"
                                        Foreground="{StaticResource PinkAccentBrush}"
-                                       TextWrapping="Wrap"/>
+                                       VerticalAlignment="Center"
+                                       TextTrimming="CharacterEllipsis"
+                                       ToolTip="{Binding Text, ElementName=textBlockInstagram}"/>
 
                             <Button x:Name="buttonAddInstagram"
                                     Grid.Column="2"
                                     Content="{x:Static properties:Resources.Button_AddLink}"
                                     Style="{StaticResource ProfileButtonStyle}"
-                                    Margin="8,0,0,0"
+                                    Width="112"
+                                    Height="32"
+                                    HorizontalAlignment="Right"
                                     Click="OnAddInstagramClick"/>
                         </Grid>
 
@@ -303,24 +313,30 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="110"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120"/>
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0"
                                        Text="TikTok:"
                                        FontSize="18"
-                                       Foreground="{StaticResource CyanAccentBrush}"/>
+                                       Foreground="{StaticResource CyanAccentBrush}"
+                                       VerticalAlignment="Center"/>
 
                             <TextBlock Grid.Column="1"
                                        x:Name="textBlockTikTok"
                                        FontSize="18"
-                                       Foreground="{StaticResource PinkAccentBrush}"/>
+                                       Foreground="{StaticResource PinkAccentBrush}"
+                                       VerticalAlignment="Center"
+                                       TextTrimming="CharacterEllipsis"
+                                       ToolTip="{Binding Text, ElementName=textBlockTikTok}"/>
 
                             <Button x:Name="buttonAddTikTok"
                                     Grid.Column="2"
                                     Content="{x:Static properties:Resources.Button_AddLink}"
                                     Style="{StaticResource ProfileButtonStyle}"
-                                    Margin="8,0,0,0"
+                                    Width="112"
+                                    Height="32"
+                                    HorizontalAlignment="Right"
                                     Click="OnAddTikTokClick"/>
                         </Grid>
                     </StackPanel>
@@ -331,7 +347,7 @@
                             Width="100"
                             Height="35"
                             HorizontalAlignment="Right"
-                            Margin="0,15,0,0"
+                            Margin="0,5,0,0"
                             Click="OnBackClick"/>
                 </Grid>
             </Grid>

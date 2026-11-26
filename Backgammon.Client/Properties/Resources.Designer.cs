@@ -2104,6 +2104,15 @@ namespace Backgammon.Client.Properties {
                 return ResourceManager.GetString("Title_ConnectionError", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Enlace inválido.
+        /// </summary>
+        public static string Title_InvalidSocialLink {
+            get {
+                return ResourceManager.GetString("Title_InvalidSocialLink", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Tirada inicial.
@@ -2123,6 +2132,15 @@ namespace Backgammon.Client.Properties {
             }
         }
         
+        /// <summary>
+        ///   Looks up a localized string similar to Eliminar amigo.
+        /// </summary>
+        public static string Title_FriendRemoval {
+            get {
+                return ResourceManager.GetString("Title_FriendRemoval", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to Eliminar enlace.
         /// </summary>
