@@ -824,4 +824,7 @@ c) Mover cuatro fichas 6 casillas cada una.
   <data name="Message_AvatarUpdateError" xml:space="preserve">
     <value>No se pudo cambiar el avatar. Inténtalo nuevamente.</value>
   </data>
+  <data name="TextBlock_AccountCode" xml:space="preserve">
+    <value>Código:</value>
+  </data>
 </root>

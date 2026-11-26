@@ -396,7 +396,8 @@ namespace Backgammon.Server.Services
             {
                 Points = dbProfile.Points,
                 Wins = dbProfile.Wins,
-                Description = dbProfile.Description
+                Description = dbProfile.Description,
+                AccountCode = string.Empty
             };
 
             AccountEntity primaryAccount = dbProfile.Accounts.FirstOrDefault();
@@ -404,6 +405,11 @@ namespace Backgammon.Server.Services
             if (primaryAccount != null)
             {
                 playerProfile.RegistrationDate = primaryAccount.RegistrationDate;
+
+                if (!string.IsNullOrWhiteSpace(primaryAccount.AccountCode))
+                {
+                    playerProfile.AccountCode = primaryAccount.AccountCode.TrimEnd();
+                }
             }
 
             AssignSocialMediaLinks(dbProfile, playerProfile);

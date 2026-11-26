@@ -228,7 +228,6 @@ namespace Backgammon.Client.Views.Pages
 
         private void DisplaySessionData(PlayerSession currentSession)
         {
-            textBlockId.Text = currentSession.PlayerId.ToString();
             textBlockUsername.Text = currentSession.Username;
         }
 
@@ -241,6 +240,7 @@ namespace Backgammon.Client.Views.Pages
             else
             {
                 buttonEditDescription.IsEnabled = true;
+                textBlockId.Text = profileData.AccountCode;
                 textBlockPoints.Text = profileData.Points.ToString();
                 textBlockWins.Text = profileData.Wins.ToString();
                 textBlockRegistrationDate.Text = profileData.RegistrationDate.ToShortDateString();

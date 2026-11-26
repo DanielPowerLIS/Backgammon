@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="YodJ8z8/t+uYIGJdvRd9QubHA9IfY4QUfUmWMorsxns=">
+<SavedWcfConfigurationInformation xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="9.1" CheckSum="w53Z5fLHjTjy1TnM/v1jNkw7wKx2wp+HKb3xleRBKxg=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IProfileService1">
       <properties>
@@ -121,10 +121,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IProfileService1" contract="ProfileReference.IProfileService" bindingType="netTcpBinding" address="net.tcp://localhost:9001/ProfileService" bindingConfiguration="NetTcpBinding_IProfileService1">
+    <endpoint name="NetTcpBinding_IProfileService1" contract="ProfileReference.IProfileService" bindingType="netTcpBinding" address="net.tcp://26.186.19.19:9001/ProfileService" bindingConfiguration="NetTcpBinding_IProfileService1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:9001/ProfileService</serializedValue>
+          <serializedValue>net.tcp://26.186.19.19:9001/ProfileService</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

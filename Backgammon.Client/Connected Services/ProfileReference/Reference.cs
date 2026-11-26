@@ -23,6 +23,9 @@ namespace Backgammon.Client.ProfileReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AccountCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Backgammon.Client.ProfileReference.Avatar AvatarField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -62,6 +65,19 @@ namespace Backgammon.Client.ProfileReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AccountCode {
+            get {
+                return this.AccountCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AccountCodeField, value) != true)) {
+                    this.AccountCodeField = value;
+                    this.RaisePropertyChanged("AccountCode");
+                }
             }
         }
         

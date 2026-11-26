@@ -718,6 +718,15 @@ namespace Backgammon.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Código:.
+        /// </summary>
+        public static string TextBlock_AccountCode {
+            get {
+                return ResourceManager.GetString("TextBlock_AccountCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to ¿Ya tienes una cuenta?.
         /// </summary>
         public static string TextBlock_AlreadyHaveAccount {

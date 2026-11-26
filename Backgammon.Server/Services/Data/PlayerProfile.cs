@@ -7,6 +7,9 @@ namespace Backgammon.Server.Services.Data
     public class PlayerProfile
     {
         [DataMember]
+        public string AccountCode { get; set; }
+
+        [DataMember]
         public int Points { get; set; }
 
         [DataMember]

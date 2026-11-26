@@ -10,9 +10,9 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="http://localhost:9002/ProfileService?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:9002/ProfileService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" />
-      <xsd:import schemaLocation="http://localhost:9002/ProfileService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://26.186.19.19:9002/ProfileService?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://26.186.19.19:9002/ProfileService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Backgammon.Server.Services.Data" />
+      <xsd:import schemaLocation="http://26.186.19.19:9002/ProfileService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IProfileService_GetPlayerProfile_InputMessage">
@@ -231,9 +231,9 @@
   </wsdl:binding>
   <wsdl:service name="ProfileService">
     <wsdl:port name="NetTcpBinding_IProfileService" binding="tns:NetTcpBinding_IProfileService">
-      <soap12:address location="net.tcp://localhost:9001/ProfileService" />
+      <soap12:address location="net.tcp://26.186.19.19:9001/ProfileService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:9001/ProfileService</wsa10:Address>
+        <wsa10:Address>net.tcp://26.186.19.19:9001/ProfileService</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>
