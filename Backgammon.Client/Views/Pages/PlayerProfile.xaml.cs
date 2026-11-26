@@ -174,6 +174,14 @@ namespace Backgammon.Client.Views.Pages
             await ManageSocialLinkAsync("TikTok", "https://www.tiktok.com/", buttonAddTikTok);
         }
 
+        private void OnAvatarClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (NavigationService != null)
+            {
+                NavigationService.Navigate(new Avatars());
+            }
+        }
+
         private void SetDescriptionEditMode(bool isEditing)
         {
             if (isEditing)
