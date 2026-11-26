@@ -95,7 +95,7 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0"
-                                   Text="ID:"
+                                   Text="{x:Static properties:Resources.TextBlock_AccountCode}"
                                    FontSize="20"
                                    Foreground="{StaticResource PinkAccentBrush}"
                                    VerticalAlignment="Center"/>

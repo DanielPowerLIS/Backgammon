@@ -594,14 +594,14 @@
     <None Include="Connected Services\ProfileReference\Backgammon.Client.ProfileReference.SocialMediaType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\ProfileReference\ProfileService.wsdl" />
-    <None Include="Connected Services\ProfileReference\ProfileService.xsd">
+    <None Include="Connected Services\ProfileReference\ProfileService1.wsdl" />
+    <None Include="Connected Services\ProfileReference\ProfileService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ProfileReference\ProfileService1.xsd">
+    <None Include="Connected Services\ProfileReference\ProfileService31.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\ProfileReference\ProfileService2.xsd">
+    <None Include="Connected Services\ProfileReference\ProfileService32.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\RegistrationReference\RegistrationService.wsdl" />
@@ -652,7 +652,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\ProfileReference\ProfileService.disco" />
     <None Include="Connected Services\ProfileReference\configuration91.svcinfo" />
     <None Include="Connected Services\ProfileReference\configuration.svcinfo" />
     <None Include="Connected Services\ProfileReference\Reference.svcmap">
@@ -704,6 +703,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Connected Services\FriendReference\FriendService1.disco" />
+    <None Include="Connected Services\ProfileReference\ProfileService1.disco" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

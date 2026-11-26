@@ -824,4 +824,7 @@ c) Move four checkers 6 points each.
   <data name="Message_AvatarUpdateError" xml:space="preserve">
     <value>Could not change the avatar. Please try again.</value>
   </data>
+  <data name="TextBlock_AccountCode" xml:space="preserve">
+    <value>Code:</value>
+  </data>
 </root>
